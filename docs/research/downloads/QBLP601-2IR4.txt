@@ -1,0 +1,218 @@
+                                                            QBLP601-2IR4                                              0603 IR LED
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+                             QT-Brightek Chip LED Series
+
+                                                   0603 IR LED
+                                          Part No.: QBLP601-2IR4
+                                                         2IR4: 765nm
+
+
+
+
+Product: QBLP601-2IR4                                                      Date: September 17, 2021                  Page 1 of 9
+                                                                           Version# 1.0
+                                                                  QBLP601-2IR4                                                         0603 IR LED
+---------------------------------------------------------------------------------------------------------------------------------------
+Table of Contents:
+Introduction ........................................................................................................................................... 3
+Electrical / Optical Characteristic (Ta=25 oC) ........................................................................................ 4
+Absolute Maximum Rating .................................................................................................................... 4
+Characteristic Curves ............................................................................................................................ 5
+Solder Profile & Footprint ...................................................................................................................... 6
+Packing ................................................................................................................................................. 7
+Labeling ................................................................................................................................................ 8
+Ordering Information ............................................................................................................................. 8
+Revision History .................................................................................................................................... 9
+Disclaimer ............................................................................................................................................. 9
+
+
+
+
+Product: QBLP601-2IR4                                                                  Date: September 17, 2021                        Page 2 of 9
+                                                                                       Version# 1.0
+                                                            QBLP601-2IR4                                              0603 IR LED
+---------------------------------------------------------------------------------------------------------------------------------------
+Introduction
+Feature:                                                            Application:
+ Water clear lens                                                   Infrared Sensor
+ Package in tape and reel                                           Optoelectronic Switch
+ 0603 LED package                                                   Smoke detector
+ AlGaAs technology                                                  Drive sensor
+ Viewing Angle = 140 deg typ.
+                                                                    Certification & Compliance:
+Description:                                                         ISO9001
+These ultra bright 0603 LEDs have a height profile of                RoHS Compliant
+0.60mm. With higher packing density and smaller
+footprint, these LEDs are ideal for smaller equipment
+and miniature application.
+
+
+
+
+Dimension:
+
+
+
+
+                                                      1                          2
+
+
+
+
+                                                          1                  2
+
+
+
+Units: mm / tolerance = +/-0.1mm
+
+Product: QBLP601-2IR4                                                      Date: September 17, 2021                  Page 3 of 9
+                                                                           Version# 1.0
+                                                            QBLP601-2IR4                                              0603 IR LED
+---------------------------------------------------------------------------------------------------------------------------------------
+Electrical / Optical Characteristic (Ta=25 oC)
+                                                            VF (V)                      λP (nm)                    Ie (mW/sr)
+       Product               Color        IF (mA)
+                                                        Typ.     Max.         Min.       Typ.   Max.              Min.   Typ.
+  QBLP601-2IR4             Infrared          20          1.6      1.8         760        765    780               0.2     1.0
+
+Absolute Maximum Rating
+      Material          Pd (mW)          IF (mA)          IFP (A)*        VR (V)       TOP (oC)          TST (oC)       TSOL (oC)**
+    AlGaAs           90          50          1                               5        -40 ~ +80         -40 ~ +85            260
+*Duty cycle=1%, Pulse width 100µs
+**IR Reflow for no more than 10 sec @ 260 oC
+
+Forward Voltage VF @ IF=20mA
+Bin                            Min.                            Max.                            Unit
+□                              1.0                             1.8                                                V
+
+Peak Wavelength λP @ IF=20mA
+Bin                            Min.                            Max.                            Unit
+□                              760                             780                                               nm
+
+Radiant Intensity IE @ IF=20mA
+Bin                            Min.                            Max.                            Unit
+A                              0.20                            0.60
+B                              0.60                            1.10                                           mW/sr
+C                              1.10                            1.60
+
+
+
+
+Product: QBLP601-2IR4                                                      Date: September 17, 2021                   Page 4 of 9
+                                                                           Version# 1.0
+                                                            QBLP601-2IR4                                              0603 IR LED
+---------------------------------------------------------------------------------------------------------------------------------------
+Characteristic Curves
+
+
+
+
+Product: QBLP601-2IR4                                                      Date: September 17, 2021                  Page 5 of 9
+                                                                           Version# 1.0
+                                                            QBLP601-2IR4                                              0603 IR LED
+---------------------------------------------------------------------------------------------------------------------------------------
+Solder Profile & Footprint
+    -The recommended reflow soldering profile is as follows (temperatures indicated are as measured
+    on the surface of the LED resin):
+
+
+
+
+                                                Recommended Pad Layout
+
+
+
+
+Units: mm                                                                                                         Tolerance:±0.1mm
+
+
+
+
+Product: QBLP601-2IR4                                                      Date: September 17, 2021                  Page 6 of 9
+                                                                           Version# 1.0
+                                                            QBLP601-2IR4                                              0603 IR LED
+---------------------------------------------------------------------------------------------------------------------------------------
+Packing
+Reel Dimension:
+
+
+
+
+                                                             Unit: mm
+
+Tape Dimension:
+
+
+
+
+                                                             Unit: mm
+
+Arrangement of Tape:
+
+
+
+
+Packaging Specification:
+
+
+
+
+Product: QBLP601-2IR4                                                      Date: September 17, 2021                  Page 7 of 9
+                                                                           Version# 1.0
+                                                            QBLP601-2IR4                                              0603 IR LED
+---------------------------------------------------------------------------------------------------------------------------------------
+Labeling
+
+
+
+
+Ordering Information
+Part #                 Orderable Part #          Spec Range                                             Quantity per reel
+                                                 Ie=1.0mW/sr typ. / λP=765nm typ. @
+QBLP601-2IR4           QBLP601-2IR4                                                                     4,000 units
+                                                 IF=20mA
+
+
+
+
+Product: QBLP601-2IR4                                                      Date: September 17, 2021                  Page 8 of 9
+                                                                           Version# 1.0
+                                                            QBLP601-2IR4                                              0603 IR LED
+---------------------------------------------------------------------------------------------------------------------------------------
+Revision History
+Description:                                                                               Revision #             Revision Date
+New Release of QBLP601-2IR4                                                                V1.0                   09/17/2021
+
+
+
+
+Disclaimer
+QT-BRIGHTEK reserves the right to make changes without further notice to any products herein to
+improve reliability, function or design. QT-BRIGHTEK does not assume any liability arising out of the
+application or use of any product or circuit described herein; neither does it convey any license under
+its patent rights, nor the rights of others.
+
+
+Life Support Policy
+QT-BRIGHTEK’s products are not authorized for use as critical components in life support devices or
+systems without the express written approval of QT-BRIGHTEK. As used herein:
+
+1. Life support devices or systems are devices or systems which, (a) are intended for surgical implant
+into the body, or (b) support or sustain life, and (c) whose failure to perform when properly used in
+accordance with instructions for use provided in the labeling, can be reasonably expected to result in
+a significant injury of the user.
+
+2. A critical component in any component of a life support device or system whose failure to perform
+can be reasonably expected to cause the failure of the life support device or system, or to affect its
+safety or effectiveness.
+
+
+
+
+Product: QBLP601-2IR4                                                      Date: September 17, 2021                  Page 9 of 9
+                                                                           Version# 1.0
+

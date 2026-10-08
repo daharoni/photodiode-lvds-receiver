@@ -1,0 +1,250 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "3662418d-3001-4c14-9f86-8872b881bac6")
+	(paper "A3")
+	(title_block
+		(title "Detector - Photodiode LVDS Receiver")
+		(date "2026-10-08")
+		(rev "A0")
+		(company "Aharoni Lab, UCLA")
+	)
+	(lib_symbols)
+	(text "Sheet status: skeleton only. No components placed. Hierarchical labels below match the sheet pins on the root sheet. GND\\nis a global net (global label) shared by every sheet. No part values are approved for fabrication."
+		(exclude_from_sim yes)
+		(at 20 75 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left top)
+		)
+		(uuid "7afabceb-8c2e-4a8e-8cc3-77d8e5a7229c")
+	)
+	(text "Fast high/low capture coupon: 49.9 Ω isolation → fast buffers (OPA356 candidate, 5V_A) → diode/hold (CH/CL 22–100 pF,\\nRH/RL 0.5–5 MΩ to VCM_DET) → OPA320 hold buffers → VHIGH, VLOW. Disconnectable. UNRESOLVED: not a validated 20 ns\\nprecision detector."
+		(exclude_from_sim yes)
+		(at 20 20 0)
+		(effects
+			(font
+				(size 2.5 2.5)
+			)
+			(justify left top)
+		)
+		(uuid "a1fc7dfd-f3e8-47cb-94f3-738c7dc37f6b")
+	)
+	(wire
+		(pts
+			(xy 30.48 116.84) (xy 38.1 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "25809765-10c0-4444-9bfe-77b7e5d00145")
+	)
+	(wire
+		(pts
+			(xy 200.66 101.6) (xy 193.04 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2d4486ae-1dec-400c-b7c6-3739ac866a27")
+	)
+	(wire
+		(pts
+			(xy 30.48 109.22) (xy 38.1 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6975829f-3446-4b3e-b80e-bbcd08e0124f")
+	)
+	(wire
+		(pts
+			(xy 200.66 109.22) (xy 193.04 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6e9edef7-1c29-4046-803f-b126669d1f1d")
+	)
+	(wire
+		(pts
+			(xy 30.48 101.6) (xy 38.1 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b0423e7d-6e93-4898-89d2-99b6e3ab145b")
+	)
+	(wire
+		(pts
+			(xy 30.48 124.46) (xy 38.1 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "efc243af-050f-4c65-ad0c-778ddc7e149b")
+	)
+	(label "VLOW"
+		(at 193.04 109.22 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "03a517a3-f2b3-44e6-850d-0218a887c730")
+	)
+	(label "3V3"
+		(at 38.1 116.84 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2209b6cb-11e1-401a-8b51-273869bba8c5")
+	)
+	(label "SDET"
+		(at 38.1 101.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "60b44252-67dd-4a80-9c03-fdf2c62e1b76")
+	)
+	(label "VHIGH"
+		(at 193.04 101.6 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6801b66d-827c-4c31-8bae-a3d86183d90e")
+	)
+	(label "5V_A"
+		(at 38.1 109.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6f478096-c4db-47d4-9e89-afa9e6415ca4")
+	)
+	(label "VCM_DET"
+		(at 38.1 124.46 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f7a91f06-b94b-417a-be41-4e95cd3c5d12")
+	)
+	(global_label "GND"
+		(shape passive)
+		(at 115.57 139.7 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "64f698da-8f0b-404a-aeb6-41d2ca593e6b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 115.57 139.7 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(hierarchical_label "3V3"
+		(shape input)
+		(at 30.48 116.84 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "3754d910-1842-498c-b136-1fc6d114fe7f")
+	)
+	(hierarchical_label "VLOW"
+		(shape output)
+		(at 200.66 109.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "454aff9c-4ed1-44fd-8e31-7a2ec4af68c0")
+	)
+	(hierarchical_label "VHIGH"
+		(shape output)
+		(at 200.66 101.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "4a609cd8-85c4-4e7c-a65a-65778f9d979d")
+	)
+	(hierarchical_label "SDET"
+		(shape input)
+		(at 30.48 101.6 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "a0c115bc-1347-4be0-88f3-569a7bff39b3")
+	)
+	(hierarchical_label "VCM_DET"
+		(shape input)
+		(at 30.48 124.46 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "aab7da7d-8cb8-4d7c-853e-da1abe1f1e0a")
+	)
+	(hierarchical_label "5V_A"
+		(shape input)
+		(at 30.48 109.22 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "af612b39-6bb0-4a92-8a88-d62d41a3f5cc")
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)

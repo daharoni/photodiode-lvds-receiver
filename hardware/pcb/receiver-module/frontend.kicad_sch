@@ -1,0 +1,281 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "53904cc4-6b03-4326-afd0-62691540fda1")
+	(paper "A3")
+	(title_block
+		(title "Front End - Photodiode LVDS Receiver")
+		(date "2026-10-08")
+		(rev "A0")
+		(company "Aharoni Lab, UCLA")
+	)
+	(lib_symbols)
+	(text "Front end: APD Hamamatsu S12023-10 (Ø1.0 mm, 6 pF; fallback S12023-05, Ø0.5 mm, 2 pF): cathode ← APD_BIAS (100–220 V) through RC filter\\n(e.g. 10 kΩ + 10 nF, ≥250 V C0G, PROPOSED) and series current limit; anode → TIA_IN (same polarity as before). Optional alternate footprint: FDS010 TO-5\\n(bench fallback only; the APD path is the design). Keep HV 200 V creepage/keep-out from TIA_IN. → OPA857 TIA on 3V3 (5k/20k select, 20k linear range 60 µA\\nis the saturation bound; ambient is multiplied by M, optical bandpass filter mandatory) → matched 100 nF AC coupling with 10k returns → VCA821 VGA on ±3V7\\n(RF 402 Ω, RG 80 Ω starting values, VG control) → 10 nF / 10k level shift to VCM_DET → SDET. PROPOSED; OPA857 stability at 6 pF UNRESOLVED."
+		(exclude_from_sim yes)
+		(at 20 20 0)
+		(effects
+			(font
+				(size 2.5 2.5)
+			)
+			(justify left top)
+		)
+		(uuid "0b54a9a6-bc1f-4ae3-a7cf-160eea73677c")
+	)
+	(text "Sheet status: skeleton only. No components placed. Hierarchical labels below match the sheet pins on the root sheet. GND\\nis a global net (global label) shared by every sheet. No part values are approved for fabrication."
+		(exclude_from_sim yes)
+		(at 20 75 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left top)
+		)
+		(uuid "a360b18c-9615-4f78-a3ed-8a273def7428")
+	)
+	(wire
+		(pts
+			(xy 30.48 132.08) (xy 38.1 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0f56eab8-b50b-4b1f-a0ad-d5949fee5594")
+	)
+	(wire
+		(pts
+			(xy 30.48 109.22) (xy 38.1 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1247e730-54b6-4fab-8b58-3b89e6ecbd32")
+	)
+	(wire
+		(pts
+			(xy 30.48 124.46) (xy 38.1 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5527bc4c-07c1-4d36-8c06-ecf31b95e66e")
+	)
+	(wire
+		(pts
+			(xy 30.48 139.7) (xy 38.1 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "92eb3cad-ef5b-400c-b285-7cecd81a04c4")
+	)
+	(wire
+		(pts
+			(xy 30.48 101.6) (xy 38.1 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a0f915f9-f50d-45ee-aac9-bab57cbbce62")
+	)
+	(wire
+		(pts
+			(xy 200.66 101.6) (xy 193.04 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cb302071-53e3-4703-998a-702d31323d53")
+	)
+	(wire
+		(pts
+			(xy 30.48 116.84) (xy 38.1 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cfc780f1-b5ec-477b-b44a-d2b5facd7a5c")
+	)
+	(label "APD_BIAS"
+		(at 38.1 101.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0e2b5dd2-bed3-43f3-91f3-3a1cf93de6d2")
+	)
+	(label "+3V7"
+		(at 38.1 116.84 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3fd1ee54-deb7-4eb7-9c72-88ebcac040d7")
+	)
+	(label "VCM_DET"
+		(at 38.1 139.7 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4f885c1b-8a0d-4a15-9804-0726e2c0dc9e")
+	)
+	(label "-3V7"
+		(at 38.1 124.46 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "53750a0b-29b9-44ee-aac7-61806f60612a")
+	)
+	(label "SDET"
+		(at 193.04 101.6 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "844f1345-dfaa-4993-b4f9-e167c654bb40")
+	)
+	(label "VG"
+		(at 38.1 132.08 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b37eba34-7bdc-45ca-bd84-5ecbb3c65771")
+	)
+	(label "3V3"
+		(at 38.1 109.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "eb90014c-da72-4e69-820a-6403d7a32acd")
+	)
+	(global_label "GND"
+		(shape passive)
+		(at 115.57 154.94 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "0b130d95-9b2f-492c-a531-b429418054ae")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 115.57 154.94 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(hierarchical_label "-3V7"
+		(shape input)
+		(at 30.48 124.46 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "00c2b22f-a6ac-4821-85ee-3cd067dedfad")
+	)
+	(hierarchical_label "APD_BIAS"
+		(shape input)
+		(at 30.48 101.6 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "0fd325ff-2e6f-4f56-a82d-ccce7e205e37")
+	)
+	(hierarchical_label "SDET"
+		(shape output)
+		(at 200.66 101.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "a0c37942-a77d-4a46-9a8e-f57d21c9bbcc")
+	)
+	(hierarchical_label "3V3"
+		(shape input)
+		(at 30.48 109.22 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "ad36dcf4-b913-4d8a-83f1-bf23ab673009")
+	)
+	(hierarchical_label "VG"
+		(shape input)
+		(at 30.48 132.08 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "e70b243c-8c28-43a6-a9b3-fbe94d909314")
+	)
+	(hierarchical_label "+3V7"
+		(shape input)
+		(at 30.48 116.84 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "eb1cc812-e4bb-4241-8d06-91e70fa3a228")
+	)
+	(hierarchical_label "VCM_DET"
+		(shape input)
+		(at 30.48 139.7 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "ee9b8131-50d6-40ef-b695-f8a7b83bafe2")
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)

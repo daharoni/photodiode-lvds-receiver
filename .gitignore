@@ -1,0 +1,31 @@
+# Historical planning input, kept local only
+initial planning docs/
+
+# macOS
+.DS_Store
+
+# KiCad temp / generated
+*-backups/
+*.bak
+*.kicad_prl
+fp-info-cache
+~*.lck
+*.lck
+_autosave-*
+*.sch-bak
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Fabrication outputs are generated; regenerate from source.
+# Exception: anything under a release/ directory is kept (frozen order packages).
+hardware/pcb/*/fab/*
+!hardware/pcb/*/fab/release/
+!hardware/pcb/*/fab/release/**
+
+# Scratch outputs
+scratch/
+*.tmp

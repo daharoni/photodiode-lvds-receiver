@@ -1,0 +1,512 @@
+                                                                               Si APD
+
+                                                                          S12023 series, etc.
+
+
+
+                                              Low bias operation, for 800 nm band
+
+  These are 800 nm band near-infrared Si APDs that can operate at low voltages, 200 V or less. They are suitable for applications
+  such as FSO (free space optics) and optical rangefinders. TE-cooled type S4315 series are also avaiable (see P.6).
+
+
+   Features                                                             Applications
+
+  Stable operation at low bias                                          FSO
+  High-speed response                                                   Optical rangefinders
+  High sensitivity and low noise
+
+
+
+
+   Structure / Absolute maximum ratings
+                                                                                       Absolute maximum ratings
+                 Dimensional                         Effective
+                                                                      Operating         Storage
+                   outline/                       photosensitive
+   Type no.                         Package                         temperature*3    temperature*3 Forward current Reverse current
+                   Window                           area size*2                                        IF max          IR max
+                                                                        Topr              Tstg
+                  material*1
+                                                       (mm)             (°C)              (°C)          (mA)            (µA)
+S12023-02            (1)/K                              ϕ0.2
+S12023-05            (1)/K
+S12051               (2)/L                             ϕ0.5
+                                     TO-18
+S12086               (3)/L
+S12023-10            (1)/K                                           -20 to +85       -55 to +125           10              200
+                                                       ϕ1.0
+S12023-10A*4         (1)/K
+S3884                (4)/K                             ϕ1.5
+                                      TO-5
+S2384                (5)/K                             ϕ3.0
+S2385                (6)/K            TO-8             ϕ5.0
+*1: K=borosilicate glass, L=lens type borosilicate glass
+*2: Photosensitive area in which a typical gain can be obtained
+*3: No dew condensation. When there is a temperature difference between a product and the surrounding area in high humidity
+     environments, dew condensation may occur on the product surface. Dew condensation on the product may cause deterioration in
+     characteristics and reliability.
+*4: This is a variant of the S12023-10 in which the device chip is light-shielded by aluminum layer except for the photosensitive area.
+Note: Exceeding the absolute maximum ratings even momentarily may cause a drop in product quality. Always be sure to use the
+       product within the absolute maximum ratings.
+
+
+
+
+                                                 www.hamamatsu.com                                                                  1
+                                       Si APD                        S12023 series, etc.
+
+
+                          Electrical and optical characteristics (Typ. Ta=25 °C, unless otherwise noted)
+                                                            Photo-    Quantum Breakdown                Dark*5
+                                      Spectral  Peak*5                                      Temp.               Cutoff*5             Excess*5
+                                                          sensitivity efficiency   voltage                                Terminal*5
+                                     response sensitivity                                     co-      current frequency               noise    Gain
+                                                              S           QE         VBR                                 capacitance
+                          Type no.     range wavelength                                    efficient     ID        fc                  figure    M
+                                                             M=1         M=1     ID=100 µA                                   Ct
+                                         λ       λp                                         of VBR              RL=50 Ω                   x   λ=800 nm
+                                                          λ=800 nm λ=800 nm Typ. Max.                Typ. Max.
+                                                                                                                                     λ=800 nm
+                                       (nm)     (nm)        (A/W)        (%)      (V) (V) (V/°C) (nA) (nA)       (MHz)      (pF)
+     S12023-02                                                                                       0.05 0.5     1000        1
+     S12023-05
+     S12051                                                                                                                        0.1      1      900          2
+     S12086                                                                                                                                                                          100
+                                     400 to
+     S12023-10                                   800         0.5        75         150     200                            0.65                                             0.3
+                                      1000                                                                                         0.2      2      600          6
+     S12023-10A*3
+     S3884                                                                                                                         0.5n
+                                                                                                                                   e         5(    s400
+                                                                                                                                                     op         10
+                                                                                                                                                                yp
+     S2384                                                                                                                             1    10     120          40                    60
+     S2385                                                                                                                             3    30      40          95                    40
+  *5: The value at the gain listed in “Gain M”
+  Note: Breakdown voltage can be specified by using the suffix of type number as examples shown below.
+         S12023-02-01: 80 to 120 V
+         S12023-02-02: 120 to 160 V
+         S12023-02-03: 160 to 200 V
+
+
+
+                          Spectral response                                                                               Quantum efficiency vs. wavelength (typical example)
+                                                       (Typ. Ta=25 °C, λ=800 nm)                                                                                       (Typ. Ta=25 °C)
+                              60                                                                                            100
+
+
+                              50
+                                                                                                                             80
+                                         M=100
+
+
+
+
+Photo sensitivity (A/W)
+                                                                                                 Quantum efficiency (%)
+                              40
+                                                                                                                             60
+
+                              30
+                                     M=50
+                                                                                                                             40
+                              20
+
+
+                              10                                                                                             20
+
+
+
+                               0                                                                                                 0
+                               400    500     600      700     800    900     1000                                               400       500    600     700        800    900    1000
+
+                                              Wavelength (nm)                                                                                     Wavelength (nm)
+                                                                             KAPDB0020ED                                                                                          KAPDB0021EC
+
+
+
+
+                                                                                                                                                                                           2
+                                    Si APD                       S12023 series, etc.
+
+
+                       Dark current vs. reverse voltage                                                          Gain vs. reverse voltage
+                                                               (Typ. Ta=25 °C)                                                                                   (Typ. λ=800 nm)
+                        10 nA                                                                                    10000
+                                                                                                                                             20 °C
+
+                                                                  S2384
+                                                                                                                                      0 °C
+                         1 nA                                                                                     1000
+                                                                  S3884                                                      -20 °C
+
+
+
+
+Dark current
+                                      S12023-10/-10A
+
+                       100 pA                                                              Gain                    100
+
+
+                                                                                                                                                                  40 °C
+                                                        S12023-05, S12051
+                        10 pA                           S12086                                                      10
+                                        S12023-02                                                                                                    60 °C
+
+
+
+
+                         1 pA                                                                                        1
+                                0      50                100                 150                                      80        100      120              140       160            180
+
+
+                                       Reverse voltage (V)                                                                            Reverse voltage (V)
+                                                                          KAPDB0016ED                                                                                            KAPDB0017EC
+
+
+
+
+                       Terminal capacitance vs. reverse voltage                                                  Excess noise factor vs. gain
+                                                    (Typ. Ta=25 °C, f=1 MHz)                                                            (Typ. Ta=25 °C, f=10 kHz, B=1 Hz)
+                         1 nF                                                                                       10
+
+                                                                                                                                                          M0.5
+                                              S2384            S2385
+                       100 pF
+
+
+
+
+                                                                                           Excess noise factor
+Terminal capacitance
+                                                                                                                                      λ=650 nm
+                                                                                               B0
+                                               S3884                                                                                                                  M0.3
+                                                           S12023-10/-10A
+                        10 pF
+
+
+
+
+                         1 pF                   S12023-05, S12051, S12086
+                                                                                                                                                                          M0.2
+                                                    S12023-02
+                                                                                                                                               λ=800 nm
+                       100 fF                                                                                        1
+                                0       50                100               150                                          1                           10                             100
+
+
+                                       Reverse voltage (V)                                                                                      Gain
+                                                                             KAPDB0018ED                                                                                            KAPDB0022EA
+
+
+
+
+                                                                                                                                                                                          3
+                  Si APD                                              S12023 series, etc.
+
+
+ Dimensional outlines (unit: mm)
+(1) S12023-02/-05/-10/-10A                                                                 (2) S12051
+
+                             5.4 ± 0.2
+
+
+                                                                                                                                          0.65 ± 0.15
+                                                                                                  Window              5.4 ± 0.2
+
+
+                                                                                                                                                        3.75 ± 0.2
+                              4.7 ± 0.1                                                            1.5 lens
+              Window                                                                                                  4.65 ± 0.1
+
+                                            2.8 ± 0.2     3.7 ± 0.2
+               2.0 min.
+
+
+
+
+Photosensitive surface                                                                     Photosensitive surface
+
+                                                                                                                                          2.8 ± 0.2     (13.5)
+                                                          (13.5)
+                     0.45                                                                                      0.45
+                    Lead                                                                                      Lead
+
+
+               2.54 ± 0.2                                                                                2.54 ± 0.2
+
+
+
+
+                                                      Distance from photosensitive                                                                      Distance from photosensitive
+                                                      area center to cap center                        Case                                             area center to cap center
+             Case                                     -0.2≤X≤+0.2                                                                                       -0.2≤X≤+0.2
+                                                      -0.2≤Y≤+0.2                                                                                       -0.2≤Y≤+0.2
+                                                                                                                                                                            KAPDA0018EC
+                                                                             KAPDA0136EC
+
+
+
+
+(3) S12086                                                                                 (4) S3884
+
+                          5.4 ± 0.2                                                                             9.1 ± 0.2
+
+                                                        2.15 ± 0.3
+                            4.65 ± 0.1                                                                          8.2 ± 0.1
+                                                                                                 Window
+                                                                                                                                               4.7 ± 0.2
+                                                                                                 C
+                                                                                                                                   2.6 ± 0.2
+                                                                                                  3.0 min.
+
+
+
+                                                        4.5 ± 0.2
+                                                                                            Photosensitive
+
+
+                                          2.8 ± 0.2                                                                                0.4 max.
+                                                                                            surface
+                                                        (13.5)                                                                                 (20)
+                   0.45                                                                                 0.45
+                  Lead                                                                                 Lead
+
+
+             2.54 ± 0.2                                                                                         5.08 ± 0.2
+
+
+
+
+                                                                                                1.5 max.
+
+
+
+
+                                                      Distance from photosensitive
+           Case                                       area center to cap center                        Case
+                                                      -0.2≤X≤+0.2                                                                                       Distance from photosensitive
+                                                      -0.2≤Y≤+0.2                                                                                       area center to cap center
+                                                                             KAPDA0031EC
+                                                                                                                                                        -0.3≤X≤+0.3
+                                                                                                                                                        -0.3≤Y≤+0.3
+                                                                                                                                                                            KAPDA0011EC
+
+
+
+
+                                                                                                                                                                                 4
+                      Si APD                                S12023 series, etc.
+
+
+
+
+ (5) S2384                                                                         (6) S2385
+
+                        9.1 ± 0.2                                                                         13.9 ± 0.2
+                        8.1 ± 0.1                                                                         12.35 ± 0.1
+
+                                                                                                                                      4.9 ± 0.2
+                         Window
+                                                4.2 ± 0.2
+                                                                                                           Window
+
+                                    2.6 ± 0.2                                                                             2.9 ± 0.2
+                        5.9 ± 0.1                                                                         10.5 ± 0.1
+
+
+
+
+     Photosensitive                                                               Photosensitive
+     surface                                                                      surface
+
+                                    0.4 max.                                                                              0.5 max.
+                                                (20)                                                                                  (15)
+                                                                                                0.45
+               0.45
+                                                                                               Lead
+              Lead
+
+                                                                                                                        Index mark
+                       5.08 ± 0.2
+                                                                                                           7.5 ± 0.2      1.4
+
+
+
+       1.5. max.
+                                                                                    1.0 max.
+                                                                                                                                      Distance from photosensitive
+                                                Distance from photosensitive
+                                                                                                                                      area center to cap center
+                                                area center to cap center
+                                                                                                                                      -0.4≤X≤+0.4
+                                                -0.3≤X≤+0.3
+                                                                                                                                      -0.4≤Y≤+0.4
+                                                -0.3≤Y≤+0.3
+               Case                                                                                Case                               The glass window may
+                                                The glass window may
+                                                                                                                                      extend a maximum of
+                                                extend a maximum of
+                                                                                                                                      0.2 mm above the upper
+                                                0.2 mm above the upper
+                                                                                                                                      surface of the cap.
+                                                surface of the cap.
+                                                                                                                                                          KAPDA0013EE
+                                                                    KAPDA0012EC
+
+
+
+
+   Recommended soldering conditions
+Solder temperature: 260 °C (10 s or less, once)
+Solder the leads at a point at least 1 mm away from the package body.
+Note: When you set soldering conditions, check that problems do not occur in the product by testing out the conditions in advance.
+
+
+
+
+                                                                                                                                                               5
+                                           Si APD                          S12023 series, etc.
+
+
+                       Related products
+                                                                                 TE-cooled Si APD S4315 series
+                                                                                                                                        (Typ. Ta=25 °C, unless otherwise noted)
+                                                      Spectral   Peak     Breakdown voltage TE-cooler TE-cooler             Thermistor
+                                                                                VBR                             Thermistor              Operating     Storage
+                                                     response sensitivity                   allowable allowable               power
+                                                                                                       voltage resistance dissipation temperature* temperature*
+                                                                                                                                                  6            6
+                 Type no.              APD used        range   wavelength    ID=100 µA       current
+                                                                                                                 Rth typ.                Topr          Tstg
+                                                          λ       λp      Min. Typ. Max. ITE max. V TE max.                Pd_th max.
+                                                        (nm)     (nm)      (V) (V) (V)          (A)       (V)      (kΩ)       (mW)        (℃)          (℃)
+   S4315                               S12023-02
+   S4315-01                            S12023-05                  800*7
+                                                 400 to 1000                    160 180 200        1.5                   1.0          9.0          0.2       -20 to +85*9 -40 to +85
+   S4315-02                            S12023-10
+   S4315-04                              S2384                    800*8
+ *6: No dew condensation. When there is a temperature difference between a product and the surrounding area in high humidity
+      environments, dew condensation may occur on the product surface. Dew condensation on the product may cause deterioration in
+      characteristics and reliability.
+ *7: M=100
+ *8: M=60
+ *9: Chip temperatuer and package temperature
+
+
+
+                           Cooling characteristic of TE-cooler                                                   Current vs. voltage characteristic of TE-cooler
+                                   (Typ. Ta=25 °C, thermal resistance of heatsink=3 °C/W)                                (Typ. Ta=25 °C, Thermal resistance of heatsink=3 °C/W)
+                              40                                                                                   1.6
+
+                                                                                                                   1.4
+
+                              20
+                                                                                                                   1.2
+
+
+
+
+Element temperature (°C)
+                                                                                                                   1.0
+                               0
+
+
+                                                                                                   Current (A)
+                                                                                                                   0.8
+
+                             -20                                                                                   0.6
+
+                                                                                                                   0.4
+                             -40
+                                                                                                                   0.2
+
+                             -60                                                                                     0
+                                   0           0.4          0.8           1.2           1.6                              0      0.2      0.4       0.6       0.8    1.0       1.2
+
+
+                                                        Current (A)                                                                            Voltage (V)
+                                                                                     KAPDB0098EA                                                                           KAPDB0100EA
+
+
+
+
+                                                                                                                                                                                    6
+                              Si APD                    S12023 series, etc.
+
+
+                 Thermistor temperature characteristic                                      Dimensional outline (unit: mm)
+                                                                  (Typ.)                                             15.3 ± 0.2
+                   106
+                                                                                                                         14 ± 0.2
+                                                                                                                     Window
+                                                                                                                                    1.9 ± 0.2   6.4 ± 0.2
+                                                                                                                     10 ± 0.2
+
+
+                   105
+
+
+
+
+Resistance (Ω)
+                                                                                             Photosensitive
+                                                                                             surface
+                                                                                                                                                12 min.
+                                                                                                            0.45
+                                                                                                           Lead
+                   104
+
+                                                                                                                    10.2 ± 0.2
+
+
+                                                                                                     5.1 ± 0.2
+                     3                                                                                                                                      Detector (anode)
+                   10
+                        -40     -20           0              20                                                                                             Detector (cathode)
+                                                                                                                                                            TE-cooler (-)
+                                                                                                                                                            TE-cooler (+)
+                               Element temperature (°C)                                                                                                     Thermistor
+                                                                    KIRDB0116EA
+
+                                                                                                             5.1 ± 0.2
+                                                                                                                                                                               KAPDA0020EB
+
+
+
+
+                 Recommended soldering conditions
+ Solder temperature: 260 °C (10 s or less, once)
+ Solder the leads at a point at least 1 mm away from the package body.
+
+
+
+                 Related information
+ www.hamamatsu.com/sp/ssd/doc_en.html
+
+   Precautions
+ ∙ Disclaimer
+ ∙ Precautions / Metal, ceramic, plastic package products
+
+   Catalogs
+ ∙ Technical note / Si APD
+
+
+
+
+ Information described in this material is current as of July 2026.
+ Product specifications are subject to change without prior notice due to improvements or other reasons. This document has been carefully prepared and the
+ information contained is believed to be accurate. In rare cases, however, there may be inaccuracies such as text errors. Before using these products, always
+ contact us for the delivery specification sheet to check the latest specifications.
+ The product warranty is valid for one year after delivery and is limited to product repair or replacement for defects discovered and reported to us within that
+ one year period. However, even if within the warranty period we accept absolutely no liability for any loss caused by natural disasters or improper product use.
+ Copying or reprinting the contents described in this material in whole or in part is prohibited without our prior permission.
+
+
+                                                                                                                                                                    Cat. No. KAPD1007E19
+                                                                       Visit our website for product and contact information.                                       Jul. 2026 DN
+                                                                       www.hamamatsu.com                                                                            Created in Japan
+

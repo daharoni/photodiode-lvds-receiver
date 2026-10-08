@@ -1,0 +1,250 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "973419d2-e577-42f3-b83d-b8bbb9d9c6ba")
+	(paper "A3")
+	(title_block
+		(title "Power - Photodiode LVDS Receiver")
+		(date "2026-10-08")
+		(rev "A0")
+		(company "Aharoni Lab, UCLA")
+	)
+	(lib_symbols)
+	(text "Power: 5V in → TPS79901 3V3 LDO; LM27762 ±3V7; APD bias block (replaces the former MAX15032 6.5–15 V photodiode bias): programmable,\\ntemperature-compensated, low-noise 100–220 V supply on rail APD_BIAS (HV), 5V in; IC/module TBD, options pending in docs/research/apd-bias-supply.md.\\nHV constraints: 200 V creepage/clearance, series current limit, guard and keep-out from TIA_IN, HV warning silk. 5V_A filtered analog rail. PROPOSED; supply UNRESOLVED."
+		(exclude_from_sim yes)
+		(at 20 20 0)
+		(effects
+			(font
+				(size 2.5 2.5)
+			)
+			(justify left top)
+		)
+		(uuid "de298c43-9e95-4159-8fdf-dd36bb4ffb6a")
+	)
+	(text "Sheet status: skeleton only. No components placed. Hierarchical labels below match the sheet pins on the root sheet. GND\\nis a global net (global label) shared by every sheet. No part values are approved for fabrication."
+		(exclude_from_sim yes)
+		(at 20 75 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left top)
+		)
+		(uuid "e7c20f89-29ee-4dbc-85b2-7ace25f5c5dd")
+	)
+	(wire
+		(pts
+			(xy 200.66 101.6) (xy 193.04 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3a6e2b2e-fa91-4170-90fe-93eefc9d8809")
+	)
+	(wire
+		(pts
+			(xy 30.48 101.6) (xy 38.1 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3e0c26c7-c641-4ad3-b5ca-f7f080876180")
+	)
+	(wire
+		(pts
+			(xy 200.66 132.08) (xy 193.04 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "87deb5c9-72d8-41b4-a279-cefbb0f166ec")
+	)
+	(wire
+		(pts
+			(xy 200.66 109.22) (xy 193.04 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b9efa172-9ca9-47fb-9ed8-e511a5f4c995")
+	)
+	(wire
+		(pts
+			(xy 200.66 124.46) (xy 193.04 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f70a30db-354c-4fd0-913d-a1f62ae2b499")
+	)
+	(wire
+		(pts
+			(xy 200.66 116.84) (xy 193.04 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fa3eac42-a79d-426b-955a-99d59c330b05")
+	)
+	(label "3V3"
+		(at 193.04 101.6 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1f67a226-2327-4376-85ea-a3cb4d665af7")
+	)
+	(label "+5V"
+		(at 38.1 101.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "31e05107-9f90-4e7a-81c5-b37b85451fea")
+	)
+	(label "APD_BIAS"
+		(at 193.04 132.08 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4a918f88-c478-42d4-bf9a-34794ac48def")
+	)
+	(label "-3V7"
+		(at 193.04 116.84 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "608c0c8d-80ce-4540-adc5-c8dbe5f0f5cc")
+	)
+	(label "+3V7"
+		(at 193.04 109.22 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "933f2c30-1acc-4fce-bf4b-f5302a99e87b")
+	)
+	(label "5V_A"
+		(at 193.04 124.46 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "e2da8488-d84e-47cd-9f5c-c106bbb73956")
+	)
+	(global_label "GND"
+		(shape passive)
+		(at 115.57 147.32 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "de66e453-3547-43fe-a466-102322927bd6")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 115.57 147.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(hierarchical_label "APD_BIAS"
+		(shape output)
+		(at 200.66 132.08 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "6297509b-9137-4a07-8684-f7d8e3d34543")
+	)
+	(hierarchical_label "+5V"
+		(shape input)
+		(at 30.48 101.6 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "844aa920-4987-4234-9b14-a4ff236be011")
+	)
+	(hierarchical_label "3V3"
+		(shape output)
+		(at 200.66 101.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "8c82f54a-c31f-4be3-989d-0d38d154f026")
+	)
+	(hierarchical_label "-3V7"
+		(shape output)
+		(at 200.66 116.84 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "984cc2b3-673f-4203-8ca3-cec0b14be1be")
+	)
+	(hierarchical_label "+3V7"
+		(shape output)
+		(at 200.66 109.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "a4b87661-b8c7-495c-9a9a-2035349fdedf")
+	)
+	(hierarchical_label "5V_A"
+		(shape output)
+		(at 200.66 124.46 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "d20b91d3-b15f-415d-80df-76ad40ed16e6")
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)

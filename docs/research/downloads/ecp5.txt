@@ -1,0 +1,1382 @@
+ECP5 and ECP5-5G sysI/O Usage Guide
+
+
+
+
+Technical Note
+
+
+
+FPGA-TN-02032 1.3
+
+January 2020
+ECP5 and ECP5-5G sysI/O Usage Guide
+Technical Note
+
+
+Disclaimers
+Lattice makes no warranty, representation, or guarantee regarding the accuracy of information contained in this document or the suitability of its
+products for any particular purpose. All information herein is provided AS IS and with all faults, and all risk associated with such information is entirely
+with Buyer. Buyer shall not rely on any data and performance specifications or parameters provided herein. Products sold by Lattice have been
+subject to limited testing and it is the Buyer's responsibility to independently determine the suitability of any products and to test and verify the
+same. No Lattice products should be used in conjunction with mission- or safety-critical or any other application in which the failure of Lattice’s
+product could create a situation where personal injury, death, severe property or environmental damage may occur. The information provided in this
+document is proprietary to Lattice Semiconductor, and Lattice reserves the right to make any changes to the information in this document or to any
+products at any time without notice.
+
+
+
+
+                   © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+      All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+2                                                                                                                                                                     FPGA-TN-02032-1.3
+                                                                                                                                          ECP5 and ECP5-5G sysI/O Usage Guide
+                                                                                                                                                                Technical Note
+
+
+
+Contents
+Acronyms in This Document ................................................................................................................................................. 5
+1. Introduction .................................................................................................................................................................. 6
+2. sysI/O Buffer Overview ................................................................................................................................................. 6
+3. Supported sysI/O Standards ......................................................................................................................................... 6
+4. sysI/O Banking Scheme................................................................................................................................................. 8
+  4.1.     VCC (1.1 V) ............................................................................................................................................................ 8
+  4.2.     VCCIO (1.2 V/1.35 V/1.5 V/1.8 V/2.5 V/3.3 V) ....................................................................................................... 8
+  4.3.     VCCAUX (2.5 V)........................................................................................................................................................ 9
+  4.4.     VCCIO8 (1.2 V/1.5 V/1.8 V/2.5 V/3.3 V) ................................................................................................................. 9
+  4.5.     VREF1 ..................................................................................................................................................................... 9
+  4.6.     Hot Socketing Support ........................................................................................................................................ 9
+  4.7.     Standby ............................................................................................................................................................... 9
+  4.8.     LVDS sysI/O Buffer Pairs (A/B and C/D on Left and Right Sides) ....................................................................... 10
+  4.9.     sysI/O Buffer Pair (A/B Pair on Top and Bottom Sides)..................................................................................... 10
+  4.10. Mixed Voltage Support in a Bank ...................................................................................................................... 12
+  4.11. sysI/O Buffer Configurations ............................................................................................................................. 13
+     4.11.1.      Programmable Drive Strength .................................................................................................................. 13
+     4.11.2.      Programmable Slew Rate ......................................................................................................................... 14
+     4.11.3.      Tri-state Control ....................................................................................................................................... 14
+     4.11.4.      Open Drain Control .................................................................................................................................. 14
+     4.11.5.      Complementary Outputs .......................................................................................................................... 14
+     4.11.6.      Differential I/O Supported ........................................................................................................................ 14
+     4.11.7.      Complementary SSTL Output Support ..................................................................................................... 14
+     4.11.8.      Differential Input Termination ................................................................................................................. 14
+     4.11.9.      Single-Ended Input Termination ............................................................................................................... 15
+     4.11.10. Programmable CLAMP ............................................................................................................................. 15
+     4.11.11. Differential SSTL and HSUL ....................................................................................................................... 16
+     4.11.12. MIPI D-PHY Receiver IMIPI Interface ........................................................................................................ 16
+5. Software sysI/O Attributes ......................................................................................................................................... 17
+  5.1.     IO_TYPE ............................................................................................................................................................. 17
+  5.2.     OPENDRAIN ....................................................................................................................................................... 18
+  5.3.     DRIVE ................................................................................................................................................................. 18
+  5.4.     DIFFDRIVE .......................................................................................................................................................... 19
+  5.5.     TERMINATION ................................................................................................................................................... 19
+  5.6.     DIFFRESISTOR .................................................................................................................................................... 19
+  5.7.     CLAMP ............................................................................................................................................................... 19
+  5.8.     PULLMODE ........................................................................................................................................................ 19
+  5.9.     SLEWRATE ......................................................................................................................................................... 19
+  5.10. HYSTERESIS ........................................................................................................................................................ 19
+  5.11. VREF .................................................................................................................................................................... 20
+  5.12. DIN/DOUT ......................................................................................................................................................... 20
+  5.13. LOC .................................................................................................................................................................... 20
+Appendix A. sysI/O Primitive Symbols and Instance Examples .......................................................................................... 21
+  Primitive Symbols ........................................................................................................................................................... 21
+  Instance Examples .......................................................................................................................................................... 22
+Appendix B. sysI/O Attribute Examples .............................................................................................................................. 23
+Appendix C. sysI/O Buffer Design Rules.............................................................................................................................. 25
+Appendix D. sysI/O Attributes using the Diamond Spreadsheet View User Interface ....................................................... 26
+Technical Support Assistance ............................................................................................................................................. 27
+Revision History .................................................................................................................................................................. 28
+
+
+
+
+                    © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+       All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02032-1.3                                                                                                                                                                              3
+ECP5 and ECP5-5G sysI/O Usage Guide
+Technical Note
+
+
+
+Figures
+Figure 4.1. ECP5 and ECP5-5G sysI/O Banking ......................................................................................................................8
+Figure 4.2. Bank VREF from One Specific Pad .........................................................................................................................9
+Figure 4.3. sysI/O Buffer Pair for Left and Right Sides ........................................................................................................11
+Figure 4.4. sysI/O Buffer Pair for Top and Bottom Sides ....................................................................................................12
+Figure 4.5. Differential Input Termination ..........................................................................................................................15
+Figure 4.6. Single-Ended Input Termination .......................................................................................................................15
+Figure 4.7. MIPI Primitive ...................................................................................................................................................16
+Figure 5.1. Port Attributes Tab of Spreadsheet View .........................................................................................................26
+
+
+
+Tables
+Table 3.1. Single-Ended I/O Standards .................................................................................................................................7
+Table 3.2. Differential I/O Standards ....................................................................................................................................7
+Table 4.1. Power Supplies .....................................................................................................................................................9
+Table 4.2. Mixed Voltage I/O Support ................................................................................................................................13
+Table 4.3. Programmable Drive Values for LVCMOS/LVTTL ...............................................................................................13
+Table 4.4. IMIPI Port List .....................................................................................................................................................16
+Table 5.1. IO_TYPE Attribute Values ...................................................................................................................................17
+Table 5.2. Programmable Output Drive ..............................................................................................................................18
+
+
+
+
+                    © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+       All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+4                                                                                                                                                                      FPGA-TN-02032-1.3
+                                                                                                                                          ECP5 and ECP5-5G sysI/O Usage Guide
+                                                                                                                                                                Technical Note
+
+
+
+
+Acronyms in This Document
+A list of acronyms used in this document.
+Acronym                               Definition
+BLVDS                                 Bus Low-Voltage Differential Signaling
+DDR                                   Double Data Rate
+DSP                                   Digital Signal Processor
+EBR                                   Embedded Block RAM
+FPGA                                  Field-Programmable Gate Array
+GPIO                                  General-Purpose Input/Output
+GUI                                   Graphical User Interface
+LVCMOS                                Low-Voltage Complementary Metal Oxide Semiconductor
+LVDS                                  Low-Voltage Differential Signaling
+LVPECL                                Low-Voltage Positive Emitter-Coupled Logic
+LVTTL                                 Low-Voltage Transistor-Transistor Logic
+MLVDS                                 Multipoint-Low Voltage Differential Signaling
+PIO                                   Programmable I/O Cell
+SDR                                   Single Data Rate
+SLVS                                  Scalable Low-Voltage Signaling
+
+
+
+
+                    © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+       All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02032-1.3                                                                                                                                                                              5
+ECP5 and ECP5-5G sysI/O Usage Guide
+Technical Note
+
+
+
+1. Introduction
+The sysI/O TM buffers in the ECP5TM and ECP5-5GTM device give the designer the ability to easily interface with other
+devices using advanced system I/O standards. This technical note describes the sysI/O standards available and how to
+implement them using Lattice Diamond® design software.
+
+
+2. sysI/O Buffer Overview
+The ECP5 and ECP5-5G sysI/O interface contains multiple Programmable I/O Cell (PIC) blocks. The primary building
+block is a quad or pair of GPIO depending on the side of the I/O. The GPIO functions are available on every PIO of all
+devices. The quad is built of four GPIOs (PIOA, PIOB, PIOC and PIOD) or two GPIOs (PIOA, PIOB). Two adjacent PIOs can
+be joined to provide a differential I/O pair (labeled as ‘T’ and ‘C’). PIOA and PIOB comprise a differential pair and PIOC
+and PIOD comprise another pair. One true LVDS driver is connected only to the A/B pair. Each PIO includes a sysI/O
+buffer and I/O logic (IOLOGIC). The ECP5 and ECP5-5G sysI/O buffers support a variety of single-ended and differential
+signaling standards. The sysI/O buffer also supports the DQS strobe signal that is required for interfacing with the DDR
+memory. The DQS signal from the bus is used to strobe the DDR data from the memory into input register blocks.
+The top and bottom sides are grouped into eight I/O with the pitch matches to nine PLC from the core. These I/O
+support hot socket with I/O standards from 3.3 V to 1.2 V and mainly used for 3.3 V domain I/O. The left and right sides
+are grouped into 16 I/O that support one DQS group and pitch matches to 12PLC + EBR/DSP from the core. The
+left/right side I/O will support I/O standard from 3.3 V to 1.2 V with no hot socket capability. The left/right side also
+have one LVDS output driver per four I/O and one differential termination resistor per two I/O. For more information
+on the architecture of the sysI/O buffer, refer to ECP5 and ECP5-5G Family Data Sheet (FPGA-DS-02012).
+The IOLOGIC includes input, output and tri-state registers that implement both single data rate (SDR) and double data
+rate (DDR) applications along with the necessary clock and data selection logic. Programmable delay lines and
+dedicated logic within the IOLOGIC are used to provide the required shift to incoming clock and data signals and the
+delay required by DQS inputs in DDR memory. The DDR implementation in the IOLOGIC and the DDR memory interface
+support are discussed in more detail in ECP5 and ECP5-5G High-Speed I/O Interface (FPGA-TN-12035).
+
+
+3. Supported sysI/O Standards
+The ECP5 and ECP5-5G sysI/O buffer supports both single-ended and differential standards. Single-ended standards can
+be further subdivided into internally ratioed standards such as LVCMOS, LVTTL; and externally referenced standards
+such as HSUL and SSTL.
+The buffers support the LVTTL, LVCMOS 1.2 V, 1.5 V, 1.8 V, 2.5 V and 3.3 V standards. In LVCMOS and LVTTL modes, the
+buffer has individually-configurable options for drive strength, bus maintenance (weak pull-up, weak pull-down).
+Differential standards supported include LVDS, BLVDS, LVPECL, MLVDS, SLVS (Rx only), differential LVCMOS, differential
+SSTL and differential HSUL.
+For better support of video standards, subLVDS and MIPI receiver and transmitter are also supported. Table 3.1 and
+Table 3.2 list the sysI/O standards supported in ECP5 and ECP5-5G devices. To implement MIPI interface with ECP5
+devices. Please refer to MIPI D-PHY Bandwidth Matrix and Implementation (FPGA-TN-02090) for detailed information.
+
+
+
+
+                  © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+6                                                                                                                                                                    FPGA-TN-02032-1.3
+                                                                                                                                        ECP5 and ECP5-5G sysI/O Usage Guide
+                                                                                                                                                              Technical Note
+
+
+Table 3.1. Single-Ended I/O Standards
+ Standard                                                      VREF                    VCCIO                     Input                  Output                      Bi-Directional
+                                                                                               2
+ LVTTL33                                                         —                       3.3                      Yes                      Yes                              Yes
+                                                                                               2
+ LVCMOS33                                                        —                       3.3                      Yes                      Yes                              Yes
+ LVCMOS25                                                        —                       2.52                     Yes                      Yes                              Yes
+ LVCMOS18                                                        —                       1.8                      Yes                      Yes                              Yes
+ LVCMOS15                                                        —                       1.5                      Yes                      Yes                              Yes
+ LVCMOS12                                                        —                       1.22                     Yes                      Yes                              Yes
+                                                                                                                       1
+ SSTL18 Class I, II                                             0.9                       —                       Yes                      Yes                             Yes1
+ SSTL15 Class I, II                                            0.75                       —                       Yes1                     Yes                             Yes1
+ SSTL135 Class I, II                                          0.675                       —                       Yes1                     Yes                             Yes1
+ HSUL12                                                         0.6                       —                       Yes1                     Yes                             Yes1
+Notes:
+1. Left and right side I/O only.
+2. Required for output only.
+
+Table 3.2. Differential I/O Standards
+ Standard                                                                      VREF                      Input                    Output                         Bi-Directional
+ SSTL18D I, II                                                                   —                         —                         —                                    —
+ SSTL135D I, II                                                                  —                         —                         —                                    —
+ SSTL15D I, II                                                                   —                         —                         —                                    —
+ HSUL12D                                                                         —                         —                         —                                    —
+ LVTTL33D                                                                        —                         —                         —                                    —
+ LVCMOS33D                                                                       —                         —                         —                                    —
+ LVCMOS25D                                                                       —                         —                         —                                    —
+ LVCMOS18D                                                                       —                         —                         —                                    —
+ LVDS                                                                            —                        Yes                    A/B pair                                Yes
+ LVDS25E                                                                         —                         No                        Yes                                 No
+ BLVDS25                                                                         —                        Yes                        No                                  No
+ BLVDS25E                                                                        —                         No                        Yes                                 Yes
+ MLVDS25                                                                         —                        Yes                        No                                  No
+ MLVDS25E                                                                        —                         No                        Yes                                 Yes
+ LVPECL33                                                                        —                        Yes                        No                                  No
+ LVPECL33E                                                                       —                         No                        Yes                                 No
+ SLVS                                                                            —                        Yes                        No                                  No
+ SUBLVDS                                                                         —                        Yes                        No                                  No
+ MIPI D-PHY HS Mode                                                              —                        Yes                    A/B pair                              Bi-Dir
+
+
+
+
+                  © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02032-1.3                                                                                                                                                                            7
+ECP5 and ECP5-5G sysI/O Usage Guide
+Technical Note
+
+
+
+4. sysI/O Banking Scheme
+ECP5 and ECP5-5G devices have general-purpose programmable sysI/O banks and a configuration bank. Each of the
+general-purpose sysI/O banks has a VCCIO supply voltage and one reference voltage, VREF1. Every device has two banks
+on the left, right and top side.
+The bottom side implements SERDES channels and only the biggest device 85K has one sysI/O bank.
+Every ECP5 and ECP5-5G device has a TAP controller interface bank in the lower left corner of the device. This Bank 8
+has four signal pins (TCK, TMS, TDI and TDO) and is powered by V CCIO8, located on the lower left side of the device, has
+shared I/O for configuration.
+
+                                                                                      TOP
+                                                                         VREF1(0)                   VREF1(1)
+                                                                          VCCIO0                     VCCIO1
+                                                                            GND                        GND
+
+
+
+
+                                                                        Bank 0                     Bank 1
+       VREF1(7)                                                                                                                                                      GND
+        VCCIO7                                                                                                                     Bank 2                            VCCIO2
+          GND                                         Bank 7                                                                                                         VREF1(2)
+
+
+
+
+       LEFT                                                                                                                                                                  RIGHT
+
+
+                                                                                                                                   Bank 3
+       VREF1(6
+        VCCIO)                                                                                                                                                       GND
+             6                                        Bank 6                                                                                                         VCCIO3
+          GND                                                                                                                                                        VREF1(3)
+
+                                                                   Bank 8                                      Bank 4 *
+
+
+
+                                                     CONFIG BANK                    SERDES
+
+
+
+
+                                                               VCCIO8
+                                                                        GND
+                                                                                                                    VCCIO4
+                                                                                                                             GND
+
+                                                                                    BOTTOM
+
+                       *Note: Only 85K device has this bank.
+
+                                                               Figure 4.1. ECP5 and ECP5-5G sysI/O Banking
+
+
+4.1.          VCC (1.1 V)
+The core power supply, VCC, is used to power the device internally before data is captured by the I/O buffers. V CC is also
+used to power the 1.2V (LVCMOS12) ratioed buffers so these can be captured independently of V CCIO.
+
+
+4.2.          VCCIO (1.2 V/1.35 V/1.5 V/1.8 V/2.5 V/3.3 V)
+Each bank has a separate VCCIO supply that powers the single-ended output drivers in a bank. The bank VCCIO is also
+used to power ratioed input buffers such as LVCMOS15 and LVCMOS18, as well as extended threshold ratioed buffers.
+For unused banks, it is recommended to set VCCIO to 0V to minimize power and hold the bank in hot socket.
+
+                  © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+8                                                                                                                                                                    FPGA-TN-02032-1.3
+                                                                                                                                        ECP5 and ECP5-5G sysI/O Usage Guide
+                                                                                                                                                              Technical Note
+
+
+
+4.3.       VCCAUX (2.5 V)
+In addition the VCCIO supply, every bank also has an auxiliary global supply called VCCAUX. The bank VCCAUX supply is
+used to power the differential and referenced (SSTL) input buffer. Bank V CCAUX is also used to power the push-pull
+output pre-driver sections.
+
+
+4.4.       VCCIO8 (1.2 V/1.5 V/1.8 V/2.5 V/3.3 V)
+The JTAG pins share power supply of Bank 8 VCCIO supplies. VCCIO8 determines the electrical characteristics of the
+LVCMOS JTAG pins, both the output high level and the input threshold. Table 4.1 contains a summary of the required
+power supplies.
+Table 4.1. Power Supplies
+ Power Supply                            Description                                                                                                  Value*
+ VCC                                     Core power supply                                                                                            1.1 V
+ VCCIO                                   Power supply for the I/O banks                                                                               1.2 V/1.35 V/1.8 V/2.5 V/3.3 V
+ VCCAUX                                  Auxiliary power supply                                                                                       2.5 V
+ VCCIO8                                  Power supply for JTAG pins and configuration bank I/O                                                        1.2 V/1.5 V/1.8 V/2.5 V/3.3 V
+*Note: Refer to ECP5 and ECP5-5G Family Data Sheet (FPGA-DS-02012) for recommended minimum and maximum values.
+
+
+
+4.5.       VREF1
+Each bank can support one separate VREF input voltage, VREF1, which is used to set the threshold for the referenced
+input buffers. A dedicated I/O in each bank can be used to drive the V REF1 bank reference voltage. An I/O used as a
+VREF1 input is also called a VREF1_DRIVER. A conceptual block diagram is shown in Figure 4.2.
+
+                                                                           PAD
+
+
+
+                                                                                          BANK VREF
+
+
+
+                                                           Figure 4.2. Bank VREF from One Specific Pad
+
+To assign a VREF driver, use IO_TYPE=VREF1_DRIVER. To assign a VREF to a buffer, use VREF=VREF1_LOAD.
+
+
+4.6.       Hot Socketing Support
+The I/O located on the top and bottom sides are fully hot socketable. Refer to ECP5 and ECP5-5G Family Data Sheet
+(FPGA-DS-02012) for hot socketing (IDK) requirements.
+
+
+4.7.       Standby
+Using the Standby modes is a way to dynamically power-down the bank. It disables the differential/reference receiver,
+true differential driver, current mirrors and bias circuits.
+In Standby mode, differential drivers and differential input buffers can be powered down to save power.
+The Standby modes are enabled on a bank-by-bank basis. Each bank has user-routed input signals to enable the
+Standby (dynamic power-down) modes.
+Refer to Power Consumption and Management for ECP5 and ECP5-5G Devices (FPGA-TN-02210) for detailed
+information.
+
+
+
+
+                  © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02032-1.3                                                                                                                                                                            9
+ECP5 and ECP5-5G sysI/O Usage Guide
+Technical Note
+
+
+
+4.8.       LVDS sysI/O Buffer Pairs (A/B and C/D on Left and Right Sides)
+The GPIO are grouped as a quad building block, GPIOA, GPIOB, GPIOC and GPIOD. Each pair consists of two single-
+ended output drivers and two sets of single-ended input buffers (both ratioed and referenced). One referenced input
+buffer, per pair, can also be configured as a differential input. In addition to these buffers and drivers, each I/O has a
+weak pull-up and weak pull-down resistor. The programmability for these ‘weak’ features is limited to ON and OFF
+programmability on each I/O independently. The pull modes are always disabled in output mode. Left and right side
+GPIO has clamp always on. The two pads in the pair are described as ‘true’ and ‘comp’, where the true pad is
+associated with the positive side of the differential I/O, and the comp (complementary) pad is associated with the
+negative side of the differential I/O. The sysI/O buffers pairs are grouped as A/B pad pairs or C/D pad pairs. Each sysI/O
+pad pair will support programmable on/off differential input termination of 100 Ω. There is an added LVDS output
+driver in the A/B pad pairs of all arrays. The C/D pad pairs do not have the true LVDS differential output driver. The
+LVDS output driver does support tri-state. LVDS can be BIDI.
+Figure 4.3 shows the sysI/O Buffer Pairs on left and right sides.
+
+
+4.9.       sysI/O Buffer Pair (A/B Pair on Top and Bottom Sides)
+The GPIO are grouped as a pair building block, GPIOA and GPIOB. Each pair consists of two single-ended output drivers
+and two sets of single-ended input buffers (ratioed only). In addition to these buffers and drivers, each I/O has a weak
+pull-up and weak pull-down resistor. The programmability for these ‘weak’ features is limited to ON and OFF
+programmability on each I/O independently. The pull modes are always disabled in output mode. All GPIO on top and
+bottom side support a clamp that is programmable on or off.
+Figure 4.4 shows the sysI/O buffer pair on the top and bottom sides.
+
+
+
+
+                  © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+10                                                                                                                                                                   FPGA-TN-02032-1.3
+                                                                                                                                                                                         ECP5 and ECP5-5G sysI/O Usage Guide
+                                                                                                                                                                                                               Technical Note
+
+
+                                                                                                 TRUE                                                        TRUE
+                                                                                                  Pad                                                         Pad
+                                                                                                   A                                                          B                                       The PAD C and PAD
+                                                                             Clamp                                                               Clamp                                                Dpio pair have the same
+                                                                 VCCIO                                                                   VCCIO
+                                                                              ON                                                                  ON                                                  configuration logic as
+                                                                                                                                                                                                      PAD A and PAD B, with
+                                                                                                                                                                                                      the exception, they do not
+                                                                                                                Weak                                                      Weak                        have a true differential
+                                                                                                                Pulldown                                                  Pulldown
+
+
+                                                    WeakPullup
+                                                                                                                                                                                                      output driver.
+                                                                                                                (default)                                                 (default)
+                                                                                                                                    GND
+                                                                                                                                    Weak
+                                                                                                                                    Pullup                                                  GND
+
+
+
+                                                                                                                     Programmable (on, off)
+                                                                                                                        100 Ω differential
+                                                                                                                        input termination
+
+
+                                                                                                                               Bank VREF
+
+
+
+
+                                                                                                                 True differential drivers only on
+                                    VCC                                                                                                                                                                   VCC
+                       VCCIO                                                                                                                                                                  VCCIO
+                                                                                                                             AB pins
+  VCCAUX                                                         +          -                                                                                             VCCAUX                                                    -          +
+
+
+                                                                                VCCAUX
+                                                                                                                                                                                                                                               VCCAUX
+
+                                                                                         VCCIO                              VCCIO                    VCCIO
+                                                                                                                                                                                         Programmable
+
+                                                                                                    SE Driver                                                 SE Driver
+                                                                                                                                                                                         static/dynamic
+                                          Ratioed   Ratioed      Ref/diff                                                                                                                                       Ratioed   Ratioed   Ref/diff
+                                                                                                                                    Diff
+                                                                                                                                    Driver
+                                                                                                                                    on AB                                                Thevenin
+                                                                                                                                    pairs                                                Termination
+                                                                                                                                                                                         50/75/150 Ω
+                                                                                                                                                                                         to VCCIO/2
+                                                                     Programmable
+                                                                     static/dynamic
+                                                                     Thevenin
+                                                                     Termination
+                                                                     50/75/150 Ω
+                                                                     to VCCIO/2
+
+                                                                                                 OUTA
+                                                     INA                                                                                                                                                        INB
+                                                                                                                   TSA
+                                                                                                                                                              OUTB                 TSB
+
+
+                                                                                                                              Complementary
+                                                                                                                              circuitry located in
+                                                                                                                              IO logic blocks
+
+
+                                                                            Figure 4.3. sysI/O Buffer Pair for Left and Right Sides
+
+
+
+
+                        © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+           All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02032-1.3                                                                                                                                                                                                                                       11
+ECP5 and ECP5-5G sysI/O Usage Guide
+Technical Note
+
+
+                                                                                     TRUE                                            TRUE
+                                                                                      Pad                                             Pad
+                                                                                       A                                              B                                 The PAD C and PAD
+                                                                        Clamp                                           Clamp                                           Dpio pair have the same
+                                                               VCCIO                                            VCCIO
+                                                                        Off, on                                         Off, on                                         configuration logic as
+                                                                                                                                                                        PAD A and PAD B.
+                                                                                            Weak                                             Weak
+                                                                                            Pulldown                                         Pulldown
+                                                                                            (default)                                        (default)
+                                                    Weak                                                  GND
+                                                    Pullup
+                                                                                                         Weak                                                  GND
+                                                                                                         Pullup
+
+
+
+
+ VCCAUX             VCCIO                                                                                                                    VCCAUX             VCCIO
+                                   VCC                                                                                                                                       VCC
+
+
+
+
+                                                                             VCCIO                                           VCCIO                          Programmable
+
+                                          Ratioed    Ratioed                                                                                                                       Ratioed   Ratioed
+                                                                                                                                                            static/dynamic
+                                                                                                                                                            Thevenin
+                                                                                                                                                            Termination
+                                                                                                                                                            50/75/150 Ω to
+                                                                Programmable                                                                                VCCIO/2
+                                                                static/dynamic
+                                                                Thevenin
+                                                                Termination
+                                                                50/75/150 Ω to
+                                                                VCCIO/2
+
+
+
+                                                    INA
+                                                                                     OUTA      TOA                                    OUTB            TOB                                    INA
+
+
+
+                                                                                                         Complementary
+                                                                                                        circuitry located in
+                                                                                                           IO logic blocks
+
+                                                                       Figure 4.4. sysI/O Buffer Pair for Top and Bottom Sides
+
+
+4.10. Mixed Voltage Support in a Bank
+ECP5 and ECP5-5G devices support mixed mode inputs in a given bank on all sides of the device. All differential and
+referenced inputs are supported independent of VCCIO. When output is configured as an open drain it can be placed
+independent of VCCIO. Some of the ratioed buffers are powered by VCCAUX and VCC and can therefore be placed
+independently of VCCIO.
+
+
+
+                       © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+          All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+12                                                                                                                                                                                 FPGA-TN-02032-1.3
+                                                                                                                                        ECP5 and ECP5-5G sysI/O Usage Guide
+                                                                                                                                                              Technical Note
+
+
+ECP5 and ECP5-5G devices support numerous mixed input voltage combinations by using a combination of three ratio
+receivers. The first receiver is powered by VCCIO and uses overdrive/underdrive threshold adjustments to support 1.8 V
+and 1.5 V signaling. The second is a fixed threshold 1.2 V ratio receiver powered by V CC that supports 1.2 V signaling.
+The third is powered with VCCAUX (2.5 V), supports hysteresis, and is used for 3.3 V and 2.5 V signaling.
+Table 4.2 lists the ratioed sysI/O standards that can be mixed in the same bank.
+Table 4.2. Mixed Voltage I/O Support
+                                                                              For Top/Bottom Banks
+ VCCIO (V)                               Input sysI/O Standards                                                                   Output sysI/O Standards
+                    1.2 V            1.5 V             1.8 V             2.5 V             3.3 V             1.2 V             1.5 V             1.8 V             2.5 V             3.3 V
+ 1.2 V              Yes                                                   Yes               Yes               Yes
+ 1.35 V             Yes                                                   Yes               Yes
+ 1.5 V              Yes               Yes                                 Yes               Yes                                  Yes
+ 1.8 V              Yes                                 Yes               Yes               Yes                                                    Yes
+ 2.5 V              Yes                                                   Yes               Yes                                                                      Yes
+ 3.3 V              Yes                                                   Yes               Yes                                                                                        Yes
+                                                                                For Left/Right Banks
+ VCCIO (V)                                        Input Signal                                                                    Output sysI/O Standards
+                    1.2 V            1.5 V             1.8 V             2.5 V             3.3 V             1.2 V             1.5 V             1.8 V             2.5 V             3.3 V
+ 1.2 V              Yes                                                                                       Yes
+ 1.35 V             Yes
+ 1.5 V              Yes               Yes                                                                                        Yes
+ 1.8 V              Yes                                 Yes                                                                                        Yes
+ 2.5 V              Yes                                                   Yes                                                                                        Yes
+ 3.3 V              Yes                                                   Yes               Yes                                                                                        Yes
+
+
+
+
+4.11. sysI/O Buffer Configurations
+This section describes the various sysI/O features available on the ECP5 and ECP5-5G FPGA.
+
+4.11.1. Programmable Drive Strength
+The single-ended driver has programmable drive strength. The LVCMOS/LVTTL drive strength available at each value of
+VCCIO is shown in Table 4.3. The ECP5 and ECP5-5G single-ended driver is a process, voltage and temperature
+compensating driver. Therefore, there will be a good tolerance of drive strength. For LVCMOS and LVTTL I/O standards,
+guaranteed minimum drive strength is listed.
+The user must consider the maximum allowable current per bank and the package thermal limit current when selecting
+the drive strength. Table 4.3 lists the available drive settings for each of the output standards.
+Table 4.3. Programmable Drive Values for LVCMOS/LVTTL
+            1.2 V                             1.5 V                               1.8 V                               2.5 V                               3.3 V
+                                                                                                                                                                                     Units
+   IOLmin           IOHmin           IOLmin            IOHmin            IOLmin            IOHmin            IOLmin            IOHmin            IOLmin            IOHmin
+     4               –4                 4                –4                 4                –4                 4                –4                 4                –4                mA
+     8               –8                 8                –8                 8                –8                 8                –8                 8                –8                mA
+                                                                          12*              –12*               12*              –12*               12*               –12*               mA
+                                                                                                                                                  16*               –16*               mA
+*Note: Automotive device may not support drive setting.
+The SSTL and HSUL nominal drive strengths are optimized for the performance and signal integrity of the I/O interface.
+
+
+                  © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02032-1.3                                                                                                                                                                            13
+ECP5 and ECP5-5G sysI/O Usage Guide
+Technical Note
+
+
+4.11.2. Programmable Slew Rate
+The single-ended output buffer for each device I/O pin has programmable output slew rate control that can be
+configured for either low-noise (SLEWRATE=SLOW) or high-speed (SLEWRATE=FAST) performance. Each I/O pin has an
+individual slew rate control that allows designers to specify slew rate control on a pin-by-pin basis. Slew rate control
+affects both the rising and falling edges. Slew rates vary as a function of drive and PVT conditions. Slow slew rate
+reduces SSO noise. The software default for slew rate is SLEWRATE=SLOW.
+Differential standards are not impacted by slew rate settings. However, slew rate settings have some impact on
+emulated differential standards, as they use single-ended output buffers and complementary outputs.
+
+4.11.3. Tri-state Control
+On the output side, each single-ended driver has a separate tri-state control. The differential driver has tri-state control
+as well.
+
+4.11.4. Open Drain Control
+In addition to tri-state control, single-ended drivers also support open drain operation on each I/O independently.
+Unlike non-open drain outputs that consist of both source and sink components, an open drain output is composed of
+only the sink section of the output driver.
+All LVCMOS and LVTTL output buffers can be configured to function as open drain outputs. The user can implement an
+open drain output by turning on the OPENDRAIN attribute in the software.
+
+4.11.5. Complementary Outputs
+The single-ended driver associated with the complementary pad can optionally be driven by the complement of the
+data that drives the single-ended driver associated with the true pad. ECP5 and ECP5-5G devices use pads A and C as
+true pads and pads B and D as complement pads. This allows a pair of single-ended drivers to be used to drive
+complementary outputs. Pads A and B from a PIO pair and pads C and D from another PIO pair. This is used for driving
+complementary SSTL signals (as required by the differential SSTL clock inputs on synchronous DRAM and synchronous
+SRAM devices, respectively). It can also be used in conjunction with off-chip resistors to emulate LVPECL33, MLVDS,
+LVDS25E and BLVDS output drivers. When this option is selected, the tri-state control for the driver associated with the
+complement pad is driven by the same signal as the tri-state control for the driver associated with the true pad.
+
+4.11.6. Differential I/O Supported
+Differential inputs LVDS, SUBLVDS, MLVDS25, BLVDS, SLVS, MIPI Receiver (HS) are supported with differential receivers
+on both A/B pair and C/D pair PIOs and on left and right sides only. 50% of the sysI/O buffer pairs on the left and right
+sides only are true differential outputs. LVDS is supported with a dedicated differential output driver on the A/B PIO
+pair. The C/D pair pins do not support true differential outputs.
+LVDS25E, LVPECL33E, MLVDS25E, and BLVDS25E outputs can be implemented via emulation on all A/B and C/D pin
+output pairs. These emulated differential outputs require external resistors. Refer to ECP5 and ECP5-5G Family Data
+Sheet (FPGA-DS-02012) for detailed information.
+MIPI Transmitter (HS) can be implemented via using emulated LVDS25E differential outputs with external resistor
+network. Refer to MIPI D-PHY Bandwidth Matrix and Implementation (FPGA-TN-02090) for detailed information.
+
+4.11.7. Complementary SSTL Output Support
+Differential SSTL outputs do not use external resistors, they use the complementary mux contained within each pair of
+single-ended output drivers.
+
+4.11.8. Differential Input Termination
+The ECP5 and ECP5-5G device supports on-chip 100 Ω input differential termination between all pairs of all banks on
+left and right sides. The only value supported is 100 Ω. It is programmable as on and off. When it is on and the I/O type
+is MIPI or a BIDI, it is dynamic.
+
+
+                  © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+14                                                                                                                                                                   FPGA-TN-02032-1.3
+                                                                                                                                        ECP5 and ECP5-5G sysI/O Usage Guide
+                                                                                                                                                              Technical Note
+
+
+Figure 4.5 on page 15 shows the discrete off-chip and on-chip solutions for dedicated, differential input termination.
+The differential termination is implemented using parallel legs that turn on and off to compensate for PVT variation.
+The termination also applies to input termination and is dynamic (enabled when output buffer is put in tri-state) or
+static (always on) to support MIPI and BIDI applications.
+
+                      Zo = 50 Ω                                                                     Zo = 50 Ω
+
+
+
+
+                                               100 Ω                                                                                         100 Ω
+
+
+                      Zo = 50 Ω                                                                     Zo = 50 Ω
+
+
+
+                                     Off-Chip Solution                                                            On-Chip Solution
+
+                                                              Figure 4.5. Differential Input Termination
+
+4.11.9. Single-Ended Input Termination
+ECP5 and ECP5-5G devices support single-ended input parallel termination to VCCIO/2. This is done by using output
+driver legs to emulate termination between the pad and VCCIO as well as between the pad and VSS. Both static and
+dynamic termination are supported. Dynamic termination is used to support the DDR2 and DDR3 interface standards.
+Values of termination are 50 Ω, 75 Ω and 150 Ω. All input parallel terminations use a Thevenin termination scheme. As
+an example, 50 Ω to VCCIO/2 is created by the Thevenin combination of 100 Ω between the pad and VCCIO and 100 Ω
+between the pad and VSS.
+Figure 4.6 shows the various off-chip, single-ended input termination schemes.
+
+             Termination Type                                         Off-Chip Solution                                                   On-Chip Solution
+
+
+                                                                   VCCIO/2                                                                         VCCIO/2
+
+       Parallel to VCCIO/2 at                                              Zo                                                                             Zo
+                                                         Zo                                                                   Zo
+       Receiving end.
+       Thevenin
+                                                                      VREF                                                            VREF
+
+
+
+
+                                                                                                                                             VCCIO/2
+                                                                                                                                                                         Tri-state
+       Parallel to VCCIO/2 at
+       Receiving end with
+                                                                                N/A
+       Bidirectional Enable/Disable                                                                                                                  Zo
+       for DDR2 and DDR3                                                                                                    Zo
+
+
+                                                                                                                                   VREF
+
+
+
+                                                           Figure 4.6. Single-Ended Input Termination
+
+4.11.10. Programmable CLAMP
+The buffers on top and bottom sysI/O have optional clamp diodes that may optionally be specified in the Lattice
+Diamond design software. The programmable CLAMP can be turned ON or OFF.
+
+
+
+
+                  © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02032-1.3                                                                                                                                                                            15
+ECP5 and ECP5-5G sysI/O Usage Guide
+Technical Note
+
+
+4.11.11. Differential SSTL and HSUL
+The single-ended driver associated with the complementary pad can optionally be driven by the complement of the
+data that drives the single-ended driver associated with the true pad. This allows a pair of single-ended drivers to be
+used to drive complementary outputs with the lowest possible skew between the signals. This is used for driving
+complementary SSTL and HSUL signals (as required by the differential SSTL and HSUL clock inputs on synchronous
+DRAM and synchronous SRAM devices, respectively).
+Refer to the ECP5 and ECP5-5G Family Data Sheet (FPGA-DS-02012) for a detailed description of the differential HSUL
+and SSTL implementations.
+
+4.11.12. MIPI D-PHY Receiver IMIPI Interface
+The MIPI D-PHY receiver IMIPI Interface is used only in input mode and only on the C/D pad pair. The differential C/D
+pad pair high-speed and pad C single-ended low-power inputs are handled through the pad C I/O logic. The pad D
+single-ended low-power inputs are handled through the pad D I/O logic.
+ HS mode: 100 Ω differential termination is enabled with a differential receiver
+ LP mode: HS mode is disabled and ratio receiver is enabled on pad C
+The primitive shown in Figure 4.7 should be used when implementing the MIPI interface.
+
+                                                                                         IMIPI
+                                       Pad C                              A                             OHSLS                             High/Low-Speed Output
+
+                                       Pad D                             AN
+
+                     High-Speed Select                                   HSSEL                              OLS                           Low-Speed Output
+
+
+                                                                              Figure 4.7. MIPI Primitive
+
+Table 4.4. IMIPI Port List
+Port                 Input/Output               Description
+A                          Input                Pad C input
+AN                         Input                Pad D input
+HSSEL                      Input                High-speed select signal. This is shared with the tri-state input of the buffer.
+                                                HSSEL=1: High-speed mode, 100 Ω differential termination is on. Pad C logic select differential
+                                                signal to IOL for gearing.
+                                                HSSEL=0: Low-speed mode, 100 Ω termination is turned off.
+                                                OHSLS selected as ratioed LVCMOS input buffer from the I input (pad C), OLS selected as LVCMOS
+                                                input from the IN input (pad D).
+OHSLS                     Output                High-speed or low-speed output, depending on HSSEL
+OLS                       Output                Low-speed output
+
+
+MIPI is supported via the IMIPI primitive instead of IO_TYPE in the front-end RTL and simulation.
+
+
+
+
+                    © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+       All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+16                                                                                                                                                                     FPGA-TN-02032-1.3
+                                                                                                                                          ECP5 and ECP5-5G sysI/O Usage Guide
+                                                                                                                                                                Technical Note
+
+
+
+5. Software sysI/O Attributes
+The sysI/O attributes can be specified in HDL, using the Preference Editor GUI or in the ASCII Preference file (.prf)
+directly. The appendices of this document provide examples of how these can be assigned using each of the methods
+described above. This section describes each of the attributes in detail.
+
+
+5.1.         IO_TYPE
+The IO_TYPE is used to set the sysI/O standard for an I/O. The VCCIO required to set these I/O standards are embedded
+in the attribute names. The BANK VCCIO attribute is used to specify allowed VCCIO combinations for each IO_TYPE.
+Default: LVCMOS25
+Table 5.1. IO_TYPE Attribute Values
+sysI/O Signaling Standard                                                                                    IO_TYPE
+DEFAULT                                                                                                      LVCMOS25
+LVDS 2.5 V                                                                                                   LVDS
+Emulated LVDS 2.5 V                                                                                          LVDS25E
+Bus LVDS 2.5 V                                                                                               BLVDS25
+Emulated Bus LVDS 2.5 V                                                                                      BLVDS25E
+LVPECL 3.3 V                                                                                                 LVPECL33
+Emulated LVPECL 3.3 V                                                                                        LVPECL33E
+MLVDS                                                                                                        MLVDS
+Emulated MLVDS                                                                                               MLVDS25E
+SLVS                                                                                                         SLVS
+Sub_LVDS                                                                                                     SUBLVDS
+HSUL 1.2 V                                                                                                   HSUL12
+Differential HSUL                                                                                            HSUL12D
+SSTL15 Class I and II                                                                                        SSTL15_I, SSTL15_II
+Differential SSTL15 Class I and II                                                                           SSTL15D_I, SSTL15D_II
+SSTL135 Class I and II                                                                                       SSTL135_I, SSTL135_II
+Differential SSTL135 Class I and II                                                                          SSTL135D_I, SSTL135D_II
+SSTL18 Class I and II                                                                                        SSTL18_I, SSTL18_II
+Differential SSTL18 Class I and II                                                                           SSTL18D_I, SSTL18D_II
+Differential LVTTL                                                                                           LVTTL33D
+LVTTL                                                                                                        LVTTL33
+LVCMOS 3.3 V                                                                                                 LVCMOS33
+LVCMOS 2.5 V                                                                                                 LVCMOS25
+LVCMOS 1.8 V                                                                                                 LVCMOS18
+LVCMOS 1.5 V                                                                                                 LVCMOS15
+LVCMOS 1.2 V                                                                                                 LVCMOS12
+Differential LVCMOS 3.3 V                                                                                    LVCMOS33D
+Differential LVCMOS 2.5 V                                                                                    LVCMOS25D
+Differential LVCMOS 1.8 V                                                                                    LVCMOS18D
+
+
+
+
+                    © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+       All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02032-1.3                                                                                                                                                                              17
+ECP5 and ECP5-5G sysI/O Usage Guide
+Technical Note
+
+
+
+5.2.       OPENDRAIN
+An I/O can be assigned independently to be an open drain when this attribute is turned on.
+Values: ON, OFF
+Default: OFF
+
+
+5.3.       DRIVE
+The drive strength attribute is available for output standards that support programmable drive strength. The default
+depends on the I/O standard used.
+Table 5.2. Programmable Output Drive
+Output Standard                                             DRIVE                                                                                     DIFFDRIVE                     VCCIO
+Single-Ended Interfaces
+LVTTL33                                                     4 mA, 8 mA, 12 mA, 16 mA                                                                        —                         3.3
+LVCMOS33                                                    4 mA, 8 mA, 12 mA, 16 mA                                                                        —                         3.3
+LVCMOS25                                                    4 mA, 8 mA, 12 mA                                                                               —                         2.5
+LVCMOS18                                                    4 mA, 8 mA, 12 mA                                                                               —                         1.8
+LVCMOS15                                                    4 mA, 8 mA                                                                                      —                         1.5
+LVCMOS12                                                    4 mA, 8 mA                                                                                      —                         1.2
+LVTTL33 (open drain)                                        4 mA, 8 mA, 12 mA, 16 mA                                                                        —                        Note2
+LVCMOS33 (open drain)                                       4 mA, 8 mA, 12 mA, 16 mA                                                                        —                        Note2
+LVCMOS25 (open drain)                                       4 mA, 8 mA, 12 mA, 16 mA                                                                        —                        Note2
+LVCMOS18 (open drain)                                       4 mA, 8 mA, 12 mA, 16 mA                                                                        —                        Note2
+LVCMOS15 (open drain)                                       4 mA, 8 mA, 12 mA1, 16 mA                                                                       —                        Note2
+                                                                                         1
+LVCMOS12 (open drain)                                       4 mA, 8 mA, 12 mA , 16 mA                                                                       —                        Note2
+HSUL12                                4 mA, 8 mA                                                                                                            —                         1.2
+SSTL135 I                             8 mA                                                                                                                  —                         1.35
+SSTL135 II                            10 mA                                                                                                                 —                         1.35
+SSTL18 I                              8 mA                                                                                                                  —                         1.8
+SSTL18 II                             16 mA                                                                                                                 —                         1.8
+SSTL15 I                              8 mA                                                                                                                  —                         1.5
+SSTL15 II                             10 mA                                                                                                                 —                         1.5
+Differential Interfaces
+LVTTL33D                              4 mA, 8 mA, 12 mA, 16 mA                                                                                              —                         3.3
+LVCMOS33D                             4 mA, 8 mA, 12 mA, 16 mA                                                                                              —                         3.3
+LVCMOS25D                             4 mA, 8 mA, 12 mA                                                                                                     —                         2.5
+SSTL1.35D I                           8 mA                                                                                                                  —                         1.35
+SSTL1.35D II                          10 mA                                                                                                                 —                         1.35
+SSTL18D I                             8 mA                                                                                                                  —                         1.8
+SSTL18D II                            16 mA                                                                                                                 —                         1.8
+SSTL15D I                             8 mA                                                                                                                  —                         1.5
+SSTL15D II                            10 mA                                                                                                                 —                         1.5
+HSUL12D                               4 mA, 8 mA                                                                                                            —                         1.2
+LVDS                                  —                                                                                                                     3.5                       2.5
+LVDS25E1                              8 mA                                                                                                                  —                         2.5
+BLVDS25E1                             16 mA                                                                                                                 —                         2.5
+MLVDS25E1                             16 mA                                                                                                                 —                         2.5
+           1
+LVPECL33E                             16 mA                                                                                                                 —                         3.3
+Notes:
+1. Emulated with LVCMOS drivers and external resistors.
+2. Independent of VCCIO.
+
+                  © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+18                                                                                                                                                                   FPGA-TN-02032-1.3
+                                                                                                                                        ECP5 and ECP5-5G sysI/O Usage Guide
+                                                                                                                                                              Technical Note
+
+
+
+5.4.       DIFFDRIVE
+DIFFDRIVE attribute is available for the LVDS output standard. The default value is set to 3.5 mA.
+Values: 3.5 mA
+Default: 3.5 mA
+
+5.5.       TERMINATION
+This attribute sets the on-chip input parallel termination to VCCIO/2. Parallel termination is achieved using a Thevenin
+termination scheme. This programmable option can be set for each I/O individually. Both static and dynamic
+terminations are available.
+Values: OFF, 50, 75, 150
+Default: OFF
+
+
+5.6.       DIFFRESISTOR
+This attribute is used to provide differential termination (dynamic differential). It is available only for differential
+IO_TYPES.
+Values: OFF, 100
+Default: OFF
+
+
+5.7.       CLAMP
+The CLAMP options can be enabled for each I/O independently. CLAMP is available on only top and bottom sysI/O
+banks. CLAMP is not available when an output is set to open drain.
+Values: ON, OFF
+Default: OFF
+
+
+5.8.       PULLMODE
+The PULLMODE options can be enabled for each I/O pin independently. The PULLMODE settings are not available when
+I/O pins are programmed output-only. It is available for I/O pins in Input mode and Bidi mode.
+Values: UP, DOWN, NONE
+Default: DOWN
+
+
+5.9.       SLEWRATE
+Each I/O pin has an individual slew rate control. This allows designers to specify slew rate control on a pin-by-pin basis.
+This is not a valid attribute for inputs.
+Values: FAST, SLOW, NA
+Default: SLOW
+Note: LVTTL and LVCMOS support fast and slow slew rates.
+
+
+5.10. HYSTERESIS
+The ratioed input buffers have an input hysteresis option. The HYSTERESIS option can be used to change the amount of
+hysteresis for the LVTTL33, LVCMOS33 and LVCMOS25 input and bi-directional I/O standards.
+The HYSTERESIS option for each of the input pins can be set independently.
+Values: ON, OFF
+Default: Default for LVCMOS33, LVCMOS25 and LVTTL33 is ON. Default for all other IO_TYPES is OFF.
+
+
+
+                  © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02032-1.3                                                                                                                                                                            19
+ECP5 and ECP5-5G sysI/O Usage Guide
+Technical Note
+
+
+
+5.11. VREF
+The VREF option must be enabled for referenced input buffers (HSUL and SSTL). The V REF can be specified in the HDL or
+in the Design Planner GUI.
+Values: OFF, VREF1_LOAD
+Default: VREF1_LOAD (software assigns the dedicated pin to be VREF).
+
+
+5.12. DIN/DOUT
+This attribute can be used when an I/O register needs to be assigned. Using DIN asserts an input register and using
+DOUT asserts an output register in the design. By default, the software will attempt to assign the I/O registers if
+applicable. Users can turn this OFF by using a synthesis attribute or the Preference Editor. These attributes can only be
+applied on registers.
+
+
+5.13. LOC
+This attribute can be used to make pin assignments to the I/O ports in the design. This attribute is used only when the
+pin assignments are made in HDL source code. Pins can also be assigned directly using the GUI in the Preference Editor.
+See the appendices of this document for further information.
+
+
+
+
+                  © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+20                                                                                                                                                                   FPGA-TN-02032-1.3
+                                                                                                                                            ECP5 and ECP5-5G sysI/O Usage Guide
+                                                                                                                                                                  Technical Note
+
+
+
+
+Appendix A. sysI/O Primitive Symbols and Instance Examples
+
+Primitive Symbols
+IB: Input Buffer                                         OBCO: Output Complementary Buffer                                         BBPD: Bi-directional Buffer with Pull-down
+                                                                                                                                    T
+  I                  O                                                                  OT
+                                                                   I                                                                    I
+                IB                                                                     OC
+INPUT: I                                                                 OBCO
+OUTPUT: O                                                                                                                            OB
+                                                         INPUT: I
+                                                         OUTPUTS: OT, OC                                                                            BBPD
+                                                                                                                                   INPUTS: I, T
+                                                                                                                                   OUTPUT: O
+                                                                                                                                   INOUT: B
+
+IBPD: Input Buffer with Pull-down                        OBZ: Output Buffer with Tristate                                          BBPU: Bi-directional Buffer with Pull-up
+                                                         T                                                                          T
+ I                   O
+                                                          I                  O                                                      I
+              IBPD
+ VSS                                                                   OBZ
+                                                         INPUTS: I, T                                                              OB
+ INPUT: I
+                                                         OUTPUT: O
+ OUTPUT: O
+                                                                                                                                                    BBPU
+                                                                                                                                   INPUTS: I, T
+                                                                                                                                   OUTPUT: O
+                                                                                                                                   INOUT: B
+
+IBPU: Input Buffer with Pull-up                          OBZPU: Output Buffer with Tristate and Pull-up                            BBW: Bi-directional Buffer with Keeper Mode
+ VDD                                                      T                                                                        T
+
+                                                          I                  O                                                      I
+ I                   O
+                                                                       OBZPU
+              IBPU                                                                                                                 OB
+ INPUT: I                                                INPUTS: I, T
+ OUTPUT: O                                               OUTPUT: O
+                                                                                                                                                     BBW
+                                                                                                                                   INPUTS: I, T
+                                                                                                                                   OUTPUT: O
+                                                                                                                                   INOUT: B
+
+OB: Output Buffer                                        BB: Bi-directional Buffer                                                MIPI
+                                                          T
+ I               O                                                                                                                          A               OHSLS
+                                                              I                                                                             AN
+            OB
+                                                                                                                                            HSSEL             OLS
+ INPUT: I                                                                                                                                           IMIPI
+ OUTPUT: O                                                 OB
+
+                                                                             BB                                                   INPUTS: A, AN, HSSEL
+                                                                                                                                  OUTPUTS: OHSLS, OLS
+                                                         INPUTS: I, T
+                                                         OUTPUT: O
+                                                         INOUT: B
+
+
+
+
+                    © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+       All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02032-1.3                                                                                                                                                                              21
+ECP5 and ECP5-5G sysI/O Usage Guide
+Technical Note
+
+
+
+Instance Examples
+Input Buffer (IB)
+VHDL:
+component IB
+    port (I: in std_logic; O: out std_logic);
+end component;
+
+Inst_IB: IB
+    port map (I=>clk, O=>buf_clk);
+Verilog:
+IB IB_inst (.I(Data[7]), .O(buf_Data7));
+
+Output Buffer (OB)
+VHDL:
+component OB
+    port (I: in std_logic; O: out std_logic);
+
+Inst_OB0: OB
+    port map (I=>buf_qo0, O=>q(0));
+Verilog:
+IB IB_inst (.I(Data[7]), .O(buf_Data7));
+
+Bi-directional Buffer (BB)
+VHDL:
+component BB
+    port (I: in std_logic; T: in std_logic; O: out     std_logic;
+       B: inout std_logic);
+end component;
+buf7: BB
+    port map (I=>Q_out7, T=>Q_tri7, O=>buf_Data7, B=>Data(7));
+Verilog:
+BB buf7 (.I(Q_out7), .T(Q_tri7), .O(buf_Data7), .B(Data[7]));
+
+
+
+
+                  © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+22                                                                                                                                                                   FPGA-TN-02032-1.3
+                                                                                                                                        ECP5 and ECP5-5G sysI/O Usage Guide
+                                                                                                                                                              Technical Note
+
+
+
+
+Appendix B. sysI/O Attribute Examples
+IO_TYPE
+VHDL:
+ATTRIBUTE IO_TYPE: string;
+ATTRIBUTE IO_TYPE OF portA: SIGNAL IS "LVCMOS18";
+ATTRIBUTE IO_TYPE OF portB: SIGNAL IS "LVCMOS33";
+ATTRIBUTE IO_TYPE OF portC: SIGNAL IS "SSTL33_II";
+ATTRIBUTE IO_TYPE OF portD: SIGNAL IS "LVCMOS25";
+Verilog
+output [4:0] portA /* synthesis IO_TYPE="LVTTL33" DRIVE="16" PULLMODE="UP" SLE-
+WRATE="FAST"*/;
+
+OPENDRAIN
+VHDL:
+ATTRIBUTE OPENDRAIN: string;
+ATTRIBUTE OPENDRAIN OF q_lvttl33_17: SIGNAL IS "ON";
+Verilog:
+output [4:0] portA /* synthesis attribute OPENDRAIN of q_lvttl33_17 is ON */;
+
+DRIVE
+VHDL:
+ATTRIBUTE DRIVE: string;
+ATTRIBUTE DRIVE OF portD: SIGNAL IS "8";
+Verilog:
+output [4:0] portA /* synthesis DRIVE = "8" */;
+
+DIFFDRIVE
+VHDL:
+ATTRIBUTE DIFFDRIVE: string;
+ATTRIBUTE DIFFDRIVE OF portF: SIGNAL IS "3.5";
+Verilog:
+output [4:0] portF/* synthesis                                       IO_TYPE="LVDS" DIFFDRIVE="3.5" */;
+
+TERMINATION
+VHDL:
+ATTRIBUTE TERMINATION: string;
+ATTRIBUTE TERMINATION OF portF: SIGNAL IS "50";
+Verilog:
+output [4:0] portA /* synthesis IO_TYPE="SSTL18_I" TERMINATION = "50"*/;
+
+DIFFRESISTOR
+VHDL:
+ATTRIBUTE DIFFRESISTOR: string;
+ATTRIBUTE DIFFERESISTOR OF portF: SIGNAL IS "100";
+Verilog:
+output [4:0] portA /* synthesis IO_TYPE="LVDS"                                                     DIFFRESISTOR = "100"*/;
+
+
+
+
+                  © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02032-1.3                                                                                                                                                                            23
+ECP5 and ECP5-5G sysI/O Usage Guide
+Technical Note
+
+
+
+PULLMODE
+VHDL:
+ATTRIBUTE PULLMODE: string;
+ATTRIBUTE PULLMODE OF portF: SIGNAL IS "PULLUP";
+Verilog:
+output [4:0] portA /* synthesis IO_TYPE="LVCMOS33"                                                               PULLMODE = "PULLUP"*/;
+
+SLEWRATE
+VHDL:
+ATTRIBUTE SLEWRATE: string;
+ATTRIBUTE SLEWRATE OF portF: SIGNAL IS "FAST";
+Verilog:
+output [4:0] portA /* synthesis IO_TYPE="LVCMOS33"                                                               SLEWRATE = "FAST"*/;
+
+CLAMP
+VHDL:
+ATTRIBUTE CLAMP: string;
+ATTRIBUTE CLAMP OF portF: SIGNAL IS "ON";
+Verilog:
+output [4:0] portA /* synthesis IO_TYPE="LVCMOS33" CLAMP = "ON"*/;
+
+HYSTERESIS
+VHDL:
+ATTRIBUTE HYSTERESIS: string;
+ATTRIBUTE HYSTERESIS OF portF: SIGNAL IS "ON";
+Verilog:
+output [4:0] portA /* synthesis IO_TYPE="LVCMOS25"                                                               HYSTERESIS = "ON"*/;
+
+
+
+
+                  © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+24                                                                                                                                                                   FPGA-TN-02032-1.3
+                                                                                                                                       ECP5 and ECP5-5G sysI/O Usage Guide
+                                                                                                                                                             Technical Note
+
+
+
+
+Appendix C. sysI/O Buffer Design Rules
+   Only one VCCIO level is allowed in a given bank.
+         If VCCIO for any bank is set to 2.5 V, it is recommended that it be connected to the same power supply as
+          VCCAUX, thus minimizing leakage. The software will issue a message in the .pad file to the user about this if the
+          VCCIO of a bank is set to 2.5 V.
+   When an output is configured as an OPENDRAIN, the PULLMODE is set to NONE and the CLAMP setting is set to
+    OFF.
+     When an output is configured as an OPENDRAIN, it can be placed independent of V CCIO.
+   When a ratioed input buffer is placed in a bank with a different VCCIO (mixed mode), the Pull mode options of Up
+    are no longer available
+   Left and right banks can support LVDS input buffers. True LVDS outputs are supported on 50% of the sysI/O pins of
+    left and right banks. True LVDS outputs are available only on the A and B pairs of the I/O pairs of left and right
+    banks. Emulated differential outputs are available on every output pair. Pad information can be found in the data
+    sheet of the pad file.
+     The IO_TYPE attribute for a differential buffer can only be assigned to the TRUE pad. The Lattice Diamond
+         design tool will automatically assign the other I/O of the differential pair to the complementary pad.
+   DIFFRESISTOR termination is available on all sysI/O pairs of left and right banks.
+   If none of the pins is used for a given bank, the VCCIO of the bank should be grounded except the JTAG bank.
+
+
+
+
+                 © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+    All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02032-1.3                                                                                                                                                                           25
+ECP5 and ECP5-5G sysI/O Usage Guide
+Technical Note
+
+
+
+
+Appendix D. sysI/O Attributes using the Diamond Spreadsheet
+View User Interface
+sysI/O buffer attributes can be assigned using the Spreadsheet View in Lattice Diamond design software. The Port
+Assignments Sheet lists all the ports in a design and all the available sysI/O attributes in multiple columns. Click on each
+of these cells for a list of all the valid I/O preferences for that port. Each column takes precedence over the next.
+Therefore, when you choose a particular IO_TYPE, the columns for the PULLMODE, DRIVE, SLEWRATE and other
+attributes will only list the valid entries for that IO_TYPE.
+Pin locations can be locked using the Pin column of the Port Assignments Sheet or using the Pin Assignments Sheet.
+You can right-click on a cell and go to Assign Pins to see a list of available pins.
+In Spreadsheet View, go to Design > Preference PIO DRC to look for incorrect pin assignments.
+You can enter the DIN/DOUT preferences using the Cell Mapping tab. All the preferences assigned using the
+Spreadsheet view are written into the logical preference file (.lpf).
+Figure 5.1 shows the Port Assignments Sheet of the Spreadsheet View. For further information on how to use the
+Spreadsheet View, refer to the Diamond Help documentation, available in the Help menu option of the software.
+
+
+
+
+                                                    Figure 5.1. Port Attributes Tab of Spreadsheet View
+
+
+
+
+                  © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+26                                                                                                                                                                   FPGA-TN-02032-1.3
+                                                                                                                                       ECP5 and ECP5-5G sysI/O Usage Guide
+                                                                                                                                                             Technical Note
+
+
+
+Technical Support Assistance
+Submit a technical support case via www.latticesemi.com/techsupport.
+
+
+
+
+                 © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+    All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+FPGA-TN-02032-1.3                                                                                                                                                                           27
+ECP5 and ECP5-5G sysI/O Usage Guide
+Technical Note
+
+
+
+
+Revision History
+Revision 1.3, January 2020
+Section                                             Change Summary
+Disclaimer                                          Added this section.
+
+Revision 1.2, March 2019
+Section                                             Change Summary
+All                                                        Changed document number from TN1262 to FPGA-TN-02032.
+                                                           Updated document template.
+General                                             Updated information related to MIPI output support.
+
+Revision 1.1, November 2015
+Section                                             Change Summary
+All                                                 Added support for ECP5-5G.
+                                                    Changed document title to ECP5 and ECP5-5G sysI/O Usage Guide.
+sysI/O Banking Scheme                               Updated sysI/O Buffer Pair (A/B Pair on Top and Bottom Sides) section. Revised the following
+                                                    figures:
+                                                        Figure 4.3. sysI/O Buffer Pair for Left and Right Sides
+                                                        Figure 4.4. sysI/O Buffer Pair for Top and Bottom Sides
+Technical Support Assistance                        Updated this section.
+
+Revision 1.0, August 2013
+Section                                             Change Summary
+All                                                 Initial release.
+
+
+
+
+                  © 2019-2020 Lattice Semiconductor Corp. All Lattice trademarks, registered trademarks, patents, and disclaimers are as listed at www.latticesemi.com/legal.
+     All other brand or product names are trademarks or registered trademarks of their respective holders. The specifications and information herein are subject to change without notice.
+
+28                                                                                                                                                                   FPGA-TN-02032-1.3
+www.latticesemi.com
+

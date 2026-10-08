@@ -1,0 +1,388 @@
+                                                                          Si PIN photodiodes
+
+                                                              S5971                                  S5972                         S5973 series
+
+
+                                                       High-speed photodiodes
+                                                       (S5973 series: 1 GHz)
+
+    The S5971, S5972 and S5973 series are high-speed Si PIN photodiodes designed for visible to near infrared light detec-
+    tion. These photodiodes provide wideband characteristics at a low bias, making them suitable for optical communications
+    and other high-speed photometry. The S5973 series includes a mini-lens type (S5973-01) that can be efficiently coupled
+    to an optical fiber and a violet sensitivity enhanced type (S5973-02) ideal for violet laser detection.
+
+
+   Features                                                                           Applications
+
+   High-speed response                                                                Optical fiber communications
+   S5971       : 100 MHz (VR=10 V)                                                    High-speed photometry
+   S5972       : 500 MHz (VR=10 V)
+   S5973 series: 1 GHz (VR=3.3 V)                                                     Violet laser detection (S5973-02)
+   Low price
+   High sensitivity
+   S5973-02: 0.3 A/W, QE=91 % (λ=410 nm)
+   High reliability
+
+
+
+
+   Structure / Absolute maximum ratings
+                                                                                                                  Absolute maximum ratings
+                  Dimensional                                                 Effective
+                                                       Photosensitive                                Reverse         Power      Operating    Storage
+                    outline/            Package                             photosensitive
+   Type no.                                              area size                                   voltage       dissipation temperature temperature
+                    Window                                                      area
+                                                                                                     VR Max.            P         Topr         Tstg
+                   material*1               (mm)              (mm)                 (mm2)               (V)            (mW)        (°C)         (°C)
+S5971                                                          f1.2                 1.1
+S5972                  ①/K                                     f0.8                 0.5
+S5973                                    TO-18                                                         20                50       -40 to +100 -55 to +125
+S5973-01               ②/L                                    f0.4                 0.12
+S5973-02               ③/K
+Note: Exceeding the absolute maximum ratings even momentarily may cause a drop in product quality. Always be sure to use the
+      product within the absolute maximum ratings.
+
+
+   Electrical and optical characteristics
+
+                                              Photosensitivity           Short                                Temp.                             Noise
+                 Spectral Peak                                                                                                   Terminal
+                                                    S                    circuit            Dark            coefficient Cutoff capacitance equivalent power
+                response sensitivity
+                                                  (A/W)                 current            current              of     frequency                 NEP
+                  range wavelength                                                                                                  Ct
+   Type no.                                                                Isc               ID                 ID         fc                  VR=10 V
+                    λ       λp                                                                                 ΔTID              f=1 MHz
+                                                                         100 lx                                                                 λ=λp
+                                                660    780       830
+                                       λp
+                                                nm     nm        nm                  Typ.       Max.
+                  (nm) (nm)                                              (µA)        (nA)       (nA)        (times/°C)   (GHz)     (pF)       (W/Hz1/2)
+S5971           320 to 1060 920        0.64                      0.6      1.0       0.07*3       1*3                      0.1*3              7.4 × 10-15
+                                                       0.55                                                                         3*3
+S5972                       800        0.57                      0.55    0.42       0.01*3      0.5*3                     0.5*3              3.1 × 10-15
+                                                0.44
+S5973                                                                    0.09                                1.15
+                320 to 1000            0.52            0.51      0.47                                                                       1.1 × 10-15 *4
+S5973-01                      760                                        0.42       0.001*4     0.1*4                     1*4      1.6*4
+S5973-02                               0.4     0.3*2   0.42      0.37    0.07                                                              1.9 × 10-15 *2 *4
+*1: Window material K: borosilicate glass, L: lens type borosilicate glass
+*2: λ=410 nm
+*3: VR=10 V
+*4: VR=3.3 V
+
+                                                         www.hamamatsu.com                                                                                 1
+                                                                                                 Photo sensitivity temperature characteristics
+
+
+
+
+                                                     Si PIN photodiodes                                          S5971, S5972, S5973 series
+
+
+                                    Spectral response                                                                                              Photosensitivity temperature characteristics
+                                                                                    (Typ. Ta=25 °C)                                                                                                        (Typ.)
+                                      0.7                                                                                                            +1.5
+                                                                                             S5971
+                                                                                                                                                                                                   S5971
+                                      0.6
+
+
+
+
+                                                                                                                  Temperature coefficient (%/°C)
+                                                                                                                                                     +1.0
+
+
+
+
+          Photosensitivity (A/W)
+                                      0.5
+
+                                               S5973-02                                                                                                                             S5972
+                                      0.4                                                                                                                                           S5973 series
+                                                                       S5972                                                                         +0.5
+                                      0.3
+
+
+                                      0.2                             S5973/-01
+                                                                                                                                                        0
+Frequency response
+                                                                                                       Cut-off frequency vs. reverse voltage
+                  0.1
+
+
+                                       0                                                                                                              -0.5
+                                       300     400    500     600    700      800    900 1000 1100                                                       200        400           600       800        1000
+
+                                                            Wavelength (nm)                                                                                                Wavelength (nm)
+                                                                                                 KPINB0157EB
+                                                                                                                                                                                                             KPINB0158EA
+
+
+
+
+                                    Frequency response                                                                                             Cutoff frequency vs. reverse voltage
+                                                            (Typ. Ta=25 °C, λ=830 nm, RL=50 Ω)                                                                            (Typ. Ta=25 °C, λ=830 nm, RL=50 Ω)
+                                      +10                                                                                                          10 GHz
+
+
+                                                                                                                                                                 S5973 series
+                                                                              S5973 series
+                                                                               (VR=3.3 V)
+
+
+
+
+             Relative output (dB)
+                                        0                                                                                                           1 GHz
+
+
+
+
+                                                                                                                   Cutoff frequency
+                                                                                                                                                                          S5972
+                                       -3                                                                      KPINB0157EB
+                                                                                                                                                                                                                           KPINB0158EA
+                                                       S5971
+                                                     (VR=10 V)
+                                      -10                                                                                                          100 MHz
+                                                                                                                                                                                         S5971
+                                                                      S5972
+                                                                    (VR=10 V)
+
+
+
+
+                                      -20                                                                                                          10 MHz
+                                       1 MHz         10 MHz         100 MHz          1 GHz           10 GHz                                                  1                      10                         100
+
+                                                                                                                                                                          Reverse voltage (V)
+                                                                 Frequency
+                                                                                                 KPINB0159EB
+                                                                                                                                                                                                             KPINB0160EC
+
+
+
+
+                                                                                                                KPINB0159EC
+                                                                                                                                                                                                                               KPINB0160
+
+
+
+                                                                                                                                                                                                                           2
+                                                                  Si PIN photodiodes                                           S5971, S5972, S5973 series
+
+
+                                    Dark current vs. reverse voltage                                                                                          Terminal capacitance vs. reverse voltage
+                                                                                                  (Typ. Ta=25 °C)                                                                                                        (Typ. Ta=25 °C, f=1 MHz)
+                                   100 pA                                                                                                                     100 pF
+
+
+
+
+                                                                S5971
+
+
+
+
+                                                                                                                               Terminal capacitance
+                                              10 pA
+
+
+
+
+        Dark current
+                                                                                                                                                                                                                        S5971
+                                                                                                                                                                          10 pF
+                                                                                       S5972
+                                                                                                                                                                                                 S5972
+                                                  1 pA
+
+
+                                                                                   S5973 series
+
+
+                                                                                                                                             S5973
+                                                                                                                   Fiber coupling characteristic    series Z direction)
+                                                                                                                                                 (S5973-01,
+             100 fA                                                                                                              1 pF
+Fiber coupling characteristic (S5973-01,
+                    0.1               1 X, Y direction) 10                                                     100                   0.1                 1                                                                      10                100
+
+
+                                                                          Reverse voltage (V)                                                                                                                    Reverse voltage (V)
+                                                                                                             KPINB0161EA                                                                                                                        KPINB0162EA
+
+
+
+
+                                    Fiber coupling characteristics (S5973-01)
+
+                                                                           X, Y direction                                                                                                                         Z direction
+
+                                                                               (Typ. Ta=25 °C, λ=780 nm, NA=0.2)                                                                                                 (Typ. Ta=25 °C, λ=780 nm, NA=0.2)
+                                                     0.6                                                                                                                                0.6
+
+
+                                                     0.5                                                                                                                                0.5
+
+
+
+
+                Fiber-coupled sensitivity (A/W)                                                                                                       Fiber-coupled sensitivity (A/W)
+                                                                                                                                                                                                                                                                  KPINB0162EA
+                                                                                                                           KPINB0161EA
+                                                     0.4                                                                                                                                0.4
+
+                                                                                                                                                                                              Optical fiber
+                                                     0.3                                                                                                                                0.3   (core diameter: 50 µm)
+                                                                           Optical fiber
+                                                                                                                                                                                                         Y
+                                                                           (core diameter: 50 µm)
+                                                                                   Y
+                                                     0.2                                                                                                                                0.2          X       Z
+                                                                                   X   Z
+                                                                                                                                                                                                Light source =780 nm LD
+                                                     0.1                   Light source=780 nm LD                                                                                       0.1     X, Y= 0 mm
+                                                                           Z=0.5 mm
+
+                                                         0                                                                                                                               0
+                                                         -0.8           -0.4               0        +0.4         +0.8                                                                     0.2        0.5            1      2         5     10           20
+
+                                                                   Shift from lens center X, Y (mm)                                                                                           Distance between lens and fiber end Z (mm)
+                                                                                                                 KPINB0088EA                                                                                                                         KPINB0089EA
+
+
+
+
+                                                                                                                                                                                                                                                                      KPINB00
+                                                                                                                                      KPINB0088EA
+                                                                                                                                                                                                                                                              3
+Dimensional outline (S5971, etc. unit: mm)                                          Dimensional outline (S5973-01, unit: mm)
+
+
+
+                                Si PIN photodiodes                                             S5971, S5972, S5973 series
+
+
+               Dimensional outlines (unit: mm)
+
+              ① S5971, S5972, S5973                                                                ② S5973-01
+
+
+
+
+                                                                                                                                          0.65 ± 0.15
+                                                                                                          Window          5.4 ± 0.2
+
+
+                                                                                                                                                        3.75 ± 0.2
+                                               5.4 ± 0.2                                                   1.5 lens           4.6 ± 0.1
+                          Window
+                           3.0 ± 0.2           4.7 ± 0.1
+
+
+                                                                     3.6 ± 0.2
+                                                                                                      Photosensitive                      2.8
+                                                                                                      surface
+                       Photosensitive                        2.8
+                       surface                                                                                  0.45
+                                                                                                              Lead                                      13.5
+                                 0.45
+                               Lead                                  13
+
+                                                                                                                                      2.54 ± 0.2
+
+
+                                                           2.54 ± 0.2
+
+
+ional outline (S5973-02, unit: mm)
+
+
+
+
+                                                                                                                       Case
+
+                                        Case                                     KPINA0022EB                                                                         KPINA0023EA
+
+
+
+
+              ③ S5973-02
+
+                          Window               5.4 ± 0.2
+                            2.0 min.
+
+
+                                                                   3.75 ± 0.2
+                                               4.7 ± 0.1
+
+
+
+                                                                                               KPINA0022EB                                                                         KPINA002
+                       Photosensitive                        2.8
+                       surface
+
+                                 0.45
+                               Lead                                13
+
+
+
+
+                                                           2.54 ± 0.2
+
+
+
+
+                                     Case
+                                                                                 KPINA0061EB
+
+
+
+
+                                                                                                                                                                          4
+
+                                                                                  KPINA0061EB
+                           Si PIN photodiodes                                                                 S5971, S5972, S5973 series
+
+
+   Related information
+www.hamamatsu.com/sp/ssd/doc_en.html
+
+  Precautions
+∙ Disclaimer
+∙ Metal, ceramic, plastic package products
+
+  Technical information
+∙ Si photodiode / Application circuit example
+
+
+
+
+Information described in this material is current as of November, 2019.
+Product specifications are subject to change without prior notice due to improvements or other reasons. This document has been carefully prepared and the
+information contained is believed to be accurate. In rare cases, however, there may be inaccuracies such as text errors. Before using these products, always
+contact us for the delivery specification sheet to check the latest specifications.
+The product warranty is valid for one year after delivery and is limited to product repair or replacement for defects discovered and reported to us within that
+one year period. However, even if within the warranty period we accept absolutely no liability for any loss caused by natural disasters or improper product use.
+Copying or reprinting the contents described in this material in whole or in part is prohibited without our prior permission.
+
+
+
+                                                                                                                                                                            www.hamamatsu.com
+     HAMAMATSU PHOTONICS K.K., Solid State Division
+     1126-1 Ichino-cho, Higashi-ku, Hamamatsu City, 435-8558 Japan, Telephone: (81)53-434-3311, Fax: (81)53-434-5184
+     U.S.A.: Hamamatsu Corporation: 360 Foothill Road, Bridgewater, N.J. 08807, U.S.A., Telephone: (1)908-231-0960, Fax: (1)908-231-1218, E-mail: usa@hamamatsu.com
+     Germany: Hamamatsu Photonics Deutschland GmbH: Arzbergerstr. 10, D-82211 Herrsching am Ammersee, Germany, Telephone: (49)8152-375-0, Fax: (49)8152-265-8, E-mail: info@hamamatsu.de
+     France: Hamamatsu Photonics France S.A.R.L.: 19, Rue du Saule Trapu, Parc du Moulin de Massy, 91882 Massy Cedex, France, Telephone: (33)1 69 53 71 00, Fax: (33)1 69 53 71 10, E-mail: infos@hamamatsu.fr
+     United Kingdom: Hamamatsu Photonics UK Limited: 2 Howard Court, 10 Tewin Road, Welwyn Garden City, Hertfordshire AL7 1BW, United Kingdom, Telephone: (44)1707-294888, Fax: (44)1707-325777, E-mail: info@hamamatsu.co.uk
+     North Europe: Hamamatsu Photonics Norden AB: Torshamnsgatan 35 16440 Kista, Sweden, Telephone: (46)8-509 031 00, Fax: (46)8-509 031 01, E-mail: info@hamamatsu.se
+     Italy: Hamamatsu Photonics Italia S.r.l.: Strada della Moia, 1 int. 6, 20020 Arese (Milano), Italy, Telephone: (39)02-93 58 17 33, Fax: (39)02-93 58 17 41, E-mail: info@hamamatsu.it
+     China: Hamamatsu Photonics (China) Co., Ltd.: B1201, Jiaming Center, No.27 Dongsanhuan Beilu, Chaoyang District, 100020 Beijing, P.R.China, Telephone: (86)10-6586-6006, Fax: (86)10-6586-2866, E-mail: hpc@hamamatsu.com.cn
+     Taiwan: Hamamatsu Photonics Taiwan Co., Ltd.: 8F-3, No. 158, Section2, Gongdao 5th Road, East District, Hsinchu, 300, Taiwan R.O.C. Telephone: (886)3-659-0080, Fax: (886)3-659-0081, E-mail: info@hamamatsu.com.tw
+                                                                                                                                                                                                                                    5
+                                                                                                                                                                          Cat. No. KPIN1025E10 Nov. 2019 DN
+

@@ -1,0 +1,157 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "51156460-cd9d-4d34-8d0f-137c501cc067")
+	(paper "A3")
+	(title_block
+		(title "MCU (optional, DNP Rev A) - Photodiode LVDS Receiver")
+		(date "2026-10-08")
+		(rev "A0")
+		(company "Aharoni Lab, UCLA")
+	)
+	(lib_symbols)
+	(text "Sheet status: skeleton only. No components placed. Hierarchical labels below match the sheet pins on the root sheet. GND\\nis a global net (global label) shared by every sheet. No part values are approved for fabrication."
+		(exclude_from_sim yes)
+		(at 20 75 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left top)
+		)
+		(uuid "0af458c5-86bc-4094-b503-babdcd142171")
+	)
+	(text "Optional SAMD51 supervisor (DNP for Rev A): ADC reads of buffered VHIGH/VLOW/VSPAN/VG; 12-bit DACs DAC_GAIN/DAC_TH into\\nbreak-before-make selectors; SWD, reset, decoupling. UNRESOLVED/optional."
+		(exclude_from_sim yes)
+		(at 20 20 0)
+		(effects
+			(font
+				(size 2.5 2.5)
+			)
+			(justify left top)
+		)
+		(uuid "f5fa47aa-5b50-490b-9178-b27964f7b669")
+	)
+	(wire
+		(pts
+			(xy 200.66 109.22) (xy 193.04 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c22a979e-b40d-4a65-92e2-7179cf94b7c9")
+	)
+	(wire
+		(pts
+			(xy 200.66 101.6) (xy 193.04 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e32eec11-db76-480c-a339-7af6fb63e0e0")
+	)
+	(wire
+		(pts
+			(xy 30.48 101.6) (xy 38.1 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e7aea7af-e8f4-41c1-88c9-3acfba2b5d31")
+	)
+	(label "DAC_GAIN"
+		(at 193.04 101.6 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1218efc5-757b-4fa0-8b2b-6b0074afcf8f")
+	)
+	(label "DAC_TH"
+		(at 193.04 109.22 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "14311d6a-20b1-4e42-99e1-85e32523ce08")
+	)
+	(label "3V3"
+		(at 38.1 101.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7ea56f5d-673e-497f-b1e4-c9b987a9e736")
+	)
+	(global_label "GND"
+		(shape passive)
+		(at 115.57 124.46 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "000d164d-cd56-4228-90b4-fe3267db8857")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 115.57 124.46 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(hierarchical_label "DAC_GAIN"
+		(shape output)
+		(at 200.66 101.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "0688d846-17c7-43ce-b228-3ba564fe9ab8")
+	)
+	(hierarchical_label "3V3"
+		(shape input)
+		(at 30.48 101.6 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "1aa471c2-1912-4d31-ae7d-abdcff02856a")
+	)
+	(hierarchical_label "DAC_TH"
+		(shape output)
+		(at 200.66 109.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "3b30c647-26e3-43b6-9783-61e03c1317b0")
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)

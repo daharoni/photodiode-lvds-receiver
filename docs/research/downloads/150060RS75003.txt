@@ -1,0 +1,632 @@
+   Dimensions: [mm]                                                                                                                                                     Recommended Land Pattern: [mm]                                                                                           Absolute Maximum Ratings (Ambient Temperature 25°C):
+                                                                                                                                                                                                                                                                                                   Properties                                                                          Test conditions                               Value                 Unit
+                                                                                                                                                                                                                                                                                                   Power Dissipation                                                   PDiss                                                          78                   mW
+                                                                                                                                                                                                                                                                                                   Peak Forward Current                                                IF Peak         duty/ 10 @ 1 kHz                              100                    mA
+
+                                                                            0,7 ±0,1
+                                                                                                                                                                                                                                                                                                   Continuous Forward Current                                            IF                                                           30                    mA
+             1                                                         2
+                                                                                                                                                                                                                                                                                                   Reverse Voltage                                                      VREV                                                          5                        V
+                                                                                                                                                                                                                                                                                                   ESD Threshold/ Human Body
+                                   0,7 ±0,1
+                                                                                                                                                                                1                                                                                         2    0,8                 Model
+                                                                                                                                                                                                                                                                                                                                                                      VESD HBM                                                       2000                      V
+
+                                                                                                                                                                                                                                                                                                   Thermal Resistance                                                   RTH                                                          450                   K/W
+                                                                                                                                                                                                                                                                                                   Junction Temperature                                                  TJ                                                          125                       °C
+                                                                                                                                                                                                                           0,8                       0,8
+
+                                                                                                                                                                                                                                                                                                 Optical Properties:
+                                   1,6 ±0,1                                                                                                                                                                                                                                                        Chip Technology                                                                                          AlInGaP
+                                   1,1 ±0,1                                                                                                                                                                                                                        Scale - 20:1                    Emitting Color                                                                                                 Red
+                                                                                                                                                                                                                                                                                                   Lens Type                                                                                              Waterclear
+
+                                                                                                                                                      0,7 ±0,1
+                                                                                                                                                                        Schematic:
+
+
+
+                                                                                                                                           0,3 ±0,1
+                                                                                                                                                                                                                                                                                                 General Information:
+                                                                                                                                                                                                                                                                                                   Operating Temperature                                                                          -40 °C up to +100 °C
+                                                                                                                                                                                                                                                                                                   Storage Conditions (in original                                                            5 °C up to 40 °C; < 90 % rH
+                                                                                                                                                                                                                                                                                                   packaging)
+                                  Polarity Mark                                                                                                                                               +                                                                     -
+                                                                                                                                                                                              1                                                                     2                              Storage Conditions (for single                                                                 -40 °C up to +100 °C
+                                                                                                                                                                                                                                                                                                   parts)
+
+                                                                            0,8 ±0,1
+             1                                                         2                                                                                                                                                                                                                           Moisture Sensitivity Level (MSL)                                                                               3
+
+
+
+
+                                                                                                                                          Scale - 20:1
+
+
+
+
+                                                                                                                                                                                                                                                                                                          CHECKED             REVISION            DATE (YYYY-MM-DD)           GENERAL TOLERANCE                         PROJECTION
+                                                                                                                                                                                                                                                                                                                                                                                                                        METHOD
+                                                                                                                                                                                                                                                                                                          PLD                 002.001             2025-10-20                  DIN ISO 2768-1m
+
+                                                                                                                                                                                                                                                                                                          DESCRIPTION
+
+
+                                                                                                                                                                                                                                                                                                          WL-SMCW SMT Mono-color Chip
+                                                                                                                                                                                                                                            Würth Elektronik eiSos GmbH & Co. KG
+                                                                                                                                                                                                                                            EMC & Inductive Solutions
+                                                                                                                                                                                                                                            Max-Eyth-Str. 1
+                                                                                                                                                                                                                                                                                                          LED Waterclear                                                                                 ORDER CODE
+
+
+                                                                                                                                                                                                                                            74638 Waldenburg                                                                                                                                             150060RS75003
+                                                                                                                                                                                                                                            Germany
+                                                                                                                                                                                                                                            Tel. +49 (0) 79 42 945 - 0                                    SIZE/TYPE                                                           BUSINESS UNIT              STATUS                                         PAGE
+                                                                                                                                                                                                                                            www.we-online.com
+                                                                                                                                                                                                                                            eiSos@we-online.com                                           0603                                                                eiPal                      Valid                                          1/10
+
+This electronic component has been designed and developed for usage in general electronic equipment only. This product is not authorized for use in equipment where a higher safety standard and reliability standard is especially required or where a failure of the product is reasonably expected to cause severe personal injury or death, unless the parties have executed an agreement specifically governing such use. Moreover Würth Elektronik eiSos GmbH
+& Co KG products are neither designed nor intended for use in areas such as military, aerospace, aviation, nuclear control, submarine, transportation, transportation signal, disaster prevention, medical, public information network etc.. Würth Elektronik eiSos GmbH & Co KG must be informed about the intent of such usage before the design-in stage. In addition, sufficient reliability evaluation checks for safety must be performed on every electronic
+component which is used in electrical circuits that require high safety and reliability functions or performance.
+Electrical & Optical Properties:                                                                                                                                                                                                        Viewing Angle:
+                                                                                                                                                            Value
+ Properties                                                                    Test conditions                                                                                                                       Unit
+                                                                                                                            min.                              typ.                            max.
+ Peak Wavelength                                                  λPeak        20 mA                                                                          630                                                     nm
+ Dominant Wavelength                                              λDom         20 mA                                        615                               625                              635                    nm
+ Luminous Intensity                                                  IV        20 mA                                        230                               530                              800                   mcd
+ Forward Voltage                                                    VF         20 mA                                         1.8                                2                               2.6                     V
+ Spectral Bandwidth                                                 Δλ         20 mA                                                                           15                                                     nm
+ Reverse Current                                                   IREV        5V                                                                                                               10                     µA
+ Viewing Angle Phi 0°                                            2θ50% 20 mA                                                                                  140                                                       °                                                                  -70                                                     0°                 10°
+                                                                                                                                                                                                                                                                               100                                                                                                   20°
+
+Certification:                                                                                                                                                                                                                                                                  90                                                                                                                  30°
+
+ RoHS Approval                                                                                                    Compliant [2011/65/EU&2015/863]                                                                                                                               80                                                                                                                                 40°
+
+
+
+
+                                                                                                                                                                                                                                             Relative Luminous Intensity [%]
+                                                                                                                                                                                                                                                                                                                                                                                                                           45°
+ REACh Approval                                                                                                  Conform or declared [(EC)1907/2006]                                                                                                                            70
+ Halogen Free                                                                                                             Conform [JEDEC JS709B]                                                                                                                                                                                                                                                                                    50°
+                                                                                                                                                                                                                                                                                60
+ Halogen Free                                                                                                            Conform [IEC 61249-2-21]
+                                                                                                                                                                                                                                                                                50                                                                                                                                                           60°
+
+                                                                                                                                                                                                                                                                                40                                                                                                                                                                  70°
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    70°
+                                                                                                                                                                                                                                                                                30
+
+                                                                                                                                                                                                                                                                                20
+                                                                                                                                                                                                                                                                                                                                                                                                                                                         80°
+                                                                                                                                                                                                                                                                                10
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        90°
+                                                                                                                                                                                                                                                                                     -90              -45                                           0        10         20       30          40     50         60        70         80      90       100
+
+
+
+
+                                                                                                                                                                                                                                                                                                          CHECKED             REVISION            DATE (YYYY-MM-DD)          GENERAL TOLERANCE                         PROJECTION
+                                                                                                                                                                                                                                                                                                                                                                                                                       METHOD
+                                                                                                                                                                                                                                                                                                          PLD                 002.001             2025-10-20                 DIN ISO 2768-1m
+
+                                                                                                                                                                                                                                                                                                          DESCRIPTION
+
+
+                                                                                                                                                                                                                                                                                                          WL-SMCW SMT Mono-color Chip
+                                                                                                                                                                                                                                            Würth Elektronik eiSos GmbH & Co. KG
+                                                                                                                                                                                                                                            EMC & Inductive Solutions
+                                                                                                                                                                                                                                            Max-Eyth-Str. 1
+                                                                                                                                                                                                                                                                                                          LED Waterclear                                                                                  ORDER CODE
+
+
+                                                                                                                                                                                                                                            74638 Waldenburg                                                                                                                                              150060RS75003
+                                                                                                                                                                                                                                            Germany
+                                                                                                                                                                                                                                            Tel. +49 (0) 79 42 945 - 0                                    SIZE/TYPE                                                          BUSINESS UNIT                STATUS                                        PAGE
+                                                                                                                                                                                                                                            www.we-online.com
+                                                                                                                                                                                                                                            eiSos@we-online.com                                           0603                                                               eiPal                        Valid                                         2/10
+
+This electronic component has been designed and developed for usage in general electronic equipment only. This product is not authorized for use in equipment where a higher safety standard and reliability standard is especially required or where a failure of the product is reasonably expected to cause severe personal injury or death, unless the parties have executed an agreement specifically governing such use. Moreover Würth Elektronik eiSos GmbH
+& Co KG products are neither designed nor intended for use in areas such as military, aerospace, aviation, nuclear control, submarine, transportation, transportation signal, disaster prevention, medical, public information network etc.. Würth Elektronik eiSos GmbH & Co KG must be informed about the intent of such usage before the design-in stage. In addition, sufficient reliability evaluation checks for safety must be performed on every electronic
+component which is used in electrical circuits that require high safety and reliability functions or performance.
+   Spectral:                                                                                                                                                                                                                            Forward Current vs. Forward Voltage:
+
+                                                                                                                                                                                                                                                                          35
+
+
+
+                                                                                                                                                                                                                                                                          30
+
+                                     100
+
+
+
+                                                                                                                                                                                                                                                                          25
+                                     80
+
+
+
+
+                                                                                                                                                                                                                                                   Forward Current [mA]
+            Relative Intensity [%]
+                                     60                                                                                                                                                                                                                                   20
+
+
+                                     40
+
+                                                                                                                                                                                                                                                                          15
+                                     20
+
+
+
+                                                                                                                                                                                                                                                                          10
+                                      0
+                                          400   450                     500                     550                      600                     650                      700                     750
+
+                                                                                                  Wavelength [nm]
+
+                                                                                                                                                                                                                                                                          5
+
+
+
+                                                                                                                                                                                                                                                                          0
+                                                                                                                                                                                                                                                                               0,0      0,5                     1,0                      1,5    2,0      2,5                                               3,0                     3,5                   4,0
+                                                                                                                                                                                                                                                                                                                                         Forward Voltage [V]
+
+                                                                                                                                                                                                                                                                                                          CHECKED             REVISION            DATE (YYYY-MM-DD)          GENERAL TOLERANCE                        PROJECTION
+                                                                                                                                                                                                                                                                                                                                                                                                                      METHOD
+                                                                                                                                                                                                                                                                                                          PLD                 002.001             2025-10-20                 DIN ISO 2768-1m
+
+                                                                                                                                                                                                                                                                                                          DESCRIPTION
+
+
+                                                                                                                                                                                                                                                                                                          WL-SMCW SMT Mono-color Chip
+                                                                                                                                                                                                                                            Würth Elektronik eiSos GmbH & Co. KG
+                                                                                                                                                                                                                                            EMC & Inductive Solutions
+                                                                                                                                                                                                                                            Max-Eyth-Str. 1
+                                                                                                                                                                                                                                                                                                          LED Waterclear                                                                                 ORDER CODE
+
+
+                                                                                                                                                                                                                                            74638 Waldenburg                                                                                                                                             150060RS75003
+                                                                                                                                                                                                                                            Germany
+                                                                                                                                                                                                                                            Tel. +49 (0) 79 42 945 - 0                                    SIZE/TYPE                                                          BUSINESS UNIT               STATUS                                         PAGE
+                                                                                                                                                                                                                                            www.we-online.com
+                                                                                                                                                                                                                                            eiSos@we-online.com                                           0603                                                               eiPal                       Valid                                          3/10
+
+This electronic component has been designed and developed for usage in general electronic equipment only. This product is not authorized for use in equipment where a higher safety standard and reliability standard is especially required or where a failure of the product is reasonably expected to cause severe personal injury or death, unless the parties have executed an agreement specifically governing such use. Moreover Würth Elektronik eiSos GmbH
+& Co KG products are neither designed nor intended for use in areas such as military, aerospace, aviation, nuclear control, submarine, transportation, transportation signal, disaster prevention, medical, public information network etc.. Würth Elektronik eiSos GmbH & Co KG must be informed about the intent of such usage before the design-in stage. In addition, sufficient reliability evaluation checks for safety must be performed on every electronic
+component which is used in electrical circuits that require high safety and reliability functions or performance.
+   Luminous Intensity vs. Forward Current:                                                                                                                                                                                              Derating Curve:
+
+                                         1000                                                                                                                                                                                                                       40
+
+
+                                         900
+                                                                                                                                                                                                                                                                    35
+
+                                         800
+                                                                                                                                                                                                                                                                    30
+
+                                         700
+
+
+
+
+                                                                                                                                                                                                                                             Forward Current [mA]
+
+              Luminous Intensity [mcd]
+                                                                                                                                                                                                                                                                    25
+                                         600
+                                                                                                                                                                                                                                                                    20
+                                         500
+
+                                                                                                                                                                                                                                                                    15
+                                         400
+
+                                                                                                                                                                                                                                                                    10
+                                         300
+
+
+                                         200                                                                                                                                                                                                                         5
+
+
+                                         100                                                                                                                                                                                                                         0
+                                                                                                                                                                                                                                                                         0             10              20               30               40          50               60             70            80             90            100 110
+
+                                           0                                                                                                                                                                                                                                                                                 Ambient Temperature [°C]
+                                                0             5                       10             15       20      25                                                                    30                       35
+                                                                                                 Forward Current [mA]
+
+                                                                                                                                                                                                                                                                                                          CHECKED             REVISION            DATE (YYYY-MM-DD)          GENERAL TOLERANCE                        PROJECTION
+                                                                                                                                                                                                                                                                                                                                                                                                                      METHOD
+                                                                                                                                                                                                                                                                                                          PLD                 002.001             2025-10-20                 DIN ISO 2768-1m
+
+                                                                                                                                                                                                                                                                                                          DESCRIPTION
+
+
+                                                                                                                                                                                                                                                                                                          WL-SMCW SMT Mono-color Chip
+                                                                                                                                                                                                                                            Würth Elektronik eiSos GmbH & Co. KG
+                                                                                                                                                                                                                                            EMC & Inductive Solutions
+                                                                                                                                                                                                                                            Max-Eyth-Str. 1
+                                                                                                                                                                                                                                                                                                          LED Waterclear                                                                                 ORDER CODE
+
+
+                                                                                                                                                                                                                                            74638 Waldenburg                                                                                                                                             150060RS75003
+                                                                                                                                                                                                                                            Germany
+                                                                                                                                                                                                                                            Tel. +49 (0) 79 42 945 - 0                                    SIZE/TYPE                                                          BUSINESS UNIT               STATUS                                         PAGE
+                                                                                                                                                                                                                                            www.we-online.com
+                                                                                                                                                                                                                                            eiSos@we-online.com                                           0603                                                               eiPal                       Valid                                          4/10
+
+This electronic component has been designed and developed for usage in general electronic equipment only. This product is not authorized for use in equipment where a higher safety standard and reliability standard is especially required or where a failure of the product is reasonably expected to cause severe personal injury or death, unless the parties have executed an agreement specifically governing such use. Moreover Würth Elektronik eiSos GmbH
+& Co KG products are neither designed nor intended for use in areas such as military, aerospace, aviation, nuclear control, submarine, transportation, transportation signal, disaster prevention, medical, public information network etc.. Würth Elektronik eiSos GmbH & Co KG must be informed about the intent of such usage before the design-in stage. In addition, sufficient reliability evaluation checks for safety must be performed on every electronic
+component which is used in electrical circuits that require high safety and reliability functions or performance.
+   Packaging Specification - Tape: [mm]                                                                                                                                                                                                                                                          Packaging Specification - Reel: [mm]
+                                                                                                                             P0                                                                                            K0
+           A                                                                  D0                                      P2                                                                                                             T                                                                                                                                                    W3
+
+
+                                                                                                                                                                                   E1                                                                                                                                                                                                                                     W1
+                                                                                                                                                                                                                                                                                                                                                                                                                    close to center
+                                                                                                                                                                                                                                                                                                                        B
+                                                                                                                                                                                                                                                                                                                                         D
+                                                                                                                                                                            F                                                                                                                                                                                                      A      N
+                                                                                                                                                                                          W
+                                                                                                                                                                                   E2                                                                                                                                 C
+                                                                       B0
+
+
+                                                                                                                                                                                                                                               Top Cover
+                                                                                                                                                                                                                                                 Tape                                                                                                                                    W2
+                                                                          D1                                  P1                                                                                                                      T1
+           A                                                  A0                                                                                                                                                           T2
+
+
+           End                                                                                                                                                                                                                                      Carrier Tape
+                                                                                                    Feeding direction                                                                                                       Start
+                                                                                                                                                                                                                                                                                                                                                                                   detail B
+                                                                                                                                                                                                                                                               Cover Tape                                                                          B
+                                                                                                                                                                                                                                                                                                                                                                            Cover Tape
+                                                                                                                                                                                                                                                                                                                                                                                                                        Chip Cavity
+                                                                                                                                                                                                                                                                                                                                                                                                                        Sprocket Hole
+
+
+
+                                       No Component                                                         Components                                                      No Component
+                                        min.160mm                                                                                                                            min.100mm                                                                                                                                                                Embossment
+                                           Polarity Mark                                                                                                                                            Cover Tape
+                                                                                                                                                                                                    min. 400mm
+
+   Packaging is referred to the international standard IEC 60286-3:2019                                                                                                                                                                                                                                          A            B            C            D             N            W1         W2           W3           W3           Material
+                                                   A0          B0          W                 T           T1         T2          K0          P0         P1          P2          D0                D1          E1          E2         F                              Qty.                                           (mm)         (mm)         (mm)         (mm)          (mm)         (mm)       (mm)         (mm)         (mm)
+                                 Tape Type                                                                                                                                                                                                      Material                                       Tolerance         ± 2,0        min.         min.         min.          typ.         +1,5       max.         min.         max.
+                                                    (mm)        (mm)        (mm)              (mm)        (mm)       (mm)        (mm)        (mm)       (mm)        (mm)        (mm)              (mm)        (mm)        (mm)       (mm)                          (pcs.)
+                Tolerance                          typ.        typ.        +0,3/ -0,1        ref.        ref.       typ.        typ.        ±0,1       ±0,1        ±0,05       +0,1/ -0,0        min.        ±0,1        min.       ±0,05                                                      Value             178          1.5          12.8         20.2          60           8.4        14.4         7.9          10.9         Polystyrene
+                Value            2a                0,95        1,80        8,00              0,1         0,10       1,12        0,92        4,00       4,00        2,00        1,50              0,30        1,75        6,25       3,50        Polystyrene        4000
+
+
+
+
+                                                                                                                                                                                                                                                                                                          CHECKED             REVISION            DATE (YYYY-MM-DD)           GENERAL TOLERANCE                       PROJECTION
+                                                                                                                                                                                                                                                                                                                                                                                                                      METHOD
+                                                                                                                                                                                                                                                                                                          PLD                 002.001             2025-10-20                  DIN ISO 2768-1m
+                                                             165° - 180°
+                                                                                                                                                                                                                                                                                                          DESCRIPTION
+
+
+                                                                                                                                                                                                                                                                                                          WL-SMCW SMT Mono-color Chip
+                                                                                                                                                                                                                                            Würth Elektronik eiSos GmbH & Co. KG
+                                                                                                                                                                                                                                            EMC & Inductive Solutions
+                                                                                                                                                                                                                                            Max-Eyth-Str. 1
+                                                                                                                                                                                                                                                                                                          LED Waterclear                                                                                 ORDER CODE
+
+
+                                                                                                                                                                                                                                            74638 Waldenburg                                                                                                                                             150060RS75003
+                                                                                                                                 Pull-off force                                                                                             Germany
+                                                                                                                                                                                                                                            Tel. +49 (0) 79 42 945 - 0                                    SIZE/TYPE                                                           BUSINESS UNIT              STATUS                                         PAGE
+                                                                                                                                                                                                                                            www.we-online.com
+                                                         Tape width                                   8 mm                       0,1 N - 1,0 N                                                                                              eiSos@we-online.com                                           0603                                                                eiPal                      Valid                                          5/10
+
+This electronic component has been designed and developed for usage in general electronic equipment only. This product is not authorized for use in equipment where a higher safety standard and reliability standard is especially required or where a failure of the product is reasonably expected to cause severe personal injury or death, unless the parties have executed an agreement specifically governing such use. Moreover Würth Elektronik eiSos GmbH
+& Co KG products are neither designed nor intended for use in areas such as military, aerospace, aviation, nuclear control, submarine, transportation, transportation signal, disaster prevention, medical, public information network etc.. Würth Elektronik eiSos GmbH & Co KG must be informed about the intent of such usage before the design-in stage. In addition, sufficient reliability evaluation checks for safety must be performed on every electronic
+component which is used in electrical circuits that require high safety and reliability functions or performance.
+   Classification Reflow Profile for SMT components:                                                                                                                                                                           Classification Reflow Soldering Profile:
+                                                                                                                                                                                                                                Profile Feature                                                                     Value
+                                                                                                                                                                                                                                Preheat Temperature Min                                              Ts min 150 °C
+                                                                                                                                                                                                                                Preheat Temperature Max                                             Ts max 200 °C
+                    Tp                                                                                                                                                                                                          Preheat Time ts from Ts min to Ts max                                   ts          max. 60 - 120 seconds
+                                                                                                                                                                                       TC –5°C
+                                                                             Max. Ramp Up Rate                                                                tp                                                                Ramp-up Rate (TL to TP)                                                             3 °C/ second max.
+                                                                             Max. Ramp Down Rate                                                                                                                                Liquidous Temperature                                                  TL           217 °C
+                    TL                                                                                                                                                                                                          Time tL maintained above TL                                             tL          max. 60 seconds
+                                                                                                                                                        tL                                                                                                                                             Tp           Tp ≤ Tc, see Table below
+                                   Ts max                                                                                                                                                                                       Peak package body temperature
+                                                                 Preheat Area
+
+
+
+
+      Temperature
+                                                                                                                                                                                                                                Time within 5°C of actual peak                                         tp           max. 10 seconds
+                                                                                                                                                                                                                                temperature
+
+                                   Ts min                                                                                                                                                                                       Ramp-down Rate (TP to TL)                                                           6 °C/ second max.
+                                                                                                                                                                                                                                Time 25°C to peak temperature                                                       max. 220 seconds
+
+                                                                              tS                                                                                                                                               refer to IPC/ JEDEC J-STD-020E
+
+                                                                                                                                                                                                                               Package Classification Reflow Temperature (Tc):
+                                                                                                                                                                                                                                                                                                          Volume mm³                                            Volume mm³                                          Volume mm³
+                                                                                                                                                                                                                                Properties                                                                <350                                                  350-2000                                            >2000
+                     25
+                                                              Time 25°C to Peak                                                                                                                                                 PB-Free Assembly | Package Thickness 260 °C                                                                                     260 °C                                              260 °C
+                                                                                                                                                                                                                                < 1.6 mm
+                                                                                                               Time
+                                                                                                                                                                                                                                PB-Free Assembly | Package Thickness 260 °C                                                                                     250 °C                                              245 °C
+                                                                                                                                                                                                                                1.6 mm - 2.5 mm
+
+                                                                                                                                                                                                                                PB-Free Assembly | Package Thickness 250 °C                                                                                     245 °C                                              245 °C
+                                                                                                                                                                                                                                > 2.5 mm
+                                                                                                                                                                                                                                Applied cycles                                                            2 cycles max.
+                                                                                                                                                                                                                               refer to IPC/ JEDEC J-STD-020E
+
+
+
+
+                                                                                                                                                                                                                                                                                                          CHECKED             REVISION            DATE (YYYY-MM-DD)          GENERAL TOLERANCE                        PROJECTION
+                                                                                                                                                                                                                                                                                                                                                                                                                      METHOD
+                                                                                                                                                                                                                                                                                                          PLD                 002.001             2025-10-20                 DIN ISO 2768-1m
+
+                                                                                                                                                                                                                                                                                                          DESCRIPTION
+
+
+                                                                                                                                                                                                                                                                                                          WL-SMCW SMT Mono-color Chip
+                                                                                                                                                                                                                                            Würth Elektronik eiSos GmbH & Co. KG
+                                                                                                                                                                                                                                            EMC & Inductive Solutions
+                                                                                                                                                                                                                                            Max-Eyth-Str. 1
+                                                                                                                                                                                                                                                                                                          LED Waterclear                                                                                 ORDER CODE
+
+
+                                                                                                                                                                                                                                            74638 Waldenburg                                                                                                                                             150060RS75003
+                                                                                                                                                                                                                                            Germany
+                                                                                                                                                                                                                                            Tel. +49 (0) 79 42 945 - 0                                    SIZE/TYPE                                                          BUSINESS UNIT               STATUS                                         PAGE
+                                                                                                                                                                                                                                            www.we-online.com
+                                                                                                                                                                                                                                            eiSos@we-online.com                                           0603                                                               eiPal                       Valid                                          6/10
+
+This electronic component has been designed and developed for usage in general electronic equipment only. This product is not authorized for use in equipment where a higher safety standard and reliability standard is especially required or where a failure of the product is reasonably expected to cause severe personal injury or death, unless the parties have executed an agreement specifically governing such use. Moreover Würth Elektronik eiSos GmbH
+& Co KG products are neither designed nor intended for use in areas such as military, aerospace, aviation, nuclear control, submarine, transportation, transportation signal, disaster prevention, medical, public information network etc.. Würth Elektronik eiSos GmbH & Co KG must be informed about the intent of such usage before the design-in stage. In addition, sufficient reliability evaluation checks for safety must be performed on every electronic
+component which is used in electrical circuits that require high safety and reliability functions or performance.
+Further information
+Component Libraries:
+3D                                                    Download_3D_WL-SMCW_150060xx75003
+Altium                                                Altium_WL-SMCW (24b)
+Cadence17-2                                           Downloads_CADENCE_WL-SMCW (24b)
+Certificate                                           IR_LED_certificate_WL-SMCW-0603_ADVANCED
+Eagle                                                 Eagle_WL-SMCW (25a)
+IGS                                                   IGS_150060xx75003
+PSpice                                                PSpice_WL-SMCW (24b)
+STP                                                   STP_150060xx75003
+
+
+
+Free Sample Order:
+Order free samples of this article directly here!
+
+
+Tutorials:
+■ LED Application Guide - Learn more about handling, storage and much more (PDF)
+
+
+REDEXPERT:
+Calculate losses for 150060RS75003 in REDEXPERT
+
+
+
+
+                                                                                                                                                                                                                                                                                                          CHECKED             REVISION            DATE (YYYY-MM-DD)          GENERAL TOLERANCE                        PROJECTION
+                                                                                                                                                                                                                                                                                                                                                                                                                      METHOD
+                                                                                                                                                                                                                                                                                                          PLD                 002.001             2025-10-20                 DIN ISO 2768-1m
+
+                                                                                                                                                                                                                                                                                                          DESCRIPTION
+
+
+                                                                                                                                                                                                                                                                                                          WL-SMCW SMT Mono-color Chip
+                                                                                                                                                                                                                                            Würth Elektronik eiSos GmbH & Co. KG
+                                                                                                                                                                                                                                            EMC & Inductive Solutions
+                                                                                                                                                                                                                                            Max-Eyth-Str. 1
+                                                                                                                                                                                                                                                                                                          LED Waterclear                                                                                 ORDER CODE
+
+
+                                                                                                                                                                                                                                            74638 Waldenburg                                                                                                                                             150060RS75003
+                                                                                                                                                                                                                                            Germany
+                                                                                                                                                                                                                                            Tel. +49 (0) 79 42 945 - 0                                    SIZE/TYPE                                                          BUSINESS UNIT               STATUS                                         PAGE
+                                                                                                                                                                                                                                            www.we-online.com
+                                                                                                                                                                                                                                            eiSos@we-online.com                                           0603                                                               eiPal                       Valid                                          7/10
+
+This electronic component has been designed and developed for usage in general electronic equipment only. This product is not authorized for use in equipment where a higher safety standard and reliability standard is especially required or where a failure of the product is reasonably expected to cause severe personal injury or death, unless the parties have executed an agreement specifically governing such use. Moreover Würth Elektronik eiSos GmbH
+& Co KG products are neither designed nor intended for use in areas such as military, aerospace, aviation, nuclear control, submarine, transportation, transportation signal, disaster prevention, medical, public information network etc.. Würth Elektronik eiSos GmbH & Co KG must be informed about the intent of such usage before the design-in stage. In addition, sufficient reliability evaluation checks for safety must be performed on every electronic
+component which is used in electrical circuits that require high safety and reliability functions or performance.
+Cautions and Warnings:                                                                                                                                                                                                               • Using a brush during the cleaning process may break the optoelectronic component body. Therefore, we do not recommend using a
+                                                                                                                                                                                                                                       brush during the PCB cleaning process.
+
+The following conditions apply to all goods within the product series of Optoelectronic                                                                                                                                              Potting:
+Components of Würth Elektronik eiSos GmbH & Co. KG:
+                                                                                                                                                                                                                                     • If the product is potted in the customer application, the potting material might shrink or expand during and after hardening. Shrinking
+General:                                                                                                                                                                                                                               could lead to an incomplete seal, allowing contaminants into the optoelectronic component body, pins or termination. Expansion could
+                                                                                                                                                                                                                                       damage the components. We recommend a manual inspection after potting to avoid these effects.
+• This optoelectronic component is designed and manufactured for use in general electronic equipment.
+• Würth Elektronik must be asked for written approval (following the PPAP procedure) before incorporating the components into any                                                                                                    Storage Conditions:
+  equipment in fields such as military, aerospace, aviation, nuclear control, submarine, transportation (automotive control, train control,
+  ship control), transportation signal, disaster prevention, medical, public information network, etc. where higher safety and reliability are                                                                                       • A storage of Würth Elektronik products for longer than 12 months is not recommended. Within other effects, the terminals may suffer
+  especially required and/or if there is the possibility of direct damage or human injury.                                                                                                                                             degradation, resulting in bad solderability. Therefore, all products shall be used within the period of 12 months based on the day of
+• Optoelectronic components that will be used in safety-critical or high-reliability applications, should be pre-evaluated by the customer                                                                                             shipment.
+• The optoelectronic component is designed and manufactured to be used within the datasheet specified values. If the usage and                                                                                                       • Do not expose the optoelectronic component to direct sunlight.
+  operation conditions specified in the datasheet are not met, the wire insulation may be damaged or dissolved.                                                                                                                      • The storage conditions in the original packaging are defined according to DIN EN 61760-2.
+• Do not drop or impact the components, the component may be damaged                                                                                                                                                                 • For a moisture sensitive component, the storage condition in the original packaging is defined according to IPC/JEDEC-J-STD-033. It is
+• Würth Elektronik products are qualified according to international standards, which are listed in each product reliability report. Würth                                                                                             also recommended to return the optoelectronic component to the original moisture proof bag and reseal the moisture proof bag again.
+  Elektronik does not warrant any customer qualified product characteristics beyond Würth Elektroniks’ specifications, for its validity and                                                                                          • The storage conditions stated in the original packaging apply to the storage time and not to the transportation time of the components.
+  sustainability over time.
+• The responsibility for the applicability of the customer specific products and use in a particular customer design is always within the                                                                                            Packaging:
+  authority of the customer. All technical specifications for standard products also apply to customer specific products.
+• Unless Würth Elektroik has given its express consent, the customer is under no circumstances entitled to reverse engineer, disassemble                                                                                             • The packaging specifications apply only to purchase orders comprising whole packaging units. If the ordered quantity exceeds or is
+  or otherwise attempt to extract knowledge or design information from the optoelectronic component                                                                                                                                    lower than the specified packaging unit, packaging in accordance with the packaging specifications cannot be ensured.
+
+Product specific:                                                                                                                                                                                                                    Handling:
+Soldering                                                                                                                                                                                                                            • Violation of the technical product specifications such as exceeding the rated current, will void the warranty.
+                                                                                                                                                                                                                                     • The product design may influence the automatic optical inspection.
+• The solder profile must comply with the technical product specifications. All other profiles will void the warranty.                                                                                                               • Certain optoelectronic component surfaces consist of soft material. Pressure on the top surface has to be handled carefully to prevent
+• All other soldering methods are at the customers’ own risk.                                                                                                                                                                          negative influence to the function and reliability of the optoelectronic components.
+• The soldering pad pattern shown above is a general recommendation for the easy assembly of optoelectronic component. If a high                                                                                                     • ESD prevention methods need to be applied for manual handling and processing by machinery.
+  degree of precision is required for the selected application (i.e. high density assembly), the customer must ensure that the soldering pad                                                                                         • Resistors for protection are obligatory.
+  pattern is optimized accordingly.                                                                                                                                                                                                  • Luminaires in operation may harm human vision or skin on a photo-biological level. Therefore direct light impact shall be avoided.
+                                                                                                                                                                                                                                     • In addition to optoelectronic components testing, products incorporating these devices have to comply with the safety precautions given
+Cleaning and Washing:                                                                                                                                                                                                                  in IEC 60825-1, IEC 62471 and IEC 62778
+                                                                                                                                                                                                                                     • Please be aware that Products provided in bulk packaging may get bent and might lead to derivations from the mechanical
+• Washing agents used during the production to clean the customer application might damage or change the characteristics of the                                                                                                        manufacturing tolerances mentioned in our datasheet, which is not considered to be a material defect.Please be aware that Products
+  optoelectronic component body, marking or plating. Washing agents may have a negative effect on the long-term functionality of the                                                                                                   provided in bulk packaging may get bent and might lead to derivations from the mechanical manufacturing tolerances mentioned in our
+  product.                                                                                                                                                                                                                             datasheet, which is not considered to be a material defect.
+
+
+
+
+                                                                                                                                                                                                                                                                                                          CHECKED             REVISION            DATE (YYYY-MM-DD)          GENERAL TOLERANCE                        PROJECTION
+                                                                                                                                                                                                                                                                                                                                                                                                                      METHOD
+                                                                                                                                                                                                                                                                                                          PLD                 002.001             2025-10-20                 DIN ISO 2768-1m
+
+                                                                                                                                                                                                                                                                                                          DESCRIPTION
+
+
+                                                                                                                                                                                                                                                                                                          WL-SMCW SMT Mono-color Chip
+                                                                                                                                                                                                                                            Würth Elektronik eiSos GmbH & Co. KG
+                                                                                                                                                                                                                                            EMC & Inductive Solutions
+                                                                                                                                                                                                                                            Max-Eyth-Str. 1
+                                                                                                                                                                                                                                                                                                          LED Waterclear                                                                                 ORDER CODE
+
+
+                                                                                                                                                                                                                                            74638 Waldenburg                                                                                                                                             150060RS75003
+                                                                                                                                                                                                                                            Germany
+                                                                                                                                                                                                                                            Tel. +49 (0) 79 42 945 - 0                                    SIZE/TYPE                                                          BUSINESS UNIT               STATUS                                         PAGE
+                                                                                                                                                                                                                                            www.we-online.com
+                                                                                                                                                                                                                                            eiSos@we-online.com                                           0603                                                               eiPal                       Valid                                          8/10
+
+This electronic component has been designed and developed for usage in general electronic equipment only. This product is not authorized for use in equipment where a higher safety standard and reliability standard is especially required or where a failure of the product is reasonably expected to cause severe personal injury or death, unless the parties have executed an agreement specifically governing such use. Moreover Würth Elektronik eiSos GmbH
+& Co KG products are neither designed nor intended for use in areas such as military, aerospace, aviation, nuclear control, submarine, transportation, transportation signal, disaster prevention, medical, public information network etc.. Würth Elektronik eiSos GmbH & Co KG must be informed about the intent of such usage before the design-in stage. In addition, sufficient reliability evaluation checks for safety must be performed on every electronic
+component which is used in electrical circuits that require high safety and reliability functions or performance.
+Technical specification:
+
+• The typical and/or calculated values and graphics of technical parameters can only reflect statistical figures. The actual parameters of
+  each single product, may differ from the typical and/or calculated values or the typical characteristic line.
+• On each reel, only one bin is sorted and taped. The bin is defined on intensity, chromaticity coordinate or wavelength and forward
+  voltage.
+• In order to ensure highest availability, the reel binning of standard deliveries can vary. A single bin cannot be ordered. Please contact us
+  in advance, if you need a particular bin sorting before placing your order.
+• Test conditions are measured at the typical current with pulse duration < 30ms.
+• Optical properties are measured according the CIE 127:2007 standard.
+• Wavelength tolerance under measurement conditions ± 2nm.
+• Optical intensity tolerance under measurement conditions ±15%.
+• Forward voltage tolerance under measurement conditions ± 0.1V.
+• CCT tolerance of x and y coordinate of ± 0.01 and CRI tolerance of ± 2 is allowed.
+
+In the characteristics curves, all values given in dotted lines may show a higher deviation than the parameters mentioned above.
+
+These cautions and warnings comply with the state of the scientific and technical knowledge and are believed to be accurate and reliable.
+However, no responsibility is assumed for inaccuracies or incompleteness.
+
+The customer has the sole responsibility to ensure that he uses the latest version of this datasheet, which is available on Würth Elektronik’s
+homepage. Unless otherwise agreed in writing (i.e. customer specific specification), changes to the content of this datasheet may occur
+without notice, provided that the changes do not have a significant effect on the usability of the optoelectronic components
+
+
+
+
+                                                                                                                                                                                                                                                                                                          CHECKED             REVISION            DATE (YYYY-MM-DD)          GENERAL TOLERANCE                        PROJECTION
+                                                                                                                                                                                                                                                                                                                                                                                                                      METHOD
+                                                                                                                                                                                                                                                                                                          PLD                 002.001             2025-10-20                 DIN ISO 2768-1m
+
+                                                                                                                                                                                                                                                                                                          DESCRIPTION
+
+
+                                                                                                                                                                                                                                                                                                          WL-SMCW SMT Mono-color Chip
+                                                                                                                                                                                                                                            Würth Elektronik eiSos GmbH & Co. KG
+                                                                                                                                                                                                                                            EMC & Inductive Solutions
+                                                                                                                                                                                                                                            Max-Eyth-Str. 1
+                                                                                                                                                                                                                                                                                                          LED Waterclear                                                                                 ORDER CODE
+
+
+                                                                                                                                                                                                                                            74638 Waldenburg                                                                                                                                             150060RS75003
+                                                                                                                                                                                                                                            Germany
+                                                                                                                                                                                                                                            Tel. +49 (0) 79 42 945 - 0                                    SIZE/TYPE                                                          BUSINESS UNIT               STATUS                                         PAGE
+                                                                                                                                                                                                                                            www.we-online.com
+                                                                                                                                                                                                                                            eiSos@we-online.com                                           0603                                                               eiPal                       Valid                                          9/10
+
+This electronic component has been designed and developed for usage in general electronic equipment only. This product is not authorized for use in equipment where a higher safety standard and reliability standard is especially required or where a failure of the product is reasonably expected to cause severe personal injury or death, unless the parties have executed an agreement specifically governing such use. Moreover Würth Elektronik eiSos GmbH
+& Co KG products are neither designed nor intended for use in areas such as military, aerospace, aviation, nuclear control, submarine, transportation, transportation signal, disaster prevention, medical, public information network etc.. Würth Elektronik eiSos GmbH & Co KG must be informed about the intent of such usage before the design-in stage. In addition, sufficient reliability evaluation checks for safety must be performed on every electronic
+component which is used in electrical circuits that require high safety and reliability functions or performance.
+Important Notes                                                                                                                                                                                                                      6. Product Life Cycle
+
+                                                                                                                                                                                                                                     Due to technical progress and economical evaluation we also reserve the right to discontinue production and delivery of products. As a
+The following conditions apply to all goods within the product range of Würth Elektronik                                                                                                                                             standard reporting procedure of the Product Termination Notification (PTN) according to the JEDEC-Standard we will inform at an early stage
+eiSos GmbH & Co. KG:                                                                                                                                                                                                                 about inevitable product discontinuance. According to this we cannot guarantee that all products within our product range will always be
+                                                                                                                                                                                                                                     available. Therefore it needs to be verified with the field sales engineer or the internal sales person in charge about the current product
+1. General Customer Responsibility                                                                                                                                                                                                   availability expectancy before or when the product for application design-in disposal is considered. The approach named above does not
+                                                                                                                                                                                                                                     apply in the case of individual agreements deviating from the foregoing for customer-specific products.
+Some goods within the product range of Würth Elektronik eiSos GmbH & Co. KG contain statements regarding general suitability for certain
+application areas. These statements about suitability are based on our knowledge and experience of typical requirements concerning the                                                                                               7. Property Rights
+areas, serve as general guidance and cannot be estimated as binding statements about the suitability for a customer application. The
+responsibility for the applicability and use in a particular customer design is always solely within the authority of the customer. Due to this                                                                                      All the rights for contractual products produced by Würth Elektronik eiSos GmbH & Co. KG on the basis of ideas, development contracts as
+fact it is up to the customer to evaluate, where appropriate to investigate and decide whether the device with the specific product                                                                                                  well as models or templates that are subject to copyright, patent or commercial protection supplied to the customer will remain with Würth
+characteristics described in the product specification is valid and suitable for the respective customer application or not.                                                                                                         Elektronik eiSos GmbH & Co. KG. Würth Elektronik eiSos GmbH & Co. KG does not warrant or represent that any license, either expressed or
+                                                                                                                                                                                                                                     implied, is granted under any patent right, copyright, mask work right, or other intellectual property right relating to any combination,
+2. Customer Responsibility related to Specific, in particular Safety-Relevant Applications                                                                                                                                           application, or process in which Würth Elektronik eiSos GmbH & Co. KG components or services are used.
+
+It has to be clearly pointed out that the possibility of a malfunction of electronic components or failure before the end of the usual lifetime                                                                                      8. General Terms and Conditions
+cannot be completely eliminated in the current state of the art, even if the products are operated within the range of the specifications.
+In certain customer applications requiring a very high level of safety and especially in customer applications in which the malfunction or                                                                                           Unless otherwise agreed in individual contracts, all orders are subject to the current version of the “General Terms and Conditions of Würth
+failure of an electronic component could endanger human life or health it must be ensured by most advanced technological aid of suitable                                                                                             Elektronik eiSos Group”, last version available at www.we-online.com.
+design of the customer application that no injury or damage is caused to third parties in the event of malfunction or failure of an electronic
+component. Therefore, customer is cautioned to verify that data sheets are current before placing orders. The current data sheets can be
+downloaded at www.we-online.com.
+
+3. Best Care and Attention
+Any product-specific notes, cautions and warnings must be strictly observed. Any disregard will result in the loss of warranty.
+
+4. Customer Support for Product Specifications
+Some products within the product range may contain substances which are subject to restrictions in certain jurisdictions in order to serve
+specific technical requirements. Necessary information is available on request. In this case the field sales engineer or the internal sales
+person in charge should be contacted who will be happy to support in this matter.
+
+5. Product R&D
+Due to constant product improvement product specifications may change from time to time. As a standard reporting procedure of the
+Product Change Notification (PCN) according to the JEDEC-Standard inform about minor and major changes. In case of further queries
+regarding the PCN, the field sales engineer or the internal sales person in charge should be contacted. The basic responsibility of the
+customer as per Section 1 and 2 remains unaffected.
+
+
+                                                                                                                                                                                                                                                                                                          CHECKED             REVISION            DATE (YYYY-MM-DD)          GENERAL TOLERANCE                        PROJECTION
+                                                                                                                                                                                                                                                                                                                                                                                                                      METHOD
+                                                                                                                                                                                                                                                                                                          PLD                 002.001             2025-10-20                 DIN ISO 2768-1m
+
+                                                                                                                                                                                                                                                                                                          DESCRIPTION
+
+
+                                                                                                                                                                                                                                                                                                          WL-SMCW SMT Mono-color Chip
+                                                                                                                                                                                                                                            Würth Elektronik eiSos GmbH & Co. KG
+                                                                                                                                                                                                                                            EMC & Inductive Solutions
+                                                                                                                                                                                                                                            Max-Eyth-Str. 1
+                                                                                                                                                                                                                                                                                                          LED Waterclear                                                                                 ORDER CODE
+
+
+                                                                                                                                                                                                                                            74638 Waldenburg                                                                                                                                             150060RS75003
+                                                                                                                                                                                                                                            Germany
+                                                                                                                                                                                                                                            Tel. +49 (0) 79 42 945 - 0                                    SIZE/TYPE                                                          BUSINESS UNIT               STATUS                                         PAGE
+                                                                                                                                                                                                                                            www.we-online.com
+                                                                                                                                                                                                                                            eiSos@we-online.com                                           0603                                                               eiPal                       Valid                                          10/10
+
+This electronic component has been designed and developed for usage in general electronic equipment only. This product is not authorized for use in equipment where a higher safety standard and reliability standard is especially required or where a failure of the product is reasonably expected to cause severe personal injury or death, unless the parties have executed an agreement specifically governing such use. Moreover Würth Elektronik eiSos GmbH
+& Co KG products are neither designed nor intended for use in areas such as military, aerospace, aviation, nuclear control, submarine, transportation, transportation signal, disaster prevention, medical, public information network etc.. Würth Elektronik eiSos GmbH & Co KG must be informed about the intent of such usage before the design-in stage. In addition, sufficient reliability evaluation checks for safety must be performed on every electronic
+component which is used in electrical circuits that require high safety and reliability functions or performance.
+

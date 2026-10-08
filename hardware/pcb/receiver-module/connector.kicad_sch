@@ -1,0 +1,334 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "2cbcfeab-3563-4c3e-b876-2f6fa899b9da")
+	(paper "A3")
+	(title_block
+		(title "Connector - Photodiode LVDS Receiver")
+		(date "2026-10-08")
+		(rev "A0")
+		(company "Aharoni Lab, UCLA")
+	)
+	(lib_symbols)
+	(text "Sheet status: skeleton only. No components placed. Hierarchical labels below match the sheet pins on the root sheet. GND\\nis a global net (global label) shared by every sheet. No part values are approved for fabrication."
+		(exclude_from_sim yes)
+		(at 20 75 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left top)
+		)
+		(uuid "84c24228-cdfe-4408-9f6b-b38b7ec13ec1")
+	)
+	(text "Connector: +5V, GND, LVDS_P/N to ECP5 (ULX3S gp/gn differential pair), debug header: LOS, SHDN_N, LE_HYS, test pads for\\nAPD_BIAS (HV: scaled monitor or shrouded pad only, never a bare probe point), 3V3, ±3V7, VHIGH, VLOW, VMID, VSPAN, VINT, VG, VTH. PROPOSED."
+		(exclude_from_sim yes)
+		(at 20 20 0)
+		(effects
+			(font
+				(size 2.5 2.5)
+			)
+			(justify left top)
+		)
+		(uuid "aac0f91b-c838-4989-87af-77388d35eeaa")
+	)
+	(wire
+		(pts
+			(xy 30.48 109.22) (xy 38.1 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1cf15d41-3a2c-4d56-82d2-ddee77afea23")
+	)
+	(wire
+		(pts
+			(xy 200.66 109.22) (xy 193.04 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "89867671-26ed-4898-8aab-6a9ca637b9d3")
+	)
+	(wire
+		(pts
+			(xy 30.48 101.6) (xy 38.1 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "af570257-73f1-419d-8ae5-ae6a9a862d9a")
+	)
+	(wire
+		(pts
+			(xy 30.48 116.84) (xy 38.1 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b8f7353f-a8bd-4e2b-8dd3-5e8cf8e47e57")
+	)
+	(wire
+		(pts
+			(xy 200.66 116.84) (xy 193.04 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c66f29f0-f88d-4ea6-a9b0-3d3e8c77fcda")
+	)
+	(wire
+		(pts
+			(xy 200.66 101.6) (xy 193.04 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f664618f-898e-4b5f-9122-52bc1cfecb49")
+	)
+	(label "+5V"
+		(at 193.04 101.6 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2a2f0174-5d18-40c4-b1da-306179e11f88")
+	)
+	(label "LVDS_N"
+		(at 38.1 109.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4166baf3-2abc-4eee-b861-55682cfe7073")
+	)
+	(label "LOS"
+		(at 38.1 116.84 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4bde0379-0b60-4095-a256-3f8d92370dea")
+	)
+	(label "LVDS_P"
+		(at 38.1 101.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6b004535-7037-4f0a-ac90-13f638b1e68b")
+	)
+	(label "LE_HYS"
+		(at 193.04 116.84 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "9b1f40b4-6bd1-499b-9b1e-4781c5a848c4")
+	)
+	(label "SHDN_N"
+		(at 193.04 109.22 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "db61dd76-1fc1-489a-b45e-cf45595c4d44")
+	)
+	(global_label "GND"
+		(shape passive)
+		(at 115.57 132.08 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "2145109b-cc58-4ed6-8542-0b7e6a0830b8")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 115.57 132.08 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(hierarchical_label "SHDN_N"
+		(shape output)
+		(at 200.66 109.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "55c5e855-8886-4fbc-94e9-1ebdb991cab6")
+	)
+	(hierarchical_label "LOS"
+		(shape input)
+		(at 30.48 116.84 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "6efd4e2a-dbed-4398-ac87-5c85b0df33dd")
+	)
+	(hierarchical_label "LVDS_P"
+		(shape input)
+		(at 30.48 101.6 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "780059e9-ed79-4fe2-9c91-7e3ab44298f8")
+	)
+	(hierarchical_label "LVDS_N"
+		(shape input)
+		(at 30.48 109.22 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "78444f0b-8cfc-4d5c-a3f6-29f8b72f6c9b")
+	)
+	(hierarchical_label "+5V"
+		(shape output)
+		(at 200.66 101.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "7f683dd5-22c2-40e4-a486-7b0193954c8a")
+	)
+	(hierarchical_label "LE_HYS"
+		(shape output)
+		(at 200.66 116.84 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e2b99b4d-b97c-4a0d-a794-29704b9723b8")
+	)
+	(wire
+		(pts
+			(xy 30.48 124.46) (xy 38.1 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "10fb0591-6649-4c68-8c59-f7437d70df8f")
+	)
+	(label "VMID"
+		(at 38.1 124.46 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5e6808d9-d972-4c3d-85f9-7e435da3cd19")
+	)
+	(hierarchical_label "VMID"
+		(shape input)
+		(at 30.48 124.46 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "9f34616e-5c87-44c5-9e62-04f3bebf6ccb")
+	)
+	(text "TP_VMID: test pad (buffered slow node, PROPOSED)"
+		(exclude_from_sim yes)
+		(at 60 124.46 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9fe9415a-f27f-4ff1-837b-647785cb8be2")
+	)
+	(wire
+		(pts
+			(xy 30.48 132.08) (xy 38.1 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9ba29b64-9ab5-4857-8286-d74f6353b8e5")
+	)
+	(label "VSPAN"
+		(at 38.1 132.08 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8761f22f-8d20-4a82-a8fb-cf0bc4823598")
+	)
+	(hierarchical_label "VSPAN"
+		(shape input)
+		(at 30.48 132.08 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c22bf122-a3bc-4412-9e16-0d275e75c19e")
+	)
+	(text "TP_VSPAN: test pad (buffered slow node, PROPOSED)"
+		(exclude_from_sim yes)
+		(at 60 132.08 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "329315b1-a35b-462f-9d31-b34454cdce85")
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)

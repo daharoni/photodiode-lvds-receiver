@@ -1,0 +1,408 @@
+                                                                                   Si APD
+
+                                                                                S14645 series
+
+
+                                              High speed, compact Si APD for LiDAR (900 nm band)
+                                              featuring low-bias operation
+
+   The S14645 series is a compact, surface mount type Si APD that achieves high sensitivity in the 800 nm band. This is suitable
+   for laser monitoring of optical rangefinders widely used from consumer electronics to industrial use.
+
+
+   Features                                                                 Applications
+
+  Small package: 3.1 × 1.8 × 1.0t mm                                       Optical rangefinders
+  Peak sensitivity wavelength: 840 nm (M=100)
+  Low bias operation: Breakdown voltage=195 V max.
+  High-speed response: Cutoff frequency=600 MHz typ.
+   (λ=900 nm, M=100)
+  Reduction of breakdown voltage variation: 175 ± 20 V
+
+
+
+
+   Structure
+          Parameter                             S14645-02                                        S14645-05                   Unit
+Photosensitive area size*1                         ϕ0.2                                             ϕ0.5                     mm
+Effective photosensitive area                      0.03                                             0.19                     mm2
+Package                                                           Glass epoxy (silicone resin)                                -
+*1: Photosensitive area in which a typical gain can be obtained
+
+
+
+   Absolute maximum ratings
+         Parameter              Symbol                                         Specification                                 Unit
+Reverse current (DC)            IR max                                              0.2                                      mA
+Forward current                 IF max                                              10                                       mA
+Operating temperature*2          Topr                                          -30 to +100                                    °C
+Storage temperature*2            Tstg                                          -40 to +100                                    °C
+Soldering temperature             Tsol                                        260 (3 times)*3                                 °C
+*2: No dew condensation
+    When there is a temperature difference between a product and the surrounding area in high humidity environments, dew condensation
+    may occur on the product surface. Dew condensation on the product may cause deterioration in characteristics and reliability.
+*3: Reflow soldering, JEDEC J-STD-020 MSL 2a, see P.5
+Note: E xceeding the absolute maximum ratings even momentarily may cause a drop in product quality. Always be sure to use the
+       product within the absolute maximum ratings.
+
+
+
+
+                                                 www.hamamatsu.com                                                                  1
+                                               Si APD                           S14645 series
+
+
+                                    Electrical and optical characteristics (Ta=25 °C)
+                                                                                                                                     S14645-02                     S14645-05
+                                        Parameter          Symbol                  Condition                                                                                                  Unit
+                                                                                                          Min.          Max.       Min. Typ.                          Typ.     Max.
+             Spectral response range                           λ                                                          400 to 1100                                                          nm
+             Peak sensitivity wavelength                      λp                                    -         840         -         -                                840        -              nm
+             Photosensitivity                                  S           λ=900 nm, M=1            -         0.5         -         -                                0.5        -             A/W
+             Quantum efficiency                               QE           λ=900 nm, M=1            -          70         -         -                                 70        -              %
+Spectral response                                                                          Quantum efficiency vs. wavelength
+             Breakdown voltage                               VBR           ID=100 µA              155         175        195       155                               175       195              V
+             Temperature coefficient of VBR                 ΔTVBR                                   -         1.1         -         -                                1.1        -             V/°C
+             Dark current                                     ID           M=100                    -          40        400        -                                80        800             pA
+             Temperature coefficient of ID                   ΔTID          M=100                    -          1.1        -         -                                1.1        -           times/°C
+                                                                           M=100, RL=50 Ω
+               Cutoff frequency                                 fc                                  -         600         -         -                                600         -            MHz
+                                                                           λ=900 nm, -3 dB
+               Terminal capacitance                             Ct         M=100, f=1 MHz           -         0.5         -         -                                1.0         -             pF
+               Excess noise figure                              x          M=100, λ=900 nm          -         0.3         -         -                                0.3         -              -
+               Gain                                             M          λ=900 nm                 -         100         -         -                                100         -              -
+
+
+
+                                    Spectral response                                                                                Quantum efficiency vs. wavelength
+                                                    (Typ. Ta=25 °C, M=100 at λ=900 nm)                                                                   (Typ. Ta=25 °C, M=1 at λ=900 nm)
+                                       60                                                                                               90
+
+                                                                                                                                        80
+                                       50
+                                                                                                                                        70
+
+
+
+
+           Photosensitivity (A/W)                                                                           Quantum efficiency (%)
+                                       40                                                                                               60
+
+                                                                                                                                        50
+                                       30
+                                                                                                                                        40
+
+                                       20                                                                                               30
+
+                                                                                                                                        20
+                                       10
+                                                                                                                                        10
+
+                                        0                                                                                                0
+                                        400   500   600   700        800     900     1000      1100                                      400     500   600   700     800   900       1000    1100
+
+
+                                                      Wavelength (nm)                                                                                    Wavelength (nm)
+                                                                                            KAPDB0432EB                                                                                     KAPDB0294EA
+
+
+
+
+                                                                                                          KAPDB0432EB                                                                                     KAPDB0294
+
+
+
+
+                                                                                                                                                                                                     2
+                                                     Si APD                            S14645 series
+
+
+                               Dark current vs. reverse voltage                                                                              Terminal capacitance vs. reverse voltage
+                                                                                     (Typ. Ta=25 °C)                                                                 (Typ. Ta=25 °C, f=1 MHz)
+                                10 nA                                                                                                          100
+
+
+
+
+                                                                                                                 Terminal capacitance (pF)
+                                 1 nA
+                                                                                                                                                10
+
+
+
+
+            Dark current (A)
+                               100 pA
+                                                                S14645-05                                                                                            S14645-05
+
+
+                                                                                                                                                 1
+
+                                10 pA
+                                                                                     S14645-02
+n vs. reverse voltage
+                                                                                                                                                                      S14645-02
+
+                                 1 pA                                                                                                          0.1
+                                        0               50              100           150            200                                             0       50            100             150
+
+
+                                                             Reverse voltage (V)                                                                            Reverse voltage (V)
+                                                                                                 KAPDB0433EA                                                                             KAPDB0434EA
+
+
+
+
+                               Gain vs. reverse voltage
+                                                                                    (Typ. λ=900 nm)
+                               10000
+
+
+
+                                                      20 °C
+                                1000
+                                                 0 °C
+
+                                            -20 °C
+                                                                                                           KAPDB0433EA                                                                            KAPDB0434EA
+            Gain                 100
+
+
+                                                                                            100 °C
+                                                                                    80 °C
+                                   10
+                                                                          60 °C
+                                                                40 °C
+
+
+                                    1
+                                     60              100        140           180       220          260
+
+
+                                                             Reverse voltage (V)
+                                                                                                 KAPDB0449EA
+
+
+
+
+                                                                                                           KAPDB0449EA
+
+
+
+
+                                                                                                                                                                                                  3
+                      Si APD                                    S14645 series
+
+
+  Directivity
+                                            (Typ. M=100, light source: tungsten lamp)
+                                           10°   0° 10°
+                                    20°                      20°
+                           30°                                      30°
+                    40°                                                               40°
+
+              50°                                                                            50°
+
+        60°                                                                                        60°
+
+    70°                                                                                             70°
+
+  80°                                                                                                    80°
+
+  90°                                                                                                  90°
+    100        80         60       40      20     0       20          40         60         80      100
+
+                                     Relative sensitivity (%)
+                                                                                                               KAPDB0450EA
+Dimensional outline (unit: mm)
+
+
+
+  Dimensional outline (unit: mm)
+  Photosensitive                     3.1                                   0.3              0.6 0.85 0.85 0.6
+  area
+        A
+                                                                            0.4
+                                                  1.8                                                                            1.4
+                                                                                                                        0.7
+
+
+                                                                                                                        Cathode mark
+
+
+  Photosensitive surface                                                                     1.2         1.5        1.2
+                                                  0.3
+                                                                                                         KAPDB0450A
+                                                                1.0
+                                                                                                                                 1.6
+
+                                                        (0.4)
+                                                                                      Recommended land pattern                         Tolerance unless otherwise noted: ±0.2
+
+
+                               Position accuracy of photosensitive area:
+                                                                                                 Type no.                    A
+                               X, Y ≤ ±0.2
+                                                                                             S14645-02                 ϕ0.2
+                                                                                             S14645-05                 ϕ0.5
+                                                                                                                                                                            KAPDA0202EA
+
+
+
+
+                                                                                                                                                                   KAPDA0202EA
+
+
+
+
+                                                                                                                                                                                4
+                                          Si APD                    S14645 series
+
+
+                 Standard packing specifications
+ndard packing specifications
+               Reel (conforms to JEITA ET-7200)
+                        Outer diameter                Hub diameter                    Tape width                                         Material               Electrostatic characteristics
+                          ϕ180 mm                       ϕ60 mm                          8 mm                                               PS                           Conductive
+
+
+               Embossed tape (unit: mm, material: PS, conductive)
+                                                        4.0 ± 0.1
+
+                                                                                                     1.75 ± 0.1
+                        ɸ1.5 ± 0.1                                  2.0 ± 0.1                                                               0.2 ± 0.05
+
+
+
+
+                                                                                                     3.5 ± 0.1
+                                                                                                                  8.0 ± 0.2
+                                                                                                                                (3.45)
+
+
+
+
+                                                                                  (ɸ1.1)
+                                   2.15
+                (1.4)
+
+
+           Recommended reflow soldering condition
+                                                                                                                                                         KPINC0023EB
+
+
+
+
+               Packing quantity
+               1000 pcs/reel
+                                                                                                                                                          KPINC0023EB
+               Packing type
+               Reel and desiccant in moisture-proof packaging (vaccum-sealed)
+
+
+
+                 Recommended reflow soldering conditions
+                              300 °C
+                                                                                                                              ∙ After unpacking, store the device in an environment
+                                                   Peak temperature              Peak temperature - 5 °C
+                                                        260 °C max.              30 s max.                                       at a temperature of 30 °C or less and a humidity of
+                                             Temperature increase                     Cooling                                    60% or less, and perform reflow soldering within 4
+                                                     3 °C/s max.                      6 °C/s max.                                weeks.
+                              217 °C                                                                                          ∙ The effect that the product receives during reflow
+                              200 °C                                                                                             soldering varies depending on the circuit board and
+
+
+
+                Temperature
+                                                                                                                                 the reflow oven that are used. When you set reflow
+                                                                                                                                 soldering conditions, check that problems do not
+                              150 °C
+                                                                                                                                 occur in the product by testing out the conditions
+                                                    Preheat              Soldering                                               in advance.
+                                                   60 to 120 s          60 to 150 s
+
+
+
+
+                                                                 Time
+                                                                                                             KMPDB0405EC
+
+
+
+
+                                                                                                                                                                                          5
+                                      Si APD                                           S14645 series
+
+
+     Related products
+Products with on-chip filter that transmits near infrared light (850 to 950 nm) are also available.
+  Spectral responce
+                                                      (Typ. Ta=25 °C, M=100 at λ=900 nm)
+                            60
+
+                                          S14645-02/-05
+                            50            (without filter)
+
+
+
+
+   Photosensitivity (A/W)
+                            40
+
+
+                            30
+
+
+                            20
+
+
+                            10
+                                                      S14645-02F/-05F
+                                                      (with filter)
+                             0
+                             400        500         600         700         800         900        1000        1100
+
+
+                                                         Wavelength (nm)
+                                                                                                                   KAPDB0436EB
+
+
+
+
+     Related information
+www.hamamatsu.com/sp/ssd/doc_en.html
+
+  Precautions
+∙ Disclaimer
+∙ Surface mount type products
+                                                                                                                              KAPDB0436EB
+  Technical information
+‧ Si photodiodes / Technical note
+
+
+
+
+Information described in this material is current as of March 2021.
+Product specifications are subject to change without prior notice due to improvements or other reasons. This document has been carefully prepared and the
+information contained is believed to be accurate. In rare cases, however, there may be inaccuracies such as text errors. Before using these products, always
+contact us for the delivery specification sheet to check the latest specifications.
+The product warranty is valid for one year after delivery and is limited to product repair or replacement for defects discovered and reported to us within that
+one year period. However, even if within the warranty period we accept absolutely no liability for any loss caused by natural disasters or improper product use.
+Copying or reprinting the contents described in this material in whole or in part is prohibited without our prior permission.
+
+
+
+                                                                                                                                                                                         www.hamamatsu.com
+               HAMAMATSU PHOTONICS K.K., Solid State Division
+               1126-1 Ichino-cho, Higashi-ku, Hamamatsu City, 435-8558 Japan, Telephone: (81)53-434-3311, Fax: (81)53-434-5184
+               U.S.A.: Hamamatsu Corporation: 360 Foothill Road, Bridgewater, N.J. 08807, U.S.A., Telephone: (1)908-231-0960, Fax: (1)908-231-1218, E-mail: usa@hamamatsu.com
+               Germany: Hamamatsu Photonics Deutschland GmbH: Arzbergerstr. 10, D-82211 Herrsching am Ammersee, Germany, Telephone: (49)8152-375-0, Fax: (49)8152-265-8, E-mail: info@hamamatsu.de
+               France: Hamamatsu Photonics France S.A.R.L.: 19, Rue du Saule Trapu, Parc du Moulin de Massy, 91882 Massy Cedex, France, Telephone: (33)1 69 53 71 00, Fax: (33)1 69 53 71 10, E-mail: infos@hamamatsu.fr
+               United Kingdom: Hamamatsu Photonics UK Limited: 2 Howard Court, 10 Tewin Road, Welwyn Garden City, Hertfordshire AL7 1BW, UK, Telephone: (44)1707-294888, Fax: (44)1707-325777, E-mail: info@hamamatsu.co.uk
+               North Europe: Hamamatsu Photonics Norden AB: Torshamnsgatan 35 16440 Kista, Sweden, Telephone: (46)8-509 031 00, Fax: (46)8-509 031 01, E-mail: info@hamamatsu.se
+               Italy: Hamamatsu Photonics Italia S.r.l.: Strada della Moia, 1 int. 6, 20020 Arese (Milano), Italy, Telephone: (39)02-93 58 17 33, Fax: (39)02-93 58 17 41, E-mail: info@hamamatsu.it
+               China: Hamamatsu Photonics (China) Co., Ltd.: 1201 Tower B, Jiaming Center, 27 Dongsanhuan Beilu, Chaoyang District, 100020 Beijing, P.R.China, Telephone: (86)10-6586-6006, Fax: (86)10-6586-2866, E-mail: hpc@hamamatsu.com.cn
+               Taiwan: Hamamatsu Photonics Taiwan Co., Ltd.: 8F-3, No. 158, Section2, Gongdao 5th Road, East District, Hsinchu, 300, Taiwan R.O.C. Telephone: (886)3-659-0080, Fax: (886)3-659-0081, E-mail: info@hamamatsu.com.tw
+                                                                                                                                                                                                                                                  6
+                                                                                                                                                                                         Cat. No. KAPD1065E03 Mar. 2021 DN
+

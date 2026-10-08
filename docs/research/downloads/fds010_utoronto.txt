@@ -1,0 +1,135 @@
+Product Specification Sheet
+                                                           CAUTION
+                                                    ELECTROSTATIC SENSITIVE DEVICE
+                                                                                                FDS010
+ Photodiodes
+                                                        DO NOT HANDLE EXCEPT
+                                                     WITH AN ESD WRIST STRAP AT A
+                                                       STATIC-FREE WORKSTATION
+
+
+
+
+Description
+The Thorlabs FDS010 photodiode is ideal for measuring both pulsed
+and CW fiber light sources, by converting the optical power to an
+electrical current. The detector is housed in a TO-5 package with an
+anode, cathode, and case connection. The photodiode anode produces
+a current, which is a function of the incident light power and the
+wavelength. The responsivity (λ), can be read from the responsivity
+graph to estimate the amount of photocurrent to expect. This can be converted to a voltage by placing a load
+resistor (RL) from the photodiode anode to the circuit ground. The output voltage is derived as:
+
+
+The bandwidth, fBW, and the rise time response, tR, are determined from the diode capacitance, CJ, and the
+load resistance, RL, as shown below. Placing a bias voltage from the photo diode cathode to the circuit ground
+can lower the photo diode capacitance.
+                                                           1                    0.35
+                                                                     ,
+                                                    2
+
+Specifications
+ Specification                          Value                       Specification                                                    Value
+ Wavelength Range                     200 - 1100 nm                 Sensor Material                                                  Si PIN
+ Active Area                       Ø1.02 mm (0.82 nm2)              Max Ratings
+ Rise/Fall Time (RL=50 Ω, 20 V)            <1 ns                    Damage Threshold, CW                                             n/a
+ Bandwidth (RL=50 Ω, -3 dB, 5 V)      350 MHz Min                   Damage Threshold, 10 ns Pulse                                    n/a
+ NEP (900 nm, 20 V)                 5.0 x 10-14 W/Hz½               Max Bias (Reverse) Voltage                                      25 V
+ Dark Current, Max (20 V)                 2.5 nA                    Operating Temperature                                       -40 to 100 °C
+ Capacitance, Typical                  10 pF @ 0 V                  Storage Temperature                                         -55 to 125 °C
+                                      2 pF @ -10 V                  Reverse Current                                                 5 mA
+ Package                             TO-5, 0.36" can                Forward Current                                                 5 mA
+
+Recommended Circuit Diagram
+Application of a reverse bias can greatly improve the response speed and linearity of the device. This is due to
+increase in the depletion region width and, consequently, decrease in junction capacitance. However, the dark
+current and noise will increase.
+
+
+                                       Noise Filter
+
+                  +                 R1 = 1 kΩ                                            PD                                      +
+                          Bias
+                         Voltage                                                                            RL                  Vo
+                                        C1 = 0.1 μF
+                  -                                                                                                              -
+                                                                                     *
+                                                                                          * Case ground for PD with a third lead.
+
+
+
+                                                                                                                            0636-S01 Rev E – April 20, 2010
+                                                                                                             Specifications subject to change without notice.
+Product Specification Sheet
+
+Graphs
+The responsivity of a photodiode is a measure of its sensitivity to light, and it is defined as the ratio of the
+photocurrent IP to the incident light power P at a given wavelength:
+
+
+
+In other words, it is a measure of the effectiveness of the conversion of light power into electrical current.
+Responsivity varies from lot to lot and with the wavelength of the incident light, applied reverse bias, and
+temperature. It increases slightly with applied reverse bias due to improved charge collection efficiency in the
+photodiode. The change in temperature increases or decreases the width of the band gap and varies inversely
+with the temperature.
+
+                                                            FDS Series Photodiode Responsivity
+                                           0.7
+                                                            FDS02
+                                           0.6
+
+
+
+
+                      Responsivity (A/W)
+                                                            FDS010
+                                                            FDS100
+                                           0.5
+                                                            FDS1010
+                                           0.4
+                                           0.3
+
+                                           0.2
+
+                                           0.1
+
+                                           0.0
+                                             200                          400                       600                    800                       1000                       1200
+                                                                                                  Wavelength (nm)
+Drawings
+
+                3
+
+                                                                                                   0.180"                                                       45°
+                                                                                                 (4.57 mm)                                                                                Ø0.200"
+                                                                                                                                                                                        (Ø5.08 mm)
+                                                                                                            1.500"
+                                                                                                          (38.10 mm)                           Ø0.360"                                             0.032"
+                                                                                                                                             (Ø9.14 mm)                                          (Ø0.81 mm)
+                                              Ø0.325"         Ø0.240"                                                                                                 3
+                                            (Ø8.26 mm)      (Ø6.10 mm)
+                                                                                                                                                                      2        1
+                                                                                                                             Ø0.018"
+                                                                                                 0.094"                    (Ø0.46 mm)                                   Ø0.397"
+2               1                                                                              (2.39 mm)                                                              (Ø10.1 mm)
+
+    Pin   Description
+     1      Anode
+     2       Case
+     3     Cathode
+
+
+
+
+USA, Canada, & S. America                    Europe                             UK and Ireland                   Scandinavia                       Japan and Asia
+Thorlabs, Inc.                               Thorlabs GmbH                      Thorlabs LTD.                    Thorlabs Sweden AB                Thorlabs Japan Inc.
+435 Route 206                                Hans-Böckler-Str. 6                1 Saint Thomas Place, Ely        Box 141 94                        5-17-1, Ohtsuka
+Newton, NJ 07860, USA                        85221 Dachau, Germany              Cambridgeshire CB7 4EX, GB       400 20 Göteborg, Sweden           Bunkyo-ku, Tokyo 112-0012, Japan
+Tel: 973-579-7227                            Tel: +49-(0)8131-5956-0            Tel: +44 (0)1353-654440          Tel: +46-31-733-30-00             Tel: +81-3-5979-8889
+Fax: 973-300-3600                            Fax: +49-(0)8131-5956-99           Fax: +44 (0)1353-654444          Fax: +46-31-703-40-45             Fax: +81-3-5979-7285
+www.thorlabs.com                             www.thorlabs.com                   www.thorlabs.com                 www.thorlabs.com                  www.thorlabs.jp
+email: feedback@thorlabs.com                 email: Europe@thorlabs.com         email: sales.uk@thorlabs.com     email: scandinavia@thorlabs.com   email: sales@thorlabs.jp
+                                                                                                                                                                           0636-S01 Rev E – April 20, 2010
+                                                                                                                                                            Specifications subject to change without notice.
+

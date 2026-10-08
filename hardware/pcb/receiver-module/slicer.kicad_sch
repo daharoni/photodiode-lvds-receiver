@@ -1,0 +1,281 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "27149065-35c0-4f56-a792-e03688af5f01")
+	(paper "A3")
+	(title_block
+		(title "Slicer / LVDS - Photodiode LVDS Receiver")
+		(date "2026-10-08")
+		(rev "A0")
+		(company "Aharoni Lab, UCLA")
+	)
+	(lib_symbols)
+	(text "Sheet status: skeleton only. No components placed. Hierarchical labels below match the sheet pins on the root sheet. GND\\nis a global net (global label) shared by every sheet. No part values are approved for fabrication."
+		(exclude_from_sim yes)
+		(at 20 75 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left top)
+		)
+		(uuid "1a180def-8343-453e-b1f9-9b62ead86b90")
+	)
+	(text "Slicer: TLV3605 (IN+ = SDET, IN− = VTH), 3V3 VCCI/VCCO individually bypassed, SHDN_N pulled high, LE_HYS hysteresis\\nresistor to GND (150k ≈ 30 mV start), LVDS OUT+/OUT− → LVDS_P/LVDS_N, 100 Ω termination at the FPGA only. Squelch/latch\\npolicy UNRESOLVED."
+		(exclude_from_sim yes)
+		(at 20 20 0)
+		(effects
+			(font
+				(size 2.5 2.5)
+			)
+			(justify left top)
+		)
+		(uuid "d24fcd35-f850-4a59-b000-058ff3512c08")
+	)
+	(wire
+		(pts
+			(xy 30.48 124.46) (xy 38.1 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "22168fed-dbac-4600-977f-f53eaf81b50c")
+	)
+	(wire
+		(pts
+			(xy 30.48 109.22) (xy 38.1 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6d74edc7-bf99-4974-8884-b0b031b3f315")
+	)
+	(wire
+		(pts
+			(xy 200.66 101.6) (xy 193.04 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "770985fd-d7bb-43b6-9c46-791b7bb303d0")
+	)
+	(wire
+		(pts
+			(xy 200.66 109.22) (xy 193.04 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8d081497-4ee1-42ae-b5ff-d8c7ea7854e8")
+	)
+	(wire
+		(pts
+			(xy 30.48 132.08) (xy 38.1 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8f1c7013-5136-48bd-88e0-a3de65f67681")
+	)
+	(wire
+		(pts
+			(xy 30.48 116.84) (xy 38.1 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9cfecf97-68a3-49fd-8eac-d9697bf19204")
+	)
+	(wire
+		(pts
+			(xy 30.48 101.6) (xy 38.1 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d40f5255-8140-4aac-8f87-5e0a63385369")
+	)
+	(label "VTH"
+		(at 38.1 109.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "282bf10f-b5c6-406f-a1a4-aebc758c7f6e")
+	)
+	(label "LVDS_P"
+		(at 193.04 101.6 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "5f02d49d-7d23-4906-aaea-c2de98dcc929")
+	)
+	(label "SDET"
+		(at 38.1 101.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5fa8f5f2-44c9-4373-b67d-3a1f03bfee2a")
+	)
+	(label "LVDS_N"
+		(at 193.04 109.22 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "8dfed3de-d646-486a-9cb6-3b6f844c1092")
+	)
+	(label "LE_HYS"
+		(at 38.1 132.08 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "bc6b8c9c-2e22-41c4-9438-780607034a8c")
+	)
+	(label "3V3"
+		(at 38.1 116.84 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c1576ceb-2da5-4194-83a1-cf7000fc5857")
+	)
+	(label "SHDN_N"
+		(at 38.1 124.46 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d313e8a8-ff8f-49d4-8cce-11ee2b96bdbf")
+	)
+	(global_label "GND"
+		(shape passive)
+		(at 115.57 147.32 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "4e706713-18bc-4434-af5d-d830cba1bf42")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 115.57 147.32 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(hierarchical_label "SDET"
+		(shape input)
+		(at 30.48 101.6 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "12a1a92e-fb11-43d2-9523-29fb29cdd683")
+	)
+	(hierarchical_label "LVDS_P"
+		(shape output)
+		(at 200.66 101.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "34aa61dd-8ce9-4ea5-aa67-037144a66b27")
+	)
+	(hierarchical_label "SHDN_N"
+		(shape input)
+		(at 30.48 124.46 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "3c228e78-fc87-45bb-ae0c-744caf4e512e")
+	)
+	(hierarchical_label "LE_HYS"
+		(shape input)
+		(at 30.48 132.08 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "6f7bd9a1-1fd7-4b3f-bd86-97a2a57c5b18")
+	)
+	(hierarchical_label "VTH"
+		(shape input)
+		(at 30.48 109.22 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "7e903259-cfef-4702-a010-150b4cd45e71")
+	)
+	(hierarchical_label "LVDS_N"
+		(shape output)
+		(at 200.66 109.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "9b3c534e-06ee-47f6-9888-664894da8485")
+	)
+	(hierarchical_label "3V3"
+		(shape input)
+		(at 30.48 116.84 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "f38ff56f-c79b-4b5c-a15c-c87ee5af332d")
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)
