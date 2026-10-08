@@ -27,6 +27,10 @@ These are the exact document revisions the design references. Any design claim (
 | MCP4728 | mcp4728.pdf | https://ww1.microchip.com/downloads/en/DeviceDoc/22187E.pdf | DS22187E (2010) | 2026-10-08 | 7e6515c45a02ffe4ad7506f3347cce7714cdd56659ff2fb22b858fc0472f381e | 68 pages in the PDF; 12-bit quad DAC with EEPROM |
 | ADS1113/4/5 | ads1115.pdf | https://www.ti.com/lit/ds/symlink/ads1115.pdf | SBAS444E – MAY 2009 – REVISED DECEMBER 2024 | 2026-10-08 | eefff4d412ce2dcd7e659f47238edc9b2fa02e5971f2625af730502033701834 | 57 pages |
 | TI app note SLLA270 | slla270.pdf | https://www.ti.com/lit/an/slla270/slla270.pdf | SLLA270 – January 2008 | 2026-10-08 | 10c315a683fa60954ba005d3392097a2e30cddcbf1eef10119a70d592b54ca81 | 15 pages; Controller Area Network Physical Layer Requirements (bus length, stub, termination) |
+| OPA858 | opa858.pdf | https://www.ti.com/lit/ds/symlink/opa858.pdf | SBOS629B – APRIL 2018 – REVISED MAY 2025 | 2026-10-08 | 1ef6fb4a2199550fb81ff220c5b6fde83439651f6d01eb60c4a2c37e43eef4d0 | 38 pages; decompensated (gain >= 7) FET-input amplifier; post-amplifier candidate, research only (docs/research/post-amp-slicer.md) |
+| THS4541 | ths4541.pdf | https://www.ti.com/lit/ds/symlink/ths4541.pdf | SLOS375B – AUGUST 2014 – REVISED FEBRUARY 2024 | 2026-10-08 | 89116b7887557237335675481ed80c5f3570b4d920d0b882393a877fb1796765 | 66 pages; fully differential amplifier, the OPA857 datasheet's reference partner; post-amplifier candidate |
+| LMH6629 | lmh6629.pdf | https://www.ti.com/lit/ds/symlink/lmh6629.pdf | SNOSB18I – APRIL 2010 – REVISED DECEMBER 2014 | 2026-10-08 | 5c37f7b1b67bdd90eeef7b37839a5d8d898a41882d5efd5f7331ecf6e4ade2ff | 48 pages; selectable minimum gain 4 or 10; post-amplifier candidate |
+| OPA855 | opa855.pdf | https://www.ti.com/lit/ds/symlink/opa855.pdf | SBOS622D – JULY 2018 – REVISED MAY 2025 | 2026-10-08 | c4f3b2ce2730ec03f1db499b335897c2bc94e0474b4891b2d86772850c55d374 | 41 pages; decompensated (gain >= 7) bipolar amplifier; post-amplifier candidate |
 
 ## Not retrieved
 
