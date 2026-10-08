@@ -14,7 +14,7 @@ FBd = "AharoniLab_Passive:FerriteBead_Small"
 NTC = "AharoniLab_Passive:Thermistor_NTC"
 POT = "AharoniLab_Passive:R_Potentiometer_Trim"
 DIO = "AharoniLab_Passive:DFLS1150-7"
-TP = "AharoniLab_Connector:TestPoint"
+TP = "AharoniLab_Connector:TestPoint"  # TP2 only
 R603 = "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 R1206 = "AharoniLab_Resistor_SMD:R_1206_3216Metric_N"
 C603 = "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
@@ -75,7 +75,7 @@ def res_down(ref, val, x, y, fp=R603, dnp=False, gnd=True):
 
 XR = 292.1          # output label column
 # ======================================================================
-# TOP BAND: input, 5V_A, TPS79901 3V3
+# TOP BAND: input caps, U1 TPS79901 3V3, U4 TPS7A2033 3V3_D
 # ======================================================================
 Y5 = 66.04
 s.hier_label("+5V", (25.4, Y5), 180, "input")
@@ -86,15 +86,6 @@ cap_down("C2", "100nF", 50.8, Y5, C603)
 cap_down("C9", "1uF", 73.66, Y5, C603)
 s.wire([(76.2, Y5), (76.2, u1.pin("EN")[1]), u1.pin("EN")])
 GND(u1.pin("GND"))
-# 5V_A branch
-s.wire([(63.5, Y5), (63.5, 43.18), (66.04, 43.18)])
-fb1 = part(FBd, "FB1", "600R 0805", (66.04, 43.18), "h", "AharoniLab_Inductor_SMD:L_0805_2012Metric_N")
-s.wire([fb1.pin("2"), (XR, 43.18)])
-cap_down("C3", "10uF 10V", 78.74, 43.18, C805)
-cap_down("C4", "100nF", 91.44, 43.18, C603)
-s.hier_label("5V_A", (XR, 43.18), 0, "output")
-# power flags: passive parts (bead, inductor) do not drive power_in pins, so ERC needs a driver on each node
-s.place("power:PWR_FLAG", "#FLG01", "PWR_FLAG", (101.6, 43.18), in_bom=False)
 # 3V3 output + divider
 s.stub(u1.pin("FB"), "r", 2.54, "V3_FB")
 s.wire([u1.pin("OUT"), (XR, Y5)])
@@ -125,67 +116,6 @@ s.text("""3V3_D: U4 TPS7A2033 3.3 V, 300 mA, own rail
 for ESP32-C6, CAN, DAC, ADC (about 60 mA est.).
 ESP32 radio MUST stay disabled (Wi-Fi TX peaks
 251-382 mA). PROPOSED, estimate not measured.""", (172, 50), 1.27)
-
-# ======================================================================
-# MIDDLE BAND: LM27762 +/-3V7
-# ======================================================================
-u2 = s.place("AharoniLab_Power:LM27762", "U2", "LM27762", (88.9, 116.84), unit=1)
-vin = u2.pin("VIN")
-s.label("+5V", (40.64, vin[1]), 180)
-s.wire([(40.64, vin[1]), vin])
-cap_down("C13", "4.7uF 10V", 45.72, vin[1], C805)
-c1m, c1p = u2.pin("C1-"), u2.pin("C1+")
-c14 = part(C, "C14", "1uF", (63.5, c1m[1] + 1.27), "v", C603)
-s.wire([c1m, (63.5, c1m[1]), c14.pin("1")])
-s.wire([c1p, (63.5, c1p[1]), c14.pin("2")])
-# EN+/EN- tied to VIN
-for pn in ("EN+", "EN-"):
-    p = u2.pin(pn)
-    s.wire([p, (50.8, p[1])])
-s.wire([(50.8, vin[1]), (50.8, u2.pin("EN-")[1])])
-# PGOOD pull-up and test point
-pg = u2.pin("PGOOD")
-r31 = part(R, "R31", "100k", (58.42, pg[1] - 5.08), "v", R603)
-s.stub(r31.pin("1"), "u", 2.54, "3V3")
-s.wire([pg, r31.pin("2")])
-tp1 = s.place(TP, "TP1", "PG_VGA", (58.42, pg[1] + 5.08), rot=180,
-              footprint="AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect")
-move_text((45.7, pg[1] + 4.4), (45.7, pg[1] + 6.4))
-s.wire([r31.pin("2"), tp1.pin("1")])
-s.wire([(pg[0] - 5.08, pg[1]), (pg[0] - 5.08, pg[1] + 10.16)])
-s.hier_label("PGOOD_VGA", (pg[0] - 5.08, pg[1] + 10.16), 180, "output")
-# ground / pad
-g, pad = u2.pin("GND"), u2.pin("PAD")
-s.wire([g, (111.76, g[1]), (111.76, pad[1]), pad])
-s.global_label("GND", (114.3, g[1]), 0)
-s.wire([(111.76, g[1]), (114.3, g[1])])
-# CPOUT cap lying horizontally to GND
-cp = u2.pin("CPOUT")
-s.wire([cp, (cp[0] + 10.16, cp[1])])
-c15 = part(C, "C15", "4.7uF 10V", (cp[0] + 10.16, cp[1]), "h", C805)
-GND(c15.pin("2"), "r")
-# +3V7
-op = u2.pin("OUT+")
-s.wire([op, (XR, op[1])])
-s.hier_label("+3V7", (XR, op[1]), 0, "output")
-cap_down("C16", "2.2uF 10V", 142.24, op[1], C603)
-fbp = u2.pin("FB+")
-r3 = part(R, "R3", "210k 1%", (119.38, op[1]), "v", R603)
-s.wire([r3.pin("2"), (119.38, fbp[1])])
-s.wire([fbp, (119.38, fbp[1])])
-r4 = part(R, "R4", "100k 1%", (119.38, fbp[1]), "v", R603)
-GND(r4.pin("2"))
-# -3V7
-om = u2.pin("OUT-")
-s.wire([om, (XR, om[1])])
-s.hier_label("-3V7", (XR, om[1]), 0, "output")
-cap_down("C17", "2.2uF 10V", 142.24, om[1], C603)
-fbn = u2.pin("FB-")
-r6 = part(R, "R6", "100k 1%", (129.54, fbn[1] - 5.08), "v", R603)
-GND(r6.pin("1"), "u")
-r5 = part(R, "R5", "205k 1%", (129.54, fbn[1]), "v", R603)
-s.wire([fbn, r5.pin("1")])
-s.wire([r5.pin("2"), (129.54, om[1])])
 
 # ======================================================================
 # BOTTOM BAND: LT8365 APD bias
@@ -363,25 +293,46 @@ s.wire([(137.16, Y2), r25.pin("1")])
 s.wire([r25.pin("2"), (170.18, Y2)])
 cap_down("C23", "1nF C0G", 170.18, Y2, C603)
 
+# ---- close the gap left by the removed LM27762 block: move everything at y >= 150 up by DY ----
+DY, THR = 60.96, 150.0
+
+
+def _shift(node):
+    if isinstance(node, list):
+        if node and node[0] == "at" and len(node) >= 3 and float(node[2]) >= THR:
+            node[2] = round(float(node[2]) - DY, 2)
+        elif node and node[0] == "xy" and float(node[2]) >= THR:
+            node[2] = round(float(node[2]) - DY, 2)
+        else:
+            for n in node:
+                _shift(n)
+
+
+for it in list(s.symbols) + list(s.items) + list(s.wires) + list(s.ncs):
+    _shift(it)
+for i in s.instances:
+    if i.at[1] >= THR:
+        i.at = (i.at[0], round(i.at[1] - DY, 2))
+s.junctions = [(x, round(y - DY, 2) if y >= THR else y) for x, y in s.junctions]
+
 # ---- text -----------------------------------------------------------
 TX = 308.0
-s.text("Power: +5V in. U1 TPS79901 3V3, U4 TPS7A2033 3V3_D, U2 LM27762 +/-3V7, 5V_A bead-filtered rail, U3 LT8365 APD bias (100-220 V) -> APD_BIAS.", (20, 20), 2.5)
-s.text("""Design intent (Rev A; nothing here is simulated or measured; details and citations in docs/schematic/power.md)
-PROPOSED  +5V entry: 10 uF + 100 nF, no reverse protection (keyed connector). 5V_A = FB1 bead + 10 uF + 100 nF for the OPA356 buffers.
+s.text("Power: +5V in. U1 TPS79901 3V3, U4 TPS7A2033 3V3_D, U3 LT8365 APD bias (100-220 V) -> APD_BIAS.", (20, 20), 2.5)
+s.text("""Design intent (Rev A, revision 2; nothing here is simulated or measured; details and citations in docs/schematic/power.md)
+PROPOSED  +5V entry: 10 uF + 100 nF, no reverse protection (keyed connector).
 PROPOSED  U1 TPS79901: VOUT = 1.193 V x (1 + R1/R2) = 3.316 V nominal (R1 17.8k, R2 10.0k). CFB 1 nF (see note).
 VERIFIED  TPS79901 CFB is required for stability; 3 pF to 1 nF when R1||R2 = 250k; <5 pF for fast start (SBVS056L p.14, 8.2.2.6).
 UNRESOLVED  Here R1||R2 = 6.4k, not 250k: the datasheet range was not stated for this impedance; 1 nF is a PROPOSED value.
-PROPOSED  U2 LM27762: +3.72 V (R3 210k, R4 100k, 1.2 V ref) and -3.72 V (R5 205k, R6 100k, 1.22 V ref); R3 != R5 (correction 14).
-VERIFIED  LM27762 FB equations and R >= 50k: SNVSAF7C p.13 (Eq. 1) and p.14 (Eq. 3). Caps: 4.7 uF CIN/CCP, 0.47-1 uF flying, 2.2 uF out (p.14-15).
-PROPOSED  PGOOD pull-up 100k to 3V3 (datasheet example uses 10k to VIN, p.14). EN+/EN- tied to VIN.
+PROPOSED  3V3 load estimate (rev 2): OPA857 26.8 mA max + OPA855 19.5 mA max (IQ 17.8 typ, 16-19.5 mA at VS = 5 V, OPA855 SBOS622D PDF p.7; Fig 6-27 p.12 shows about 16-17.5 mA at 3.3 V, so 19.5 is conservative) + TLV3605 17.5 mA max + OPA2320 ~2 mA = about 66 mA. U1 TPS79901 is rated 200 mA. PROPOSED, not measured.
+REMOVED  (decision 12) U2 LM27762 +/-3V7, 5V_A bead/caps, PGOOD_VGA and TP1: the VCA821 VGA is gone, the OPA855 runs from 3V3.
 PROPOSED  U3 LT8365 values per docs/calculations/apd-bias-design.md sections 3.2 and 4: 500 kHz (RT 84.5k), L1 10 uH, boost to ~110 V + doubler.
 VERIFIED  SYNC/MODE: float = pulse-skip, GND = Burst, 100k to GND = Burst/SSFM (LT8365 Rev. A p.7). BIAS tie to GND if unused; INTVCC 1 uF (p.7).
-PROPOSED  EN/UVLO 200k/200k from 5V_HVIN, always connected. Q3 DMN2056U-7 pulls EN/UVLO to GND = HV OFF. Gate = HV_DIS, R33 100k pull-up to 3V3_D, R34 1k series: HV is OFF until the ESP32 drives HV_DIS low after verifying the DAC (decision 11). J1 HV FORCE ON (DNP) shorts the gate to GND for bench use without firmware.\nPROPOSED  U4 TPS7A2033 3V3_D: 300 mA, radio must stay disabled; load est. 60 mA (docs/research/module-controller.md). CIN 1 uF, COUT 10 uF + 1 uF (datasheet minimum 1 uF, max 200 uF: SBVS338H p.5). PGOOD_VGA = U2 PGOOD.
+PROPOSED  EN/UVLO 200k/200k from 5V_HVIN, always connected. Q3 DMN2056U-7 pulls EN/UVLO to GND = HV OFF. Gate = HV_DIS, R33 100k pull-up to 3V3_D, R34 1k series: HV is OFF until the ESP32 drives HV_DIS low after verifying the DAC (decision 11). J1 HV FORCE ON (DNP) shorts the gate to GND for bench use without firmware.\nPROPOSED  U4 TPS7A2033 3V3_D: 300 mA, radio must stay disabled; load est. 60 mA (docs/research/module-controller.md). CIN 1 uF, COUT 10 uF + 1 uF (datasheet minimum 1 uF, max 200 uF: SBVS338H p.5).
 PROPOSED  BIAS: R28 0R to GND fitted; R29 0R to 5V_HVIN DNP. Fit exactly one of them. SYNC options R26/R27/TP2 are DNP.
 PROPOSED  D2 (GND to SW, from the p.30 250 V example, purpose not stated) is DNP. Q1/Q2 clamp ~150 uA. C8 and R19 form filter stage 1.
 PROPOSED  HV_MON = HV_OUT/101 (R20+R32 10M, R21 100k): 1.39 V at 140 V. Stage 2 filter (10k + 10 nF) is on the front-end sheet.
 Net names: HV_V1, HV_PUMP, HV_RAW, HV_OUT, HV_CLAMP, 5V_HVIN, EN, SYNC, BIAS, RT, SS, VC, FBX are local labels; APD_BIAS = HV_FILT.
-Pending: DAC_HV, HV_MON, HV_DIS, 3V3_D and PGOOD_VGA pins are added to the root sheet by the orchestrator.""", (TX, 28), 1.4)
+Hierarchical pins: in +5V, DAC_HV, HV_DIS; out 3V3, 3V3_D, APD_BIAS, HV_MON.""", (TX, 28), 1.4)
 s.text("""HV WARNING
 APD bias reaches 220 V. Stored energy ~2.3 mJ (docs/calculations/apd-bias-design.md section 4). Can be hazardous.
 Never probe HV_OUT, HV_RAW, HV_PUMP, HV_V1 or HV_CLAMP directly. Use HV_MON (HV_OUT/101) for observation.

@@ -996,144 +996,350 @@
 		)
 	)
 	(junction
-		(at 208.28 96.52)
+		(at 185.42 152.4)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "b603dc89-c0cd-481b-9db0-72abb9c079a0")
+		(uuid "c3a736b5-dbfb-40b2-86d5-006d6f8d940e")
 	)
 	(junction
-		(at 185.42 147.32)
+		(at 175.26 106.68)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "513adf68-7142-4419-8b3c-91c3ad9e5b66")
+		(uuid "95893184-dfca-4090-9a63-9f752dab0c15")
 	)
 	(junction
-		(at 198.12 88.9)
+		(at 203.2 142.24)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "dc0e5ba4-54b3-472e-bca6-50ca121f698c")
+		(uuid "8e077fa7-fe8f-4069-baf1-9b9585ab344f")
 	)
 	(junction
-		(at 193.04 96.52)
+		(at 203.2 101.6)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "35febe4f-22b0-446b-84a8-089eb1e00949")
+		(uuid "ba9dd581-d946-40d7-9aa1-08f88aeda9c9")
 	)
 	(junction
-		(at 116.84 124.46)
+		(at 180.34 152.4)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "e1215c2a-5f24-4f02-a3f4-86c4286022b2")
+		(uuid "5452a666-9794-4449-9a89-cb6dfcb4551e")
 	)
 	(junction
-		(at 213.36 96.52)
+		(at 160.02 124.46)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "f8382029-8d9e-44c2-b296-8cb1010d455d")
+		(uuid "2f92cbed-9491-4f3c-bcc0-ebf1172699a6")
 	)
 	(junction
-		(at 203.2 96.52)
+		(at 177.8 124.46)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "8ef71e89-5091-4085-8800-f8eec83f8373")
+		(uuid "555950ce-f102-4cfe-b8a2-0a8a7d64460e")
 	)
 	(junction
-		(at 175.26 139.7)
+		(at 203.2 106.68)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "2049526a-c3bd-47df-a916-6afbbcb35b17")
+		(uuid "9e23c34c-8fc0-4742-ad54-3844edf0ea5b")
 	)
 	(junction
-		(at 198.12 96.52)
+		(at 231.14 124.46)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "1ee3b69e-8d79-4c51-a3cf-197d27ef4564")
+		(uuid "5bc8386c-be17-4f28-8ffb-ab40ff0d99fb")
 	)
 	(junction
-		(at 116.84 121.92)
+		(at 208.28 106.68)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "4b1e464f-a04b-48e4-adcc-b0b3c59cdbd7")
+		(uuid "97628808-bb35-461b-bf7e-ed63bc11582e")
+	)
+	(junction
+		(at 198.12 101.6)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ab6c7932-bf53-480e-9179-3cbf55b16a23")
+	)
+	(junction
+		(at 193.04 101.6)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "20d34de9-d1d1-44c1-879e-a7b3deebe55e")
+	)
+	(junction
+		(at 157.48 124.46)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "fc84b203-b51e-4c75-ab3d-5579af50eb7b")
+	)
+	(junction
+		(at 114.3 106.68)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "05750d4d-7c83-420c-afa6-2c29fc79ce5d")
+	)
+	(junction
+		(at 167.64 124.46)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5f738853-e9ee-41df-8154-a725835662ca")
+	)
+	(junction
+		(at 213.36 106.68)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "fc9ad296-ecb0-475c-abcd-a00dcbbea10e")
 	)
 	(wire
 		(pts
-			(xy 50.8 121.92) (xy 187.96 121.92)
+			(xy 101.6 106.68) (xy 175.26 106.68)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "0c7171d3-4bdb-4059-8eb1-4e3f8b4e6c35")
+		(uuid "61d5d631-4c91-49b5-bd25-57bd05cd4bef")
 	)
 	(wire
 		(pts
-			(xy 50.8 124.46) (xy 187.96 124.46)
+			(xy 187.96 121.92) (xy 175.26 121.92)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "5c0e55f7-c36c-475b-853d-a7dd30d2e121")
+		(uuid "3b2c63ed-149b-4997-b893-77a198f6a97e")
 	)
 	(wire
 		(pts
-			(xy 116.84 121.92) (xy 116.84 114.3)
+			(xy 175.26 121.92) (xy 175.26 96.52)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "ca4edc3c-97ab-4418-b4a7-5f3f7f87e70a")
+		(uuid "0a48a228-794f-463b-92e4-2f6ec37049e2")
 	)
 	(wire
 		(pts
-			(xy 116.84 124.46) (xy 116.84 129.54)
+			(xy 114.3 106.68) (xy 114.3 101.6)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "d7c9a2ba-266e-4983-a277-88c2dd828e62")
+		(uuid "d44a22b7-f768-43c2-b2c5-5b19bd06f696")
 	)
 	(wire
 		(pts
-			(xy 50.8 139.7) (xy 182.88 139.7)
+			(xy 213.36 124.46) (xy 231.14 124.46)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "e5814abe-610a-4b5d-8085-5d0762ee7f2b")
+		(uuid "06034932-10e3-4087-b042-3d30579b8b43")
 	)
 	(wire
 		(pts
-			(xy 182.88 139.7) (xy 182.88 129.54)
+			(xy 231.14 124.46) (xy 231.14 96.52)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "8df7a9e3-2f59-4c91-9740-6e93898e2ff4")
+		(uuid "985ab022-af1b-4bbe-9d33-122fcc538eb2")
 	)
 	(wire
 		(pts
-			(xy 182.88 129.54) (xy 187.96 129.54)
+			(xy 231.14 96.52) (xy 226.06 96.52)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "be2ea9c8-637f-4dd1-9ffa-70be51419c0b")
+		(uuid "92fe14c9-fe07-4dbb-83ce-234e61d9b18e")
 	)
 	(wire
 		(pts
-			(xy 175.26 134.62) (xy 175.26 132.08)
+			(xy 220.98 96.52) (xy 210.82 96.52)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "5ecd6cfc-af94-46a3-8840-d8daf8111677")
+		(uuid "3ff94a3a-8f9c-4557-b7a9-8befcbdcccbb")
+	)
+	(wire
+		(pts
+			(xy 205.74 96.52) (xy 175.26 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "899aa9bc-0a7a-480c-bb76-b7ccd84278de")
+	)
+	(wire
+		(pts
+			(xy 187.96 124.46) (xy 167.64 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9f53921a-6307-4044-8715-4dbb2a5e390c")
+	)
+	(wire
+		(pts
+			(xy 177.8 124.46) (xy 177.8 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "94aeb999-a7ee-4def-a56f-b78d4f7c7ff2")
+	)
+	(wire
+		(pts
+			(xy 177.8 132.08) (xy 177.8 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dad13d6f-69d1-4134-9533-ba3a91cec4e0")
+	)
+	(wire
+		(pts
+			(xy 127 147.32) (xy 177.8 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f8d721d5-e158-425d-bf4c-c51ec929becb")
+	)
+	(wire
+		(pts
+			(xy 160.02 124.46) (xy 160.02 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f536e691-48e3-4e83-a583-70b967077ea3")
+	)
+	(wire
+		(pts
+			(xy 167.64 124.46) (xy 167.64 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bbd0a3d1-4982-4634-9282-3e4756a2368f")
+	)
+	(wire
+		(pts
+			(xy 167.64 132.08) (xy 167.64 142.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e3202e68-4d3d-4d3d-bb80-6d36a1b10e15")
+	)
+	(wire
+		(pts
+			(xy 127 142.24) (xy 167.64 142.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ff68a736-2efc-4a8d-b65b-71e3de0ec3e5")
+	)
+	(wire
+		(pts
+			(xy 157.48 124.46) (xy 157.48 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2d70e5cf-d848-44d4-aa9d-12760858ca49")
+	)
+	(wire
+		(pts
+			(xy 157.48 132.08) (xy 157.48 134.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "01714510-43fb-49b3-accd-cd26126c95fd")
+	)
+	(wire
+		(pts
+			(xy 167.64 124.46) (xy 152.4 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a32897a7-19bf-47d6-b796-a935b2566aeb")
+	)
+	(wire
+		(pts
+			(xy 147.32 124.46) (xy 139.7 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "336fc02a-6a22-4c39-93ad-51c02929956e")
+	)
+	(wire
+		(pts
+			(xy 187.96 129.54) (xy 180.34 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6d6ee9cf-a935-43f2-bfed-db19154aa03a")
+	)
+	(wire
+		(pts
+			(xy 180.34 129.54) (xy 180.34 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0b85b19a-45bd-4df4-b4e6-2367ce04ee5b")
+	)
+	(wire
+		(pts
+			(xy 180.34 152.4) (xy 170.18 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "203eb575-0060-4b0e-85e4-3ed889973b20")
+	)
+	(wire
+		(pts
+			(xy 180.34 160.02) (xy 180.34 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a711e170-717c-44a0-869c-59f56d6b97a2")
 	)
 	(wire
 		(pts
@@ -1143,67 +1349,67 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "38a6ab41-f22b-4bb0-9305-86c3edbac282")
+		(uuid "3d45dac1-7ec2-433d-992c-bb06ea70a58a")
 	)
 	(wire
 		(pts
-			(xy 185.42 132.08) (xy 185.42 147.32)
+			(xy 185.42 132.08) (xy 185.42 154.94)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "28c08dd9-acb5-4a74-b279-1f1b2c6ce121")
+		(uuid "162dafb7-44de-4c6d-abb3-be920a039f00")
 	)
 	(wire
 		(pts
-			(xy 185.42 152.4) (xy 185.42 154.94)
+			(xy 185.42 160.02) (xy 185.42 162.56)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "e00a191f-d2ab-4c12-8679-ba969fd7b296")
+		(uuid "b0136b42-0ce1-409b-b4c8-b2d4a3628769")
 	)
 	(wire
 		(pts
-			(xy 175.26 147.32) (xy 185.42 147.32)
+			(xy 185.42 152.4) (xy 190.5 152.4)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "1da7b8a3-9b11-4350-9cf9-efe819960787")
+		(uuid "a46136f7-f972-414d-80c7-5d8e3d0010ca")
 	)
 	(wire
 		(pts
-			(xy 50.8 152.4) (xy 175.26 152.4)
+			(xy 195.58 152.4) (xy 203.2 152.4)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "a5dac650-e6b5-4bc6-9859-9d4e676d06df")
+		(uuid "a60a0453-04f4-4339-9530-d79c1b25afc1")
 	)
 	(wire
 		(pts
-			(xy 213.36 124.46) (xy 254 124.46)
+			(xy 231.14 124.46) (xy 246.38 124.46)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "f42eb927-9579-446b-b56a-5e00a86f1d7d")
+		(uuid "4140843b-eda6-4a3c-bcf2-e8dfc32d231b")
 	)
 	(wire
 		(pts
-			(xy 213.36 129.54) (xy 254 129.54)
+			(xy 213.36 129.54) (xy 246.38 129.54)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "ba4374fd-ecf9-4d8b-a4ad-f66bf2d30a52")
+		(uuid "c9f3b15c-0746-4628-98cf-a3d954843e95")
 	)
 	(wire
 		(pts
@@ -1213,164 +1419,175 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "381ee21d-24ae-4d86-81dc-53a30eebfbfb")
+		(uuid "3778ba44-f134-4cdb-ad9b-5dce063ce58f")
 	)
 	(wire
 		(pts
-			(xy 205.74 139.7) (xy 205.74 142.24)
+			(xy 200.66 142.24) (xy 205.74 142.24)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "a57ce03c-a929-4653-a192-5821b93ca7db")
+		(uuid "4efdf705-ed51-4051-a37c-0719f3bacdb6")
 	)
 	(wire
 		(pts
-			(xy 205.74 142.24) (xy 200.66 142.24)
+			(xy 205.74 142.24) (xy 205.74 139.7)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "e3fe1bcf-9012-44e9-a98a-2d3b44a49c8b")
+		(uuid "9d5600b6-6378-4ae8-a961-d0d9759ef6c0")
 	)
 	(wire
 		(pts
-			(xy 50.8 88.9) (xy 203.2 88.9)
+			(xy 203.2 142.24) (xy 203.2 144.78)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "9263a917-e620-4fcd-a139-bdbc677f23aa")
+		(uuid "76fc92db-dd41-4c42-8b6c-4d3206526380")
 	)
 	(wire
 		(pts
-			(xy 198.12 114.3) (xy 198.12 88.9)
+			(xy 185.42 101.6) (xy 215.9 101.6)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "b8edf057-2791-4368-89e5-4317b5b05625")
+		(uuid "86fecf33-e698-4e33-a936-9015d721796d")
 	)
 	(wire
 		(pts
-			(xy 198.12 96.52) (xy 182.88 96.52)
+			(xy 198.12 114.3) (xy 198.12 101.6)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "9f8ee636-9af6-437f-90ed-b744f174998f")
+		(uuid "089dbfc4-4c39-4256-abf1-cee2bd8ec624")
 	)
 	(wire
 		(pts
-			(xy 193.04 101.6) (xy 193.04 104.14)
+			(xy 185.42 106.68) (xy 185.42 109.22)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "530e503b-1d00-42e0-ae86-4a2430dc660a")
+		(uuid "dfd9beb4-1ec1-4fa6-8a44-532bfa44ea9f")
 	)
 	(wire
 		(pts
-			(xy 182.88 101.6) (xy 182.88 104.14)
+			(xy 193.04 106.68) (xy 193.04 109.22)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "cc9c72e1-595e-4ed2-b979-8ce2ea48ea23")
+		(uuid "85b3630b-8439-469e-8f4b-8a6eb8961a70")
 	)
 	(wire
 		(pts
-			(xy 203.2 93.98) (xy 203.2 114.3)
+			(xy 203.2 106.68) (xy 203.2 114.3)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "ed3376fd-3db7-4918-b2a2-75293db2fc69")
+		(uuid "177b6b09-da62-42df-86f4-76b41ee6cffd")
 	)
 	(wire
 		(pts
-			(xy 203.2 96.52) (xy 223.52 96.52)
+			(xy 203.2 106.68) (xy 223.52 106.68)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "0b9d5455-2980-4c26-a029-b3aa9105aa88")
+		(uuid "c41d87e1-2f9f-4a4b-8fc7-a9941d6e2351")
 	)
 	(wire
 		(pts
-			(xy 213.36 101.6) (xy 213.36 104.14)
+			(xy 213.36 111.76) (xy 213.36 114.3)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "bc38ce50-145a-4e47-84ae-7b0b2a0e37dd")
+		(uuid "6ee9e8eb-65e3-4b6d-8379-f55489b5d613")
 	)
 	(wire
 		(pts
-			(xy 223.52 101.6) (xy 223.52 104.14)
+			(xy 223.52 111.76) (xy 223.52 114.3)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "17299be0-905f-44b4-b588-4e8a633f685f")
+		(uuid "73874161-717d-47b0-bd7f-fae5d3e0c31e")
 	)
-	(hierarchical_label "SDET"
+	(hierarchical_label "SDET_P"
 		(shape input)
-		(at 50.8 121.92 180)
+		(at 101.6 106.68 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify right)
 		)
-		(uuid "0fadb801-699b-423e-a75a-ecf39f21e9a9")
+		(uuid "1eadf154-1d30-4928-ace9-4368c96b594c")
 	)
-	(hierarchical_label "VTH"
-		(shape input)
-		(at 50.8 124.46 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "4b8d07f7-83a2-4400-be13-027f3bbba128")
-	)
-	(hierarchical_label "SHDN_N"
-		(shape input)
-		(at 50.8 139.7 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "216b8afd-adee-4787-8dd5-aecdca34feb0")
-	)
-	(label "3V3"
-		(at 175.26 132.08 90)
+	(label "SDET_P"
+		(at 127 106.68 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "ceb2ae8c-7edc-4962-bc53-81c5fcf936c7")
+		(uuid "0cd00e2d-95e4-4213-9e94-0955cfc6d61b")
+	)
+	(text "positive feedback, AC coupled"
+		(exclude_from_sim yes)
+		(at 203.2 90 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "7e1a1dd3-817c-428f-a20c-fc7d37564067")
+	)
+	(hierarchical_label "VCM_REF"
+		(shape input)
+		(at 127 147.32 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "66b2b581-157f-49a7-ba79-1afc88203cbb")
+	)
+	(hierarchical_label "DAC_TH"
+		(shape input)
+		(at 127 142.24 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "f9b409fa-705d-4048-ae05-362ecb908eb7")
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 185.42 154.94 270)
+		(at 157.48 134.62 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -1378,9 +1595,64 @@
 			)
 			(justify right)
 		)
-		(uuid "40b20318-99bc-40a4-b09b-1d66d9c44cdc")
+		(uuid "8bdcd225-cd42-42ef-b7db-985313dde53f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 185.42 154.94 0)
+			(at 157.48 134.62 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(hierarchical_label "VTH_MON"
+		(shape output)
+		(at 139.7 124.46 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "a2b573fd-ccc7-4ae7-a701-7fde0f01bd19")
+	)
+	(hierarchical_label "SHDN_N"
+		(shape input)
+		(at 170.18 152.4 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "6a6c96c7-e379-4e9a-a6e8-6652fb3d5c72")
+	)
+	(label "3V3"
+		(at 180.34 162.56 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "6d99de0a-d29b-48cf-8dfc-dba4b71f4f0a")
+	)
+	(global_label "GND"
+		(shape passive)
+		(at 185.42 162.56 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "50155076-45c6-4392-8e66-ffffceeb8f52")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 185.42 162.56 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1393,40 +1665,51 @@
 	)
 	(hierarchical_label "LE_HYS"
 		(shape input)
-		(at 50.8 152.4 180)
+		(at 203.2 152.4 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
-		(uuid "66131945-1ef2-4582-84f9-289f2e767f96")
+		(uuid "35afa51b-b6d1-45d8-8883-217d31f0f447")
 	)
 	(hierarchical_label "LVDS_P"
 		(shape output)
-		(at 254 124.46 0)
+		(at 246.38 124.46 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left)
 		)
-		(uuid "3be0afc9-fbd2-49f8-b161-ade9ee3a6605")
+		(uuid "6a6104f7-b9bc-4f7f-b430-30c5ca4fd308")
 	)
 	(hierarchical_label "LVDS_N"
 		(shape output)
-		(at 254 129.54 0)
+		(at 246.38 129.54 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left)
 		)
-		(uuid "52a31b20-0f50-446b-a83a-3fdd52bb9c75")
+		(uuid "a840be0d-006d-49ef-90e7-65e210302d2f")
+	)
+	(text "100 ohm termination is on the FPGA"
+		(exclude_from_sim yes)
+		(at 236 133 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "78643c0b-c6f0-479d-b317-cafeb5193da7")
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 200.66 142.24 270)
+		(at 203.2 144.78 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -1434,9 +1717,9 @@
 			)
 			(justify right)
 		)
-		(uuid "fe73633f-995e-4017-af6b-e3db1ffa4e5d")
+		(uuid "b55036a4-7e0f-4850-a5f1-6db3b2994767")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 200.66 142.24 0)
+			(at 203.2 144.78 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1449,18 +1732,18 @@
 	)
 	(hierarchical_label "3V3"
 		(shape input)
-		(at 50.8 88.9 180)
+		(at 215.9 101.6 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
-		(uuid "ce9a8293-03f0-4af0-bdee-a2ead59d7608")
+		(uuid "20861cbf-0487-4ee8-a74b-1ce4df0b00aa")
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 193.04 104.14 270)
+		(at 185.42 109.22 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -1468,9 +1751,9 @@
 			)
 			(justify right)
 		)
-		(uuid "8234696a-18fd-435f-be52-62b72daf8f67")
+		(uuid "e4c5c302-f110-4ec5-b41d-9bcb128ea1e4")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 193.04 104.14 0)
+			(at 185.42 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1483,7 +1766,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 182.88 104.14 270)
+		(at 193.04 109.22 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -1491,9 +1774,9 @@
 			)
 			(justify right)
 		)
-		(uuid "c13f6b39-5c50-4ac7-96d6-f235a1b1c992")
+		(uuid "4ca1aad7-464f-439c-9b9f-86183218c22e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 182.88 104.14 0)
+			(at 193.04 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1506,7 +1789,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 213.36 104.14 270)
+		(at 213.36 114.3 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -1514,9 +1797,9 @@
 			)
 			(justify right)
 		)
-		(uuid "d62f2b20-ffdf-4b18-8f28-c4eff66a5cf7")
+		(uuid "a12407d0-3621-4304-8a9b-b737cbe5ce66")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 213.36 104.14 0)
+			(at 213.36 114.3 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1529,7 +1812,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 223.52 104.14 270)
+		(at 223.52 114.3 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -1537,9 +1820,9 @@
 			)
 			(justify right)
 		)
-		(uuid "8e4be3b5-d6f9-441b-8bf5-c015620ed815")
+		(uuid "27d684a7-c4ec-4d9f-b0c1-c38f55a2a63c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 223.52 104.14 0)
+			(at 223.52 114.3 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1550,27 +1833,60 @@
 			)
 		)
 	)
-	(text "Slicer: TLV3605 LVDS comparator (U20). IN+ = SDET, IN- = VTH. Left to right: inputs, comparator, LVDS pair out."
+	(text "Slicer: SDET_P is compared with the VCM_REF baseline (SDET_N, trimmed by DAC_TH) in a TLV3605 with 3 mV external hysteresis; LVDS out."
 		(exclude_from_sim yes)
-		(at 50.8 40 0)
+		(at 101.6 30.48 0)
 		(effects
 			(font
 				(size 2.5 2.5)
 			)
 			(justify left top)
 		)
-		(uuid "3a5185be-a5db-4248-b111-b3021f8e96c9")
+		(uuid "bc4cd939-6ba8-487a-86f9-fa2ec3d8ae94")
 	)
-	(text "Design intent (Rev A, nothing here is simulated or measured)\nPROPOSED  IN+ = SDET (AC-coupled detector output), IN- = VTH (threshold from Control). Output high when SDET > VTH.\nPROPOSED  VCCI = VCCO = 3V3. VCCI direct to 3V3; VCCO through R80 0R (option for a bead). Each pin has 100 nF 0402 + 1 uF 0603.\nVERIFIED  Supply range 2.4 V to 5.5 V; separate VCCI/VCCO; bypass 0.1 uF ceramic directly between VCCI/VCCO and VEE (SNOSDA2F p.19, 7.3 and 7.4.1 item 2).\nPROPOSED  SHDN (pin 7): R81 10k pull-up to 3V3; SHDN_N from Control, active low. VIH 1.5 V min, VIL 0.4 V max, 1.8 V logic compatible (SNOSDA2F p.8, EC table, and p.13 6.4).\n          Shutdown is not a guaranteed zero output (standing correction 11); the FPGA watchdog must catch a stuck output.\nVERIFIED  LE/HYS (pin 8): output latches when the pin is below 800 mV above VEE (p.14, 7.1.3; EC table VIL_LE 0.35 V max, VIH_LE 1.5 V min, p.8).\n          Floating = 0 mV hysteresis; resistor to VEE sets it: 150k = 30 mV, 56k = 60 mV (p.8 and p.15, 7.1.4).\nPROPOSED  R82 150k to GND = 30 mV hysteresis (R82 footprint also takes 56k for 60 mV). R83 0R, DNP: fit only if the FPGA is to force the latch.\nUNRESOLVED  Pin voltage of LE/HYS with R82 fitted is not given in the datasheet. If R83 is fitted the FPGA must drive low only (open drain) or tri-state; driving high may override the hysteresis setting.\nPROPOSED  OUT+ = LVDS_P, OUT- = LVDS_N, VOD 350 mV typ into 100 ohm. No termination on this board: the ECP5 has on-die 100 ohm termination (docs/research/ulx3s-lvds-input.md).\nPROPOSED  VEE (3, 5, 9, 11) and exposed pad (13) to GND. Datasheet gives no pad connection requirement beyond layout item 1 (solid ground plane); pad tied to GND by this schematic.\nPROPOSED  TP20 VTH, TP21 SDET (DNP: the probe adds load on SDET). Keep SDET and VTH traces short and matched; OUT+/OUT- matched length (p.19 layout items 3 and 6)."
+	(text "1 inputs: SDET_P, threshold network SDET_N"
 		(exclude_from_sim yes)
-		(at 50.8 175 0)
+		(at 101.6 78 0)
 		(effects
 			(font
 				(size 1.5 1.5)
 			)
 			(justify left top)
 		)
-		(uuid "f81491b8-1d9d-4b69-be5d-917d7f31a66a")
+		(uuid "62df7f22-f790-4414-a49c-a3b56c922f82")
+	)
+	(text "2 TLV3605 comparator"
+		(exclude_from_sim yes)
+		(at 200 78 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left top)
+		)
+		(uuid "8b6c13f4-12c1-4322-bacc-820acdb3c53e")
+	)
+	(text "3 LVDS out"
+		(exclude_from_sim yes)
+		(at 236 78 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left top)
+		)
+		(uuid "06f681a6-07bc-4d0d-a98c-658cd6e5fb1b")
+	)
+	(text "Design intent (revision 2, decision 12; nothing here is simulated or measured)\nPROPOSED   The signal arrives already AC coupled and referenced to VCM_REF (Front End sheet). With 8b/10b the\n           eye centre is that baseline, so IN- is the same baseline plus a small trim: no peak tracking. Light\n           on makes SDET_P go BELOW the baseline (OPA857 output swings down, SBOS630D p.19), so LVDS_P is LOW\n           for a one: the FPGA must invert, or LVDS_P/N be swapped at the FPGA.\nPROPOSED   Threshold SDET_N: R84 1k from VCM_REF (matches the 1k return R59 on IN+, so bias currents cancel:\n           IB -1 uA typ / +-5 uA max, IOS +-1 uA, SNOSDA2F p.7; a single 1k would give 1 mV typ / 5 mV max,\n           10k would give 10 / 50 mV). DAC_TH through R85 100k: trim = (DAC - VCM_REF) x 1k/101k, so a 0 to\n           3.3 V DAC with VCM_REF 1.65 V moves the threshold +-16.3 mV (8 uV per 12-bit LSB). C84 10n to GND\n           keeps IN- quiet (corner 16 kHz). VTH_MON = SDET_N through R86 10k for the ADC.\nPROPOSED   External hysteresis (research 2-4 mV; the internal LE/HYS pin cannot go below about 8 mV, SNOSDA2F\n           p.8, Fig. 7-4 p.16): positive feedback from OUT+ to IN+ through R87 5.49k in series with C87 100p.\n           OUT+ swings 350 mVpp (VOD 350 mV typ, VOCM 1.2 V, p.7). Source seen at IN+ at signal speed = 49.9\n           ohm (R56) || 1k (R59) = 47.5 ohm. Window = 350 mV x 47.5/(5490 + 47.5) = 3.0 mV. C87 blocks DC: a\n           bare resistor would shift IN+ by (1.2 - 1.65) x 1k/(1k + 5.49k) = -69 mV. High-pass corner 1/(2 pi\n           x 5.54k x 100p) = 287 kHz, tau 554 ns, so a 100 ns run (5 UI) keeps 83 % of the window. The spec\n           text of about 100k with a 1k source only holds for slow (DC) states: at 50 MHz edges it gives 0.17\n           mV. UNRESOLVED: effect on jitter not simulated.\nPROPOSED   LE/HYS (pin 8) left open = internal hysteresis 0 mV and latch off (p.8). R82 150k to GND (30 mV,\n           DNP) and R83 0R to LE_HYS (DNP) are footprints only. SHDN (pin 7): R81 10k pull-up, SHDN_N active\n           low (VIH 1.5 V, VIL 0.4 V, p.8); shutdown is not a guaranteed zero output (standing correction 11).\nVERIFIED   VCCI = VCCO = 3V3 (2.4 to 5.5 V, p.19); 100 nF 0402 + 1 uF at each of VCCI and VCCO, VCCO through\n           R80 0R (bead option). VEE and EP to GND (datasheet gives no pad requirement beyond a ground plane).\n           PWR_FLAG on the VCCO net because R80 is passive.\nPROPOSED   LVDS: OUT+ = LVDS_P, OUT- = LVDS_N; 100 ohm termination at the ECP5 input\n           (docs/research/ulx3s-lvds-input.md). TP20 SDET_N, TP21 SDET_P (DNP, the probe loads the input).\nUNRESOLVED Comparator input noise and delay below 10 mV overdrive are not in the datasheet\n           (docs/research/post-amp-slicer.md section 1); IB at VCM = 1.65 V is not specified."
+		(exclude_from_sim yes)
+		(at 101.6 172 0)
+		(effects
+			(font
+				(size 1.5 1.5)
+			)
+			(justify left top)
+		)
+		(uuid "367e3e93-eaf0-424a-855a-b414dfe63aed")
 	)
 	(symbol
 		(lib_id "AharoniLab_OpAmp:TLV3605RVKR")
@@ -1582,25 +1898,27 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "3aaa36fb-17c2-4788-9272-a84ba54227b9")
+		(uuid "548c8494-e809-4457-bc16-53a495a78f2e")
 		(property "Reference" "U20"
-			(at 200.66 113.03 0)
+			(at 213.36 136.5 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Value" "TLV3605RVKR"
-			(at 200.66 140.97 0)
+			(at 213.36 138.1 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" "AharoniLab_Package_DFN_QFN:Texas_RVK0012A_WQFN-12-1EP_3x3mm_P0.5mm_EP1.75x1.75mm"
@@ -1714,34 +2032,34 @@
 			)
 		)
 		(pin "4"
-			(uuid "d902af21-f514-4dea-b321-780a0dbec2c2")
+			(uuid "5da307d1-96d7-443c-a316-f695713e3aba")
 		)
 		(pin "6"
-			(uuid "91b19075-2f8f-40ee-b6dd-0144e0ae5a44")
+			(uuid "4bfd21cd-8819-4249-8b3a-ff662d5408b8")
 		)
 		(pin "7"
-			(uuid "0804e912-a6fb-4068-a486-425c712f46d6")
+			(uuid "26f47b48-2bb4-46ab-84fd-bb9f11e0f253")
 		)
 		(pin "8"
-			(uuid "faa20bee-ecdb-4a05-8fcf-6a2ef1ffaea7")
+			(uuid "71abc276-57df-4f61-89c3-9e3cd6de7bfe")
 		)
 		(pin "12"
-			(uuid "979d568c-e770-447c-8128-ed92b51596e5")
+			(uuid "4a2d975c-f057-43cc-9d43-ed222e0ebc13")
 		)
 		(pin "10"
-			(uuid "42ab37bf-54dc-4152-980b-66815ab05b7f")
+			(uuid "b2e38337-46e2-48be-86a1-4ec2cd2ad991")
 		)
 		(pin "2"
-			(uuid "d1d4047d-e75e-41d0-9513-c4cac321e806")
+			(uuid "eadeba41-c858-4b4c-9ece-2e1f990ef4dd")
 		)
 		(pin "1"
-			(uuid "1c329360-7e0f-4544-807d-92ff38244806")
+			(uuid "994f9927-b955-4c45-82bb-30178e45a22a")
 		)
 		(pin "[3,5,9,11]"
-			(uuid "b5ff0405-a94f-42fd-a4f3-88de885035e7")
+			(uuid "41181aa0-76a3-4bd3-a35e-b3df914cd385")
 		)
 		(pin "13"
-			(uuid "32b8cb2c-9ad6-420f-9aa2-1d28600715f1")
+			(uuid "d1c24bc2-264a-46d1-86d9-b6298aa9f266")
 		)
 		(instances
 			(project "receiver-module"
@@ -1754,7 +2072,7 @@
 	)
 	(symbol
 		(lib_id "AharoniLab_Connector:TestPoint")
-		(at 116.84 114.3 0)
+		(at 114.3 101.6 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -1762,29 +2080,31 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp yes)
-		(uuid "025770b5-9dc6-48b5-af7e-7c773069154f")
+		(uuid "aadeffbb-39cf-496e-9509-6eb8b7658843")
 		(property "Reference" "TP21"
-			(at 116.84 107.442 0)
+			(at 116.2 101 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
-		(property "Value" "SDET"
-			(at 116.84 109.22 0)
+		(property "Value" "SDET_P"
+			(at 116.2 102.5 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
-			(at 116.84 114.3 0)
+			(at 114.3 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1795,7 +2115,7 @@
 			)
 		)
 		(property "Datasheet" "https://github.com/Aharoni-Lab/kicad-lab-library"
-			(at 116.84 114.3 0)
+			(at 114.3 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1806,7 +2126,7 @@
 			)
 		)
 		(property "Description" "Test point, single pin; default footprint is the 1.0mm plated hole, SMD pad variants are in AharoniLab_Connector"
-			(at 116.84 114.3 0)
+			(at 114.3 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1817,7 +2137,7 @@
 			)
 		)
 		(property "Contributor" "Daniel Aharoni"
-			(at 116.84 114.3 0)
+			(at 114.3 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1828,7 +2148,7 @@
 			)
 		)
 		(property "Source" "KiCad official library (Connector: TestPoint), lab properties added"
-			(at 116.84 114.3 0)
+			(at 114.3 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1839,7 +2159,7 @@
 			)
 		)
 		(property "Validated" "No"
-			(at 116.84 114.3 0)
+			(at 114.3 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1850,7 +2170,7 @@
 			)
 		)
 		(property "ki_keywords" "test point tp probe"
-			(at 116.84 114.3 0)
+			(at 114.3 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1861,7 +2181,7 @@
 			)
 		)
 		(property "ki_fp_filters" "TestPoint*"
-			(at 116.84 114.3 0)
+			(at 114.3 101.6 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1872,7 +2192,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "d4ff8196-7716-4331-88b2-2f60f37e495f")
+			(uuid "30754eb9-7678-4299-bef5-6faeb3b2a159")
 		)
 		(instances
 			(project "receiver-module"
@@ -1884,8 +2204,8 @@
 		)
 	)
 	(symbol
-		(lib_id "AharoniLab_Connector:TestPoint")
-		(at 116.84 129.54 180)
+		(lib_id "AharoniLab_Passive:R_Small_US")
+		(at 223.52 96.52 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -1893,9 +2213,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "8af5167b-157a-4676-850b-0bc06169ff1a")
-		(property "Reference" "TP20"
-			(at 116.84 136.398 0)
+		(uuid "ddbf7a23-ddb8-4c9d-a0c7-8f81ae0e2119")
+		(property "Reference" "R87"
+			(at 223.52 92.71 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1904,8 +2224,8 @@
 				)
 			)
 		)
-		(property "Value" "VTH"
-			(at 116.84 134.62 0)
+		(property "Value" "5.49k"
+			(at 223.52 94.32 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -1914,8 +2234,8 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
-			(at 116.84 129.54 0)
+		(property "Footprint" "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
+			(at 223.52 96.52 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1925,8 +2245,8 @@
 				)
 			)
 		)
-		(property "Datasheet" "https://github.com/Aharoni-Lab/kicad-lab-library"
-			(at 116.84 129.54 0)
+		(property "Datasheet" ""
+			(at 223.52 96.52 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1936,30 +2256,8 @@
 				)
 			)
 		)
-		(property "Description" "Test point, single pin; default footprint is the 1.0mm plated hole, SMD pad variants are in AharoniLab_Connector"
-			(at 116.84 129.54 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Contributor" "Daniel Aharoni"
-			(at 116.84 129.54 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Source" "KiCad official library (Connector: TestPoint), lab properties added"
-			(at 116.84 129.54 0)
+		(property "Description" "Resistor, small US symbol"
+			(at 223.52 96.52 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1970,7 +2268,7 @@
 			)
 		)
 		(property "Validated" "No"
-			(at 116.84 129.54 0)
+			(at 223.52 96.52 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1980,8 +2278,8 @@
 				)
 			)
 		)
-		(property "ki_keywords" "test point tp probe"
-			(at 116.84 129.54 0)
+		(property "Contributor" "Daniel Aharoni"
+			(at 223.52 96.52 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -1991,8 +2289,30 @@
 				)
 			)
 		)
-		(property "ki_fp_filters" "TestPoint*"
-			(at 116.84 129.54 0)
+		(property "Source" "KiCad Device library"
+			(at 223.52 96.52 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 223.52 96.52 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "R_*"
+			(at 223.52 96.52 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2003,7 +2323,413 @@
 			)
 		)
 		(pin "1"
-			(uuid "97941551-2ad5-4c5a-87c9-20e771c54c6d")
+			(uuid "9d65571f-d2e1-4844-b782-5d378efd1f1c")
+		)
+		(pin "2"
+			(uuid "a9cd9a47-1f1a-4b73-be0d-d0d53bbc5a7b")
+		)
+		(instances
+			(project "receiver-module"
+				(path "/20237707-2fe5-41a5-bbd6-cb6c24e8ba32/32812998-0b35-4309-a51b-1352d244051f"
+					(reference "R87")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "AharoniLab_Passive:C_Small")
+		(at 208.28 96.52 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "70f4bb56-27ff-4f88-becb-a5aa94fa4932")
+		(property "Reference" "C87"
+			(at 208.28 92.71 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100p"
+			(at 208.28 94.32 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
+			(at 208.28 96.52 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 208.28 96.52 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 208.28 96.52 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Validated" "No"
+			(at 208.28 96.52 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Contributor" "Daniel Aharoni"
+			(at 208.28 96.52 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Source" "KiCad Device library"
+			(at 208.28 96.52 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 208.28 96.52 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "C_*"
+			(at 208.28 96.52 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "d77fd80c-ff8b-4f75-963d-377fed9ad570")
+		)
+		(pin "2"
+			(uuid "03c01b4a-269c-4329-8bb6-ba256d2311c9")
+		)
+		(instances
+			(project "receiver-module"
+				(path "/20237707-2fe5-41a5-bbd6-cb6c24e8ba32/32812998-0b35-4309-a51b-1352d244051f"
+					(reference "C87")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "AharoniLab_Passive:R_Small_US")
+		(at 177.8 129.54 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "18710906-d79c-486d-be77-d33566e1d13d")
+		(property "Reference" "R84"
+			(at 175.8 128.27 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "1k"
+			(at 175.8 129.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
+			(at 177.8 129.54 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 177.8 129.54 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor, small US symbol"
+			(at 177.8 129.54 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Validated" "No"
+			(at 177.8 129.54 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Contributor" "Daniel Aharoni"
+			(at 177.8 129.54 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Source" "KiCad Device library"
+			(at 177.8 129.54 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 177.8 129.54 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "R_*"
+			(at 177.8 129.54 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "94b12227-2e5d-45f0-ae25-647babb134f0")
+		)
+		(pin "2"
+			(uuid "9d71dba9-cdc3-4cfd-8a93-39e5f94d25f3")
+		)
+		(instances
+			(project "receiver-module"
+				(path "/20237707-2fe5-41a5-bbd6-cb6c24e8ba32/32812998-0b35-4309-a51b-1352d244051f"
+					(reference "R84")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "AharoniLab_Connector:TestPoint")
+		(at 160.02 119.38 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "bddf708a-968e-4189-a22c-32304f413cb5")
+		(property "Reference" "TP20"
+			(at 161.92 118.78 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SDET_N"
+			(at 161.92 120.28 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
+			(at 160.02 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://github.com/Aharoni-Lab/kicad-lab-library"
+			(at 160.02 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Test point, single pin; default footprint is the 1.0mm plated hole, SMD pad variants are in AharoniLab_Connector"
+			(at 160.02 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Contributor" "Daniel Aharoni"
+			(at 160.02 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Source" "KiCad official library (Connector: TestPoint), lab properties added"
+			(at 160.02 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Validated" "No"
+			(at 160.02 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "test point tp probe"
+			(at 160.02 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 160.02 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4cd87509-060c-4fe8-8238-5d6b33b8a5de")
 		)
 		(instances
 			(project "receiver-module"
@@ -2016,7 +2742,7 @@
 	)
 	(symbol
 		(lib_id "AharoniLab_Passive:R_Small_US")
-		(at 175.26 137.16 0)
+		(at 167.64 129.54 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2024,31 +2750,31 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "188f84d3-9593-4469-9aa6-0749e75b8b06")
-		(property "Reference" "R81"
-			(at 176.022 136.652 0)
+		(uuid "3b1a3bbe-584b-44e2-8e19-9cbe77fea03d")
+		(property "Reference" "R85"
+			(at 165.64 128.27 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Value" "10k"
-			(at 176.022 138.176 0)
+		(property "Value" "100k"
+			(at 165.64 129.54 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Footprint" "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
-			(at 175.26 137.16 0)
+			(at 167.64 129.54 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2059,7 +2785,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 175.26 137.16 0)
+			(at 167.64 129.54 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2070,7 +2796,7 @@
 			)
 		)
 		(property "Description" "Resistor, small US symbol"
-			(at 175.26 137.16 0)
+			(at 167.64 129.54 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2081,7 +2807,7 @@
 			)
 		)
 		(property "Validated" "No"
-			(at 175.26 137.16 0)
+			(at 167.64 129.54 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2092,7 +2818,7 @@
 			)
 		)
 		(property "Contributor" "Daniel Aharoni"
-			(at 175.26 137.16 0)
+			(at 167.64 129.54 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2103,7 +2829,7 @@
 			)
 		)
 		(property "Source" "KiCad Device library"
-			(at 175.26 137.16 0)
+			(at 167.64 129.54 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2114,7 +2840,7 @@
 			)
 		)
 		(property "ki_keywords" "r resistor"
-			(at 175.26 137.16 0)
+			(at 167.64 129.54 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2125,7 +2851,7 @@
 			)
 		)
 		(property "ki_fp_filters" "R_*"
-			(at 175.26 137.16 0)
+			(at 167.64 129.54 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2136,10 +2862,416 @@
 			)
 		)
 		(pin "1"
-			(uuid "f205a246-6d3d-4bb3-8379-e2e7d62f26b7")
+			(uuid "2e3d696d-a4da-46db-928d-7ffd8946086d")
 		)
 		(pin "2"
-			(uuid "a5326d1d-186c-460f-891e-501565e993a3")
+			(uuid "81e3dc88-ffd5-4e59-9560-d7e849eb62be")
+		)
+		(instances
+			(project "receiver-module"
+				(path "/20237707-2fe5-41a5-bbd6-cb6c24e8ba32/32812998-0b35-4309-a51b-1352d244051f"
+					(reference "R85")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "AharoniLab_Passive:C_Small")
+		(at 157.48 129.54 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "8861906b-59a9-4a97-84d8-2abba2d41325")
+		(property "Reference" "C84"
+			(at 155.48 128.27 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "10n"
+			(at 155.48 129.54 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
+			(at 157.48 129.54 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 157.48 129.54 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 157.48 129.54 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Validated" "No"
+			(at 157.48 129.54 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Contributor" "Daniel Aharoni"
+			(at 157.48 129.54 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Source" "KiCad Device library"
+			(at 157.48 129.54 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 157.48 129.54 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "C_*"
+			(at 157.48 129.54 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "e1c2ca79-0b89-4210-ad0f-a266979efc36")
+		)
+		(pin "2"
+			(uuid "56ab667f-8738-4a51-9f23-e80593628b61")
+		)
+		(instances
+			(project "receiver-module"
+				(path "/20237707-2fe5-41a5-bbd6-cb6c24e8ba32/32812998-0b35-4309-a51b-1352d244051f"
+					(reference "C84")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "AharoniLab_Passive:R_Small_US")
+		(at 149.86 124.46 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "58dc1a90-ff22-4d49-a8dc-3199b75f7dcc")
+		(property "Reference" "R86"
+			(at 149.86 120.65 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 149.86 122.26 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
+			(at 149.86 124.46 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 149.86 124.46 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor, small US symbol"
+			(at 149.86 124.46 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Validated" "No"
+			(at 149.86 124.46 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Contributor" "Daniel Aharoni"
+			(at 149.86 124.46 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Source" "KiCad Device library"
+			(at 149.86 124.46 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 149.86 124.46 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "R_*"
+			(at 149.86 124.46 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "3df67a95-962b-456d-9e18-cc6a28ca24d1")
+		)
+		(pin "2"
+			(uuid "b610cd21-4dff-462f-a309-4aaf8d07d132")
+		)
+		(instances
+			(project "receiver-module"
+				(path "/20237707-2fe5-41a5-bbd6-cb6c24e8ba32/32812998-0b35-4309-a51b-1352d244051f"
+					(reference "R86")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "AharoniLab_Passive:R_Small_US")
+		(at 180.34 157.48 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "8cd626fe-2200-424e-8eaa-1b7cf2c8984b")
+		(property "Reference" "R81"
+			(at 178.34 156.21 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "10k"
+			(at 178.34 157.48 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
+			(at 180.34 157.48 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 180.34 157.48 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor, small US symbol"
+			(at 180.34 157.48 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Validated" "No"
+			(at 180.34 157.48 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Contributor" "Daniel Aharoni"
+			(at 180.34 157.48 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Source" "KiCad Device library"
+			(at 180.34 157.48 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 180.34 157.48 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "R_*"
+			(at 180.34 157.48 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "cf9d76cd-d832-4fe9-a925-5ff997e60af2")
+		)
+		(pin "2"
+			(uuid "e84c6d68-f1ef-4d86-9943-6288ed9ac9e5")
 		)
 		(instances
 			(project "receiver-module"
@@ -2152,17 +3284,17 @@
 	)
 	(symbol
 		(lib_id "AharoniLab_Passive:R_Small_US")
-		(at 185.42 149.86 0)
+		(at 185.42 157.48 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
-		(dnp no)
-		(uuid "66d2b877-de11-4c09-9763-8e2e585d36cb")
+		(dnp yes)
+		(uuid "d65116a2-d3b6-42b8-a315-b4b1278daae0")
 		(property "Reference" "R82"
-			(at 186.182 149.352 0)
+			(at 187.42 156.21 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2173,7 +3305,7 @@
 			)
 		)
 		(property "Value" "150k"
-			(at 186.182 150.876 0)
+			(at 187.42 157.48 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2184,7 +3316,7 @@
 			)
 		)
 		(property "Footprint" "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
-			(at 185.42 149.86 0)
+			(at 185.42 157.48 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2195,7 +3327,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 185.42 149.86 0)
+			(at 185.42 157.48 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2206,7 +3338,7 @@
 			)
 		)
 		(property "Description" "Resistor, small US symbol"
-			(at 185.42 149.86 0)
+			(at 185.42 157.48 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2217,7 +3349,7 @@
 			)
 		)
 		(property "Validated" "No"
-			(at 185.42 149.86 0)
+			(at 185.42 157.48 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2228,7 +3360,7 @@
 			)
 		)
 		(property "Contributor" "Daniel Aharoni"
-			(at 185.42 149.86 0)
+			(at 185.42 157.48 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2239,7 +3371,7 @@
 			)
 		)
 		(property "Source" "KiCad Device library"
-			(at 185.42 149.86 0)
+			(at 185.42 157.48 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2250,7 +3382,7 @@
 			)
 		)
 		(property "ki_keywords" "r resistor"
-			(at 185.42 149.86 0)
+			(at 185.42 157.48 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2261,7 +3393,7 @@
 			)
 		)
 		(property "ki_fp_filters" "R_*"
-			(at 185.42 149.86 0)
+			(at 185.42 157.48 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2272,10 +3404,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "248c5252-d714-4f6c-af79-29276af9ea0d")
+			(uuid "08b8c9fc-f4b4-4fab-a2a9-01aae4f07fbe")
 		)
 		(pin "2"
-			(uuid "50bd67b3-a8f2-4be6-ade4-b86c26591a45")
+			(uuid "b6aecfb3-e5cf-4ca2-8593-49f8094c0a17")
 		)
 		(instances
 			(project "receiver-module"
@@ -2288,7 +3420,7 @@
 	)
 	(symbol
 		(lib_id "AharoniLab_Passive:R_Small_US")
-		(at 175.26 149.86 0)
+		(at 193.04 152.4 90)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2296,31 +3428,29 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp yes)
-		(uuid "a937aed5-d4fb-4613-81a6-1c79d8046e86")
+		(uuid "1f38373c-5173-4454-916b-9b345c348b1d")
 		(property "Reference" "R83"
-			(at 176.022 149.352 0)
+			(at 193.04 148.59 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Value" "0R"
-			(at 176.022 150.876 0)
+			(at 193.04 150.2 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
-			(at 175.26 149.86 0)
+			(at 193.04 152.4 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2331,7 +3461,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 175.26 149.86 0)
+			(at 193.04 152.4 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2342,7 +3472,7 @@
 			)
 		)
 		(property "Description" "Resistor, small US symbol"
-			(at 175.26 149.86 0)
+			(at 193.04 152.4 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2353,7 +3483,7 @@
 			)
 		)
 		(property "Validated" "No"
-			(at 175.26 149.86 0)
+			(at 193.04 152.4 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2364,7 +3494,7 @@
 			)
 		)
 		(property "Contributor" "Daniel Aharoni"
-			(at 175.26 149.86 0)
+			(at 193.04 152.4 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2375,7 +3505,7 @@
 			)
 		)
 		(property "Source" "KiCad Device library"
-			(at 175.26 149.86 0)
+			(at 193.04 152.4 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2386,7 +3516,7 @@
 			)
 		)
 		(property "ki_keywords" "r resistor"
-			(at 175.26 149.86 0)
+			(at 193.04 152.4 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2397,7 +3527,7 @@
 			)
 		)
 		(property "ki_fp_filters" "R_*"
-			(at 175.26 149.86 0)
+			(at 193.04 152.4 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2408,10 +3538,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "a945d355-57ce-4049-8e25-56dd4157a2f4")
+			(uuid "7c4c036c-1b82-44c9-b81a-f8cf19aa0c26")
 		)
 		(pin "2"
-			(uuid "3742007e-97d3-4b58-93ec-b214021cad73")
+			(uuid "d3606c0a-9adb-48c1-8017-28a76aa58483")
 		)
 		(instances
 			(project "receiver-module"
@@ -2424,7 +3554,7 @@
 	)
 	(symbol
 		(lib_id "AharoniLab_Passive:C_Small")
-		(at 193.04 99.06 0)
+		(at 185.42 104.14 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2432,167 +3562,31 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "7d1dfd85-b6d8-4fe4-be3f-6d20e81d3d16")
-		(property "Reference" "C80"
-			(at 193.294 97.282 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "100n"
-			(at 193.294 101.092 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "AharoniLab_Capacitor_SMD:C_0402_1005Metric_N"
-			(at 193.04 99.06 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 193.04 99.06 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 193.04 99.06 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Validated" "No"
-			(at 193.04 99.06 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Contributor" "Daniel Aharoni"
-			(at 193.04 99.06 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Source" "KiCad Device library"
-			(at 193.04 99.06 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "ki_keywords" "capacitor cap"
-			(at 193.04 99.06 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "ki_fp_filters" "C_*"
-			(at 193.04 99.06 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "68b7feeb-01fe-4482-931e-f7073143759f")
-		)
-		(pin "2"
-			(uuid "080c57ca-1c8e-46dd-83e1-79b4be170abb")
-		)
-		(instances
-			(project "receiver-module"
-				(path "/20237707-2fe5-41a5-bbd6-cb6c24e8ba32/32812998-0b35-4309-a51b-1352d244051f"
-					(reference "C80")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "AharoniLab_Passive:C_Small")
-		(at 182.88 99.06 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "f71ec4fa-b6c4-4891-9e97-ff7a3a872b43")
+		(uuid "6dcc50a2-24e4-402f-8020-4f416dee10b7")
 		(property "Reference" "C81"
-			(at 183.134 97.282 0)
+			(at 183.42 102.87 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Value" "1u"
-			(at 183.134 101.092 0)
+			(at 183.42 104.14 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(property "Footprint" "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
-			(at 182.88 99.06 0)
+			(at 185.42 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2603,7 +3597,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 182.88 99.06 0)
+			(at 185.42 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2614,7 +3608,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 182.88 99.06 0)
+			(at 185.42 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2625,7 +3619,7 @@
 			)
 		)
 		(property "Validated" "No"
-			(at 182.88 99.06 0)
+			(at 185.42 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2636,7 +3630,7 @@
 			)
 		)
 		(property "Contributor" "Daniel Aharoni"
-			(at 182.88 99.06 0)
+			(at 185.42 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2647,7 +3641,7 @@
 			)
 		)
 		(property "Source" "KiCad Device library"
-			(at 182.88 99.06 0)
+			(at 185.42 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2658,7 +3652,7 @@
 			)
 		)
 		(property "ki_keywords" "capacitor cap"
-			(at 182.88 99.06 0)
+			(at 185.42 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2669,7 +3663,7 @@
 			)
 		)
 		(property "ki_fp_filters" "C_*"
-			(at 182.88 99.06 0)
+			(at 185.42 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2680,10 +3674,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "9b40074a-4113-47c7-b19c-a9dda691acaa")
+			(uuid "58eb917a-0a2d-4d18-940a-1bc8108b7192")
 		)
 		(pin "2"
-			(uuid "bc38eed8-e9de-4f29-ab38-fa1fe3f4fed8")
+			(uuid "48316211-4443-4b1e-90f6-80ebb69db22b")
 		)
 		(instances
 			(project "receiver-module"
@@ -2695,8 +3689,8 @@
 		)
 	)
 	(symbol
-		(lib_id "AharoniLab_Passive:R_Small_US")
-		(at 203.2 91.44 0)
+		(lib_id "AharoniLab_Passive:C_Small")
+		(at 193.04 104.14 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2704,31 +3698,31 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "5a890bd7-8def-41d2-8c8f-e52b8a5f2d38")
-		(property "Reference" "R80"
-			(at 203.962 90.932 0)
+		(uuid "90cfc898-aefc-4e22-8616-e74242cca37a")
+		(property "Reference" "C80"
+			(at 191.04 102.87 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Value" "0R"
-			(at 203.962 92.456 0)
+		(property "Value" "100n"
+			(at 191.04 104.14 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
-			(at 203.2 91.44 0)
+		(property "Footprint" "AharoniLab_Capacitor_SMD:C_0402_1005Metric_N"
+			(at 193.04 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2739,7 +3733,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 203.2 91.44 0)
+			(at 193.04 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2749,8 +3743,8 @@
 				)
 			)
 		)
-		(property "Description" "Resistor, small US symbol"
-			(at 203.2 91.44 0)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 193.04 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2761,7 +3755,7 @@
 			)
 		)
 		(property "Validated" "No"
-			(at 203.2 91.44 0)
+			(at 193.04 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2772,7 +3766,7 @@
 			)
 		)
 		(property "Contributor" "Daniel Aharoni"
-			(at 203.2 91.44 0)
+			(at 193.04 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2783,7 +3777,7 @@
 			)
 		)
 		(property "Source" "KiCad Device library"
-			(at 203.2 91.44 0)
+			(at 193.04 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2793,8 +3787,8 @@
 				)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 203.2 91.44 0)
+		(property "ki_keywords" "capacitor cap"
+			(at 193.04 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2804,8 +3798,8 @@
 				)
 			)
 		)
-		(property "ki_fp_filters" "R_*"
-			(at 203.2 91.44 0)
+		(property "ki_fp_filters" "C_*"
+			(at 193.04 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2816,10 +3810,146 @@
 			)
 		)
 		(pin "1"
-			(uuid "b26ba873-30b4-49b9-bc40-f3e86aa83b51")
+			(uuid "93110d91-5667-419e-b52e-34e7ae00dbb6")
 		)
 		(pin "2"
-			(uuid "d768f28f-51b3-40cc-a385-485cbcb5593a")
+			(uuid "146f96d2-08d1-41eb-a36b-b3b18291d887")
+		)
+		(instances
+			(project "receiver-module"
+				(path "/20237707-2fe5-41a5-bbd6-cb6c24e8ba32/32812998-0b35-4309-a51b-1352d244051f"
+					(reference "C80")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "AharoniLab_Passive:R_Small_US")
+		(at 203.2 104.14 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "5f04c750-b5c3-4e24-adc0-bbdaf17ef0b1")
+		(property "Reference" "R80"
+			(at 201.2 102.87 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "0R"
+			(at 201.2 104.14 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
+			(at 203.2 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 203.2 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor, small US symbol"
+			(at 203.2 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Validated" "No"
+			(at 203.2 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Contributor" "Daniel Aharoni"
+			(at 203.2 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Source" "KiCad Device library"
+			(at 203.2 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 203.2 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "R_*"
+			(at 203.2 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "3ac12c40-f84d-4a0e-baa1-73dafb3b3571")
+		)
+		(pin "2"
+			(uuid "65c2151c-216c-4184-8090-fad127665c36")
 		)
 		(instances
 			(project "receiver-module"
@@ -2831,95 +3961,8 @@
 		)
 	)
 	(symbol
-		(lib_id "power:PWR_FLAG")
-		(at 208.28 96.52 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom no)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "25c66d5d-30d4-4643-90ed-ac23335671bb")
-		(property "Reference" "#FLG10"
-			(at 208.28 94.615 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "PWR_FLAG"
-			(at 208.28 92.71 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 208.28 96.52 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 208.28 96.52 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 208.28 96.52 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "ki_keywords" "flag power"
-			(at 208.28 96.52 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "28df0343-28d1-41c5-a7cc-c2e68c06bcfd")
-		)
-		(instances
-			(project "receiver-module"
-				(path "/20237707-2fe5-41a5-bbd6-cb6c24e8ba32/32812998-0b35-4309-a51b-1352d244051f"
-					(reference "#FLG10")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "AharoniLab_Passive:C_Small")
-		(at 213.36 99.06 0)
+		(at 213.36 109.22 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -2927,9 +3970,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "1a647b5a-2c33-4fd1-a40e-d923cbc73439")
+		(uuid "7e05d6e4-30b6-4d1b-92b6-ee7db0e0dcf6")
 		(property "Reference" "C82"
-			(at 213.614 97.282 0)
+			(at 215.36 107.95 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2940,7 +3983,7 @@
 			)
 		)
 		(property "Value" "100n"
-			(at 213.614 101.092 0)
+			(at 215.36 109.22 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -2951,7 +3994,7 @@
 			)
 		)
 		(property "Footprint" "AharoniLab_Capacitor_SMD:C_0402_1005Metric_N"
-			(at 213.36 99.06 0)
+			(at 213.36 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2962,7 +4005,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 213.36 99.06 0)
+			(at 213.36 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2973,7 +4016,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 213.36 99.06 0)
+			(at 213.36 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2984,7 +4027,7 @@
 			)
 		)
 		(property "Validated" "No"
-			(at 213.36 99.06 0)
+			(at 213.36 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2995,7 +4038,7 @@
 			)
 		)
 		(property "Contributor" "Daniel Aharoni"
-			(at 213.36 99.06 0)
+			(at 213.36 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3006,7 +4049,7 @@
 			)
 		)
 		(property "Source" "KiCad Device library"
-			(at 213.36 99.06 0)
+			(at 213.36 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3017,7 +4060,7 @@
 			)
 		)
 		(property "ki_keywords" "capacitor cap"
-			(at 213.36 99.06 0)
+			(at 213.36 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3028,7 +4071,7 @@
 			)
 		)
 		(property "ki_fp_filters" "C_*"
-			(at 213.36 99.06 0)
+			(at 213.36 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3039,10 +4082,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "cbe94542-4527-4139-b6ae-45c7f2dae9ad")
+			(uuid "3787ab78-d556-4bcf-8ef5-7da28fb4306a")
 		)
 		(pin "2"
-			(uuid "10a63cdd-e6bd-4be5-a401-de7facbef94b")
+			(uuid "513deee2-283c-4a92-8639-720c3c4844f6")
 		)
 		(instances
 			(project "receiver-module"
@@ -3055,7 +4098,7 @@
 	)
 	(symbol
 		(lib_id "AharoniLab_Passive:C_Small")
-		(at 223.52 99.06 0)
+		(at 223.52 109.22 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -3063,9 +4106,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "50caac95-e47b-4986-a2ce-51463d0e8a6c")
+		(uuid "cb7e269a-2333-4363-a0b5-8988a23c8735")
 		(property "Reference" "C83"
-			(at 223.774 97.282 0)
+			(at 225.52 107.95 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3076,7 +4119,7 @@
 			)
 		)
 		(property "Value" "1u"
-			(at 223.774 101.092 0)
+			(at 225.52 109.22 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -3087,7 +4130,7 @@
 			)
 		)
 		(property "Footprint" "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
-			(at 223.52 99.06 0)
+			(at 223.52 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3098,7 +4141,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 223.52 99.06 0)
+			(at 223.52 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3109,7 +4152,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 223.52 99.06 0)
+			(at 223.52 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3120,7 +4163,7 @@
 			)
 		)
 		(property "Validated" "No"
-			(at 223.52 99.06 0)
+			(at 223.52 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3131,7 +4174,7 @@
 			)
 		)
 		(property "Contributor" "Daniel Aharoni"
-			(at 223.52 99.06 0)
+			(at 223.52 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3142,7 +4185,7 @@
 			)
 		)
 		(property "Source" "KiCad Device library"
-			(at 223.52 99.06 0)
+			(at 223.52 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3153,7 +4196,7 @@
 			)
 		)
 		(property "ki_keywords" "capacitor cap"
-			(at 223.52 99.06 0)
+			(at 223.52 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3164,7 +4207,7 @@
 			)
 		)
 		(property "ki_fp_filters" "C_*"
-			(at 223.52 99.06 0)
+			(at 223.52 109.22 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3175,15 +4218,103 @@
 			)
 		)
 		(pin "1"
-			(uuid "15fc8ec6-7161-4c9b-8826-0bd6c5ca0f1a")
+			(uuid "da196ee9-05cf-40b7-961a-1e17635ddbe8")
 		)
 		(pin "2"
-			(uuid "4f838199-65a3-435e-a7c4-47ac29db9c4b")
+			(uuid "187b966b-1708-4b43-8cbe-1e204dda23a9")
 		)
 		(instances
 			(project "receiver-module"
 				(path "/20237707-2fe5-41a5-bbd6-cb6c24e8ba32/32812998-0b35-4309-a51b-1352d244051f"
 					(reference "C83")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 208.28 106.68 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "b2f0513b-ddad-47d0-9b64-35eee10c1c1c")
+		(property "Reference" "#FLG10"
+			(at 208.28 104.775 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 208.28 102.87 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 208.28 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 208.28 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 208.28 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "flag power"
+			(at 208.28 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "5019700b-dc27-4e6d-99dc-3b7f9850d218")
+		)
+		(instances
+			(project "receiver-module"
+				(path "/20237707-2fe5-41a5-bbd6-cb6c24e8ba32/32812998-0b35-4309-a51b-1352d244051f"
+					(reference "#FLG10")
 					(unit 1)
 				)
 			)

@@ -54,11 +54,11 @@ Performance beats cost. No backward compatibility with the Miniscope Zero headst
   `power:PWR_FLAG`/`power:GND` are the only non-lab symbols allowed.
 - Sheets are generated: `hardware/pcb/receiver-module/gen/<sheet>.py` with
   `tools/kicad_sch` (run from `tools/`). Edit the generator and regenerate
-  (order: power, frontend, slicer, control, detector, connector, mcu, root);
+  (order: power, frontend, slicer, control, connector, controller, root; `control.kicad_sch` is the Monitor sheet);
   specs in `docs/schematic/rev-a-sheet-specs.md`, as-built notes in
   `docs/schematic/<sheet>.md`. Reference-designator ranges per sheet are in the spec.
 - CLI: `/Users/daharoni/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli` (KiCad 10.0.5; not on PATH) (ERC, DRC, exports).
-- The fast high/low level detector is built as a disconnectable, swappable sub-circuit.
+- Six sheets since decision 12: Power, Front End, Slicer, Monitor, Connector, Controller (the detector/AGC sheets are gone).
 - Fab outputs under `hardware/pcb/*/fab/` are ignored by git except under `release/`.
 
 ## Key standing corrections (details in decision-log.md)

@@ -27,8 +27,8 @@ def u(x, y):
 
 # The old MCU sheet is copied to controller.kicad_sch first; its sheet uuid is kept so the root instance path stays valid.
 s = Sheet.load(PATH, root_uuid="20237707-2fe5-41a5-bbd6-cb6c24e8ba32", sheet_uuid="9c1b5363-b8fe-46ae-a030-8579ae40f325")
-s.title_block = ["title_block", ["title", Str("Controller (ESP32-C6, DAC, ADC, CAN) - Photodiode LVDS Receiver")],
-                 ["date", Str("2026-10-08")], ["rev", Str("A0")], ["company", Str("Aharoni Lab, UCLA")]]
+s.title_block = ["title_block", ["title", Str("Controller (ESP32-C6, DAC, ADC, CAN)")],
+                 ["date", Str("2026-10-08")], ["rev", Str("A1")], ["company", Str("Aharoni Lab, UCLA")]]
 
 
 def _sym(inst):
@@ -143,8 +143,14 @@ stub(esp, "GPIO14", "l", 2, "LE_HYS_E")
 s.no_connect(P(esp, "GPIO15"))
 stub(esp, "GPIO18", "l", 2, "CAN_TX")
 stub(esp, "GPIO19", "l", 2, "CAN_RX")
-stub(esp, "GPIO20", "l", 12, "LOS", kind="hier", shape="input")
-stub(esp, "GPIO21", "l", 12, "PGOOD_VGA", kind="hier", shape="input")
+stub(esp, "GPIO20", "l", 4, "TIA_CTRL", kind="hier", shape="output")
+# AUX2: GPIO21 -> R214 1k -> hierarchical AUX2 (bidirectional)
+_p21 = P(esp, "GPIO21")
+r214 = rh("R214", "1k", _p21[0] / G - OX - 20, _p21[1] / G - OY)
+_a, _b = r214.pin("1"), r214.pin("2")
+_near, _far = (_a, _b) if _a[0] > _b[0] else (_b, _a)
+s.connect(_p21, _near)
+s.stub(_far, "l", 4 * G, "AUX2", kind="hier", shape="bidirectional")
 stub(esp, "GPIO22", "l", 2, "DAC_RDY")
 stub(esp, "GPIO23", "l", 2, "STATUS")
 stub(esp, "GPIO16/U0TXD", "l", 2, "TXD0")
@@ -251,7 +257,7 @@ for k, (ref, nm, x) in enumerate((("R195", "SDA", 176), ("R196", "SCL", 184), ("
     rr = rv(ref, "4.7k" if k < 2 else "10k", x, 78); v33(rr, "1"); s.stub(P(rr, "2"), "d", 2 * G, nm)
 
 # DAC output RC rows
-rows = ((30, "DACO_A", "DAC_GAIN", "R210", "C201"), (44, "DACO_B", "DAC_TH", "R211", "C202"),
+rows = ((30, "DACO_A", None, "R210", "C201"), (44, "DACO_B", "DAC_TH", "R211", "C202"),
         (58, "DACO_C", "DAC_HV", "R212", "C203"), (72, "DACO_D", None, "R213", "C204"))
 for y, src, out, rr, cc in rows:
     lab(src, 248, y, 180)
@@ -266,7 +272,7 @@ for y, src, out, rr, cc in rows:
         s.hier_label(out, u(268, y), 0, "output")
     else:
         s.wire([(ccap.pin("1")[0], far[1]), u(268, y)])
-        lab("DAC_D", 268, y, 0)
+        lab("DAC_A" if src == "DACO_A" else "DAC_D", 268, y, 0)
 
 # ============================== I2C ADC U63 (ADS1115) ==============================
 ax, ay = 215, 110
@@ -280,8 +286,8 @@ s.wire([vdd, (vdd[0], u(0, 92)[1])])
 c195 = cv("C195", "100n", ax + 7, 94, fp=C402)
 s.wire([(vdd[0], u(0, 92)[1]), c195.pin("1")]); gnd(c195, "2")
 s.stub((vdd[0], u(0, 92)[1]), "u", 2 * G, "3V3_D")
-rows = ((92, "AIN0", "HV_MON", "R206", "C197"), (106, "AIN1", "VSPAN", "R207", "C198"),
-        (120, "AIN2", "VG", "R208", "C199"), (134, "AIN3", "VMID", "R209", "C200"))
+rows = ((92, "AIN0", "HV_MON", "R206", "C197"), (106, "AIN1", "RSSI", "R207", "C198"),
+        (120, "AIN2", "VTH_MON", "R208", "C199"), (134, "AIN3", None, "R209", "C200"))
 for y, pin, net, rr, cc in rows:
     stub(u63, pin, "r", 2, "ADC_" + pin)
     lab("ADC_" + pin, 248, y, 180)
@@ -292,7 +298,10 @@ for y, pin, net, rr, cc in rows:
     ccap = cv(cc, "10n", 262, y + 4)
     s.wire([far, (ccap.pin("1")[0], far[1]), ccap.pin("1")]); gnd(ccap, "2")
     s.wire([(ccap.pin("1")[0], far[1]), u(268, y)])
-    s.hier_label(net, u(268, y), 0, "input")
+    if net:
+        s.hier_label(net, u(268, y), 0, "input")
+    else:
+        s.global_label("GND", u(268, y), 0)
 
 # ============================== CAN U64 (SN65HVD230) ==============================
 kx, ky = 200, 156
@@ -313,7 +322,7 @@ s.wire([(vcc[0], ny), (c196.pin("2")[0], ny), c196.pin("2")]); gnd(c196, "1", "u
 s.stub((vcc[0], ny), "u", 2 * G, "3V3_D")
 
 # ============================== test points (column) ==============================
-tps = ("EN", "BOOT", "TXD0", "RXD0", "SDA", "SCL", "CAN_TX", "CAN_RX", "DAC_D", "STATUS")
+tps = ("EN", "BOOT", "TXD0", "RXD0", "SDA", "SCL", "CAN_TX", "CAN_RX", "DAC_A", "DAC_D")
 for k, nm in enumerate(tps):
     y = 112 + 5 * k
     t = s.place(TP, "TP%d" % (60 + k), nm, u(16, y), rot=270, footprint=TPFP)
@@ -331,18 +340,18 @@ note("DAC_HV safe default: MCP4728 EEPROM for channel C is programmed to 0xFFF (
      "never power-down. HV_DIS (GPIO0, pull-up on the Power sheet) gates the bias regardless. UNRESOLVED until firmware exists.", 104, 146, width=50)
 note("Optional CAN bus ESD part: not fitted, no part chosen (DNP footprint note only).", 228, 152, width=40)
 
-intent = """DESIGN INTENT (Controller sheet, Rev A). Labels: VERIFIED = datasheet cited, PROPOSED = design intent, UNRESOLVED = open. Nothing here is measured or simulated.
-ROLE (decision 11, PROPOSED): on-module ESP32-C6 supervises the analog chain. It sets DAC_GAIN, DAC_TH, DAC_HV (MCP4728), reads HV_MON, VSPAN, VG, VMID (ADS1115), gates the HV bias (HV_DIS), the comparator (SHDN_N) and hysteresis (LE_HYS), reads LOS and PGOOD_VGA, and talks to the FPGA side over CAN (CAN_H/CAN_L, 125 kbit/s). The analog path stays primary.
-WITHOUT FIRMWARE (PROPOSED): everything analog runs from its own references and the Control sheet AGC; HV stays off (HV_DIS pull-up on the Power sheet); the comparator stays enabled (SHDN_N pull-up on the Slicer sheet); HOLD_N is a wire from the Connector.
-PIN MAP (module pad; research doc section 1): IO0 HV_DIS (Hi-Z at reset), IO1 SHDN_N, IO14 LE_HYS via R205 (DNP), IO2 SDA, IO3 SCL, IO6 LDAC, IO7 AUX via R204, IO8 strap pull-up, IO9 BOOT, IO12/IO13 USB D-/D+, IO16/IO17 TXD0/RXD0 pads, IO18 CAN_TX, IO19 CAN_RX, IO20 LOS, IO21 PGOOD_VGA, IO22 DAC RDY, IO23 status LED. IO4, IO5, IO15 unconnected (no_connect).
-CHANGE FROM SPEC: IO10 and IO11 do not exist on the MINI-1 (MINI DS Table 3-1 p10-11; 22 GPIOs), so LDAC moved to IO6 and AUX to IO7 (JTAG MTCK/MTDO pins; USB-Serial-JTAG is the debug path, so the external JTAG function is unused). PROPOSED.
-STRAPPING (VERIFIED, MINI DS Table 4-1..4-3 p12-13): GPIO9 weak pull-up, high = SPI boot; download boot needs GPIO8 = 1 and GPIO9 = 0 (BOOT pad to GND, then EN pad). GPIO8 has R192 10k to 3V3_D. Do not drive IO8/IO9 at reset. IO0, IO1, IO14 are Hi-Z at reset (C6 DS Table 2-2 p17-18), so the pull resistors on the other sheets fix the safe state. IO18-IO23 have weak pull-ups at reset (CAN_TX idles recessive).
+intent = """DESIGN INTENT (Controller sheet, revision 2, decision 12). Labels: VERIFIED = datasheet cited, PROPOSED = design intent, UNRESOLVED = open. Nothing here is measured or simulated.
+ROLE (PROPOSED): on-module ESP32-C6 does the slow trims and housekeeping, never the data path. (1) Range trim: DAC_HV (MCP4728 ch C) moves the APD bias toward the Q(M) optimum, and TIA_CTRL (IO20) schedules the OPA857 gain 20k / 5k from RSSI (ADS1115 AIN1) and FPGA link validity (received over CAN). (2) Threshold trim: DAC_TH (ch B) sets the Slicer threshold node; VTH_MON (AIN2) reads it back. (3) HV gating: HV_DIS (IO0) enables the APD bias supply; HV_MON (AIN0) reads the bias. (4) Module identity and status over CAN (CAN_H/CAN_L, 125 kbit/s), plus SHDN_N and LE_HYS to the Slicer. DAC_A (ch A) and DAC_D are spare test pads (TP68, TP69); ADS1115 AIN3 is tied to GND through its RC (spare).
+UNPROGRAMMED ESP32 (PROPOSED): the module decodes. TIA_CTRL floats, so the Front End pull-up gives 20 k; SHDN_N pull-up keeps the comparator on; the Slicer threshold sits at VCM_REF through its resistor network. BUT HV_DIS is pulled up on the Power sheet, so an unprogrammed module has NO APD bias and no gain. Bench jumper J1 (HV FORCE ON, Power sheet) forces HV on. DAC_HV default (EEPROM) is the lowest bias.
+PIN MAP (module pad; research doc section 1): IO0 HV_DIS, IO1 SHDN_N, IO2 SDA, IO3 SCL, IO6 LDAC, IO7 AUX via R204 1k, IO14 LE_HYS via R205 (0R, DNP), IO20 TIA_CTRL (direct, pull-up on the Front End), IO21 AUX2 via R214 1k, IO8 strap pull-up, IO9 BOOT, IO12/IO13 USB D-/D+, IO16/IO17 TXD0/RXD0 pads, IO18 CAN_TX, IO19 CAN_RX, IO22 DAC RDY, IO23 status LED. IO4, IO5, IO15 unconnected (no_connect).
+CHANGE FROM EARLIER SPEC: IO10 and IO11 do not exist on the MINI-1 (MINI DS Table 3-1 p10-11; 22 GPIOs), so LDAC is IO6 and AUX is IO7 (JTAG MTCK/MTDO pins; USB-Serial-JTAG is the debug path). IO15 is a strapping pin, so TIA_CTRL uses IO20. PROPOSED.
+STRAPPING (VERIFIED, MINI DS Table 4-1..4-3 p12-13): GPIO9 weak pull-up, high = SPI boot; download boot needs GPIO8 = 1 and GPIO9 = 0 (BOOT pad to GND, then EN pad). GPIO8 has R192 10k to 3V3_D. Do not drive IO8/IO9 at reset. IO0, IO1, IO14 are Hi-Z at reset (C6 DS Table 2-2 p17-18), so the pull resistors on the other sheets fix the safe state. IO18-IO23 have weak pull-ups at reset (CAN_TX idles recessive; TIA_CTRL reads high = 20 k even before the Front End pull-up).
 USB (PROPOSED): J60 is for programming only. VBUS goes only to U61 pin 5 (not a supply), CC1/CC2 5.1k to GND, D+/D- through R193/R194 (0R fitted, 22R footprint, value UNRESOLVED). UART fallback on TP62/TP63.
 CAN (PROPOSED, research section 3): SN65HVD230 with RS = 10k to GND (slope control, 80/120/160 ns edges, SLOS346O p8; 3 m leg passes the SLLA270 p9 stub rule marginally). 125 kbit/s. NO termination on the module; one 120 ohm (or 2 x 60 ohm + 4.7 nF split, SLLA270 p8) at the FPGA-end junction only. Vref_OUT unconnected.
-I2C (VERIFIED, MCP4728 DS22187E p21-24; ADS1115 SBAS444E p20): private bus, MCP4728 at 0x60, ADS1115 ADDR = GND at 0x48. MCP4728 factory default is 0 V on all channels (not Hi-Z). ADS1115 inputs must stay within GND-0.3 .. VDD+0.3 V; all four sources are <= 3.3 V nodes. LDAC is held high by R197 so a high LDAC keeps the EEPROM values on the outputs.
-UNRESOLVED: USB series resistor values; auto-reset behaviour over USB; DAC_GAIN and DAC_TH safe direction; verification of the DAC_HV default after EEPROM programming (General Call Read); measured 3V3_D current; antenna keep-out numbers; -1 versus -1U module; VBUS back-feed against the 5 V cable rail."""
+I2C (VERIFIED, MCP4728 DS22187E p21-24; ADS1115 SBAS444E p20): private bus, MCP4728 at 0x60, ADS1115 ADDR = GND at 0x48. MCP4728 factory default is 0 V on all channels (not Hi-Z). ADS1115 inputs must stay within GND-0.3 .. VDD+0.3 V; the three sources are <= 3.3 V nodes. LDAC is held high by R197 so a high LDAC keeps the EEPROM values on the outputs.
+UNRESOLVED: USB series resistor values; auto-reset over USB; DAC_TH safe direction; verification of the DAC_HV default after EEPROM programming (General Call Read); firmware range-trim and TIA_CTRL scheduling algorithm; measured 3V3_D current; antenna keep-out numbers; -1 versus -1U module; VBUS back-feed against the 5 V cable rail."""
 paras = intent.split("\n")
-cols = [paras[0:5], paras[5:8], paras[8:]]
+cols = [paras[0:3], paras[3:7], paras[7:]]
 for k, ps in enumerate(cols):
     s.text(wrap("\n".join(ps), 80), u(k * 86, 170), 1.27)
 

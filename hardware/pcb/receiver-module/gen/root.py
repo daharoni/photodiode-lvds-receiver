@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Generate receiver-module.kicad_sch (root): seven hierarchical sheet symbols joined by local labels.
-Run LAST (after power, frontend, slicer, control, detector, connector, controller): python3 gen/root.py
+"""Generate receiver-module.kicad_sch (root): six hierarchical sheet symbols joined by local labels.
+Run LAST (after power, frontend, slicer, control, connector, controller): python3 gen/root.py
 Pins are derived from each sub-sheet's hierarchical labels and asserted against the layout table."""
 import os, sys
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", ".."))
@@ -18,32 +18,34 @@ for sh in find_all(old, "sheet"):
     pr = {p[1]: p[2] for p in find_all(sh, "property")}
     pg = find(find(find(find(sh, "instances"), "project"), "path"), "page")[1]
     fn_ = {"mcu.kicad_sch": "controller.kicad_sch"}.get(str(pr["Sheetfile"]), str(pr["Sheetfile"]))
-    ident[fn_] = ("Controller" if fn_ == "controller.kicad_sch" else str(pr["Sheetname"]), str(find(sh, "uuid")[1]), str(pg))
+    if not os.path.exists(os.path.join(D, fn_)):
+        continue   # e.g. detector.kicad_sch was removed in decision 12
+    nm = {"controller.kicad_sch": "Controller", "control.kicad_sch": "Monitor"}.get(fn_, str(pr["Sheetname"]))
+    ident[fn_] = (nm, str(find(sh, "uuid")[1]), str(pg))
 # file -> (column, y, ordered input pins, ordered output pins)
-COL = [38.1, 119.38, 195.58, 271.78, 347.98]
+COL = [38.1, 119.38, 195.58, 271.78]
 W = 35.56
 # file -> (column, y, inputs, outputs, bidirectional)
 LAYOUT = {
-    "power.kicad_sch":     (0, 55.88,  ["+5V", "DAC_HV", "HV_DIS"],
-                            ["3V3", "3V3_D", "+3V7", "-3V7", "5V_A", "APD_BIAS", "HV_MON", "PGOOD_VGA"], []),
-    "frontend.kicad_sch":  (1, 55.88,  ["APD_BIAS", "3V3", "+3V7", "-3V7", "VG", "VCM_DET"], ["SDET"], []),
-    "detector.kicad_sch":  (2, 55.88,  ["SDET", "5V_A", "3V3", "VCM_DET"], ["VHIGH", "VLOW"], []),
-    "control.kicad_sch":   (2, 116.84, ["3V3", "VHIGH", "VLOW", "HOLD_N", "DAC_GAIN", "DAC_TH"],
-                            ["VCM_DET", "VG", "VTH", "LOS", "VMID", "VSPAN"], []),
-    "slicer.kicad_sch":    (3, 55.88,  ["SDET", "VTH", "3V3", "SHDN_N", "LE_HYS"], ["LVDS_P", "LVDS_N"], []),
-    "connector.kicad_sch": (4, 55.88,  ["LVDS_P", "LVDS_N", "LOS", "VMID", "VSPAN", "3V3", "3V3_D", "+3V7", "-3V7", "5V_A", "HV_MON"],
-                            ["+5V", "HOLD_N"], ["CAN_H", "CAN_L", "AUX"]),
-    "controller.kicad_sch": (1, 160.02, ["3V3_D", "LOS", "PGOOD_VGA", "HV_MON", "VSPAN", "VG", "VMID"],
-                            ["HV_DIS", "SHDN_N", "LE_HYS", "DAC_GAIN", "DAC_TH", "DAC_HV"], ["CAN_H", "CAN_L", "AUX"]),
+    "power.kicad_sch":     (0, 55.88,  ["+5V", "DAC_HV", "HV_DIS"], ["3V3", "3V3_D", "APD_BIAS", "HV_MON"], []),
+    "frontend.kicad_sch":  (1, 55.88,  ["APD_BIAS", "3V3", "TIA_CTRL", "VCM_REF"], ["SDET_P", "TIA_TAP"], []),
+    "slicer.kicad_sch":    (2, 55.88,  ["SDET_P", "VCM_REF", "DAC_TH", "3V3", "SHDN_N", "LE_HYS"],
+                            ["LVDS_P", "LVDS_N", "VTH_MON"], []),
+    "connector.kicad_sch": (3, 55.88,  ["LVDS_P", "LVDS_N", "RSSI", "HV_MON", "3V3", "3V3_D"], ["+5V"],
+                            ["CAN_H", "CAN_L", "AUX", "AUX2"]),
+    "control.kicad_sch":   (1, 134.62, ["3V3", "TIA_TAP"], ["VCM_REF", "RSSI"], []),
+    "controller.kicad_sch": (2, 134.62, ["3V3_D", "HV_MON", "RSSI", "VTH_MON"],
+                            ["DAC_TH", "DAC_HV", "HV_DIS", "SHDN_N", "LE_HYS", "TIA_CTRL"], ["CAN_H", "CAN_L", "AUX", "AUX2"]),
 }
 assert set(LAYOUT) == set(ident), (set(LAYOUT) ^ set(ident))
 
 s = Sheet.load(PATH)
-s.text("Root sheet. Signal flow: Power -> Front End -> Slicer/LVDS -> Connector; Detector and Control close the AGC/threshold loop; the Controller (ESP32-C6, decision 11)\n"
-       "sets gain/threshold/HV, monitors HV/LOS and talks CAN to the headstage through the Connector. Status labels: VERIFIED / PROPOSED / UNRESOLVED.\n"
-       "No part values are approved for fabrication.", (25.4, 15), 1.5)
-s.text("Power rails +5V, 3V3, 3V3_D, +3V7, -3V7, 5V_A are carried as hierarchical sheet pins (joined on this sheet by local labels).\n"
-       "GND is a global net: each sub-sheet carries a global label GND (no sheet pin).", (25.4, 35), 1.5)
+s.text("Root sheet. Signal flow: Power -> Front End -> Slicer/LVDS -> Connector. No AGC loop and no detector sheet (decision 12).\n"
+       "Monitor sheet buffers VCM_REF (1.65 V baseline) and the RSSI minimum detector from TIA_TAP; the Controller (ESP32-C6, decisions 11/12) sets\n"
+       "DAC_TH/DAC_HV/HV_DIS/SHDN_N/LE_HYS/TIA_CTRL, reads HV_MON/RSSI/VTH_MON, and talks CAN through the Connector.\n"
+       "Status labels VERIFIED/PROPOSED/UNRESOLVED; no part values approved for fabrication.", (25.4, 15), 1.5)
+s.text("Rails +5V, 3V3, 3V3_D are sheet pins; GND is global. HV_ nets and APD_BIAS are net class HV (1.0 mm clearance).\n"
+       "LVDS_P is low for a logic one (post-amp non-inverting after an OPA857 whose OUT swings down with light); the FPGA inverts.", (25.4, 35), 1.5)
 
 pinpos = {}
 for fn, (col, y, ins, outs, bis) in LAYOUT.items():
@@ -69,11 +71,9 @@ for fn, (col, y, ins, outs, bis) in LAYOUT.items():
 px, py = pinpos[("power.kicad_sch", "+5V")]
 s.place("power:PWR_FLAG", "#FLG04", "PWR_FLAG", (px - 6.35, py), in_bom=False)
 # GND flag on a global GND label
-s.place("power:PWR_FLAG", "#FLG05", "PWR_FLAG", (38.1, 254.0), in_bom=False)
-s.wire([(38.1, 254.0), (45.72, 254.0)])
-s.global_label("GND", (45.72, 254.0), 0)
-s.text("Global net GND enters here only to carry a PWR_FLAG for ERC. The Controller is the ESP32-C6 sheet (decision 11); the MCU sheet is gone.\n"
-       "HOLD_N is a plain wire: Connector -> Control (buffered on the Connector sheet). HV_MON is Power -> Controller and Connector; DAC_HV and HV_DIS are Controller -> Power.\n"
-       "The Control hierarchical pin LOS is the active-low net LOS_N on the Control sheet. CAN_H, CAN_L and AUX run Controller <-> Connector.", (25.4, 262), 1.5)
+s.place("power:PWR_FLAG", "#FLG05", "PWR_FLAG", (38.1, 241.3), in_bom=False)
+s.wire([(38.1, 241.3), (45.72, 241.3)])
+s.global_label("GND", (45.72, 241.3), 0)
+s.text("Global net GND enters here only to carry a PWR_FLAG for ERC. CAN_H, CAN_L, AUX, AUX2 run Controller <-> Connector.", (25.4, 248.92), 1.5)
 s.save(PATH)
 print("wrote", PATH)
