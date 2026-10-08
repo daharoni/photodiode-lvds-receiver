@@ -43,7 +43,7 @@ open risks. Per-sheet as-built notes with datasheet citations are in
 | `docs/schematic/` | Rev A sheet specs and per-sheet as-built notes |
 | `hardware/pcb/` | KiCad project (`receiver-module/`) |
 | `hardware/mechanical/` | Enclosure and filter holder (TBD) |
-| `firmware/` | ECP5 gateware; SAMD51 code (location undecided) |
+| `firmware/` | ECP5 gateware; ESP32-C6 module firmware (TBD) |
 | `tools/` | Helper scripts |
 | `CLAUDE.md` | Guide for Claude Code sessions |
 

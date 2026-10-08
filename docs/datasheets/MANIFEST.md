@@ -20,6 +20,13 @@ These are the exact document revisions the design references. Any design claim (
 | LT8365 | lt8365.pdf | user-supplied (analog.com), retrieved by user 2026-10-08 | LT8365 Rev. A | 2026-10-08 | c511973eed4b53a96d2e74d71d3646c59664bad470799bd469ba8db4efcd5025 | 150 V boost/SEPIC/inverting converter, 30 pages; APD bias candidate |
 | DC2838A demo manual | dc2838a-demo-manual.pdf | user-supplied (analog.com), retrieved by user 2026-10-08 | DEMO MANUAL DC2838A Rev. 0 | 2026-10-08 | 7e69992a576d25f35dec23ff82ca1fb046d55e12a6d581e75f59f8a8df5c0746 | LT8365 250 V charge-pump boost demo, 6 pages |
 | DC2838A schematic | dc2838a-schematic.pdf | user-supplied (analog.com), retrieved by user 2026-10-08 | 710-DC2838A Rev 02 PCA schematic | 2026-10-08 | 0bfed480a823ce337775f65d5ed2fd26409fdfae2a73be539e1a6ceffbd3b39c | 1 page |
+| ESP32-C6-MINI-1 / MINI-1U module | esp32-c6-mini-1.pdf | https://www.espressif.com/sites/default/files/documentation/esp32-c6-mini-1_mini-1u_datasheet_en.pdf | Datasheet Version 1.5 | 2026-10-08 | 26691033f31cbebf623842c16624e61151b152533c13a850c091c8e858c510a2 | 53 pages; module controller |
+| ESP32-C6 series | esp32-c6-datasheet.pdf | https://www.espressif.com/sites/default/files/documentation/esp32-c6_datasheet_en.pdf | Datasheet Version 1.5 | 2026-10-08 | 372a5b42b2900c83ef4309149c8835e9ae2d1be19244995bf2fb83af4dc5edf1 | 86 pages; chip-level pin tables (QFN32 in the module) |
+| SN65HVD230/231/232 | sn65hvd230.pdf | https://www.ti.com/lit/ds/symlink/sn65hvd230.pdf | SLOS346O – MARCH 2001 – REVISED APRIL 2018 | 2026-10-08 | e98fc0c59168c035d7958111924dae7e21e46ab45bdfd6400aef048299d6d716 | 43 pages; 3.3 V CAN transceiver |
+| TCAN330/332/334/337 (+G) | tcan334.pdf | https://www.ti.com/lit/ds/symlink/tcan334.pdf | SLLSEQ7F – DECEMBER 2015 – REVISED MAY 2025 | 2026-10-08 | bb89f067e6a7902867bf6b82eaab762167f403ae8464a29ec4f318ab0c71628f | 47 pages; alternative CAN transceiver, SOIC-8 or SOT-23 |
+| MCP4728 | mcp4728.pdf | https://ww1.microchip.com/downloads/en/DeviceDoc/22187E.pdf | DS22187E (2010) | 2026-10-08 | 7e6515c45a02ffe4ad7506f3347cce7714cdd56659ff2fb22b858fc0472f381e | 68 pages in the PDF; 12-bit quad DAC with EEPROM |
+| ADS1113/4/5 | ads1115.pdf | https://www.ti.com/lit/ds/symlink/ads1115.pdf | SBAS444E – MAY 2009 – REVISED DECEMBER 2024 | 2026-10-08 | eefff4d412ce2dcd7e659f47238edc9b2fa02e5971f2625af730502033701834 | 57 pages |
+| TI app note SLLA270 | slla270.pdf | https://www.ti.com/lit/an/slla270/slla270.pdf | SLLA270 – January 2008 | 2026-10-08 | 10c315a683fa60954ba005d3392097a2e30cddcbf1eef10119a70d592b54ca81 | 15 pages; Controller Area Network Physical Layer Requirements (bus length, stub, termination) |
 
 ## Not retrieved
 

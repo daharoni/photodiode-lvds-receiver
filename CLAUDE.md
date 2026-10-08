@@ -15,7 +15,8 @@ Performance beats cost. No backward compatibility with the Miniscope Zero headst
 ## Hard rules
 
 1. Analog-first is a firm user decision. Do not propose an MCU/ADC-first
-   architecture. SAMD51 hooks (ADC monitor, DAC gain/threshold) are optional extras.
+   architecture. The on-module ESP32-C6 (decision 11) is a supervisor only:
+   trims (I2C DAC), monitors (I2C ADC), slow GPIO, CAN link to the FPGA side.
 2. Label every design claim in docs as VERIFIED, PROPOSED or UNRESOLVED.
    VERIFIED means checked against a datasheet or measurement that is cited.
 3. Cite the datasheet (document, revision, page/figure) next to the claim.
@@ -38,7 +39,7 @@ Performance beats cost. No backward compatibility with the Miniscope Zero headst
 
 - `docs/` : requirements, architecture, decision log, bringup, research, datasheets, calculations
 - `hardware/pcb/` : KiCad project; `hardware/mechanical/` : enclosure (TBD)
-- `firmware/` : ECP5 gateware (`ecp5/`); SAMD51 code location undecided
+- `firmware/` : ECP5 gateware (`ecp5/`); ESP32-C6 module firmware (`esp32/`, TBD)
 - `tools/` : helper scripts
 
 ## KiCad conventions
@@ -64,7 +65,7 @@ AC-couple OPA857 outputs into the VCA821; cathode to positive bias; use 6 pF
 for the S12023-10 and FDS010 alike; rails +/-3.7 V (VCA821 min +/-3.5 V); AGC is a true integrator
 (100k/47 nF); VSPAN/VMID use matched 10k 0.1% networks; TLV3605 SHDN is
 active-low and not a guaranteed zero; FPGA watchdog uses an independent clock;
-APD bias 100-220 V (HV safety rules: 200 V creepage/clearance, series current limit, keep-out from TIA input); SAMD51 DACs are 12-bit.
+APD bias 100-220 V (HV safety rules: 200 V creepage/clearance, series current limit, keep-out from TIA input); module DACs (MCP4728) are 12-bit; HOLD_N is a direct FPGA wire, never via CAN.
 
 ## Bring-up gates
 

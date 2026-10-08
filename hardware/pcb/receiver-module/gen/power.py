@@ -48,6 +48,17 @@ def part(lib, ref, val, pin1, o="v", fp=None, dnp=False):
     return i
 
 
+def move_text(ref_xy, val_xy):
+    """Relocate Reference/Value text of the most recently placed symbol (horizontal, centred)."""
+    for p in s.symbols[-1]:
+        if isinstance(p, list) and p[0] == "property" and str(p[1]) in ("Reference", "Value"):
+            xy = ref_xy if str(p[1]) == "Reference" else val_xy
+            p[3] = ["at", xy[0], xy[1], 0]
+            for q in p:
+                if isinstance(q, list) and q[0] == "effects":
+                    q[:] = [e for e in q if not (isinstance(e, list) and e[0] == "justify")]
+
+
 def cap_down(ref, val, x, y, fp, dnp=False):
     """Capacitor hanging from (x, y) to a GND label below."""
     c = part(C, ref, val, (x, y), "v", fp, dnp)
@@ -97,6 +108,24 @@ s.stub((137.16, 71.12), "l", 2.54, "V3_FB")
 c12 = part(C, "C12", "1nF C0G", (154.94, Y5), "v", C603)
 s.wire([c12.pin("2"), (154.94, 71.12), (137.16, 71.12)])
 
+# ---- 3V3_D digital rail: U4 TPS7A2033PDBV (spec 1.5) ----
+u4 = s.place("AharoniLab_Power:TPS7A2033PDBV", "U4", "TPS7A2033PDBV", (210.82, 78.74))
+u4i, u4e, u4o = u4.pin("IN"), u4.pin("EN"), u4.pin("OUT")
+s.label("+5V", (177.8, u4i[1]), 180)
+s.wire([(177.8, u4i[1]), u4i])
+cap_down("C29", "1uF 10V", 185.42, u4i[1], C603)
+s.wire([u4e, (190.5, u4e[1]), (190.5, u4i[1])])
+GND(u4.pin("GND"))
+s.no_connect(u4.pin("NC"))
+s.wire([u4o, (XR, u4o[1])])
+s.hier_label("3V3_D", (XR, u4o[1]), 0, "output")
+cap_down("C30", "10uF 10V", 226.06, u4o[1], C805)
+cap_down("C31", "1uF 10V", 236.22, u4o[1], C603)
+s.text("""3V3_D: U4 TPS7A2033 3.3 V, 300 mA, own rail
+for ESP32-C6, CAN, DAC, ADC (about 60 mA est.).
+ESP32 radio MUST stay disabled (Wi-Fi TX peaks
+251-382 mA). PROPOSED, estimate not measured.""", (172, 50), 1.27)
+
 # ======================================================================
 # MIDDLE BAND: LM27762 +/-3V7
 # ======================================================================
@@ -121,7 +150,10 @@ s.stub(r31.pin("1"), "u", 2.54, "3V3")
 s.wire([pg, r31.pin("2")])
 tp1 = s.place(TP, "TP1", "PG_VGA", (58.42, pg[1] + 5.08), rot=180,
               footprint="AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect")
+move_text((45.7, pg[1] + 4.4), (45.7, pg[1] + 6.4))
 s.wire([r31.pin("2"), tp1.pin("1")])
+s.wire([(pg[0] - 5.08, pg[1]), (pg[0] - 5.08, pg[1] + 10.16)])
+s.hier_label("PGOOD_VGA", (pg[0] - 5.08, pg[1] + 10.16), 180, "output")
 # ground / pad
 g, pad = u2.pin("GND"), u2.pin("PAD")
 s.wire([g, (111.76, g[1]), (111.76, pad[1]), pad])
@@ -223,6 +255,7 @@ s.stub((177.8, RC), "u", 2.54, "HV_OUT")
 # clamp
 q1 = s.place("AharoniLab_Transistor:MMBTA42", "Q1", "MMBTA42", (200.66, 205.74))
 q2 = s.place("AharoniLab_Transistor:MMBT3904", "Q2", "MMBT3904", (198.12, 215.9), mirror="y")
+move_text((186, 218.5), (186, 220.5))
 r17 = part(R, "R17", "4.99M 1%", (187.96, RC), "v", R603)
 r18 = part(R, "R18", "4.99M 1%", (187.96, 200.66), "v", R603)
 s.wire([r18.pin("2"), q1.pin("B")])
@@ -249,15 +282,28 @@ cap_down("C28", "10nF", 254, 177.8, C603)
 
 # ---- support networks, row 1 (y = 231.14) and row 2 (y = 251.46) ----
 Y1, Y2 = 231.14, 251.46
-# EN divider + HV_EN header
+# EN divider + HV disable gate Q3 (decision 11)
 r22 = part(R, "R22", "200k 1%", (30.48, Y1 - 5.08), "v", R603)
 s.stub(r22.pin("1"), "u", 2.54, "5V_HVIN")
 r23 = res_down("R23", "200k 1%", 30.48, Y1)
-j1 = s.place("AharoniLab_Connector:Conn_01x03", "J1", "HV_EN", (58.42, Y1 + 2.54),
-             footprint="AharoniLab_Connector:PinHeader_1x03_P2.54mm_Vertical")
-s.wire([(30.48, Y1), j1.pin("Pin_1")])
-s.stub(j1.pin("Pin_2"), "l", 2.54, "EN")
-GND(j1.pin("Pin_3"), "l")
+q3 = s.place("AharoniLab_Transistor:DMN2056U-7", "Q3", "DMN2056U-7", (50.8, 236.22), mirror="y")
+s.wire([(30.48, Y1), q3.pin("D")])
+s.label("EN", (43.18, Y1), 0)
+GND(q3.pin("S"))
+gx = 63.5
+s.wire([q3.pin("G"), (gx, 236.22)])
+r33 = part(R, "R33", "100k", (gx, 226.06), "v", R603)
+s.stub(r33.pin("1"), "u", 2.54, "3V3_D")
+s.wire([r33.pin("2"), (gx, 236.22)])
+r34 = part(R, "R34", "1k", (66.04, 236.22), "h", R603)
+s.wire([(gx, 236.22), r34.pin("1")])
+s.wire([r34.pin("2"), (73.66, 236.22)])
+s.hier_label("HV_DIS", (73.66, 236.22), 0, "input")
+j1 = s.place("AharoniLab_Connector:Conn_01x02", "J1", "HV FORCE ON", (gx + 5.08, 243.84), dnp=True,
+             footprint="AharoniLab_Connector:PinHeader_1x02_P2.54mm_Vertical")
+s.wire([(gx, 236.22), j1.pin("Pin_1")])
+move_text((gx + 8.89, 241.8), (gx + 8.89, 249.5))
+GND(j1.pin("Pin_2"), "l")
 # SYNC options
 s.label("SYNC", (83.82, Y1), 180)
 tp2 = s.place(TP, "TP2", "SYNC_EXT", (119.38, Y1), rot=180,
@@ -275,22 +321,24 @@ r14 = part(R, "R14", "442k 0.1%", (177.8, Y1), "h", R603)
 s.wire([(165.1, Y1), r14.pin("1")])
 s.wire([r14.pin("2"), (213.36, Y1)])
 s.stub((190.5, Y1), "u", 2.54, "FBX")
-cap_down("C26", "10pF C0G", 203.2, Y1, C603, dnp=True)
-xs = [218.44, 231.14, 243.84, 256.54]
+cap_down("C26", "10pF C0G", 198.12, Y1, C603, dnp=True)
+xs = [228.6, 241.3, 254.0, 266.7]
 prev = (213.36, Y1)
 for ref, x in zip(("R8", "R9", "R10", "R11"), xs):
     r = part(R, ref, "2.05M 1%", (x, Y1), "h", R603)
     s.wire([prev, r.pin("1")])
     prev = r.pin("2")
-s.wire([prev, (266.7, Y1)])
-s.label("HV_OUT", (266.7, Y1), 0)
+s.wire([prev, (276.86, Y1)])
+s.label("HV_OUT", (276.86, Y1), 0)
 r12 = part(R, "R12", "86.6k 1%", (213.36, Y1), "v", R603)
 th1 = part(NTC, "TH1", "NTC 10k B3950", (213.36, Y1 + 5.08), "v", "AharoniLab_Resistor_SMD:R_0603_1608Metric_N")
+move_text((225, Y1 + 5.5), (225, Y1 + 8.0))
 GND(th1.pin("2"))
 rv1 = s.place(POT, "RV1", "50k trim", (231.14, 254.0), dnp=True,
               footprint="AharoniLab_Resistor_SMD:Bourns_3224W_SMD")
 s.stub(rv1.pin("1"), "u", 2.54, "3V3")
 GND(rv1.pin("3"))
+move_text((221.0, 255.0), (221.0, 257.0))
 s.wire([rv1.pin("2"), (243.84, rv1.pin("2")[1])])
 r15 = part(R, "R15", "274k", (243.84, rv1.pin("2")[1]), "h", R603, dnp=True)
 s.stub(r15.pin("2"), "r", 2.54, "FBX")
@@ -317,7 +365,7 @@ cap_down("C23", "1nF C0G", 170.18, Y2, C603)
 
 # ---- text -----------------------------------------------------------
 TX = 308.0
-s.text("Power: +5V in. U1 TPS79901 3V3, U2 LM27762 +/-3V7, 5V_A bead-filtered rail, U3 LT8365 APD bias (100-220 V) -> APD_BIAS.", (20, 20), 2.5)
+s.text("Power: +5V in. U1 TPS79901 3V3, U4 TPS7A2033 3V3_D, U2 LM27762 +/-3V7, 5V_A bead-filtered rail, U3 LT8365 APD bias (100-220 V) -> APD_BIAS.", (20, 20), 2.5)
 s.text("""Design intent (Rev A; nothing here is simulated or measured; details and citations in docs/schematic/power.md)
 PROPOSED  +5V entry: 10 uF + 100 nF, no reverse protection (keyed connector). 5V_A = FB1 bead + 10 uF + 100 nF for the OPA356 buffers.
 PROPOSED  U1 TPS79901: VOUT = 1.193 V x (1 + R1/R2) = 3.316 V nominal (R1 17.8k, R2 10.0k). CFB 1 nF (see note).
@@ -328,18 +376,18 @@ VERIFIED  LM27762 FB equations and R >= 50k: SNVSAF7C p.13 (Eq. 1) and p.14 (Eq.
 PROPOSED  PGOOD pull-up 100k to 3V3 (datasheet example uses 10k to VIN, p.14). EN+/EN- tied to VIN.
 PROPOSED  U3 LT8365 values per docs/calculations/apd-bias-design.md sections 3.2 and 4: 500 kHz (RT 84.5k), L1 10 uH, boost to ~110 V + doubler.
 VERIFIED  SYNC/MODE: float = pulse-skip, GND = Burst, 100k to GND = Burst/SSFM (LT8365 Rev. A p.7). BIAS tie to GND if unused; INTVCC 1 uF (p.7).
-PROPOSED  EN/UVLO 200k/200k from 5V_HVIN with J1 HV_EN: jumper 1-2 enable, 2-3 disable (no jumper = EN divider open, EN floating: UNRESOLVED).
+PROPOSED  EN/UVLO 200k/200k from 5V_HVIN, always connected. Q3 DMN2056U-7 pulls EN/UVLO to GND = HV OFF. Gate = HV_DIS, R33 100k pull-up to 3V3_D, R34 1k series: HV is OFF until the ESP32 drives HV_DIS low after verifying the DAC (decision 11). J1 HV FORCE ON (DNP) shorts the gate to GND for bench use without firmware.\nPROPOSED  U4 TPS7A2033 3V3_D: 300 mA, radio must stay disabled; load est. 60 mA (docs/research/module-controller.md). CIN 1 uF, COUT 10 uF + 1 uF (datasheet minimum 1 uF, max 200 uF: SBVS338H p.5). PGOOD_VGA = U2 PGOOD.
 PROPOSED  BIAS: R28 0R to GND fitted; R29 0R to 5V_HVIN DNP. Fit exactly one of them. SYNC options R26/R27/TP2 are DNP.
 PROPOSED  D2 (GND to SW, from the p.30 250 V example, purpose not stated) is DNP. Q1/Q2 clamp ~150 uA. C8 and R19 form filter stage 1.
 PROPOSED  HV_MON = HV_OUT/101 (R20+R32 10M, R21 100k): 1.39 V at 140 V. Stage 2 filter (10k + 10 nF) is on the front-end sheet.
 Net names: HV_V1, HV_PUMP, HV_RAW, HV_OUT, HV_CLAMP, 5V_HVIN, EN, SYNC, BIAS, RT, SS, VC, FBX are local labels; APD_BIAS = HV_FILT.
-Pending: DAC_HV and HV_MON pins are added to the root sheet by the orchestrator.""", (TX, 28), 1.4)
+Pending: DAC_HV, HV_MON, HV_DIS, 3V3_D and PGOOD_VGA pins are added to the root sheet by the orchestrator.""", (TX, 28), 1.4)
 s.text("""HV WARNING
 APD bias reaches 220 V. Stored energy ~2.3 mJ (docs/calculations/apd-bias-design.md section 4). Can be hazardous.
 Never probe HV_OUT, HV_RAW, HV_PUMP, HV_V1 or HV_CLAMP directly. Use HV_MON (HV_OUT/101) for observation.
 Capacitors C5-C8, C25 and resistors R19, R30 carry >= 200 V ratings; keep 200 V creepage/clearance on every HV_ net,
 series-limited, with the HV netclass 1.0 mm clearance. Keep the APD_BIAS/FBX area away from TIA_IN.
-Do not fit a jumper on J1 pins 2-3 and 1-2 at once. Discharge through the divider takes ~0.5 s: wait before touching.
+HV is OFF by default (Q3 gate pulled up); J1 FORCE ON overrides the firmware disable: fit only on the bench with the DAC set. Discharge through the divider takes ~0.5 s: wait before touching.
 References: LT8365 Rev. A datasheet p.30 (250 V example), DC2838A demo manual Rev. 0.""", (TX, 190), 1.4)
 import textwrap
 for it in s.items:

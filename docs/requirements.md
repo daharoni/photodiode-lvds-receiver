@@ -44,6 +44,6 @@ Capacitance 6 pF typ at 10 V, rise/fall 1 ns (830 nm, 50 Ω, 10 V), dark current
 9. Installed detector capacitance (6 pF datasheet typ) by measurement at the actual bias, including lead and pad parasitics.
 10. Approval of the provisional BER, reacquisition and LOS goals.
 11. APD bias supply selection (UNRESOLVED; options in docs/research/apd-bias-supply.md, pending).
-12. APD temperature compensation method: thermistor network vs future SAMD51 DAC (UNRESOLVED).
+12. APD temperature compensation method: thermistor network (Rev A) refined by the on-module ESP32 via the MCP4728 DAC_HV trim (UNRESOLVED until G1).
 13. Measure actual S12023-10 operating voltage per unit (UNRESOLVED; datasheet gives VBR only, Vop is graph-read).
 14. OPA857 stability at 6 pF source capacitance (UNRESOLVED; datasheet gives noise plot only).

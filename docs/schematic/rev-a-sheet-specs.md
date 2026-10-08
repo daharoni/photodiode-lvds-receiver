@@ -9,13 +9,15 @@ Conventions for every sheet:
 - Every sheet carries a text block "Design intent" with the status labels, and every value that comes from a datasheet or the calculation docs cites it in the as-built note.
 - Reference designator ranges (so sheets never collide): Power U1-U9/R1-R49/C1-C49/D1-D9/L1-L9/Q1-Q9/J1-J2/RV1-RV2/TH1/FB1-FB2; Front end U10-U19/R50-R79/C50-C79/D10-D19/JP10-JP19/TP10-TP19; Slicer U20-U29/R80-R99/C80-C99/TP20-TP29; Control U30-U39/R100-R149/C100-C129/D30-D39/JP30-JP39/RV30-RV39/TP30-TP39; Detector U40-U49/R150-R179/C150-C169/D40-D49/JP40-JP49/TP40-TP49; Connector J50-J59/R180-R189/TP50-TP79; MCU J60-J69/R190-R199/C190-C199.
 
-New hierarchical nets added in Rev A (root sheet pins updated by the orchestrator after the sheets exist): `DAC_HV` (MCU -> Power), `HV_MON` (Power -> Connector, MCU), `HOLD_N` (Connector -> Control).
+Hierarchical nets beyond the original skeleton: `DAC_HV` (Controller -> Power), `HV_MON` (Power -> Controller, Connector), `HOLD_N` (Connector -> Control), `HV_DIS` (Controller -> Power), `CAN_H`/`CAN_L` (Controller <-> Connector), `AUX` (Connector <-> Controller), `3V3_D` (Power -> Controller), `SHDN_N`/`LE_HYS` (Controller -> Slicer), `LOS` (Control -> Controller, Connector), `PGOOD_VGA` (Power -> Controller).
+
+**Revision 2026-10-08 (decision 11):** the external-MCU header is replaced by an on-module ESP32-C6 controller sheet (section 7) with on-board I2C DAC/ADC, a CAN link in the module cable (section 6), a 3V3_D rail (section 1.5) and an HV disable gate (section 1.4). Facts and citations: docs/research/module-controller.md.
 
 ---
 
 ## 1. Power sheet (`power.kicad_sch`)
 
-Pins: in +5V; out 3V3, +3V7, -3V7, 5V_A, APD_BIAS, HV_MON; in DAC_HV.
+Pins: in +5V, DAC_HV, HV_DIS; out 3V3, 3V3_D, +3V7, -3V7, 5V_A, APD_BIAS, HV_MON, PGOOD_VGA.
 
 ### 1.1 Input
 - +5V: C 10 uF 0805 X7R 10 V plus 100 nF 0603 at the entry. No reverse protection in Rev A (keyed connector). PROPOSED.
@@ -33,9 +35,13 @@ Pins: in +5V; out 3V3, +3V7, -3V7, 5V_A, APD_BIAS, HV_MON; in DAC_HV.
 - EN+ and EN- tied to VIN. PGOOD (open drain, active low) pulled up 100 k to 3V3 and to a test point TP "PG_VGA". PAD to GND.
 - Place resistors next to the FB pins (datasheet layout note).
 
+### 1.5 3V3_D digital rail: TPS7A2033PDBV (U4)
+- IN = +5V with 1 uF; OUT = `3V3_D` with 10 uF 0805 + 1 uF; EN tied to IN; GND. Fixed 3.3 V, 300 mA. Loads: ESP32-C6 (radio OFF, ~20-40 mA est.), SN65HVD230, MCP4728, ADS1115 (~60 mA total est., docs/research/module-controller.md). Constraint stated on the sheet: the ESP32 radio must stay disabled (WiFi TX peaks 251-382 mA exceed this LDO); a buck is the Rev B option if the radio is ever used. Hierarchical output 3V3_D. PROPOSED.
+- PGOOD of U2 (already pulled up 100 k to 3V3) also leaves as hierarchical output `PGOOD_VGA`.
+
 ### 1.4 APD bias: LT8365EMSE (U3), from `docs/calculations/apd-bias-design.md` section 3.2 and section 4. Implement exactly those values; do not re-derive.
 - Input: pi filter from +5V: 10 uF 50 V 1206 + 0.47 uH (use generic L with footprint L_0805_2012Metric_N, PROPOSED) + 10 uF 50 V 1206 + 4.7 uF 50 V 0805 at VIN. Net after the filter `5V_HVIN`.
-- EN/UVLO: 200 k top from 5V_HVIN, 200 k bottom to GND; plus 3-pin header J1 "HV_EN" (1 = divider node, 2 = EN pin, 3 = GND) so a jumper 1-2 enables, 2-3 disables. PROPOSED (bench safety).
+- EN/UVLO: 200 k top from 5V_HVIN, 200 k bottom to GND (UVLO). HV disable gate (revision, decision 11): Q3 DMN2056U-7 N-MOSFET drain on the EN/UVLO node, source GND, gate = hierarchical input `HV_DIS` with R 100 k pull-up to 3V3_D (so with the ESP32 unprogrammed or absent the gate is high, EN is held low, HV is OFF); the ESP32 drives HV_DIS low to enable after it has verified the DAC. J1 becomes a 2-pin header "HV FORCE ON" (DNP jumper) from the gate to GND for bench use without firmware. PROPOSED.
 - SYNC/MODE: floating by default (pulse-skipping); 0 ohm DNP footprints to GND (Burst) and 100 k DNP to GND (per the doc's "Burst+SSFM" option), test point for an external clock. BIAS: to GND, 0 ohm DNP option to 5V_HVIN. INTVCC: 1 uF 0603 to GND. RT: 84.5 k 1 % to GND. SS: 0.22 uF to GND. VC: 84.5 k + 1 nF C0G to GND, optional 10 pF DNP from VC to GND.
 - Power stage: L1 10 uH (Wurth 74437324100 footprint) from 5V_HVIN to SW1 and SW2 (both SW pins tied). D1 DFLS1150 SW -> R7 20 ohm 0805 -> `HV_V1` with C5 0.1 uF 200 V 1206 to GND (stage 1 boost, ~70 V). Doubler: C6 0.1 uF 200 V 1206 from SW to `HV_PUMP`; D3 DFLS1150 from HV_V1 to HV_PUMP; D4 DFLS1150 from HV_PUMP to `HV_RAW`; C7 0.1 uF 200 V 1206 from HV_RAW to HV_V1 (stacked, exactly as the DC2838A doubler described in the doc section 2). D2 DFLS1150 anode GND, cathode SW (as in the datasheet p.30 250 V example, purpose not stated; fit, DNP allowed). R_out 47 ohm 1206 from HV_RAW to `HV_OUT`, C 1 nF 500 V 1206 from HV_OUT to GND.
 - FBX feedback from HV_OUT: top R8-R11 4 x 2.05 M 1 % 0603 in series to FBX; bottom R12 86.6 k 1 % + TH1 NTC 10 k beta 3950 0603 in series to GND. DAC leg: DAC_HV -> R13 10 k -> node with C 100 nF to GND -> R14 442 k -> FBX. Pot leg: RV1 50 k trimmer (Bourns 3224W) ends 3V3/GND, wiper -> R15 274 k -> FBX (RV1 and R15 DNP in production). Keep the FBX node short; 10 pF DNP from FBX to GND.
@@ -99,16 +105,24 @@ Pins: in SDET, 5V_A, 3V3, VCM_DET; out VHIGH, VLOW. Whole block UNRESOLVED (not 
 
 ## 6. Connector (`connector.kicad_sch`)
 
-Pins: out +5V, SHDN_N, LE_HYS, HOLD_N; in LVDS_P, LVDS_N, LOS, VMID, VSPAN, HV_MON (plus local test points on rails).
-- J50 Conn_01x06 "ULX3S" 2.54 mm: 1 +5V, 2 GND, 3 LVDS_P, 4 LVDS_N, 5 GND, 6 HOLD_N. R180 100 ohm 0603 DNP across LVDS_P/LVDS_N at the connector (bench scope only; never fitted with DIFFRESISTOR on; docs/research/ulx3s-lvds-input.md). Add text naming the target ULX3S pairs gp/gn[8..13] (bank 7) first, then [14..21].
-- J51 Conn_01x06 "DEBUG": 1 GND, 2 LOS, 3 SHDN_N, 4 LE_HYS, 5 HOLD_N, 6 HV_MON.
-- Test points TP50-TP6x: 3V3, +3V7, -3V7, 5V_A, VMID, VSPAN, HV_MON, GND x2. Hierarchical inputs 3V3, +3V7, -3V7, 5V_A are new on this sheet (orchestrator updates the root).
-- Text: HV rule: no bare APD_BIAS pad; HV_MON is the only HV observation point.
+Pins: out +5V, HOLD_N; in LVDS_P, LVDS_N, LOS, VMID, VSPAN, HV_MON, 3V3, +3V7, -3V7, 5V_A, 3V3_D; bidirectional CAN_H, CAN_L, AUX.
+- J50 Wuerth 61201221621 (2x06 shrouded, 2.54 mm) "MODULE CABLE": 1 +5V, 2 +5V, 3 GND, 4 GND, 5 LVDS_P, 6 LVDS_N, 7 GND, 8 GND, 9 CAN_H, 10 CAN_L, 11 HOLD_N, 12 AUX. (Rows: power, ground, LVDS pair, ground, CAN pair, control; pin pairs 2n-1/2n sit side by side so each differential pair shares a row and is flanked by ground rows; docs/research/module-controller.md section 6.)
+- R180 100 ohm 0603 DNP across LVDS_P/LVDS_N at J50 (bench scope only; never fitted with the ECP5 DIFFRESISTOR on). No CAN termination on the module (single split termination lives at the FPGA-end junction, docs/research/module-controller.md section 3); R182/R183 2 x 60.4 ohm + C180 4.7 nF split-termination footprints DNP at J50 so a single-module bench setup can terminate here. State that on the sheet.
+- HOLD_N from J50 pin 11 -> R184 1 k series -> U50 SN74LVC1G17DBVR Schmitt buffer (3V3, 100 nF) -> hierarchical output HOLD_N; R185 100 k pull-up to 3V3 on the buffer input (unplugged cable = run). AUX: J50 pin 12 -> R186 1 k -> hierarchical AUX (reserved; ESP32 GPIO10).
+- J51 Conn_01x06 "DEBUG": 1 GND, 2 LOS, 3 HOLD_N (buffered), 4 AUX, 5 HV_MON, 6 3V3_D.
+- Test points: 3V3, 3V3_D, +3V7, -3V7, 5V_A, VMID, VSPAN, HV_MON, GND x2 (TP50-TP59).
+- Text: ULX3S target pairs, LVDS termination rule, CAN termination rule and bit rate (125 kbit/s PROPOSED), HV rule (no bare APD_BIAS pad; HV_MON is the only HV observation point).
 
 ---
 
-## 7. MCU hooks (`mcu.kicad_sch`)
+## 7. Controller (`controller.kicad_sch`, replaces `mcu.kicad_sch`; Sheetname "Controller")
 
-Pins: in 3V3, HV_MON; out DAC_GAIN, DAC_TH, DAC_HV. No SAMD51 on Rev A.
-- J60 Conn_01x06 "MCU": 1 3V3 (reference only, 10 mA max note), 2 GND, 3 DAC_GAIN, 4 DAC_TH, 5 DAC_HV, 6 HV_MON. R190-R192 100 k pull-downs on DAC_GAIN, DAC_TH, DAC_HV so unfitted DACs read 0 V (note DAC_HV Hi-Z vs 0 V changes the bias set point by the doc's numbers: 0 V = maximum trim; state it). PROPOSED: pull-downs may be replaced by pull-ups once the DAC polarity is decided; UNRESOLVED.
-- Text: SAMD51 12-bit DACs, ADC inputs to buffer later.
+Pins: in 3V3_D, HV_MON, VSPAN, VG, VMID, LOS, PGOOD_VGA; out DAC_GAIN, DAC_TH, DAC_HV, HV_DIS, SHDN_N, LE_HYS; bidirectional CAN_H, CAN_L, AUX. All parts on 3V3_D unless stated. Facts: docs/research/module-controller.md (cite its section numbers on the sheet).
+- U60 ESP32-C6-MINI-1 (AharoniLab_MCU): 3V3 = 3V3_D with 10 uF 0805 + 100 nF 0402 at pin 3; all GND pads = GND; EN (8): R190 10 k pull-up to 3V3_D + C190 1 uF to GND + TP "EN" pad; BOOT: GPIO9 with R191 10 k pull-up to 3V3_D and TP "BOOT" pad (pull to GND for download); GPIO8: R192 10 k pull-up (strapping, must be high at boot). GPIO15 (strapping) left unconnected with a no_connect flag and a note. Antenna keep-out note on the sheet (module placed at a board edge, radio unused).
+- USB programming: J60 USB4105-GF-A-120 USB-C receptacle. VBUS is NOT a supply for the module (the module is powered from the cable): VBUS goes only to the USBLC6 VBUS pin. CC1 and CC2 each 5.1 k to GND (UFP sink declaration). D+ (A6 and B6 tied) and D- (A7 and B7 tied) -> U61 USBLC6-2SC6 (I/O1 = D+, I/O2 = D-, VBUS = VBUS, GND) -> R193/R194 series (fit 0 ohm; value UNRESOLVED per the research doc, footprint allows 22 ohm) -> GPIO13/USB_D+ and GPIO12/USB_D-. Shield pins to GND through C 1 nF in parallel with R 1 M (DNP); SBU1/SBU2 no_connect. UART fallback: GPIO16/U0TXD and GPIO17/U0RXD to test pads "TXD0"/"RXD0".
+- Local I2C (GPIO2 = SDA, GPIO3 = SCL): R195/R196 4.7 k pull-ups to 3V3_D. U62 MCP4728T-E_UN: VDD 3V3_D + 100 nF, VSS GND, SCL/SDA, ~{LDAC} = GPIO11 (so the ESP32 can latch all channels at once; R 10 k pull-up to 3V3_D, note that a high LDAC holds outputs at EEPROM values), RDY/~{BSY} = GPIO22 (input, R 10 k pull-up), OUTA = DAC_GAIN, OUTB = DAC_TH, OUTC = DAC_HV, OUTD = `DAC_D` to a test point (spare; PROPOSED future VTARGET trim). Each DAC output through R 100 ohm + C 100 nF to GND. Sheet note: DAC_HV safe-default rule (EEPROM programmed to full scale = lowest bias, never power-down on channel C, internal 2.048 V ref with gain x2 so the trim does not track the 3V3_D rail; UNRESOLVED until firmware exists), HV is gated by HV_DIS regardless.
+- U63 ADS1115IDGSR: VDD 3V3_D + 100 nF, GND, SCL/SDA, ADDR = GND (0x48), ALERT/RDY = GPIO23 (R 10 k pull-up, optional), AIN0 = HV_MON, AIN1 = VSPAN, AIN2 = VG, AIN3 = VMID, each through R 10 k + C 10 nF to GND (inputs must stay within GND-0.3..VDD+0.3; all four sources are <= 3.3 V nodes).
+- CAN: U64 SN65HVD230D: VCC 3V3_D + 100 nF, GND, D = GPIO18 (TWAI TX), R = GPIO19 (TWAI RX), RS = R 10 k to GND (slope control, docs/research/module-controller.md section 2), Vref_OUT no_connect, CANH = hierarchical CAN_H, CANL = hierarchical CAN_L. Optional CAN ESD (DNP footprint note only, no part).
+- GPIO: HV_DIS = GPIO0 (hierarchical out; the pull-up to 3V3_D lives on the Power sheet), SHDN_N = GPIO1 (hier out; the 10 k pull-up on the Slicer sheet keeps the comparator enabled with an unprogrammed ESP32), LE_HYS = GPIO14 (hier out through R 0 ohm DNP so the default is the Slicer's hysteresis resistor only), LOS = GPIO20 (hier in, active-low LOS_N), PGOOD_VGA = GPIO21 (hier in), AUX = GPIO10 (bidirectional hier) through R 1 k. Status LED D60 (AharoniLab_Passive:LED, footprint AharoniLab_LED_SMD:LED_0805_2012Metric) + R 1 k on GPIO23; therefore the ADS1115 ALERT/RDY pin gets a no_connect flag instead of GPIO23. Avoid IO4, IO5, IO6, IO7, IO8, IO9, IO12, IO13, IO15, IO16, IO17 for anything else (strapping, JTAG, USB, UART0; research doc section 1).
+- Unused GPIOs: no_connect flags. Text block: role of the controller (decision 11), what runs without firmware (everything analog; HV off; comparator enabled; HOLD_N wire), pin map table, strapping rules, CAN parameters, UNRESOLVED items (USB series resistors, auto-reset behaviour, DAC default verification, 3V3_D current measurement).
+- Reference ranges: U60-U69, R190-R229, C190-C219, D60-D69, J60-J61, TP60-TP69.
