@@ -8,14 +8,14 @@ uplink. It succeeds the receiver used with the Miniscope Zero link
 Signal chain: silicon APD (primary Hamamatsu S12023-10; FDS010 PIN only as a bench
 fallback) on a programmable, temperature-compensated 100-220 V bias
 (APD_BIAS) -> OPA857 transimpedance
-amplifier -> AC-coupled VCA821 variable-gain amplifier -> level shift ->
-TLV3605 comparator with LVDS output -> one LVDS pair to an ECP5 FPGA (ULX3S
-first), which does clock recovery, 8b/10b decode and redundant-lane merging.
-An analog AGC loop (fast high/low capture -> VMID slicer threshold, VSPAN ->
-integrator -> VGA gain) keeps the signal centered. The architecture is
-analog-first by decision; see `docs/decision-log.md`.
+amplifier -> AC coupling -> OPA855 fixed-gain post-amplifier -> TLV3605
+comparator sliced at the AC baseline, LVDS output -> one LVDS pair to an ECP5
+FPGA (ULX3S first), which does clock recovery, 8b/10b decode and redundant-lane
+merging. An on-module ESP32-C6 trims the APD bias and TIA gain slowly over a
+CAN link and reports the module identity. The architecture is analog-first by
+decision; see `docs/decision-log.md` (entries 11 and 12).
 
-The module exposes only 5 V power, ground, one LVDS pair and debug pads. It is
+The module exposes 5 V power, ground, one LVDS pair, a CAN pair and debug pads. It is
 intended for a shielded aluminum housing with a swappable optical bandpass
 filter.
 

@@ -7,16 +7,18 @@ Guide for Claude Code sessions in this repo.
 Optical receiver module for the next-generation wireless UCLA Miniscope data
 uplink. Chain: silicon APD (primary Hamamatsu S12023-10, 6 pF; fallback S12023-05; FDS010
 only as a bench fallback) on a programmable, temperature-compensated 100-220 V
-bias (APD_BIAS, HV) -> OPA857 TIA (3.3 V) -> AC-coupled VCA821 (+/-3.7 V) -> level shift to
-~1.65 V -> TLV3605 LVDS comparator -> one LVDS pair to an ECP5 FPGA (ULX3S
-first). Target 50 Mbps line rate (8b/10b), UI = 20 ns. Board input is 5 V.
+bias (APD_BIAS, HV) -> OPA857 TIA (3.3 V) -> AC coupling -> OPA855 fixed gain x7 ->
+low-pass -> AC coupling to a 1.65 V baseline -> TLV3605 LVDS comparator -> one LVDS pair
+to an ECP5 FPGA (ULX3S first). Slow range control (APD bias, TIA 20k/5k) by the on-module
+ESP32-C6 over CAN (decisions 11, 12). Target 50 Mbps line rate (8b/10b), UI = 20 ns. Board input is 5 V.
 Performance beats cost. No backward compatibility with the Miniscope Zero headstage is required; the headstage is co-designed with this receiver.
 
 ## Hard rules
 
-1. Analog-first is a firm user decision. Do not propose an MCU/ADC-first
-   architecture. The on-module ESP32-C6 (decision 11) is a supervisor only:
-   trims (I2C DAC), monitors (I2C ADC), slow GPIO, CAN link to the FPGA side.
+1. Analog-first is a firm user decision: slicing is analog and the module
+   decodes with the ESP32 unprogrammed. Do not propose an MCU/ADC-first
+   architecture. The ESP32-C6 (decisions 11, 12) does slow range trim only
+   (APD bias DAC, TIA gain select), monitors, slow GPIO and the CAN link.
 2. Label every design claim in docs as VERIFIED, PROPOSED or UNRESOLVED.
    VERIFIED means checked against a datasheet or measurement that is cited.
 3. Cite the datasheet (document, revision, page/figure) next to the claim.
@@ -61,11 +63,12 @@ Performance beats cost. No backward compatibility with the Miniscope Zero headst
 
 ## Key standing corrections (details in decision-log.md)
 
-AC-couple OPA857 outputs into the VCA821; cathode to positive bias; use 6 pF
-for the S12023-10 and FDS010 alike; rails +/-3.7 V (VCA821 min +/-3.5 V); AGC is a true integrator
-(100k/47 nF); VSPAN/VMID use matched 10k 0.1% networks; TLV3605 SHDN is
-active-low and not a guaranteed zero; FPGA watchdog uses an independent clock;
-APD bias 100-220 V (HV safety rules: 200 V creepage/clearance, series current limit, keep-out from TIA input); module DACs (MCP4728) are 12-bit; HOLD_N is a direct FPGA wire, never via CAN.
+Cathode to positive bias, anode to TIA IN; use 6 pF for the S12023-10 and FDS010 alike;
+AC-couple everything after the TIA (OUTN is 1.83 V); comparator slices at the AC baseline
+(decision 12 superseded the VGA/AGC corrections 1, 4, 5, 7, 8, 9); TLV3605 SHDN is
+active-low and not a guaranteed zero; FPGA watchdog uses an independent clock; APD bias
+100-220 V (HV safety rules: 200 V creepage/clearance, series current limit, keep-out from
+TIA input, HV off until the ESP32 drives HV_DIS low); module DACs (MCP4728) are 12-bit.
 
 ## Bring-up gates
 
@@ -78,8 +81,9 @@ Do not order PCBs before the pre-order checks in G4 pass.
 ## Open risks
 
 Detector is a silicon APD S12023-10 (decision-log entry 8) on the LT8365 bias
-(entry 9). Biggest risks: the APD bias supply, the fast high/low
-detector, the AGC loop (VG upper bound vs VCA821 2 V range, anti-windup; LOS
-does not freeze the integrator, entry 10), and OPA857 behavior at 6 pF source capacitance. Received power has
+(entry 9). Biggest risks: the APD bias supply, OPA857 behavior at 6 pF source
+capacitance, post-amp clipping/recovery and comparator noise at small overdrive
+(decision 12, G1 measurements), and the firmware range-control loop (M vs
+temperature, 20k/5k scheduling). Received power has
 not been measured; any budget is an estimate from LED datasheets. Ambient light
 is multiplied by M, so the optical bandpass filter is mandatory.

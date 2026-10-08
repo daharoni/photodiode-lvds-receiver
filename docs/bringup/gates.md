@@ -13,27 +13,28 @@ Acceptance: manual-gain optical eye is open at target rate across bias range and
 - [ ] Verify ambient saturation margin with the real optical filter (OPA857 20k linear range, 60 uA input)
 - [ ] Record wavelength and optical power; FDS010 checks only if the bench fallback is used
 - [ ] Load-test supplies including worst-case VGA rails, sequencing, ripple, thermal, bias startup
-- [ ] Manual-gain optical eye/step/saturation test across bias range and both TIA gains
-- [ ] Measure TIA->VGA common-mode, differential input and RG overload
-- [ ] Measure AC-coupling response to training, gaps and abrupt light changes
+- [ ] Optical eye/step/saturation test across the bias range and both TIA gains at the fixed post-amp gain (decision 12)
+- [ ] Post-amp clip test: 2x and 10x over the 9 uA (20k) clip point with a 5-UI pattern; measure recovery and zero-crossing shift against the 3 ns datasheet figure
+- [ ] Comparator small-signal test: 5-30 mV pulses at VCM 1.65 V; delay, jitter, effective input noise; bias-current offset through the 1 k returns
+- [ ] Chain noise at the comparator input with the APD (6 pF) connected, 20k and 5k
+- [ ] Measure AC-coupling response to training, gaps and abrupt light changes (baseline wander with 8b/10b)
+- [ ] CTRL (20k/5k) and bias-step switching transients: how long until the slicer is valid again
 
-## G2: detector proof
+## G2: range-trim proof (replaces the detector-coupon proof; decision 12)
 
-Acceptance: held levels track eye centers; midpoint/span error <= 5% of span at 1 V (goal); detector adds <= 0.05 UI jitter (goal).
+Goal: show that the ESP32's slow trim (APD bias via DAC_HV, TIA_CTRL 20k/5k) holds the link near the Q(M) optimum using RSSI and FPGA validity, and that no analog AGC is needed because intensity changes track animal motion.
 
-- [ ] Compare held levels to center-eye histograms with 0101, isolated one/zero, max runs, commas, PRBS payload
-- [ ] Sweep hold C/R, temperature, noise, diode current; bound midpoint/span error, settling, droop, loading
-- [ ] Eye with detector connected vs disconnected (added jitter <= 0.05 UI goal)
+- [ ] RSSI vs photocurrent across M and 20k/5k; monotonic, repeatable, temperature drift bounded
+- [ ] PRBS BER vs photocurrent at fixed settings: confirm the ~39 dB single-setting window and the clip-region behaviour
+- [ ] Trim-loop step response: light step of 10 dB up and down; time to valid frames; no oscillation between 20k/5k
+- [ ] APD M vs bias and temperature per unit; DAC_HV EEPROM default and HV_DIS gating verified
 
-## G3: closed-loop proof
+## G3: system-behaviour proof
 
-Acceptance: stable loop with >= 60 degrees phase margin, correct sign, working clamps and anti-windup, defined behavior through all startup and fade cases.
-
-- [ ] Measure gain slope and detector pole; verify sign
-- [ ] Verify >= 60 degrees phase margin, clamps, anti-windup
-- [ ] Dark start, weak light, sudden strong light, interruption and return (includes the SEARCH-at-max-gain behaviour: LOS no longer freezes the integrator, decision 10)
-- [ ] Verify VINT upper bound against the VCA821 VG range; decide whether the DNP BAS70 clamps or a hard limiter are needed
-- [ ] Latch/shutdown/independent-clock timeout behavior
+- [ ] Dark start, weak light, sudden strong light, interruption and return (firmware trim + FPGA reacquisition)
+- [ ] Threshold trim (DAC_TH) eye walk: BER vs threshold offset, centre found by firmware
+- [ ] Latch/shutdown/independent-clock timeout behaviour; CAN link under load; module identity
+- [ ] 6.63 MHz field injection with the module in the housing
 
 ## G4: system proof
 
