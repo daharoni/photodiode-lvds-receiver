@@ -70,6 +70,7 @@ class Sheet:
         self.lib = lib or Library()
         self.wires, self.items, self.junctions, self.ncs = [], [], [], []
         self.symbols, self.lib_syms, self.instances = [], {}, []
+        self.sheets = []
 
     @classmethod
     def load(cls, path, root_uuid=None, sheet_uuid=None, project="receiver-module", lib=None):
@@ -189,6 +190,32 @@ class Sheet:
         self.items.append(["text", esc(text), ["exclude_from_sim", "yes"], ["at", *_pt(at), 0],
                            _fx(size, "left top"), ["uuid", _uid()]])
 
+    def sheet_symbol(self, name, file, at, size, pins, uuid, page):
+        """Hierarchical sheet symbol on this (root) sheet. pins: [(name, shape, side, y_offset)] with side
+        'l' (pin on the left edge, text to the right) or 'r'; y_offset in mm from the top edge.
+        `uuid` and `page` are kept from the existing sheet so sub-sheet instance paths stay valid."""
+        x, y = _pt(at)
+        w, h = size
+        fx = lambda j: _fx(1.27, j)
+        sh = ["sheet", ["at", x, y], ["size", w, h], ["exclude_from_sim", "no"], ["in_bom", "yes"],
+              ["on_board", "yes"], ["dnp", "no"], ["fields_autoplaced", "yes"],
+              ["stroke", ["width", 0.1524], ["type", "solid"]], ["fill", ["color", 0, 0, 0, 0]],
+              ["uuid", Str(uuid)],
+              ["property", Str("Sheetname"), Str(name), ["at", x, _r(y - 0.7116), 0], ["show_name", "no"],
+               ["do_not_autoplace", "no"], fx("left bottom")],
+              ["property", Str("Sheetfile"), Str(file), ["at", x, _r(y + h + 0.7116), 0], ["show_name", "no"],
+               ["do_not_autoplace", "no"], fx("left top")]]
+        pos = {}
+        for pname, shape, side, dy in pins:
+            px = x if side == "l" else _r(x + w)
+            py = _r(y + dy)
+            sh.append(["pin", Str(pname), shape, ["at", px, py, 180 if side == "l" else 0],
+                       ["uuid", _uid()], fx("left" if side == "l" else "right")])
+            pos[pname] = (px, py)
+        sh.append(["instances", ["project", Str(self.project), ["path", Str("/" + str(self.uuid)), ["page", Str(str(page))]]]])
+        self.sheets.append(sh)
+        return pos
+
     # ---- conveniences --------------------------------------------------
     def connect(self, p1, p2, via="h"):
         """Orthogonal route p1 -> p2: via 'h' goes horizontal first, 'v' vertical first."""
@@ -239,7 +266,7 @@ class Sheet:
         tree.append(["lib_symbols"] + list(self.lib_syms.values()))
         tree += [["junction", ["at", *j], ["diameter", 0], ["color", 0, 0, 0, 0], ["uuid", _uid()]]
                  for j in self.junctions]
-        tree += self.ncs + self.wires + self.items + self.symbols
+        tree += self.ncs + self.wires + self.items + self.symbols + self.sheets
         tree.append(["sheet_instances", ["path", Str("/"), ["page", Str("1")]]])
         tree.append(["embedded_fonts", "no"])
         with open(path, "w") as f:

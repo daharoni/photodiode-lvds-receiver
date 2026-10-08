@@ -5,6 +5,9 @@ import os
 from .sexpr import Str, find, find_all, parse
 
 
+KICAD_POWER_SYM = "/Users/daharoni/Applications/KiCad/KiCad.app/Contents/SharedSupport/symbols/power.kicad_sym"
+
+
 def default_root():
     return os.path.expanduser(os.environ.get("AHARONI_LAB_KICAD_LIB", "~/Projects/kicad-lab-library"))
 
@@ -17,7 +20,8 @@ class Library:
 
     def _load(self, nick):
         if nick not in self._files:
-            path = os.path.join(self.root, "symbols", nick + ".kicad_sym")
+            # Only the "power" nickname comes from KiCad's bundled library; everything else is lab-only.
+            path = KICAD_POWER_SYM if nick == "power" else os.path.join(self.root, "symbols", nick + ".kicad_sym")
             with open(path) as f:
                 tree = parse(f.read())
             self._files[nick] = {s[1]: s for s in find_all(tree, "symbol")}

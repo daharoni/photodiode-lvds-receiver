@@ -6,7 +6,7 @@ All entries dated 2026-10-08 (user session). Labels are PROPOSED unless noted.
 
 1. **Analog-first.** AGC and slicing are analog; MCU/ADC hooks are optional. Rationale: user decision, lowest latency and independent of firmware.
 2. **Single PCB, hierarchical sheets.** Rapid iteration instead of many coupons.
-3. **ULX3S first FPGA target.** Available now; LVDS-on-3.3 V-bank still UNVERIFIED.
+3. **ULX3S first FPGA target.** Available now. LVDS input on the 3.3 V banks VERIFIED (docs/research/ulx3s-lvds-input.md): ECP5 differential inputs run from VCCAUX and DIFFRESISTOR=100 exists on banks 7 and 2/3, so the TLV3605 pair goes straight to gp/gn[8..13] or [14..21] with no receiver IC and no external termination.
 4. **Shielded housing and swappable filter.** 6.63 MHz QSCR field is in-band; one module serves 630 nm and 765 nm.
 5. **Rails +/-3.7 V; APD_BIAS 100–220 V (superseded PD_BIAS >= 6.5 V on 2026-10-08).** See corrections 4 and 14 and decision 8.
 6. **All new parts via lab-library PR.** No project-local symbols; library at ~/Projects/kicad-lab-library.
@@ -14,6 +14,13 @@ All entries dated 2026-10-08 (user session). Labels are PROPOSED unless noted.
 8. **Detector: silicon APD selected (2026-10-08).** The link budget (docs/calculations/link-budget.md) shows a bare FDS010 PIN into the OPA857 is 18–23 dB optical short of Q = 6 at 35 cm lateral with any headstage-power-compatible emitter, because photocurrent (1–3 nA) is far below TIA noise (8–26 nA). Étendue caps optics at ~2× for a ±45° field of view. An APD with M ≈ 50 plus a modestly brighter NIR emitter closes the link with margin. Daniel approved the APD path. Consequences: the 6.5–15 V MAX15032 bias block is replaced by a 150–200 V temperature-compensated APD bias supply; the FDS010 remains a drop-in fallback only if a compatible footprint is kept; part selection is tracked in docs/research/apd-selection.md. PROPOSED until a part and bias design are chosen.
 
 9. **APD bias supply: on-board LT8365 boost + charge-pump stage (2026-10-08).** Daniel prefers to handle as much as reasonable on our own PCB rather than a purchased HV module. Rev A therefore carries an LT8365-based 100–220 V generator (datasheet Rev. A and DC2838A demo manual Rev. 0 archived in docs/datasheets/), a two-stage RC cathode filter, series current limit, NTC temperature-tracking divider with a DAC-trim hook, and a footprint/pads for an external HV module as bench fallback. Design calculations in docs/calculations/apd-bias-design.md. PROPOSED until measured.
+
+10. **Rev A schematic choices (2026-10-08, PROPOSED).** Captured in docs/schematic/rev-a-sheet-specs.md and the per-sheet as-built notes:
+   - The analog LOS comparator (TLV3201 on VSPAN) is a status output only and does not freeze the AGC integrator. Reason: a weak eye at power-up would set LOS, freeze the integrator and leave the gain unable to rise (startup deadlock found during sheet population). With no signal the loop runs VG toward its upper bound, which is the SEARCH state in the architecture state table. The FPGA's HOLD_N (via a TMUX1112 switch in the integrator input path) is the only freeze; a DNP 0 ohm resistor keeps the LOS-freeze option for bench experiments. The VG upper bound versus the VCA821 0-2 V gain-control range is UNRESOLVED (BAS70 clamps footprinted, DNP).
+   - Gain and threshold sources are 3-pin headers (VINT / pot / DAC and VMID / pot / DAC) because they change on the bench; the detector coupon and the OPA857 gain select use solder jumpers.
+   - APD bias filter split: clamp + 27 k/10 nF on the Power sheet, 10 k/10 nF at the cathode on the Front End sheet; HV nets are prefixed HV_ and sit in the project net class HV (1.0 mm clearance). HV_MON (10 M/100 k, Vout/101) is the only HV observation point; no bare APD_BIAS pad.
+   - No SAMD51 on Rev A: a 6-pin MCU header carries DAC_GAIN, DAC_TH, DAC_HV and HV_MON with 100 k pull-downs (polarity UNRESOLVED).
+   - Standard KiCad power symbols (power:PWR_FLAG, power:GND) are allowed alongside the lab library, as in the lab's CaRacterize project.
 
 ## Standing corrections (from the prior design review)
 

@@ -47,7 +47,13 @@ Performance beats cost. No backward compatibility with the Miniscope Zero headst
   `hardware/pcb/receiver-module/`.
 - Library: lab library at `~/Projects/kicad-lab-library`, referenced through
   `${AHARONI_LAB_KICAD_LIB}`. Never create project-local symbols or footprints.
-  New parts are added to the lab library by PR to that repo.
+  New parts are added to the lab library by PR to that repo. KiCad's bundled
+  `power:PWR_FLAG`/`power:GND` are the only non-lab symbols allowed.
+- Sheets are generated: `hardware/pcb/receiver-module/gen/<sheet>.py` with
+  `tools/kicad_sch` (run from `tools/`). Edit the generator and regenerate
+  (order: power, frontend, slicer, control, detector, connector, mcu, root);
+  specs in `docs/schematic/rev-a-sheet-specs.md`, as-built notes in
+  `docs/schematic/<sheet>.md`. Reference-designator ranges per sheet are in the spec.
 - CLI: `/Users/daharoni/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli` (KiCad 10.0.5; not on PATH) (ERC, DRC, exports).
 - The fast high/low level detector is built as a disconnectable, swappable sub-circuit.
 - Fab outputs under `hardware/pcb/*/fab/` are ignored by git except under `release/`.
@@ -70,8 +76,9 @@ Do not order PCBs before the pre-order checks in G4 pass.
 
 ## Open risks
 
-Detector is a silicon APD (decision-log entry 8, PROPOSED until part and bias
-design are chosen). Biggest risks: the APD bias supply, the fast high/low
-detector, and OPA857 behavior at 6 pF source capacitance. Received power has
+Detector is a silicon APD S12023-10 (decision-log entry 8) on the LT8365 bias
+(entry 9). Biggest risks: the APD bias supply, the fast high/low
+detector, the AGC loop (VG upper bound vs VCA821 2 V range, anti-windup; LOS
+does not freeze the integrator, entry 10), and OPA857 behavior at 6 pF source capacitance. Received power has
 not been measured; any budget is an estimate from LED datasheets. Ambient light
 is multiplied by M, so the optical bandpass filter is mandatory.
