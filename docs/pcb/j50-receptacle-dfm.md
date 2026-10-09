@@ -54,6 +54,10 @@ DRC rules (KiCad 10 syntax, UNTESTED; put after the general rules because later 
   (constraint hole_clearance (min 0.27mm)))
 ```
 
+## 5. Outcome (2026-10-09)
+
+Daniel uploaded the test board `hardware/pcb/j50-dfm-test` to JLCPCB: the DFM check passed without error under the **Advanced PCB** option (user-reported; standard tier was not accepted or not tested, UNRESOLVED which). Decision: keep the Wuerth 632723300011 and its footprint as drawn by WE (no pad enlargement), order the receiver module as Advanced PCB, and waive the three hole rules for J50 only in `receiver-module.kicad_dru`. The SMT-only fallback parts in section 4 are not needed.
+
 ## Not verified
 
 LCSC/JLCPCB listing and footprint of the Wuerth part; pin diameter of the B-row legs; pad/drill of any LCSC alternative; JLCPCB's reaction to the waiver; the DRC rule syntax (not run).

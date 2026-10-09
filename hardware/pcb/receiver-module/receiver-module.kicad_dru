@@ -57,6 +57,20 @@
   (condition "A.hasNetclass('HV') && A.Type == 'Pad' && B.Net != A.Net && B.Type != 'Zone'")
   (constraint clearance (min 1.25mm)))
 
+# J50 (Wuerth 632723300011) B-row through-holes: 0.65 mm pads / 0.40 mm drills at 0.8 mm pitch as drawn by WE
+# (annular 0.125 mm, hole-to-hole 0.40 mm, hole-to-copper 0.275 mm). JLCPCB's DFM accepted this footprint under the
+# "Advanced PCB" option (Daniel, 2026-10-09, test board hardware/pcb/j50-dfm-test). Order the board as Advanced PCB.
+# Waived for J50 only; every other footprint keeps the standard-tier minima.
+(rule "j50 annular"
+  (condition "A.memberOfFootprint('J50')")
+  (constraint annular_width (min 0.12mm)))
+(rule "j50 hole to hole"
+  (condition "A.memberOfFootprint('J50') && B.memberOfFootprint('J50')")
+  (constraint hole_to_hole (min 0.38mm)))
+(rule "j50 hole clearance"
+  (condition "A.memberOfFootprint('J50') && B.memberOfFootprint('J50')")
+  (constraint hole_clearance (min 0.27mm)))
+
 # EXCEPTION (must stay last): two pads of the SAME footprint (Q1, Q2, D3, D4, D10, D11, U3, R/C bodies) cannot be
 # spaced by the layout, the part's own pad gap applies. Everything outside one footprint keeps the HV/HV_LADDER clearance.
 (rule "hv same footprint pads"

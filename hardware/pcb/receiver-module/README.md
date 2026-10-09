@@ -55,6 +55,8 @@ Files for the board:
 
 ## Fabrication settings (JLCPCB, 6 layers) - PROPOSED
 
+**Ordering tier (Daniel, 2026-10-09):** order as JLCPCB **Advanced PCB**. The J50 (Wuerth 632723300011) B-row holes (0.65 mm pad / 0.40 mm drill at 0.8 mm pitch, as drawn by WE) are below the standard-tier minima (annular 0.15 mm, hole-to-hole 0.45 mm, hole-to-copper 0.30 mm); JLCPCB's DFM accepted the test board `hardware/pcb/j50-dfm-test` without error under the Advanced PCB option. `receiver-module.kicad_dru` waives the three hole rules for J50 only (rules `j50 annular`, `j50 hole to hole`, `j50 hole clearance`); every other footprint keeps the standard minima. DRC after the waiver: no hole or clearance violations (only silk-over-copper from unplaced parts).
+
 Full rationale, sources and the UNRESOLVED list: [`docs/pcb/jlcpcb-fab-settings.md`](../../../docs/pcb/jlcpcb-fab-settings.md). The differential geometries below are values computed with a 2D field solver (`tools/impedance_fd/`), labelled PROPOSED; they are NOT JLCPCB calculator output and must be confirmed with the JLCPCB impedance calculator at order time (the stackup lists 1.538 mm of copper and dielectric, about 1.60 mm with mask; confirm 1.6 mm in the calculator).
 
 Stackup: JLC06161H-3313, 1.6 mm, ENIG, outer copper 1 oz (0.035 mm), inner 0.5 oz (0.0152 mm), mask 0.0305 mm Er 3.8; prepreg 3313 0.0994 mm Er 4.1 (F.Cu to In1, In4 to B.Cu), core 0.55 mm Er 4.6 (twice), prepreg 2116 0.1088 mm Er 4.16 (In2 to In3). Loss tangent left at the KiCad default 0.02 (JLCPCB publishes none). Board thickness in the file is 1.5994 mm (sum of the stackup including mask; KiCad recomputes it).
