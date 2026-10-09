@@ -4,6 +4,8 @@ No gate has been started. Goals marked "goal" are provisional, not user-approved
 
 ## G1: fast-path proof
 
+Simulation inputs (SIMULATED, ngspice 47 with TI models, `docs/simulation/README.md`; no parasitics, no tolerances, nothing measured): compare each G1 measurement below with the simulated number named in its item. The sims could not show: the cascade OPA857 -> C51 -> OPA855 end to end; the TLV3605 or any noise/BER (no model); the real OPA855 clip level and recovery (the model clips 0.25-0.35 V below the datasheet VOL and limit-cycles); the OPA855 loop-gain phase in a second simulator (ngspice AC polarity quirk); the OPA857 at 6 pF in silicon (model validated only at 1.5 pF); PCB and package parasitics, tolerances, temperature.
+
 Acceptance: manual-gain optical eye is open at target rate across bias range and both TIA gains; supplies meet worst-case VGA needs; TIA->VGA interface is within limits.
 
 - [ ] Verify APD VBR and gain-vs-bias curve per unit at room temperature (S12023-10; record operating voltage for M = 50 and 100)
@@ -14,7 +16,10 @@ Acceptance: manual-gain optical eye is open at target rate across bias range and
 - [ ] Record wavelength and optical power; FDS010 checks only if the bench fallback is used
 - [ ] Load-test supplies including worst-case VGA rails, sequencing, ripple, thermal, bias startup
 - [ ] Optical eye/step/saturation test across the bias range and both TIA gains at the fixed post-amp gain (decision 12)
-- [ ] Post-amp clip test: 2x and 10x over the 9 uA (20k) clip point with a 5-UI pattern; measure recovery and zero-crossing shift against the 3 ns datasheet figure
+- [ ] Post-amp clip test: 2x and 10x over the 9 uA (20k) clip point with a 5-UI pattern; measure recovery and zero-crossing shift against the 3 ns datasheet figure. The simulation (OPA855 model, recovery under 1 ns, limit cycle at its 0.8 V floor) is not a prediction for the real part: look for any oscillation on OUT while overdriven and for the real clip level near 1.05-1.15 V
+- [ ] OPA855 stability at RF 301 / RG 49.9 as built: closed-loop frequency response or a fast step at PA_OUT, compare with the simulated 0.1 dB peaking, 2.13 GHz -3 dB, about 1 % overshoot on 2 ns edges; also check the idle level at OUT against both the model (1.578 V) and the derived 1.73 V
+- [ ] OPA857 at 6 pF in both CTRL modes: -3 dB bandwidth, peaking and the eye at 50 Mb/s; compare with the simulated 20k 13.8 % overshoot / 12.6 ns to 2 % and 5k 1.7 % / 4.7 ns. The 20k eye at 6 pF is the key measurement (ISI risk); the 5k eye shows whether 5k can be the preferred mode
+- [ ] VCM_REF buffer: step the load or the divider and look for ringing at VCM_REF with C101 1 uF and R102 10 ohm; compare with the simulated 87.6 deg PM and 0.96 mV shift per 100 mV via 1 k
 - [ ] Comparator small-signal test: 5-30 mV pulses at VCM 1.65 V; delay, jitter, effective input noise; bias-current offset through the 1 k returns
 - [ ] Chain noise at the comparator input with the APD (6 pF) connected, 20k and 5k
 - [ ] Measure AC-coupling response to training, gaps and abrupt light changes (baseline wander with 8b/10b)

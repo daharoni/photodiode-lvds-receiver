@@ -84,6 +84,7 @@ Detector is a silicon APD S12023-10 (decision-log entry 8) on the LT8365 bias
 (entry 9). Biggest risks: the APD bias supply, OPA857 behavior at 6 pF source
 capacitance, post-amp clipping/recovery and comparator noise at small overdrive
 (decision 12, G1 measurements), and the firmware range-control loop (M vs
-temperature, 20k/5k scheduling). Received power has
-not been measured; any budget is an estimate from LED datasheets. Ambient light
+temperature, 20k/5k scheduling). ngspice sims with TI models in docs/simulation/
+cover OPA855 stability, OPA857 at 6 pF and the VCM_REF buffer; nothing measured.
+Received power has not been measured; any budget is an estimate from LED datasheets. Ambient light
 is multiplied by M, so the optical bandpass filter is mandatory.

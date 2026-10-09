@@ -132,6 +132,8 @@ TIA overload guard (runs in every state with `loop auto` or `tia auto`; PROPOSED
 | at 5k, rssi_drop below 0.10 V (equivalent to under 0.40 V at 20k) for 10 s | set 20k |
 | any switch | at least 10 s between switches; ignore link metrics for 300 ms after a switch (switching transient not yet measured: G1 item); never switch while HV is ramping |
 
+SIMULATED input to the 20k/5k scheduling (ngspice 47, TI OPA857 v1.0 model, `docs/simulation/README.md` Sim 2; model fidelity at 6 pF not validated, nothing measured): at the S12023-10's 6 pF the 20k mode shows about 1 dB peaking and 13.8 % overshoot, taking 12.6 ns to settle to 2 % of the 20 ns UI (pattern-dependent ISI at 50 Mb/s), while 5k is clean (1.7 % overshoot, 4.7 ns). So the scheduling should treat 5k as the preferred mode whenever the signal budget allows and 20k as the sensitivity fallback. This does not change the loop structure or thresholds here; how much that shifts the 5k-to-20k up-switch (rssi_drop below 0.10 V at 5k) is decided at G1/G2 from the measured 20k eye at 6 pF. UNRESOLVED until measured.
+
 The two thresholds (0.80 V down, 0.40 V up-equivalent) give a factor-2 (6 dB) band, the 10 s dwell prevents chatter. The post-amp clips at about 9 uA pp at 20k and 36.5 uA at 5k but the comparator keeps slicing because the clip is symmetric about the baseline (decision 12); the guard protects the TIA, not the post-amp.
 
 ### 6.4 M estimation and per-unit calibration
@@ -228,3 +230,4 @@ Sources: ULX3S schematic v3.1.7, PDF page 7 (docs/datasheets/ulx3s-schematics-v3
 6. USB: declared bMaxPower, pre-enumeration current, clean-machine driver behaviour, VBUS monitor (hardware agent).
 7. MCP4728 EEPROM endurance (not looked up); J1 bench override defeats the safe-default logic.
 8. IDF release choice and C6 chip revision on the MINI-1.
+9. 20k eye at 6 pF (SIMULATED 13.8 % overshoot, 12.6 ns to 2 % settle; model not validated at 6 pF): decides how strongly firmware prefers 5k and whether the 5k-to-20k up-switch threshold moves (G1).

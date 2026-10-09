@@ -84,3 +84,13 @@ Link budget: Q = 6 needs Ipp of about 90-180 nA (link-budget.md; 1.7-3.3 mVpp at
 | Firmware dependence | none required for the loop | required for range (M, 20k/5k) and temperature compensation of M; contradicts the "analog-first" independence unless a slow analog fallback is kept |
 
 Impact on decisions: this proposal makes slow range control firmware-based, which is a contradiction of decision 1 ("AGC is analog; MCU/ADC hooks optional") and needs the user's explicit approval. Keep the VCA821 + AGC as an option on the disconnectable sub-circuit until G1/G2 show the fixed-gain path works.
+
+## Simulation follow-up (2026-10-09)
+
+Three ngspice 47 simulations with TI vendor models now exist: `docs/simulation/README.md` (SIMULATED, not VERIFIED; no parasitics, no tolerances, nothing measured). Headline results:
+
+1. OPA855 at gain 7: RF 301 / RG 49.9 is as stable as the datasheet's 453 / 75 in the model (77 deg phase margin both, no peaking). The phase figure is moderately trustworthy (model AC polarity quirk). The model clips 0.25-0.35 V below the datasheet VOL and limit-cycles when overdriven, so the clip and recovery questions of this note stay UNRESOLVED for the real part (G1).
+2. OPA857 at 6 pF: stable, but in 20k mode 13.8 % overshoot and 12.6 ns to settle to 2 % of the 20 ns UI (ISI risk at 50 Mb/s); 5k is clean. Prefer 5k when the signal allows; measure the 20k eye at 6 pF (G1). Model validated only at 1.5 pF.
+3. VCM_REF buffer: R102 10 ohm with C101 1 uF gives 87.6 deg phase margin; with no isolation resistor the model is unstable. The value stands.
+
+Not simulated: the end-to-end TIA -> post-amp -> comparator chain, noise or BER, the TLV3605.
