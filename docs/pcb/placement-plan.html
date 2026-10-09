@@ -199,7 +199,7 @@ td.side{font-family:var(--mono);font-size:.78rem;text-transform:uppercase;white-
 <tr><td class="ref"><i class="sw power"></i> PWR_HV_OUT</td><td class="m">Power</td><td class="side">top</td><td>back edge, between island and APD</td><td>Clamp and output filter sit between the island and the APD.</td></tr>
 <tr><td class="ref"><i class="sw power"></i> PWR_HV_MON</td><td class="m">Power</td><td class="side">top</td><td>back edge, between island and APD</td><td>HV monitor tap on the way to the APD.</td></tr>
 <tr><td class="ref"><i class="sw power"></i> PWR_HV_DIS</td><td class="m">Power</td><td class="side">top</td><td>back-right HV island</td><td>Part of the HV island, 1.0 mm ring.</td></tr>
-<tr><td class="ref"><i class="sw frontend"></i> FE_APD</td><td class="m">Front End</td><td class="side">top</td><td>centre line, optical end</td><td>APD at the housing window; R50, C50, D10, D11 carry the filtered bias to the cathode.</td></tr>
+<tr><td class="ref"><i class="sw frontend"></i> FE_APD</td><td class="m">Front End</td><td class="side">top</td><td>centre line, optical end</td><td>APD at the housing window; R50, C50, D10 carry the filtered bias to the cathode.</td></tr>
 <tr><td class="ref"><i class="sw frontend"></i> FE_TIA</td><td class="m">Front End</td><td class="side">top</td><td>centre line, butted to FE_APD</td><td>Anode-to-OPA857-input trace is the shortest on the board; nothing else near it.</td></tr>
 <tr><td class="ref"><i class="sw frontend"></i> FE_POSTAMP</td><td class="m">Front End</td><td class="side">top</td><td>centre line, after FE_TIA</td><td>Fast chain, butted; VCM_REF reaches it from the bottom.</td></tr>
 <tr><td class="ref"><i class="sw frontend"></i> FE_LPF_COUPLE</td><td class="m">Front End</td><td class="side">top</td><td>centre line, after FE_POSTAMP</td><td>Fast chain, butted, ahead of the comparator.</td></tr>
@@ -227,7 +227,7 @@ td.side{font-family:var(--mono);font-size:.78rem;text-transform:uppercase;white-
 <li>Fast chain butted together on the top centre line: FE_APD, FE_TIA, FE_POSTAMP, FE_LPF_COUPLE, SLC_COMP, CONN_FANOUT, ESD arrays, J50.</li>
 <li>APD anode to OPA857 input is the shortest trace on the board, with nothing else near it and no HV copper within a few mm on any layer.</li>
 <li>HV island is one block (PWR_HV_BOOST, PWR_HV_FB, PWR_HV_DIS) with a 1.0 mm clearance ring, outer layers only; the DRC enforces the 1.0 mm clearance.</li>
-<li>Only the filtered bias (R50, C50, D10, D11 of FE_APD) runs left along the back edge to the APD cathode.</li>
+<li>Only the filtered bias (R50, C50, D10 of FE_APD) runs left along the back edge to the APD cathode.</li>
 <li>GND1 and GND2 stay solid under HV traces: no plane cuts.</li>
 <li>Differential pairs from the fan-out to J50 stay on top over GND1, with no layer change.</li>
 <li>ESD arrays within a few mm of the J50 pins; R180 termination at the fan-out input, which is centred behind J50.</li>

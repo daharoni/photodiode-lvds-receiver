@@ -67,7 +67,7 @@ Pins: in VBUS, DAC_HV, HV_DIS; out 3V3, 3V3_D, APD_BIAS, HV_MON. (Revision 2: th
 ## 2. Front end (`frontend.kicad_sch`)
 
 Pins: in APD_BIAS, 3V3, TIA_CTRL, VCM_REF; out SDET_P, SDET_N, TIA_TAP.
-- Stage 2 filter: R50 10 k 1206 (>= 200 V) from APD_BIAS to `HV_K`; C50 10 nF >= 400 V C0G 1210 from HV_K to GND, at the cathode. D10 S12023-10: 1 K = HV_K, 3 A = `TIA_IN`, 2 CASE = GND. D11 FDS010 (DNP) on the same nets. Standing correction 2.
+- Stage 2 filter: R50 10 k 1206 (>= 200 V) from APD_BIAS to `HV_K`; C50 10 nF >= 400 V C0G 1210 from HV_K to GND, at the cathode. D10 S12023-10: 1 K = HV_K, 3 A = `TIA_IN`, 2 CASE = GND. D11 (FDS010 bench fallback, DNP) was dropped from Rev A on 2026-10-09 (Daniel); reference D11 is retired. Standing correction 2.
 - U10 OPA857 (SBOS630D): IN (15) = TIA_IN; VS+ (9, 10, 11) = 3V3 with 2 x 100 nF 0402 + 1 uF 0603; GND pins and PAD = GND; Test_SD (13) = GND; Test_IN (14) = 3V3; NC (16) no_connect. CTRL (2) = hierarchical input `TIA_CTRL` from the ESP32 (logic 1 = 20 k, 0 = 5 k; VIH 2 V) with R57 100 k pull-up to 3V3 so an unprogrammed ESP32 gives 20 k; JP10 SolderJumper_3 (common = CTRL, sides 3V3 / GND) stays for bench forcing, open by default. OUT (8) = `TIA_OUT`, OUTN (5) = `TIA_REF`.
 - RSSI pick-off: `TIA_TAP` = TIA_OUT through R58 1 k (so the Monitor sheet's peak detector loads the TIA lightly); hierarchical output.
 - Coupling into the post-amp (research doc section 4): C51 100 nF from TIA_OUT to `PA_IN`; R51 1 k from PA_IN to VCM_REF (corner 1.6 kHz; the research asks for >= 10 us time constant: 1 k x 100 nF = 100 us, fine). TIA_REF (OUTN) is left unused except for TP12 (single-ended post-amp; the differential option is noted on the sheet as UNRESOLVED).

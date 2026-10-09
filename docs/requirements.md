@@ -31,7 +31,7 @@ Historical baseline, not a constraint (see scope note above).
 - Driver: EPC2038 GaN FET. Encoder: SAMD51.
 - Coverage: 70 cm diameter for a single receiver (paper).
 
-## Detector facts (FDS010, bench fallback only; the APD path is the design)
+## Detector facts (FDS010, bench fallback only; the APD path is the design) (not on the Rev A board since 2026-10-09)
 
 Capacitance 6 pF typ at 10 V, rise/fall 1 ns (830 nm, 50 Ω, 10 V), dark current 0.3 nA typ / 1.0 nA max at 10 V, 25 V max reverse, peak 0.44 A/W at 730 nm, active area 0.8 mm² (Ø1.0 mm), TO-5. VERIFIED against 0636-S01 Rev I (2017-03-16), docs/datasheets/fds010.pdf. Pins: 1 anode, 2 case, 3 cathode (drawing p.3).
 

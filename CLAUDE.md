@@ -6,7 +6,7 @@ Guide for Claude Code sessions in this repo.
 
 Optical receiver module for the next-generation wireless UCLA Miniscope data
 uplink. Chain: silicon APD (primary Hamamatsu S12023-10, 6 pF; fallback S12023-05; FDS010
-only as a bench fallback) on a programmable, temperature-compensated 100-220 V
+bench-only, not on the board since 2026-10-09) on a programmable, temperature-compensated 100-220 V
 bias (APD_BIAS, HV) -> OPA857 TIA (3.3 V) -> AC coupling -> OPA855 fixed gain x7 ->
 low-pass -> AC coupling to a 1.65 V baseline -> TLV3605 LVDS comparator -> one LVDS pair
 to an ECP5 FPGA (ULX3S first). Slow range control (APD bias, TIA 20k/5k) by the on-module
