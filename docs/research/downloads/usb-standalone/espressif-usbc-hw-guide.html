@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YK0H573CWX"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-YK0H573CWX');
+        </script><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>USB Type-C Hardware Design Guide -  -  &mdash; ESP-IoT-Solution latest documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/js/chatbot_widget.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+        <script src="../../_static/js/chatbot_widget_en.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'usb/usb_overview/usb_typec_hardware_guide';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-iot-solution';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = '../.././_static/js/generic_version.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.RELEASE = 'latest';
+    </script>
+
+    <script type="text/javascript" src="../.././_static/js/generic_version.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="USB Host Drivers" href="../usb_host/usb_host_index.html" />
+    <link rel="prev" title="Developing with Native tinyusb" href="tinyusb_development_guide.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> ESP-IoT-Solution
+            <img src="../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../gettingstarted.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../basic/index.html">Basic Component</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bluetooth/index.html">Bluetooth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../display/index.html">Display</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">USB Host&amp;Device</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">USB Overview</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="usb_overview.html">USB Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usb_otg.html">USB OTG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usb_serial_jtag.html">USB Serial JTAG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usb_phy.html">USB PHY</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usb_vid_pid.html">USB VID PID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usb_host_solutions.html">USB Host Solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usb_device_solutions.html">USB Device Solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usb_device_self_power.html">USB Self Power Device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usb_device_const_COM.html">USB Device Set Const COM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usb_signal_quality.html">USB Signal Quality Test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tinyusb_guide.html">TinyUSB Guide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tinyusb_development_guide.html">Native TinyUSB Development Guide</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">USB Type-C Hardware Design Guide</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#usb-type-c-overview">USB Type-C Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#usb-type-c-role-identification-and-power-detection">USB Type-C Role Identification and Power Detection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#introduction-to-usb-pd">Introduction to USB PD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#usb-type-c-data-transmission">USB Type-C Data Transmission</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#usb-type-c-hardware-reference-designs">USB Type-C Hardware Reference Designs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#usb-type-c-reference-documents">USB Type-C Reference Documents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../usb_host/usb_host_index.html">USB HOST Driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usb_device/usb_driver_index.html">USB Device Driver</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../audio/index.html">Audio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../multimedia/index.html">Multimedia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ai/index.html">AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../input_device/index.html">Input Device</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ir/index.html">IR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../low_power_solution/index.html">Low Power Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sensors/index.html">Sensors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../touch/index.html">Touch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../storage/index.html">Storage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../motor/index.html">Motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../solution/index.html">Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security_solution/index.html">Security&amp;Encryption</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../electrical_lighting_solution/index.html">Electrical&amp;Lighting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../others/index.html">Other Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contribute</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IoT-Solution</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">USB Host &amp; Device</a> &raquo;</li>
+          <li><a href="index.html">USB Host &amp; Device</a> &raquo;</li>
+      <li><strong>USB Type-C Hardware Design Guide</strong></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-iot-solution/blob/db9f2f485/docs/en/usb/usb_overview/usb_typec_hardware_guide.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="usb-type-c-hardware-design-guide">
+<h1><strong>USB Type-C Hardware Design Guide</strong><a class="headerlink" href="#usb-type-c-hardware-design-guide" title="Permalink to this headline"></a></h1>
+<p><a class="reference external" href="../../../../zh_CN/latest/usb/usb_overview/usb_typec_hardware_guide.html">[中文]</a></p>
+<section id="usb-type-c-overview">
+<h2>USB Type-C Overview<a class="headerlink" href="#usb-type-c-overview" title="Permalink to this headline"></a></h2>
+<p>Since its official release in 2014, USB Type-C has rapidly gained widespread adoption in various electronic devices due to its compact size, reversible connector design, and support for high-power transmission capabilities. Compared to traditional USB Type-A interfaces, USB-C not only offers greater convenience in use but also better suits the design requirements of modern portable devices, demonstrating strong compatibility and practicality in mobile devices, laptops, and even certain high-power applications.</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="../../_images/usb_typec_typea.png"><img alt="../../_images/usb_typec_typea.png" src="../../_images/usb_typec_typea.png" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-text">USB Type-A and USB Type-C connectors</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="../../_images/usb_typec_pin.png"><img alt="../../_images/usb_typec_pin.png" src="../../_images/usb_typec_pin.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-text">USB Type-C Connector Pins</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<table class="docutils align-center" id="id3">
+<caption><span class="caption-text">USB Type-C Connector Pin Functions</span><a class="headerlink" href="#id3" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 25%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Pins</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>USB 3.x</p></td>
+<td><p>A2, A3, B2, B3, A10, A11, B10, B11</p></td>
+<td><p>USB 3.x data transfer</p></td>
+</tr>
+<tr class="row-odd"><td><p>USB 2.0</p></td>
+<td><p>A6/B6 (D+), A7/B7 (D−)</p></td>
+<td><p>USB 2.0 data transfer</p></td>
+</tr>
+<tr class="row-even"><td><p>Config</p></td>
+<td><p>CC1, CC2</p></td>
+<td><p>Configuration interface, plug detection, power delivery protocol info transfer, Vconn function</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sideband Use</p></td>
+<td><p>SBU1, SBU2</p></td>
+<td><p>Low speed signals are allocated exclusively for use in alternate modes.</p></td>
+</tr>
+<tr class="row-even"><td><p>Power</p></td>
+<td><p>VBUS, GND</p></td>
+<td><p>Power supply</p></td>
+</tr>
+</tbody>
+</table>
+<p>In addition, USB Type-C connectors are available in various pin configurations to suit different application scenarios, such as 24-pin, 16-pin, 12-pin, and 6-pin versions. The 6-pin configuration includes only power pins and does not support data transmission; the 12-pin and 16-pin configurations add USB 2.0 data support on top of power delivery; the 24-pin configuration provides full-featured Type-C functionality. Users can select the appropriate pin configuration based on their specific application needs to achieve a balance between performance and cost.</p>
+</section>
+<section id="usb-type-c-role-identification-and-power-detection">
+<h2>USB Type-C Role Identification and Power Detection<a class="headerlink" href="#usb-type-c-role-identification-and-power-detection" title="Permalink to this headline"></a></h2>
+<p>Compared to previous USB specifications, USB Type-C defines a broader range of roles:</p>
+<ul class="simple">
+<li><p><strong>Power roles:</strong> A USB-C port can act as a <strong>Source</strong> (power provider), a <strong>Sink</strong> (power consumer), or a <strong>Dual-Role Power (DRP)</strong> port.</p></li>
+<li><p><strong>Data roles:</strong> A USB-C port can operate as a <strong>Downstream-Facing Port (DFP)</strong>, an <strong>Upstream-Facing Port (UFP)</strong>, or a <strong>Dual-Role Data (DRD)</strong> port.</p></li>
+</ul>
+<p>The identification and configuration of these roles are accomplished through the CC lines within the Type-C connector.</p>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="../../_images/usb_typec_cc.png"><img alt="../../_images/usb_typec_cc.png" src="../../_images/usb_typec_cc.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-text">Type-C CC Pull-up and Pull-down Model</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>As a Source, the USB-C port asserts one pull-up resistor (Rp) on each CC pin.</p></li>
+<li><p>As a Sink, the USB-C port asserts a pull-down resistor (Rd) on each CC pin.</p></li>
+<li><p>When a Source-side USB-C port is connected to a Sink-side USB-C port, the Source detects the Sink’s Rd on CC and interprets this as a valid attachment, confirming the partner is a Sink. If both sides are Sources or both are Sinks, no valid connection (attachment) is established, and neither side will operate normally.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For dual-role ports, the CC line will continuously alternate between pull-up and pull-down states.</p>
+</div>
+<p>The pull-down resistor Rd is typically 5.1 KΩ, while the pull-up resistor Rp determines the current-carrying capability. Without USB Power Delivery (PD), USB Type-C supports up to 5V and a maximum current of 3A:</p>
+<table class="docutils align-center" id="id5">
+<caption><span class="caption-text">USB Type-C Power Capabilities</span><a class="headerlink" href="#id5" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 32%" />
+<col style="width: 32%" />
+<col style="width: 36%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Power Profile</p></th>
+<th class="head"><p>Rp (5V drive)</p></th>
+<th class="head"><p>Rp (3.3V drive)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Default Power</p></td>
+<td><p>56 KΩ ±20%</p></td>
+<td><p>36 KΩ ±20%</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.5A &#64; 5V</p></td>
+<td><p>22 KΩ ±20%</p></td>
+<td><p>12 KΩ ±20%</p></td>
+</tr>
+<tr class="row-even"><td><p>3A &#64; 5V</p></td>
+<td><p>10 KΩ ±20%</p></td>
+<td><p>4.7 KΩ ±20%</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If your application requires power negotiation above 15W, support for alternate functions such as DisplayPort, or if the power and data roles do not match, a USB PD controller is required.</p>
+</div>
+</section>
+<section id="introduction-to-usb-pd">
+<h2>Introduction to USB PD<a class="headerlink" href="#introduction-to-usb-pd" title="Permalink to this headline"></a></h2>
+<p>By default, the USB Type-C interface supports up to 5V and 3A (i.e., 15W), which is suitable for powering common low-power devices. To meet the needs of higher-power devices, the USB Power Delivery (PD) specification was introduced. The latest USB PD 3.2 version significantly increases power delivery capability, allowing up to 240W over a single USB Type-C cable, greatly expanding the application range of USB-C. Note that for voltages of 20V and power above 60W, the current is limited by cable specifications.</p>
+<figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="../../_images/usb_pd_version.png"><img alt="../../_images/usb_pd_version.png" src="../../_images/usb_pd_version.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-text">Evolution of USB PD Versions</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<section id="usb-pd-power-negotiation-process">
+<h3>USB PD Power Negotiation Process<a class="headerlink" href="#usb-pd-power-negotiation-process" title="Permalink to this headline"></a></h3>
+<p>USB PD operates by using the CC line of the USB Type-C interface as a data channel to negotiate voltage, current, and power direction. Once a power source and sink are connected via USB Type-C, USB PD messages are transmitted over the CC line using a 300kbps ±10% bi-phase mark code (BMC) signal. The negotiation process includes the following steps:</p>
+<ul class="simple">
+<li><p>The power source sends a Source_Capabilities message containing its available power profiles (e.g., 5V/3A, 9V/3A, etc.).</p></li>
+<li><p>The sink receives the Source_Capabilities message, selects the desired power profile, and sends a Request message.</p></li>
+<li><p>The source receives the Request message, checks if it can supply the requested power, and if so, sends an Accept message. The source then sends a PS_Rdy message to indicate that the requested power is being supplied. If the request cannot be met, a Reject message is sent.</p></li>
+</ul>
+<figure class="align-center" id="id7">
+<a class="reference internal image-reference" href="../../_images/usb_typec_pd_comm.png"><img alt="../../_images/usb_typec_pd_comm.png" src="../../_images/usb_typec_pd_comm.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">USB PD Communication</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The current ESP32 series chips are unable to parse the USB PD protocol, so an external PD controller is required to implement specific voltage requests.</p>
+</section>
+</section>
+<section id="usb-type-c-data-transmission">
+<h2>USB Type-C Data Transmission<a class="headerlink" href="#usb-type-c-data-transmission" title="Permalink to this headline"></a></h2>
+<p>USB Type-C is compatible with multiple USB specifications, including USB 1.0, 1.1, 2.0, 3.2 Gen 1, 3.2 Gen 2, 3.2 Gen 2×2, USB4 20 Gbps, and USB4 40 Gbps. Given that current ESP32-series chips support up to USB 2.0 High-Speed, this document focuses on USB 2.0 and earlier specifications.</p>
+<p>USB Type-C provides two sets of D+/D− pins <strong>A6/A7</strong> and <strong>B6/B7</strong>. To guarantee proper differential signaling regardless of plug orientation, <strong>A6 is tied to B6</strong> as <strong>D+</strong>, and <strong>A7 is tied to B7</strong> as <strong>D−</strong>. This differential pair carries the USB data, ensuring the link operates correctly in either insertion direction.</p>
+<figure class="align-center" id="id8">
+<a class="reference internal image-reference" href="../../_images/usb_typec_dpdm.png"><img alt="../../_images/usb_typec_dpdm.png" src="../../_images/usb_typec_dpdm.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-text">D+/D− pins on USB Type-C</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>For the <strong>SuperSpeed differential pairs (TX/RX)</strong>, since current ESP32 devices do <strong>not</strong> support USB 3.x data rates, these pins should be left <strong>unconnected (NC)</strong>. No routing or terminations are required.</p>
+</section>
+<section id="usb-type-c-hardware-reference-designs">
+<h2>USB Type-C Hardware Reference Designs<a class="headerlink" href="#usb-type-c-hardware-reference-designs" title="Permalink to this headline"></a></h2>
+<p>Based on the requested voltage, the USB Type-C hardware design can be divided into two schemes: with or without an external PD controller. For the hardware solution with an external PD controller, this section will focus solely on the Device hardware design.</p>
+<section id="device-hardware-design-with-pd-controller">
+<h3>Device Hardware Design with PD Controller<a class="headerlink" href="#device-hardware-design-with-pd-controller" title="Permalink to this headline"></a></h3>
+<p>Since the USB-PD protocol is relatively complex, the device side can use a PD controller chip to simplify the design, quickly complete voltage negotiation and output the required voltage:</p>
+<figure class="align-center" id="id9">
+<a class="reference internal image-reference" href="../../_images/usb_typec_pd_trigger.png"><img alt="../../_images/usb_typec_pd_trigger.png" src="../../_images/usb_typec_pd_trigger.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">IP2721 PD Controller</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The IP2721 can automatically detect device connection status through the CC pin and use hardware PD protocol to parse power source capability information, thereby automatically requesting matching voltage output. Users can also select other models of PD controllers according to actual requirements to implement voltage request functionality.</p>
+</section>
+<section id="hardware-design-for-device-host-and-drp-without-pd-controller">
+<h3>Hardware Design for Device, Host, and DRP without PD Controller<a class="headerlink" href="#hardware-design-for-device-host-and-drp-without-pd-controller" title="Permalink to this headline"></a></h3>
+<section id="usb-type-c-device-design">
+<h4>USB Type-C Device Design<a class="headerlink" href="#usb-type-c-device-design" title="Permalink to this headline"></a></h4>
+<figure class="align-center" id="id10">
+<a class="reference internal image-reference" href="../../_images/usb_typec_device_design.png"><img alt="../../_images/usb_typec_device_design.png" src="../../_images/usb_typec_device_design.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-text">USB Type-C Device Design</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>In the device design, CC1 and CC2 need to be pulled down with 5.1 KΩ resistors.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>When a device needs more than the USB default current (500 mA for USB 2.0; 900 mA after USB 3.x enumeration), it is necessary to read the source’s advertised current level on the Type-C CC line (using CC logic and a Type-C port controller) and set the device’s input current limit no higher than that level; otherwise, the source may be overloaded.</p>
+</div>
+</section>
+<section id="usb-type-c-host-and-drp-design">
+<h4>USB Type-C Host and DRP Design<a class="headerlink" href="#usb-type-c-host-and-drp-design" title="Permalink to this headline"></a></h4>
+<figure class="align-center" id="id11">
+<img alt="../../_images/usb_typec_drp_design.png" src="../../_images/usb_typec_drp_design.png" />
+<figcaption>
+<p><span class="caption-text">USB Type-C Host and DRP Design</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The Host and DRP design use the TI TUSB320LA Type-C CC logic and port controller, which configures the TUSB320 to switch between DFP, UFP, and DRP roles through the I2C interface. Users can also select other models of CC logic and port controllers according to actual requirements.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>In mass-produced products, USB ports must also account for conditions such as <strong>overcurrent and overtemperature</strong>. This ensures that in abnormal situations, current output can be limited to protect the power supply system. You can opt for USB port power switch chips with adjustable current limit thresholds, such as the <a class="reference external" href="https://www.wch-ic.com/downloads/CH217DS1_PDF.html">CH217</a>, to simplify the Host VBUS design.</p>
+</div>
+</section>
+</section>
+</section>
+<section id="usb-type-c-reference-documents">
+<h2>USB Type-C Reference Documents<a class="headerlink" href="#usb-type-c-reference-documents" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.usb.org/sites/default/files/USB%20Type-C%20Spec%20R2.0%20-%20August%202019.pdf">Universal Serial Bus Type-C Cable and Connector Specification</a></p></li>
+<li><p><a class="reference external" href="https://www.renesas.com/en/support/engineer-school/usb-power-delivery-03">USB Power Delivery: The Technology 2 - USB Type-C and Role Swap</a></p></li>
+<li><p><a class="reference external" href="https://www.monolithicpower.com/en/learning/resources/usb-type-c-charging-connectors-design-optimization-and-interoperability">USB Type-C Charging Connectors: Design, Optimization, and Interoperability</a></p></li>
+<li><p><a class="reference external" href="https://www.ti.com/lit/gpn/tusb320lai">TUSB320 Datasheet</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+
+
+<p style="text-align:center"><a href="https://www.espressif.com/en/company/documents/documentation_feedback?docId=9063&sections=USB Type-C Hardware Design Guide (usb/usb_overview/usb_typec_hardware_guide)&version=latest (master)">Provide feedback about this document</a></p>
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tinyusb_development_guide.html" class="btn btn-neutral float-left" title="Developing with Native tinyusb" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../usb_host/usb_host_index.html" class="btn btn-neutral float-right" title="USB Host Drivers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) CO., LTD.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../esp-iot-solution-en-master.pdf" class="fa fa-file-pdf-o"> Download PDF</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

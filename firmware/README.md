@@ -6,3 +6,5 @@ Planned contents:
 - SAMD51 code (optional ADC monitoring, DAC gain/threshold hooks) and the headstage 8b/10b transmit test code.
 
 Location is undecided: this code may live here or move to a separate repository. Nothing is written yet.
+
+ESP32-C6 module controller: the firmware plan is in `esp32/README.md` (boot and safe defaults, range-trim state machine, self-test, USB workflow); the command and telemetry protocol (CAN and USB console) is in `../docs/firmware/can-and-console-protocol.md`; USB flashing and browser tooling facts are in `../docs/research/esp32-usb-tooling.md`. Nothing is implemented yet.
