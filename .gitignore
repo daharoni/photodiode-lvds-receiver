@@ -29,3 +29,4 @@ hardware/pcb/*/fab/*
 # Scratch outputs
 scratch/
 *.tmp
+.history/
