@@ -79,7 +79,7 @@ XR = 292.1          # output label column
 # TOP BAND: input caps, U1 TPS79901 3V3, U4 TPS7A2033 3V3_D
 # ======================================================================
 Y5 = 66.04
-s.label("+5V", (25.4, Y5), 180)   # internal merged rail (U5 OUT); the cable rail is +5V_CABLE
+s.label("+5V", (25.4, Y5), 180)   # internal merged rail (U5 OUT); VBUS comes from the Connector
 u1 = s.place("AharoniLab_Power:TPS79901DDCT", "U1", "TPS79901DDCT", (88.9, 68.58))
 s.connect((25.4, Y5), u1.pin("IN"))
 cap_down("C1", "10uF 10V", 38.1, Y5, C805)
@@ -100,51 +100,44 @@ s.stub((137.16, 71.12), "l", 2.54, "V3_FB")
 c12 = part(C, "C12", "1nF C0G", (154.94, Y5), "v", C603)
 s.wire([c12.pin("2"), (154.94, 71.12), (137.16, 71.12)])
 
-# ---- U5 TPS2121RUXR source mux (decision 13): +5V_CABLE priority, VBUS fallback, OUT = +5V ----
-u5 = s.place("AharoniLab_Power:TPS2121RUXR", "U5", "TPS2121RUXR", (129.54, 38.1),
-             footprint="AharoniLab_Package_DFN_QFN:RUX0012A")
-move_text((129.54, 22.0), (111.76, 58.4))
-X5 = 87.63
-in1, in2 = u5.pin("IN1"), u5.pin("IN2")
-s.hier_label("+5V_CABLE", (78.74, in1[1]), 180, "input")
-s.connect((78.74, in1[1]), in1)
-s.hier_label("VBUS", (78.74, in2[1]), 180, "input")
-s.connect((78.74, in2[1]), in2)
-c33 = s.place(C, "C33", "4.7uF 10V", (X5, in1[1] - 2.54), rot=180, footprint=C805)   # hangs up, GND above
-s.stub(c33.pin("2"), "u", 2.54, "GND", kind="global")
-cap_down("C34", "4.7uF 10V", X5, in2[1], C805)
-for pn, nm in (("PR1", "PR1"), ("OV1", "OV1"), ("OV2", "OV2")):
-    s.stub(u5.pin(pn), "l", 2.54, nm)
-s.stub(u5.pin("CP2"), "l", 2.54, "GND", kind="global")
-GND(u5.pin("GND"))
-for x, top, ra, rb, va, vb, nm in ((27.94, "+5V_CABLE", "R35", "R36", "294k 1%", "100k 1%", "PR1"),
-                                  (48.26, "+5V_CABLE", "R39", "R40", "464k 1%", "100k 1%", "OV1"),
-                                  (68.58, "VBUS", "R41", "R42", "464k 1%", "100k 1%", "OV2")):
-    ra_ = part(R, ra, va, (x, 33.02), "v", R603)
-    s.stub(ra_.pin("1"), "u", 2.54, top)
-    rb_ = res_down(rb, vb, x, 38.1)
-    s.stub((x, 38.1), "l", 2.54, nm)
-# OUT pins 1 and 8 -> +5V
-o1, o8 = u5.pin("1"), u5.pin("8")
-s.wire([o1, (o1[0] + 5.08, o1[1]), (o1[0] + 5.08, o8[1]), o8])
-s.stub((o1[0] + 5.08, o8[1]), "r", 2.54, "+5V")
-# ST -> PWR_SRC with R37 pull-up to 3V3_D
-st = u5.pin("ST")
-s.wire([st, (XR, st[1])])
-s.hier_label("PWR_SRC", (XR, st[1]), 0, "output")
-r37 = part(R, "R37", "10k", (165.1, st[1] - 5.08), "v", R603)
-s.stub(r37.pin("1"), "u", 2.54, "3V3_D")
-# ILM -> R38 100k to GND; SS -> C32 220 nF to GND
-ilm, ss = u5.pin("ILM"), u5.pin("SS")
-s.wire([ilm, (165.1, ilm[1])])
-res_down("R38", "100k 1%", 165.1, ilm[1])
-s.wire([ss, (149.86, ss[1])])
-cap_down("C32", "220nF", 149.86, ss[1], C603)
-s.text("""U5 TPS2121 source mux (PROPOSED; SLVSEA3F pin table p.4-5,
-Table 9-3 p.18, ST p.18, ILM p.13): cable priority, USB-C VBUS
-fallback. PR1 divider R35/R36, OV1 R39/R40, OV2 R41/R42 (VBUS).
-ILM R38 100k (1.24 A typ; minimum at 100k UNRESOLVED), SS C32 220 nF.
-ST low = USB powers the module (PWR_SRC). Not simulated or measured.""", (20, 52), 1.27)
+# ---- U5 TPS259631DDAR eFuse (decision 14): IN = VBUS (from the Connector), OUT = +5V ----
+u5 = s.place("AharoniLab_Power:TPS259631DDAR", "U5", "TPS259631DDAR", (129.54, 38.1))   # footprint: the library symbol's own (Texas_DDA-R-PDSO-G8_SO-PowerPAD-8)
+move_text((129.54, 24.0), (145.0, 58.0))
+in_, en_, ov_, dv_ = u5.pin("IN"), u5.pin("EN/UVLO"), u5.pin("OVLO"), u5.pin("dVdt")
+s.hier_label("VBUS", (78.74, in_[1]), 180, "input")
+XD = 96.52
+s.wire([(78.74, in_[1]), (XD, in_[1]), in_])
+cap_down("C33", "4.7uF 25V", 88.9, in_[1], C805)
+# R35 IN -> EN/UVLO, R36 EN/UVLO -> OVLO, R37 OVLO -> GND (vertical chain, pin 1 on top)
+r35 = part(R, "R35", "357k 1%", (XD, in_[1]), "v", R603)
+r36 = part(R, "R36", "43.2k 1%", (XD, en_[1]), "v", R603)
+r37 = part(R, "R37", "100k 1%", (XD, r36.pin("2")[1]), "v", R603)
+GND(r37.pin("2"))
+s.wire([(XD, en_[1]), en_])
+s.wire([ov_, (109.22, ov_[1]), (109.22, r36.pin("2")[1]), r36.pin("2")])
+# dVdt: C32 47 nF to GND
+s.wire([dv_, (114.3, dv_[1])])
+c32 = part(C, "C32", "47nF X7R 10V", (114.3, dv_[1]), "v", C603)
+GND(c32.pin("2"))
+GND(u5.pin("GND")); GND(u5.pin("EP"))
+# OUT -> +5V
+s.stub(u5.pin("OUT"), "r", 10.16, "+5V")
+# ILM: R38 1.21k to GND, TP3 IMON
+ilm = u5.pin("ILM")
+s.wire([ilm, (149.86, ilm[1])])
+r38 = part(R, "R38", "1.21k 1%", (144.78, ilm[1]), "v", R603)
+GND(r38.pin("2"))
+tp3 = s.place(TP, "TP3", "IMON", (149.86, ilm[1]), footprint="AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect")
+# FLT: TP4, R39 100k DNP pull-up to 3V3_D
+flt = u5.pin("FLT")
+s.wire([flt, (162.56, flt[1])])
+r39 = part(R, "R39", "100k", (157.48, flt[1] - 5.08), "v", R603, dnp=True)
+s.stub(r39.pin("1"), "u", 2.54, "3V3_D")
+tp4 = s.place(TP, "TP4", "FLT", (162.56, flt[1]), footprint="AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect")
+s.text("""U5 TPS259631DDAR eFuse (PROPOSED; TPS2596 SLVSET8A p.4, p.22):
+IN = VBUS, OUT = +5V. R35 357k / R36 43.2k / R37 100k set UVLO and OVLO,
+R38 1.21k sets ILM, C32 47 nF sets dVdt, C33 4.7 uF on VBUS.
+FLT open-drain (TP4); R39 pull-up DNP. Not simulated or measured.""", (20, 18), 1.27)
 
 # ---- 3V3_D digital rail: U4 TPS7A2033PDBV (spec 1.5) ----
 u4 = s.place("AharoniLab_Power:TPS7A2033PDBV", "U4", "TPS7A2033PDBV", (210.82, 78.74))
@@ -364,8 +357,8 @@ s.junctions = [(x, round(y - DY, 2) if y >= THR else y) for x, y in s.junctions]
 
 # ---- text -----------------------------------------------------------
 TX = 308.0
-s.text("Power: +5V_CABLE / VBUS in -> U5 mux -> +5V. U1 TPS79901 3V3, U4 TPS7A2033 3V3_D, U3 LT8365 APD bias (100-220 V) -> APD_BIAS.", (20, 12.7), 2.5)
-s.text("""Design intent (Rev A, revision 3; nothing here is simulated or measured; details and citations in docs/schematic/power.md)
+s.text("Power: VBUS in -> U5 eFuse -> +5V. U1 TPS79901 3V3, U4 TPS7A2033 3V3_D, U3 LT8365 APD bias (100-220 V) -> APD_BIAS.", (20, 12.7), 2.5)
+s.text("""Design intent (Rev A, revision 4; nothing here is simulated or measured; details and citations in docs/schematic/power.md)
 PROPOSED  +5V (U5 OUT) entry: C1 10 uF + C2 100 nF.
 PROPOSED  U1 TPS79901: VOUT = 1.193 V x (1 + R1/R2) = 3.316 V nominal (R1 17.8k, R2 10.0k). CFB 1 nF (see note).
 VERIFIED  TPS79901 CFB is required for stability; 3 pF to 1 nF when R1||R2 = 250k; <5 pF for fast start (SBVS056L p.14, 8.2.2.6).
@@ -379,15 +372,14 @@ PROPOSED  BIAS: R28 0R to GND fitted; R29 0R to 5V_HVIN DNP. Fit exactly one of 
 PROPOSED  D2 (GND to SW, from the p.30 250 V example, purpose not stated) is DNP. Q1/Q2 clamp ~150 uA. C8 and R19 form filter stage 1.
 PROPOSED  HV_MON = HV_OUT/101 (R20+R32 10M, R21 100k): 1.39 V at 140 V. Stage 2 filter (10k + 10 nF) is on the front-end sheet.
 Net names: HV_V1, HV_PUMP, HV_RAW, HV_OUT, HV_CLAMP, 5V_HVIN, EN, SYNC, BIAS, RT, SS, VC, FBX are local labels; APD_BIAS = HV_FILT.
-Hierarchical pins: in +5V_CABLE, VBUS, DAC_HV, HV_DIS; out 3V3, 3V3_D, APD_BIAS, HV_MON, PWR_SRC.
-PROPOSED  (decision 13, revision 3) U5 TPS2121RUXR: IN1 pin 7 = +5V_CABLE (priority), IN2 pin 2 = VBUS (USB-C), OUT pins 1 and 8 = +5V (internal merged rail for U1, U3 via L2, U4); GND pin 12; CP2 pin 3 = GND. Pin numbers match the TPS2121 pin table (SLVSEA3F p.4-5, the symbol's ILM is the datasheet ILIM).
-PROPOSED  Priority: PR1 from +5V_CABLE through R35 294k / R36 100k: cable selected above about 3.98-4.33 V rising, dropped below about 3.90-4.10 V (SLVSEA3F p.7-8 VREF 0.99-1.10 V, p.18 Table 9-3). UNRESOLVED: chatter near the threshold with a real ULX3S rail (hysteresis only about 0.08 V on the rail).
-PROPOSED  Overvoltage: OV1 R39 464k / R40 100k from +5V_CABLE, OV2 R41 464k / R42 100k from VBUS; trip about 5.6-6.2 V, below the TPS799 7.0 V abs max (SBVS056L p.4); OV pin range 0-5.5 V (SLVSEA3F p.6).
-VERIFIED  ST (pin 9): R37 10k pull-up to 3V3_D, PWR_SRC high = cable (or OUT Hi-Z), low = USB (SLVSEA3F p.18); pull-up range 6-20k p.6.
-PROPOSED  ILM R38 100k (maximum RILM; ILM = 65.2/RILM^0.861 = 1.24 A typ, p.13). UNRESOLVED: the datasheet table has no 100k row (1.5 A typ at 80k, p.8), so the minimum limit is not stated. SS C32 220 nF (about 350-400 V/s, p.13 Table 9-1 scaled, estimate); first-plug settling and inrush UNRESOLVED until measured. The limit protects U5 and the cable; it does not enforce the 0.5 A USB budget.
-PROPOSED  C33 4.7 uF 0805 on +5V_CABLE at IN1, C34 4.7 uF 0805 on VBUS at IN2 (TI recommends a larger input capacitor to damp cable ringing, SLVSEA3F p.33); C1/C2 stay on +5V (OUT). UNRESOLVED: USB attach capacitance limit not checked against the USB spec. No TVS (24 V abs max p.6), no other reverse protection (keyed connector).
-PROPOSED  No back-feed (fast reverse blocking, <= 1 uA leakage, SLVSEA3F p.7, p.15): both present means cable powers and USB carries data only. Switchover about 100 us typ (tSW p.7); hold-up droop about 1 V estimated, not measured.
-PROPOSED  ERC: U5 OUT pins 1 and 8 are power_out on the +5V net, so +5V needs no PWR_FLAG; the root PWR_FLAG #FLG04 sits on +5V_CABLE. Budget about 0.19 A worst case (docs/research/usb-standalone-power.md section 1.5, estimate); radio must stay disabled. USB-alone firmware starts HV at the low-bias end in steps (PROPOSED).""", (TX, 28), 1.4)
+Hierarchical pins: in VBUS, DAC_HV, HV_DIS; out 3V3, 3V3_D, APD_BIAS, HV_MON.
+PROPOSED  (decision 14, revision 4) U5 TPS259631DDAR eFuse: IN pin 4 = VBUS (single 5 V input from the Connector sheet), OUT pin 5 = +5V (internal rail for U1, U3 via L2, U4), GND pin 1 and exposed pad pin 9 = GND (TPS2596 SLVSET8A p.4). Fixed-clamp variants rejected; this variant gives x1 auto-retry (Device Comparison p.3). Abs max on IN 21 V (p.1, p.5).
+PROPOSED  UVLO/OVLO divider R35 357k / R36 43.2k / R37 100k (1 %): overvoltage cut-off 5.76-6.20 V rising (below the 7.0 V abs max of the TPS79901, SBVS056L p.4), UVLO 4.06-4.32 V rising, 3.72-4.00 V falling (calculated with tolerances, not simulated).
+PROPOSED  ILM R38 1.21k 1 %: ILIM 0.68 / 0.76 / 0.84 A min/typ/max (TPS2596 Eq. 5 p.22). A real current limit, not the 0.5 A USB budget. TP3 IMON on ILM (about 0.79 V/A). C32 47 nF on dVdt: about 5.3 ms ramp, about 23 mA inrush into an assumed 25 uF (estimate, measure in G1).
+PROPOSED  FLT (pin 6) open-drain, TP4; R39 100k pull-up DNP to 3V3_D. UNRESOLVED: both rails are off while the eFuse is cut off, so a pull-up reads 0 V and cannot separate fault from no power; FLT is not routed to the ESP32. FLT pin abs max not read.
+PROPOSED  C33 4.7 uF 25 V 0805 on VBUS at IN. C1/C2 stay on +5V (OUT). Removed: TPS2121, +5V_CABLE, PWR_SRC, old R39-R42, C34, the PR1 divider.
+PROPOSED  Budget about 0.19 A worst case from +5V (docs/research/usb-standalone-power.md section 1.5, estimate) plus up to 35 mA on 3V3 for the LVDS fan-out U50 (LVDS104 p.5); radio must stay disabled. UNRESOLVED: whether a bus-powered hub holds a module to 100 mA.
+PROPOSED  ERC: U5 OUT (pin 5) is power_out on the +5V net, so +5V needs no PWR_FLAG; the root PWR_FLAG #FLG04 sits on VBUS. USB-alone firmware starts HV at the low-bias end in steps (PROPOSED).""", (TX, 28), 1.4)
 s.text("""HV WARNING
 APD bias reaches 220 V. Stored energy ~2.3 mJ (docs/calculations/apd-bias-design.md section 4). Can be hazardous.
 Never probe HV_OUT, HV_RAW, HV_PUMP, HV_V1 or HV_CLAMP directly. Use HV_MON (HV_OUT/101) for observation.

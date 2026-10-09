@@ -138,7 +138,7 @@ s.wire([(XF, yo), (XO, yo)])
 s.hier_label("LVDS_P", (XO, yo), 0, "output")
 s.wire([om, (XO, om[1])])
 s.hier_label("LVDS_N", (XO, om[1]), 0, "output")
-s.text("100 ohm termination is on the FPGA", (236.0, 133.0), 1.27)
+s.text("100 ohm termination R180 is across U50 A/B on the Connector sheet", (236.0, 133.0), 1.27)
 
 # ------------------------- ground ---------------------------------------------------------
 vee, ep = u.pin("VEE"), u.pin("EP")
@@ -189,7 +189,7 @@ block("Design intent (revision 2, decision 12; nothing here is simulated or meas
     "only. SHDN (pin 7): R81 10k pull-up, SHDN_N active low (VIH 1.5 V, VIL 0.4 V, p.8); shutdown is not a guaranteed zero output (standing correction 11).",
     "VERIFIED   VCCI = VCCO = 3V3 (2.4 to 5.5 V, p.19); 100 nF 0402 + 1 uF at each of VCCI and VCCO, VCCO through R80 0R (bead option). VEE and EP to GND "
     "(datasheet gives no pad requirement beyond a ground plane). PWR_FLAG on the VCCO net because R80 is passive.",
-    "PROPOSED   LVDS: OUT+ = LVDS_P, OUT- = LVDS_N; 100 ohm termination at the ECP5 input (docs/research/ulx3s-lvds-input.md). TP20 SDET_N, TP21 SDET_P (DNP, "
+    "PROPOSED   LVDS: OUT+ = LVDS_P, OUT- = LVDS_N; 100 ohm termination R180 across the A/B inputs of the fan-out buffer U50 on the Connector sheet, a few cm away (revision 4; SN65LVDS104 has no on-chip termination, LVDS104 p.16 Fig. 25; the ECP5 end is terminated with DIFFRESISTOR, docs/research/ulx3s-lvds-input.md). TP20 SDET_N, TP21 SDET_P (DNP, "
     "the probe loads the input).",
     "UNRESOLVED Comparator input noise and delay below 10 mV overdrive are not in the datasheet (docs/research/post-amp-slicer.md section 1); IB at VCM = 1.65 V is "
     "not specified."], (101.6, 172))

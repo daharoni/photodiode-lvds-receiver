@@ -144,13 +144,7 @@ s.no_connect(P(esp, "GPIO15"))
 stub(esp, "GPIO18", "l", 2, "CAN_TX")
 stub(esp, "GPIO19", "l", 2, "CAN_RX")
 stub(esp, "GPIO20", "l", 4, "TIA_CTRL", kind="hier", shape="output")
-# AUX2: GPIO21 -> R214 1k -> hierarchical AUX2 (bidirectional)
-_p21 = P(esp, "GPIO21")
-r214 = rh("R214", "1k", _p21[0] / G - OX - 20, _p21[1] / G - OY)
-_a, _b = r214.pin("1"), r214.pin("2")
-_near, _far = (_a, _b) if _a[0] > _b[0] else (_b, _a)
-s.connect(_p21, _near)
-s.stub(_far, "l", 4 * G, "AUX2", kind="hier", shape="bidirectional")
+s.no_connect(P(esp, "GPIO21"))   # AUX2 removed in revision 4; IO21 free
 stub(esp, "GPIO22", "l", 2, "DAC_RDY")
 stub(esp, "GPIO23", "l", 2, "STATUS")
 stub(esp, "GPIO16/U0TXD", "l", 2, "TXD0")
@@ -161,8 +155,8 @@ stub(esp, "GPIO0", "r", 4, "HV_DIS", kind="hier", shape="output")
 stub(esp, "GPIO1", "r", 4, "SHDN_N", kind="hier", shape="output")
 stub(esp, "GPIO2", "r", 2, "SDA")
 stub(esp, "GPIO3", "r", 2, "SCL")
-stub(esp, "GPIO4", "r", 2, "VBUS_SENSE")
-stub(esp, "GPIO5", "r", 4, "PWR_SRC", kind="hier", shape="input")
+stub(esp, "GPIO4", "r", 4, "CC1_SENSE", kind="hier", shape="input")
+stub(esp, "GPIO5", "r", 4, "CC2_SENSE", kind="hier", shape="input")
 stub(esp, "GPIO6", "r", 2, "LDAC")
 # AUX: GPIO7 -> R204 1k -> hierarchical AUX
 r204 = rh("R204", "1k", 176, 102)
@@ -198,49 +192,11 @@ le_out = r205.pin("2") if r205.pin("1")[0] > r205.pin("2")[0] else r205.pin("1")
 s.stub(le_out, "l", 4 * G, "LE_HYS", kind="hier", shape="output")
 
 # ============================== USB-C and ESD (left) ==============================
-jx, jy = 30, 70
-j60 = s.place("AharoniLab_Connector:USB4105-GF-A-120", "J60", "USB4105-GF-A-120", u(jx, jy), mirror="y")
-# CC pull-downs
-r200 = rv("R200", "5.1k", 50, 60); s.connect(P(j60, "A5"), P(r200, "2")); gnd(r200, "1", "u")
-r201 = rv("R201", "5.1k", 56, 62); s.connect(P(j60, "B5"), P(r201, "2")); gnd(r201, "1", "u")
-# D+ / D- : both contacts of each pair to a label
-stub(j60, "A6", "r", 2, "USB_DP"); stub(j60, "B6", "r", 2, "USB_DP")
-stub(j60, "A7", "r", 2, "USB_DM"); stub(j60, "B7", "r", 2, "USB_DM")
-s.no_connect(P(j60, "A8")); s.no_connect(P(j60, "B8"))
-# shield: all four tied, C 1 nF || R 1 M (DNP) to GND (pins are at the bottom of the symbol)
-sh = [P(j60, "SH%d" % k) for k in (1, 2, 3, 4)]
-yb = u(0, 90)[1]
-for p in sh:
-    s.wire([p, (p[0], yb)])
-c193 = cv("C193", "1n", 16, 94)
-r202 = rv("R202", "1M", 22, 94, dnp=True)
-s.wire([(u(16, 0)[0], yb), (sh[0][0], yb)])
-for cc in (c193, r202):
-    s.wire([cc.pin("1"), (cc.pin("1")[0], yb)]); gnd(cc, "2")
-ga, gb = P(j60, "A1_B12"), P(j60, "B1_A12")
-s.wire([ga, (ga[0], u(0, 92)[1])]); s.wire([gb, (gb[0], u(0, 90)[1]), (ga[0], u(0, 90)[1])])
-s.global_label("GND", (ga[0], u(0, 92)[1]), 270)
-va, vb = P(j60, "A4_B9"), P(j60, "B4_A9")
-yv = u(0, 48)[1]
-s.wire([va, (va[0], yv)]); s.wire([vb, (vb[0], yv), (va[0], yv)])
-s.wire([(va[0], yv), (va[0], yv - 6 * G)]); s.label("VBUS", (va[0], yv - 2 * G), 90)
-s.hier_label("VBUS", (va[0], yv - 6 * G), 90, "output")
-s.wire([(va[0], yv), (va[0] + 5 * G, yv)]); s.place("power:PWR_FLAG", "#FLG60", "PWR_FLAG", (va[0] + 5 * G, yv), in_bom=False)
-
-# VBUS sense divider: R215 100k (VBUS -> VBUS_SENSE), R216 150k to GND, C205 1n, into IO4 (decision 13)
-r215 = rv("R215", "100k", 44, 38)
-s.stub(P(r215, "1"), "u", 2 * G, "VBUS")
-r216 = rv("R216", "150k", 44, 47); gnd(r216, "2")
-s.wire([P(r215, "2"), P(r216, "1")])
-c205 = cv("C205", "1n", 60, 47)
-ys = P(r216, "1")[1]
-s.wire([(P(r216, "1")[0], ys), (c205.pin("1")[0], ys), c205.pin("1")]); gnd(c205, "2")
-s.label("VBUS_SENSE", (u(51, 0)[0], ys), 0)
-
+# J60, its Rd/shield parts, VBUS_SENSE and #FLG60 are gone (revision 4): the receptacle is J50 on the Connector sheet.
 # U61 USBLC6-2SC6
 u61 = s.place("AharoniLab_Misc:USBLC6-2SC6", "U61", "USBLC6-2SC6", u(85, 72))
-stub(u61, "1", "l", 2, "USB_DP"); stub(u61, "3", "l", 2, "USB_DM")
-gnd(u61, "2", "d"); stub(u61, "5", "u", 2, "VBUS")
+stub(u61, "1", "l", 4, "USB_DP", kind="hier", shape="bidirectional"); stub(u61, "3", "l", 4, "USB_DM", kind="hier", shape="bidirectional")
+gnd(u61, "2", "d"); stub(u61, "5", "u", 4, "VBUS", kind="hier", shape="input")
 r193 = rh("R193", "22R", 101, 70)
 r194 = rh("R194", "22R", 112, 86)
 for rr, up, dn in ((r193, "6", "USB_DP_E"), (r194, "4", "USB_DM_E")):
@@ -255,7 +211,6 @@ for rr, up, dn in ((r193, "6", "USB_DP_E"), (r194, "4", "USB_DM_E")):
 
 for rr in (r193, r194):
     tpos(rr, "Reference", 0, -4.6); tpos(rr, "Value", 0, -2.4)
-tpos(j60, "Value", 14, 21, "left")
 tpos(u61, "Value", 7, 10, "left")
 tpos(esp, "Value", 14, 26, "left")
 # status LED
@@ -340,7 +295,7 @@ tpos(u64, "Value", 6, 13, "left")
 s.stub(P(u64, "CANL"), "r", 8 * G, "CAN_L", kind="hier", shape="bidirectional")
 s.stub(P(u64, "CANH"), "r", 8 * G, "CAN_H", kind="hier", shape="bidirectional")
 gnd(u64, "GND", "d")
-r199 = rv("R199", "10k", 179, ky + 4)
+r199 = rv("R199", "100k", 179, ky + 4)
 s.wire([P(u64, "RS"), (P(r199, "1")[0], P(u64, "RS")[1]), P(r199, "1")]); gnd(r199, "2")
 vcc = P(u64, "VCC")
 ny = u(0, ky - 16)[1]
@@ -367,23 +322,23 @@ note("Strapping (MINI DS Table 4-1/4-3 p12-13): GPIO9 high = SPI boot; GPIO9 low
 note("DAC_HV safe default: MCP4728 EEPROM for channel C is programmed to 0xFFF (lowest bias), VREF = VDD, PD = 00, "
      "never power-down. HV_DIS (GPIO0, pull-up on the Power sheet) gates the bias regardless. UNRESOLVED until firmware exists.", 104, 146, width=50)
 _n = """BUTTONS (PROPOSED): SW60 RESET (EN to GND) and SW61 BOOT (IO9 to GND), C&K PTS810 SJM 250; TP60/TP61 in parallel. R190 10k + C190 1u is the debounce and the recommended EN RC (MINI-1 datasheet v1.5 p.40, HDG p.10). Download boot = GPIO9 0 with GPIO8 1 at EN rising (MINI-1 datasheet Table 4-3 p.13), VERIFIED. Fitted even though RTS/DTR auto-reset exists (TRM v1.2 p.1030 Table 32.3-2): recovery for empty flash or a disabled USB PHY (HDG p.30).
-VBUS SENSE (PROPOSED): ratio 0.6; 2.64 V at 4.4 V, 3.15 V at 5.25 V, 3.3 V at 5.5 V (calculated); reads high above VBUS about 4.1 V (VIH 0.75 x VDD, MINI-1 datasheet Table 6-3 p.26); 21 uA at 5.25 V. The USB Serial/JTAG controller has no VBUS-detect (text search of TRM v1.2 found none: absence of a statement, UNRESOLVED). IO4/IO5 are strapping pins (MTMS/MTDI) that only select SDIO sampling edges (MINI-1 datasheet Table 4-4 p.14); SDIO unused, PROPOSED harmless.
-FIRMWARE STATES by (VBUS_SENSE, PWR_SRC): (0,1) cable only; (1,0) USB only (standalone self-test); (1,1) both, cable powers; (0,0) cannot occur with power present. The ESP32 must not clear HV_DIS on the basis of these inputs alone. UNRESOLVED: firmware policy for the D+ pull-up backdrive into an unpowered host (TRM p.1042); self-test cannot prove the comparator or LVDS output without an FPGA or optical source; ground offset between laptop and FPGA supply not analysed; EN-side ESD diode; 13 ms mux soft start versus the 10 ms EN RC.""".split("\n")
-_usb = "USB D+/D- (PROPOSED, decision 13): R193/R194 22R (ESP32-C6 Hardware Design Guidelines p.18 section 1.3.13: reserve 22/33 ohm and capacitors to ground; MINI-1 datasheet v1.5 Fig. 9-1 p.40 leaves them TBD), with DNP C206/C207 (0402, value TBD on the first board) from USB_DP_E/USB_DM_E to GND on the module side. UNRESOLVED: effect of 22 ohm with USBLC6 and USB4105, and auto-reset through them, untested. VBUS surge protection is Power U5 (24 V abs max) with C34, not the USBLC6; the USBLC6-2SC6 VBUS-pin clamp behaviour is UNRESOLVED (ST datasheet not read)."
+CC SENSE (PROPOSED, decision 14): CC1_SENSE (IO4, ADC1_CH4) and CC2_SENSE (IO5, ADC1_CH5) arrive from the Connector sheet already divided 100k/100k with 100 nF; only the 0-1.9 V ATTEN2 range is read (ESP32-C6 datasheet v1.5 Table 5-6 p.66, +-23 mV after calibration), so Rp classification is thin (firmware: three agreeing reads). IO4/IO5 are strapping pins (MTMS/MTDI) that only select SDIO sampling edges (MINI-1 datasheet Table 4-4 p.14); SDIO unused, PROPOSED harmless. UNRESOLVED: finer ADC attenuation range; clamp-injection current for a fault on the CC taps (input high max VDD + 0.3 V, Table 5-4 p.65). VBUS_SENSE and PWR_SRC are removed.
+FIRMWARE STATES (PROPOSED, firmware/esp32/README.md): cc_class, cc_orient and usb_host are logged hints; the definitive system indicator is LINK_ALL from the FPGA master. The ESP32 must not clear HV_DIS on the basis of CC levels alone. UNRESOLVED: firmware policy for the D+ pull-up backdrive into an unpowered host (TRM p.1042); self-test cannot prove the comparator or LVDS output without an FPGA or optical source; ground offset between laptop and FPGA supply not analysed; EN-side ESD diode; eFuse dVdt ramp (about 5.3 ms estimated) versus the 10 ms EN RC.""".split("\n")
+_usb = "USB D+/D- (PROPOSED, decision 14): USB_DP/USB_DM arrive from J50 on the Connector sheet (hierarchical, bidirectional). R193/R194 22R (ESP32-C6 Hardware Design Guidelines p.18 section 1.3.13: reserve 22/33 ohm and capacitors to ground; MINI-1 datasheet v1.5 Fig. 9-1 p.40 leaves them TBD), with DNP C206/C207 (0402, value TBD) from USB_DP_E/USB_DM_E to GND on the module side. UNRESOLVED: effect of 22 ohm with USBLC6 and auto-reset through them, untested. VBUS surge protection is the eFuse U5 on the Power sheet (21 V abs max, TPS2596 p.5), not the USBLC6; USBLC6-2SC6 VBUS-pin clamp behaviour UNRESOLVED (ST datasheet not read). Place U61 near J50 at layout."
 note(_usb, 44, 10, width=52)
 note(_n[0], 98, 10, width=52)
 note(_n[1], 152, 10, width=52)
 note(_n[2], 206, 10, width=52)
 note("Optional CAN bus ESD part: not fitted, no part chosen (DNP footprint note only).", 228, 152, width=40)
 
-intent = """DESIGN INTENT (Controller sheet, revision 3, decisions 12 and 13). Labels: VERIFIED = datasheet cited, PROPOSED = design intent, UNRESOLVED = open. Nothing here is measured or simulated.
+intent = """DESIGN INTENT (Controller sheet, revision 4, decisions 12, 13 and 14). Labels: VERIFIED = datasheet cited, PROPOSED = design intent, UNRESOLVED = open. Nothing here is measured or simulated.
 ROLE (PROPOSED): on-module ESP32-C6 does the slow trims and housekeeping, never the data path. (1) Range trim: DAC_HV (MCP4728 ch C) moves the APD bias toward the Q(M) optimum, and TIA_CTRL (IO20) schedules the OPA857 gain 20k / 5k from RSSI (ADS1115 AIN1) and FPGA link validity (received over CAN). (2) Threshold trim: DAC_TH (ch B) sets the Slicer threshold node; VTH_MON (AIN2) reads it back. (3) HV gating: HV_DIS (IO0) enables the APD bias supply; HV_MON (AIN0) reads the bias. (4) Module identity and status over CAN (CAN_H/CAN_L, 125 kbit/s), plus SHDN_N and LE_HYS to the Slicer. DAC_A (ch A) and DAC_D are spare test pads (TP68, TP69); ADS1115 AIN3 is tied to GND through its RC (spare).
 UNPROGRAMMED ESP32 (PROPOSED): the module decodes. TIA_CTRL floats, so the Front End pull-up gives 20 k; SHDN_N pull-up keeps the comparator on; the Slicer threshold sits at VCM_REF through its resistor network. BUT HV_DIS is pulled up on the Power sheet, so an unprogrammed module has NO APD bias and no gain. Bench jumper J1 (HV FORCE ON, Power sheet) forces HV on. DAC_HV default (EEPROM) is the lowest bias.
-PIN MAP (module pad; research doc section 1): IO0 HV_DIS, IO1 SHDN_N, IO2 SDA, IO3 SCL, IO6 LDAC, IO7 AUX via R204 1k, IO14 LE_HYS via R205 (0R, DNP), IO20 TIA_CTRL (direct, pull-up on the Front End), IO21 AUX2 via R214 1k, IO8 strap pull-up, IO9 BOOT, IO12/IO13 USB D-/D+, IO16/IO17 TXD0/RXD0 pads, IO18 CAN_TX, IO19 CAN_RX, IO22 DAC RDY, IO23 status LED, IO4 VBUS_SENSE (R215 100k / R216 150k / C205 1n from VBUS), IO5 PWR_SRC (hierarchical input from Power U5 ST). IO15 is the only no_connect.
+PIN MAP (module pad; research doc section 1): IO0 HV_DIS, IO1 SHDN_N, IO2 SDA, IO3 SCL, IO6 LDAC, IO7 AUX via R204 1k, IO14 LE_HYS via R205 (0R, DNP), IO20 TIA_CTRL (direct, pull-up on the Front End), IO21 no_connect (AUX2 removed), IO8 strap pull-up, IO9 BOOT, IO12/IO13 USB D-/D+, IO16/IO17 TXD0/RXD0 pads, IO18 CAN_TX, IO19 CAN_RX, IO22 DAC RDY, IO23 status LED, IO4 CC1_SENSE and IO5 CC2_SENSE (hierarchical inputs from the Connector). IO15 and IO21 are no_connect.
 CHANGE FROM EARLIER SPEC: IO10 and IO11 do not exist on the MINI-1 (MINI DS Table 3-1 p10-11; 22 GPIOs), so LDAC is IO6 and AUX is IO7 (JTAG MTCK/MTDO pins; USB-Serial-JTAG is the debug path). IO15 is a strapping pin, so TIA_CTRL uses IO20. PROPOSED.
 STRAPPING (VERIFIED, MINI DS Table 4-1..4-3 p12-13): GPIO9 weak pull-up, high = SPI boot; download boot needs GPIO8 = 1 and GPIO9 = 0 (BOOT pad to GND, then EN pad). GPIO8 has R192 10k to 3V3_D. Do not drive IO8/IO9 at reset. IO0, IO1, IO14 are Hi-Z at reset (C6 DS Table 2-2 p17-18), so the pull resistors on the other sheets fix the safe state. IO18-IO23 have weak pull-ups at reset (CAN_TX idles recessive; TIA_CTRL reads high = 20 k even before the Front End pull-up).
-USB (PROPOSED, decision 13): J60 is for programming and standalone power; VBUS leaves the sheet as hierarchical output VBUS (Power U5 IN2) and feeds U61 pin 5 and the VBUS_SENSE divider (#FLG60 stays here). D+/D- through R193/R194 22R with DNP C206/C207 to GND (details in the notes at the top). UART fallback on TP62/TP63.
-CAN (PROPOSED, research section 3): SN65HVD230 with RS = 10k to GND (slope control, 80/120/160 ns edges, SLOS346O p8; 3 m leg passes the SLLA270 p9 stub rule marginally). 125 kbit/s. NO termination on the module; one 120 ohm (or 2 x 60 ohm + 4.7 nF split, SLLA270 p8) at the FPGA-end junction only. Vref_OUT unconnected.
+USB (PROPOSED, decision 14): the receptacle is J50 on the Connector sheet; USB_DP/USB_DM, VBUS (U61 pin 5 only) and CC1_SENSE/CC2_SENSE arrive as hierarchical inputs. D+/D- through R193/R194 22R with DNP C206/C207 to GND (details in the notes at the top). UART fallback on TP62/TP63.
+CAN (PROPOSED, research section 3): SN65HVD230 with RS = 100k to GND (slope control, 600/800/1200 ns rise, SLOS346O p8; stub rule SLLA270 p9 allows at least 20 m, PROPOSED arithmetic; revision 4). 125 kbit/s. NO termination on the module; one 120 ohm (or 2 x 60 ohm + 4.7 nF split, SLLA270 p8) at the FPGA-end junction only. Vref_OUT unconnected.
 I2C (VERIFIED, MCP4728 DS22187E p21-24; ADS1115 SBAS444E p20): private bus, MCP4728 at 0x60, ADS1115 ADDR = GND at 0x48. MCP4728 factory default is 0 V on all channels (not Hi-Z). ADS1115 inputs must stay within GND-0.3 .. VDD+0.3 V; the three sources are <= 3.3 V nodes. LDAC is held high by R197 so a high LDAC keeps the EEPROM values on the outputs.
 UNRESOLVED: USB series resistor effect and auto-reset over USB; DAC_TH safe direction; verification of the DAC_HV default after EEPROM programming (General Call Read); firmware range-trim and TIA_CTRL scheduling algorithm; measured 3V3_D current; antenna keep-out numbers; -1 versus -1U module; VBUS back-feed against the 5 V cable rail."""
 paras = intent.split("\n")
