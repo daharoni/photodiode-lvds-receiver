@@ -191,7 +191,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "00c9d8a3-b6a7-4625-8c1c-becfcbb50079")
-		(at 207.675 84.275)
+		(at 280.615 188.195)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R187"
@@ -396,7 +396,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "00cb957a-e0e5-4290-a5c5-20aedfc78d06")
-		(at 223.635 115.555)
+		(at 259.455 174.095)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP30"
@@ -556,7 +556,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "011b4576-b560-40cd-9321-4f04fcdc561b")
-		(at 195.065 119.195)
+		(at 299.185 121.735)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C58"
@@ -761,7 +761,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "01cb0313-bd8a-4457-8f74-009cd94c1799")
-		(at 175.685 94.315)
+		(at 376.835 91.675)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R32"
@@ -966,7 +966,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "021f7c73-8eea-4887-b340-8244f470a8a6")
-		(at 203.665 79.255)
+		(at 333.515 185.735)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R177"
@@ -1171,7 +1171,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "07b93538-1ff4-44d5-b36f-82d424badffd")
-		(at 166.025 137.005)
+		(at 305.155 211.975)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R193"
@@ -1376,7 +1376,7 @@
 	(footprint "AharoniLab_Package_SO:Texas_DDA-R-PDSO-G8_SO-PowerPAD-8_3.9x4.9mm_P1.27mm_EP2.4x3.1mm"
 		(layer "F.Cu")
 		(uuid "097d40ee-bcb6-43e4-bca5-7827e4189564")
-		(at 166.76 106.325)
+		(at 255.225 88.725)
 		(descr "Texas Instruments DDA (R-PDSO-G8) PowerPAD plastic small outline, 8 pin, 3.9x4.9 mm body, 1.27 mm pitch, 2.4x3.1 mm exposed thermal pad, JEDEC MS-012 BA (TPS2596 eFuse family, https://www.ti.com/lit/ds/symlink/tps2596.pdf)")
 		(tags "SOIC SO PowerPAD DDA 8 exposed pad TPS2596")
 		(property "Reference" "U5"
@@ -1714,7 +1714,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "09caf253-69bb-4169-84d0-4d0937c2859a")
-		(at 163.655 101.845)
+		(at 376.835 94.135)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C28"
@@ -1919,7 +1919,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "0ba4a1fd-3381-49ba-9368-a20369744e4a")
-		(at 203.085 114.175)
+		(at 317.065 118.235)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R59"
@@ -2124,7 +2124,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "0c3ce72e-aff4-4ba2-8df5-7107b89c65f9")
-		(at 195.065 114.175)
+		(at 317.065 115.775)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C54"
@@ -2329,7 +2329,7 @@
 	(footprint "AharoniLab_Diode_SMD:Diodes_PowerDI-123"
 		(layer "F.Cu")
 		(uuid "0cbd5cb5-e933-4b50-9bd5-768bd35b6b2f")
-		(at 158.825 109.825)
+		(at 311.015 92.775)
 		(descr "Diodes Inc. PowerDI123 (SOD-123F-like, 3.7 x 1.78 mm) 2-terminal SMD diode; pad 1 = cathode (large tab, cathode band side), pad 2 = anode; land pattern from the DFLS1150 suggested pad layout (DS30593 Rev. 10-2, Sept 2023, p.4: G 0.65, X 1.05, X1 2.40, X2 4.10, Y 1.50 mm) https://www.diodes.com/assets/Datasheets/DFLS1150.pdf")
 		(tags "diode PowerDI123 PowerDI-123 Diodes Incorporated")
 		(property "Reference" "D4"
@@ -2571,7 +2571,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_1206_3216Metric_N"
 		(layer "F.Cu")
 		(uuid "0cd23e24-0c9b-41d7-ba39-5e34032671b9")
-		(at 207.895 128.955)
+		(at 266.755 127.575)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R50"
@@ -2776,7 +2776,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "0d2189e1-969a-40ca-b2a8-d6d35f19bdbe")
-		(at 162.015 139.515)
+		(at 332.115 218.935)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C203"
@@ -2981,7 +2981,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "0f1f2d9a-20da-40d4-916f-06b1c612c8f5")
-		(at 182.165 145.385)
+		(at 333.305 223.675)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP69"
@@ -3141,7 +3141,7 @@
 	(footprint "AharoniLab_LED_SMD:LED_0805_2012Metric"
 		(layer "F.Cu")
 		(uuid "115669ed-3e0f-4265-b1a6-d5fe8a0aa619")
-		(at 181.875 133.07)
+		(at 372.035 212.195)
 		(descr "LED SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "LED")
 		(property "Reference" "D60"
@@ -3410,7 +3410,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "12a86f99-f578-4736-84c2-4a2b4b45e826")
-		(at 175.685 99.335)
+		(at 397.795 93.845)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R34"
@@ -3615,7 +3615,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0402_1005Metric_N"
 		(layer "F.Cu")
 		(uuid "13e22d5e-6963-405f-9011-eb5593500bf3")
-		(at 194.495 130.325)
+		(at 283.725 122.865)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C57"
@@ -3820,7 +3820,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "14ba7f22-4284-4bcf-b1c8-707e03a6cfae")
-		(at 182.165 141.105)
+		(at 323.085 218.195)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP67"
@@ -3980,7 +3980,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "157b5ab9-1913-414a-962a-18ed87fa4aae")
-		(at 174.045 144.535)
+		(at 343.275 211.975)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R211"
@@ -4185,7 +4185,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0805_2012Metric_N"
 		(layer "F.Cu")
 		(uuid "15ca8f0b-143e-4b86-ad1b-ea807c28e7bc")
-		(at 183.925 82.515)
+		(at 279.615 87.005)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C10"
@@ -4390,7 +4390,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0402_1005Metric_N"
 		(layer "F.Cu")
 		(uuid "1668faee-3130-4c4e-8e7e-86b5a13f02d2")
-		(at 177.485 140.675)
+		(at 357.345 221.125)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C195"
@@ -4595,7 +4595,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "16c9a4e2-c43d-4d1f-99cf-d6b7df226b8e")
-		(at 223.635 117.695)
+		(at 269.895 172.095)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP31"
@@ -4755,7 +4755,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "17492555-4d53-406a-88a3-737bb4e0a263")
-		(at 167.665 96.825)
+		(at 335.295 92.755)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R10"
@@ -4960,7 +4960,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "1a162b75-d75c-4c46-b7d0-518882983a2e")
-		(at 163.655 89.295)
+		(at 317.415 98.955)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C22"
@@ -5165,7 +5165,7 @@
 	(footprint "AharoniLab_Package_DFN_QFN:Espressif_ESP32-C6-MINI-1"
 		(layer "F.Cu")
 		(uuid "1bc4f43c-8c7f-422b-89f5-690026b7d19c")
-		(at 163.81 129.375)
+		(at 257.825 222.495)
 		(descr "Espressif ESP32-C6-MINI-1 / ESP32-C6-MINI-1U Wi-Fi 6 / BLE 5 / Zigbee module, 53-pad castellated LGA, 13.2 x 16.6 mm (-1U: 13.2 x 12.5 mm, antenna area absent), land pattern from datasheet v1.5 Figure 11-1, https://www.espressif.com/sites/default/files/documentation/esp32-c6-mini-1_mini-1u_datasheet_en.pdf")
 		(tags "ESP32-C6 MINI-1 MINI-1U module WiFi6 BLE Zigbee Espressif")
 		(property "Reference" "U60"
@@ -6002,7 +6002,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "1d384921-6a03-4eaa-946a-63674a743de7")
-		(at 199.075 116.685)
+		(at 299.185 119.275)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R54"
@@ -6207,7 +6207,7 @@
 	(footprint "AharoniLab_Package_DFN_QFN:Texas_R-PUSON-N14"
 		(layer "F.Cu")
 		(uuid "1e047ac0-8541-477b-b537-c4d0a3aa4c05")
-		(at 205.285 102.26)
+		(at 266.875 187.005)
 		(descr "USON, 14 Pin (https://www.ti.com/lit/ds/symlink/tpd6e05u06.pdf#page=28)")
 		(tags "USON NoLead")
 		(property "Reference" "U52"
@@ -6668,7 +6668,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "1ea901f5-e780-4bdc-ba43-3f2d68c96822")
-		(at 180.005 141.105)
+		(at 374.875 214.695)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP62"
@@ -6828,7 +6828,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "1f3e0cd1-cd9b-4c25-9a0e-86e2f0ef3fa9")
-		(at 158.005 142.025)
+		(at 357.915 218.935)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C198"
@@ -7033,7 +7033,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "1faedc74-df4e-4542-9d93-62c353c649dc")
-		(at 171.675 94.315)
+		(at 376.835 86.755)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R20"
@@ -7238,7 +7238,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "21632a82-a902-4c69-8d26-56168974f722")
-		(at 220.545 124.215)
+		(at 256.415 171.815)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R102"
@@ -7443,7 +7443,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "22fac96a-b28d-4638-a07a-d654229c5eee")
-		(at 163.655 81.765)
+		(at 278.255 94.115)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C9"
@@ -7648,7 +7648,7 @@
 	(footprint "AharoniLab_Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 		(layer "F.Cu")
 		(uuid "2793a9c2-fe21-4e57-819d-5303f0a19416")
-		(at 175.405 130.46)
+		(at 317.335 213.945)
 		(descr "SOIC, 8 Pin (JEDEC MS-012AA, https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/soic_narrow-r/r_8.pdf)")
 		(tags "SOIC SO")
 		(property "Reference" "U64"
@@ -8103,7 +8103,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_1206_3216Metric_N"
 		(layer "F.Cu")
 		(uuid "2a27a9fd-9183-411f-9eac-97d8d6590e5d")
-		(at 158.825 89.725)
+		(at 311.015 96.075)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C18"
@@ -8308,7 +8308,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0402_1005Metric_N"
 		(layer "F.Cu")
 		(uuid "2ac04de9-8944-4e73-b44b-a0a27c7180e1")
-		(at 177.485 144.615)
+		(at 303.445 216.105)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C206"
@@ -8513,7 +8513,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "2adc1e12-5427-4dac-b32c-e57f8e9605ce")
-		(at 158.005 139.515)
+		(at 353.955 218.935)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C197"
@@ -8718,7 +8718,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "2cef2d32-38c5-4a0e-be25-2a914fdcbf4a")
-		(at 195.065 111.665)
+		(at 295.225 121.735)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C53"
@@ -8923,7 +8923,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "2db57096-8ac1-4535-9274-80c172fca02e")
-		(at 199.075 142.095)
+		(at 256.415 152.035)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R83"
@@ -9128,7 +9128,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0805_2012Metric_N"
 		(layer "F.Cu")
 		(uuid "2df08c66-aa89-45c0-9626-a796c5e94237")
-		(at 181.145 147.955)
+		(at 267.375 212.225)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C191"
@@ -9333,7 +9333,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "2ed84ecc-4b57-4faf-90f1-1f8b44a42797")
-		(at 220.545 114.175)
+		(at 270.815 169.815)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C102"
@@ -9538,7 +9538,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "2fc426f8-fd78-46f8-a982-4e9382651257")
-		(at 199.655 84.275)
+		(at 276.655 193.115)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C182"
@@ -9743,7 +9743,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "308576b4-8e2b-4543-a0c3-d91818104b06")
-		(at 220.545 126.725)
+		(at 274.775 169.815)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R103"
@@ -9948,7 +9948,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "37bdfe8b-d921-4b29-a4d7-ac9bf0bca338")
-		(at 199.075 111.665)
+		(at 303.085 115.775)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R51"
@@ -10153,7 +10153,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "39d59270-799d-4eef-a9c0-1f6b9610881d")
-		(at 174.045 149.555)
+		(at 336.075 216.475)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R213"
@@ -10358,7 +10358,7 @@
 	(footprint "AharoniLab_Package_SO:TSSOP-16_4.4x5mm_P0.65mm"
 		(layer "F.Cu")
 		(uuid "3cee372a-b164-4a23-9258-f71c51be39f3")
-		(at 204.56 96.355)
+		(at 313.245 187.755)
 		(descr "TSSOP, 16 Pin (https://www.jedec.org/document_search?search_api_views_fulltext=MO-153)")
 		(tags "TSSOP SO JEDEC-MO-153-AB Texas_PW0016A Microchip-ST Toshiba-TSSOP16-P-0044-0.65A NXP-SOT403-1 Infineon-P-TSSOP-16-800")
 		(property "Reference" "U50"
@@ -10841,7 +10841,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "3de4487e-557c-422b-a172-2e068106eded")
-		(at 179.695 81.765)
+		(at 252.455 96.115)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R37"
@@ -11046,7 +11046,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0402_1005Metric_N"
 		(layer "F.Cu")
 		(uuid "3f3b635c-c285-4bf7-badb-c7238df5d97b")
-		(at 202.205 146.305)
+		(at 251.885 154.225)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C82"
@@ -11251,7 +11251,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "3f76d1b4-a833-4ef6-aad4-c5c1c705080b")
-		(at 199.655 89.295)
+		(at 314.835 192.235)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C185"
@@ -11456,7 +11456,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "402de66f-4ddb-4611-abb9-ffb4d89c84d8")
-		(at 203.085 139.585)
+		(at 270.335 146.535)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R86"
@@ -11661,7 +11661,7 @@
 	(footprint "AharoniLab_Package_SO:Analog_MSE16-12_MSOP-16-1EP_3x4mm_P0.5mm_EP1.65x2.85mm"
 		(layer "F.Cu")
 		(uuid "4111394a-cb06-42fd-bf2c-116a698968b3")
-		(at 180.59 105.895)
+		(at 312.625 88.295)
 		(descr "MSOP-16 (4 pins removed, 12 leads: 1,3,5-8,9-12,14,16) with exposed pad, 3x4.04 mm body, 0.5 mm pitch, ADI/LTC MSE16 (12), drawing 05-08-1871 Rev D, exposed pad 1.65x2.85 mm numbered 17; https://www.analog.com/media/en/technical-documentation/data-sheets/lt8365.pdf")
 		(tags "MSOP LT8365 MSE16 exposed pad 16-lead 4 pins removed")
 		(property "Reference" "U3"
@@ -12053,7 +12053,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "419971f4-692c-42df-9a5e-924d96d3b66c")
-		(at 162.015 144.535)
+		(at 284.255 216.675)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R190"
@@ -12258,7 +12258,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "446596ce-2f1b-4f12-abbe-4f477863b8e2")
-		(at 198.735 104.835)
+		(at 349.275 187.645)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP55"
@@ -12418,7 +12418,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_1206_3216Metric_N"
 		(layer "F.Cu")
 		(uuid "44e9e2af-1a7b-4a56-80a5-542a075d0e5e")
-		(at 184.505 101.025)
+		(at 356.315 94.855)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R30"
@@ -12623,7 +12623,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "44f387a5-1395-43a3-a4c4-734f9672770e")
-		(at 199.075 137.075)
+		(at 260.375 149.575)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R81"
@@ -12828,7 +12828,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "4512e28a-7054-4a2a-a443-340c3f2ba206")
-		(at 171.675 89.295)
+		(at 365.035 94.455)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R17"
@@ -13033,7 +13033,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_1206_3216Metric_N"
 		(layer "F.Cu")
 		(uuid "460a036f-4665-4b2e-aaf5-c902f7142416")
-		(at 184.505 97.715)
+		(at 361.915 91.555)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R19"
@@ -13238,7 +13238,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0402_1005Metric_N"
 		(layer "F.Cu")
 		(uuid "46c67f2f-359d-4f1c-9da8-165b0fd2d4fc")
-		(at 194.495 126.385)
+		(at 302.575 121.465)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C52"
@@ -13443,7 +13443,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "48c6f299-d60a-4930-9de7-ec4f100081d2")
-		(at 203.665 89.295)
+		(at 290.575 188.195)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R183"
@@ -13648,7 +13648,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "4c5623b4-194d-4b90-bace-0088859d76cc")
-		(at 220.545 109.155)
+		(at 260.375 171.815)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C100"
@@ -13853,7 +13853,7 @@
 	(footprint "AharoniLab_Package_SO:SOIC-8_3.9x4.9mm_P1.27mm"
 		(layer "F.Cu")
 		(uuid "4d97b671-ef49-4de1-887d-51b595b0b632")
-		(at 226.775 111.26)
+		(at 254.675 167.385)
 		(descr "SOIC, 8 Pin (JEDEC MS-012AA, https://www.analog.com/media/en/package-pcb-resources/package/pkg_pdf/soic_narrow-r/r_8.pdf)")
 		(tags "SOIC SO")
 		(property "Reference" "U30"
@@ -14314,7 +14314,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "4de21f10-013c-477b-aa84-f81b4ec3045a")
-		(at 198.735 94.135)
+		(at 345.055 185.555)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP50"
@@ -14474,7 +14474,7 @@
 	(footprint "AharoniLab_Connector:PinHeader_1x02_P2.54mm_Vertical"
 		(layer "F.Cu")
 		(uuid "4e9207ba-db9f-4efd-8fc0-b943238496f6")
-		(at 186.215 105.395)
+		(at 394.125 87.795)
 		(descr "Through hole straight pin header, 1x02, 2.54mm pitch, single row, KiCad official geometry https://gitlab.com/kicad/libraries/kicad-footprints")
 		(tags "Through hole pin header THT 1x02 2.54mm single row")
 		(property "Reference" "J1"
@@ -14762,7 +14762,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0402_1005Metric_N"
 		(layer "F.Cu")
 		(uuid "4f4411f4-d5c6-4968-9075-5733eb48321c")
-		(at 177.485 138.705)
+		(at 339.465 221.125)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C194"
@@ -14967,7 +14967,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "4f71b58e-2cec-4fd5-9c0a-6c2674fba25c")
-		(at 167.665 84.275)
+		(at 264.335 96.115)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C32"
@@ -15172,7 +15172,7 @@
 	(footprint "AharoniLab_OptoDevice:Hamamatsu_S12023_TO-18_P2.54mm_Vertical"
 		(layer "F.Cu")
 		(uuid "514f6628-45ae-43a4-be2b-fc35bcc12d2a")
-		(at 207.795 123.325)
+		(at 253.155 129.895)
 		(descr "Hamamatsu S12023-02/-05/-10/-10A Si APD, TO-18 metal can with borosilicate window (5.4 mm flange, 4.7 mm cap, 3.7 mm overall height), 3 leads 0.45 mm on a 2.54 mm diameter circle; through-hole, 0.7 mm drill, 1.2 mm pads, origin on pad 1. Pad 1 = cathode, pad 2 = case, pad 3 = anode; tab at upper left in this top view. Datasheet: https://www.hamamatsu.com/resources/pdf/ssd/s12023-02_etc_kapd1007e.pdf (KAPD1007E19, outline KAPDA0136EC)")
 		(tags "APD photodiode S12023 TO-18 THT Hamamatsu")
 		(property "Reference" "D10"
@@ -15480,7 +15480,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "515f58c7-0904-4c98-83ff-7f3a771aecca")
-		(at 199.075 114.175)
+		(at 295.225 119.275)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R53"
@@ -15685,7 +15685,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "531fed88-9bdb-4185-bc00-0939ddd8ba05")
-		(at 207.675 89.295)
+		(at 280.615 190.655)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R189"
@@ -15890,7 +15890,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "54219503-1bee-4733-9817-753f8eb729f9")
-		(at 199.695 144.425)
+		(at 269.415 148.815)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP20"
@@ -16050,7 +16050,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0805_2012Metric_N"
 		(layer "F.Cu")
 		(uuid "54a07ad3-3593-415c-a9e6-f20921319b4f")
-		(at 183.925 94.555)
+		(at 262.175 87.005)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C33"
@@ -16255,7 +16255,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "555132db-ac6e-4475-8477-f3c3c6adc05a")
-		(at 207.675 79.255)
+		(at 276.655 188.195)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R185"
@@ -16460,7 +16460,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "56ed95b8-7cab-41f6-bb60-379b8873e380")
-		(at 162.015 149.555)
+		(at 252.455 230.075)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R192"
@@ -16665,7 +16665,7 @@
 	(footprint "AharoniLab_Connector:Wuerth_632723300011"
 		(layer "F.Cu")
 		(uuid "57a835eb-9b09-4c68-bf89-cbbb1bf0e8a3")
-		(at 215.205 79.375)
+		(at 255.975 185.855)
 		(descr "Wuerth Elektronik WR-COM USB 3.1 Type-C horizontal receptacle 632723300011, 24 pin, THR/SMT hybrid: A-row 12 SMT pads at 0.5 mm pitch, B-row 12 plated holes (0.4 mm drill, staggered 0.4 mm pitch) plus plate/shell posts; pin 1 = A1; PCB edge at y=10.58 (connector overhangs 0.95 mm); datasheet https://www.we-online.com/components/products/datasheet/632723300011.pdf")
 		(tags "USB USB-C Type-C receptacle connector USB3.1 24 pin horizontal Wuerth WR-COM")
 		(property "Reference" "J50"
@@ -17251,7 +17251,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "58003f6a-3710-4210-8599-05af47886a1a")
-		(at 175.685 79.255)
+		(at 312.515 101.855)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R24"
@@ -17456,7 +17456,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "58aef106-514f-4f78-bb33-9207fa22a235")
-		(at 170.035 139.515)
+		(at 371.835 214.875)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R203"
@@ -17661,7 +17661,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "5c571662-e800-470b-8fa2-88e4c492c053")
-		(at 163.655 99.335)
+		(at 339.255 97.675)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C27"
@@ -17866,7 +17866,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "5c74ee90-d527-4421-b32f-79b16058e0e8")
-		(at 179.695 86.785)
+		(at 260.375 96.115)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R39"
@@ -18071,7 +18071,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "5cb8b1cc-2d9d-4ff0-b42e-c9a299a60378")
-		(at 175.685 101.845)
+		(at 256.855 93.155)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R35"
@@ -18276,7 +18276,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "5dfe11f6-9119-4af2-b6ae-95d3c4a9ef70")
-		(at 179.695 89.295)
+		(at 343.215 97.675)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "TH1"
@@ -18467,7 +18467,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "5f93036d-ee28-4825-a956-09b5826a3732")
-		(at 199.695 146.565)
+		(at 290.375 146.355)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP21"
@@ -18628,7 +18628,7 @@
 	(footprint "AharoniLab_Package_SO:MSOP-10_3x3mm_P0.5mm"
 		(layer "F.Cu")
 		(uuid "5fb61a44-3560-4e8e-a9e5-02d217362502")
-		(at 181.555 119.93)
+		(at 333.735 212.995)
 		(descr "MSOP, 10 Pin (JEDEC MO-187 variation BA, 0.85mm body thickness, https://www.jedec.org/system/files/docs/mo-187F.pdf)")
 		(tags "MSOP SO TSSOP-10_3x3mm_P0.5mm")
 		(property "Reference" "U62"
@@ -19103,7 +19103,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "6040b9c7-29d0-4935-9adc-d3bf5fd028e0")
-		(at 182.165 136.825)
+		(at 344.045 221.215)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP65"
@@ -19263,7 +19263,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "63f1e8e0-76be-45fb-a9f0-26fa32905da7")
-		(at 214.125 122.565)
+		(at 312.185 120.515)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP11"
@@ -19423,7 +19423,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "64a12d67-50ad-447b-8fe8-074a753d80ab")
-		(at 167.665 94.315)
+		(at 345.555 86.755)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R9"
@@ -19628,7 +19628,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "65b2ae39-eeeb-4415-9abb-5808f5558cd6")
-		(at 203.085 134.565)
+		(at 270.335 144.075)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R84"
@@ -19833,7 +19833,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "66a21a22-91f9-4c76-a769-07caaf3b9871")
-		(at 175.685 84.275)
+		(at 320.435 101.855)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R26"
@@ -20038,7 +20038,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "69d5411d-8fbd-4422-9060-eda811b92440")
-		(at 163.655 91.805)
+		(at 321.375 98.955)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C23"
@@ -20243,7 +20243,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "6fae6d5e-d33a-45eb-8c3a-75a934ba6c20")
-		(at 171.675 86.785)
+		(at 361.075 94.455)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R16"
@@ -20448,7 +20448,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "71681daf-66fe-48dd-adfb-b1dc56c7496b")
-		(at 167.665 89.295)
+		(at 274.295 94.115)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R2"
@@ -20653,7 +20653,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "7203a01f-9539-4f41-a504-15c0d78273ac")
-		(at 166.025 139.515)
+		(at 300.055 216.375)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R194"
@@ -20858,7 +20858,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "72ca85fc-2b41-49e5-b977-296f9a0f8c23")
-		(at 171.675 101.845)
+		(at 308.555 101.855)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R23"
@@ -21063,7 +21063,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "73dd32ce-c4ee-428a-ae8f-3a03a9ef78bf")
-		(at 198.735 102.695)
+		(at 347.165 187.645)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP54"
@@ -21223,7 +21223,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "74c34103-4ad3-43f1-8006-776163445570")
-		(at 175.685 86.785)
+		(at 324.395 101.855)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R27"
@@ -21428,7 +21428,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "764aad1f-04c2-4e07-b9c3-bc66c71cfacb")
-		(at 175.685 89.295)
+		(at 304.595 104.315)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R28"
@@ -21633,7 +21633,7 @@
 	(footprint "AharoniLab_Diode_SMD:Diodes_PowerDI-123"
 		(layer "F.Cu")
 		(uuid "77cf8478-7d65-461d-a9ee-25c52ac7e227")
-		(at 158.825 99.775)
+		(at 318.735 87.175)
 		(descr "Diodes Inc. PowerDI123 (SOD-123F-like, 3.7 x 1.78 mm) 2-terminal SMD diode; pad 1 = cathode (large tab, cathode band side), pad 2 = anode; land pattern from the DFLS1150 suggested pad layout (DS30593 Rev. 10-2, Sept 2023, p.4: G 0.65, X 1.05, X1 2.40, X2 4.10, Y 1.50 mm) https://www.diodes.com/assets/Datasheets/DFLS1150.pdf")
 		(tags "diode PowerDI123 PowerDI-123 Diodes Incorporated")
 		(property "Reference" "D1"
@@ -21875,7 +21875,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "78289838-0525-405d-8fd8-75d7770b8353")
-		(at 167.665 79.255)
+		(at 294.195 91.155)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C29"
@@ -22080,7 +22080,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "786abdb2-f4ec-4361-92cd-8d5fd18a9b73")
-		(at 203.085 109.155)
+		(at 281.475 120.675)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R57"
@@ -22285,7 +22285,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "79639deb-03b5-4d4b-b437-501ead92e172")
-		(at 171.675 96.825)
+		(at 376.835 89.215)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R21"
@@ -22490,7 +22490,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "79b7ec47-ca68-4e40-b6c8-3187d14d98ec")
-		(at 180.005 136.825)
+		(at 284.555 221.195)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP60"
@@ -22650,7 +22650,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "7a2c2393-8f67-4533-b45d-0d353aea6149")
-		(at 195.065 139.585)
+		(at 274.295 146.535)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C84"
@@ -22855,7 +22855,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "7b26a3e1-2567-4b68-8ec4-40aef58f1aab")
-		(at 195.065 142.095)
+		(at 287.335 146.535)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C87"
@@ -23060,7 +23060,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "7c4c6add-c6be-41d2-b7f7-061d2af6abf0")
-		(at 203.085 142.095)
+		(at 287.335 144.075)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R87"
@@ -23265,7 +23265,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "7cdea3a8-62af-4ac2-bd47-f21fe3de11bf")
-		(at 203.665 81.765)
+		(at 310.875 192.235)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R180"
@@ -23470,7 +23470,7 @@
 	(footprint "AharoniLab_Switch_SMD:SW_SPST_PTS810"
 		(layer "F.Cu")
 		(uuid "7ce987dc-322e-466f-a721-d4f3c5013906")
-		(at 174.555 119.975)
+		(at 278.925 213.095)
 		(descr "C&K (Littelfuse) PTS 810 Series, Microminiature SMT Top Actuated, 4.2x3.2mm, J-bend; pad geometry from KiCad official Button_Switch_SMD:SW_SPST_PTS810, matches datasheet recommended PCB layout; pads 1 (top row) and 2 (bottom row) are the two switch terminals, each pair of same-numbered pads is internally connected, datasheet: http://www.ckswitches.com/media/1476/pts810.pdf")
 		(tags "SPST Button Switch")
 		(property "Reference" "SW60"
@@ -23881,7 +23881,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0402_1005Metric_N"
 		(layer "F.Cu")
 		(uuid "7e5bd8dd-c077-4873-9608-8defb26690e0")
-		(at 177.485 142.645)
+		(at 318.505 218.105)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C196"
@@ -24086,7 +24086,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "7eda3860-b1a4-4cf3-a7e1-37cb41bfc3d1")
-		(at 182.165 138.965)
+		(at 320.975 218.195)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP66"
@@ -24246,7 +24246,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "81557ca4-f41f-43c5-891b-914f773e8b8a")
-		(at 199.655 91.805)
+		(at 252.455 199.385)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R170"
@@ -24451,7 +24451,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "81e5b154-2a95-4a88-94e0-dd766b3018f9")
-		(at 223.635 119.835)
+		(at 272.005 172.095)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP32"
@@ -24611,7 +24611,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "82946adc-97a1-48e0-a1b5-8f3e34a28c3e")
-		(at 158.005 137.005)
+		(at 277.555 221.375)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C190"
@@ -24816,7 +24816,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "83b9f5ae-9ae1-4890-8004-36fd9c2481bf")
-		(at 171.675 79.255)
+		(at 335.295 95.215)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R13"
@@ -25021,7 +25021,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "84c9949e-c294-4f04-9d95-f3919e53d434")
-		(at 170.035 147.045)
+		(at 361.155 211.975)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R206"
@@ -25226,7 +25226,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0402_1005Metric_N"
 		(layer "F.Cu")
 		(uuid "85001245-f95e-4838-8d0f-e8cbe5707f21")
-		(at 177.485 146.585)
+		(at 299.485 218.565)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C207"
@@ -25431,7 +25431,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "85cde2c4-896e-4bb8-b4f0-19028101467c")
-		(at 203.085 116.685)
+		(at 303.145 119.275)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R60"
@@ -25636,7 +25636,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "861082a7-324c-4e92-89f9-2fe46bd48e51")
-		(at 167.665 101.845)
+		(at 343.215 92.755)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R12"
@@ -25841,7 +25841,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "885ca497-576c-411e-ace3-1ca1ff0d95d0")
-		(at 198.735 96.275)
+		(at 347.165 185.555)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP51"
@@ -26001,7 +26001,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0402_1005Metric_N"
 		(layer "F.Cu")
 		(uuid "8962052f-ffed-40fa-b1f8-aa12929e51b9")
-		(at 194.495 128.355)
+		(at 280.905 122.865)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C56"
@@ -26206,7 +26206,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "89d53d2e-e193-41b5-94bb-05d440c38846")
-		(at 203.085 111.665)
+		(at 277.515 123.135)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R58"
@@ -26411,7 +26411,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0402_1005Metric_N"
 		(layer "F.Cu")
 		(uuid "8ae60652-6bec-4cb1-933f-59ce8b260e9c")
-		(at 177.485 136.735)
+		(at 263.765 229.805)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C192"
@@ -26616,7 +26616,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "8c0fddaa-5c12-4cee-9bdc-8d4e03665126")
-		(at 195.065 109.155)
+		(at 299.125 115.775)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C51"
@@ -26821,7 +26821,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_1206_3216Metric_N"
 		(layer "F.Cu")
 		(uuid "8e57a389-7889-4167-9c3b-657360b5a136")
-		(at 158.825 93.075)
+		(at 316.615 96.075)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C19"
@@ -27026,7 +27026,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "8f2c08f0-4528-4ad8-a1cd-8661653f9dd9")
-		(at 179.695 79.255)
+		(at 260.815 93.155)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R36"
@@ -27231,7 +27231,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "8fb1df75-9579-43f4-8d43-a9d77d050fa8")
-		(at 174.045 137.005)
+		(at 357.915 216.475)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R208"
@@ -27436,7 +27436,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "8fb97848-9636-45bf-98f1-3d8bfca2e220")
-		(at 175.685 81.765)
+		(at 316.475 101.855)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R25"
@@ -27641,7 +27641,7 @@
 	(footprint "AharoniLab_Connector:PinHeader_1x06_P2.54mm_Vertical"
 		(layer "F.Cu")
 		(uuid "90fd3a7b-6d22-4033-9a57-19ff580626ea")
-		(at 195.355 80.295)
+		(at 329.265 186.775)
 		(descr "Through hole straight pin header, 1x06, 2.54mm pitch, single row, KiCad official geometry https://gitlab.com/kicad/libraries/kicad-footprints")
 		(tags "Through hole pin header THT 1x06 2.54mm single row")
 		(property "Reference" "J51"
@@ -27973,7 +27973,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "915e4a50-5ec3-47d1-b3b7-8cc354879d06")
-		(at 199.075 134.565)
+		(at 256.415 149.575)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R80"
@@ -28178,7 +28178,7 @@
 	(footprint "AharoniLab_Package_SOT:SOT-23-5"
 		(layer "F.Cu")
 		(uuid "92ef2708-0726-4bfe-9334-13e18bbca99b")
-		(at 174.105 110.125)
+		(at 290.365 87.725)
 		(descr "SOT, 5 Pin (JEDEC MO-178 Var AA https://www.jedec.org/document_search?search_api_views_fulltext=MO-178)")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "U4"
@@ -28658,7 +28658,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "98987cf1-7e33-45b1-b24a-988b95d9c87d")
-		(at 179.695 84.275)
+		(at 256.415 96.115)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R38"
@@ -28863,7 +28863,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "9accabb7-ccd9-4b3b-9671-7e676e15f4dd")
-		(at 207.675 81.765)
+		(at 260.375 199.385)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R186"
@@ -29068,7 +29068,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_1206_3216Metric_N"
 		(layer "F.Cu")
 		(uuid "9bd8d97f-9eec-44d3-ad4c-15ef686846b0")
-		(at 158.825 79.675)
+		(at 316.615 92.775)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C5"
@@ -29273,7 +29273,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "9d61eb6e-2c9e-4ef4-ab38-e523d00fd8d9")
-		(at 162.015 142.025)
+		(at 336.075 218.935)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C204"
@@ -29478,7 +29478,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_1210_3225Metric_N"
 		(layer "F.Cu")
 		(uuid "9d8c65a1-cf89-4b40-b5cc-b4e74365f192")
-		(at 200.835 122.575)
+		(at 261.175 128.045)
 		(descr "Capacitor SMD 1210 (3225 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C50"
@@ -29683,7 +29683,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "9e880a16-43a8-4a69-9372-d294f45c5188")
-		(at 220.545 121.705)
+		(at 252.455 171.815)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R101"
@@ -29888,7 +29888,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_1206_3216Metric_N"
 		(layer "F.Cu")
 		(uuid "a0f31670-e79b-4732-ae19-d23b625be833")
-		(at 158.825 83.025)
+		(at 322.215 92.775)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C6"
@@ -30093,7 +30093,7 @@
 	(footprint "AharoniLab_Connector:SolderJumper-3_P1.3mm_Open_RoundedPad1.0x1.5mm"
 		(layer "F.Cu")
 		(uuid "a12750b6-d3d1-42e4-aba7-6d56a83602e6")
-		(at 200.835 126.475)
+		(at 283.235 116.295)
 		(descr "SMD Solder 3-pad Jumper, 1x1.5mm rounded Pads, 0.3mm gap, open, KiCad official geometry https://gitlab.com/kicad/libraries/kicad-footprints")
 		(tags "solder jumper open")
 		(property "Reference" "JP10"
@@ -30467,7 +30467,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0402_1005Metric_N"
 		(layer "F.Cu")
 		(uuid "a1c8c7bb-2590-4dfa-b32c-8ff57cfe3367")
-		(at 202.205 144.335)
+		(at 259.805 151.765)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C80"
@@ -30672,7 +30672,7 @@
 	(footprint "AharoniLab_Package_SOT:SOT-23-5"
 		(layer "F.Cu")
 		(uuid "a2aa5ebe-3e33-456b-8857-c92cdbeb573c")
-		(at 174.105 105.5)
+		(at 274.865 87.725)
 		(descr "SOT, 5 Pin (JEDEC MO-178 Var AA https://www.jedec.org/document_search?search_api_views_fulltext=MO-178)")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "U1"
@@ -31152,7 +31152,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "a2db82ac-916d-4776-8a72-a28f994fac4b")
-		(at 220.545 111.665)
+		(at 252.455 174.275)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C101"
@@ -31357,7 +31357,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0805_2012Metric_N"
 		(layer "F.Cu")
 		(uuid "a359b681-6fe2-451d-a267-35d1fe7f2e29")
-		(at 183.925 85.525)
+		(at 274.515 91.405)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C11"
@@ -31562,7 +31562,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "a4cd61f6-950c-4e24-924a-9b054efaeb87")
-		(at 163.655 86.785)
+		(at 313.455 98.955)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C21"
@@ -31767,7 +31767,7 @@
 	(footprint "AharoniLab_Package_DFN_QFN:RGT0016A"
 		(layer "F.Cu")
 		(uuid "a556622d-8b32-48a6-8752-3d46552cb0e2")
-		(at 195.535 122.925)
+		(at 277.985 116.995)
 		(descr "VQFN-16 3x3mm, 0.5mm pitch, exposed pad, https://www.ti.com/lit/ds/symlink/opa857.pdf")
 		(tags "OPA857 QFN VQFN RGT0016A")
 		(property "Reference" "U10"
@@ -32257,7 +32257,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "a6d2af41-7a86-4184-a411-017b3d7aab48")
-		(at 214.125 124.705)
+		(at 286.195 122.955)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP12"
@@ -32417,7 +32417,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "a6d907ca-414a-47dc-850f-a4238ca00f33")
-		(at 180.005 138.965)
+		(at 286.665 221.195)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP61"
@@ -32577,7 +32577,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "a6e8f273-603e-43f4-bdee-bf8148088ab6")
-		(at 162.015 147.045)
+		(at 281.515 221.375)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R191"
@@ -32782,7 +32782,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "a711e686-a6f6-48a9-b3df-ff9f57c7d168")
-		(at 207.675 86.785)
+		(at 276.655 190.655)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R188"
@@ -32987,7 +32987,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "aa238961-f34e-4693-a4e7-dc50c985db2d")
-		(at 175.685 91.805)
+		(at 308.555 104.315)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R29"
@@ -33192,7 +33192,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0805_2012Metric_N"
 		(layer "F.Cu")
 		(uuid "aa5e5210-2360-412d-a216-ce39b3add955")
-		(at 183.925 88.535)
+		(at 321.615 95.905)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C20"
@@ -33397,7 +33397,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_1206_3216Metric_N"
 		(layer "F.Cu")
 		(uuid "ad8a82f4-7dd8-43a9-89c3-16a2fea06499")
-		(at 158.825 96.425)
+		(at 356.335 91.575)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C25"
@@ -33602,7 +33602,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0805_2012Metric_N"
 		(layer "F.Cu")
 		(uuid "adca628f-5a25-4639-aef2-0fddd4264bee")
-		(at 183.925 79.505)
+		(at 252.675 93.405)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C1"
@@ -33807,7 +33807,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "ae289d1e-1ca9-4738-ba0f-993a827dda97")
-		(at 158.005 144.535)
+		(at 361.875 218.935)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C199"
@@ -34012,7 +34012,7 @@
 	(footprint "AharoniLab_Package_DFN_QFN:Texas_DSG0008A_WSON-8_2x2mm_P0.5mm_EP0.9x1.6mm"
 		(layer "F.Cu")
 		(uuid "afcaec1d-a894-4216-832a-491ce5066c91")
-		(at 212.675 129.075)
+		(at 295.195 116.295)
 		(descr "Texas Instruments WSON-8 (DSG0008A), 2x2mm body, 0.5mm pitch, 0.9x1.6mm exposed thermal pad, 0.8mm max height (OPA855; https://www.ti.com/lit/ds/symlink/opa855.pdf).")
 		(tags "WSON DSG DSG0008A NoLead")
 		(property "Reference" "U11"
@@ -34334,7 +34334,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "b1568728-67e6-49b9-a22c-0410232beb5c")
-		(at 167.665 99.335)
+		(at 339.255 92.755)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R11"
@@ -34539,7 +34539,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "b16ce521-1357-4789-bc88-c0f8d079f4fc")
-		(at 167.665 86.785)
+		(at 278.695 91.155)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R1"
@@ -34744,7 +34744,7 @@
 	(footprint "AharoniLab_Package_SOT:SOT-23"
 		(layer "F.Cu")
 		(uuid "b3597678-5ceb-488a-9042-77cda75fe862")
-		(at 188.605 89.125)
+		(at 398.825 87.725)
 		(descr "SOT, 3 Pin (JEDEC TO-236 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=TO-236)")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "Q3"
@@ -35199,7 +35199,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "b4f23b09-6398-4e10-91bb-1851a41ffa53")
-		(at 171.675 84.275)
+		(at 343.215 95.215)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R15"
@@ -35404,7 +35404,7 @@
 	(footprint "AharoniLab_Diode_SMD:Diodes_PowerDI-123"
 		(layer "F.Cu")
 		(uuid "b63181fa-7f70-4823-843e-61bb810761cf")
-		(at 158.825 106.475)
+		(at 305.415 92.775)
 		(descr "Diodes Inc. PowerDI123 (SOD-123F-like, 3.7 x 1.78 mm) 2-terminal SMD diode; pad 1 = cathode (large tab, cathode band side), pad 2 = anode; land pattern from the DFLS1150 suggested pad layout (DS30593 Rev. 10-2, Sept 2023, p.4: G 0.65, X 1.05, X1 2.40, X2 4.10, Y 1.50 mm) https://www.diodes.com/assets/Datasheets/DFLS1150.pdf")
 		(tags "diode PowerDI123 PowerDI-123 Diodes Incorporated")
 		(property "Reference" "D3"
@@ -35646,7 +35646,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "b87eaf83-29f7-4a12-88d0-def83e95034f")
-		(at 167.665 81.765)
+		(at 289.795 94.115)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C31"
@@ -35851,7 +35851,7 @@
 	(footprint "AharoniLab_Package_SO:MSOP-10_3x3mm_P0.5mm"
 		(layer "F.Cu")
 		(uuid "b91994b3-9114-4aba-b86f-d4f73b560f99")
-		(at 181.555 124.535)
+		(at 355.575 212.995)
 		(descr "MSOP, 10 Pin (JEDEC MO-187 variation BA, 0.85mm body thickness, https://www.jedec.org/system/files/docs/mo-187F.pdf)")
 		(tags "MSOP SO TSSOP-10_3x3mm_P0.5mm")
 		(property "Reference" "U63"
@@ -36326,7 +36326,7 @@
 	(footprint "AharoniLab_OptoDevice:Thorlabs_FDS010_TO-5_P5.08mm_Vertical"
 		(layer "F.Cu")
 		(uuid "ba1bdb4c-20bf-45b5-8e83-1416408ee8e8")
-		(at 209.015 115.425)
+		(at 254.375 122.045)
 		(descr "Thorlabs FDS010 silicon PIN photodiode, TO-5 metal can (8.3mm cap, 9.1mm flange 0.7mm thick, 4.6mm cap height, 9.9mm overall with tab), 3 leads 0.5mm (38mm long) on a 5.1mm (5.08mm) diameter circle, 1.0mm active area. Through-hole, 0.9mm drill, 1.6mm pads, origin on pad 1. Pad 1 = anode, pad 2 = case, pad 3 = cathode; tab on the left in this top view. Datasheet: https://www.thorlabs.com/thorproduct.cfm?partnumber=FDS010 (spec sheet 0636-S01 Rev I (2017-03-16))")
 		(tags "photodiode FDS010 TO-5 THT Thorlabs")
 		(property "Reference" "D11"
@@ -36623,7 +36623,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "ba5e0ac6-3f9a-4a09-a186-4683e55d1c3b")
-		(at 199.655 86.785)
+		(at 280.615 193.115)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C183"
@@ -36828,7 +36828,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "bae2bd85-8163-4080-bd9d-419d26367f19")
-		(at 188.395 99.275)
+		(at 255.495 98.395)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP3"
@@ -36988,7 +36988,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "bc250eb0-b71e-47d8-89c7-fa0509d1bff2")
-		(at 158.005 149.555)
+		(at 340.035 216.475)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C201"
@@ -37193,7 +37193,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "bf9bc715-5944-4480-921d-46bdd575ad7f")
-		(at 214.125 120.425)
+		(at 294.305 124.015)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP10"
@@ -37353,7 +37353,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "c1bbd310-cda2-4dad-914f-775dc50dafb2")
-		(at 199.075 139.585)
+		(at 252.455 152.035)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R82"
@@ -37558,7 +37558,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "c29077c4-71f8-41c7-b60c-cdea743a8b2c")
-		(at 158.005 147.045)
+		(at 353.955 221.395)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C200"
@@ -37763,7 +37763,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0402_1005Metric_N"
 		(layer "F.Cu")
 		(uuid "c3d8a5d7-a72d-44ae-8d3d-904d6fe9e2a7")
-		(at 210.365 94.045)
+		(at 318.225 191.965)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C184"
@@ -37968,7 +37968,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "c44b7e66-bd85-4273-84d0-b24379f3c086")
-		(at 162.015 137.005)
+		(at 343.995 216.475)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C202"
@@ -38173,7 +38173,7 @@
 	(footprint "AharoniLab_Resistor_SMD:Bourns_3224W_SMD"
 		(layer "F.Cu")
 		(uuid "c4ca7d1a-302b-4109-97c2-52fc9d10d42f")
-		(at 164.825 112.575)
+		(at 336.465 88.525)
 		(descr "Bourns 3224W 4 mm SMD multiturn trimming potentiometer (top adjust), pad 1 = CCW end, 2 = wiper, 3 = CW end; land pattern per the 3224W recommended layout (Bourns 3224 datasheet REV. 08/26: pads 1.6 mm wide, 2.0 mm centre pad, 1.3 mm end pads, 2.5 mm end-pad spacing, 2.9 mm centre-to-end offset) https://www.bourns.com/docs/Product-Datasheets/3224.pdf")
 		(tags "potentiometer trimmer Bourns 3224W 3224 SMD multiturn")
 		(property "Reference" "RV1"
@@ -38440,7 +38440,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0805_2012Metric_N"
 		(layer "F.Cu")
 		(uuid "c610114b-1edb-42c4-a0a6-0a88b3c25680")
-		(at 183.925 91.545)
+		(at 290.015 91.405)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C30"
@@ -38645,7 +38645,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "c6548a31-8748-4d59-9af4-da020ececac6")
-		(at 198.735 98.415)
+		(at 349.275 185.555)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP52"
@@ -38805,7 +38805,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "c8bcb93e-f6c0-40c3-87dd-1605e9e38aaa")
-		(at 203.665 91.805)
+		(at 280.615 185.735)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R184"
@@ -39010,7 +39010,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "ca521806-cf57-452b-bf2f-9fe3274f19ba")
-		(at 220.545 116.685)
+		(at 256.415 174.275)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C103"
@@ -39215,7 +39215,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "cb89aa8c-d77a-411f-bdf6-ca34307eeb1a")
-		(at 166.025 147.045)
+		(at 332.115 221.395)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R197"
@@ -39420,7 +39420,7 @@
 	(footprint "AharoniLab_Package_SOT:SOT-23-6"
 		(layer "F.Cu")
 		(uuid "ccec1f39-52c3-4286-aebf-f740de64115e")
-		(at 182.205 129.325)
+		(at 300.625 212.945)
 		(descr "SOT-23-6 (JEDEC MO-178 variant AB), 6 pin, 0.95mm pitch, 2.8mm lead span, 1.45mm max height, https://www.jedec.org/sites/default/files/docs/Mo-178c.PDF")
 		(tags "SOT-23-6 SOT23-6 SOT-23-6L TSOP-6")
 		(property "Reference" "U61"
@@ -39724,7 +39724,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "ce5c349d-906d-47d0-a452-505cc7d4be42")
-		(at 163.655 84.275)
+		(at 274.295 96.575)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C12"
@@ -39929,7 +39929,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0805_2012Metric_N"
 		(layer "F.Cu")
 		(uuid "ce7e38d3-e3d4-40e7-b63e-01a68c84660a")
-		(at 188.355 92.825)
+		(at 304.795 99.175)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R7"
@@ -40134,7 +40134,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "cfb3e072-2782-4b8c-9417-663efec6e12a")
-		(at 182.165 143.245)
+		(at 331.195 223.675)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP68"
@@ -40294,7 +40294,7 @@
 	(footprint "AharoniLab_Diode_SMD:Diodes_PowerDI-123"
 		(layer "F.Cu")
 		(uuid "d107c466-a902-43a7-b7a2-380aa402b940")
-		(at 158.825 103.125)
+		(at 324.335 87.175)
 		(descr "Diodes Inc. PowerDI123 (SOD-123F-like, 3.7 x 1.78 mm) 2-terminal SMD diode; pad 1 = cathode (large tab, cathode band side), pad 2 = anode; land pattern from the DFLS1150 suggested pad layout (DS30593 Rev. 10-2, Sept 2023, p.4: G 0.65, X 1.05, X1 2.40, X2 4.10, Y 1.50 mm) https://www.diodes.com/assets/Datasheets/DFLS1150.pdf")
 		(tags "diode PowerDI123 PowerDI-123 Diodes Incorporated")
 		(property "Reference" "D2"
@@ -40536,7 +40536,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "d1240f37-e801-40b8-963d-2de2e0a0cc8a")
-		(at 220.545 119.195)
+		(at 260.855 165.415)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R100"
@@ -40741,7 +40741,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "d1d3da5a-fe44-4b53-bf52-7fae8f47377f")
-		(at 174.045 147.045)
+		(at 332.115 216.475)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R212"
@@ -40946,7 +40946,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "d2de59f7-f35e-4dbf-8a7c-b237b486a7d9")
-		(at 195.065 137.075)
+		(at 252.455 149.575)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C83"
@@ -41151,7 +41151,7 @@
 	(footprint "AharoniLab_Package_SOT:SOT-23"
 		(layer "F.Cu")
 		(uuid "d5a2a192-92da-4b67-9812-01206110b1d4")
-		(at 227.165 116.705)
+		(at 271.265 166.385)
 		(descr "SOT, 3 Pin (JEDEC TO-236 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=TO-236)")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "D30"
@@ -41606,7 +41606,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "d5d8c3ae-d313-48b9-b938-5cf38776f3cd")
-		(at 170.035 142.025)
+		(at 256.415 230.075)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R204"
@@ -41811,7 +41811,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "da5ef71e-bcf1-4838-b73e-212a64ceb7d7")
-		(at 170.035 137.005)
+		(at 315.115 218.375)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R199"
@@ -42016,7 +42016,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "db2ef52a-ec83-4819-b408-5cc4e98e9d74")
-		(at 195.065 134.565)
+		(at 257.955 144.075)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C81"
@@ -42221,7 +42221,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "dc4b665f-e3ae-4471-b36b-7f9b6684ef37")
-		(at 166.025 142.025)
+		(at 340.035 218.935)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R195"
@@ -42426,7 +42426,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "dc88d503-9574-4c7b-9f5c-13f22b22335e")
-		(at 163.655 79.255)
+		(at 252.455 98.575)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C2"
@@ -42631,7 +42631,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "ddbc83da-c447-40db-a91b-ff17ef3f763a")
-		(at 180.005 143.245)
+		(at 370.915 217.155)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP63"
@@ -42791,7 +42791,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "de66138f-bb27-4b79-aa3a-25c0cff28021")
-		(at 171.675 99.335)
+		(at 304.595 101.855)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R22"
@@ -42996,7 +42996,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "df53580f-4b0a-4c2b-a49b-616ddad0d2e7")
-		(at 166.025 144.535)
+		(at 343.995 218.935)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R196"
@@ -43201,7 +43201,7 @@
 	(footprint "AharoniLab_Package_SOT:SOT-23"
 		(layer "F.Cu")
 		(uuid "dfd2a4fb-7467-4b13-971d-53fdbe4f8138")
-		(at 188.605 80.225)
+		(at 361.565 87.725)
 		(descr "SOT, 3 Pin (JEDEC TO-236 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=TO-236)")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "Q1"
@@ -43656,7 +43656,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "e01f1583-e6a0-49fb-9b52-b3844199f547")
-		(at 198.735 100.555)
+		(at 345.055 187.645)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP53"
@@ -43816,7 +43816,7 @@
 	(footprint "AharoniLab_Package_SOT:SOT-23"
 		(layer "F.Cu")
 		(uuid "e0df6fb6-4ab4-4021-bc2f-7734b7d5c68b")
-		(at 188.605 84.675)
+		(at 366.425 87.725)
 		(descr "SOT, 3 Pin (JEDEC TO-236 Var AB https://www.jedec.org/document_search?search_api_views_fulltext=TO-236)")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "Q2"
@@ -44271,7 +44271,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "e214bc5f-e7a4-4f97-b584-33cc3d672a96")
-		(at 203.085 137.075)
+		(at 274.295 144.075)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R85"
@@ -44476,7 +44476,7 @@
 	(footprint "AharoniLab_Package_DFN_QFN:Texas_R-PUSON-N14"
 		(layer "F.Cu")
 		(uuid "e24f75fa-a3e7-4b82-b4a5-c597cf062bdd")
-		(at 201.635 102.26)
+		(at 263.275 187.005)
 		(descr "USON, 14 Pin (https://www.ti.com/lit/ds/symlink/tpd6e05u06.pdf#page=28)")
 		(tags "USON NoLead")
 		(property "Reference" "U51"
@@ -44937,7 +44937,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "e3230ae5-dba8-4044-8c7a-13bc5e0d9061")
-		(at 188.395 101.415)
+		(at 257.605 98.395)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP4"
@@ -45097,7 +45097,7 @@
 	(footprint "AharoniLab_Package_DFN_QFN:Texas_RVK0012A_WQFN-12-1EP_3x3mm_P0.5mm_EP1.75x1.75mm"
 		(layer "F.Cu")
 		(uuid "e5b5e131-1f29-4181-a658-7894ad6024f2")
-		(at 195.835 146.125)
+		(at 253.225 145.595)
 		(descr "WQFN-12 with exposed pad, 3x3 mm, 0.5 mm pitch, TI RVK0012A; land pattern from Ultra Librarian (TI product page link), retrieved 2026-10-08; https://www.ti.com/lit/ds/symlink/tlv3605.pdf")
 		(tags "TLV3605 WQFN QFN RVK0012A exposed pad")
 		(property "Reference" "U20"
@@ -45583,7 +45583,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "e6128f01-c790-4320-96b9-44c274e8ff21")
-		(at 203.665 84.275)
+		(at 276.655 185.735)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R181"
@@ -45788,7 +45788,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "e64456e6-50f3-46d8-8a75-e1a5993b7859")
-		(at 166.025 149.555)
+		(at 336.075 221.395)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R198"
@@ -45993,7 +45993,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "e97d8bdb-97ac-4560-84f4-5ab633cabee3")
-		(at 171.675 91.805)
+		(at 355.515 97.715)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R18"
@@ -46198,7 +46198,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "e99680e5-5393-43f8-8703-1ce21b464b16")
-		(at 170.035 144.535)
+		(at 260.375 230.075)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R205"
@@ -46403,7 +46403,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "e9d10999-1943-4a32-a838-42a73be072c0")
-		(at 171.675 81.765)
+		(at 339.255 95.215)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R14"
@@ -46608,7 +46608,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "e9e07852-031b-4139-bc34-f5992379c4f9")
-		(at 163.655 94.315)
+		(at 325.335 98.955)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C24"
@@ -46813,7 +46813,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "eb5ae96e-b8c8-4ef4-9a00-b236cfd08acf")
-		(at 195.065 116.685)
+		(at 313.105 118.235)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C55"
@@ -47018,7 +47018,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "eca66eb8-035c-45e0-ae0d-40a3e499f317")
-		(at 199.075 109.155)
+		(at 277.515 120.675)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C59"
@@ -47223,7 +47223,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "ed24755b-a1ba-498f-a263-c2e9c3423978")
-		(at 199.655 81.765)
+		(at 256.415 199.385)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C181"
@@ -47428,7 +47428,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "ee53b999-a2e6-4c9b-9487-5f7867c041af")
-		(at 170.035 149.555)
+		(at 353.955 216.475)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R207"
@@ -47633,7 +47633,7 @@
 	(footprint "AharoniLab_Inductor_SMD:L_0805_2012Metric_N"
 		(layer "F.Cu")
 		(uuid "ee6930d3-667b-44d6-9f13-851f8053ecf8")
-		(at 173.805 113.725)
+		(at 309.225 99.075)
 		(descr "IPC-7351 Level B (Nominal), Inductor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 80, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "inductor")
 		(property "Reference" "L2"
@@ -47840,7 +47840,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "eeb8d1ae-cbf1-4222-8e05-eb7151152c0c")
-		(at 199.075 119.195)
+		(at 313.105 115.775)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R56"
@@ -48045,7 +48045,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "f0a5bc4a-b3bb-4958-8b45-f4f3229df5e5")
-		(at 174.045 142.025)
+		(at 339.315 211.975)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R210"
@@ -48250,7 +48250,7 @@
 	(footprint "AharoniLab_Switch_SMD:SW_SPST_PTS810"
 		(layer "F.Cu")
 		(uuid "f1026966-81c8-43f2-ae72-7f038625b061")
-		(at 174.555 124.725)
+		(at 278.925 217.795)
 		(descr "C&K (Littelfuse) PTS 810 Series, Microminiature SMT Top Actuated, 4.2x3.2mm, J-bend; pad geometry from KiCad official Button_Switch_SMD:SW_SPST_PTS810, matches datasheet recommended PCB layout; pads 1 (top row) and 2 (bottom row) are the two switch terminals, each pair of same-numbered pads is internally connected, datasheet: http://www.ckswitches.com/media/1476/pts810.pdf")
 		(tags "SPST Button Switch")
 		(property "Reference" "SW61"
@@ -48661,7 +48661,7 @@
 	(footprint "AharoniLab_Inductor_SMD:Wuerth_74437324100"
 		(layer "F.Cu")
 		(uuid "f1367276-0df7-47a1-9eb2-ea5106aa26d3")
-		(at 180.055 111.515)
+		(at 305.965 88.325)
 		(descr "Wuerth Elektronik WE-LHMI 74437324100 SMT power inductor, 10 uH, size 4020 (4.45 x 4.06 mm body, 1.8 mm high), pad 1 = start of winding (dot); land pattern per datasheet Recommended Land Pattern (rev. 003.000, 2024-12-27: pads 1.5 x 2.4 mm, 2.2 mm gap, 5.2 mm overall; no vias or traces in the restricted area between pads) https://www.we-online.com/components/products/datasheet/74437324100.pdf")
 		(tags "inductor power Wurth Wuerth WE-LHMI 4020 74437324100")
 		(property "Reference" "L1"
@@ -48878,7 +48878,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "f15ab953-e505-4c60-ba99-0b7474585634")
-		(at 175.685 96.825)
+		(at 393.835 93.845)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R33"
@@ -49083,7 +49083,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "f22a54c3-f606-4c73-9a86-d1ef6b9085c9")
-		(at 199.655 79.255)
+		(at 290.575 190.655)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C180"
@@ -49288,7 +49288,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_1210_3225Metric_N"
 		(layer "F.Cu")
 		(uuid "f3608aeb-20fe-445e-b731-731d162bdf24")
-		(at 186.745 112.365)
+		(at 356.335 87.625)
 		(descr "Capacitor SMD 1210 (3225 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C8"
@@ -49493,7 +49493,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "f49174eb-2475-4752-a926-68fdf31e6e7b")
-		(at 174.045 139.515)
+		(at 361.875 216.475)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R209"
@@ -49698,7 +49698,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "f560f2f4-ea17-4e61-8e24-2db1e400f1a6")
-		(at 180.005 145.385)
+		(at 341.935 221.215)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP64"
@@ -49858,7 +49858,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "f75f512d-15a4-4b35-b492-ce0efe0417ee")
-		(at 167.665 91.805)
+		(at 341.595 86.755)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R8"
@@ -50063,7 +50063,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_1206_3216Metric_N"
 		(layer "F.Cu")
 		(uuid "f84b242a-a086-46ad-873f-5ae1a9104769")
-		(at 158.825 86.375)
+		(at 305.415 96.075)
 		(descr "Capacitor SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C7"
@@ -50268,7 +50268,7 @@
 	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "f8a92164-3e51-4b98-b99f-b5535d471e0b")
-		(at 203.665 86.785)
+		(at 290.575 185.735)
 		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R182"
@@ -50473,7 +50473,7 @@
 	(footprint "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 		(layer "F.Cu")
 		(uuid "f9d29993-cc1e-4720-9c2f-4a997fe3a90a")
-		(at 188.395 97.135)
+		(at 311.595 104.135)
 		(descr "SMD rectangular pad as test point, 1.0 x 1.0 mm, Aharoni Lab interconnect variant https://github.com/Aharoni-Lab/kicad-lab-library")
 		(tags "test point SMD pad rectangle square")
 		(property "Reference" "TP2"
@@ -50633,7 +50633,7 @@
 	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
 		(layer "F.Cu")
 		(uuid "faa0d864-ca1c-482a-95d6-e248a0075b79")
-		(at 163.655 96.825)
+		(at 335.295 97.675)
 		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C26"
@@ -50871,4 +50871,508 @@
 		)
 	)
 	(embedded_fonts no)
+	(gr_text "PWR_EFUSE"
+		(at 250.475 84.725 0)
+		(layer "Cmts.User")
+		(uuid "9462fa13-39cb-4179-8923-a75fc7be2eac")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "PWR_3V3"
+		(at 272.315 84.725 0)
+		(layer "Cmts.User")
+		(uuid "5ee9f9f9-bbfa-4f0b-82b1-f91ada05e80c")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "PWR_3V3D"
+		(at 287.815 84.725 0)
+		(layer "Cmts.User")
+		(uuid "da0e4736-b24f-4695-98f3-d931e372a8ba")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "PWR_HV_BOOST"
+		(at 302.615 84.725 0)
+		(layer "Cmts.User")
+		(uuid "bfa35637-d896-4b19-b0c8-2d428d53d640")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "PWR_HV_FB"
+		(at 333.315 84.725 0)
+		(layer "Cmts.User")
+		(uuid "f942aed9-56bf-44df-adfa-8c809bff2986")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "PWR_HV_OUT"
+		(at 353.535 84.725 0)
+		(layer "Cmts.User")
+		(uuid "97b90942-38ec-416b-bb5e-47ee03437d7c")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "PWR_HV_MON"
+		(at 374.855 84.725 0)
+		(layer "Cmts.User")
+		(uuid "65f28268-d76b-495a-8fc3-f4c070b4f40e")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "PWR_HV_DIS"
+		(at 391.855 84.725 0)
+		(layer "Cmts.User")
+		(uuid "3502da68-970e-45e7-afef-413e52e7e7de")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "FE_APD"
+		(at 250.475 113.745 0)
+		(layer "Cmts.User")
+		(uuid "5bdcbda7-bca1-46f8-8e0f-1960bf5474d6")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "FE_TIA"
+		(at 275.535 113.745 0)
+		(layer "Cmts.User")
+		(uuid "c4b860ba-d5a5-401a-aecf-b2f909315204")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "FE_POSTAMP"
+		(at 293.245 113.745 0)
+		(layer "Cmts.User")
+		(uuid "ff884b35-161d-4bfa-9c1c-c6c241974605")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "FE_LPF_COUPLE"
+		(at 311.125 113.745 0)
+		(layer "Cmts.User")
+		(uuid "5a0ef283-114c-4816-a91f-218f590d9570")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "SLC_COMP"
+		(at 250.475 142.045 0)
+		(layer "Cmts.User")
+		(uuid "7cdad7bf-84ce-4215-86f3-b95bef752a6d")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "SLC_THRESH"
+		(at 268.355 142.045 0)
+		(layer "Cmts.User")
+		(uuid "aafcd178-fe64-4d23-901d-57a858e27486")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "SLC_HYST"
+		(at 285.355 142.045 0)
+		(layer "Cmts.User")
+		(uuid "fe3a2e9d-c1d7-45cc-8689-07d3065e1a8f")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "MON_VCM"
+		(at 250.475 163.385 0)
+		(layer "Cmts.User")
+		(uuid "1ca8b3b3-abba-4f53-8664-879f47e584bd")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "MON_RSSI"
+		(at 268.835 163.385 0)
+		(layer "Cmts.User")
+		(uuid "56b91d9b-2f1e-4b47-817b-1a95acaecec6")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "CONN_RECEPT"
+		(at 250.475 183.705 0)
+		(layer "Cmts.User")
+		(uuid "923a921a-a383-45c7-8076-467d5696acca")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "CONN_CC"
+		(at 274.675 183.705 0)
+		(layer "Cmts.User")
+		(uuid "7f9c9fe7-74b1-471e-adf1-b7a61373f9bc")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "CONN_CAN_TERM"
+		(at 288.595 183.705 0)
+		(layer "Cmts.User")
+		(uuid "02297088-ad98-4376-b014-58f40fae868b")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "CONN_FANOUT"
+		(at 308.895 183.705 0)
+		(layer "Cmts.User")
+		(uuid "312d1821-4a79-4668-9117-cfeb5362fdf3")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "CONN_DEBUG"
+		(at 326.995 183.705 0)
+		(layer "Cmts.User")
+		(uuid "e1a88e7b-c7de-4cc2-872b-2339b2f55a71")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "CONN_TP"
+		(at 343.995 183.705 0)
+		(layer "Cmts.User")
+		(uuid "63f25cb8-f5b6-4f1b-8ead-7225a3e57898")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "CTRL_MCU"
+		(at 250.475 209.945 0)
+		(layer "Cmts.User")
+		(uuid "8d9f7f71-adec-4d2a-9131-96b54e04b708")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "CTRL_RESET_BOOT"
+		(at 275.575 209.945 0)
+		(layer "Cmts.User")
+		(uuid "15f5c60a-bf94-4591-9d7e-731b8e23fcfc")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "CTRL_USB"
+		(at 298.075 209.945 0)
+		(layer "Cmts.User")
+		(uuid "5517efc0-5a82-469f-9b93-e91459abfa8a")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "CTRL_CAN"
+		(at 313.135 209.945 0)
+		(layer "Cmts.User")
+		(uuid "5011463b-0b9d-4f80-9b71-1daac4dddee0")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "CTRL_DAC"
+		(at 330.135 209.945 0)
+		(layer "Cmts.User")
+		(uuid "3203f844-108b-446b-9c5e-cbedc0dfd315")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "CTRL_ADC"
+		(at 351.975 209.945 0)
+		(layer "Cmts.User")
+		(uuid "b9e8cb78-c19a-40f7-92c9-58ebd8b366ce")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "CTRL_STATUS_UART"
+		(at 369.855 209.945 0)
+		(layer "Cmts.User")
+		(uuid "e0213902-4010-4005-8463-9571e0ee56bc")
+		(effects
+			(font
+				(size 1.5 1.5)
+				(thickness 0.2)
+			)
+			(justify left bottom)
+		)
+	)
+	(group "PWR_EFUSE"
+		(uuid "71bd6244-ceca-4d29-8c84-e53ed7b3ff91")
+		(members "097d40ee-bcb6-43e4-bca5-7827e4189564" "5cb8b1cc-2d9d-4ff0-b42e-c9a299a60378" "8f2c08f0-4528-4ad8-a1cd-8661653f9dd9" "3de4487e-557c-422b-a172-2e068106eded" "98987cf1-7e33-45b1-b24a-988b95d9c87d" "5c74ee90-d527-4421-b32f-79b16058e0e8" "4f71b58e-2cec-4fd5-9c0a-6c2674fba25c" "54a07ad3-3593-415c-a9e6-f20921319b4f" "adca628f-5a25-4639-aef2-0fddd4264bee" "dc88d503-9574-4c7b-9f5c-13f22b22335e" "bae2bd85-8163-4080-bd9d-419d26367f19" "e3230ae5-dba8-4044-8c7a-13bc5e0d9061")
+	)
+	(group "PWR_3V3"
+		(uuid "a1e48979-3da2-47db-b57b-2d2478dea3c2")
+		(members "a2aa5ebe-3e33-456b-8857-c92cdbeb573c" "b16ce521-1357-4789-bc88-c0f8d079f4fc" "71681daf-66fe-48dd-adfb-b1dc56c7496b" "22fac96a-b28d-4638-a07a-d654229c5eee" "15ca8f0b-143e-4b86-ad1b-ea807c28e7bc" "a359b681-6fe2-451d-a267-35d1fe7f2e29" "ce5c349d-906d-47d0-a452-505cc7d4be42")
+	)
+	(group "PWR_3V3D"
+		(uuid "8bd25fcf-5f56-4aa2-aef7-aac205ac9825")
+		(members "92ef2708-0726-4bfe-9334-13e18bbca99b" "78289838-0525-405d-8fd8-75d7770b8353" "c610114b-1edb-42c4-a0a6-0a88b3c25680" "b87eaf83-29f7-4a12-88d0-def83e95034f")
+	)
+	(group "PWR_HV_BOOST"
+		(uuid "65c4f496-6869-4631-8e6c-a11e44b5ea26")
+		(members "4111394a-cb06-42fd-bf2c-116a698968b3" "f1367276-0df7-47a1-9eb2-ea5106aa26d3" "ee6930d3-667b-44d6-9f13-851f8053ecf8" "77cf8478-7d65-461d-a9ee-25c52ac7e227" "d107c466-a902-43a7-b7a2-380aa402b940" "b63181fa-7f70-4823-843e-61bb810761cf" "0cbd5cb5-e933-4b50-9bd5-768bd35b6b2f" "9bd8d97f-9eec-44d3-ad4c-15ef686846b0" "a0f31670-e79b-4732-ae19-d23b625be833" "f84b242a-a086-46ad-873f-5ae1a9104769" "2a27a9fd-9183-411f-9eac-97d8d6590e5d" "8e57a389-7889-4167-9c3b-657360b5a136" "aa5e5210-2360-412d-a216-ce39b3add955" "a4cd61f6-950c-4e24-924a-9b054efaeb87" "1a162b75-d75c-4c46-b7d0-518882983a2e" "69d5411d-8fbd-4422-9060-eda811b92440" "e9e07852-031b-4139-bc34-f5992379c4f9" "ce7e38d3-e3d4-40e7-b63e-01a68c84660a" "de66138f-bb27-4b79-aa3a-25c0cff28021" "72ca85fc-2b41-49e5-b977-296f9a0f8c23" "58003f6a-3710-4210-8599-05af47886a1a" "8fb97848-9636-45bf-98f1-3d8bfca2e220" "66a21a22-91f9-4c76-a769-07caaf3b9871" "74c34103-4ad3-43f1-8006-776163445570" "764aad1f-04c2-4e07-b9c3-bc66c71cfacb" "aa238961-f34e-4693-a4e7-dc50c985db2d" "f9d29993-cc1e-4720-9c2f-4a997fe3a90a")
+	)
+	(group "PWR_HV_FB"
+		(uuid "27788f30-3a86-4652-a385-135bd695567c")
+		(members "f75f512d-15a4-4b35-b492-ce0efe0417ee" "64a12d67-50ad-447b-8fe8-074a753d80ab" "17492555-4d53-406a-88a3-737bb4e0a263" "b1568728-67e6-49b9-a22c-0410232beb5c" "861082a7-324c-4e92-89f9-2fe46bd48e51" "83b9f5ae-9ae1-4890-8004-36fd9c2481bf" "e9d10999-1943-4a32-a838-42a73be072c0" "b4f23b09-6398-4e10-91bb-1851a41ffa53" "faa0d864-ca1c-482a-95d6-e248a0075b79" "5c571662-e800-470b-8fa2-88e4c492c053" "c4ca7d1a-302b-4109-97c2-52fc9d10d42f" "5dfe11f6-9119-4af2-b6ae-95d3c4a9ef70")
+	)
+	(group "PWR_HV_OUT"
+		(uuid "7be17b2f-07d3-415e-9e4b-0fa8d86b900c")
+		(members "dfd2a4fb-7467-4b13-971d-53fdbe4f8138" "e0df6fb6-4ab4-4021-bc2f-7734b7d5c68b" "6fae6d5e-d33a-45eb-8c3a-75a934ba6c20" "4512e28a-7054-4a2a-a443-340c3f2ba206" "e97d8bdb-97ac-4560-84f4-5ab633cabee3" "460a036f-4665-4b2e-aaf5-c902f7142416" "44e9e2af-1a7b-4a56-80a5-542a075d0e5e" "f3608aeb-20fe-445e-b731-731d162bdf24" "ad8a82f4-7dd8-43a9-89c3-16a2fea06499")
+	)
+	(group "PWR_HV_MON"
+		(uuid "82140b78-9601-45ee-b2bf-1fc00b949f76")
+		(members "1faedc74-df4e-4542-9d93-62c353c649dc" "79639deb-03b5-4d4b-b437-501ead92e172" "01cb0313-bd8a-4457-8f74-009cd94c1799" "09caf253-69bb-4169-84d0-4d0937c2859a")
+	)
+	(group "PWR_HV_DIS"
+		(uuid "57396f2e-ddd5-4cf6-952c-dce0e553c47f")
+		(members "b3597678-5ceb-488a-9042-77cda75fe862" "4e9207ba-db9f-4efd-8fc0-b943238496f6" "f15ab953-e505-4c60-ba99-0b7474585634" "12a86f99-f578-4736-84c2-4a2b4b45e826")
+	)
+	(group "POWER"
+		(uuid "4677bbbf-a454-4621-b6b2-5f2da97d6064")
+		(members "71bd6244-ceca-4d29-8c84-e53ed7b3ff91" "a1e48979-3da2-47db-b57b-2d2478dea3c2" "8bd25fcf-5f56-4aa2-aef7-aac205ac9825" "65c4f496-6869-4631-8e6c-a11e44b5ea26" "27788f30-3a86-4652-a385-135bd695567c" "7be17b2f-07d3-415e-9e4b-0fa8d86b900c" "82140b78-9601-45ee-b2bf-1fc00b949f76" "57396f2e-ddd5-4cf6-952c-dce0e553c47f")
+	)
+	(group "FE_APD"
+		(uuid "30b6fbcc-7df1-4669-a142-ceff0ff8779c")
+		(members "514f6628-45ae-43a4-be2b-fc35bcc12d2a" "ba1bdb4c-20bf-45b5-8e83-1416408ee8e8" "0cd23e24-0c9b-41d7-ba39-5e34032671b9" "9d8c65a1-cf89-4b40-b5cc-b4e74365f192")
+	)
+	(group "FE_TIA"
+		(uuid "71a3598d-8792-4e29-8374-54367deacfb6")
+		(members "a556622d-8b32-48a6-8752-3d46552cb0e2" "8962052f-ffed-40fa-b1f8-aa12929e51b9" "13e22d5e-6963-405f-9011-eb5593500bf3" "eca66eb8-035c-45e0-ae0d-40a3e499f317" "786abdb2-f4ec-4361-92cd-8d5fd18a9b73" "a12750b6-d3d1-42e4-aba7-6d56a83602e6" "89d53d2e-e193-41b5-94bb-05d440c38846" "a6d2af41-7a86-4184-a411-017b3d7aab48")
+	)
+	(group "FE_POSTAMP"
+		(uuid "e7758a91-1a26-44da-b36c-5f2cc08afa30")
+		(members "8c0fddaa-5c12-4cee-9bdc-8d4e03665126" "37bdfe8b-d921-4b29-a4d7-ac9bf0bca338" "afcaec1d-a894-4216-832a-491ce5066c91" "515f58c7-0904-4c98-83ff-7f3a771aecca" "1d384921-6a03-4eaa-946a-63674a743de7" "85cde2c4-896e-4bb8-b4f0-19028101467c" "2cef2d32-38c5-4a0e-be25-2a914fdcbf4a" "46c67f2f-359d-4f1c-9da8-165b0fd2d4fc" "011b4576-b560-40cd-9321-4f04fcdc561b" "bf9bc715-5944-4480-921d-46bdd575ad7f")
+	)
+	(group "FE_LPF_COUPLE"
+		(uuid "9fd71932-c9ac-44e1-9331-63580cc8f21f")
+		(members "eeb8d1ae-cbf1-4222-8e05-eb7151152c0c" "0c3ce72e-aff4-4ba2-8df5-7107b89c65f9" "eb5ae96e-b8c8-4ef4-9a00-b236cfd08acf" "0ba4a1fd-3381-49ba-9368-a20369744e4a" "63f1e8e0-76be-45fb-a9f0-26fa32905da7")
+	)
+	(group "FRONT_END"
+		(uuid "07dbba0f-29d0-4929-93d6-b6e3465d123b")
+		(members "30b6fbcc-7df1-4669-a142-ceff0ff8779c" "71a3598d-8792-4e29-8374-54367deacfb6" "e7758a91-1a26-44da-b36c-5f2cc08afa30" "9fd71932-c9ac-44e1-9331-63580cc8f21f")
+	)
+	(group "SLC_COMP"
+		(uuid "d34e8f6d-0f06-46f8-a3f1-cc1a4f070f10")
+		(members "e5b5e131-1f29-4181-a658-7894ad6024f2" "a1c8c7bb-2590-4dfa-b32c-8ff57cfe3367" "db2ef52a-ec83-4819-b408-5cc4e98e9d74" "3f3b635c-c285-4bf7-badb-c7238df5d97b" "d2de59f7-f35e-4dbf-8a7c-b237b486a7d9" "915e4a50-5ec3-47d1-b3b7-8cc354879d06" "44f387a5-1395-43a3-a4c4-734f9672770e" "c1bbd310-cda2-4dad-914f-775dc50dafb2" "2db57096-8ac1-4535-9274-80c172fca02e")
+	)
+	(group "SLC_THRESH"
+		(uuid "b87b51ff-b336-41fd-a5a4-261a0b207545")
+		(members "65b2ae39-eeeb-4415-9abb-5808f5558cd6" "e214bc5f-e7a4-4f97-b584-33cc3d672a96" "402de66f-4ddb-4611-abb9-ffb4d89c84d8" "7a2c2393-8f67-4533-b45d-0d353aea6149" "54219503-1bee-4733-9817-753f8eb729f9")
+	)
+	(group "SLC_HYST"
+		(uuid "c9c9f296-2ca9-4e03-9f49-ecb5472dfd87")
+		(members "7c4c6add-c6be-41d2-b7f7-061d2af6abf0" "7b26a3e1-2567-4b68-8ec4-40aef58f1aab" "5f93036d-ee28-4825-a956-09b5826a3732")
+	)
+	(group "SLICER"
+		(uuid "b8338adb-1f5d-4c9f-910c-c970c7d6ddeb")
+		(members "d34e8f6d-0f06-46f8-a3f1-cc1a4f070f10" "b87b51ff-b336-41fd-a5a4-261a0b207545" "c9c9f296-2ca9-4e03-9f49-ecb5472dfd87")
+	)
+	(group "MON_VCM"
+		(uuid "51ca1bba-1044-4159-8947-6b298faf6f7a")
+		(members "4d97b671-ef49-4de1-887d-51b595b0b632" "d1240f37-e801-40b8-963d-2de2e0a0cc8a" "9e880a16-43a8-4a69-9372-d294f45c5188" "21632a82-a902-4c69-8d26-56168974f722" "4c5623b4-194d-4b90-bace-0088859d76cc" "a2db82ac-916d-4776-8a72-a28f994fac4b" "ca521806-cf57-452b-bf2f-9fe3274f19ba" "00cb957a-e0e5-4290-a5c5-20aedfc78d06")
+	)
+	(group "MON_RSSI"
+		(uuid "2791c32b-a84b-4c57-afd0-4446ef34266a")
+		(members "d5a2a192-92da-4b67-9812-01206110b1d4" "2ed84ecc-4b57-4faf-90f1-1f8b44a42797" "308576b4-8e2b-4543-a0c3-d91818104b06" "16c9a4e2-c43d-4d1f-99cf-d6b7df226b8e" "81e5b154-2a95-4a88-94e0-dd766b3018f9")
+	)
+	(group "MONITOR"
+		(uuid "e0bf3dfc-6e80-48e5-bf9b-bcd2eba6adde")
+		(members "51ca1bba-1044-4159-8947-6b298faf6f7a" "2791c32b-a84b-4c57-afd0-4446ef34266a")
+	)
+	(group "CONN_RECEPT"
+		(uuid "fb764947-9f1c-4483-ab81-886b379188ff")
+		(members "57a835eb-9b09-4c68-bf89-cbbb1bf0e8a3" "e24f75fa-a3e7-4b82-b4a5-c597cf062bdd" "1e047ac0-8541-477b-b537-c4d0a3aa4c05" "81557ca4-f41f-43c5-891b-914f773e8b8a" "ed24755b-a1ba-498f-a263-c2e9c3423978" "9accabb7-ccd9-4b3b-9671-7e676e15f4dd")
+	)
+	(group "CONN_CC"
+		(uuid "c7fa1837-65ca-4cb8-aca9-e9e99c6f41e4")
+		(members "e6128f01-c790-4320-96b9-44c274e8ff21" "c8bcb93e-f6c0-40c3-87dd-1605e9e38aaa" "555132db-ac6e-4475-8477-f3c3c6adc05a" "00c9d8a3-b6a7-4625-8c1c-becfcbb50079" "a711e686-a6f6-48a9-b3df-ff9f57c7d168" "531fed88-9bdb-4185-bc00-0939ddd8ba05" "2fc426f8-fd78-46f8-a982-4e9382651257" "ba5e0ac6-3f9a-4a09-a186-4683e55d1c3b")
+	)
+	(group "CONN_CAN_TERM"
+		(uuid "76b18085-01a0-41d0-9050-736b80036aaa")
+		(members "f8a92164-3e51-4b98-b99f-b5535d471e0b" "48c6f299-d60a-4930-9de7-ec4f100081d2" "f22a54c3-f606-4c73-9a86-d1ef6b9085c9")
+	)
+	(group "CONN_FANOUT"
+		(uuid "334f18ab-f843-444a-a94b-ea76d27bf050")
+		(members "3cee372a-b164-4a23-9258-f71c51be39f3" "7cdea3a8-62af-4ac2-bd47-f21fe3de11bf" "c3d8a5d7-a72d-44ae-8d3d-904d6fe9e2a7" "3f76d1b4-a833-4ef6-aad4-c5c1c705080b")
+	)
+	(group "CONN_DEBUG"
+		(uuid "df5253a3-a7b4-4cd6-a797-9bc36bcc65fd")
+		(members "90fd3a7b-6d22-4033-9a57-19ff580626ea" "021f7c73-8eea-4887-b340-8244f470a8a6")
+	)
+	(group "CONN_TP"
+		(uuid "df4e80bd-cf46-4529-baee-286d9a775f32")
+		(members "4de21f10-013c-477b-aa84-f81b4ec3045a" "885ca497-576c-411e-ace3-1ca1ff0d95d0" "c6548a31-8748-4d59-9af4-da020ececac6" "e01f1583-e6a0-49fb-9b52-b3844199f547" "73dd32ce-c4ee-428a-ae8f-3a03a9ef78bf" "446596ce-2f1b-4f12-abbe-4f477863b8e2")
+	)
+	(group "CONNECTOR"
+		(uuid "f8821334-09eb-41e1-b4fd-863615cb00bb")
+		(members "fb764947-9f1c-4483-ab81-886b379188ff" "c7fa1837-65ca-4cb8-aca9-e9e99c6f41e4" "76b18085-01a0-41d0-9050-736b80036aaa" "334f18ab-f843-444a-a94b-ea76d27bf050" "df5253a3-a7b4-4cd6-a797-9bc36bcc65fd" "df4e80bd-cf46-4529-baee-286d9a775f32")
+	)
+	(group "CTRL_MCU"
+		(uuid "e6ccb46e-047c-4fbc-b9d8-bdb5e1b0501a")
+		(members "1bc4f43c-8c7f-422b-89f5-690026b7d19c" "2df08c66-aa89-45c0-9626-a796c5e94237" "8ae60652-6bec-4cb1-933f-59ce8b260e9c" "56ed95b8-7cab-41f6-bb60-379b8873e380" "d5d8c3ae-d313-48b9-b938-5cf38776f3cd" "e99680e5-5393-43f8-8703-1ce21b464b16")
+	)
+	(group "CTRL_RESET_BOOT"
+		(uuid "cd634ead-ddd2-4071-a165-fff9604c2561")
+		(members "419971f4-692c-42df-9a5e-924d96d3b66c" "82946adc-97a1-48e0-a1b5-8f3e34a28c3e" "a6e8f273-603e-43f4-bdee-bf8148088ab6" "7ce987dc-322e-466f-a721-d4f3c5013906" "f1026966-81c8-43f2-ae72-7f038625b061" "79b7ec47-ca68-4e40-b6c8-3187d14d98ec" "a6d907ca-414a-47dc-850f-a4238ca00f33")
+	)
+	(group "CTRL_USB"
+		(uuid "94ef29e5-9267-4c7b-be91-19199780ea16")
+		(members "ccec1f39-52c3-4286-aebf-f740de64115e" "07b93538-1ff4-44d5-b36f-82d424badffd" "7203a01f-9539-4f41-a504-15c0d78273ac" "2ac04de9-8944-4e73-b44b-a0a27c7180e1" "85001245-f95e-4838-8d0f-e8cbe5707f21")
+	)
+	(group "CTRL_CAN"
+		(uuid "837d90db-422c-4641-bb32-af89148d6865")
+		(members "2793a9c2-fe21-4e57-819d-5303f0a19416" "da5ef71e-bcf1-4838-b73e-212a64ceb7d7" "7e5bd8dd-c077-4873-9608-8defb26690e0" "7eda3860-b1a4-4cf3-a7e1-37cb41bfc3d1" "14ba7f22-4284-4bcf-b1c8-707e03a6cfae")
+	)
+	(group "CTRL_DAC"
+		(uuid "817fcd3d-6b0e-49c6-96a6-c23959ade5b9")
+		(members "5fb61a44-3560-4e8e-a9e5-02d217362502" "4f4411f4-d5c6-4968-9075-5733eb48321c" "f0a5bc4a-b3bb-4958-8b45-f4f3229df5e5" "157b5ab9-1913-414a-962a-18ed87fa4aae" "d1d3da5a-fe44-4b53-bf52-7fae8f47377f" "39d59270-799d-4eef-a9c0-1f6b9610881d" "bc250eb0-b71e-47d8-89c7-fa0509d1bff2" "c44b7e66-bd85-4273-84d0-b24379f3c086" "0d2189e1-969a-40ca-b2a8-d6d35f19bdbe" "9d61eb6e-2c9e-4ef4-ab38-e523d00fd8d9" "dc4b665f-e3ae-4471-b36b-7f9b6684ef37" "df53580f-4b0a-4c2b-a49b-616ddad0d2e7" "cb89aa8c-d77a-411f-bdf6-ca34307eeb1a" "e64456e6-50f3-46d8-8a75-e1a5993b7859" "f560f2f4-ea17-4e61-8e24-2db1e400f1a6" "6040b9c7-29d0-4935-9adc-d3bf5fd028e0" "cfb3e072-2782-4b8c-9417-663efec6e12a" "0f1f2d9a-20da-40d4-916f-06b1c612c8f5")
+	)
+	(group "CTRL_ADC"
+		(uuid "e4b67e3f-ba36-4cb2-85b0-06504d3364fb")
+		(members "b91994b3-9114-4aba-b86f-d4f73b560f99" "1668faee-3130-4c4e-8e7e-86b5a13f02d2" "84c9949e-c294-4f04-9d95-f3919e53d434" "ee53b999-a2e6-4c9b-9487-5f7867c041af" "8fb1df75-9579-43f4-8d43-a9d77d050fa8" "f49174eb-2475-4752-a926-68fdf31e6e7b" "2adc1e12-5427-4dac-b32c-e57f8e9605ce" "1f3e0cd1-cd9b-4c25-9a0e-86e2f0ef3fa9" "ae289d1e-1ca9-4738-ba0f-993a827dda97" "c29077c4-71f8-41c7-b60c-cdea743a8b2c")
+	)
+	(group "CTRL_STATUS_UART"
+		(uuid "02d33616-57d0-4377-b8f1-62038bba5598")
+		(members "115669ed-3e0f-4265-b1a6-d5fe8a0aa619" "58aef106-514f-4f78-bb33-9207fa22a235" "1ea901f5-e780-4bdc-ba43-3f2d68c96822" "ddbc83da-c447-40db-a91b-ff17ef3f763a")
+	)
+	(group "CONTROLLER"
+		(uuid "c662ed03-363f-4b22-b0ee-c8d70dbb9920")
+		(members "e6ccb46e-047c-4fbc-b9d8-bdb5e1b0501a" "cd634ead-ddd2-4071-a165-fff9604c2561" "94ef29e5-9267-4c7b-be91-19199780ea16" "837d90db-422c-4641-bb32-af89148d6865" "817fcd3d-6b0e-49c6-96a6-c23959ade5b9" "e4b67e3f-ba36-4cb2-85b0-06504d3364fb" "02d33616-57d0-4377-b8f1-62038bba5598")
+	)
 )
