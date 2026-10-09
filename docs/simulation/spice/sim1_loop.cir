@@ -1,0 +1,30 @@
+* Sim 1 loop gain: OPA855 post-amp, loop broken at the IN- pin with a large inductor (DC closed, AC open)
+* and a large capacitor injecting the AC test voltage at the pin. Return ratio T = -V(NY)/V(NX).
+* NY = feedback-network side, NX = op-amp IN- pin. Voltage injection into a high-impedance pin from a
+* low-impedance network (RF||RG, tens of ohm), so loading error is small. Same circuit as sim1_postamp.cir.
+.param RF=301 RG=49.9
+.include ../../research/downloads/spice-models/opa855/SBOMB43/opa855_pspice/opa855_a.lib
+VDD 3V3 0 3.3
+VCM VCM_REF 0 1.65
+Vsrc SRC 0 DC 1.83
+Rsrc SRC TIA_OUT 25
+C51 TIA_OUT PA_IN 100n
+R51 PA_IN VCM_REF 1k
+R60 VCM_REF PA_REF 10
+C53 PA_REF 0 1u
+XU11 PA_IN NX OUT 3V3 0 OPA855
+R53 OUT NY {RF}
+R54 NY PA_REF {RG}
+LBRK NY NX 1G
+CINJ NX XI 1G
+Vinj XI 0 DC 0 AC 1
+R56 OUT LP 49.9
+C54 LP 0 47p
+C55 LP SDET_P 100n
+R59 SDET_P VCM_REF 1k
+CCMP SDET_P 0 2p
+.control
+ac dec 200 1k 20G
+wrdata sim1_loop_out.txt v(NY) v(NX)
+.endc
+.end

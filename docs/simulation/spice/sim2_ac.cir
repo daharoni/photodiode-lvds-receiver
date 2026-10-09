@@ -1,0 +1,10 @@
+* Sim 2 AC: transimpedance v(OUT)/Iph. Uses the DERIVED model with LIMIT() removed (ngspice .ac limitation, see README)
+.param CD=6p CTRLV=3.3
+.include ../../research/downloads/spice-models/ngspice-patched/opa857_ac_nolimit.lib
+.include sim2_core.inc
+.control
+op
+ac dec 200 100k 10G
+wrdata sim2_ac_out.txt v(out) v(in)
+.endc
+.end

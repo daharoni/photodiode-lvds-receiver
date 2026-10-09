@@ -1,0 +1,177 @@
+
+**** 11/18/20 15:38:43 ******* PSpice 17.4.0 (Nov 2018) ******* ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-ac_sweep"  [ C:\Users\a0232073\Desktop\GWL_Models\OPA855\AppendScript\opa855_pspice\opa855_pspice-pspicefile
+
+
+ ****     CIRCUIT DESCRIPTION
+
+
+******************************************************************************
+
+
+
+
+** Creating circuit file "ac_sweep.cir" 
+** WARNING: THIS AUTOMATICALLY GENERATED FILE MAY BE OVERWRITTEN BY SUBSEQUENT SIMULATIONS
+
+*Libraries: 
+* Profile Libraries :
+.INC "C:\Users\a0232073\Desktop\GWL_Models\OPA855\AppendScript\opa855_pspice\opa855_pspice-pspicefiles\schematic1\ac_sweep\ac_sweep"
++ "_profile.inc" 
+* Local Libraries :
+* From [PSPICE NETLIST] section of C:\SPB_Data\cdssetup\OrCAD_PSpiceTIPSpice_Install\17.4.0\PSpice.ini file:
+
+**** INCLUDING ac_sweep_profile.inc ****
+.LIB    ".\OPA855_A.lib" 
+
+**** RESUMING ac_sweep.cir ****
+.lib "nom_pspti.lib" 
+.lib "nom.lib" 
+
+*Analysis directives: 
+.AC DEC 31 1k 100G
+.OPTIONS ADVCONV
+.PROBE64 V(alias(*)) I(alias(*)) W(alias(*)) D(alias(*)) NOISE(alias(*)) 
+.INC "..\SCHEMATIC1.net" 
+
+
+
+**** INCLUDING SCHEMATIC1.net ****
+* source OPA855_PSPICE
+V_V3         N03033 0 DC 0Vdc AC 1Vac 
+R_R3         0 OUT  200 TC=0,0 
+V_V2         VEE 0 -2.5Vdc
+R_R2         0 N02977  75 TC=0,0 
+V_V1         VCC 0 2.5Vdc
+R_R1         N02977 OUT  453 TC=0,0 
+X_U1         N03033 N02977 OUT VCC VEE OPA855
+
+**** RESUMING ac_sweep.cir ****
+.END
+
+INFO(ORPSIM-16573): AC analysis does not support expression evaluation at each frequency. ABM devices with non-linear operations will be evaluated only at bias point.
+
+**** 11/18/20 15:38:43 ******* PSpice 17.4.0 (Nov 2018) ******* ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-ac_sweep"  [ C:\Users\a0232073\Desktop\GWL_Models\OPA855\AppendScript\opa855_pspice\opa855_pspice-pspicefile
+
+
+ ****     Diode MODEL PARAMETERS
+
+
+******************************************************************************
+
+
+
+
+               X_U1.X_E_N.DVN  X_U1.X_I_NP1.DNVF               X_U1.X_U1.DNVF  
+          IS  100.000000E-18  100.000000E-18                  100.000000E-18 
+          KF  316.227800E-12  316.227800E-12                  316.227800E-12 
+
+
+**** 11/18/20 15:38:43 ******* PSpice 17.4.0 (Nov 2018) ******* ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-ac_sweep"  [ C:\Users\a0232073\Desktop\GWL_Models\OPA855\AppendScript\opa855_pspice\opa855_pspice-pspicefile
+
+
+ ****     Resistor MODEL PARAMETERS
+
+
+******************************************************************************
+
+
+
+
+               X_U1.R_NOISELESS 
+  T_Measured   27            
+   T_Current -273.15         
+           R    1            
+
+
+**** 11/18/20 15:38:43 ******* PSpice 17.4.0 (Nov 2018) ******* ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-ac_sweep"  [ C:\Users\a0232073\Desktop\GWL_Models\OPA855\AppendScript\opa855_pspice\opa855_pspice-pspicefile
+
+
+ ****     Voltage Controlled Switch MODEL PARAMETERS
+
+
+******************************************************************************
+
+
+
+
+               X_U1.X_ESD_OUT.ESD_SW           X_U1.X_S1._S1   X_U1.X_S2._S2   
+         RON   50                               1.000000E-03    1.000000E-03 
+        ROFF    1.000000E+12                   20.000000E+03   20.000000E+03 
+         VON     .5                              .8              .8          
+        VOFF     .45                           -1              -1            
+
+
+ERROR(ORPSIM-16583): Detected an imported model containing transistors or diodes. For such models, PSpice for TI supports a minimum of one and maximum of three traces. Reduce the number of traces and simulate again.
+
+
+ABORTING SIMULATION
+**** 11/18/20 15:38:43 ******* PSpice 17.4.0 (Nov 2018) ******* ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-ac_sweep"  [ C:\Users\a0232073\Desktop\GWL_Models\OPA855\AppendScript\opa855_pspice\opa855_pspice-pspicefile
+
+
+ ****     JOB STATISTICS SUMMARY
+
+
+******************************************************************************
+
+
+
+Node counts:
+  Top level (NUNODS)                =           6
+  External (NCNODS)                 =          87
+  Total (NUMNOD)                    =          87
+
+Total device count (NUMEL)          =         195
+  Capacitors (C)                    =          25
+  Diodes (D)                        =           6
+  VCVS (E)                          =          11
+  VCCS (G)                          =          29
+  CCVS (H)                          =           1
+  Current Sources (I)               =           9
+  Inductors (L)                     =           2
+  Resistors (R)                     =          99
+  VSwitches (S)                     =           4
+  Voltage Sources (V)               =           7
+
+Number of subcircuits (X)           =          17
+
+Matrix statistics:
+  Matrix size (NSTOP)               =         108
+  Initial no. elements (NTTAR)      =         425
+  No. elements w/ fillin (NTTBR)    =         425
+  No. fillins (IFILL)               =           0
+  No. overflows (NTTOV)             =           0
+  No. LU operations (IOPS)          =           0
+  Percent sparsity (PERSPA)         =      96.356
+
+Analysis statistics:
+  No. total time points (NUMTTP)    =           0
+  No. rejected time points (NUMRTP) =           0
+  No. iterations (NUMNIT)           =           0
+
+Load Threads                        =           1
+
+Runtime statistics:                       Seconds      Iterations
+  Matrix load                       =        0.00
+  Matrix solution                   =        0.00               1
+  Readin                            =        6.45
+  General setup                     =         .02
+  CMI setup                     =        0.00
+  Setup                             =        0.00
+  DC sweep                          =        0.00               0
+  Bias point                        =        0.00               0
+  AC and noise                      =        0.00               0
+  Total transient analysis          =        0.00
+  Output                            =        0.00
+  Overhead                          =         .17
+  Total job time (using Solver 1)   =        6.47
+

@@ -1,0 +1,172 @@
+Note: gnd in a subcircuit is not set to 0 automatically
+
+Note: Compatibility modes selected: ps a
+
+
+Circuit: * sim 1: opa855 post-amp as drawn (front end sheet, docs/schematic/frontend.md, gen/frontend.py)
+
+Reducing trtol to 1 for xspice 'A' devices
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+No. of Data Rows : 1
+v(out) = 1.578135e+00
+v(pa_in) = 1.637916e+00
+v(sdet_p) = 1.650000e+00
+Reducing trtol to 1 for xspice 'A' devices
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+No. of Data Rows : 1461
+Reducing trtol to 1 for xspice 'A' devices
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+3v3                                        3.3
+vcm_ref                                   1.65
+src                                       1.83
+tia_out                                   1.83
+pa_in                                  1.63792
+pa_ref                                 1.64791
+xu11.n1492098                          1.63245
+xu11.n1492108                           1.6383
+xu11.mid                                  1.65
+xu11.n1492376                           1.6383
+xu11.n1483677                          4.25343
+xu11.n1483687                          1.65014
+xu11.psrrp                             1.65008
+xu11.n1481259                           1.6503
+xu11.n1483713                          1.65307
+xu11.psrrn                             1.65014
+xu11.n1461236                          1.65141
+xu11.n1461246                             1.65
+xu11.n1461252                          1.64996
+xu11.cmrr                                 1.65
+xu11.n1481243                         0.468718
+xu11.n1481253                          1.64992
+xu11.n1483693                          1.64693
+xu11.n1483703                          1.64986
+xu11.n1534615                          1.35122
+xu11.n1534625                          1.63953
+xu11.n1534887                          1.63953
+xu11.n1541593                          1.38275
+xu11.n1541603                          1.64064
+xu11.n406634                               3.3
+xu11.n317950                              1.65
+xu11.n406794                        1.6522e-06
+xu11.n1446217                          1.56643
+xu11.clamp                             1.56365
+xu11.n31014                            1.63746
+xu11.n35813                             2.5085
+xu11.n38096                            1.02511
+xu11.esdn                              1.63747
+xu11.esdp                              1.63792
+xu11.vimon                             1.45286
+xu11.vout_s                            1.57814
+xu11.n112292                           1.57814
+out                                    1.57814
+xu11.zo                                1.57814
+xu11.vcc_b                                 3.3
+xu11.vee_b                         1.65055e-06
+xu11.n1492126                           1.6383
+xu11.n1534635                          1.63953
+xu11.n1534645                          1.63953
+xu11.n1446199                          1.56643
+xu11.n10570                            1.63752
+xu11.n10561                            1.63752
+xu11.n1254860                         0.583505
+xu11.n1492118                           1.6383
+xu11.n25816                            1.63746
+xu11.n11984                            1.63752
+xu11.vcc_clp                            2.5085
+xu11.vee_clp                           1.02511
+xu11.n06456                            1.63792
+xu11.n1490067                          1.65008
+xu11.n11991                            1.63747
+inm                                    1.63747
+xu11.n28602                                1.1
+xu11.n30136                                2.9
+xu11.n30913                            1.63746
+xu11.n35675                             2.5085
+xu11.n38050                            1.02511
+xu11.aolnet                            1.65001
+xu11.n110431                           1.45286
+xu11.x_e_n.7                          0.833786
+xu11.x_e_n.8                          0.833786
+xu11.x_e_n.3                      -2.19375e-19
+xu11.x_e_n.6                        4.3875e-19
+xu11.x_e_n.4                        4.3875e-19
+xu11.x_e_n.5                                 0
+xu11.x_iq_n.g1_int1                0.000197135
+xu11.x_iq_p.g1_int1                          0
+xu11.x_i_np1.7                        0.833786
+xu11.x_i_np1.8                        0.833786
+xu11.x_i_np1.3                    -4.16671e-15
+xu11.x_i_np1.6                     8.33343e-15
+xu11.x_i_np1.4                     8.33343e-15
+xu11.x_i_np1.5                               0
+xu11.x_u1.7                           0.833786
+xu11.x_u1.8                           0.833786
+xu11.x_u1.3                       -4.16671e-15
+xu11.x_u1.6                        8.33343e-15
+xu11.x_u1.4                        8.33343e-15
+xu11.x_u1.5                                  0
+xu11.x_u2.g1_int1                 -1.15134e-05
+xu11.x_u3.g1_int1                  8.63504e-06
+xu11.x_u5.g1_int1                  0.000791502
+xu11.x_u5.g1_int2                     0.197135
+xu11.x_u6.g1_int1                   0.00102511
+xu11.x_u6.g1_int2                     0.197135
+xu11.x_vcm_clamp.g1_int1            -0.0125383
+xu11.n749288                           1.63752
+xu11.x_vos_drift.e1_int1               -0.0004
+xu11.x_vos_vs_vcm.1                    1.63752
+xu11.x_vos_vs_vcm.e1_int1                    0
+xu11.x_vos_vs_vcm.e1_int2              1.66248
+lp                                     1.57814
+sdet_p                                    1.65
+b.xu11.x_vos_vs_vcm.be1#branch               0
+b.xu11.x_vos_drift.be1#branch                0
+b.xu11.x_vcm_clamp.bg1#branch                0
+b.xu11.x_u6.bg1#branch                       0
+b.xu11.x_u5.bg1#branch                       0
+b.xu11.x_u3.bg1#branch                       0
+b.xu11.x_u2.bg1#branch                       0
+b.xu11.x_iq_p.bg1#branch                     0
+b.xu11.x_iq_n.bg1#branch                     0
+h.xu11.x_h3.h_h3#branch            1.97135e-10
+v.xu11.x_h3.vh_h3#branch           0.000197135
+l.xu11.l_l2#branch                -3.06237e-05
+l.xu11.l_l1#branch                  -0.0027855
+e.xu11.x_vos_vs_vcm.e1#branch      2.60789e-13
+e.xu11.x_vos_drift.e1#branch       2.60789e-13
+e.xu11.x_u1.e2#branch              2.08336e-23
+e.xu11.x_u1.e1#branch              3.33337e-23
+e.xu11.x_i_np1.e2#branch           2.08336e-23
+e.xu11.x_i_np1.e1#branch           3.33337e-23
+e.xu11.x_e_n.e3#branch                 1.2e-05
+e.xu11.x_e_n.e2#branch             1.09687e-27
+e.xu11.x_e_n.e1#branch               1.755e-27
+e.xu11.e_e6#branch                 2.40896e-05
+e.xu11.e_e3#branch                 7.18641e-11
+v.xu11.x_vos_vs_vcm.v1#branch      2.60789e-13
+v.xu11.v_vcm_min#branch            5.49998e-10
+v.xu11.v_vcm_max#branch              -1.25e-09
+vsrc#branch                        3.18912e-18
+vcm#branch                        -0.000221224
+vdd#branch                          -0.0171333
+a.xu11.x_vos_vs_vcm.ae1#branch_1_0               0
+a.xu11.x_u6.ag1#branch_1_0                   0
+a.xu11.x_u5.ag1#branch_1_0                   0
+
+
+No. of Data Rows : 25795
+Note: Simulation executed from .control section 

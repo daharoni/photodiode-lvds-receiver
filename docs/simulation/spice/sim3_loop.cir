@@ -1,0 +1,13 @@
+* Sim 3 loop gain: loop broken at IN- (L 1GH / C 1GF), T = -V(OPOUT)/V(NX); R102, C101 and loads are inside the loop path
+.param R102=10 LOADMODE=0
+.include ../../research/downloads/spice-models/ngspice-patched/opax320_ac_nolimit.lib
+.include sim3_core.inc
+LBRK OPOUT INM 1G
+CINJ INM XI 1G
+Vinj XI 0 DC 0 AC 1
+.control
+alter vt ac = 0
+ac dec 100 10 1G
+wrdata sim3_loop_out.txt v(opout) v(inm)
+.endc
+.end

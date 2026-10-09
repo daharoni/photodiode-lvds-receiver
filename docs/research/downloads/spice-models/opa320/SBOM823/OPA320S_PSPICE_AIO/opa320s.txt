@@ -1,0 +1,328 @@
+* OPA320S
+*****************************************************************************
+* (C) Copyright 2012 Texas Instruments Incorporated. All rights reserved.                                            
+*****************************************************************************
+** This model is designed as an aid for customers of Texas Instruments.
+** TI and its licensors and suppliers make no warranties, either expressed
+** or implied, with respect to this model, including the warranties of 
+** merchantability or fitness for a particular purpose.  The model is
+** provided solely on an "as is" basis.  The entire risk as to its quality
+** and performance is with the customer.
+*****************************************************************************
+*
+** Released by: WEBENCH(R) Design Center, Texas Instruments Inc.
+* Part: OPA320S
+* Date: 08/27/13
+* Model Type: All In One
+* Simulator: Pspice
+* Simulator Version: Pspice 16.2.0.p001
+* EVM Order Number: N/A 
+* EVM Users Guide: N/A
+* Datasheet: SBOS513D - AUGUST 2011 - Revised NOVEMBER 2011
+*
+* Model Version: 2.0
+*
+*****************************************************************************
+*
+* Updates:
+* Version 1.0 : Release to Web
+* Version 2.0 : Correct GOS for single-supply operation
+* 
+*****************************************************************************
+* Notes: 
+* The model meets the following datasheet specs for 5.5V (+-2.75V) operation
+* at a temperature of 27C with a load resistance of 10kohms:
+* VOS, IIB, Input common-mode Voltage Range, CMRR, noise, Input Capacitance,
+* Open-loop voltage gain, GBW, Slew Rate, Output Voltage Swing, 
+* Open-loop Output Resistance, Quiescent Current
+* Enable and Disable Time, 
+* 
+* The model meets the following specs over the published operating temperature 
+* range:
+* IIB
+*
+* The model does not meet the following datasheet specs:
+* phase margin, AOL at 2k load resistance, power-on time,
+* thresholds for enable & disable, disable time is longer than the published spec.
+* Short circuit output current is about half the published value.
+*
+* The model will shut-down if the inputs exceed the maximum rated voltage.
+*
+* The model enable/disable threshold is at the midpoint of the power supplies.
+* The settling time for the macromodel is less than the published device specs.
+*****************************************************************************
+*$
+.SUBCKT OPA320S INP INN VCC VEE OUT SHDN
+C_C4     INN INP  4p  TC=0,0 
+E_E2     N61051 0 VEE 0 1
+X_U22    INPUT_OUTP INPUT_VOS VNSE_OPA320S
+X_U28    INPUTP_GBW INPUTN_GBW VCC VEE INPUTP_ICMR INPUTN_ICMR EN GNDF ICMR_OPA320S 
+X_U12    INPUT_TF INPUT_VCLAMP VCC VEE EN GNDF TF_OPA320S
+X_U19    OUT_CNTRL SHDN VCC VEE GNDF SHDN_NOT_OPA320S
+E_E5     INPUTP_CMRR INPUTP_ICMR OUT_CMRR GNDF 0.5 
+X_U29    VCC VEE INPUT_VCLAMP INPUT_VIMON VIMON GNDF VCLAMP_W_SENSE_OPA320S 
+R_R10       GNDF EN  10k TC=0,0 
+X_U31    INPUT_VIMON INPUT_ZOUT VIMON GNDF AMETER_OPA320S 
+X_U18    INPUTP_ICMR GNDF VCC VEE VICM GNDF IIBP_OPA320S
+V_V4     N278677 GNDF 0.69Vdc
+X_U5     VICM INP INN GNDF VICM_OPA320S
+X_U30    INPUTP_CMRR INPUT_VOS VICM VCC VEE GNDF VOS_OPA320S 
+G_G1     OUT_CMRR GNDF VICM GNDF -7e-6
+R_R6     OUT_CNTRL N278435  100 TC=0,0 
+GOS      INPUT_ZOUT OUT VALUE = {(1/90)*(1e-8+V(EN,GNDF))*V(INPUT_ZOUT,OUT)}
+X_U13    INPUTP_GBW INPUTN_GBW INPUT_TF EN GNDF GBW_SLEW_OPA320S
+X_U26    VCC VEE INPUT_OUTN INPUTN_CMRR GNDF PSRR_OPA320S 
+R_R1     N61125 N61045  1e6 TC=0,0 
+X_U20    VCC VEE EN VIMON GNDF IQ_OPA320S
+D_D1     IN_COMP N278435 Dbreak 
+X_U17    GNDF INPUTN_ICMR VCC VEE VICM GNDF IIBN_OPA320S
+R_R4     INN INPUT_OUTN  1 TC=0,0 
+R_R2     N61051 N61125  1e6 TC=0,0 
+R_R9     OUT_CNTRL IN_COMP  1k TC=0,0 
+C_C1     0 N61125  1m  TC=0,0 
+C_C6     GNDF IN_COMP  18n  TC=0,0 
+R_R3     INP INPUT_OUTP  1 TC=0,0 
+X_U23    INPUT_OUTN INPUT_VOS FEMT_OPA320S
+E_E3     GNDF 0 N61125 0 1
+R_R5     N114739 GNDF  1 TC=0,0 
+C_C2     INN GNDF  2p  TC=0,0 
+X_U2     EN IN_COMP N278677 GNDF COMPARATOR_OPA320S 
+E_E1     N61045 0 VCC 0 1
+L_L1     OUT_CMRR N114739  8uH  
+C_C3     GNDF INP  2p  TC=0,0 
+E_E4     INPUTN_CMRR INPUTN_ICMR OUT_CMRR GNDF -0.5
+.model Dbreak D N=0.001 RS=0.001 T_ABS=27
+.ENDS OPA320S 
+*$
+**
+.SUBCKT VNSE_OPA320S 1 2 
+.PARAM NLF = 5 
+.PARAM FLW = 1000  
+.PARAM NVR = 7
+.PARAM GLF={PWR(FLW,0.25)*NLF/1164}
+.PARAM RNV={1.184*PWR(NVR,2)}
+.MODEL DVN D KF={PWR(FLW,0.5)/1E11} IS=1.0E-16
+I1 0 7 10E-3
+I2 0 8 10E-3
+D1 7 0 DVN
+D2 8 0 DVN
+E1 3 6 7 8 {GLF}
+R1 3 0 1E9
+R2 3 0 1E9
+R3 3 6 1E9
+E2 6 4 5 0 10
+R4 5 0 {RNV}
+R5 5 0 {RNV}
+R6 3 4 1E9
+R7 4 0 1E9
+E3 1 2 3 4 1
+C1 1 0 1E-15
+C2 2 0 1E-15
+C3 1 2 1E-15
+.ENDS
+*$
+.SUBCKT ICMR_OPA320S   VOP VOM VDD VSS VIP VIM SHDN GNDF 
+.PARAM VMAX = -0.12 
+.PARAM VMIN = -0.12
+ECLAMPP  VOP GNDF VALUE = {LIMIT(V(VIP,GNDF),V(VDD,GNDF) - VMAX, V(VSS,GNDF) + VMIN)}
+ECLAMPM  VOM GNDF VALUE = {LIMIT(V(VIM,GNDF),V(VDD,GNDF) - VMAX, V(VSS,GNDF) + VMIN)}
+.ENDS
+*$
+.SUBCKT TF_OPA320S  VI  VO  VCC VEE SHDN GNDF
+.PARAM fp1 = 45e6 
+*.PARAM fp1 = 20e6 
+.PARAM fp2 = 10G 
+.PARAM fp3 = 10G 
+.PARAM fp4 = 10G
+.PARAM Gm = 1M
+.PARAM Ro = {1/Gm}
+.PARAM PI = 3.141592
+.PARAM gL = 1M
+Gp1  GNDF VO VI GNDF {Gm}
+Rp1  VO GNDF {Ro}
+Cp1  VO GNDF {1/(2*PI*Ro*fp1)} IC = 0
+.ENDS
+*$
+.SUBCKT SHDN_NOT_OPA320S OUT_CNTRL IN VCC VEE GNDF
+.PARAM VIHparam = 0.7
+.PARAM VILparam = 0.3
+.PARAM VIMIDparam = 0.5
+.PARAM VSmax = 5.5
+.PARAM IIBmin = 0.04u
+.PARAM IIBmax = 0.13u
+.PARAM VCCnom = 5
+.PARAM VD = 0.3
+.PARAM VMAX = 6
+ETEST TEST 0 VALUE = {V(IN,GNDF)}
+EN1 N1 GNDF VALUE = {IF(V(IN) < V(GNDF),0,1)}
+EN2 N2 GNDF VALUE = {IF(V(IN) >= V(GNDF),1,0)}
+EN3 N3 GNDF VALUE = {IF(V(IN) > V(VCC)+VD,0,1)}
+EN4 N4 GNDF VALUE = {IF(V(IN) < V(VEE)-VD,0,1)}
+EN6 N6 GNDF VALUE = {IF((V(VCC)-V(VEE)) > VMAX,0,1)}
+EOUT OUT_CNTRL GNDF VALUE = {V(N1,GNDF)*V(N2,GNDF)*V(N3,GNDF)*V(N4,GNDF)*V(N6,GNDF)}
+EN5 N5 GNDF VALUE = {(V(IN,VEE)/55e6) + IIBmin}
+GIB_IN IN GNDF VALUE = {V(N5,GNDF)*V(N3,GNDF)*V(N4,GNDF)}
+.ENDS
+*$
+.SUBCKT VCLAMP_W_SENSE_OPA320S  VDD  VSS  VI  VO VIMON  GNDF
+.PARAM SCALEP = 1
+.PARAM SCALEN = 1
+.PARAM ISC = 0.065
+.PARAM ROS = 90
+EHRPOS HRPOS GNDF VALUE = {MIN(V(VIMON,GNDF)*69.2,ISC*ROS-V(VDD,GNDF))}
+EHRNEG HRNEG GNDF VALUE = {MAX(V(VIMON,GNDF)*69.2,-ISC*ROS-V(VSS,GNDF))}
+EPCLIP  VDD_CLP GNDF VALUE = {V(VDD,GNDF) + V(HRPOS,GNDF)}
+ENCLIP  VSS_CLP GNDF VALUE = {V(VSS,GNDF) + V(HRNEG,GNDF)}
+ECLAMP  VO GNDF VALUE = {LIMIT(V(VI,GNDF), V(VDD_CLP,GNDF), V(VSS_CLP,GNDF))}
+.ENDS
+*$
+.SUBCKT AMETER_OPA320S  VI  VO VIMON GNDF
+.PARAM GAIN = 1
+VSENSE VI VO DC = 0
+EMETER VIMON GNDF VALUE = {I(VSENSE)*GAIN}
+.ENDS
+*$
+.SUBCKT IIBP_OPA320S OUT IN VCC VEE INP GNDF
+.PARAM SCALE = 1p
+.PARAM IIBtyp = 0.1
+.PARAM m1t = 0
+.PARAM m2t = 2
+.PARAM m3t = 8
+.PARAM m4t = 52
+.PARAM m1v = -1
+.PARAM m2v = 0.001
+.PARAM m3v = -10
+.PARAM b1v = -0.9
+.PARAM b3v = 23
+EIIBt NIIBt 0 VALUE = {MAX(1,PWR(2,(TEMP-27)/10))}
+Ein Nin 0 VALUE = {V(INP,GNDF)}
+E1v N1v 0 VALUE = {m1v*V(Nin) + b1v}
+E2v N2v 0 VALUE = {m2v*V(Nin) + IIBtyp}
+E3v N3v 0 VALUE = {m3v*V(Nin) + b3v}
+E4v N4v 0  VALUE = {MIN(MAX(V(N1v),V(N2v)),V(N3v))}
+EIIBv NIIBv 0 VALUE = {V(N4v)/1}
+GOUT OUT IN VALUE = {SCALE*(V(NIIBt)*V(NIIBv))}
+.ENDS
+*$
+.SUBCKT VICM_OPA320S OUT INP INN GNDF
+EOUT OUT GNDF VALUE = {0.5*(V(INP,GNDF) + V(INN,GNDF))}
+.ENDS
+*$
+.SUBCKT VOS_OPA320S OUT IN VICM VCC VEE GNDF
+.PARAM SCALE = 1e-6
+.PARAM DRIFT = 1.5
+.PARAM VICM_SHIFT = 9.1
+.PARAM VCC_SHIFT = 5
+.PARAM VOS_TYP = -40
+EDRIFT NDRIFT 0 VALUE = {DRIFT*(TEMP - 27)}
+ESHIFT NSHIFT 0 VALUE = {VICM_SHIFT*V(VICM,GNDF)}
+EVCC NVCC 0 VALUE = {V(VCC,VEE)}
+EVCCSHIFT NVCCSHIFT 0 VALUE = {VCC_SHIFT*(V(NVCC) - 5.5)}
+EVOS OUT IN VALUE = {SCALE*(VOS_TYP + V(NDRIFT) + V(NSHIFT) + V(NVCCSHIFT))}
+.ENDS
+*$
+.SUBCKT GBW_SLEW_OPA320S  VIP  VIM  VO  SHDN GNDF 
+.PARAM Aol = 130  
+.PARAM GBW = 20e6  
+.PARAM SRP = 10e6  
+.PARAM SRN = 10e6 
+.PARAM IT = 0.001
+.PARAM PI = 3.141592
+.PARAM IP = {IT*MAX(1,SRP/SRN)}
+.PARAM IN = {IT*MIN(-1,-SRN/SRP)}
+.PARAM CC = {IT*MAX(1/SRP,1/SRN)}
+.PARAM FP = {GBW/PWR(10,AOL/20)}
+.PARAM RC = {1/(2*PI*CC*FP)}
+.PARAM GC = {PWR(10,AOL/20)/RC}
+G1p GNDF OUTG1p VALUE = {MAX(MIN(GC*V(SHDN,GNDF)*V(VIP,VIM),IP),IN)}
+G1n OUTG1n GNDF VALUE = {MAX(MIN(GC*V(SHDN,GNDF)*V(VIP,VIM),IP),IN)}
+G1OUT GNDF VO VALUE = {V(SHDN,GNDF)*V(OUTG1p,OUTG1n)}
+RG1p OUTG1p GNDF {0.5*RC}
+Cg1dp OUTG1p GNDF {2*CC} IC=0
+RG1n OUTG1n GNDF {0.5*RC}
+Cg1dn OUTG1n GNDF {2*CC} IC=0
+ROUT VO GNDF 1
+.ENDS
+*$
+.SUBCKT PSRR_OPA320S  VDD  VSS  VI  VO  GNDF 
+.PARAM PSRR = 140 
+.PARAM fpsrr = 1
+.PARAM PI = 3.141592
+.PARAM RPSRR = 1
+.PARAM GPSRR = {PWR(10,-PSRR/20)/RPSRR}
+.PARAM LPSRR = {RPSRR/(2*PI*fpsrr)}
+G1  GNDF 1 VDD VSS {GPSRR}
+R1  1 2 {RPSRR}
+L1  2 GNDF {LPSRR} 
+E1  VO VI 1 GNDF 1
+C2  VDD VSS 10P 
+.ENDS
+*$
+.SUBCKT IQ_OPA320S VCC VEE SHDN VIMON GNDF
+.PARAM IQ_NOM = 0.00134
+.PARAM IQ_SHDN = 0.1u
+.PARAM Geq = 18.75u
+GVAR VCC VEE VALUE = {(V(SHDN)+ 1e-9)*Geq*V(VCC,VEE)}
+GIQ VCC VEE VALUE = {V(SHDN)*IQ_NOM + (1-V(SHDN))*IQ_SHDN}
+GOUTP VCC GNDF VALUE = {IF(V(VIMON,GNDF) > 0, V(VIMON)*V(SHDN),0)}
+GOUTN GNDF VEE VALUE = {IF(V(VIMON,GNDF) < 0, V(VIMON)*V(SHDN),0)}
+.ENDS
+*$
+.SUBCKT IIBN_OPA320S OUT IN VCC VEE INN GNDF
+.PARAM SCALE = 1p
+.PARAM IIBtyp = 0.3
+.PARAM m1t = 0
+.PARAM m2t = 2
+.PARAM m3t = 8
+.PARAM m4t = 52
+.PARAM m1v = -1
+.PARAM m2v = 0.001
+.PARAM m3v = -10
+.PARAM b1v = -0.9
+.PARAM b3v = 23
+EIIBt NIIBt 0 VALUE = {MAX(1,PWR(2,(TEMP-27)/10))}
+*EIIBt NIIBt 0  VALUE = {MAX(MAX(MAX(V(N1t),V(N2t)),V(N3t)),V(N4t))}
+Ein Nin 0 VALUE = {V(INN,GNDF)}
+E1v N1v 0 VALUE = {m1v*V(Nin) + b1v}
+E2v N2v 0 VALUE = {m2v*V(Nin) + IIBtyp}
+E3v N3v 0 VALUE = {m3v*V(Nin) + b3v}
+E4v N4v 0  VALUE = {MIN(MAX(V(N1v),V(N2v)),V(N3v))}
+EIIBv NIIBv 0 VALUE = {V(N4v)/1}
+GOUT OUT IN VALUE = {SCALE*(V(NIIBt)*V(NIIBv))}
+.ENDS
+*$
+.SUBCKT FEMT_OPA320S 1 2 
+.PARAM NLFF = 0.7 
+.PARAM FLWF = 100 
+.PARAM NVRF = 0.6
+.PARAM GLFF={PWR(FLWF,0.25)*NLFF/1164}
+.PARAM RNVF={1.184*PWR(NVRF,2)}
+.MODEL DVNF D KF={PWR(FLWF,0.5)/1E11} IS=1.0E-16
+* END CALC VALS
+I1 0 7 10E-3
+I2 0 8 10E-3
+D1 7 0 DVNF
+D2 8 0 DVNF
+E1 3 6 7 8 {GLFF}
+R1 3 0 1E9
+R2 3 0 1E9
+R3 3 6 1E9
+E2 6 4 5 0 10
+R4 5 0 {RNVF}
+R5 5 0 {RNVF}
+R6 3 4 1E9
+R7 4 0 1E9
+G1 1 2 3 4 1E-6
+C1 1 0 1E-15
+C2 2 0 1E-15
+C3 1 2 1E-15
+.ENDS
+*$
+.SUBCKT COMPARATOR_OPA320S OUT IN REF GNDF
+.PARAM VOUT_MAX = 1
+.PARAM VOUT_MIN = 0
+.PARAM GAIN = 1e4
+EOUT OUT GNDF VALUE = {MAX(MIN(GAIN*V(IN,REF),VOUT_MAX),VOUT_MIN)}
+.ENDS
+*$
+

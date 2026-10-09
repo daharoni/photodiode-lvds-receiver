@@ -30,3 +30,6 @@ hardware/pcb/*/fab/*
 scratch/
 *.tmp
 .history/
+# raw SPICE transient/AC data is reproducible from docs/simulation/spice/run_sim*.sh
+docs/simulation/spice/out/*.txt
+docs/simulation/spice/out/*.txt.gz

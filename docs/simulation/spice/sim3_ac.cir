@@ -1,0 +1,11 @@
+* Sim 3 AC: closed-loop response of the VCM_REF buffer, derived no-limit model copy (ngspice .ac, see README)
+.param R102=10 LOADMODE=0
+.include ../../research/downloads/spice-models/ngspice-patched/opax320_ac_nolimit.lib
+.include sim3_core.inc
+RFB OPOUT INM 0.001
+.control
+op
+ac dec 100 10 1G
+wrdata sim3_ac_out.txt v(opout) v(vcm_ref)
+.endc
+.end

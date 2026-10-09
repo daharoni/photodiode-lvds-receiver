@@ -1,0 +1,367 @@
+; OPA857
+;****************************************************************************
+; (C) Copyright 2016 Texas Instruments Incorporated. All rights reserved.
+;****************************************************************************
+;* This model is designed as an aid for customers of Texas Instruments.
+;* TI and its licensors and suppliers make no warranties, either expressed
+;* or implied, with respect to this model, including the warranties of
+;* merchantability or fitness for a particular purpose.  The model is
+;* provided solely on an "as is" basis.  The entire risk as to its quality
+;* and performance is with the customer.
+;****************************************************************************
+;
+;* Released by: WEBENCH(R) Design Center, Texas Instruments Inc.
+; Part: OPA857
+; Date: 12/13/2016
+; Model Type: All In One
+; Simulator: ADS
+; Simulator Version: 2016
+; EVM Order Number: N/A
+; EVM Users Guide:  N/A
+; Datasheet: SBOS630D –DECEMBER 2013–REVISED AUGUST 2016
+;
+; Model Version: 1.0
+;
+;****************************************************************************
+;
+; Updates:
+;
+; Version 1.0 : Release to Web
+;
+;****************************************************************************
+; Notes:
+; 1. The following parameters are modeled:
+;    Small Signal Bandwidth, Slew Rate, Equivalent input-referred current
+;    noise, Overdrive Recovery Time, Closed-Loop Output Impendance,
+;    Transimpendance Gain, Output Offset Voltage, Common-Mode Voltage,
+;    Input Capacitance, Output Voltage Swing, Output Current Drive,
+;    Quiescent Operating Current, PSRR
+;
+; 2. The following parameters are not modeled:
+;    Temperature Variation, Harmonic Distortion
+;
+;
+;****************************************************************************
+define opa857 ( ctrl 0 in out outn vs)
+opa857_ht4:xi0 ctrl 0 in out outn vs
+end opa857
+
+
+
+
+
+
+
+define analog_buffer ( vout vin)
+R:r0 vin 0 R=1e9
+R:r1 vout 0 R=1e9
+SDD:e0xE vin 0 vout 0 I[1,0]=0 F[2,0]=(1*_v1)-_v2
+end analog_buffer
+
+
+define opa857_amp_ht4 ( vcc vee vinm vinp vout)
+opa857_amp_cmrr_ht4:xi21 net066 net065
+opa857_amp_psrr_ht4:xi19 vcc_int vee_int net8 net066
+opa857_amp_inoise_ht4:xi18 net058 net8
+opa857_amp_vnoise_ht4:xi17 net048 net058
+opa857_amp_iload_ht4:xi10 vcc vee vimon
+SDD:h2 vimon 0 F[1,0]=-(1*_c1)+_v1 C[1]="vcursourcedetect"
+I_Source:i5 vcc vee Idc=23.2e-3
+I_Source:i0 net041 0 Idc=-568e-9
+I_Source:i3 net065 0 Idc=1e-12
+R:r2 net51 net089 R=1
+R:r9 vinp net048 R=100e-3
+R:r10 vinm net8 R=100e-3
+R:r1 vimon 0 R=1e9
+R:r0 net66 net39 R=530.5e3
+R:r4 net15 net45 R=1
+R:r6 net15 net21 R=100e-3
+C:c7 0 net048 C=500e-15
+C:c8 net8 0 C=500e-15
+C:c6 net048 net8 C=10e-15
+C:c0xE net39 net66 C=4.6e-12
+analog_buffer:xi16 net089 net0137
+analog_buffer:xi13 vee_int vee
+analog_buffer:xi12 vcc_int vcc
+analog_buffer:xi11 net0105 net45
+analog_buffer:xi2 net21 net51
+dideal1:d7 net0137 net0116 Mode=1
+dideal1:d6 net0135 net0137 Mode=1
+dideal1:d2 net46 net041 Mode=1
+dideal1:d1 net041 net25 Mode=1
+dideal1:d4 net065 net27 Mode=1
+dideal1:d3 net48 net065 Mode=1
+dideal1:d5 net70 net51 Mode=1
+dideal1:d0 net51 net33 Mode=1
+dideal1:d9 net15 net44 Mode=1
+dideal1:d8 net0105 net40 Mode=1
+V_Source:v7 net041 net058 Vdc=0
+V_Source:v12 vcc_int net0116 Vdc=0
+V_Source:v14 net0135 vee_int Vdc=0
+V_Source:v1 net67 net39 Vdc=0
+V_Source:v9 net40 net15 Vdc=20.2e-3
+V_Source:v2 net66 0 Vdc=0
+V_Source:v10 net44 net0105 Vdc=5.2e-3
+V_Source:v3 net46 vee_int Vdc=1
+V_Source:v6 net48 vee_int Vdc=1
+V_Source:v0 net39 net0137 Vdc=0
+V_Source:ve1 net52 vee_int Vdc=600e-3
+V_Source:v5 vcc_int net27 Vdc=1
+V_Source:v4 vcc_int net25 Vdc=1
+V_Source:vcursourcedetect net45 net59 Vdc=0
+V_Source:vcursinkdetect vout net59 Vdc=0
+V_Source:v13 vcc_int net68 Vdc=1.4
+SDD:gahdli6 net66 net67 net041 net065 I[1,0]=min(max(_v2*188e-3,-1e-3),1e-3) I[2,0]=0
+SDD:h0 net68 net33 F[1,0]=-(1e-9 + 1e-9*_c1 + 0*_c1^2 + 0*_c1^3 + 1e-9*_c1^4 + 0*_c1^5 + 0*_c1^6 + 0*_c1^7 + 0*_c1^8 + 0*_c1^9)+_v1 \
+      C[1]="vcursourcedetect"
+SDD:h1 net70 net52 F[1,0]=-(1e-9 + 1e-9*_c1 + 0*_c1^2 + 0*_c1^3 + 1e-9*_c1^4 + 0*_c1^5 + 0*_c1^6 + 0*_c1^7 + 0*_c1^8 + 0*_c1^9)+_v1 \
+      C[1]="vcursinkdetect"
+end opa857_amp_ht4
+
+
+define opa857_ht4 ( ctrl 0 in out outn vs)
+opa857_amp_ht4:xi5 vs 0 in net7 net036
+sw_l4:xahdli12 net024 net029 in von=1.1
+sw_l4:xahdli9 ctrl net032 in von=1.1
+hpa_inv_ideal:xahdlinv0 ctrl net024 vs 0
+C:c3 net029 net036 C=290e-15
+C:c2 net032 net036 C=103.5e-15
+C:c5 net032 0 C=1.5e-12
+C:c4 net029 0 C=500e-15
+C:c0xE net7 0 C=20e-12
+C:c1 net23 0 C=50e-12
+R:r5 net042 outn R=25
+R:r6 net032 net036 R=20e3
+R:r3 0 net23 R=7.5e3
+R:r1 net23 vs R=6e3
+R:r4 net036 out R=25
+R:r0 net029 net036 R=5e3
+R:r2 net7 net042 R=1.5e3
+analog_buffer:xi4 net042 net23
+end opa857_ht4
+
+
+
+
+define hpa_inv_ideal ( _node1 _node2 vdd vss_n)
+SDD:e1 _node2 0 _node1 0 vdd 0 vss_n 0 F[1,0]=( if _v2>(_v3+_v4)/2 then _v4 else _v3 endif )-_v1 \
+      I[2,0]=0 I[3,0]=0 I[4,0]=0
+end hpa_inv_ideal
+
+
+define sw_l4 ( s a b)
+parameters  von=1.1
+;.model vswitch2 vswitch roff=1e9 ron=1e-3 voff=-0.01 von={von}
+;spice_vswitch:s1 a b s 0 roff=1e9 ron=1e-3 voff=-0.01 von=von
+SwitchV       :s1 a b s 0 R2=1e9   R1=1e-3  V2=-0.01   V1=von
+end sw_l4
+
+
+model dideal1 Diode N=0.1m Nbv=0.1m Ibv=1e-10 Tnom=27 IkModel=1
+
+define opa857_amp_iload_ht4 ( vdd vss_n vimon)
+SDD:g1 vdd 0 vimon 0 I[1,0]=   ( if _v2>=0 then _v2 else 0 endif ) I[2,0]=0
+SDD:g2 vss_n 0 vimon 0 I[1,0]= ( if _v2<0  then _v2 else 0 endif ) I[2,0]=0
+end opa857_amp_iload_ht4
+
+
+define opa857_amp_vnoise_ht4 ( a b)
+ x=1k
+ y=0.4
+ z=0.4
+vnse:x1 a b nlf=y flw=x nvr=z
+end opa857_amp_vnoise_ht4
+
+
+define opa857_amp_inoise_ht4 ( a b)
+ x=1k
+ y=0.4e3
+ z=0.4e3
+femt:x1 a b nlff=y flwf=x nvrf=z
+end opa857_amp_inoise_ht4
+
+
+define opa857_amp_psrr_ht4 ( vdd vss_n a b)
+psrr_dual_new:x1 vdd vss_n a b 0 psrrp=80 fpsrrp=5k psrrn=80 fpsrrn=5k
+end opa857_amp_psrr_ht4
+
+
+define opa857_amp_cmrr_ht4 ( a b)
+V_Source:v1 a b Vdc=0
+end opa857_amp_cmrr_ht4
+
+
+
+define vnse ( _node1 _node2)
+parameters  nlf=10 flw=4 nvr=4.6
+ glf=pow(flw,0.25)*nlf/1164
+ rnv=1.184*pow(nvr,2)
+model dvn Diode Kf=pow(flw,0.5)/1e11 Is=1.0e-16 Ibv=1e-10 Tnom=27 IkModel=1
+I_Source:i1 0 _node7 Idc=10e-3
+I_Source:i2 0 _node8 Idc=10e-3
+dvn:d1 _node7 0 Mode=1
+dvn:d2 _node8 0 Mode=1
+SDD:e1 _node7 _node8 _node3 _node6 I[1,0]=0 F[2,0]=(glf*_v1)-_v2
+R:r1 _node3 0 R=1e9
+R:r2 _node3 0 R=1e9
+R:r3 _node3 _node6 R=1e9
+SDD:e2 _node5 0 _node6 _node4 I[1,0]=0 F[2,0]=(10*_v1)-_v2
+R:r4 _node5 0 R=rnv
+R:r5 _node5 0 R=rnv
+R:r6 _node3 _node4 R=1e9
+R:r7 _node4 0 R=1e9
+SDD:e3 _node3 _node4 _node1 _node2 I[1,0]=0 F[2,0]=(1*_v1)-_v2
+C:c1 _node1 0 C=1e-15
+C:c2 _node2 0 C=1e-15
+C:c3 _node1 _node2 C=1e-15
+end vnse
+
+
+
+define femt ( _node1 _node2)
+parameters  nlff=0.1 flwf=0.001 nvrf=0.1
+ glff=pow(flwf,0.25)*nlff/1164
+ rnvf=1.184*pow(nvrf,2)
+model dvnf Diode Kf=pow(flwf,0.5)/1e11 Is=1.0e-16 Ibv=1e-10 Tnom=27 IkModel=1
+I_Source:i1 0 _node7 Idc=10e-3
+I_Source:i2 0 _node8 Idc=10e-3
+dvnf:d1 _node7 0 Mode=1
+dvnf:d2 _node8 0 Mode=1
+SDD:e1 _node7 _node8 _node3 _node6 I[1,0]=0 F[2,0]=(glff*_v1)-_v2
+R:r1 _node3 0 R=1e9
+R:r2 _node3 0 R=1e9
+R:r3 _node3 _node6 R=1e9
+SDD:e2 _node5 0 _node6 _node4 I[1,0]=0 F[2,0]=(10*_v1)-_v2
+R:r4 _node5 0 R=rnvf
+R:r5 _node5 0 R=rnvf
+R:r6 _node3 _node4 R=1e9
+R:r7 _node4 0 R=1e9
+SDD:g1 _node3 _node4 _node1 _node2 I[1,0]=0 I[2,0]=1e-6*_v1
+C:c1 _node1 0 C=1e-15
+C:c2 _node2 0 C=1e-15
+C:c3 _node1 _node2 C=1e-15
+end femt
+
+
+
+
+
+
+define psrr_single ( vdd vss_n vi vo gndf)
+parameters  psrr=130 fpsrr=1.6
+; pi=3.141592
+ rpsrr=1
+ gpsrr=pow(10,-psrr/20)/rpsrr
+ lpsrr=rpsrr/(2*pi*fpsrr)
+SDD:g1 vdd vss_n gndf _node1 I[1,0]=0 I[2,0]=gpsrr*_v1
+R:r1 _node1 _node2 R=rpsrr
+L:l1 _node2 gndf L=lpsrr
+SDD:e1 _node1 gndf vo vi I[1,0]=0 F[2,0]=(1*_v1)-_v2
+C:c2 vdd vss_n C=10p
+end psrr_single
+
+define psrr_single_new ( vdd vss_n vi vo gndf)
+parameters  psrr=130 fpsrr=1.6
+;pi=3.141592
+rpsrr=1
+gpsrr=pow(10,-psrr/20)/rpsrr
+lpsrr=rpsrr/(2*pi*fpsrr)
+SDD:g1 vdd vss_n gndf _node1 I[1,0]=0 I[2,0]=gpsrr*_v1
+R:r1 _node1 _node2 R=rpsrr
+L:l1 _node2 gndf L=lpsrr
+
+SDD:ea _node1 gndf _node101 gndf I[1,0]=0 F[2,0]=(1*_v1)-_v2
+SDD:gra _node101 _node102 I[1,0]=_v1/1e6
+C:ca _node102 gndf C=1e3
+SDD:eb _node1 _1a_ _node102 gndf F[1,0]=(_v2)-_v1 I[2,0]=0
+
+SDD:e1 "1a" gndf vo vi I[1,0]=0 F[2,0]=(1*_v1)-_v2
+C:c2 vdd vss_n C=10p
+end psrr_single_new
+
+define psrr_dual ( vdd vss_n vi vo gndf)
+parameters  psrrp=130 fpsrrp=1.6 psrrn=130 fpsrrn=1.6
+;pi=3.141592
+rpsrrp=1
+gpsrrp=pow(10,-psrrp/20)/rpsrrp
+lpsrrp=rpsrrp/(2*pi*fpsrrp)
+rpsrrn=1
+gpsrrn=pow(10,-psrrn/20)/rpsrrn
+lpsrrn=rpsrrn/(2*pi*fpsrrn)
+SDD:g1 vdd gndf gndf _node1 I[1,0]=0 I[2,0]=gpsrrp*_v1
+R:r1 _node1 _node2 R=rpsrrp
+L:l1 _node2 gndf L=lpsrrp
+
+SDD:g2 vss_n gndf gndf _node3 I[1,0]=0 I[2,0]=gpsrrn*_v1
+R:r2 _node3 _node4 R=rpsrrn
+L:l2 _node4 gndf L=lpsrrn
+
+SDD:e1 vo vi _node1 gndf _node3 gndf F[1,0]=(_v2+_v3)-_v1 I[2,0]=0 I[3,0]=0
+C:c3 vdd vss_n C=10p
+end psrr_dual
+
+define psrr_dual_new ( vdd vss_n vi vo gndf)
+parameters  psrrp=130 fpsrrp=1.6 psrrn=130 fpsrrn=1.6
+; pi=3.141592
+ rpsrrp=1
+ gpsrrp=pow(10,-psrrp/20)/rpsrrp
+ lpsrrp=rpsrrp/(2*pi*fpsrrp)
+ rpsrrn=1
+ gpsrrn=pow(10,-psrrn/20)/rpsrrn
+ lpsrrn=rpsrrn/(2*pi*fpsrrn)
+
+SDD:g1 vdd gndf gndf _node1 I[1,0]=0 I[2,0]=gpsrrp*_v1
+R:r1 _node1 _node2 R=rpsrrp
+L:l1 _node2 gndf L=lpsrrp
+
+SDD:ea _node1 gndf _node101 gndf I[1,0]=0 F[2,0]=(1*_v1)-_v2
+SDD:gra _node101 _node102 I[1,0]=_v1/1e6
+C:ca _node102 gndf C=1e3
+SDD:eb _node1 _1a_ _node102 gndf F[1,0]=(_v2)-_v1 I[2,0]=0
+
+
+SDD:g2 vss_n gndf gndf _node3 I[1,0]=0 I[2,0]=gpsrrn*_v1
+R:r2 _node3 _node4 R=rpsrrn
+L:l2 _node4 gndf L=lpsrrn
+
+SDD:ec _node3 gndf _node301 gndf I[1,0]=0 F[2,0]=(1*_v1)-_v2
+SDD:grc _node301 _node302 I[1,0]=_v1/1e6
+C:cc _node302 gndf C=1e3
+SDD:ed _node3 _3a_ _node302 gndf F[1,0]=(_v2)-_v1 I[2,0]=0
+
+
+SDD:e1 vo vi _1a_ gndf _3a_ gndf F[1,0]=(_v2+_v3)-_v1 I[2,0]=0 I[3,0]=0
+C:c3 vdd vss_n C=10p
+end psrr_dual_new
+
+
+
+define cmrr ( vi vo gndf)
+parameters  cmrr=130 fcmrr=1600
+; pi=3.141592
+ rcmrr=1
+ gcmrr=pow(10,-cmrr/20)/rcmrr
+ lcmrr=rcmrr/(2*pi*fcmrr)
+SDD:g1 vi gndf gndf _node1 I[1,0]=0 I[2,0]=gcmrr*_v1
+R:r1 _node1 _node2 R=rcmrr
+L:l1 _node2 gndf L=lcmrr
+SDD:e1 _node1 gndf vi vo I[1,0]=0 F[2,0]=(1*_v1)-_v2
+end cmrr
+
+define cmrr_new ( vi vo gndf)
+parameters  cmrr=130 fcmrr=1600
+; pi=3.141592
+ rcmrr=1
+ gcmrr=pow(10,-cmrr/20)/rcmrr
+ lcmrr=rcmrr/(2*pi*fcmrr)
+SDD:g1 vi gndf gndf _node1 I[1,0]=0 I[2,0]=gcmrr*_v1
+R:r1 _node1 _node2 R=rcmrr
+L:l1 _node2 gndf L=lcmrr
+
+SDD:ea _node1 gndf _node101 gndf I[1,0]=0 F[2,0]=(1*_v1)-_v2
+SDD:gra _node101 _node102 I[1,0]=_v1/1e6
+C:ca _node102 gndf C=1e3
+SDD:eb _node1 _1a_ _node102 gndf F[1,0]=(_v2)-_v1 I[2,0]=0
+
+SDD:e1 "1a" gndf vi vo I[1,0]=0 F[2,0]=(1*_v1)-_v2
+end cmrr_new

@@ -1,0 +1,72 @@
+(ExpressProject "OPA855_PSPICE"
+  (ProjectVersion "19981106")
+  (SoftwareVersion "17.4-2020 S004-[11/18/20]")
+  (ProjectType "Analog or A/D Mixed Mode")
+  (Folder "Design Resources"
+    (Folder "Library"
+      (File ".\library\opa855.olb"
+        (Type "Schematic Library")))
+    (NoModify)
+    (File ".\opa855_pspice.dsn"
+      (Type "Schematic Design"))
+    (BuildFileAddedOrDeleted "x")
+    (CompileFileAddedOrDeleted "x")
+    (DOCKED "TRUE")
+    (DOCKING_POSITION "61215")
+    (PSPICE_Regenerate_Netlist_Flag "FALSE"))
+  (Folder "Layout")
+  (Folder "Outputs"
+    (File ".\opa855_pspice-pspicefiles\schematic1\schematic1.net"
+      (Type "Report")))
+  (Folder "PSpice Resources"
+    (Folder "Simulation Profiles"
+      (ActiveProfile ".\opa855_pspice-pspicefiles\schematic1\ac_sweep.sim")
+      (File.PSpice.{09528990-3187-11D2-BC7B-00A0C90CBF91}
+         ".\opa855_pspice-pspicefiles\schematic1\ac_sweep.sim"
+        (DisplayName "SCHEMATIC1-AC_Sweep")
+        (Type "PSpice Profile")))
+    (Folder "Model Libraries"
+      (Sort User)
+      (File ".\opa855_a.lib"
+        (Type "PSpiceLibrary")
+        (DisplayName ".\OPA855_A.lib")))
+    (Folder "Stimulus Files"
+      (Sort User))
+    (Folder "Include Files"
+      (Sort User)))
+  (DefaultLibraryBrowseDirectory "library\PSpice")
+  (PartMRUSelector
+    (OPA855
+      (FullPartName "OPA855.Normal")
+      (LibraryName
+         "C:\USERS\A0232073\DESKTOP\GWL_MODELS\OPA855\APPENDSCRIPT\OPA855_A.OLB")
+      (DeviceIndex "0")))
+  (LastUsedLibraryBrowseDirectory
+     "C:\Users\a0232073\Desktop\GWL_Models\OPA855\AppendScript")
+  (GlobalState
+    (FileView
+      (Path "Design Resources")
+      (Path "Design Resources" ".\opa855_pspice.dsn")
+      (Path "Design Resources" ".\opa855_pspice.dsn" "SCHEMATIC1")
+      (Path "Design Resources" "Library")
+      (Path "Design Resources" "Library" ".\library\opa855.olb")
+      (Select "Design Resources" ".\opa855_pspice.dsn"))
+    (HierarchyView)
+    (Doc
+      (Type "COrCapturePMDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 0 200 0 875"))
+      (Tab 0))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -1 -1 5 1248 24 893")
+        (Scroll "-52 -8")
+        (Zoom "114")
+        (Occurrence "/"))
+      (Path
+         "C:\USERS\A0232073\DESKTOP\GWL_MODELS\OPA855\APPENDSCRIPT\OPA855_PSPICE\OPA855_PSPICE.DSN")
+      (Schematic "SCHEMATIC1")
+      (Page "PAGE1")))
+  (MPSSessionName "a0232073")
+  (Folder "Logs"))

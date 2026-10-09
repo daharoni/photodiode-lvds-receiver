@@ -1,0 +1,12 @@
+* Sim 3 transient: 100 mV disturbance injected at VCM_REF through 1k at t = 1 ms (RD/VD in sim3_core.inc); 10 mV step at IN+ at 0.4 ms, TI model as shipped
+.param R102=10 LOADMODE=0
+.include ../../research/downloads/spice-models/opa320/SBOM438/OPAx320.LIB
+.include sim3_core.inc
+RFB OPOUT INM 0.001
+.control
+op
+print v(opout) v(vcm_ref)
+tran 100n 2m
+wrdata sim3_tran_out.txt v(opout) v(vcm_ref)
+.endc
+.end

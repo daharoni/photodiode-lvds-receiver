@@ -1,0 +1,25 @@
+* Sim 1 cross-check: steady-state sine response of the as-drawn post-amp vs the ngspice AC result (same netlist as sim1_postamp.cir)
+.param RF=301 RG=49.9 FREQ=3e8
+.include ../../research/downloads/spice-models/opa855/SBOMB43/opa855_pspice/opa855_a.lib
+VDD 3V3 0 3.3
+VCM VCM_REF 0 1.65
+Vsrc SRC 0 SIN(1.83 10m {FREQ} 0.2u)
+Rsrc SRC TIA_OUT 25
+C51 TIA_OUT PA_IN 100n
+R51 PA_IN VCM_REF 1k
+R60 VCM_REF PA_REF 10
+C53 PA_REF 0 1u
+XU11 PA_IN INM OUT 3V3 0 OPA855
+R53 OUT INM {RF}
+R54 INM PA_REF {RG}
+R56 OUT LP 49.9
+C54 LP 0 47p
+C55 LP SDET_P 100n
+R59 SDET_P VCM_REF 1k
+CCMP SDET_P 0 2p
+.control
+tran 5p 0.5u 0.3u 5p
+meas tran vmx max v(out) from=0.45u to=0.5u
+meas tran vmn min v(out) from=0.45u to=0.5u
+.endc
+.end

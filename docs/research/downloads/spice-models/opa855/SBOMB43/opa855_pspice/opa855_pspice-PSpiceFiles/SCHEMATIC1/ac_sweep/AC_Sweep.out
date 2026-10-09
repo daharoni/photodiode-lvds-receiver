@@ -1,0 +1,245 @@
+
+**** 11/18/20 15:38:56 ******* PSpice 17.4.0 (Nov 2018) ******* ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-ac_sweep"  [ C:\Users\a0232073\Desktop\GWL_Models\OPA855\AppendScript\opa855_pspice\opa855_pspice-pspicefile
+
+
+ ****     CIRCUIT DESCRIPTION
+
+
+******************************************************************************
+
+
+
+
+** Creating circuit file "ac_sweep.cir" 
+** WARNING: THIS AUTOMATICALLY GENERATED FILE MAY BE OVERWRITTEN BY SUBSEQUENT SIMULATIONS
+
+*Libraries: 
+* Profile Libraries :
+.INC "C:\Users\a0232073\Desktop\GWL_Models\OPA855\AppendScript\opa855_pspice\opa855_pspice-pspicefiles\schematic1\ac_sweep\ac_sweep"
++ "_profile.inc" 
+* Local Libraries :
+* From [PSPICE NETLIST] section of C:\SPB_Data\cdssetup\OrCAD_PSpiceTIPSpice_Install\17.4.0\PSpice.ini file:
+
+**** INCLUDING ac_sweep_profile.inc ****
+.LIB    ".\OPA855_A.lib" 
+
+**** RESUMING ac_sweep.cir ****
+.lib "nom_pspti.lib" 
+.lib "nom.lib" 
+
+*Analysis directives: 
+.AC DEC 31 1k 100G
+.OPTIONS ADVCONV
+.PROBE64 N([OUT])
+.INC "..\SCHEMATIC1.net" 
+
+
+
+**** INCLUDING SCHEMATIC1.net ****
+* source OPA855_PSPICE
+V_V3         N03033 0 DC 0Vdc AC 1Vac 
+R_R3         0 OUT  200 TC=0,0 
+V_V2         VEE 0 -2.5Vdc
+R_R2         0 N02977  75 TC=0,0 
+V_V1         VCC 0 2.5Vdc
+R_R1         N02977 OUT  453 TC=0,0 
+X_U1         N03033 N02977 OUT VCC VEE OPA855
+
+**** RESUMING ac_sweep.cir ****
+.END
+
+INFO(ORPSIM-16573): AC analysis does not support expression evaluation at each frequency. ABM devices with non-linear operations will be evaluated only at bias point.
+
+**** 11/18/20 15:38:56 ******* PSpice 17.4.0 (Nov 2018) ******* ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-ac_sweep"  [ C:\Users\a0232073\Desktop\GWL_Models\OPA855\AppendScript\opa855_pspice\opa855_pspice-pspicefile
+
+
+ ****     Diode MODEL PARAMETERS
+
+
+******************************************************************************
+
+
+
+
+               X_U1.X_E_N.DVN  X_U1.X_I_NP1.DNVF               X_U1.X_U1.DNVF  
+          IS  100.000000E-18  100.000000E-18                  100.000000E-18 
+          KF  316.227800E-12  316.227800E-12                  316.227800E-12 
+
+
+**** 11/18/20 15:38:56 ******* PSpice 17.4.0 (Nov 2018) ******* ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-ac_sweep"  [ C:\Users\a0232073\Desktop\GWL_Models\OPA855\AppendScript\opa855_pspice\opa855_pspice-pspicefile
+
+
+ ****     Resistor MODEL PARAMETERS
+
+
+******************************************************************************
+
+
+
+
+               X_U1.R_NOISELESS 
+  T_Measured   27            
+   T_Current -273.15         
+           R    1            
+
+
+**** 11/18/20 15:38:56 ******* PSpice 17.4.0 (Nov 2018) ******* ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-ac_sweep"  [ C:\Users\a0232073\Desktop\GWL_Models\OPA855\AppendScript\opa855_pspice\opa855_pspice-pspicefile
+
+
+ ****     Voltage Controlled Switch MODEL PARAMETERS
+
+
+******************************************************************************
+
+
+
+
+               X_U1.X_ESD_OUT.ESD_SW           X_U1.X_S1._S1   X_U1.X_S2._S2   
+         RON   50                               1.000000E-03    1.000000E-03 
+        ROFF    1.000000E+12                   20.000000E+03   20.000000E+03 
+         VON     .5                              .8              .8          
+        VOFF     .45                           -1              -1            
+
+
+**** 11/18/20 15:38:56 ******* PSpice 17.4.0 (Nov 2018) ******* ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-ac_sweep"  [ C:\Users\a0232073\Desktop\GWL_Models\OPA855\AppendScript\opa855_pspice\opa855_pspice-pspicefile
+
+
+ ****     SMALL SIGNAL BIAS SOLUTION       TEMPERATURE =   27.000 DEG C
+
+
+******************************************************************************
+
+
+
+ NODE   VOLTAGE     NODE   VOLTAGE     NODE   VOLTAGE     NODE   VOLTAGE
+
+
+(  OUT)     .0020  (  VCC)    2.5000  (  VEE)   -2.5000  (N02977)-484.2E-06     
+
+(N03033)    0.0000 (X_U1.ZO)     .0020                   (X_U1.MID)-350.0E-12   
+
+(X_U1.CMRR)-351.2E-12                 (X_U1.ESDN)-484.3E-06                     
+
+(X_U1.ESDP)-121.0E-09                 (X_U1.CLAMP)     .0026                    
+
+(X_U1.PSRRN) 213.8E-06                (X_U1.PSRRP) 129.9E-06                    
+
+(X_U1.VCC_B)    2.5000                (X_U1.VEE_B)   -2.5000                    
+
+(X_U1.VIMON)     .0157                (X_U1.AOLNET)-344.2E-09                   
+
+(X_U1.N06456)-121.0E-09               (X_U1.N10561)-400.1E-06                   
+
+(X_U1.N10570)-400.1E-06               (X_U1.N11984)-400.1E-06                   
+
+(X_U1.N11991)-484.3E-06               (X_U1.N25816)-484.0E-06                   
+
+(X_U1.N28602)   -1.4000               (X_U1.N30136)    2.1000                   
+
+(X_U1.N30913)-484.0E-06               (X_U1.N31014)-484.0E-06                   
+
+(X_U1.N35675)    1.7118               (X_U1.N35813)    1.7118                   
+
+(X_U1.N38050)   -1.4799               (X_U1.N38096)   -1.4799                   
+
+(X_U1.VOUT_S)     .0020               (X_U1.X_U1.3)    0.0000                   
+
+(X_U1.X_U1.4)    0.0000               (X_U1.X_U1.5)    0.0000                   
+
+(X_U1.X_U1.6)    0.0000               (X_U1.X_U1.7)     .8338                   
+
+(X_U1.X_U1.8)     .8338               (X_U1.N110431)     .0157                  
+
+(X_U1.N112292)     .0020              (X_U1.N317950)-350.0E-12                  
+
+(X_U1.N406634)    2.5000              (X_U1.N406794)   -2.5000                  
+
+(X_U1.N749288)-400.1E-06              (X_U1.VCC_CLP)    1.7118                  
+
+(X_U1.VEE_CLP)   -1.4799              (X_U1.X_E_N.3)    0.0000                  
+
+(X_U1.X_E_N.4)    0.0000              (X_U1.X_E_N.5)    0.0000                  
+
+(X_U1.X_E_N.6)    0.0000              (X_U1.X_E_N.7)     .8338                  
+
+(X_U1.X_E_N.8)     .8338              (X_U1.N1254860)     .0411                 
+
+(X_U1.N1446199)     .0025             (X_U1.N1446217)     .0025                 
+
+(X_U1.N1461236) 13.76E-09             (X_U1.N1461246)-348.8E-12                 
+
+(X_U1.N1461252)-749.3E-12             (X_U1.N1481243)   -1.7898                 
+
+(X_U1.N1481253)-125.3E-06             (X_U1.N1481259) 454.7E-06                 
+
+(X_U1.N1483677)    3.9446             (X_U1.N1483687) 213.8E-06                 
+
+(X_U1.N1483693)    -.0046             (X_U1.N1483703)-213.8E-06                 
+
+(X_U1.N1483713)     .0046             (X_U1.N1490067) 129.9E-06                 
+
+(X_U1.N1492098) 677.1E-06             (X_U1.N1492108) 451.4E-06                 
+
+(X_U1.N1492118) 451.4E-06             (X_U1.N1492126) 451.4E-06                 
+
+(X_U1.N1492376) 451.4E-06             (X_U1.N1534615)     .0115                 
+
+(X_U1.N1534625) 403.8E-06             (X_U1.N1534635) 403.8E-06                 
+
+(X_U1.N1534645) 403.8E-06             (X_U1.N1534887) 403.8E-06                 
+
+(X_U1.N1541593)     .0103             (X_U1.N1541603) 361.2E-06                 
+
+(X_U1.X_I_NP1.3)    0.0000            (X_U1.X_I_NP1.4)    0.0000                
+
+(X_U1.X_I_NP1.5)    0.0000            (X_U1.X_I_NP1.6)    0.0000                
+
+(X_U1.X_I_NP1.7)     .8338            (X_U1.X_I_NP1.8)     .8338                
+
+(X_U1.X_VOS_VS_VCM.1)-400.1E-06       
+
+
+
+
+    VOLTAGE SOURCE CURRENTS
+    NAME         CURRENT
+
+    V_V3        -1.210E-05
+    V_V2         1.751E-02
+    V_V1        -1.753E-02
+    X_U1.V_VCM_MAX  -2.100E-09
+    X_U1.V_VCM_MIN   1.400E-09
+    X_U1.X_H3.VH_H3  -1.569E-05
+    X_U1.X_VOS_VS_VCM.V1  -1.599E-17
+
+    TOTAL POWER DISSIPATION   8.76E-02  WATTS
+
+
+
+          JOB CONCLUDED
+
+**** 11/18/20 15:38:56 ******* PSpice 17.4.0 (Nov 2018) ******* ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-ac_sweep"  [ C:\Users\a0232073\Desktop\GWL_Models\OPA855\AppendScript\opa855_pspice\opa855_pspice-pspicefile
+
+
+ ****     JOB STATISTICS SUMMARY
+
+
+******************************************************************************
+
+
+
+  License check-out time            =        6.75
+  Total job time (using Solver 1)   =        4.19
+

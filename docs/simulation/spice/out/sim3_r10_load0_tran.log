@@ -1,0 +1,217 @@
+Note: gnd in a subcircuit is not set to 0 automatically
+
+Note: Compatibility modes selected: ps a
+
+
+Circuit: * sim 3 transient: 100 mv disturbance injected at vcm_ref through 1k at t = 1 ms (rd/vd in sim3_core.inc); 10 mv step at in+ at 0.4 ms, ti model as shipped
+
+Reducing trtol to 1 for xspice 'A' devices
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Note: Starting dynamic gmin stepping
+Warning: Dynamic gmin stepping failed
+Note: Starting true gmin stepping
+Warning: True gmin stepping failed
+Note: Starting source stepping
+Warning: source stepping failed
+Note: Transient op started
+Note: Transient op finished successfully
+
+No. of Data Rows : 1
+v(opout) = 4.040110e-02
+v(vcm_ref) = 6.572402e-02
+Reducing trtol to 1 for xspice 'A' devices
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Note: Starting dynamic gmin stepping
+Warning: Dynamic gmin stepping failed
+Note: Starting true gmin stepping
+Warning: True gmin stepping failed
+Note: Starting source stepping
+Note: Source stepping completed
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+3v3                                        3.3
+mid                                       1.65
+m2                                        1.65
+inp                                       1.65
+xu30.n24458                               1.65
+xu30.n24659                               1.65
+xu30.n37029                            251.429
+xu30.n37037                            157.075
+xu30.mid                                  1.65
+xu30.n39473                            251.433
+xu30.n39884                            251.411
+xu30.n39892                            25.5289
+xu30.n2425309                              3.3
+xu30.n2425287                             1.65
+xu30.n2425325                      1.65165e-06
+xu30.n56849                               1.65
+xu30.n57325                               1.65
+xu30.n59747                               1.65
+xu30.n59865                               1.65
+xu30.n25921                          -0.285943
+xu30.n25929                            1.64999
+xu30.n65579                               1.65
+xu30.n65697                               1.65
+xu30.n68774                            2.38162
+xu30.n72398                            3.22794
+xu30.n72391                          0.0109616
+xu30.n81574                               1.65
+xu30.n81664                               1.65
+xu30.sw_ol_opax320                        1.65
+xu30.vclp                              2.38162
+xu30.vimon                             6.40972
+xu30.n27785                            3.58396
+xu30.n27793                            1.65001
+xu30.vout_s                            1.65003
+xu30.n2419074                          2.38162
+xu30.n36262                            2.38162
+xu30.n32347                            1.65003
+xu30.n2821521                             1.65
+xu30.n2821796                             1.65
+xu30.clamp                             2.38162
+xu30.esdp                                 1.65
+xu30.esdn                              1.65003
+xu30.n158495                           2.38162
+xu30.cl_clamp                          2.38162
+xu30.n161937                           1.65003
+opout                                  1.65003
+xu30.claw_clamp                        2.38162
+xu30.n45999                            1.65003
+xu30.n39124                            251.433
+xu30.n39417                            251.433
+xu30.vcc_b                                 3.3
+xu30.vee_b                            1.65e-06
+xu30.n25415                            1.65001
+xu30.n25397                            1.65001
+xu30.n25248                               1.65
+xu30.vcc_clp                           3.22794
+xu30.vee_clp                         0.0109617
+xu30.n1356345                          1.46157
+xu30.n1356333                          1.46157
+xu30.n1356409                          3.30167
+xu30.n1356429                          3.30167
+xu30.vsense                            2.38162
+xu30.n28678                            1.65003
+xu30.n28438                            1.65001
+xu30.n24207                               1.65
+xu30.n31303                            1.65003
+xu30.n31389                                3.4
+xu30.n31737                         -0.0999984
+inm                                    1.65003
+xu30.n32236                            1.65003
+xu30.n32510                            1.65002
+xu30.n46041                            251.406
+xu30.n55560                               1.65
+xu30.n57321                               1.65
+xu30.n59739                              66.65
+xu30.n59743                               1.65
+xu30.n59881                               1.65
+xu30.n59905                            -68.729
+xu30.n65567                             101.65
+xu30.n65575                               1.65
+xu30.n65713                               1.65
+xu30.n65737                            -113.35
+xu30.n72064                            3.22794
+xu30.n72073                          0.0109616
+xu30.v11                                  1.65
+xu30.v12                                  1.65
+xu30.n81756                               1.65
+xu30.n161737                           6.40972
+xu30.n1356115                          3.30167
+xu30.n1356061                          1.46157
+xu30.x_u1.7                           0.833806
+xu30.x_u1.8                           0.833806
+xu30.x_u1.3                        9.93219e-19
+xu30.x_u1.6                       -1.98644e-18
+xu30.x_u1.4                       -1.98644e-18
+xu30.x_u1.5                                  0
+xu30.x_u10.gvo+_int1                         0
+xu30.x_u10.gvo-_int1                         0
+xu30.x_u11.gvo+_int1                         0
+xu30.x_u11.gvo-_int1                         0
+xu30.x_u12.gvo+_int1                         0
+xu30.x_u12.gvo-_int1                         0
+xu30.x_u16.gsw+_int1                         0
+xu30.x_u18.g1_int1                 7.20537e-05
+xu30.x_u18.g1_int2                     4.75972
+xu30.x_u19.g1_int1                   1.096e-05
+xu30.x_u19.g1_int2                    -4.75972
+xu30.x_u22.g1_int1                           0
+xu30.x_u23.g1_int1                           0
+xu30.x_u26.g1_int1                  0.00475972
+xu30.x_u27.g1_int1                           0
+xu30.x_u30.g1_int1                 1.75464e-11
+xu30.x_u31.g1_int1                 7.31617e-07
+xu30.x_u32.g1_int1                     249.761
+xu30.x_u35.g1_int1                           0
+xu30.x_u36.3                                 0
+xu30.x_u36.5                                 0
+xu30.x_u37.3                                 0
+xu30.x_u37.5                                 0
+xu30.x_u4.e1_int1                    1.245e-05
+xu30.x_u6.g1_int1                   2.9804e-05
+vcm_ref                                1.60243
+l1                                 1.60243e-06
+l2                                 1.60243e-06
+l3                                 1.60243e-06
+d                                         1.65
+b.xu30.x_u6.bg1#branch                       0
+b.xu30.x_u4.be1#branch                       0
+b.xu30.x_u35.bg1#branch                      0
+b.xu30.x_u32.bg1#branch                      0
+b.xu30.x_u31.bg1#branch                      0
+b.xu30.x_u30.bg1#branch                      0
+b.xu30.x_u27.bg1#branch                      0
+b.xu30.x_u26.bg1#branch                      0
+b.xu30.x_u23.bg1#branch                      0
+b.xu30.x_u22.bg1#branch                      0
+b.xu30.x_u19.bg1#branch                      0
+b.xu30.x_u18.bg1#branch                      0
+b.xu30.x_u16.bgsw+#branch                    0
+b.xu30.x_u12.bgvo-#branch                    0
+b.xu30.x_u12.bgvo+#branch                    0
+b.xu30.x_u11.bgvo-#branch                    0
+b.xu30.x_u11.bgvo+#branch                    0
+b.xu30.x_u10.bgvo-#branch                    0
+b.xu30.x_u10.bgvo+#branch                    0
+h.xu30.x_h3.h_h3#branch           -6.21031e-19
+v.xu30.x_h3.vh_h3#branch            9.2189e-10
+h.xu30.x_h2.h_h2#branch            3.50414e-19
+v.xu30.x_h2.vh_h2#branch          -9.21891e-10
+h.xu30.x_h1.h_h1#branch           -4.75972e-12
+v.xu30.x_h1.vh_h1#branch            0.00475972
+e.xu30.x_u4.e1#branch             -1.47864e-13
+e.xu30.x_u37.e1#branch                       0
+e.xu30.x_u36.e1#branch                       0
+e.xu30.x_u1.e3#branch              3.47864e-13
+e.xu30.x_u1.e2#branch              -4.9661e-27
+e.xu30.x_u1.e1#branch             -7.94576e-27
+e.xu30.e_e3#branch                -2.87899e-17
+e.xu30.e_e2#branch                -1.30834e-18
+e.xu30.e_e1#branch                 6.81211e-13
+vd#branch                         -4.75684e-05
+v.xu30.v_v_orp#branch                        0
+v.xu30.v_v_orn#branch                        0
+v.xu30.v_v_iscp#branch                -6.5e-11
+v.xu30.v_v_iscn#branch              7.0379e-11
+v.xu30.v_v_grp#branch                   -1e-10
+v.xu30.v_v_grn#branch                 1.15e-10
+v.xu30.v_vcm_min#branch               1.75e-12
+v.xu30.v_vcm_max#branch              -1.75e-12
+vt#branch                          -3.0731e-13
+vt2#branch                         -3.0731e-13
+vdd#branch                         -0.00642472
+a.xu30.x_u19.ag1#branch_1_0                  0
+a.xu30.x_u18.ag1#branch_1_0                  0
+
+
+No. of Data Rows : 20067
+Note: Simulation executed from .control section 

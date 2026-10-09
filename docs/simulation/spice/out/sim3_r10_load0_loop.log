@@ -1,0 +1,14 @@
+Note: gnd in a subcircuit is not set to 0 automatically
+
+Note: Compatibility modes selected: ps a
+
+
+Circuit: * sim 3 loop gain: loop broken at in- (l 1gh / c 1gf), t = -v(opout)/v(nx); r102, c101 and loads are inside the loop path
+
+Reducing trtol to 1 for xspice 'A' devices
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+No. of Data Rows : 801
+Note: Simulation executed from .control section 

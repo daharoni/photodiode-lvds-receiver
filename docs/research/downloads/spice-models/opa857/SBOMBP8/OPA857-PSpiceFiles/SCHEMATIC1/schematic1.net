@@ -1,0 +1,9 @@
+* source OPA857
+V_V2         VEE 0 0Vdc
+V_V1         VCC 0 3.3Vdc
+R_R3         OUTN OUT  500 TC=0,0 
+X_U1         VEE VEE VIN OUT OUTN VCC OPA857
+I_I1         VIN 0 DC 0Adc AC 0Aac
++SIN 300e-6 100e-6 50e6 0 0 0
+C_C1         OUTN OUT  4e-12  TC=0,0 
+C_C2         0 VIN  1.5e-12  TC=0,0 

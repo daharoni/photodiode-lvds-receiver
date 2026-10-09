@@ -1,0 +1,62 @@
+{
+ "20k_6p": {
+  "Rt_1MHz_ohm": 19502.0,
+  "peaking_dB": 0.97,
+  "f_peak_MHz": 53.7,
+  "f3dB_MHz": 99.1,
+  "settle_2pct_ns_from_edge_start": 12.6,
+  "idle_V": 1.8358,
+  "plateau_5UI_V": 1.7383,
+  "amp_mV": 97.5,
+  "Rt_tran_ohm": 19501.0,
+  "lead_overshoot_pct": 13.8,
+  "release_overshoot_pct": 13.8,
+  "ring_extrema_gt2pct": 1,
+  "tr_10_90_ns": 3.57
+ },
+ "20k_1.5p": {
+  "Rt_1MHz_ohm": 19509.0,
+  "peaking_dB": 0.0,
+  "f_peak_MHz": 1.0,
+  "f3dB_MHz": 106.1,
+  "settle_2pct_ns_from_edge_start": 6.1,
+  "idle_V": 1.8358,
+  "plateau_5UI_V": 1.7382,
+  "amp_mV": 97.5,
+  "Rt_tran_ohm": 19509.0,
+  "lead_overshoot_pct": 1.7,
+  "release_overshoot_pct": 1.7,
+  "ring_extrema_gt2pct": 0,
+  "tr_10_90_ns": 3.53
+ },
+ "5k_6p": {
+  "Rt_1MHz_ohm": 4875.0,
+  "peaking_dB": 0.0,
+  "f_peak_MHz": 1.0,
+  "f3dB_MHz": 151.0,
+  "settle_2pct_ns_from_edge_start": 4.7,
+  "idle_V": 1.8358,
+  "plateau_5UI_V": 1.8114,
+  "amp_mV": 24.4,
+  "Rt_tran_ohm": 4875.0,
+  "lead_overshoot_pct": 1.7,
+  "release_overshoot_pct": 1.7,
+  "ring_extrema_gt2pct": 0,
+  "tr_10_90_ns": 2.7
+ },
+ "5k_1.5p": {
+  "Rt_1MHz_ohm": 4877.0,
+  "peaking_dB": 0.0,
+  "f_peak_MHz": 1.0,
+  "f3dB_MHz": 127.0,
+  "settle_2pct_ns_from_edge_start": 6.1,
+  "idle_V": 1.8358,
+  "plateau_5UI_V": 1.8114,
+  "amp_mV": 24.4,
+  "Rt_tran_ohm": 4878.0,
+  "lead_overshoot_pct": 0.0,
+  "release_overshoot_pct": -0.0,
+  "ring_extrema_gt2pct": 0,
+  "tr_10_90_ns": 3.19
+ }
+}

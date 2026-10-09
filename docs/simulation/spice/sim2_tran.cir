@@ -1,0 +1,11 @@
+* Sim 2 transient: 50 Mb/s NRZ photocurrent, 5 uA peak, TI model as shipped
+.param CD=6p CTRLV=3.3
+.include ../../research/downloads/spice-models/opa857/SBOMBP8/opa857.lib
+.include sim2_core.inc
+.control
+op
+print v(in) v(out) v(outn)
+tran 0.05n 1100n
+wrdata sim2_tran_out.txt v(out) v(in)
+.endc
+.end

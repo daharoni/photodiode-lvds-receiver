@@ -1,0 +1,226 @@
+
+**** 05/27/21 15:07:08 ******* PSpice 17.4.0 (Nov 2018) ******* ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-TransientAnalysis"  [ C:\Users\a0232073\Downloads\OPA857\OPA857-PSpiceFiles\SCHEMATIC1\TransientAnalysis.sim
+
+
+ ****     CIRCUIT DESCRIPTION
+
+
+******************************************************************************
+
+
+
+
+** Creating circuit file "TransientAnalysis.cir" 
+** WARNING: THIS AUTOMATICALLY GENERATED FILE MAY BE OVERWRITTEN BY SUBSEQUENT SIMULATIONS
+
+*Libraries: 
+* Profile Libraries :
+* Local Libraries :
+.LIB "../../../opa857.LIB" 
+* From [PSPICE NETLIST] section of C:\SPB_Data\cdssetup\OrCAD_PSpiceTIPSpice_Install\17.4.0\PSpice.ini file:
+.lib "nom_pspti.lib" 
+.lib "nom.lib" 
+
+*Analysis directives: 
+.TRAN  0 100ns 0 0.1e-9 
+.OPTIONS ADVCONV
+.OPTIONS FILEMODELSEARCH
+.PROBE64 N([OUT])
+.PROBE64 N([OUTN])
+.INC "..\SCHEMATIC1.net" 
+
+
+
+**** INCLUDING SCHEMATIC1.net ****
+* source OPA857
+V_V2         VEE 0 0Vdc
+V_V1         VCC 0 3.3Vdc
+R_R3         OUTN OUT  500 TC=0,0 
+X_U1         VEE VEE VIN OUT OUTN VCC OPA857
+I_I1         VIN 0 DC 0Adc AC 0Aac
++SIN 300e-6 100e-6 50e6 0 0 0
+C_C1         OUTN OUT  4e-12  TC=0,0 
+C_C2         0 VIN  1.5e-12  TC=0,0 
+
+**** RESUMING TransientAnalysis.cir ****
+.END
+
+**** 05/27/21 15:07:08 ******* PSpice 17.4.0 (Nov 2018) ******* ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-TransientAnalysis"  [ C:\Users\a0232073\Downloads\OPA857\OPA857-PSpiceFiles\SCHEMATIC1\TransientAnalysis.sim
+
+
+ ****     Diode MODEL PARAMETERS
+
+
+******************************************************************************
+
+
+
+
+               DIDEAL1         X_U1.XI0.XI5.XI18.X1.DVNF 
+          IS   10.000000E-15  100.000000E-18 
+           N  100.000000E-06                 
+          KF                  316.227800E-12 
+
+
+               X_U1.XI0.XI5.XI17.X1.DVN 
+          IS  100.000000E-18 
+          KF  316.227800E-12 
+
+
+**** 05/27/21 15:07:08 ******* PSpice 17.4.0 (Nov 2018) ******* ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-TransientAnalysis"  [ C:\Users\a0232073\Downloads\OPA857\OPA857-PSpiceFiles\SCHEMATIC1\TransientAnalysis.sim
+
+
+ ****     Voltage Controlled Switch MODEL PARAMETERS
+
+
+******************************************************************************
+
+
+
+
+               X_U1.XI0.XAHDLI12.VSWITCH2 
+         RON    1.000000E-03 
+        ROFF    1.000000E+09 
+         VON    1.1          
+        VOFF    -.01         
+
+
+               X_U1.XI0.XAHDLI9.VSWITCH2 
+         RON    1.000000E-03 
+        ROFF    1.000000E+09 
+         VON    1.1          
+        VOFF    -.01         
+
+
+**** 05/27/21 15:07:08 ******* PSpice 17.4.0 (Nov 2018) ******* ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-TransientAnalysis"  [ C:\Users\a0232073\Downloads\OPA857\OPA857-PSpiceFiles\SCHEMATIC1\TransientAnalysis.sim
+
+
+ ****     INITIAL TRANSIENT SOLUTION       TEMPERATURE =   27.000 DEG C
+
+
+******************************************************************************
+
+
+
+ NODE   VOLTAGE     NODE   VOLTAGE     NODE   VOLTAGE     NODE   VOLTAGE
+
+
+(  OUT)    1.8967  (  VCC)    3.3000  (  VEE)    0.0000  (  VIN)     .9999      
+
+( OUTN)    1.8363  (X_U1.XI0.NET7)    1.8342                                    
+
+(X_U1.XI0.NET23)    1.8333            (X_U1.XI0.NET024)    3.3000               
+
+(X_U1.XI0.NET029)     .9999           (X_U1.XI0.NET032)    1.8997               
+
+(X_U1.XI0.NET036)    1.8998           (X_U1.XI0.NET042)    1.8333               
+
+(X_U1.XI0.XI5.NET8)     .9999         (X_U1.XI0.XI5.NET15)    1.9001            
+
+(X_U1.XI0.XI5.NET21)    1.9001        (X_U1.XI0.XI5.NET25)    2.3000            
+
+(X_U1.XI0.XI5.NET27)    2.3000        (X_U1.XI0.XI5.NET33)    1.9000            
+
+(X_U1.XI0.XI5.NET39)    3.3001        (X_U1.XI0.XI5.NET40)    1.9242            
+
+(X_U1.XI0.XI5.NET44)    1.9050        (X_U1.XI0.XI5.NET45)    1.8998            
+
+(X_U1.XI0.XI5.NET46)    1.0000        (X_U1.XI0.XI5.NET48)    1.0000            
+
+(X_U1.XI0.XI5.NET51)    1.9001        (X_U1.XI0.XI5.NET52)     .6000            
+
+(X_U1.XI0.XI5.NET59)    1.8998        (X_U1.XI0.XI5.NET66)    0.0000            
+
+(X_U1.XI0.XI5.NET67)    3.3001        (X_U1.XI0.XI5.NET68)    1.9000            
+
+(X_U1.XI0.XI5.NET70)     .6000        (X_U1.XI0.XI5.VIMON) 300.7E-06            
+
+(X_U1.XI0.XI5.NET041)    1.8342       (X_U1.XI0.XI5.NET048)    1.8342           
+
+(X_U1.XI0.XI5.NET058)    1.8342       (X_U1.XI0.XI5.NET065)     .9999           
+
+(X_U1.XI0.XI5.NET066)     .9999       (X_U1.XI0.XI5.NET089)    3.3001           
+
+(X_U1.XI0.XI5.NET0105)    1.8998      (X_U1.XI0.XI5.NET0116)    3.3000          
+
+(X_U1.XI0.XI5.NET0135)    0.0000      (X_U1.XI0.XI5.NET0137)    3.3001          
+
+(X_U1.XI0.XI5.VCC_INT)    3.3000      (X_U1.XI0.XI5.VEE_INT)    0.0000          
+
+(X_U1.XI0.XI5.XI17.X1.3)    0.0000    (X_U1.XI0.XI5.XI17.X1.4)    0.0000        
+
+(X_U1.XI0.XI5.XI17.X1.5)    0.0000    (X_U1.XI0.XI5.XI17.X1.6)    0.0000        
+
+(X_U1.XI0.XI5.XI17.X1.7)     .8338    (X_U1.XI0.XI5.XI17.X1.8)     .8338        
+
+(X_U1.XI0.XI5.XI18.X1.3)    0.0000    (X_U1.XI0.XI5.XI18.X1.4)    0.0000        
+
+(X_U1.XI0.XI5.XI18.X1.5)    0.0000    (X_U1.XI0.XI5.XI18.X1.6)    0.0000        
+
+(X_U1.XI0.XI5.XI18.X1.7)     .8338    (X_U1.XI0.XI5.XI18.X1.8)     .8338        
+
+(X_U1.XI0.XI5.XI19.X1.1) 330.0E-06    (X_U1.XI0.XI5.XI19.X1.2)    0.0000        
+
+(X_U1.XI0.XI5.XI19.X1.3)    0.0000    (X_U1.XI0.XI5.XI19.X1.4)    0.0000        
+
+(X_U1.XI0.XI5.XI19.X1.1a) 54.21E-21   (X_U1.XI0.XI5.XI19.X1.3a)    0.0000       
+
+(X_U1.XI0.XI5.XI19.X1.101) 330.0E-06  (X_U1.XI0.XI5.XI19.X1.102) 330.0E-06      
+
+(X_U1.XI0.XI5.XI19.X1.301)    0.0000  (X_U1.XI0.XI5.XI19.X1.302)    0.0000  
+
+
+
+
+    VOLTAGE SOURCE CURRENTS
+    NAME         CURRENT
+
+    V_V2         2.344E-02
+    V_V1        -2.375E-02
+    X_U1.XI0.XI5.V7   5.680E-07
+    X_U1.XI0.XI5.V12  -9.938E-04
+    X_U1.XI0.XI5.V14   3.310E-12
+    X_U1.XI0.XI5.V1   1.000E-03
+    X_U1.XI0.XI5.V9  -3.442E-14
+    X_U1.XI0.XI5.V2  -9.938E-04
+    X_U1.XI0.XI5.V10  -1.490E-14
+    X_U1.XI0.XI5.V3   8.442E-13
+    X_U1.XI0.XI5.V6  -1.200E-04
+    X_U1.XI0.XI5.V0   9.938E-04
+    X_U1.XI0.XI5.VE1   1.310E-12
+    X_U1.XI0.XI5.V5   1.310E-12
+    X_U1.XI0.XI5.V4   4.758E-13
+    X_U1.XI0.XI5.VCURSOURCEDETECT   3.007E-04
+    X_U1.XI0.XI5.VCURSINKDETECT  -3.007E-04
+    X_U1.XI0.XI5.V13  -1.400E+00
+    X_U1.XI0.XI5.XI21.V1  -1.200E-04
+
+    TOTAL POWER DISSIPATION   2.04E+00  WATTS
+
+
+
+          JOB CONCLUDED
+
+**** 05/27/21 15:07:08 ******* PSpice 17.4.0 (Nov 2018) ******* ID# 0 ********
+
+ ** Profile: "SCHEMATIC1-TransientAnalysis"  [ C:\Users\a0232073\Downloads\OPA857\OPA857-PSpiceFiles\SCHEMATIC1\TransientAnalysis.sim
+
+
+ ****     JOB STATISTICS SUMMARY
+
+
+******************************************************************************
+
+
+
+  License check-out time            =      155.52
+  Total job time (using Solver 1)   =        1.34
+
