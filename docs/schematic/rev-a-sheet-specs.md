@@ -1,5 +1,7 @@
 # Rev A schematic specifications, sheet by sheet
 
+**Frozen 2026-10-09 (layout started): the generators are disabled (`hardware/pcb/receiver-module/gen/FROZEN`); this spec is now updated to describe GUI edits rather than drive regeneration.**
+
 Status labels: VERIFIED (cited datasheet or measurement), PROPOSED (design intent), UNRESOLVED (open). Nothing on this page is measured or simulated. These specs are the brief for populating `hardware/pcb/receiver-module/*.kicad_sch`; the as-built notes live in `docs/schematic/<sheet>.md`. Authority: `docs/decision-log.md` (14 standing corrections), `docs/calculations/apd-bias-design.md`, `docs/research/ulx3s-lvds-input.md`.
 
 Conventions for every sheet:

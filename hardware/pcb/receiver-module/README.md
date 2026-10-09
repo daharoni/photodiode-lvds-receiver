@@ -9,6 +9,8 @@ in notes: VERIFIED / PROPOSED / UNRESOLVED.
 
 ## Generated sheets
 
+**FROZEN since 2026-10-09 (PCB layout started).** The generators exit with status 2 while `gen/FROZEN` exists, because regeneration would rewrite the `.kicad_sch` files with new UUIDs and break the schematic-to-board link. Schematic changes now go through the KiCad GUI, with the spec and as-built docs updated by hand. To unfreeze, see `gen/FROZEN` (delete it deliberately, regenerate all sheets in order, re-import to the PCB, re-annotate/re-link footprints). The text below is historical until then.
+
 Each sub-sheet and the root are produced by `gen/<sheet>.py` using the `tools/kicad_sch` package
 (`cd tools && python3 gen/...` from the project root; see `tools/kicad_sch/README.md`). Regenerate in
 the order power, frontend, slicer, control, connector, controller, root. Each sheet keeps its uuid, so

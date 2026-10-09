@@ -6,6 +6,11 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..",
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 from kicad_sch import Sheet
 
+# Freeze guard: layout started 2026-10-09; see gen/FROZEN.
+if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), "FROZEN")):
+    sys.stderr.write("generators are frozen since 2026-10-09 (layout started); see gen/FROZEN\n")
+    sys.exit(2)
+
 PATH = os.path.join(ROOT, "hardware/pcb/receiver-module/frontend.kicad_sch")
 R = "AharoniLab_Passive:R_Small_US"
 C = "AharoniLab_Passive:C_Small"

@@ -1,0 +1,5 @@
+Schematic generators frozen 2026-10-09.
+Reason: PCB layout started; regenerating rewrites the .kicad_sch files with new UUIDs and breaks the
+schematic-to-board link and any GUI edits. Schematic changes now go through the KiCad GUI.
+To unfreeze: delete this file deliberately, regenerate ALL sheets in order (power, frontend, slicer,
+control, connector, controller, root), re-import to the PCB, and expect to re-annotate / re-link footprints.

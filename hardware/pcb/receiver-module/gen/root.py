@@ -8,6 +8,11 @@ sys.path.insert(0, os.path.join(ROOT, "tools"))
 from kicad_sch import Sheet
 from kicad_sch.sexpr import parse, find, find_all
 
+# Freeze guard: layout started 2026-10-09; see gen/FROZEN.
+if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), "FROZEN")):
+    sys.stderr.write("generators are frozen since 2026-10-09 (layout started); see gen/FROZEN\n")
+    sys.exit(2)
+
 D = os.path.join(ROOT, "hardware/pcb/receiver-module")
 PATH = os.path.join(D, "receiver-module.kicad_sch")
 

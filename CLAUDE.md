@@ -52,6 +52,7 @@ Performance beats cost. No backward compatibility with the Miniscope Zero headst
   `${AHARONI_LAB_KICAD_LIB}`. Never create project-local symbols or footprints.
   New parts are added to the lab library by PR to that repo. KiCad's bundled
   `power:PWR_FLAG`/`power:GND` are the only non-lab symbols allowed.
+- The generators are frozen since 2026-10-09 (layout started; `gen/FROZEN`): schematic changes now go through the KiCad GUI, with the spec and as-built docs updated by hand. The generator bullet below is historical until unfrozen.
 - Sheets are generated: `hardware/pcb/receiver-module/gen/<sheet>.py` with
   `tools/kicad_sch` (run from `tools/`). Edit the generator and regenerate
   (order: power, frontend, slicer, control, connector, controller, root; `control.kicad_sch` is the Monitor sheet);
