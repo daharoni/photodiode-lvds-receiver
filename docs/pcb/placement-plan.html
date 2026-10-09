@@ -1,0 +1,245 @@
+<title>Receiver Module Placement Plan</title>
+
+<style>@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&family=Barlow+Condensed:wght@500;600&family=IBM+Plex+Mono:wght@400;600&display=swap");
+/* Layout concept: a schematic title block on graph paper, then numbered drawing-sheet sections with a colour edge per KiCad sheet. */
+:root{--bg:#eceff0;--surface:#f8fafa;--fg:#0e1c21;--muted:#4a5c62;--border:#b9c7ca;--grid:#d9e1e3;--accent:#00656f;--good:#14703a;--warn:#a5500a;
+--power:#c2410c;--power-bg:#fbe3d6;--frontend:#0369a1;--frontend-bg:#d7eaf6;--slicer:#15803d;--slicer-bg:#d9efe0;--monitor:#8b3fb8;--monitor-bg:#eadcf4;--connector:#9a6a00;--connector-bg:#f6e8bd;--controller:#be185d;--controller-bg:#f7d9e6;
+--mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--head:"Barlow Condensed","Arial Narrow","Helvetica Neue",Arial,sans-serif;--body:"Barlow",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color-scheme:light}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0c1316;--surface:#121c20;--fg:#dce8e7;--muted:#8ea3a6;--border:#2c3d42;--grid:#18262a;--accent:#4fd1c5;--good:#4ade80;--warn:#fbbf24;
+--power:#fb923c;--power-bg:#2e1b0f;--frontend:#38bdf8;--frontend-bg:#0e2433;--slicer:#4ade80;--slicer-bg:#10291a;--monitor:#c792f0;--monitor-bg:#251733;--connector:#facc15;--connector-bg:#2b2307;--controller:#f472b6;--controller-bg:#2f1322; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0c1316;--surface:#121c20;--fg:#dce8e7;--muted:#8ea3a6;--border:#2c3d42;--grid:#18262a;--accent:#4fd1c5;--good:#4ade80;--warn:#fbbf24;
+--power:#fb923c;--power-bg:#2e1b0f;--frontend:#38bdf8;--frontend-bg:#0e2433;--slicer:#4ade80;--slicer-bg:#10291a;--monitor:#c792f0;--monitor-bg:#251733;--connector:#facc15;--connector-bg:#2b2307;--controller:#f472b6;--controller-bg:#2f1322; color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.5}
+.wrap{max-width:1200px;margin-inline:auto;padding-inline:16px;padding-block:0 64px}
+img{max-width:100%;height:auto}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,summary:focus-visible,.scroll:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--head);text-wrap:balance;line-height:1.1;margin:0;font-weight:600;letter-spacing:.01em}
+h1{font-size:clamp(2.4rem,7vw,4.4rem);text-transform:uppercase;letter-spacing:.02em}
+h2{font-size:clamp(1.6rem,4vw,2.2rem);text-transform:uppercase}
+h3{font-size:1.25rem;text-transform:uppercase;letter-spacing:.04em;margin-block:28px 8px}
+p,li{max-width:65ch}
+code,.mono{font-family:var(--mono);font-size:.86em;overflow-wrap:anywhere}
+li,p{overflow-wrap:break-word}
+.label{font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+header.top{padding-block:40px 28px;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px;border-block-end:2px solid var(--fg);margin-inline:-16px;padding-inline:16px}
+.titleblock{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;align-items:end}
+.titleblock dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));margin:0;border:2px solid var(--fg);background:var(--surface)}
+.titleblock dl div{padding:8px 12px;border-inline-start:1px solid var(--border);border-block-end:1px solid var(--border);min-width:0}
+.titleblock dt{font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+.titleblock dd{margin:0;font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:1.05rem}
+.sub{margin-block:12px 0;max-width:60ch;color:var(--muted)}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px 16px;padding-block:12px;border-block-end:1px solid var(--border);font-family:var(--mono);font-size:.8rem;text-transform:uppercase;letter-spacing:.08em}
+nav.toc a{text-decoration:none}
+nav.toc a:hover{text-decoration:underline}
+section{padding-block-start:40px;display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+section>*{min-width:0}
+.sechead{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px;border-block-end:1px solid var(--fg);padding-block-end:6px}
+.sechead .no{font-family:var(--mono);color:var(--muted);font-size:.9rem;letter-spacing:.1em}
+.scroll{overflow-x:auto;max-width:100%}
+.scroll>svg,.scroll>.mm{min-width:980px}
+.diagram{border:1px solid var(--border);background:var(--surface)}
+.diagram svg{display:block;width:100%;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-family:var(--mono);font-size:.78rem;text-transform:uppercase;letter-spacing:.06em}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:14px;height:14px;border:2px solid var(--fg);display:inline-block}
+.sw.power{border-color:var(--power);background:var(--power-bg)}.sw.frontend{border-color:var(--frontend);background:var(--frontend-bg)}.sw.slicer{border-color:var(--slicer);background:var(--slicer-bg)}.sw.monitor{border-color:var(--monitor);background:var(--monitor-bg)}.sw.connector{border-color:var(--connector);background:var(--connector-bg)}.sw.controller{border-color:var(--controller);background:var(--controller-bg)}
+.sw.fast{border-color:var(--fg);background:var(--fg);height:4px;border-width:0}
+.sw.slow{border:0;border-block-start:2px dashed var(--muted);height:0;background:none}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:.9rem}
+th{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;text-align:start;color:var(--muted);border-block-end:2px solid var(--fg);padding:6px 10px;white-space:nowrap}
+td{padding:5px 10px;border-block-end:1px solid var(--border);vertical-align:top}
+td.m,td.ref{font-family:var(--mono);font-size:.82rem}
+td.ref{font-weight:600;white-space:nowrap}
+tr.dnp td{color:var(--muted)}
+tr.dnp td.ref{text-decoration:line-through}
+.badge{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;border:1px solid var(--warn);color:var(--warn);padding:0 5px;margin-inline-start:6px;text-transform:uppercase}
+.sheet{border-inline-start:8px solid var(--bar);padding-inline-start:16px}
+.sheet.power{--bar:var(--power)}.sheet.frontend{--bar:var(--frontend)}.sheet.slicer{--bar:var(--slicer)}.sheet.monitor{--bar:var(--monitor)}.sheet.connector{--bar:var(--connector)}.sheet.controller{--bar:var(--controller)}
+.sheet .tag{display:inline-block;font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;padding:2px 8px;border:2px solid var(--bar);color:var(--fg);background:var(--bg)}
+.fig{border:1px solid var(--border);background:var(--surface)}
+.fig img{display:block;width:100%}
+.figlink{font-family:var(--mono);font-size:.8rem}
+.stats{display:flex;flex-wrap:wrap;gap:6px 20px;font-family:var(--mono);font-size:.82rem}
+.stats b{font-variant-numeric:tabular-nums}
+.tps{font-family:var(--mono);font-size:.84rem}
+.card{border:1px solid var(--border);background:var(--surface);padding:12px 16px;border-radius:2px}
+.grid2{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr))}
+.grid2>*{min-width:0}
+.checks{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr))}
+.checks>*{min-width:0}
+.card h3{margin-block:0 8px}
+.card ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.card li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:baseline}
+.st{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;padding:1px 5px;border:1px solid var(--muted);color:var(--muted);text-transform:uppercase;white-space:nowrap}
+.st.v{border-color:var(--good);color:var(--good)}.st.p{border-color:var(--accent);color:var(--accent)}.st.u{border-color:var(--warn);color:var(--warn)}
+.src{display:block;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+svg text{font-family:var(--body);fill:var(--fg)}
+svg .t-s{font-size:11px;font-family:var(--mono)}
+svg .t-m{font-size:13px;font-weight:600}
+svg .t-l{font-size:12px;font-family:var(--mono);fill:var(--muted)}
+svg .t-h{font-size:12px;font-family:var(--mono);letter-spacing:.1em;font-weight:600}
+svg .bx{stroke-width:2}
+svg .power{fill:var(--power-bg);stroke:var(--power)}svg .frontend{fill:var(--frontend-bg);stroke:var(--frontend)}svg .slicer{fill:var(--slicer-bg);stroke:var(--slicer)}svg .monitor{fill:var(--monitor-bg);stroke:var(--monitor)}svg .connector{fill:var(--connector-bg);stroke:var(--connector)}svg .controller{fill:var(--controller-bg);stroke:var(--controller)}
+svg .fast{stroke:var(--fg);stroke-width:4;fill:none}
+svg .slow{stroke:var(--muted);stroke-width:1.6;stroke-dasharray:6 4;fill:none}
+svg .rail{stroke:var(--power);stroke-width:2.4;fill:none}
+svg .ah{fill:var(--fg);stroke:none}
+svg .ahs{fill:var(--muted);stroke:none}
+svg .band{fill:none;stroke:var(--fg);stroke-width:1.5}
+.mm{padding:12px}
+pre.mermaid{margin:0;font-family:var(--mono);font-size:.8rem;white-space:pre}
+footer{margin-block-start:56px;padding-block-start:20px;border-block-start:2px solid var(--fg);display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))}
+footer>*{min-width:0}
+footer ul{margin:0;padding-inline-start:18px}
+pre.cmd{margin:0;padding:10px 12px;background:var(--surface);border:1px solid var(--border);overflow-x:auto;font-family:var(--mono);font-size:.78rem}
+
+.pp-note{font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+.prop{display:inline-block;font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;padding:2px 8px;border:2px solid var(--accent);color:var(--accent);text-transform:uppercase}
+.plans{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(min(100%,900px),1fr))}
+.plans>*{min-width:0}
+.scroll>svg.plan{min-width:720px}
+svg .board{fill:var(--surface);stroke:var(--fg);stroke-width:3}
+svg .z{stroke-width:2}
+svg .zt{font-family:var(--mono);font-size:10.5px;font-weight:600;text-anchor:middle}
+svg .zs{font-family:var(--mono);font-size:9px;text-anchor:middle;fill:var(--muted)}
+svg .edge{font-family:var(--mono);font-size:11px;letter-spacing:.08em;fill:var(--muted);text-anchor:middle}
+svg .ring{fill:url(#hatch);stroke:var(--warn);stroke-width:2;stroke-dasharray:6 3}
+svg .hatchl{stroke:var(--warn);stroke-width:1.2}
+svg .ghost{fill:none;stroke:var(--muted);stroke-width:1.5;stroke-dasharray:5 4}
+svg .hv{fill:var(--surface);stroke:var(--warn);stroke-width:2}
+svg .tpd{fill:var(--fg);stroke:none}
+svg .note{font-family:var(--mono);font-size:10px;fill:var(--muted)}
+svg .apd{fill:var(--frontend);stroke:var(--fg);stroke-width:2}
+.sheetname{font-family:var(--mono);font-size:.78rem;white-space:nowrap}
+td.side{font-family:var(--mono);font-size:.78rem;text-transform:uppercase;white-space:nowrap}
+.tbl{border:1px solid var(--border);background:var(--surface)}
+.rules{display:grid;gap:8px;padding-inline-start:20px;margin:0}
+@media (max-width:720px){.titleblock{grid-template-columns:minmax(0,1fr)}body{font-size:16px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.hole circle{fill:var(--bg);stroke:var(--fg);stroke-width:1.5}.hole circle:last-child{fill:var(--fg);opacity:.35}.hole-label{font:10px var(--mono, monospace);fill:var(--muted)}
+</style>
+<div class="wrap">
+<header class="top"><div class="titleblock"><div><span class="label">Aharoni Lab, UCLA &middot; photodiode LVDS receiver</span><h1>Receiver Module Placement Plan</h1>
+<p class="sub">Where the PCB block groups go on the board. This is a floor plan, not to scale; nothing here is measured or simulated.</p></div>
+<dl><div><dt>Date</dt><dd>2026-10-09</dd></div><div><dt>Status</dt><dd><span class="prop">PROPOSED</span></dd></div><div><dt>Board</dt><dd>JLC06161H-3313, 6 layer</dd></div></dl></div></header>
+<nav class="toc" aria-label="Sections"><a href="#plans">Floor plans</a><a href="#blocks">Blocks</a><a href="#rules">Rules</a><a href="#open">Open</a></nav>
+<section id="plans"><div class="sechead"><span class="no">01</span><h2>Floor plans</h2></div>
+<p>Long rectangle. Optical end on the left (APD at the housing window), cable end on the right (J50 USB-C receptacle at the right edge). Top signal layer over solid GND1, bottom signal layer over solid GND2. The bottom view is drawn as seen from the top, that is mirrored front to back through the board, so the optical end stays on the left and J50 stays on the right. Block sizes are schematic only. PROPOSED.</p>
+<div class="legend"><span><i class="sw power"></i>Power</span><span><i class="sw frontend"></i>Front End</span><span><i class="sw slicer"></i>Slicer</span><span><i class="sw monitor"></i>Monitor</span><span><i class="sw connector"></i>Connector</span><span><i class="sw controller"></i>Controller</span><span><i class="sw fast"></i>Fast chain</span></div>
+<div class="plans">
+<div><h3>Top view</h3><div class="diagram scroll" tabindex="0" role="region" aria-label="Top side floor plan"><svg class="plan" viewBox="0 0 1000 430" role="img" aria-labelledby="top-t top-d" xmlns="http://www.w3.org/2000/svg"><title id="top-t">Top side floor plan</title><desc id="top-d">Top side of the board, optical end left, cable end right, fast chain along the centre line, HV island back right, test points along the front edge.</desc><defs><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line class="hatchl" x1="0" y1="0" x2="0" y2="7"/></pattern><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs>
+<rect class="board" x="70" y="70" width="870" height="320"/><g class="hole"><circle cx="88" cy="88" r="9"/><circle cx="88" cy="88" r="4.5"/></g><g class="hole"><circle cx="922" cy="88" r="9"/><circle cx="922" cy="88" r="4.5"/></g><g class="hole"><circle cx="88" cy="372" r="9"/><circle cx="88" cy="372" r="4.5"/></g><g class="hole"><circle cx="922" cy="372" r="9"/><circle cx="922" cy="372" r="4.5"/></g><text class="hole-label" x="110" y="92">H1–H4: M2 plated holes, GND (chassis tie), 1.0 mm from HV copper</text>
+<text class="edge" x="505" y="58">back edge (HV)</text>
+<text class="edge" x="505" y="410">front edge (test points, J51, switches)</text>
+<text class="edge" transform="translate(48 230) rotate(-90)">optical end</text>
+<text class="edge" transform="translate(962 230) rotate(90)">cable end</text>
+<rect class="z frontend" x="78" y="200" width="72" height="60"/><text class="zt" x="114.0" y="228.0">FE_APD</text><text class="zs" x="114.0" y="239.0">APD, window</text>
+<circle class="apd" cx="70" cy="230" r="9"/><text class="note" x="82" y="190">window</text>
+<rect class="z frontend" x="152" y="200" width="98" height="60"/><text class="zt" x="201.0" y="228.0">FE_TIA</text><text class="zs" x="201.0" y="239.0">OPA857</text>
+<rect class="z frontend" x="252" y="200" width="120" height="60"/><text class="zt" x="312.0" y="228.0">FE_POSTAMP</text><text class="zs" x="312.0" y="239.0">OPA855 x7</text>
+<rect class="z frontend" x="374" y="200" width="120" height="60"/><text class="zt" x="434.0" y="234.0">FE_LPF_COUPLE</text>
+<rect class="z slicer" x="496" y="200" width="100" height="60"/><text class="zt" x="546.0" y="228.0">SLC_COMP</text><text class="zs" x="546.0" y="239.0">TLV3605</text>
+<rect class="z slicer" x="442" y="146" width="76" height="46"/><text class="zt" x="480.0" y="173.0">SLC_THRESH</text>
+<rect class="z slicer" x="522" y="146" width="76" height="46"/><text class="zt" x="560.0" y="173.0">SLC_HYST</text>
+<rect class="z connector" x="600" y="200" width="130" height="60"/><text class="zt" x="665.0" y="228.0">CONN_FANOUT</text><text class="zs" x="665.0" y="239.0">R180 at input</text>
+<rect class="z connector" x="734" y="200" width="142" height="60"/><text class="zt" x="805.0" y="228.0">ESD arrays</text><text class="zs" x="805.0" y="239.0">U51 U52 (CONN_RECEPT)</text>
+<rect class="z connector" x="880" y="190" width="60" height="80"/><text class="zt" x="910.0" y="228.0">J50</text><text class="zs" x="910.0" y="239.0">USB-C</text>
+<line class="fast" x1="86" y1="282" x2="870" y2="282" marker-end="url(#ah)"/><text class="note" x="90" y="298">fast chain: APD -&gt; TIA -&gt; post-amp -&gt; LPF -&gt; comparator -&gt; fan-out -&gt; ESD -&gt; J50</text>
+<text class="note" x="82" y="316">APD anode to OPA857 input: shortest trace,</text><text class="note" x="82" y="328">no HV copper within a few mm, any layer</text>
+<rect class="ring" x="636" y="76" width="192" height="102"/><rect class="hv" x="646" y="86" width="172" height="82"/><text class="zs" x="732" y="99" style="fill:var(--warn)">HV island (outer layers)</text><rect class="z power" x="652" y="104" width="82" height="26"/><text class="zt" x="693.0" y="121.0">PWR_HV_BOOST</text>
+<rect class="z power" x="738" y="104" width="74" height="26"/><text class="zt" x="775.0" y="121.0">PWR_HV_FB</text>
+<rect class="z power" x="652" y="134" width="82" height="28"/><text class="zt" x="693.0" y="152.0">PWR_HV_DIS</text>
+
+<rect class="z power" x="526" y="88" width="106" height="38"/><text class="zt" x="579.0" y="105.0">PWR_HV_OUT</text><text class="zs" x="579.0" y="116.0">clamp, filter</text>
+<rect class="z power" x="412" y="88" width="110" height="38"/><text class="zt" x="467.0" y="111.0">PWR_HV_MON</text>
+<polyline class="slow" points="412,106 140,106 140,198" style="stroke:var(--warn);stroke-dasharray:none;stroke-width:2.2" marker-end="url(#ah)"/><text class="note" x="148" y="100">filtered bias only (R50 C50 D10 D11)</text>
+<rect class="z connector" x="836" y="148" width="100" height="38"/><text class="zt" x="886.0" y="165.0">CONN_CC</text><text class="zs" x="886.0" y="176.0">at CC pins</text>
+<rect class="z power" x="780" y="290" width="156" height="46"/><text class="zt" x="858.0" y="311.0">PWR_EFUSE</text><text class="zs" x="858.0" y="322.0">beside J50 VBUS pins</text><text class="zs" x="858.0" y="333.0">C33 at its input</text>
+<rect class="z frontend" x="90" y="352" width="420" height="26"/><text class="zt" x="300" y="369">TP10-TP21 (FE, SLC test points)</text>
+<circle class="tpd" cx="110" cy="345" r="2.6"/><circle class="tpd" cx="144" cy="345" r="2.6"/><circle class="tpd" cx="178" cy="345" r="2.6"/><circle class="tpd" cx="212" cy="345" r="2.6"/><circle class="tpd" cx="246" cy="345" r="2.6"/><circle class="tpd" cx="280" cy="345" r="2.6"/><circle class="tpd" cx="314" cy="345" r="2.6"/><circle class="tpd" cx="348" cy="345" r="2.6"/><circle class="tpd" cx="382" cy="345" r="2.6"/><circle class="tpd" cx="416" cy="345" r="2.6"/><circle class="tpd" cx="450" cy="345" r="2.6"/><circle class="tpd" cx="484" cy="345" r="2.6"/><rect class="z connector" x="524" y="352" width="76" height="26"/><text class="zt" x="562.0" y="369.0">CONN_TP</text>
+<rect class="z connector" x="604" y="336" width="106" height="42"/><text class="zt" x="657.0" y="355.0">CONN_DEBUG</text><text class="zs" x="657.0" y="366.0">J51 scope header</text>
+<rect class="z controller" x="722" y="340" width="104" height="38"/><text class="zt" x="774.0" y="363.0">CTRL_RESET_BOOT</text>
+<rect class="z controller" x="830" y="340" width="106" height="38"/><text class="zt" x="883.0" y="363.0">CTRL_STATUS_UART</text>
+</svg></div></div>
+<div><h3>Bottom view (as seen from the top, mirrored)</h3><div class="diagram scroll" tabindex="0" role="region" aria-label="Bottom side floor plan"><svg class="plan" viewBox="0 0 1000 430" role="img" aria-labelledby="bot-t bot-d" xmlns="http://www.w3.org/2000/svg"><title id="bot-t">Bottom side floor plan, seen from the top</title><desc id="bot-d">Bottom side of the board drawn as seen from the top: quiet analog monitor buffers under the front end, controller, power and connector support parts under the right half.</desc><defs><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line class="hatchl" x1="0" y1="0" x2="0" y2="7"/></pattern><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs>
+<rect class="board" x="70" y="70" width="870" height="320"/><g class="hole"><circle cx="88" cy="88" r="9"/><circle cx="88" cy="88" r="4.5"/></g><g class="hole"><circle cx="922" cy="88" r="9"/><circle cx="922" cy="88" r="4.5"/></g><g class="hole"><circle cx="88" cy="372" r="9"/><circle cx="88" cy="372" r="4.5"/></g><g class="hole"><circle cx="922" cy="372" r="9"/><circle cx="922" cy="372" r="4.5"/></g>
+<text class="edge" x="505" y="58">back edge (HV)</text>
+<text class="edge" x="505" y="410">front edge (test points, J51, switches)</text>
+<text class="edge" transform="translate(48 230) rotate(-90)">optical end</text>
+<text class="edge" transform="translate(962 230) rotate(90)">cable end</text>
+<rect class="ghost" x="80" y="84" width="394" height="294"/><text class="note" x="90" y="100">quiet zone under the front end: no switching parts</text>
+<rect class="ghost" x="636" y="76" width="192" height="102"/><text class="note" x="642" y="128">HV island (top)</text>
+<rect class="ghost" x="880" y="190" width="60" height="80"/><text class="note" x="884" y="234">J50</text><text class="note" x="884" y="246">(top)</text>
+<rect class="z monitor" x="196" y="200" width="128" height="60"/><text class="zt" x="260.0" y="228.0">MON_RSSI</text><text class="zs" x="260.0" y="239.0">OPA2320, BAS70</text><text class="zs" x="260.0" y="250.0">tap from TIA</text>
+<rect class="z monitor" x="330" y="200" width="128" height="60"/><text class="zt" x="394.0" y="228.0">MON_VCM</text><text class="zs" x="394.0" y="239.0">OPA2320</text><text class="zs" x="394.0" y="250.0">VCM_REF</text>
+<text class="note" x="196" y="278">under TIA / post-amp / slicer</text>
+<rect class="z controller" x="478" y="196" width="114" height="56"/><text class="zt" x="535.0" y="222.0">CTRL_DAC</text><text class="zs" x="535.0" y="233.0">I2C, beside MCU</text>
+<rect class="z controller" x="478" y="258" width="114" height="56"/><text class="zt" x="535.0" y="284.0">CTRL_ADC</text><text class="zs" x="535.0" y="295.0">I2C, beside MCU</text>
+<rect class="z controller" x="598" y="196" width="120" height="118"/><text class="zt" x="658.0" y="253.0">CTRL_MCU</text><text class="zs" x="658.0" y="264.0">ESP32-C6</text><text class="zs" x="658.0" y="275.0">antenna end to</text><text class="zs" x="658.0" y="286.0">a board edge</text>
+<rect class="ghost" x="598" y="314" width="120" height="14"/><text class="note" x="604" y="325">antenna keep-out</text>
+<rect class="z controller" x="800" y="196" width="76" height="36"/><text class="zt" x="838.0" y="212.0">CTRL_CAN</text><text class="zs" x="838.0" y="223.0">near RX pins</text>
+<rect class="z controller" x="800" y="238" width="76" height="50"/><text class="zt" x="838.0" y="261.0">CTRL_USB</text><text class="zs" x="838.0" y="272.0">USBLC6 + 22R</text><text class="zs" x="838.0" y="283.0">under D+/D-</text>
+<line class="slow" x1="800" y1="262" x2="724" y2="262" marker-end="url(#ah)"/><text class="note" x="738" y="254">USB</text>
+<rect class="z power" x="722" y="298" width="100" height="42"/><text class="zt" x="772.0" y="317.0">PWR_3V3D</text><text class="zs" x="772.0" y="328.0">to ESP32</text>
+<rect class="z power" x="830" y="298" width="106" height="42"/><text class="zt" x="883.0" y="317.0">PWR_3V3</text><text class="zs" x="883.0" y="328.0">to analog chain</text>
+<polyline class="slow" points="883,340 883,362 100,362" style="stroke:var(--power);stroke-dasharray:none;stroke-width:2.2" marker-end="url(#ah)"/><text class="note" x="110" y="378">3V3 heads left to the analog chain</text>
+<line class="slow" x1="722" y1="319" x2="718" y2="300" style="stroke:var(--power);stroke-width:2"/></svg></div></div>
+</div></section>
+<section id="blocks"><div class="sechead"><span class="no">02</span><h2>Blocks</h2></div>
+<p>All 30 blocks from <code>tools/pcb_group_blocks.py</code>. PROPOSED.</p>
+<div class="tbl scroll" tabindex="0" role="region" aria-label="Block placement table"><table><thead><tr><th>Block</th><th>Sheet</th><th>Side</th><th>Zone</th><th>Reason</th></tr></thead><tbody>
+<tr><td class="ref"><i class="sw power"></i> PWR_EFUSE</td><td class="m">Power</td><td class="side">top</td><td>right end, beside J50 VBUS pins</td><td>Short VBUS run; C33 at its input. Its output feeds the HV boost input.</td></tr>
+<tr><td class="ref"><i class="sw power"></i> PWR_3V3</td><td class="m">Power</td><td class="side">bottom</td><td>right half, power area</td><td>3V3 heads left along the bottom to the analog chain.</td></tr>
+<tr><td class="ref"><i class="sw power"></i> PWR_3V3D</td><td class="m">Power</td><td class="side">bottom</td><td>right half, power area, next to MCU</td><td>3V3_D goes to the ESP32.</td></tr>
+<tr><td class="ref"><i class="sw power"></i> PWR_HV_BOOST</td><td class="m">Power</td><td class="side">top</td><td>back-right HV island</td><td>One HV island block with FB and DIS; 1.0 mm clearance ring, outer layers only.</td></tr>
+<tr><td class="ref"><i class="sw power"></i> PWR_HV_FB</td><td class="m">Power</td><td class="side">top</td><td>back-right HV island</td><td>Part of the HV island, 1.0 mm ring.</td></tr>
+<tr><td class="ref"><i class="sw power"></i> PWR_HV_OUT</td><td class="m">Power</td><td class="side">top</td><td>back edge, between island and APD</td><td>Clamp and output filter sit between the island and the APD.</td></tr>
+<tr><td class="ref"><i class="sw power"></i> PWR_HV_MON</td><td class="m">Power</td><td class="side">top</td><td>back edge, between island and APD</td><td>HV monitor tap on the way to the APD.</td></tr>
+<tr><td class="ref"><i class="sw power"></i> PWR_HV_DIS</td><td class="m">Power</td><td class="side">top</td><td>back-right HV island</td><td>Part of the HV island, 1.0 mm ring.</td></tr>
+<tr><td class="ref"><i class="sw frontend"></i> FE_APD</td><td class="m">Front End</td><td class="side">top</td><td>centre line, optical end</td><td>APD at the housing window; R50, C50, D10, D11 carry the filtered bias to the cathode.</td></tr>
+<tr><td class="ref"><i class="sw frontend"></i> FE_TIA</td><td class="m">Front End</td><td class="side">top</td><td>centre line, butted to FE_APD</td><td>Anode-to-OPA857-input trace is the shortest on the board; nothing else near it.</td></tr>
+<tr><td class="ref"><i class="sw frontend"></i> FE_POSTAMP</td><td class="m">Front End</td><td class="side">top</td><td>centre line, after FE_TIA</td><td>Fast chain, butted; VCM_REF reaches it from the bottom.</td></tr>
+<tr><td class="ref"><i class="sw frontend"></i> FE_LPF_COUPLE</td><td class="m">Front End</td><td class="side">top</td><td>centre line, after FE_POSTAMP</td><td>Fast chain, butted, ahead of the comparator.</td></tr>
+<tr><td class="ref"><i class="sw slicer"></i> SLC_COMP</td><td class="m">Slicer</td><td class="side">top</td><td>centre line, after FE_LPF_COUPLE</td><td>Comparator butted to the chain; LVDS leaves toward the fan-out.</td></tr>
+<tr><td class="ref"><i class="sw slicer"></i> SLC_THRESH</td><td class="m">Slicer</td><td class="side">top</td><td>beside SLC_COMP</td><td>Threshold network beside the comparator.</td></tr>
+<tr><td class="ref"><i class="sw slicer"></i> SLC_HYST</td><td class="m">Slicer</td><td class="side">top</td><td>beside SLC_COMP</td><td>Hysteresis network beside the comparator.</td></tr>
+<tr><td class="ref"><i class="sw monitor"></i> MON_VCM</td><td class="m">Monitor</td><td class="side">bottom</td><td>left half, under post-amp / slicer</td><td>VCM_REF feeds both the post-amp and the comparator coupling.</td></tr>
+<tr><td class="ref"><i class="sw monitor"></i> MON_RSSI</td><td class="m">Monitor</td><td class="side">bottom</td><td>left half, under front end</td><td>RSSI tap comes from the TIA; quiet area, no switching parts.</td></tr>
+<tr><td class="ref"><i class="sw connector"></i> CONN_RECEPT</td><td class="m">Connector</td><td class="side">top</td><td>J50 at right edge; ESD arrays between fan-out and J50</td><td>ESD arrays within a few mm of the pins; J50 at the right edge.</td></tr>
+<tr><td class="ref"><i class="sw connector"></i> CONN_CC</td><td class="m">Connector</td><td class="side">top</td><td>right end, next to CC pins</td><td>Next to the J50 CC pins.</td></tr>
+<tr><td class="ref"><i class="sw connector"></i> CONN_CAN_TERM</td><td class="m">Connector</td><td class="side">none</td><td>not placed (not on the module)</td><td>CAN termination is not on the module (brief); the block is in the group table only.</td></tr>
+<tr><td class="ref"><i class="sw connector"></i> CONN_FANOUT</td><td class="m">Connector</td><td class="side">top</td><td>centre line, centred behind J50</td><td>R180 termination at its input; pairs to J50 stay on top over GND1, no layer change.</td></tr>
+<tr><td class="ref"><i class="sw connector"></i> CONN_DEBUG</td><td class="m">Connector</td><td class="side">top</td><td>front edge, near the fan-out</td><td>J51 scope header reachable at the front edge.</td></tr>
+<tr><td class="ref"><i class="sw connector"></i> CONN_TP</td><td class="m">Connector</td><td class="side">top</td><td>front edge, with the test points</td><td>Not in the placement intent; shown beside TP10-TP21 (assumption for the orchestrator to confirm).</td></tr>
+<tr><td class="ref"><i class="sw controller"></i> CTRL_MCU</td><td class="m">Controller</td><td class="side">bottom</td><td>right half, under the connector end</td><td>ESP32-C6 module, antenna end toward a board edge.</td></tr>
+<tr><td class="ref"><i class="sw controller"></i> CTRL_RESET_BOOT</td><td class="m">Controller</td><td class="side">top</td><td>front edge, right</td><td>Switches reachable at an edge.</td></tr>
+<tr><td class="ref"><i class="sw controller"></i> CTRL_USB</td><td class="m">Controller</td><td class="side">bottom</td><td>directly under J50 D+/D- pins</td><td>USBLC6 and 22 R directly under the pins, on the way to the module.</td></tr>
+<tr><td class="ref"><i class="sw controller"></i> CTRL_CAN</td><td class="m">Controller</td><td class="side">bottom</td><td>under J50, near the RX pins</td><td>Transceiver near the CAN RX pins.</td></tr>
+<tr><td class="ref"><i class="sw controller"></i> CTRL_DAC</td><td class="m">Controller</td><td class="side">bottom</td><td>right half, beside CTRL_MCU</td><td>I2C neighbour of the MCU.</td></tr>
+<tr><td class="ref"><i class="sw controller"></i> CTRL_ADC</td><td class="m">Controller</td><td class="side">bottom</td><td>right half, beside CTRL_MCU</td><td>I2C neighbour of the MCU.</td></tr>
+<tr><td class="ref"><i class="sw controller"></i> CTRL_STATUS_UART</td><td class="m">Controller</td><td class="side">top</td><td>front edge, right</td><td>Status LED reachable at an edge.</td></tr>
+</tbody></table></div></section>
+<section id="rules"><div class="sechead"><span class="no">03</span><h2>Rules while placing</h2></div>
+<ul class="rules">
+<li>Fast chain butted together on the top centre line: FE_APD, FE_TIA, FE_POSTAMP, FE_LPF_COUPLE, SLC_COMP, CONN_FANOUT, ESD arrays, J50.</li>
+<li>APD anode to OPA857 input is the shortest trace on the board, with nothing else near it and no HV copper within a few mm on any layer.</li>
+<li>HV island is one block (PWR_HV_BOOST, PWR_HV_FB, PWR_HV_DIS) with a 1.0 mm clearance ring, outer layers only; the DRC enforces the 1.0 mm clearance.</li>
+<li>Only the filtered bias (R50, C50, D10, D11 of FE_APD) runs left along the back edge to the APD cathode.</li>
+<li>GND1 and GND2 stay solid under HV traces: no plane cuts.</li>
+<li>Differential pairs from the fan-out to J50 stay on top over GND1, with no layer change.</li>
+<li>ESD arrays within a few mm of the J50 pins; R180 termination at the fan-out input, which is centred behind J50.</li>
+<li>PWR_EFUSE right beside the J50 VBUS pins with C33 at its input; CONN_CC next to the CC pins.</li>
+<li>Bottom left half stays quiet: no switching parts under the front end.</li>
+<li>CTRL_USB (USBLC6 + 22 R) directly under the D+/D- pins; CTRL_CAN under J50 near the RX pins.</li>
+<li>ESP32-C6 module with its antenna end toward a board edge.</li>
+<li>CAN termination is not on the module.</li>
+</ul></section>
+<section id="open"><div class="sechead"><span class="no">04</span><h2>Open</h2></div>
+<div class="card"><ul>
+<li><span class="st u">Unresolved</span><span>Plane cut-out under the TIA input, per OPA857 guidance.</span></li>
+<li><span class="st u">Unresolved</span><span>Exact HV island position, which depends on the housing.</span></li>
+</ul></div></section>
+</div>
