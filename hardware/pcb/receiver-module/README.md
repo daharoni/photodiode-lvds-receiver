@@ -42,7 +42,7 @@ tables (the lab library is global via `${AHARONI_LAB_KICAD_LIB}`); this project 
 
 ## Board
 
-`receiver-module.kicad_pcb`: 6-layer board (stackup below), 72 x 46 mm placeholder outline on Edge.Cuts, all 224 footprints placed by the first-pass placement script (below; layout in progress, nothing routed). Rules and fabrication settings follow `docs/pcb/jlcpcb-fab-settings.md` (research, PROPOSED values, nothing measured).
+`receiver-module.kicad_pcb`: 6-layer board (stackup below), 75 x 50 mm placeholder outline on Edge.Cuts, all 224 footprints placed by the first-pass placement script (below; layout in progress, nothing routed). Rules and fabrication settings follow `docs/pcb/jlcpcb-fab-settings.md` (research, PROPOSED values, nothing measured).
 
 ### First-pass placement (2026-10-09, PROPOSED)
 
@@ -55,7 +55,7 @@ PYTHONPATH=../../../tools /Users/daharoni/Applications/KiCad/KiCad.app/Contents/
   ../../../tools/pcb_place.py receiver-module.kicad_pcb placement/placement-spec.json --out receiver-module.kicad_pcb --report /tmp/report.json
 ```
 
-It re-places EVERY footprint from the spec, so do not run it on a board with hand placement you want to keep. Floor plan (y down, optical end left): fast chain on the top centre line (D10 at x 9 mm, OPA857, OPA855, filter, TLV3605, SN65LVDS104, ESD arrays, J50 at the right edge with the mouth overhanging 0.95 mm); HV island along the back edge on top (HV_MON, HV_OUT, FB ladder, LT8365 boost, HV_DIS); J51 and the FDS010 fallback at the front left; status LED, test points and the RESET/BOOT switches at the front right. Bottom: ESP32-C6 with its antenna over the front edge (keep-out 38-54 x 40-46 mm, both sides), USB ESD and CAN transceiver under J50, CC dividers and eFuse under the connector end, 3V3/3V3_D regulators and DAC/ADC under the HV island, VCM_REF buffer and RSSI detector under the post-amp. The optical window must be centred on the APD can, which sits about 1.3 mm right of the D10 footprint origin (pin 1). The renders used for review are not committed; `kicad-cli pcb render --side top|bottom` regenerates them.
+It re-places EVERY footprint from the spec, so do not run it on a board with hand placement you want to keep. Floor plan (y down, optical end left): fast chain on the top centre line (D10 at x 9 mm, OPA857, OPA855, filter, TLV3605, SN65LVDS104, ESD arrays, J50 at the right edge with the mouth overhanging 0.95 mm); HV island along the back edge on top (HV_MON, HV_OUT, FB ladder, LT8365 boost, HV_DIS); J51 and the FDS010 fallback at the front left; status LED, test points and the RESET/BOOT switches at the front right. Bottom: ESP32-C6 with its antenna over the front edge (keep-out 41-57 x 44-50 mm, both sides), USB ESD and CAN transceiver under J50, CC dividers and eFuse under the connector end, 3V3/3V3_D regulators and DAC/ADC under the HV island, VCM_REF buffer and RSSI detector under the post-amp. The optical window must be centred on the APD can, which sits about 1.3 mm right of the D10 footprint origin (pin 1). The renders used for review are not committed; `kicad-cli pcb render --side top|bottom` regenerates them.
 
 Files for the board:
 
