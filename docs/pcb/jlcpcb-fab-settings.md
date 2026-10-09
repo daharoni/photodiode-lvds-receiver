@@ -10,7 +10,7 @@ Status: research, read 2026-10-09. Labels: VERIFIED = read on a cited JLCPCB (or
 - KM = https://docs.kicad.org/10.0/en/pcbnew/pcbnew.html (KiCad 10 manual)
 - IPC = IPC-2221 Table 6-1 as reproduced by https://www.ema-eda.com/ema-resources/blog/pcb-clearance-and-creepage-distance-table/ (secondary source; the standard itself was not read; IPC-2221B values, revision C not checked)
 
-**Ordering note (2026-10-09):** the board must be ordered under JLCPCB's **Advanced PCB** option because the J50 receptacle's through-hole B row is below the standard-tier hole minima; JLCPCB's DFM accepted it under that option (Daniel, test board `hardware/pcb/j50-dfm-test`; see `docs/pcb/j50-receptacle-dfm.md`). The capability table below is the standard tier and still governs everything except J50.
+**Ordering note (2026-10-09):** the board must be ordered with the JLCPCB quote option "Min via hole size/diameter" = 0.25 mm/(0.35/0.4 mm) (the high-precision tier; JLCPCB then auto-selects "4-Wire Kelvin Test" and "FR4 Tg155", extra cost) because the J50 receptacle's through-hole B row is below the standard-tier hole minima; JLCPCB's DFM accepted it with that option (Daniel, test board `hardware/pcb/j50-dfm-test`; see `docs/pcb/j50-receptacle-dfm.md`). The capability table below is the standard tier and still governs everything except J50.
 
 ## 1. JLCPCB multilayer capability (FR-4, 1.6 mm, 4 and 6 layer)
 

@@ -59,7 +59,8 @@
 
 # J50 (Wuerth 632723300011) B-row through-holes: 0.65 mm pads / 0.40 mm drills at 0.8 mm pitch as drawn by WE
 # (annular 0.125 mm, hole-to-hole 0.40 mm, hole-to-copper 0.275 mm). JLCPCB's DFM accepted this footprint under the
-# "Advanced PCB" option (Daniel, 2026-10-09, test board hardware/pcb/j50-dfm-test). Order the board as Advanced PCB.
+# quote option "Min via hole size/diameter" = 0.25mm/(0.35/0.4mm) (auto-adds 4-Wire Kelvin Test and FR4 Tg155)
+# (Daniel, 2026-10-09, test board hardware/pcb/j50-dfm-test). Order the board with that option.
 # Waived for J50 only; every other footprint keeps the standard-tier minima.
 (rule "j50 annular"
   (condition "A.memberOfFootprint('J50')")

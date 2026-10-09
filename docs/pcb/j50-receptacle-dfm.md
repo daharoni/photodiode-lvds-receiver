@@ -56,7 +56,7 @@ DRC rules (KiCad 10 syntax, UNTESTED; put after the general rules because later 
 
 ## 5. Outcome (2026-10-09)
 
-Daniel uploaded the test board `hardware/pcb/j50-dfm-test` to JLCPCB: the DFM check passed without error under the **Advanced PCB** option (user-reported; standard tier was not accepted or not tested, UNRESOLVED which). Decision: keep the Wuerth 632723300011 and its footprint as drawn by WE (no pad enlargement), order the receiver module as Advanced PCB, and waive the three hole rules for J50 only in `receiver-module.kicad_dru`. The SMT-only fallback parts in section 4 are not needed.
+Daniel uploaded the test board `hardware/pcb/j50-dfm-test` to JLCPCB: the DFM check passed without error with the quote option "Min via hole size/diameter" = 0.25 mm/(0.35/0.4 mm) (the high-precision tier; JLCPCB then auto-selects "4-Wire Kelvin Test" and "FR4 Tg155", extra cost) (user-reported with a screenshot of the option; whether the standard 0.3 mm/(0.4/0.45 mm) tier also passes was not tested, UNRESOLVED). Decision: keep the Wuerth 632723300011 and its footprint as drawn by WE (no pad enlargement), order the receiver module with that option, and waive the three hole rules for J50 only in `receiver-module.kicad_dru`. The SMT-only fallback parts in section 4 are not needed.
 
 ## Not verified
 

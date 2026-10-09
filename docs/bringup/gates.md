@@ -47,7 +47,7 @@ Goal: show that the ESP32's slow trim (APD bias via DAC_HV, TIA_CTRL 20k/5k) hol
 
 ## G4: system proof
 
-- Pre-order (decision 14 / fab settings): order the receiver module as JLCPCB **Advanced PCB**, 6 layers, JLC06161H-3313, ENIG, impedance control; confirm the 90/100 ohm trace geometries in JLCPCB's impedance calculator (ours are computed, PROPOSED); the J50 hole waiver in `receiver-module.kicad_dru` relies on the Advanced PCB DFM pass of 2026-10-09 (`hardware/pcb/j50-dfm-test`). PROPOSED.
+- Pre-order (decision 14 / fab settings): order the receiver module at JLCPCB with "Min via hole size/diameter" = 0.25 mm/(0.35/0.4 mm) (the high-precision tier; JLCPCB then auto-selects "4-Wire Kelvin Test" and "FR4 Tg155", extra cost), 6 layers, JLC06161H-3313, ENIG, impedance control; confirm the 90/100 ohm trace geometries in JLCPCB's impedance calculator (ours are computed, PROPOSED); the J50 hole waiver in `receiver-module.kicad_dru` relies on the DFM pass with that option on 2026-10-09 (`hardware/pcb/j50-dfm-test`). PROPOSED.
 
 Acceptance: BER measured against known transmitted truth meets the approved target (BER <= 1e-9 is a provisional goal); redundancy works; CAD checks pass before any board order.
 
