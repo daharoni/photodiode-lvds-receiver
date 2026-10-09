@@ -43,11 +43,11 @@
           "height": 1.27,
           "width": 1.27
         },
-        "silk_line_width": 0.1,
+        "silk_line_width": 0.15,
         "silk_text_italic": false,
         "silk_text_size_h": 1.0,
         "silk_text_size_v": 1.0,
-        "silk_text_thickness": 0.1,
+        "silk_text_thickness": 0.15,
         "silk_text_upright": false,
         "zones": {
           "border_display_style": 2,
@@ -105,7 +105,7 @@
         "malformed_courtyard": "error",
         "microvia_drill_out_of_range": "error",
         "mirrored_text_on_front_layer": "warning",
-        "missing_courtyard": "ignore",
+        "missing_courtyard": "warning",
         "missing_footprint": "warning",
         "missing_tuning_profile": "warning",
         "net_conflict": "warning",
@@ -140,24 +140,25 @@
       },
       "rules": {
         "max_error": 0.005,
-        "min_clearance": 0.0,
-        "min_connection": 0.0,
-        "min_copper_edge_clearance": 0.5,
+        "min_clearance": 0.1,
+        "min_connection": 0.1,
+        "min_copper_edge_clearance": 0.3,
         "min_groove_width": 0.0,
-        "min_hole_clearance": 0.25,
-        "min_hole_to_hole": 0.25,
+        "min_hole_clearance": 0.3,
+        "min_hole_to_hole": 0.45,
         "min_microvia_diameter": 0.2,
         "min_microvia_drill": 0.1,
         "min_resolved_spokes": 2,
-        "min_silk_clearance": 0.0,
-        "min_text_height": 0.8,
-        "min_text_thickness": 0.08,
-        "min_through_hole_diameter": 0.3,
-        "min_track_width": 0.2,
-        "min_via_annular_width": 0.1,
-        "min_via_diameter": 0.5,
-        "solder_mask_to_copper_clearance": 0.0,
-        "use_height_for_length_calcs": true
+        "min_silk_clearance": 0.15,
+        "min_text_height": 1.0,
+        "min_text_thickness": 0.15,
+        "min_through_hole_diameter": 0.2,
+        "min_track_width": 0.1,
+        "min_via_annular_width": 0.15,
+        "min_via_diameter": 0.45,
+        "solder_mask_to_copper_clearance": 0.09,
+        "use_height_for_length_calcs": true,
+        "solder_mask_min_width": 0.1
       },
       "teardrop_options": [
         {
@@ -496,7 +497,7 @@
     "classes": [
       {
         "bus_width": 12,
-        "clearance": 0.2,
+        "clearance": 0.15,
         "diff_pair_gap": 0.2,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
@@ -507,7 +508,7 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": 2147483647,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.2,
+        "track_width": 0.15,
         "tuning_profile": "",
         "via_diameter": 0.6,
         "via_drill": 0.3,
@@ -524,7 +525,7 @@
         "microvia_drill": 0.1,
         "name": "HV",
         "pcb_color": "rgba(255, 0, 0, 0.000)",
-        "priority": 1,
+        "priority": 0,
         "schematic_color": "rgba(255, 0, 0, 0.800)",
         "track_width": 0.3,
         "tuning_profile": "",
@@ -534,18 +535,94 @@
       },
       {
         "bus_width": 12,
-        "clearance": 0.2,
+        "clearance": 0.6,
         "diff_pair_gap": 0.2,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
-        "name": "LVDS",
+        "name": "HV_LADDER",
+        "pcb_color": "rgba(255, 128, 0, 0.000)",
+        "priority": 1,
+        "schematic_color": "rgba(255, 128, 0, 0.800)",
+        "track_width": 0.3,
+        "tuning_profile": "",
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.15,
+        "diff_pair_gap": 0.15,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.145,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "DIFF90",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 0,
+        "priority": 2,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.2,
+        "track_width": 0.145,
+        "tuning_profile": "",
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.15,
+        "diff_pair_gap": 0.15,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.145,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "USB90",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 3,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.145,
+        "tuning_profile": "",
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.15,
+        "diff_pair_gap": 0.15,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.145,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "CAN90",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 4,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.145,
+        "tuning_profile": "",
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.15,
+        "diff_pair_gap": 0.15,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.11,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "DIFF100",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 5,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.11,
         "tuning_profile": "",
         "via_diameter": 0.6,
         "via_drill": 0.3,
@@ -559,24 +636,100 @@
     "netclass_assignments": null,
     "netclass_patterns": [
       {
-        "netclass": "LVDS",
-        "pattern": "LVDS_*"
+        "netclass": "HV",
+        "pattern": "/APD_BIAS"
       },
       {
         "netclass": "HV",
-        "pattern": "HV_*"
+        "pattern": "/Front End/HV_K"
       },
       {
         "netclass": "HV",
-        "pattern": "/Power/HV_*"
+        "pattern": "/Power/HV_OUT"
       },
       {
         "netclass": "HV",
-        "pattern": "/Front End/HV_*"
+        "pattern": "/Power/HV_CLAMP"
       },
       {
         "netclass": "HV",
-        "pattern": "APD_BIAS"
+        "pattern": "/Power/HV_RAW"
+      },
+      {
+        "netclass": "HV",
+        "pattern": "/Power/HV_V1"
+      },
+      {
+        "netclass": "HV",
+        "pattern": "/Power/HV_PUMP"
+      },
+      {
+        "netclass": "HV",
+        "pattern": "Net-(Q1-E)"
+      },
+      {
+        "netclass": "HV",
+        "pattern": "Net-(Q1-B)"
+      },
+      {
+        "netclass": "HV",
+        "pattern": "Net-(R17-Pad2)"
+      },
+      {
+        "netclass": "HV_LADDER",
+        "pattern": "Net-(R20-Pad2)"
+      },
+      {
+        "netclass": "HV_LADDER",
+        "pattern": "Net-(R10-Pad2)"
+      },
+      {
+        "netclass": "HV_LADDER",
+        "pattern": "Net-(R10-Pad1)"
+      },
+      {
+        "netclass": "HV_LADDER",
+        "pattern": "Net-(R8-Pad2)"
+      },
+      {
+        "netclass": "DIFF90",
+        "pattern": "*/LVDS_OUT1_P"
+      },
+      {
+        "netclass": "DIFF90",
+        "pattern": "*/LVDS_OUT1_N"
+      },
+      {
+        "netclass": "DIFF90",
+        "pattern": "*/LVDS_OUT2_P"
+      },
+      {
+        "netclass": "DIFF90",
+        "pattern": "*/LVDS_OUT2_N"
+      },
+      {
+        "netclass": "USB90",
+        "pattern": "*/USB_DP"
+      },
+      {
+        "netclass": "USB90",
+        "pattern": "*/USB_DM"
+      },
+      {
+        "netclass": "CAN90",
+        "pattern": "*/CAN_H"
+      },
+      {
+        "netclass": "CAN90",
+        "pattern": "*/CAN_L"
+      },
+      {
+        "netclass": "DIFF100",
+        "pattern": "*/LVDS_P"
+      },
+      {
+        "netclass": "DIFF100",
+        "pattern": "*/LVDS_N"
       }
     ]
   },
