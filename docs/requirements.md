@@ -15,6 +15,10 @@ Status key: ANSWERED (user stated it), PARTIAL (some of it known), ASSUMED (our 
 | 5. Redundancy contract | Multiple receiver lanes merged in the FPGA. Skew and merge policy not specified. | Framed packets with sequence numbers; select validated copies. | ASSUMED |
 | 6. Fade / startup behavior | Maximum fade rate and ambient illumination not known. Blue ~470 nm behavioral light is filtered. IR 38 kHz downlink transmitter is separate, not on this board. | Local analog LOS within 1 ms (provisional); FPGA owns validity and reacquisition. | ASSUMED |
 
+## USB standalone requirement
+
+Daniel's requirement, 2026-10-09 (user-supplied, ANSWERED): "anyone should be able to plug a module into a random laptop over USB, program it and verify it, with no FPGA attached". Realised by decision 13 (USB-C power and programming through a TPS2121 source mux; the board input is the system cable or USB). PROPOSED until G1 measurements.
+
 ## Previous system baseline (Miniscope Zero)
 
 Historical baseline, not a constraint (see scope note above).

@@ -19,6 +19,10 @@ Acceptance: manual-gain optical eye is open at target rate across bias range and
 - [ ] Chain noise at the comparator input with the APD (6 pF) connected, 20k and 5k
 - [ ] Measure AC-coupling response to training, gaps and abrupt light changes (baseline wander with 8b/10b)
 - [ ] CTRL (20k/5k) and bias-step switching transients: how long until the slicer is valid again
+- [ ] USB source mux U5 (decision 13): time to +5V after first plug-in (settling tSET, no datasheet formula) and inrush current with C32 220 nF; compare the estimate of a 5 V ramp in about 13-14 ms
+- [ ] U5 both-sources behaviour: cable only, USB only, both, cable removed while running (switchover about 100 us typ, hold-up droop on +5V and 3V3_D), USB removed while on cable; confirm no current into either source and near-0 V on the unpowered input; PR1 chatter with a real ULX3S rail
+- [ ] USB auto-reset and download through the 22 ohm R193/R194 and the USBLC6: esptool/browser flashing of an empty-flash module from a laptop root port, RESET/BOOT recovery, 3V3_D rise versus the EN RC
+- [ ] USB-alone self-test current: total +5V input current at dark, with HV at 220 V and 0.5-1 mA load, and at ESP32 boot/flash-write peaks, against the 0.19 A (0.24 A margin) estimate and the 0.5 A USB default; check VBUS_SENSE and PWR_SRC levels in all four states
 
 ## G2: range-trim proof (replaces the detector-coupon proof; decision 12)
 
@@ -43,3 +47,4 @@ Acceptance: BER measured against known transmitted truth meets the approved targ
 - [ ] BER vs known transmitted truth
 - [ ] Redundancy tests: skew, missing lane, conflicting frames, CRC errors, rejoin
 - [ ] Pre-order CAD checks: symbols/footprints/pin maps, ERC, DRC, stackup, independent review
+- [ ] Both sources plugged (decision 13): verify no current into either source; measure with a USB power meter on the laptop port and a series ammeter on the cable +5V

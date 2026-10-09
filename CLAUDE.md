@@ -10,7 +10,7 @@ only as a bench fallback) on a programmable, temperature-compensated 100-220 V
 bias (APD_BIAS, HV) -> OPA857 TIA (3.3 V) -> AC coupling -> OPA855 fixed gain x7 ->
 low-pass -> AC coupling to a 1.65 V baseline -> TLV3605 LVDS comparator -> one LVDS pair
 to an ECP5 FPGA (ULX3S first). Slow range control (APD bias, TIA 20k/5k) by the on-module
-ESP32-C6 over CAN (decisions 11, 12). Target 50 Mbps line rate (8b/10b), UI = 20 ns. Board input is 5 V.
+ESP32-C6 over CAN (decisions 11, 12). Target 50 Mbps line rate (8b/10b), UI = 20 ns. Board input is 5 V from the system cable or a USB-C port through a TPS2121 priority mux (decision 13); the module can be programmed and self-tested from a laptop over USB alone.
 Performance beats cost. No backward compatibility with the Miniscope Zero headstage is required; the headstage is co-designed with this receiver.
 
 ## Hard rules
