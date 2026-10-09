@@ -24,10 +24,10 @@ Acceptance: manual-gain optical eye is open at target rate across bias range and
 - [ ] Chain noise at the comparator input with the APD (6 pF) connected, 20k and 5k
 - [ ] Measure AC-coupling response to training, gaps and abrupt light changes (baseline wander with 8b/10b)
 - [ ] CTRL (20k/5k) and bias-step switching transients: how long until the slicer is valid again
-- [ ] USB source mux U5 (decision 13): time to +5V after first plug-in (settling tSET, no datasheet formula) and inrush current with C32 220 nF; compare the estimate of a 5 V ramp in about 13-14 ms
-- [ ] U5 both-sources behaviour: cable only, USB only, both, cable removed while running (switchover about 100 us typ, hold-up droop on +5V and 3V3_D), USB removed while on cable; confirm no current into either source and near-0 V on the unpowered input; PR1 chatter with a real ULX3S rail
+- [ ] eFuse U5 TPS259631 (decision 14): measure OV cut-off (calculated 5.76-6.20 V), UVLO rising/falling (4.06-4.32 V / 3.72-4.00 V), ILIM (0.68-0.84 A) and first-plug inrush with C32 47 nF and the estimated 25 uF on +5V (calculated ramp about 5.3 ms, about 23 mA); check FLT and the IMON test point
+- [ ] Fan-out U50 (SN65LVDS104): LVDS eye at the receptacle on both TX pairs through a 2 m certified cable at 50 Mb/s, VOD and common mode against the ECP5 +-100 mV threshold, 3V3 current with outputs 1-3 enabled; J51 output 3 scope eye
 - [ ] USB auto-reset and download through the 22 ohm R193/R194 and the USBLC6: esptool/browser flashing of an empty-flash module from a laptop root port, RESET/BOOT recovery, 3V3_D rise versus the EN RC
-- [ ] USB-alone self-test current: total +5V input current at dark, with HV at 220 V and 0.5-1 mA load, and at ESP32 boot/flash-write peaks, against the 0.19 A (0.24 A margin) estimate and the 0.5 A USB default; check VBUS_SENSE and PWR_SRC levels in all four states
+- [ ] USB-alone self-test current: total +5V input current at dark, with HV at 220 V and 0.5-1 mA load, and at ESP32 boot/flash-write peaks, against the 0.19 A (0.24 A margin) estimate and the 0.5 A USB default; measure the CC1/CC2 voltages at the pins and at the ADC (CC1_SENSE/CC2_SENSE) with a real source port and with 2-3 laptops/hubs; confirm class and orientation classification
 
 ## G2: range-trim proof (replaces the detector-coupon proof; decision 12)
 
@@ -52,4 +52,8 @@ Acceptance: BER measured against known transmitted truth meets the approved targ
 - [ ] BER vs known transmitted truth
 - [ ] Redundancy tests: skew, missing lane, conflicting frames, CRC errors, rejoin
 - [ ] Pre-order CAD checks: symbols/footprints/pin maps, ERC, DRC, stackup, independent review
-- [ ] Both sources plugged (decision 13): verify no current into either source; measure with a USB power meter on the laptop port and a series ammeter on the cable +5V
+- [ ] Laptop foreign-host test (decision 14): plug a module into two different laptops (ideally two OSes/vendors, USB 3 Type-C), scope the CAN pins and the LVDS pair: does the host treat the 10-25 kohm per pin CAN load as a termination, SS receiver-detect, SBU handling; module stays harmless and the CAN is silent; decide the foreign-host mitigations (draft open item 3) afterwards
+- [ ] 3 m cable check (decision 14): for a specific candidate passive cable, DC continuity of the SS wires (A2 to B11 etc.: a few ohms for passive full-featured), then scope LVDS and CAN through it; accept 3 m only for that cable
+- [ ] CAN with 14 stubs (decision 14): bus with one split termination at the breakout, 125 kbit/s, R199 100 k, stubs up to 3 m: error counters, edges
+- [ ] CAN-to-LVDS crosstalk inside the cable (decision 14): CAN edges (about 2 V) against the adjacent LVDS pair (about 350 mV); BER with CAN traffic on versus off
+- [ ] USB-PD charger or hub plugged into a module (decision 14): stays at 5 V, hard-reset VBUS dip tolerated; hub-powered current behaviour

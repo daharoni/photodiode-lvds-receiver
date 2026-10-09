@@ -34,7 +34,7 @@ Classes 4-6 are reserved. PROPOSED. A node must never transmit an ID with anothe
 - Unique identity: the 48-bit factory MAC read from eFuse (EFUSE_MAC, BLOCK1, TRM Table 6.3-3; field existence VERIFIED, uniqueness assumed per Espressif convention, PROPOSED). Board serial and revision: `serial` (u32) and `board_rev` (u8) in the NVS `factory` namespace, written once with the console `serial set` command (write-once by firmware rule, not by eFuse, so a mistake is recoverable by erasing NVS). PROPOSED. Burning the serial into EFUSE_USR_DATA (BLOCK3, 256 bits, irreversible) is possible later and not planned.
 - Node ID: u8 in NVS, 0 = unassigned. Console `node set <1..14>` or the ENUM/ASSIGN exchange.
 - ENUM flow (PROPOSED): (1) master broadcasts ENUM_REQ `[round u8, slot_ms u8]` with slot_ms >= 2 (a frame is 1.08 ms worst case, section 3). (2) Each node waits `slot = crc16(mac) mod 64` slots, then answers: assigned nodes with 0x71n, unassigned with 0x72h. Payload (8 B): `mac[6], node_id u8 (0 = unassigned), fw u8 = major<<4 | minor`. (3) Master replies ASSIGN `[mac[6], node_id u8, flags u8]` (flags bit0 = persist); the node whose MAC matches adopts the ID and stores it in NVS. (4) Repeat ENUM_REQ until no 0x72h arrives. Slot collisions are possible (same slot); the next round resolves them. UNRESOLVED: bench test with 2-3 nodes.
-- Cable-to-node association (PROPOSED): the master drives the AUX line (cable pin 12, ESP32 IO7) high on one lane at a time; every module reports `aux_in` in `TLM_STATE`/GET so the dashboard can map CAN node to LVDS lane. AUX is a spare GPIO (docs/schematic/connector.md). UNRESOLVED: master firmware not written.
+- Cable-to-node association (PROPOSED): the master drives the AUX line (SBU1/SBU2 tied on the USB-C receptacle, ESP32 IO7; no orientation interpretation is needed, decision 14) high on one lane at a time; every module reports `aux_in` in `TLM_STATE`/GET so the dashboard can map CAN node to LVDS lane. AUX is a spare GPIO (docs/schematic/rev-a-sheet-specs.md revision 4; AUX2 is removed). UNRESOLVED: master firmware not written.
 - IDENTIFY (0x12n, DLC 1, `[seconds u8]`): the module blinks its STATUS LED in a distinctive pattern (section 6).
 
 ### 1.3 Command frames
@@ -46,7 +46,7 @@ GET (0x10n, DLC 2): `[param u16]`. SET (0x11n, DLC 6): `[param u16, value i32]`.
 | Frame | Rate (default) | Bytes (little endian) |
 |---|---|---|
 | TLM_ANALOG 0x30n | 10 Hz | `hv_dv u16` (APD bias, 0.1 V, = HV_MON x 101), `rssi_mv u16` (ADS1115 AIN1 raw millivolts), `vth_mv u16` (AIN2), `m_x10 u16` (estimated M x 10; 0xFFFF = unknown) |
-| TLM_STATE 0x31n | 2 Hz and on change | byte0: bits 2:0 `hv_state`, bit3 `tia` (1 = 20k), bit4 `mode` (1 = bus), bit5 `comp_en`, bit6 `link_valid` (last LINK_ALL nibble), bit7 `tia_auto`; byte1 `loop_state`; bytes 2-3 `faults u16`; bytes 4-5 `dac_hv u16` (12-bit code); byte6 `link_err` (0-7 echo of the master nibble); byte7 bits 1:0 `selftest_last` (0 never, 1 pass, 2 fail), bit2 `aux_in`, bits 4:3 `pwr` (0 cable only, 1 USB only, 2 both, 3 unknown) |
+| TLM_STATE 0x31n | 2 Hz and on change | byte0: bits 2:0 `hv_state`, bit3 `tia` (1 = 20k), bit4 `mode` (1 = bus), bit5 `comp_en`, bit6 `link_valid` (last LINK_ALL nibble), bit7 `tia_auto`; byte1 `loop_state`; bytes 2-3 `faults u16`; bytes 4-5 `dac_hv u16` (12-bit code); byte6 `link_err` (0-7 echo of the master nibble); byte7 bits 1:0 `selftest_last` (0 never, 1 pass, 2 fail), bit2 `aux_in`, bits 4:3 `src` (0 `system` = LINK_ALL heard, 1 `host` = SOF seen without LINK_ALL, 2 `unknown`); `cc_class` and `cc_orient` are console/GET only unless 4 bits (class 2, orientation 2) are reserved in TLM_SLOW (UNRESOLVED, byte layout open) |
 | TLM_SLOW 0x32n | 0.2 Hz | `uptime_s u32`, `temp_dc i16` (die temperature, 0.1 C), `can_tec u8`, `can_rec u8` |
 
 Enumerations. `hv_state`: 0 OFF, 1 RAMP, 2 ON, 3 HOLD, 4 FAULT. `loop_state`: 0 OFF, 1 RAMP, 2 SEARCH, 3 TRACK, 4 LOS, 5 MANUAL, 6 FAULT. Fault bits: section 5.
@@ -156,7 +156,7 @@ One JSON object per line, keys always present, unknown values `null`:
  "hv":"on","hv_v":142.3,"hv_set":142.0,"dac_hv":2310,
  "m":48.2,"rssi_mv":1923,"rssi_drop":41,"vth_mv":1651,"th_mv":0.0,
  "tia":"20k","comp":1,"loop":"TRACK","link":1,"err":0,
- "faults":0,"temp_c":31.4,"can_tec":0,"can_rec":0,"mode":"usb","pwr":"usb"}
+ "faults":0,"temp_c":31.4,"can_tec":0,"can_rec":0,"mode":"usb","src":"host","cc_class":"default","cc_orient":"cc1"}
 ```
 
 | Field | Source | Notes |
@@ -170,7 +170,7 @@ One JSON object per line, keys always present, unknown values `null`:
 | tia, comp | OPA857 gain, SHDN_N | |
 | loop | state | |
 | link, err | FPGA-reported link_valid and error class | null in standalone USB mode (no master) |
-| faults, temp_c, can_tec, can_rec, mode, pwr | fault word, die temperature, CAN counters, `usb` or `bus`, power source from VBUS_SENSE/PWR_SRC (`cable`, `usb`, `both`) | |
+| faults, temp_c, can_tec, can_rec, mode, src, cc_class, cc_orient | fault word, die temperature, CAN counters, `usb` or `bus`, source (`system`, `host`, `unknown`), CC class (`default`, `1.5A`, `3.0A`, `none`) and orientation (`cc1`, `cc2`, `none`) from IO4/IO5 | cc_* are hints only |
 
 The CAN master (FPGA side) emits the same keys from the TLM frames so one dashboard handles both transports. PROPOSED.
 

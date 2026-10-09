@@ -10,7 +10,7 @@ only as a bench fallback) on a programmable, temperature-compensated 100-220 V
 bias (APD_BIAS, HV) -> OPA857 TIA (3.3 V) -> AC coupling -> OPA855 fixed gain x7 ->
 low-pass -> AC coupling to a 1.65 V baseline -> TLV3605 LVDS comparator -> one LVDS pair
 to an ECP5 FPGA (ULX3S first). Slow range control (APD bias, TIA 20k/5k) by the on-module
-ESP32-C6 over CAN (decisions 11, 12). Target 50 Mbps line rate (8b/10b), UI = 20 ns. Board input is 5 V from the system cable or a USB-C port through a TPS2121 priority mux (decision 13); the module can be programmed and self-tested from a laptop over USB alone.
+ESP32-C6 over CAN (decisions 11, 12). Target 50 Mbps line rate (8b/10b), UI = 20 ns. Each module has one 24-pin USB-C receptacle (decision 14) carrying 5 V (through a TPS259631 eFuse), the LVDS pair (SN65LVDS104 fan-out onto both TX pairs), CAN on both RX pairs, USB D+/D- and AUX on SBU; cable rule: passive full-featured, <= 2 m certified, 3 m only after a bench check. The module can still be programmed and self-tested from a laptop over USB alone (decision 13 requirement).
 Performance beats cost. No backward compatibility with the Miniscope Zero headstage is required; the headstage is co-designed with this receiver.
 
 ## Hard rules
@@ -81,7 +81,7 @@ Do not order PCBs before the pre-order checks in G4 pass.
 ## Open risks
 
 Detector is a silicon APD S12023-10 (decision-log entry 8) on the LT8365 bias
-(entry 9). Biggest risks: the APD bias supply, OPA857 behavior at 6 pF source
+(entry 9). Biggest risks: the APD bias supply, the 24-pin USB-C cable/foreign-host behaviour (decision 14, G1/G4), OPA857 behavior at 6 pF source
 capacitance, post-amp clipping/recovery and comparator noise at small overdrive
 (decision 12, G1 measurements), and the firmware range-control loop (M vs
 temperature, 20k/5k scheduling). ngspice sims with TI models in docs/simulation/

@@ -1,5 +1,7 @@
 # USB-standalone power, buttons and VBUS sensing: research and proposed spec text
 
+Note (2026-10-09): decision 14 replaced the two-source mux (TPS2121, `+5V_CABLE`, PWR_SRC, VBUS_SENSE) described below with a single-VBUS TPS259631 eFuse on one 24-pin USB-C connector. The USB-standalone requirement itself is unchanged. Current power-path design: `docs/research/usbc-power-path.md` and `docs/research/decision-14-draft-usbc-single-connector.md`; spec: `docs/schematic/rev-a-sheet-specs.md` revision 4. The sections below are kept as history, and their TPS2121 sections are superseded.
+
 Date 2026-10-09. Scope: let one receiver module be powered, programmed and self-tested from a laptop USB-C port alone (no FPGA, no system cable), and coexist safely when USB and the 12-pin system cable are both plugged in. This is research and a proposal only. Nothing was implemented in the generators, sheets, spec, decision log or architecture. Nothing here was simulated or measured.
 
 Labels: VERIFIED (checked against a cited document, revision and page), PROPOSED (design intent), UNRESOLVED (open). Page numbers are PDF pages unless stated.
