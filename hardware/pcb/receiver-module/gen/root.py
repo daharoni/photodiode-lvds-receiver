@@ -27,15 +27,15 @@ COL = [38.1, 119.38, 195.58, 271.78]
 W = 35.56
 # file -> (column, y, inputs, outputs, bidirectional)
 LAYOUT = {
-    "power.kicad_sch":     (0, 55.88,  ["+5V", "DAC_HV", "HV_DIS"], ["3V3", "3V3_D", "APD_BIAS", "HV_MON"], []),
+    "power.kicad_sch":     (0, 55.88,  ["+5V_CABLE", "VBUS", "DAC_HV", "HV_DIS"], ["3V3", "3V3_D", "APD_BIAS", "HV_MON", "PWR_SRC"], []),
     "frontend.kicad_sch":  (1, 55.88,  ["APD_BIAS", "3V3", "TIA_CTRL", "VCM_REF"], ["SDET_P", "TIA_TAP"], []),
     "slicer.kicad_sch":    (2, 55.88,  ["SDET_P", "VCM_REF", "DAC_TH", "3V3", "SHDN_N", "LE_HYS"],
                             ["LVDS_P", "LVDS_N", "VTH_MON"], []),
-    "connector.kicad_sch": (3, 55.88,  ["LVDS_P", "LVDS_N", "RSSI", "HV_MON", "3V3", "3V3_D"], ["+5V"],
+    "connector.kicad_sch": (3, 55.88,  ["LVDS_P", "LVDS_N", "RSSI", "HV_MON", "3V3", "3V3_D"], ["+5V_CABLE"],
                             ["CAN_H", "CAN_L", "AUX", "AUX2"]),
     "control.kicad_sch":   (1, 134.62, ["3V3", "TIA_TAP"], ["VCM_REF", "RSSI"], []),
-    "controller.kicad_sch": (2, 134.62, ["3V3_D", "HV_MON", "RSSI", "VTH_MON"],
-                            ["DAC_TH", "DAC_HV", "HV_DIS", "SHDN_N", "LE_HYS", "TIA_CTRL"], ["CAN_H", "CAN_L", "AUX", "AUX2"]),
+    "controller.kicad_sch": (2, 134.62, ["3V3_D", "HV_MON", "RSSI", "VTH_MON", "PWR_SRC"],
+                            ["DAC_TH", "DAC_HV", "HV_DIS", "SHDN_N", "LE_HYS", "TIA_CTRL", "VBUS"], ["CAN_H", "CAN_L", "AUX", "AUX2"]),
 }
 assert set(LAYOUT) == set(ident), (set(LAYOUT) ^ set(ident))
 
@@ -44,7 +44,7 @@ s.text("Root sheet. Signal flow: Power -> Front End -> Slicer/LVDS -> Connector.
        "Monitor sheet buffers VCM_REF (1.65 V baseline) and the RSSI minimum detector from TIA_TAP; the Controller (ESP32-C6, decisions 11/12) sets\n"
        "DAC_TH/DAC_HV/HV_DIS/SHDN_N/LE_HYS/TIA_CTRL, reads HV_MON/RSSI/VTH_MON, and talks CAN through the Connector.\n"
        "Status labels VERIFIED/PROPOSED/UNRESOLVED; no part values approved for fabrication.", (25.4, 15), 1.5)
-s.text("Rails +5V, 3V3, 3V3_D are sheet pins; GND is global. HV_ nets and APD_BIAS are net class HV (1.0 mm clearance).\n"
+s.text("Rails +5V_CABLE (Connector -> Power), VBUS (Controller -> Power), 3V3, 3V3_D are sheet pins; +5V is internal to Power (U5 TPS2121 mux OUT, decision 13); PWR_SRC runs Power -> Controller; GND is global. HV_ nets and APD_BIAS are net class HV (1.0 mm clearance).\n"
        "LVDS_P is low for a logic one (post-amp non-inverting after an OPA857 whose OUT swings down with light); the FPGA inverts.", (25.4, 35), 1.5)
 
 pinpos = {}
@@ -64,11 +64,11 @@ for fn, (col, y, ins, outs, bis) in LAYOUT.items():
     pos = s.sheet_symbol(name, fn, (x, y), (W, h), pins, uuid, page)
     for n, shape, side, _ in pins:
         p = pos[n]
-        s.stub(p, "l" if side == "l" else "r", 5.08 if n != "+5V" or fn != "power.kicad_sch" else 12.7, n)
+        s.stub(p, "l" if side == "l" else "r", 5.08 if n != "+5V_CABLE" or fn != "power.kicad_sch" else 12.7, n)
         pinpos[(fn, n)] = p
 
-# +5V driver flag (connector +5V is a passive-ish sheet output; ERC needs a power_out source)
-px, py = pinpos[("power.kicad_sch", "+5V")]
+# +5V_CABLE driver flag (connector sheet output is not a power_out; ERC needs a power_out source). VBUS has #FLG60 inside Controller.
+px, py = pinpos[("power.kicad_sch", "+5V_CABLE")]
 s.place("power:PWR_FLAG", "#FLG04", "PWR_FLAG", (px - 6.35, py), in_bom=False)
 # GND flag on a global GND label
 s.place("power:PWR_FLAG", "#FLG05", "PWR_FLAG", (38.1, 241.3), in_bom=False)

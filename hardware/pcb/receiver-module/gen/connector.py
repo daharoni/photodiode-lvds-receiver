@@ -23,7 +23,7 @@ JX, JY = 127.0, 55.88
 j50 = s.place(J50L, "J50", "MODULE CABLE", (JX, JY))
 # (pin, side, kind, net, shape)
 J50_MAP = [
-    ("1", "hier", "+5V", "output"), ("2", "local", "+5V", None),
+    ("1", "hier", "+5V_CABLE", "output"), ("2", "local", "+5V_CABLE", None),
     ("3", "global", "GND", None), ("4", "global", "GND", None),
     ("5", "hier", "LVDS_P", "input"), ("6", "hier", "LVDS_N", "input"),
     ("7", "global", "GND", None), ("8", "global", "GND", None),
@@ -104,7 +104,10 @@ for ri in (r180, c180):
     tidy_text(ri, False)
 
 s.text("Connector: J50 module cable (ULX3S side), J51 debug header, bench test points.", (38.1, 12.7), 2.5)
-s.text("""Design intent (Rev A revision 2, 2026-10-08, decision 12; nothing here is simulated or measured)
+s.text("""Design intent (Rev A revision 3, 2026-10-09, decisions 12 and 13; nothing here is simulated or measured)
+
++5V_CABLE (PROPOSED, decision 13): J50 pins 1 and 2 are the system rail, renamed from +5V. It is the priority input of the Power sheet source mux U5 (TPS2121);
+  the module never sources it, and with USB-C also attached the cable powers the module and USB carries data only.
 
 ULX3S target pairs (PROPOSED; ULX3S schematics v3.1.7 p.2, Lattice FPGA-TN-02032 v1.4 p.14, p.26):
   First choice gp/gn[8..13] (bank 7, left), second choice gp/gn[14..21] (banks 2/3, right).
@@ -128,7 +131,7 @@ HV rule (PROPOSED): no bare APD_BIAS pad on this sheet. HV_MON (~Vout/101, unbuf
        (150.0, 205.0), 1.5)
 s.text("""J50 MODULE CABLE pinout (Wuerth 61201221621, 2x06 shrouded, 2.54 mm; PROPOSED,
 docs/research/module-controller.md s.6; pins 2n-1/2n share a row)
-Row 1:  1 +5V      2 +5V      supply current shared, first row away from signals
+Row 1:  1 +5V_CABLE  2 +5V_CABLE  system supply rail (mux priority input on Power, never sourced by the module)
 Row 2:  3 GND      4 GND      power return
 Row 3:  5 LVDS_P   6 LVDS_N   50 Mbps pair on adjacent pins (twisted pair)
 Row 4:  7 GND      8 GND      ground row between LVDS and CAN
