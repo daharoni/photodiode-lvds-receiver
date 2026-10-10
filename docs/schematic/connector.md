@@ -10,11 +10,11 @@ Footprint is the library symbol's own (`Wuerth_632723300011`). All four VBUS pin
 
 | Pin | Net | Pin | Net |
 |---|---|---|---|
-| A2 SSTXP1 | LVDS_OUT1_P (U50 1Y) | B11 SSRXP1 | CAN_H |
-| A3 SSTXN1 | LVDS_OUT1_N (U50 1Z) | B10 SSRXN1 | CAN_L |
+| A2 SSTXP1 | LVDS_OUT2_P (U50 2Y) | B11 SSRXP1 | CAN_H |
+| A3 SSTXN1 | LVDS_OUT2_N (U50 2Z) | B10 SSRXN1 | CAN_L |
 | A5 CC1 | CC1 (R181 Rd, R185 tap, U51 D1+) | B5 CC2 | CC2 (R184 Rd, R188 tap, U52 D3+) |
-| A6 DP1, B6 DP2 | USB_DP (tied) | B2 SSTXP2 | LVDS_OUT2_P (U50 2Y) |
-| A7 DN1, B7 DN2 | USB_DM (tied) | B3 SSTXN2 | LVDS_OUT2_N (U50 2Z) |
+| A6 DP1, B6 DP2 | USB_DP (tied) | B2 SSTXP2 | LVDS_OUT1_P (U50 1Y) |
+| A7 DN1, B7 DN2 | USB_DM (tied) | B3 SSTXN2 | LVDS_OUT1_N (U50 1Z) |
 | A8 SBU1, B8 SBU2 | AUX_CAB (tied) | A10 SSRXN2 | CAN_L |
 | A11 SSRXP2 | CAN_H | | |
 
@@ -25,11 +25,11 @@ The ties are made by same-name local labels on the pins (nets USB_DP, USB_DM, AU
 |---|---|---|
 | J50 | 632723300011 | above |
 | J51 "DEBUG / scope" | Conn_01x06 | 1 GND, 2 LVDS_DBG_P, 3 LVDS_DBG_N, 4 CAN_H, 5 CAN_L, 6 AUX (PROPOSED) |
-| U50 | SN65LVDS104PW (TSSOP-16) | A = LVDS_P, B = LVDS_N; 1Y/1Z -> J50 A2/A3, 2Y/2Z -> J50 B2/B3, 3Y/3Z -> J51 2/3, 4Y/4Z no_connect; EN1-EN3 to 3V3, EN4 to GND (enables active high, LVDS104 section 9.4 Table 2, VERIFIED); VCC (4) 3V3 with C184 100 nF 0402 + C185 1 uF 0603; 23 mA typ / 35 mA max (p.5) |
+| U50 | SN65LVDS104PW (TSSOP-16) | A = LVDS_P, B = LVDS_N; 1Y/1Z -> J50 B2/B3, 2Y/2Z -> J50 A2/A3 (swapped 2026-10-09 so the pairs do not cross on the way to the clamps), 3Y/3Z -> J51 2/3, 4Y/4Z no_connect; EN1-EN3 to 3V3, EN4 to GND (enables active high, LVDS104 section 9.4 Table 2, VERIFIED); VCC (4) 3V3 with C184 100 nF 0402 + C185 1 uF 0603; 23 mA typ / 35 mA max (p.5) |
 | R180 | 100R 0.1 % 0603, fitted | across U50 A/B; the buffer has no on-chip termination (LVDS104 p.16 Fig. 25). Absorbs the old DNP bench pad of the same designator |
 | R177 | 100R 0603, DNP | across LVDS_DBG_P/N (J51 scope load). UNRESOLVED: whether an unloaded output 3 is acceptable |
-| U51 | TPD6E05U06 (USON-14, footprint Texas_R-PUSON-N14) | lower end of J50, I/O side facing J50, pin 14 uppermost: 14 = CC1 (A5), 13 no_connect (spare), 12 = LVDS_OUT1_N (A3), 11 = LVDS_OUT1_P (A2), 9 = CAN_L (B10), 8 = CAN_H (B11) |
-| U52 | TPD6E05U06 | upper end of J50, same orientation: 14 = LVDS_OUT2_P (B2), 13 = LVDS_OUT2_N (B3), 12 = CAN_H (A11), 11 = CAN_L (A10), 9 = CC2 (B5), 8 = AUX_CAB (A8/B8) |
+| U51 | TPD6E05U06 (USON-14, footprint Texas_R-PUSON-N14) | lower end of J50, I/O side facing J50, pin 14 uppermost: 14 = CC1 (A5), 13 no_connect (spare), 12 = LVDS_OUT2_N (A3, U50 2Z), 11 = LVDS_OUT2_P (A2, U50 2Y), 9 = CAN_L (B10), 8 = CAN_H (B11) |
+| U52 | TPD6E05U06 | upper end of J50, same orientation: 14 = LVDS_OUT1_P (B2, U50 1Y), 13 = LVDS_OUT1_N (B3, U50 1Z), 12 = CAN_H (A11), 11 = CAN_L (A10), 9 = CC2 (B5), 8 = AUX_CAB (A8/B8) |
 | R181, R184 | 5.1k 1 % | Rd on CC1, CC2 (Type-C R2.0 Table 4-25 p.236) |
 | R185/R187/C182 | 100k / 100k / 100 nF | CC1 tap -> CC1_SENSE |
 | R188/R189/C183 | 100k / 100k / 100 nF | CC2 tap -> CC2_SENSE |
@@ -41,6 +41,8 @@ The ties are made by same-name local labels on the pins (nets USB_DP, USB_DM, AU
 U51/U52 pins 1-4, 6, 7 are hidden NC-type pins in the library symbol, so no no_connect flag is drawn on them (a flag there is reported dangling by ERC). The spare channel (U51 D1-, pin 13) carries a no_connect flag.
 
 ESD channel split by position (hand edit 2026-10-09, after placement started; generators frozen): the revision-4 split (U51 = both TX pairs + both CC, U52 = both CAN pairs + SBU) made half the protected lines run the length of the J50 pad rows past the other device before reaching their clamp, because the two plug orientations put the same function at opposite ends of the receptacle. U51 now clamps the lower-end pins (A5, A3/A2, B10/B11) and U52 the upper-end pins (B2/B3, A11/A10, B5, A8/B8), each pin level with its pad: A-row SMD pads get straight top-layer traces in pad order, B-row through-hole pins arrive on an inner layer with a via at the clamp pad, and pair polarity follows the pad order (ESD channels are identical). Nets unchanged; ERC 0/0; 223 components. PROPOSED.
+
+Fan-out output swap (hand edit 2026-10-09): U50 output 1 (pins 16/15, the upper pair on the TSSOP) now feeds the upper end of J50 (B2/B3 through U52) and output 2 (pins 14/13) the lower end (A2/A3 through U51), so the two pairs no longer cross between U50 and the clamps. Pair polarity is unchanged (P to SSTXp, N to SSTXn on both). At the lower end the pad order is A3 (n) above A2 (p) while U50 puts 2Y above 2Z, so one line of that pair still has to cross the other once between U50 and U51; the upper pair is uncrossed. PROPOSED.
 
 ## Rules and citations
 - Fan-out margin: TLV3605 VOD 250/350/450 mV (TLV p.7) against the buffer threshold +-100 mV: 150 mV at minimum VOD (VERIFIED arithmetic). Fail-safe static high with no TLV3605 power (LVDS104 p.15-16). Supply 3V3 up to about 101 mA total (66 mA estimate + 35 mA), inside the TPS79901 200 mA rating (rating not rechecked: UNRESOLVED). The ECP5 end is still terminated on-die (DIFFRESISTOR 100, `docs/research/ulx3s-lvds-input.md`); R180 sits at U50, not the FPGA.
