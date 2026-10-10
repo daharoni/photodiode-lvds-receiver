@@ -4043,7 +4043,7 @@
 		)
 		(uuid "b16e4de0-deb7-404c-b500-69dfca48e3f1")
 	)
-	(label "LVDS_OUT1_P"
+	(label "CAN_H"
 		(at 157.48 93.98 180)
 		(effects
 			(font
@@ -4053,7 +4053,7 @@
 		)
 		(uuid "b16b40be-d2cf-4937-a41a-3910ddb7cc92")
 	)
-	(label "LVDS_OUT1_N"
+	(label "CAN_L"
 		(at 157.48 96.52 180)
 		(effects
 			(font
@@ -4063,7 +4063,7 @@
 		)
 		(uuid "f3792603-d99e-412c-a3e7-20c4502eaf5c")
 	)
-	(label "CAN_H"
+	(label "LVDS_OUT1_P"
 		(at 157.48 99.06 180)
 		(effects
 			(font
@@ -4073,7 +4073,7 @@
 		)
 		(uuid "ded74b02-c521-42f1-add1-787b71b24e40")
 	)
-	(label "CAN_L"
+	(label "LVDS_OUT1_N"
 		(at 157.48 101.6 180)
 		(effects
 			(font

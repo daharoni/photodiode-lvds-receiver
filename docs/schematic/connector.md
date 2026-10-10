@@ -28,7 +28,7 @@ The ties are made by same-name local labels on the pins (nets USB_DP, USB_DM, AU
 | U50 | SN65LVDS104PW (TSSOP-16) | A = LVDS_P, B = LVDS_N; 1Y/1Z -> J50 A2/A3, 2Y/2Z -> J50 B2/B3, 3Y/3Z -> J51 2/3, 4Y/4Z no_connect; EN1-EN3 to 3V3, EN4 to GND (enables active high, LVDS104 section 9.4 Table 2, VERIFIED); VCC (4) 3V3 with C184 100 nF 0402 + C185 1 uF 0603; 23 mA typ / 35 mA max (p.5) |
 | R180 | 100R 0.1 % 0603, fitted | across U50 A/B; the buffer has no on-chip termination (LVDS104 p.16 Fig. 25). Absorbs the old DNP bench pad of the same designator |
 | R177 | 100R 0603, DNP | across LVDS_DBG_P/N (J51 scope load). UNRESOLVED: whether an unloaded output 3 is acceptable |
-| U51 | TPD6E05U06 (USON-14, footprint Texas_R-PUSON-N14) | A-row end of J50: D1+/D1- = LVDS_OUT1_P/N (A2/A3), D2+ = CAN_H (B11), D2- = CAN_L (B10), D3+ = CC1 (A5), D3- no_connect (spare) |
+| U51 | TPD6E05U06 (USON-14, footprint Texas_R-PUSON-N14) | A-row end of J50: D1+ = CAN_H (B11), D1- = CAN_L (B10), D2+/D2- = LVDS_OUT1_P/N (A2/A3), D3+ = CC1 (A5), D3- no_connect (spare); I/O side faces J50 with pin 14 uppermost |
 | U52 | TPD6E05U06 | B-row end of J50: D1+/D1- = LVDS_OUT2_P/N (B2/B3), D2+ = CAN_H (A11), D2- = CAN_L (A10), D3+ = CC2 (B5), D3- = AUX_CAB (A8/B8) |
 | R181, R184 | 5.1k 1 % | Rd on CC1, CC2 (Type-C R2.0 Table 4-25 p.236) |
 | R185/R187/C182 | 100k / 100k / 100 nF | CC1 tap -> CC1_SENSE |

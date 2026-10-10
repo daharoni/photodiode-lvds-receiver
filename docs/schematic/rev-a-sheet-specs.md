@@ -137,14 +137,14 @@ Pins: out VBUS, USB_DP, USB_DM, CC1_SENSE, CC2_SENSE; in LVDS_P, LVDS_N, RSSI, H
 
 | Channel | U51 (A-row end: A2/A3, B11/B10, A5) | U52 (B-row end: B2/B3, A11/A10, B5, A8/B8) |
 |---|---|---|
-| D1+ (pin 14) | LVDS_OUT1_P (SSTXp1, A2) | LVDS_OUT2_P (SSTXp2, B2) |
-| D1- (pin 13) | LVDS_OUT1_N (SSTXn1, A3) | LVDS_OUT2_N (SSTXn2, B3) |
-| D2+ (pin 12) | CAN_H at SSRXp1 (B11) | CAN_H at SSRXp2 (A11) |
-| D2- (pin 11) | CAN_L at SSRXn1 (B10) | CAN_L at SSRXn2 (A10) |
+| D1+ (pin 14) | CAN_H at SSRXp1 (B11) | LVDS_OUT2_P (SSTXp2, B2) |
+| D1- (pin 13) | CAN_L at SSRXn1 (B10) | LVDS_OUT2_N (SSTXn2, B3) |
+| D2+ (pin 12) | LVDS_OUT1_P (SSTXp1, A2) | CAN_H at SSRXp2 (A11) |
+| D2- (pin 11) | LVDS_OUT1_N (SSTXn1, A3) | CAN_L at SSRXn2 (A10) |
 | D3+ (pin 9) | CC1 (A5) | CC2 (B5) |
 | D3- (pin 8) | spare (no_connect) | AUX_CAB (SBU, A8/B8) |
 
-Layout note (2026-10-09, hand edit after placement started): the original split (U51 = both TX pairs and both CC, U52 = both CAN pairs and SBU) was replaced by a split by position along the J50 pad rows, because the two cable orientations put the same function at opposite ends of the receptacle (A2/A3 and B11/B10 at one end, B2/B3 and A11/A10 at the other). Each device now sits at one end of the pin rows and clamps only the pins next to it, so every protected line runs connector pad -> clamp pad -> destination without a detour past the other device. Nets are unchanged; only which clamp sits on which pad moved.
+Layout note (2026-10-09, hand edit after placement started): the original split (U51 = both TX pairs and both CC, U52 = both CAN pairs and SBU) was replaced by a split by position along the J50 pad rows, because the two cable orientations put the same function at opposite ends of the receptacle (A2/A3 and B11/B10 at one end, B2/B3 and A11/A10 at the other). Each device now sits at one end of the pin rows and clamps only the pins next to it, so every protected line runs connector pad -> clamp pad -> destination without a detour past the other device. Nets are unchanged; only which clamp sits on which pad moved. Both devices are placed with the I/O side (pins 14 to 8, top to bottom) facing J50; U51 has its CAN pair on D1 and the TX1 pair on D2 so that, with pin 14 uppermost, the lowest A-row pads A2/A3 meet the lower pair of pins.
 
   Excluded: TI ESD122 (VRWM +-3.6 V) and Nexperia PUSB3FR4 (VI max 3.3 V) clamp or conduct below the 5 V levels on CC, SBU and CAN. UNRESOLVED: unidirectional clamps conduct near -0.7 V; with up to 0.4 V of cable GND drop check the CAN common-mode excursion against that clamp. USBLC6-2SC6 on D+/D- stays on the Controller sheet (full speed; place it near J50 at layout).
 - J51 Conn_01x06 "DEBUG / scope header" (Daniel kept it, 2026-10-09; PROPOSED pin map): 1 GND, 2 LVDS_DBG_P (U50 3Y), 3 LVDS_DBG_N (U50 3Z), 4 CAN_H, 5 CAN_L, 6 AUX. R177 100 ohm DNP across pins 2/3 (UNRESOLVED whether an unloaded output 3 is acceptable; LVDS104 is characterised with 100 ohm loads). RSSI, HV_MON, 3V3, 3V3_D stay on test points TP50-TP55 (3V3, 3V3_D, RSSI, HV_MON, GND x2).
