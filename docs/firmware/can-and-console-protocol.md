@@ -8,7 +8,7 @@ One parameter model, two transports. Every parameter has one name, one numeric t
 
 | Item | Value | Label |
 |---|---|---|
-| Physical | SN65HVD230 on IO18 (TX) / IO19 (RX); one split termination at the FPGA end; 125 kbit/s, bit time 8 us | PROPOSED (docs/research/module-controller.md s.3; SLLA270 p.8-9 for termination and stub rules, VERIFIED there) |
+| Physical | SN65HVD230 on IO19 (TX) / IO18 (RX) (swapped 2026-10-10 for layout); one split termination at the FPGA end; 125 kbit/s, bit time 8 us | PROPOSED (docs/research/module-controller.md s.3; SLLA270 p.8-9 for termination and stub rules, VERIFIED there) |
 | Controller | ESP32-C6 TWAI: CAN 2.0, 11/29-bit IDs, 1 kbit/s to 1 Mbit/s, listen-only and self-test modes | VERIFIED (C6 DS p.4; MINI DS s.5.2.1.7 p.21) |
 | ID format | 11-bit standard IDs only (29-bit not used) | PROPOSED |
 | Byte order | little endian; signed integers two's complement | PROPOSED |

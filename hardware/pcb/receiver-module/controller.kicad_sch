@@ -4702,7 +4702,7 @@
 		)
 		(uuid "2790d40e-fdb1-4a3f-a5b5-8e61f82a4317")
 	)
-	(label "CAN_TX"
+	(label "CAN_RX"
 		(at 182.88 124.46 180)
 		(effects
 			(font
@@ -4712,7 +4712,7 @@
 		)
 		(uuid "14459bf0-f379-4e9b-a265-649edc2971d5")
 	)
-	(label "CAN_RX"
+	(label "CAN_TX"
 		(at 182.88 127 180)
 		(effects
 			(font

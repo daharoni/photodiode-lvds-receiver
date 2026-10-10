@@ -13,7 +13,7 @@ Hard rules carried over (CLAUDE.md): slicing is analog and the module decodes wi
 | TIA_CTRL | IO20, 100 k pull-up (frontend R57) | 1 = 20k, 0 = 5k; unprogrammed = 20k |
 | I2C | IO2 SDA, IO3 SCL, 4.7 k pull-ups | MCP4728 0x60, ADS1115 0x48 |
 | LDAC / RDY | IO6 / IO22 | MCP4728 LDAC; RDY/BSY open drain (EEPROM write busy) |
-| CAN | IO18 TX, IO19 RX, SN65HVD230, Rs 10 k, 125 kbit/s | one split termination at the FPGA end |
+| CAN | IO19 TX, IO18 RX (swapped 2026-10-10 for layout), SN65HVD230, Rs 10 k, 125 kbit/s | one split termination at the FPGA end |
 | USB | IO12 D-, IO13 D+ (native USB Serial/JTAG), UART0 pads IO16/IO17 fallback | no USB-UART chip |
 | Straps | IO9 BOOT (pull-up, button), IO8 10 k pull-up, EN 10 k + 1 uF | download boot needs IO8 = 1, IO9 = 0 (MINI DS Table 4-3 p.13, VERIFIED) |
 | CC1_SENSE / CC2_SENSE | IO4 / IO5 (ADC1_CH4 / CH5), each a 100 k + 100 k + 100 nF tap from the receptacle CC pin (ATTEN2 range) | PROPOSED hardware, decision 14 (`docs/research/decision-14-draft-usbc-single-connector.md` 3e, spec revision 4). Firmware derives `cc_class` (`default`, `1.5A`, `3.0A`, `none`) and `cc_orient` (`cc1`, `cc2`, `none`) as hints only (logged in telemetry); `usb_host` = USB Serial/JTAG SOF seen. Never a basis to clear HV_DIS by themselves |
