@@ -2513,8 +2513,18 @@
 		(uuid "834a7100-d74b-4d62-b68a-37d4a9c54a12")
 	)
 	(no_connect
-		(at 162.56 106.68)
-		(uuid "fbe0a297-0fda-4296-ab90-795e3cdfafa6")
+		(at 162.56 96.52)
+		(uuid "f8f18185-ffd9-4de1-91db-8238363e3a8c")
+	)
+	(wire
+		(pts
+			(xy 162.56 106.68) (xy 157.48 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "60925833-3c67-4555-a020-8f700174acc8")
 	)
 	(wire
 		(pts
@@ -3025,16 +3035,6 @@
 			(type default)
 		)
 		(uuid "3288fbf4-95cf-492c-bccf-c7aa87a06c7a")
-	)
-	(wire
-		(pts
-			(xy 162.56 96.52) (xy 157.48 96.52)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4c28a9f6-485a-49de-92cb-f46f9a45cc94")
 	)
 	(wire
 		(pts
@@ -4043,7 +4043,7 @@
 		)
 		(uuid "b16e4de0-deb7-404c-b500-69dfca48e3f1")
 	)
-	(label "CAN_H"
+	(label "CC1"
 		(at 157.48 93.98 180)
 		(effects
 			(font
@@ -4053,17 +4053,7 @@
 		)
 		(uuid "b16b40be-d2cf-4937-a41a-3910ddb7cc92")
 	)
-	(label "CAN_L"
-		(at 157.48 96.52 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "f3792603-d99e-412c-a3e7-20c4502eaf5c")
-	)
-	(label "LVDS_OUT1_P"
+	(label "LVDS_OUT1_N"
 		(at 157.48 99.06 180)
 		(effects
 			(font
@@ -4073,7 +4063,7 @@
 		)
 		(uuid "ded74b02-c521-42f1-add1-787b71b24e40")
 	)
-	(label "LVDS_OUT1_N"
+	(label "LVDS_OUT1_P"
 		(at 157.48 101.6 180)
 		(effects
 			(font
@@ -4083,7 +4073,17 @@
 		)
 		(uuid "99caf819-e4a3-4403-a1c4-e81649ffbb63")
 	)
-	(label "CC1"
+	(label "CAN_H"
+		(at 157.48 106.68 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f1de1bfb-ba0c-4a49-bc25-2478be0d15ba")
+	)
+	(label "CAN_L"
 		(at 157.48 104.14 180)
 		(effects
 			(font
@@ -4139,7 +4139,7 @@
 			)
 		)
 	)
-	(label "CAN_H"
+	(label "LVDS_OUT2_P"
 		(at 157.48 144.78 180)
 		(effects
 			(font
@@ -4149,7 +4149,7 @@
 		)
 		(uuid "850a2739-5317-4eb9-8284-69694fafb6a3")
 	)
-	(label "CAN_L"
+	(label "LVDS_OUT2_N"
 		(at 157.48 147.32 180)
 		(effects
 			(font
@@ -4159,7 +4159,7 @@
 		)
 		(uuid "62256005-b7cb-4cd1-a0d6-93bb5d4d5de3")
 	)
-	(label "LVDS_OUT2_P"
+	(label "CAN_H"
 		(at 157.48 149.86 180)
 		(effects
 			(font
@@ -4169,7 +4169,7 @@
 		)
 		(uuid "88096176-2344-42d6-903f-b31185f2fcfe")
 	)
-	(label "LVDS_OUT2_N"
+	(label "CAN_L"
 		(at 157.48 152.4 180)
 		(effects
 			(font
@@ -4663,7 +4663,7 @@
 		)
 		(uuid "f5ff80a6-089e-4b34-8785-5811ccb0b1cd")
 	)
-	(text "Design intent (Rev A revision 4, 2026-10-09, decision 14; PROPOSED unless labelled; nothing here is simulated or measured)\nONE CONNECTOR: J50 carries 5 V (VBUS pins A4/A9/B4/B9 tied, hierarchical output VBUS to the Power eFuse and the Controller), USB 2.0 D+/D- (A6/B6 tied\n  = USB_DP, A7/B7 tied = USB_DM), the 50 Mbps LVDS pair on both SuperSpeed TX pairs through the fan-out U50 (1Y/1Z -> A2/A3, 2Y/2Z -> B2/B3), CAN on\n  both RX pairs (CAN_H = B11 and A11, CAN_L = B10 and A10) and the SBU pair tied as AUX (A8/B8 -> AUX_CAB -> R186 1k -> AUX). Plug orientation does\n  not matter: P to SSTXp and N to SSTXn on both pairs (USB Type-C R2.5 Table 3-10 p.83).\nRd/CC: R181 and R184 5.1 k 1 % on CC1 and CC2 (Type-C R2.0 Table 4-25 p.236). Taps 100k/100k with 100 nF give CC1_SENSE and CC2_SENSE for the ESP32\n  ADC; 100k/100k keeps the pin below 3.3 V even with 5.5 V VCONN on the unused CC (TC R2.5 p.155). The 200 k tap lowers Rd by about 2.5 %: fold into\n  firmware thresholds.\nU50 SN65LVDS104PW (LVDS104 SLLS396G p.3-5, p.16 Fig. 25): no on-chip termination, so R180 100 ohm 0.1 % across A/B is FITTED; enables active high\n  (section 9.4 Table 2), EN1-EN3 to 3V3, EN4 to GND (output 4 disabled, 4Y/4Z no_connect), output 3 feeds J51 with R177 100 ohm DNP across it\n  (UNRESOLVED whether an unloaded output 3 is acceptable). 23 mA typ, 35 mA max (p.5). VOD 250/350/450 mV (TLV3605 p.7) against the 100 mV buffer\n  threshold: 150 mV margin at minimum VOD (arithmetic). Fail-safe: static high with no TLV3605 power (p.15-16). Do NOT add a second 100 ohm at the\n  FPGA without DIFFRESISTOR consideration: the ECP5 input is terminated on-die (DIFFRESISTOR 100, docs/research/ulx3s-lvds-input.md); each of the two\n  paths sees one load.\nESD: U51 (A-row pins: SSTX1 pair A2/A3, CAN B11/B10, CC1; one spare) and U52 (SSTX2 pair B2/B3, CAN A11/A10, CC2, SBU AUX_CAB) TPD6E05U06RVZ (TI SLVSBO7O Table 5.4 p.7: 0.47\n  pF, VRWM 5.5 V); place within a few mm of J50. D+/D- clamp is U61 on the Controller sheet.\nCAN: no termination on the module (SLLA270 p.4, p.8); R182/R183/C180 are DNP for a single-module bench; never fit them on a module in a star. 125\n  kbit/s PROPOSED. Two bused pairs give about 45 ohm in parallel, acceptable at the slowed edges.\nShield: S1 to GND through C181 1 nF with R170 1 M (DNP). Layout rules (not schematic): Dp/Dn ties within 3.5 mm of J50 (TC Table 3-4 note 1 p.77).\nUNRESOLVED: top- or mid-mount J50; SBU exposure to a laptop alternate mode; unidirectional ESD clamp near -0.7 V versus cable GND drop on CAN; the 3.3\n  V-only ESP32 GPIO behind R186 1k."
+	(text "Design intent (Rev A revision 4, 2026-10-09, decision 14; PROPOSED unless labelled; nothing here is simulated or measured)\nONE CONNECTOR: J50 carries 5 V (VBUS pins A4/A9/B4/B9 tied, hierarchical output VBUS to the Power eFuse and the Controller), USB 2.0 D+/D- (A6/B6 tied\n  = USB_DP, A7/B7 tied = USB_DM), the 50 Mbps LVDS pair on both SuperSpeed TX pairs through the fan-out U50 (1Y/1Z -> A2/A3, 2Y/2Z -> B2/B3), CAN on\n  both RX pairs (CAN_H = B11 and A11, CAN_L = B10 and A10) and the SBU pair tied as AUX (A8/B8 -> AUX_CAB -> R186 1k -> AUX). Plug orientation does\n  not matter: P to SSTXp and N to SSTXn on both pairs (USB Type-C R2.5 Table 3-10 p.83).\nRd/CC: R181 and R184 5.1 k 1 % on CC1 and CC2 (Type-C R2.0 Table 4-25 p.236). Taps 100k/100k with 100 nF give CC1_SENSE and CC2_SENSE for the ESP32\n  ADC; 100k/100k keeps the pin below 3.3 V even with 5.5 V VCONN on the unused CC (TC R2.5 p.155). The 200 k tap lowers Rd by about 2.5 %: fold into\n  firmware thresholds.\nU50 SN65LVDS104PW (LVDS104 SLLS396G p.3-5, p.16 Fig. 25): no on-chip termination, so R180 100 ohm 0.1 % across A/B is FITTED; enables active high\n  (section 9.4 Table 2), EN1-EN3 to 3V3, EN4 to GND (output 4 disabled, 4Y/4Z no_connect), output 3 feeds J51 with R177 100 ohm DNP across it\n  (UNRESOLVED whether an unloaded output 3 is acceptable). 23 mA typ, 35 mA max (p.5). VOD 250/350/450 mV (TLV3605 p.7) against the 100 mV buffer\n  threshold: 150 mV margin at minimum VOD (arithmetic). Fail-safe: static high with no TLV3605 power (p.15-16). Do NOT add a second 100 ohm at the\n  FPGA without DIFFRESISTOR consideration: the ECP5 input is terminated on-die (DIFFRESISTOR 100, docs/research/ulx3s-lvds-input.md); each of the two\n  paths sees one load.\nESD: U51 (pin 14 CC1 A5, 13 spare, 12/11 SSTX1 A3/A2, 9/8 CAN B10/B11) and U52 (14/13 SSTX2 B2/B3, 12/11 CAN A11/A10, 9 CC2 B5, 8 AUX_CAB A8/B8) TPD6E05U06RVZ, pin order follows the J50 pad rows (TI SLVSBO7O Table 5.4 p.7: 0.47\n  pF, VRWM 5.5 V); place within a few mm of J50. D+/D- clamp is U61 on the Controller sheet.\nCAN: no termination on the module (SLLA270 p.4, p.8); R182/R183/C180 are DNP for a single-module bench; never fit them on a module in a star. 125\n  kbit/s PROPOSED. Two bused pairs give about 45 ohm in parallel, acceptable at the slowed edges.\nShield: S1 to GND through C181 1 nF with R170 1 M (DNP). Layout rules (not schematic): Dp/Dn ties within 3.5 mm of J50 (TC Table 3-4 note 1 p.77).\nUNRESOLVED: top- or mid-mount J50; SBU exposure to a laptop alternate mode; unidirectional ESD clamp near -0.7 V versus cable GND drop on CAN; the 3.3\n  V-only ESP32 GPIO behind R186 1k."
 		(exclude_from_sim yes)
 		(at 38.1 232 0)
 		(effects

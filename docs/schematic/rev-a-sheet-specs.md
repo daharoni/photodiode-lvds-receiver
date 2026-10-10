@@ -135,16 +135,16 @@ Pins: out VBUS, USB_DP, USB_DM, CC1_SENSE, CC2_SENSE; in LVDS_P, LVDS_N, RSSI, H
 - CAN: `CAN_H` bused to J50 B11 and A11, `CAN_L` to J50 B10 and A10 (hierarchical, from the Controller's SN65HVD230). DNP split termination R182/R183 60.4 ohm + C180 4.7 nF stays for single-module bench use; the termination is at the FPGA-end breakout only (SLLA270 p.4, p.8 Fig. 10). Two bused cable pairs give about 45 ohm in parallel, acceptable at the slowed edges (PROPOSED).
 - ESD: two `TPD6E05U06RVZ` (USON-14, 1 x 2.5 mm; 0.47 pF typ, VRWM 5.5 V, VBR 6.5-8.5 V, leakage 10 nA max, TPD Table 5.4 p.7, VERIFIED; I/O pins D1+/D1-/D2+/D2-/D3+/D3- on pins 14, 13, 12, 11, 9, 8, GND pins 5 and 10, pins 1-4, 6, 7 NC) placed within a few mm of J50 (TPD p.5). New lab-library symbol and USON-14 footprint (copy of bundled `Package_SON:Texas_R-PUSON-N14`, compare with the TI drawing: UNRESOLVED). Channel assignment (explicit, PROPOSED; 11 channels used, one spare):
 
-| Channel | U51 (A-row end: A2/A3, B11/B10, A5) | U52 (B-row end: B2/B3, A11/A10, B5, A8/B8) |
+| Channel | U51 (lower end of J50) | U52 (upper end of J50) |
 |---|---|---|
-| D1+ (pin 14) | CAN_H at SSRXp1 (B11) | LVDS_OUT2_P (SSTXp2, B2) |
-| D1- (pin 13) | CAN_L at SSRXn1 (B10) | LVDS_OUT2_N (SSTXn2, B3) |
-| D2+ (pin 12) | LVDS_OUT1_P (SSTXp1, A2) | CAN_H at SSRXp2 (A11) |
-| D2- (pin 11) | LVDS_OUT1_N (SSTXn1, A3) | CAN_L at SSRXn2 (A10) |
-| D3+ (pin 9) | CC1 (A5) | CC2 (B5) |
-| D3- (pin 8) | spare (no_connect) | AUX_CAB (SBU, A8/B8) |
+| D1+ (pin 14) | CC1 (A5) | LVDS_OUT2_P (SSTXp2, B2) |
+| D1- (pin 13) | spare (no_connect) | LVDS_OUT2_N (SSTXn2, B3) |
+| D2+ (pin 12) | LVDS_OUT1_N (SSTXn1, A3) | CAN_H at SSRXp2 (A11) |
+| D2- (pin 11) | LVDS_OUT1_P (SSTXp1, A2) | CAN_L at SSRXn2 (A10) |
+| D3+ (pin 9) | CAN_L at SSRXn1 (B10) | CC2 (B5) |
+| D3- (pin 8) | CAN_H at SSRXp1 (B11) | AUX_CAB (SBU, A8/B8) |
 
-Layout note (2026-10-09, hand edit after placement started): the original split (U51 = both TX pairs and both CC, U52 = both CAN pairs and SBU) was replaced by a split by position along the J50 pad rows, because the two cable orientations put the same function at opposite ends of the receptacle (A2/A3 and B11/B10 at one end, B2/B3 and A11/A10 at the other). Each device now sits at one end of the pin rows and clamps only the pins next to it, so every protected line runs connector pad -> clamp pad -> destination without a detour past the other device. Nets are unchanged; only which clamp sits on which pad moved. Both devices are placed with the I/O side (pins 14 to 8, top to bottom) facing J50; U51 has its CAN pair on D1 and the TX1 pair on D2 so that, with pin 14 uppermost, the lowest A-row pads A2/A3 meet the lower pair of pins.
+Layout note (2026-10-09, hand edit after placement started): the original split (U51 = both TX pairs and both CC, U52 = both CAN pairs and SBU) was replaced by a split by position along the J50 pad rows, because the two cable orientations put the same function at opposite ends of the receptacle (A2/A3 and B11/B10 at one end, B2/B3 and A11/A10 at the other). Each device now sits at one end of the pin rows and clamps only the pins next to it, so every protected line runs connector pad -> clamp pad -> destination without a detour past the other device. Nets are unchanged; only which clamp sits on which pad moved. Both devices are placed with the I/O side (pins 14 to 8, top to bottom) facing J50, each level with its end of the pad rows. Pin order follows the pads: the A-row pads are SMD at 0.5 mm pitch and get straight top-layer traces, so they are assigned to the pins level with them and in the same top-to-bottom order (U52: A11/A10 on 12/11, A8 on 8; U51: A5 on 14, A3/A2 on 12/11). The B-row pins are through-hole and reach their clamp pins by an inner-layer trace and a via at the pad, so their alignment matters less (U52: B2/B3 on 14/13, B5 on 9; U51: B10/B11 on 9/8). ESD channels are identical, so pair polarity is free: U51 carries N above P and L above H because that is the order of A3/A2 and B10/B11 at the lower end of the receptacle.
 
   Excluded: TI ESD122 (VRWM +-3.6 V) and Nexperia PUSB3FR4 (VI max 3.3 V) clamp or conduct below the 5 V levels on CC, SBU and CAN. UNRESOLVED: unidirectional clamps conduct near -0.7 V; with up to 0.4 V of cable GND drop check the CAN common-mode excursion against that clamp. USBLC6-2SC6 on D+/D- stays on the Controller sheet (full speed; place it near J50 at layout).
 - J51 Conn_01x06 "DEBUG / scope header" (Daniel kept it, 2026-10-09; PROPOSED pin map): 1 GND, 2 LVDS_DBG_P (U50 3Y), 3 LVDS_DBG_N (U50 3Z), 4 CAN_H, 5 CAN_L, 6 AUX. R177 100 ohm DNP across pins 2/3 (UNRESOLVED whether an unloaded output 3 is acceptable; LVDS104 is characterised with 100 ohm loads). RSSI, HV_MON, 3V3, 3V3_D stay on test points TP50-TP55 (3V3, 3V3_D, RSSI, HV_MON, GND x2).
