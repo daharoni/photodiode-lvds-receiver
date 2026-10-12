@@ -1,0 +1,137 @@
+# ESP32-C6 module firmware: build (ESP-IDF 5.5), host unit tests, and an optional
+# hardware-in-the-loop test on a Raspberry Pi bench (Aharoni-Lab/hil-bench-controller).
+#
+# Not yet run: UNTESTED in CI and on hardware as of this commit.
+#
+# Repository variable HIL_ESP32C6_BENCH (Settings > Secrets and variables > Actions >
+# Variables): set it to 'true' once a bench with the runner labels
+# [self-hosted, hil, esp32c6] and an `esp32c6_receiver` target exists. While it is unset,
+# the hil-test job is skipped and the workflow still passes on build + host tests.
+#
+# Self-hosted runner safety: the hil-test job never runs for pull requests from forks
+# (only pushes to main and same-repository PRs), so untrusted code cannot reach the
+# bench. Keep "Require approval for all outside collaborators" on in the repository
+# Actions settings, and register the bench runner in a runner group limited to this
+# repository.
+#
+# Sources:
+#   esp-idf-ci-action inputs (esp_idf_version, target, path, command):
+#     https://github.com/espressif/esp-idf-ci-action
+#   `idf.py merge-bin` exists in ESP-IDF v5.5.1 (tools/idf_py_actions/serial_ext.py): it runs
+#     `esptool --chip <target> merge-bin -o <output> @flash_args` in the build directory,
+#     default output merged-binary.bin, written inside the build directory.
+#   The v5.5.x tag and espressif/idf Docker image tag v5.5.5 were checked to exist.
+
+name: ESP32 firmware
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "firmware/esp32/**"
+      - ".github/workflows/esp32-firmware.yml"
+  pull_request:
+    paths:
+      - "firmware/esp32/**"
+      - ".github/workflows/esp32-firmware.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Build (ESP-IDF v5.5.5, esp32c6)
+        uses: espressif/esp-idf-ci-action@v1
+        with:
+          esp_idf_version: v5.5.5
+          target: esp32c6
+          path: firmware/esp32
+          command: idf.py build
+
+      - name: Merge bootloader + partition table + app into one image (offset 0x0)
+        uses: espressif/esp-idf-ci-action@v1
+        with:
+          esp_idf_version: v5.5.5
+          target: esp32c6
+          path: firmware/esp32
+          command: idf.py merge-bin -o receiver-esp32c6-merged.bin
+
+      - name: Upload firmware artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: esp32-firmware
+          # Paths are relative to the repo root; the common root is firmware/esp32/build,
+          # so the HIL job finds receiver-esp32c6-merged.bin at the top of the download.
+          path: |
+            firmware/esp32/build/*.bin
+            firmware/esp32/build/bootloader/bootloader.bin
+            firmware/esp32/build/partition_table/partition-table.bin
+            firmware/esp32/build/receiver-esp32c6-merged.bin
+            firmware/esp32/build/flasher_args.json
+          if-no-files-found: error
+          retention-days: 14
+
+  host-tests:
+    runs-on: ubuntu-latest
+    if: hashFiles('firmware/esp32/test_host/CMakeLists.txt') != ''
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure
+        run: cmake -S firmware/esp32/test_host -B build-host
+      - name: Build
+        run: cmake --build build-host
+      - name: Run
+        run: ctest --test-dir build-host --output-on-failure
+
+  hil-test:
+    needs: build
+    runs-on: [self-hosted, hil, esp32c6]
+    # Skipped until a bench exists (HIL_ESP32C6_BENCH) and never for fork PRs; see the
+    # notes at the top.
+    if: >-
+      ${{ vars.HIL_ESP32C6_BENCH == 'true' &&
+          (github.event_name == 'push' ||
+           github.event.pull_request.head.repo.full_name == github.repository) }}
+    concurrency:
+      group: hil-esp32c6-receiver
+      cancel-in-progress: false
+    timeout-minutes: 15
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: esp32-firmware
+
+      - name: Bench health check
+        run: benchctl health --check config --check probe
+
+      - name: Flash merged image (esptool over USB Serial/JTAG)
+        run: >
+          benchctl flash
+          --firmware receiver-esp32c6-merged.bin
+          --target esp32c6_receiver
+
+      - name: Wait for boot banner
+        run: >
+          benchctl serial expect
+          --target esp32c6_receiver
+          --pattern "BOOT OK"
+          --timeout 20
+
+      - name: HV_DIS must be high (APD high voltage off) after boot
+        run: benchctl gpio get --pin hv_dis --target esp32c6_receiver --expect high
+
+      - name: Start quick self-test
+        run: benchctl serial send --target esp32c6_receiver "selftest quick"
+
+      - name: Self-test must pass
+        run: >
+          benchctl serial expect
+          --target esp32c6_receiver
+          --pattern '"pass":true'
+          --timeout 60
