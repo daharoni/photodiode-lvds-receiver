@@ -157,7 +157,7 @@ td.side{font-family:var(--mono);font-size:.78rem;text-transform:uppercase;white-
 <rect class="z power" x="412" y="88" width="110" height="38"/><text class="zt" x="467.0" y="111.0">PWR_HV_MON</text>
 <polyline class="slow" points="412,106 140,106 140,198" style="stroke:var(--warn);stroke-dasharray:none;stroke-width:2.2" marker-end="url(#ah)"/><text class="note" x="148" y="100">filtered bias only (R50 C50 D10)</text>
 <rect class="z connector" x="836" y="148" width="100" height="38"/><text class="zt" x="886.0" y="165.0">CONN_CC</text><text class="zs" x="886.0" y="176.0">at CC pins</text>
-<rect class="z power" x="780" y="290" width="156" height="46"/><text class="zt" x="858.0" y="311.0">PWR_EFUSE</text><text class="zs" x="858.0" y="322.0">beside J50 VBUS pins</text><text class="zs" x="858.0" y="333.0">C33 at its input</text>
+<rect class="z power" x="780" y="290" width="156" height="46"/><text class="zt" x="858.0" y="311.0">PWR_EFUSE</text><text class="zs" x="858.0" y="322.0">BOTTOM side, under J50 VBUS pins</text><text class="zs" x="858.0" y="333.0">C33 at its input</text>
 <rect class="z frontend" x="90" y="352" width="420" height="26"/><text class="zt" x="300" y="369">TP10-TP21 (FE, SLC test points)</text>
 <circle class="tpd" cx="110" cy="345" r="2.6"/><circle class="tpd" cx="144" cy="345" r="2.6"/><circle class="tpd" cx="178" cy="345" r="2.6"/><circle class="tpd" cx="212" cy="345" r="2.6"/><circle class="tpd" cx="246" cy="345" r="2.6"/><circle class="tpd" cx="280" cy="345" r="2.6"/><circle class="tpd" cx="314" cy="345" r="2.6"/><circle class="tpd" cx="348" cy="345" r="2.6"/><circle class="tpd" cx="382" cy="345" r="2.6"/><circle class="tpd" cx="416" cy="345" r="2.6"/><circle class="tpd" cx="450" cy="345" r="2.6"/><circle class="tpd" cx="484" cy="345" r="2.6"/><rect class="z connector" x="524" y="352" width="76" height="26"/><text class="zt" x="562.0" y="369.0">CONN_TP</text>
 <rect class="z connector" x="604" y="336" width="106" height="42"/><text class="zt" x="657.0" y="355.0">CONN_DEBUG</text><text class="zs" x="657.0" y="366.0">J51 scope header</text>
@@ -191,7 +191,7 @@ td.side{font-family:var(--mono);font-size:.78rem;text-transform:uppercase;white-
 <section id="blocks"><div class="sechead"><span class="no">02</span><h2>Blocks</h2></div>
 <p>All 30 blocks from <code>tools/pcb_group_blocks.py</code>. PROPOSED.</p>
 <div class="tbl scroll" tabindex="0" role="region" aria-label="Block placement table"><table><thead><tr><th>Block</th><th>Sheet</th><th>Side</th><th>Zone</th><th>Reason</th></tr></thead><tbody>
-<tr><td class="ref"><i class="sw power"></i> PWR_EFUSE</td><td class="m">Power</td><td class="side">top</td><td>right end, beside J50 VBUS pins</td><td>Short VBUS run; C33 at its input. Its output feeds the HV boost input.</td></tr>
+<tr><td class="ref"><i class="sw power"></i> PWR_EFUSE</td><td class="m">Power</td><td class="side">bottom</td><td>right end, bottom side under the J50 VBUS pins (as placed 2026-10-09 by placement-spec.json; drawn in the top view for the VBUS run)</td><td>Short VBUS run through vias at the VBUS pins; C33 at its input. Its output feeds the HV boost input.</td></tr>
 <tr><td class="ref"><i class="sw power"></i> PWR_3V3</td><td class="m">Power</td><td class="side">bottom</td><td>right half, power area</td><td>3V3 heads left along the bottom to the analog chain.</td></tr>
 <tr><td class="ref"><i class="sw power"></i> PWR_3V3D</td><td class="m">Power</td><td class="side">bottom</td><td>right half, power area, next to MCU</td><td>3V3_D goes to the ESP32.</td></tr>
 <tr><td class="ref"><i class="sw power"></i> PWR_HV_BOOST</td><td class="m">Power</td><td class="side">top</td><td>back-right HV island</td><td>One HV island block with FB and DIS; 1.0 mm clearance ring, outer layers only.</td></tr>
@@ -231,7 +231,7 @@ td.side{font-family:var(--mono);font-size:.78rem;text-transform:uppercase;white-
 <li>GND1 and GND2 stay solid under HV traces: no plane cuts.</li>
 <li>Differential pairs from the fan-out to J50 stay on top over GND1, with no layer change.</li>
 <li>ESD arrays within a few mm of the J50 pins; R180 termination at the fan-out input, which is centred behind J50.</li>
-<li>PWR_EFUSE right beside the J50 VBUS pins with C33 at its input; CONN_CC next to the CC pins.</li>
+<li>PWR_EFUSE on the bottom side under the J50 VBUS pins with C33 at its input; CONN_CC next to the CC pins.</li>
 <li>Bottom left half stays quiet: no switching parts under the front end.</li>
 <li>CTRL_USB (USBLC6 + 22 R) directly under the D+/D- pins; CTRL_CAN under J50 near the RX pins.</li>
 <li>ESP32-C6 module with its antenna end toward a board edge.</li>

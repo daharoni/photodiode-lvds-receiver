@@ -43,7 +43,7 @@ Rev A has three low-voltage rails: analog 3V3 (TPS79901), digital 3V3_D (TPS7A20
 | TRACK | Valid frames | Firmware trims M toward the Q(M) optimum slowly from RSSI and FPGA error counts | Loss of validity |
 | LOS | FPGA timeout on an independent clock | Firmware returns to SEARCH scheduling; comparator state is "invalid" | Valid frames |
 
-Dwell times and the RSSI thresholds are UNRESOLVED until G3. Provisional goals: reacquisition <= 50 ms (not approved).
+Dwell times and the RSSI thresholds are UNRESOLVED until G3. Provisional goal: reacquisition <= 20 ms (requirements.md item 3; not approved).
 
 ## Layout status (2026-10-12, PROPOSED)
 
