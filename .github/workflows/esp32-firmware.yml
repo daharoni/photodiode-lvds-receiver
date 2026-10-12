@@ -79,7 +79,6 @@ jobs:
 
   host-tests:
     runs-on: ubuntu-latest
-    if: hashFiles('firmware/esp32/test_host/CMakeLists.txt') != ''
     steps:
       - uses: actions/checkout@v4
       - name: Configure
@@ -94,10 +93,7 @@ jobs:
     runs-on: [self-hosted, hil, esp32c6]
     # Skipped until a bench exists (HIL_ESP32C6_BENCH) and never for fork PRs; see the
     # notes at the top.
-    if: >-
-      ${{ vars.HIL_ESP32C6_BENCH == 'true' &&
-          (github.event_name == 'push' ||
-           github.event.pull_request.head.repo.full_name == github.repository) }}
+    if: ${{ vars.HIL_ESP32C6_BENCH == 'true' && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository) }}
     concurrency:
       group: hil-esp32c6-receiver
       cancel-in-progress: false
