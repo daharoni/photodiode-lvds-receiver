@@ -477,7 +477,7 @@ a{color:#000;text-decoration:none}
 <section id="controller">
 <p class="eyebrow">05 &middot; Module controller and firmware</p>
 <h2>An ESP32-C6 that trims slowly and never touches the data</h2>
-<p class="lede">Decision 11: Daniel moved away from the SAMD51 and wants every module to carry an ESP32 as its single point of contact with the FPGA side (identification, future-proofing) and as the owner of everything slow on the module. Analog-first is unchanged: the module decodes with the ESP32 unprogrammed. All of this is <span class="t p">PROPOSED</span>; the firmware is a plan, nothing is implemented, simulated or measured. Plan: <a href="../firmware/esp32/README.md">firmware/esp32/README.md</a>. Protocol: <a href="firmware/can-and-console-protocol.md">firmware/can-and-console-protocol.md</a>.</p>
+<p class="lede">Decision 11: Daniel moved away from the SAMD51 and wants every module to carry an ESP32 as its single point of contact with the FPGA side (identification, future-proofing) and as the owner of everything slow on the module. Analog-first is unchanged: the module decodes with the ESP32 unprogrammed. All of this is <span class="t p">PROPOSED</span>; an ESP-IDF 5.5 firmware skeleton exists since 2026-10-12 (builds for esp32c6, host-tested HV gate, range state machine and CAN codec; nothing flashed or measured on hardware). Plan: <a href="../firmware/esp32/README.md">firmware/esp32/README.md</a>. Protocol: <a href="firmware/can-and-console-protocol.md">firmware/can-and-console-protocol.md</a>.</p>
 
 <h3>5.1 Role and parts</h3>
 <ul>
@@ -521,7 +521,7 @@ a{color:#000;text-decoration:none}
 <li>Force live outputs to safe values, check the ADC with HV off (HV_MON should read about 0.05 V; more than 30 V of bias while disabled sets HV_STUCK).</li>
 <li>Read CC1/CC2 and watch for USB SOF, then start CAN in listen-only for 1.5 s or more to find the mode.</li>
 <li>HV stays off until commanded: console <code>hv on</code> (standalone), master <code>hv_cmd</code> over CAN, or a stored <code>hv_auto</code> flag with a heard master and no faults (default 0).</li>
-<li>Soft start: drive HV_DIS low, let the LT8365 soft-start (SS 0.22 uF) reach the DAC minimum of about 104-110 V, then walk DAC_HV down closed-loop on HV_MON at no more than 20 V/s. Timeout 10 s gives HV_UNDER and HV off.</li>
+<li>Soft start: first write DAC_HV = 0xFFF and read it back (the only path that lowers HV_DIS), then drive HV_DIS low, let the LT8365 soft-start (SS 0.22 uF) reach the DAC minimum of about 104-110 V, then walk DAC_HV down closed-loop on HV_MON at no more than 20 V/s with a code bound derived from hv_max and a trip if the bias does not follow the code. Timeout 10 s gives HV_UNDER and HV off.</li>
 </ol>
 <p>Any ESP32 reset, crash or loss of 3V3_D releases IO0, so HV turns off with no firmware action. HV also goes off within 10 ms of: I2C or ADC failure, HV out of range, CAN bus-off or no LINK_ALL for the 2 s default in bus mode. <span class="t p">PROPOSED</span></p>
 
@@ -935,6 +935,7 @@ a{color:#000;text-decoration:none}
 <div class="card"><h4>Firmware</h4><ul>
 <li><a href="../firmware/esp32/README.md">firmware/esp32/README.md</a> (plan, boot, range-trim)</li>
 <li><a href="firmware/can-and-console-protocol.md">firmware/can-and-console-protocol.md</a></li>
+<li><a href="../firmware/esp32/HIL.md">firmware/esp32/HIL.md</a> (bench and CI plan) and <a href="../firmware/esp32/web/README.md">firmware/esp32/web/</a> (browser flasher)</li>
 </ul></div>
 </div>
 
