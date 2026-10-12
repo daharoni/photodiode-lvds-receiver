@@ -53,7 +53,7 @@ Enumerations. `hv_state`: 0 OFF, 1 RAMP, 2 ON, 3 HOLD, 4 FAULT. `loop_state`: 0 
 
 ### 1.5 Master status: LINK_ALL (0x1F0, broadcast, 20 Hz, DLC 8)
 
-Bytes 0-6 hold one nibble per module: node n is in byte (n-1)/2, low nibble for odd n, high nibble for even n. Byte 7 is a sequence counter. Nibble: bit3 `valid` (8b/10b framing locked and code-valid), bits 2:0 error class from the FPGA's invalid-code count per 100 ms window (0 none, 1 = 1-2, 2 = 3-8, 3 = 9-32, 4 = 33-128, 5 = more than 128, 7 = LOS: no decodable activity or independent-clock timeout). Class thresholds are PROPOSED and match the FPGA gateware's counters, which are UNRESOLVED (firmware/ecp5 is empty). Invalid-code counts are not a BER measurement (standing correction 12). Receipt of LINK_ALL is also the node's bus heartbeat.
+Bytes 0-6 hold one nibble per module: node n is in byte (n-1)/2, low nibble for odd n, high nibble for even n. Byte 7 is a sequence counter. Nibble: bit3 `valid` (8b/10b framing locked and code-valid), bits 2:0 error class from the FPGA's invalid-code count per 100 ms window (0 none, 1 = 1-2, 2 = 3-8, 3 = 9-32, 4 = 33-128, 5 = more than 128, 7 = LOS: no decodable activity or independent-clock timeout). Class thresholds are PROPOSED and are implemented on the FPGA side in `firmware/ecp5/rtl/lane_monitor.v` (100 ms windows; class 7 when the independent-clock watchdog reports LOS or lock was lost in the window); the gateware sends the 7 nibble bytes to the master over a UART every 50 ms as `0xA5, seq u8, nib[0..6], crc8` (firmware/ecp5/README.md s.7), and the master copies them into LINK_ALL unchanged. Invalid-code counts are not a BER measurement (standing correction 12). Receipt of LINK_ALL is also the node's bus heartbeat.
 
 ### 1.6 Fault and boot frames
 

@@ -14,7 +14,7 @@
 #     (the local tools/fpga-env.sh install is that release); the linux-x64 asset of that
 #     release has not been checked here, a failed download would show on the first run.
 #
-# Artifact ecp5-gateware: firmware/ecp5/build/ulx3s.bit, timing.json, nextpnr.log (DEVICE=85k).
+# Artifact ecp5-gateware: firmware/ecp5/build/85k/ulx3s.bit, timing.json, nextpnr.log (DEVICE=85k).
 
 name: ECP5 gateware
 
@@ -60,7 +60,7 @@ jobs:
       - name: Build bitstream (DEVICE=85k)
         run: make bit DEVICE=85k
 
-      - name: Timing check (clk_s >= 200 MHz, clk_c >= 100 MHz)
+      - name: Timing check (clk_s >= 200 MHz, clk_c >= 50 MHz)
         run: make timing DEVICE=85k
 
       - name: Upload bitstream and timing reports
@@ -68,8 +68,8 @@ jobs:
         with:
           name: ecp5-gateware
           path: |
-            firmware/ecp5/build/ulx3s.bit
-            firmware/ecp5/build/timing.json
-            firmware/ecp5/build/nextpnr.log
+            firmware/ecp5/build/85k/ulx3s.bit
+            firmware/ecp5/build/85k/timing.json
+            firmware/ecp5/build/85k/nextpnr.log
           if-no-files-found: error
           retention-days: 14

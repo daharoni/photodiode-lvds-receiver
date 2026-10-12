@@ -1,5 +1,6 @@
 # ECP5 gateware build flow (ULX3S). `source ../../tools/fpga-env.sh` first.
 #   make info | lint | test | synth | pnr | pack | bit | timing | prog | flash | clean
+# Outputs of DEVICE=x are in build/x/ ; `make clean` removes build/ (all devices) and the tb outputs.
 # DEVICE = 85k (default) | 45k | 25k | 12k ; all share package CABGA381 and the ULX3S pinout.
 # GIT_SHA (max 8 chars) is printed in the UART banner; default is the short commit id, or "dev".
 
@@ -7,7 +8,8 @@ DEVICE   ?= 85k
 PACKAGE  ?= CABGA381
 SPEED    ?= 6
 TOP      ?= ulx3s_top
-BUILD    ?= build
+# Outputs per device: build/<DEVICE>/ (switching DEVICE can never repack a stale config).
+BUILD    ?= build/$(DEVICE)
 GIT_SHA  ?= $(shell git rev-parse --short=7 HEAD 2>/dev/null || echo dev)
 SEED     ?= 1
 
@@ -61,16 +63,16 @@ $(BUILD)/ulx3s.bit: $(BUILD)/ulx3s.config
 
 bit: synth pnr pack
 
-# Fail if the last (post-route) Max frequency lines show clk_s < 200 MHz or clk_c < 100 MHz.
+# Fail if the last (post-route) Max frequency lines show clk_s < 200 MHz or clk_c < 50 MHz.
 # Clock names in nextpnr's log contain the net name ("clk_s" / "clk_c").
 timing:
 	@test -f $(BUILD)/nextpnr.log || { echo "no $(BUILD)/nextpnr.log: run make pnr first"; exit 1; }
 	@grep "Max frequency for clock" $(BUILD)/nextpnr.log | tail -3 | tee $(BUILD)/timing.txt
 	@awk '/Max frequency for clock/ { n=$$0; f=$$0; sub(/.*: /,"",f); sub(/ MHz.*/,"",f); \
 	  if (n ~ /clk_s/) { seen_s=1; if (f+0 < 200) { print "FAIL clk_s " f " MHz < 200"; bad=1 } } \
-	  else if (n ~ /clk_c/) { seen_c=1; if (f+0 < 100) { print "FAIL clk_c " f " MHz < 100"; bad=1 } } } \
+	  else if (n ~ /clk_c/) { seen_c=1; if (f+0 < 50) { print "FAIL clk_c " f " MHz < 50"; bad=1 } } } \
 	  END { if (!seen_s || !seen_c) { print "FAIL: clk_s or clk_c not found in log"; bad=1 } \
-	        if (bad) exit 1; print "timing OK: clk_s >= 200 MHz and clk_c >= 100 MHz" }' $(BUILD)/timing.txt
+	        if (bad) exit 1; print "timing OK: clk_s >= 200 MHz and clk_c >= 50 MHz" }' $(BUILD)/timing.txt
 
 prog: $(BUILD)/ulx3s.bit
 	openFPGALoader -b ulx3s $<
@@ -79,5 +81,5 @@ flash: $(BUILD)/ulx3s.bit
 	openFPGALoader -b ulx3s -f $<
 
 clean:
-	rm -rf $(BUILD)
+	rm -rf build
 	@for d in $(TBDIRS); do $(MAKE) -C $$d clean 2>/dev/null || true; done

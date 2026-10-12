@@ -3,8 +3,8 @@
 // section 9 row 5.  Status: PROPOSED (thresholds PROPOSED in protocol s.1.5);
 // simulated only (tb/lane_monitor).
 //
-// Ports (clk_c domain, 100 MHz, synchronous active-high reset):
-//   lock             lane lock from lane_rx (aligned and 16 valid symbols)
+// Ports (clk_c domain, 50 MHz, synchronous active-high reset):
+//   lock             lane lock from lane_rx (aligned and LOCK_SYMBOLS valid symbols)
 //   err_pulse        1 clk per invalid symbol (code_err or disp_err)
 //   los              loss of signal from the watchdog (los_sync of watchdog.v)
 //   nibble[3:0]      {valid, class[2:0]} of the LAST CLOSED window
@@ -21,10 +21,10 @@
 // fresh module never reports a good link.  Class 6 is unused.
 //
 // Parameters:
-//   WINDOW_CYCLES  10_000_000  PROPOSED  100 ms at 100 MHz, README s.5; >= 2
+//   WINDOW_CYCLES  5_000_000  PROPOSED  100 ms at 50 MHz, README s.5; >= 2
 `default_nettype none
 module lane_monitor #(
-  parameter WINDOW_CYCLES = 10_000_000
+  parameter WINDOW_CYCLES = 5_000_000
 ) (
   input  wire        clk,
   input  wire        rst,

@@ -15,9 +15,9 @@ module uart_loop (
     output wire       rx_valid,
     output wire       rx_frame_err
 );
-    uart_tx #(.CLK_HZ(100_000_000), .BAUD(`TB_BAUD)) u_tx (
+    uart_tx #(.CLK_HZ(50_000_000), .BAUD(`TB_BAUD)) u_tx (
         .clk(clk), .rst(rst), .data(tx_data), .valid(tx_valid), .ready(tx_ready), .txd(txd));
-    uart_rx #(.CLK_HZ(100_000_000), .BAUD(`TB_BAUD)) u_rx (
+    uart_rx #(.CLK_HZ(50_000_000), .BAUD(`TB_BAUD)) u_rx (
         .clk(clk), .rst(rst), .rxd(txd & ~force_low), .data(rx_data), .valid(rx_valid), .frame_err(rx_frame_err));
 endmodule
 `default_nettype wire

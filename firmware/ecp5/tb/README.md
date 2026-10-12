@@ -27,7 +27,9 @@ cocotb 2.1's `Makefile.sim` already makes `make` exit nonzero when a test fails 
 
 ## Conventions
 
-- Clock 10 ns (`Clock(dut.clk, 10, unit="ns")`). Inputs are driven on the falling edge and
+- Clock 10 ns (`Clock(dut.clk, 10, unit="ns")`) for the pure-logic blocks (cycle counts only); the tests that tie
+  cycles to real time use the 50 MHz core clock, 20 ns (tb/uart, tb/system) and tb/lane_phy runs the
+  clocks.v model (clk_s 5 ns, clk_c 20 ns, coincident rising edges). Inputs are driven on the falling edge and
   outputs are read on the next falling edge, so one registered stage = one `push`.
 - Gotcha (observed): a signal write still pending when a test returns makes `vvp` segfault at
   shutdown under Icarus 14 + cocotb 2.1 (results.xml is then deleted and make fails). End each
@@ -41,5 +43,7 @@ cocotb 2.1's `Makefile.sim` already makes `make` exit nonzero when a test fails 
 | dec_8b10b | all 1024 words from disparity -, + and unknown, each followed by two probes that reveal the resulting disparity (model tracks disparity and resync); exactly 464 words decode without `code_err`; round trip of every symbol at both disparities; 10000 random valid symbols with gaps; 10000 symbols with bit flips and random words |
 | crc16 | check value 0x29B1; reset/init value, init priority over data_valid; CRC of 1000 random frames (header + payload, half with idle gaps and garbage on `data` while `data_valid` is low) equals the model and the CRC the model's `pack_frame` put on the wire |
 | prbs | first 64 bytes after reset and after loading 24 seeds (with advance gaps), zero seed, 4200-byte run, model check of the 32767-bit period |
+
+| lane_phy | the 200 -> 50 MHz handoff: 400 words, each equal to the four consecutive pad samples recorded at the clk_s edges (samples[0] oldest), tiling the pad stream with no overlap and no gap, INVERT flips all four |
 
 Other agents add `cdr_oversample`, `comma_align`, `lane_monitor`, `watchdog`, `uart` (see top-level README section 9).

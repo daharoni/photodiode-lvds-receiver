@@ -16,7 +16,7 @@
 // Parameters
 //   TX_LEN : payload bytes per frame, 1..256 (default 64)
 //   TX_GAP : idle pairs between frames (default 4)
-//   DIV    : clk cycles per line bit (default 2: 100 MHz / 2 = 50 Mbps); >= 1
+//   DIV    : clk cycles per line bit (default 1: 50 MHz / 1 = 50 Mbps); >= 1
 //
 // Ports
 //   clk, rst (synchronous, active high), enable
@@ -35,7 +35,7 @@
 module frame_tx #(
   parameter TX_LEN = 64,
   parameter TX_GAP = 4,
-  parameter DIV    = 2
+  parameter DIV    = 1
 ) (
   input  wire        clk,
   input  wire        rst,

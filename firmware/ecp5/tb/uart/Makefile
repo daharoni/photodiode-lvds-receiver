@@ -1,4 +1,4 @@
-# Loopback test of uart_tx -> uart_rx at 1 Mbaud and 3 Mbaud, 100 MHz clock.
+# Loopback test of uart_tx -> uart_rx at 1 Mbaud and 3 Mbaud, 50 MHz clock (3 Mbaud = 16.67 clocks per bit).
 # `make` runs both bauds (separate build dirs) and fails if either fails or if results.xml
 # contains a failure/error (cocotb 2.1 already exits nonzero; the grep is a second guard).
 SIM ?= icarus

@@ -3,8 +3,8 @@
 // Label: PROPOSED (README section 7); behaviour checked by tb/status_uart (Python bit-banged UART
 // receivers and a Python reference for the message and the CRC-8). Nothing here has run on an FPGA.
 //
-// esp_txd (1 Mbaud 8N1), one 10-byte message per STATUS_PERIOD_CYCLES (default 5,000,000 = 50 ms
-// at 100 MHz, 20 Hz):  0xA5, seq u8, nibble bytes 0..6, crc8.
+// esp_txd (1 Mbaud 8N1), one 10-byte message per STATUS_PERIOD_CYCLES (default 2,500,000 = 50 ms
+// at 50 MHz, 20 Hz):  0xA5, seq u8, nibble bytes 0..6, crc8.
 //   seq counts messages, first message 0, wraps at 256.
 //   nibble byte j: low nibble = lane 2j (node 2j+1), high nibble = lane 2j+1 (node 2j+2);
 //   a lane >= N_LANES reports 0x7 (LOS, valid = 0). Seven bytes cover up to 14 lanes.
@@ -40,9 +40,9 @@
 
 module status_uart #(
   parameter N_LANES              = 7,
-  parameter CLK_HZ               = 100_000_000,
-  parameter STATUS_PERIOD_CYCLES = 5_000_000,
-  parameter ASCII_PERIOD_CYCLES  = 100_000_000
+  parameter CLK_HZ               = 50_000_000,
+  parameter STATUS_PERIOD_CYCLES = 2_500_000,
+  parameter ASCII_PERIOD_CYCLES  = 50_000_000
 ) (
   input  wire                  clk,
   input  wire                  rst,

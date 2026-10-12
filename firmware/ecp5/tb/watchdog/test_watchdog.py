@@ -1,5 +1,5 @@
 """watchdog (README section 5/9 row 5, standing corrections 11 and 12).
-TIMEOUT_CYCLES = 100 clk25 clocks (Makefile override).  clk_c = 100 MHz,
+TIMEOUT_CYCLES = 100 clk25 clocks (Makefile override).  clk_c = 50 MHz (20 ns),
 clk25 = 25 MHz with an arbitrary phase offset (a real asynchronous pair).
 Stuck-high and stuck-low lines produce no transitions; the test derives
 the transition pulses from the line model, never from the RTL.
@@ -21,7 +21,7 @@ async def start(dut, offset_ns=3, rst_ns=400):
     dut.rst_c.value = 1
     dut.rst25.value = 1
     dut.transition_async.value = 0
-    cocotb.start_soon(Clock(dut.clk_c, 10, unit="ns").start())
+    cocotb.start_soon(Clock(dut.clk_c, 20, unit="ns").start())
     if offset_ns:
         await Timer(offset_ns, unit="ns")
     cocotb.start_soon(Clock(dut.clk25, CLK25_NS, unit="ns").start())
@@ -125,7 +125,7 @@ async def spacing_just_below_and_above_timeout(dut):
 
 @cocotb.test()
 async def dense_transitions_keep_los_low(dut):
-    """Edge-every-clock and idle-pattern-like activity at 100 MHz (50 MHz toggle
+    """Edge-every-clock and idle-pattern-like activity at 50 MHz (25 MHz toggle
     aliasing trap): LOS stays low over 5 timeouts."""
     await start(dut)
     mon = Mon(dut)

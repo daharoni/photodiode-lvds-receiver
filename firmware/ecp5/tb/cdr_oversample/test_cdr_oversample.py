@@ -15,7 +15,7 @@ async def drive(dut, words, valid_mode="const", drain=0, start_clock=True):
     """Feed one word per valid cycle; return per-cycle (bits, nbits) list
     (the drain cycles are NOT included so counts are not polluted).
     valid_mode "const": samples_valid = 1 every cycle; "alt": every other cycle
-    (the real lane condition: a new non-overlapping word every 2nd clk_c)."""
+    (the old 100 MHz lane condition, kept as a hold-state test; the 50 MHz design ties it high)."""
     if start_clock:
         cocotb.start_soon(Clock(dut.clk, 10, unit="ns").start())
     dut.rst.value = 1

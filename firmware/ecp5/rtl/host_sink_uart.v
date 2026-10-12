@@ -18,11 +18,11 @@
 // and host_drops++. The 512-byte FIFO holds payload only (<= 256 bytes per accepted frame; the
 // header is sent from registers), so it cannot overflow while the sink only accepts when idle.
 // Counters (16 bit, wrap): host_sent (frames fully handed to the UART), host_drops.
-// busy: a frame is being received or sent. Throughput at 3 Mbaud, 100 MHz: about 300 kB/s.
+// busy: a frame is being received or sent. Throughput at 3 Mbaud, 50 MHz (16.67 clocks per bit, 16 or 17 per bit from the uart_tx phase accumulator): about 300 kB/s.
 `default_nettype none
 
 module host_sink_uart #(
-  parameter CLK_HZ = 100_000_000,
+  parameter CLK_HZ = 50_000_000,
   parameter BAUD   = 3_000_000
 ) (
   input  wire        clk,

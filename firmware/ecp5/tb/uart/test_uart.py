@@ -1,4 +1,4 @@
-"""Loopback of uart_tx into uart_rx at BAUD (env var) with a 100 MHz clock (cocotb 2.1)."""
+"""Loopback of uart_tx into uart_rx at BAUD (env var) with a 50 MHz clock (20 ns, the core clock; 3 Mbaud is 16.67 clocks per bit) (cocotb 2.1)."""
 import os
 import random
 
@@ -11,7 +11,7 @@ BIT_NS = 1e9 / BAUD
 
 
 async def setup(dut):
-    cocotb.start_soon(Clock(dut.clk, 10, unit="ns").start())
+    cocotb.start_soon(Clock(dut.clk, 20, unit="ns").start())
     dut.rst.value = 1
     dut.tx_valid.value = 0
     dut.tx_data.value = 0
@@ -73,14 +73,14 @@ async def random_with_gaps(dut):
 
 @cocotb.test()
 async def bit_period(dut):
-    """The start-to-stop frame lasts 10 bit periods within 1 clock (10 ns) of ideal."""
+    """The start-to-stop frame lasts 10 bit periods within 1 clock (20 ns) of ideal."""
     await setup(dut)
     await send(dut, 0x00)
     await FallingEdge(dut.txd)
     t0 = cocotb.utils.get_sim_time("ns")
     await RisingEdge(dut.txd)   # stop bit begins after 9 bit times (all zeros)
     t1 = cocotb.utils.get_sim_time("ns")
-    assert abs((t1 - t0) - 9 * BIT_NS) <= 10.0, f"9 bits took {t1 - t0} ns, ideal {9 * BIT_NS}"
+    assert abs((t1 - t0) - 9 * BIT_NS) <= 20.0, f"9 bits took {t1 - t0} ns, ideal {9 * BIT_NS}"
 
 
 @cocotb.test()

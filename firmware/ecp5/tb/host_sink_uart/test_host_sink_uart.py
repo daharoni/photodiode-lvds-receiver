@@ -1,7 +1,7 @@
 """host_sink_uart vs model/link8b10b (README section 6 host sink, section 9).
 
 Input stream is driven like lane_merge's output; the UART line is decoded by a Python bit-banged
-receiver sampling at the middle of each bit (100 MHz test clock, 3 Mbaud, 33.3 clocks per bit).
+receiver sampling at the middle of each bit (50 MHz clock, 3 Mbaud, 16.67 clocks per bit).
 Expected bytes come from the model: 0x5A followed by the non-K symbols of pack_frame
 (seq LE, type, len, payload, crc LE). Every test ends on an await (tb/README.md).
 """
@@ -13,7 +13,7 @@ from cocotb.triggers import FallingEdge
 
 from model import link8b10b as m
 
-CLK_HZ = 100_000_000
+CLK_HZ = 50_000_000
 BAUD = 3_000_000
 CPB = CLK_HZ / BAUD          # clocks per bit
 

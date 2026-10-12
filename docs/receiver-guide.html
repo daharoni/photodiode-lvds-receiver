@@ -165,7 +165,7 @@ a{color:#000;text-decoration:none}
 <tr><td>Layout</td><td>Started. 223 footprints placed on a 75 x 50 mm placeholder outline by a first-pass script, 0 courtyard overlaps. <b>Nothing is routed.</b> Not fabrication-approved.</td></tr>
 <tr><td>Simulation</td><td>Three ngspice runs with TI models (OPA855 post-amp, OPA857 at 6 pF, VCM_REF buffer). Labelled <span class="t s">SIMULATED</span>, not <span class="t v">VERIFIED</span>. Section 08.</td></tr>
 <tr><td>Measurement</td><td><b>Nothing is measured.</b> No received-power measurement exists; the link budget is an estimate from LED datasheets. No bring-up gate has started.</td></tr>
-<tr><td>Not yet designed</td><td>FPGA-end breakout board, FPGA gateware (<code>firmware/ecp5/</code> is empty), ESP32 firmware (plan only), enclosure, host link from FPGA to a computer.</td></tr>
+<tr><td>Not yet designed</td><td>FPGA-end breakout board, enclosure, host link from FPGA to a computer. The ESP32 firmware (<code>firmware/esp32/</code>) and the ECP5 gateware (<code>firmware/ecp5/</code>) exist as skeletons with host and simulation tests; neither has run on hardware.</td></tr>
 </table></div>
 
 <h3>Label legend</h3>
@@ -566,7 +566,7 @@ a{color:#000;text-decoration:none}
 <section id="fpga">
 <p class="eyebrow">06 &middot; FPGA side</p>
 <h2>What the ECP5 end has to do</h2>
-<p class="lede">The module sends no clock. The FPGA recovers it. Nothing in <code>firmware/ecp5/</code> exists yet and the breakout board is not designed, so this section is the contract the module assumes. Items are <span class="t p">PROPOSED</span> unless labelled.</p>
+<p class="lede">The module sends no clock. The FPGA recovers it. The gateware now exists in <code>firmware/ecp5/</code> (spec and status in its <a href="../firmware/ecp5/README.md">README</a>; open-source Yosys/nextpnr flow; it builds for the ULX3S and passes timing, and every block has cocotb simulation tests) but has not run on an FPGA, and the breakout board is not designed, so this section is still the contract the module assumes. Items are <span class="t p">PROPOSED</span> unless labelled.</p>
 
 <h3>6.1 ULX3S input pairs</h3>
 <ul>
@@ -579,10 +579,10 @@ a{color:#000;text-decoration:none}
 
 <h3>6.2 Gateware duties</h3>
 <ul>
-<li><b>Clock and data recovery</b> in the fabric. Reason: no clock is sent, and a digital CDR is flexible, lets the rate change and avoids a PLL on the module.</li>
-<li><b>8b/10b decode and framing.</b> Framed packets with sequence numbers; commas regularly in a continuous stream (assumed, burst and idle structure is open).</li>
-<li><b>Redundant-lane merge.</b> Several receivers see the same stream; the FPGA selects validated copies. Maximum skew and merge policy are not specified. <span class="t u">UNRESOLVED</span></li>
-<li><b>Link validity.</b> Decoder validity is the LOS judge for the whole system. It feeds LINK_ALL to every module's firmware.</li>
+<li><b>Clock and data recovery</b> in the fabric. Reason: no clock is sent, and a digital CDR is flexible, lets the rate change and avoids a PLL on the module. As built: 4x blind oversampling at 200 MS/s (PLL from the 25 MHz oscillator), a second-order digital PLL on the edge-phase histogram; in simulation zero bit errors over 1e5 bits at +/-500 ppm and 0.3 UI jitter after a lock-in of about 1000 bits. <span class="t p">PROPOSED</span></li>
+<li><b>8b/10b decode and framing.</b> The line protocol is now defined in the gateware README section 3 and the headstage must follow it: continuous 8b/10b, idle = K28.5 D16.2 pairs, frame = K27.7, seq u16, type u8, len u8, 1 to 256 payload bytes, CRC-16/CCITT-FALSE, K29.7; the Python model in <code>firmware/ecp5/model/</code> is the executable definition and the test oracle for the headstage encoder. <span class="t p">PROPOSED</span></li>
+<li><b>Redundant-lane merge.</b> Several receivers see the same stream; the FPGA selects validated copies. v0 policy: the first CRC-valid copy of each sequence number wins, later copies count as duplicates, gaps count as lost; conflicting valid copies and the maximum skew are still open. <span class="t u">UNRESOLVED</span></li>
+<li><b>Link validity.</b> Decoder validity is the LOS judge for the whole system. The gateware forms the LINK_ALL nibble per lane (valid bit and error class from invalid symbols per 100 ms window, class 7 = LOS from the watchdog) and sends the 7-byte nibble block to the ULX3S's own ESP32 over a UART 20 times a second; that ESP32 is the CAN master and forwards it as LINK_ALL. A 1 Hz ASCII status report and a 3 Mbaud frame sink on the ULX3S USB serial serve bring-up until the host link exists. <span class="t p">PROPOSED</span></li>
 </ul>
 
 <div class="callout"><h4>Watchdog rule (standing correction 12)</h4><p>The FPGA watchdog runs on an independent local clock, not on the recovered one, so it survives loss of the recovered clock. After release the CDR and framing are reacquired. Both constant LVDS states are "invalid" after a timeout (correction 11: TLV3605 shutdown is not a guaranteed zero and a latched comparator holds its last state). Invalid-code counts are not a BER measurement because they miss errors.</p></div>
@@ -937,6 +937,7 @@ a{color:#000;text-decoration:none}
 <li><a href="../firmware/esp32/README.md">firmware/esp32/README.md</a> (plan, boot, range-trim)</li>
 <li><a href="firmware/can-and-console-protocol.md">firmware/can-and-console-protocol.md</a></li>
 <li><a href="../firmware/esp32/HIL.md">firmware/esp32/HIL.md</a> (bench and CI plan) and <a href="../firmware/esp32/web/README.md">firmware/esp32/web/</a> (browser flasher)</li>
+<li><a href="../firmware/ecp5/README.md">firmware/ecp5/README.md</a> (ECP5 gateware spec, line protocol, ULX3S pins, status) and <a href="../firmware/ecp5/model/link8b10b.py">firmware/ecp5/model/</a> (Python golden model of the line protocol)</li>
 </ul></div>
 </div>
 

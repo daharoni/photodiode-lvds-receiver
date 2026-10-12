@@ -1,26 +1,32 @@
 // clocks.v : EHXPLLL wrapper plus reset synchronisers (README section 4).
 //
-// 25 MHz in -> clk_s 200 MHz (CLKOP) and clk_c 100 MHz (CLKOS, phase 0), same VCO.
+// 25 MHz in -> clk_s 200 MHz (CLKOP) and clk_c 50 MHz (CLKOS, phase 0), same VCO.
+// clk_c = clk_s / 4: every clk_c rising edge coincides with a clk_s rising edge (both
+// dividers use CLK*_CPHASE = 1 on the same VCO phase counter; PROPOSED, not measured, the
+// lane_phy header derives what the capture relies on).  The core runs at 50 MHz because the
+// CDR consumes exactly one 4-sample word per 20 ns UI (decision of 2026-10-12, timing: the
+// 100 MHz core reached only 38 MHz in nextpnr).
 // Labels: PROPOSED (nothing measured on hardware). The PLL parameters below are the
-// output of `ecppll -i 25 -o 200 --clkout1 100 -f /dev/stdout` (prjtrellis, oss-cad-suite
+// output of `ecppll -i 25 -o 200 --clkout1 50 -f /dev/stdout` (prjtrellis, oss-cad-suite
 // 2026-10-12), pasted verbatim here:
 //
-//   sdiv 6
+//   sdiv 12
 //   Pll parameters:
 //   Refclk divisor: 1
 //   Feedback divisor: 8
 //   clkout0 divisor: 3
 //   clkout0 frequency: 200 MHz
-//   clkout1 divisor: 6
-//   clkout1 frequency: 100 MHz
+//   clkout1 divisor: 12
+//   clkout1 frequency: 50 MHz
 //   clkout1 phase shift: 0 degrees
 //   VCO frequency: 600
-//   (generated module "pll": EHXPLLL with CLKI_DIV=1, CLKOP_DIV=3, CLKOS_DIV=6,
+//   (generated module "pll": EHXPLLL with CLKI_DIV=1, CLKOP_DIV=3, CLKOS_DIV=12,
 //    CLKFB_DIV=8, FEEDBK_PATH="CLKOP", CLKOP_CPHASE=1, CLKOS_CPHASE=1, FPHASE=0,
 //    ICP_CURRENT=12, LPF_RESISTOR=8, MFG_ENABLE_FILTEROPAMP=1, MFG_GMCREF_SEL=2)
 //
-// NOTE: the VCO is 600 MHz (25 MHz x 8 x ... = 200 MHz x CLKOP_DIV 3), not 800 MHz as
-// README section 4 says; 600 MHz is inside the 400-800 MHz VCO range (DS Table 3.23).
+// NOTE: the VCO is 600 MHz (CLKOP 200 MHz x CLKOP_DIV 3; CLKOS 600 / 12 = 50 MHz), not 800 MHz
+// as README section 4 says; 600 MHz is inside the 400-800 MHz VCO range
+// (DS Table 3.23).
 //
 // Reset polarity: btn[1] is FIRE1, active HIGH (ulx3s_v20.lpf line 55: PULLMODE=DOWN, a
 // pressed button pulls the pin up). Each reset output (rst25, rst_c, rst_s) asserts
@@ -29,7 +35,10 @@
 // not locked). btn_rst is not debounced.
 //
 // Simulation: under `ifdef SYNTHESIS the EHXPLLL is instantiated; otherwise a behavioural
-// model makes clk_s = 8x and clk_c = 4x of clk25 (Icarus), locked after 16 clk25 cycles.
+// model makes clk_s = 8x and clk_c = 2x of clk25 (Icarus), locked after 16 clk25 cycles.
+// The model's clk_c rises together with every 4th clk_s rise (first coincidence at 2.5 ns),
+// like the PLL; both clocks are driven by blocking assignments in the active region so the
+// flops on either clock see the same pre-edge values (no simulation race).
 // Only this file and lane_phy.v may hold vendor primitives (README s.1).
 `default_nettype none
 
@@ -37,7 +46,7 @@ module clocks (
     input  wire clk25,
     input  wire btn_rst,   // active high (FIRE1)
     output wire clk_s,     // 200 MHz
-    output wire clk_c,     // 100 MHz
+    output wire clk_c,     // 50 MHz
     output wire locked,
     output wire rst25,     // synchronous to clk25, high while reset
     output wire rst_c,     // synchronous to clk_c
@@ -47,7 +56,7 @@ module clocks (
 `ifdef SYNTHESIS
     (* FREQUENCY_PIN_CLKI="25" *)
     (* FREQUENCY_PIN_CLKOP="200" *)
-    (* FREQUENCY_PIN_CLKOS="100" *)
+    (* FREQUENCY_PIN_CLKOS="50" *)
     (* ICP_CURRENT="12" *) (* LPF_RESISTOR="8" *) (* MFG_ENABLE_FILTEROPAMP="1" *) (* MFG_GMCREF_SEL="2" *)
     EHXPLLL #(
         .PLLRST_ENA("DISABLED"),
@@ -64,7 +73,7 @@ module clocks (
         .CLKOP_CPHASE(1),
         .CLKOP_FPHASE(0),
         .CLKOS_ENABLE("ENABLED"),
-        .CLKOS_DIV(6),
+        .CLKOS_DIV(12),
         .CLKOS_CPHASE(1),
         .CLKOS_FPHASE(0),
         .FEEDBK_PATH("CLKOP"),
@@ -101,8 +110,11 @@ module clocks (
     reg clk_c_r = 1'b0;
     reg lock_r  = 1'b0;
     reg [4:0] lock_cnt = 5'd0;
-    always #2.5 clk_s_r = ~clk_s_r;
-    always #5.0 clk_c_r = ~clk_c_r;
+    always #2.5 clk_s_r = ~clk_s_r;              // rises at 2.5, 7.5, 12.5 ... (200 MHz)
+    initial begin                                // 50 MHz, rises at 2.5, 22.5 ... = every 4th clk_s rise
+        #2.5;
+        forever begin clk_c_r = 1'b1; #10.0; clk_c_r = 1'b0; #10.0; end
+    end
     always @(posedge clk25) begin
         if (lock_cnt != 5'd16) lock_cnt <= lock_cnt + 5'd1;
         else lock_r <= 1'b1;

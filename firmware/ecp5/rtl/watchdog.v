@@ -4,7 +4,7 @@
 // Status: PROPOSED; simulated only (tb/watchdog).
 //
 // Ports
-//   clk_c, rst_c       100 MHz lane clock and its synchronous active-high reset
+//   clk_c, rst_c       50 MHz lane clock and its synchronous active-high reset
 //   transition_async   1-clk pulse(s) in the clk_c domain: "an edge was seen in
 //                      this word" (cdr_oversample.transition; may be high on
 //                      consecutive clocks)
@@ -24,9 +24,9 @@
 //   clk_c: `seen` latches transition_async; a free-running STRETCH_BITS-bit
 //          prescaler samples it every 2**STRETCH_BITS clk_c and toggles `tog`
 //          if it is set.  Without the prescaler a transition on consecutive
-//          100 MHz clocks (the normal case, one edge per UI = 2 clocks) would
-//          toggle `tog` at 50 MHz, which a 25 MHz sampler aliases to a constant
-//          and misses.  `tog` toggles at most every 8 clk_c = 80 ns (>= 2 clk25
+//          50 MHz clocks (the normal case: an edge in consecutive words) would
+//          toggle `tog` at 25 MHz, which a 25 MHz sampler aliases to a constant
+//          and misses.  `tog` toggles at most every 8 clk_c = 160 ns (>= 2 clk25
 //          periods), so the 2-flop synchroniser + XOR edge detector in clk25
 //          sees every toggle.
 //   clk25: tog -> 2 flops -> XOR with a third flop = event.

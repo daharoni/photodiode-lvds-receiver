@@ -10,7 +10,7 @@
 `default_nettype none
 
 module uart_rx #(
-    parameter CLK_HZ = 100_000_000,
+    parameter CLK_HZ = 50_000_000,
     parameter BAUD   = 115_200
 ) (
     input  wire       clk,
