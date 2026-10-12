@@ -573,7 +573,8 @@ a{color:#000;text-decoration:none}
 <li>True differential inputs: gp/gn[8..13] (bank 7, VCCIO jumper-selectable 2.5 or 3.3 V) and gp/gn[14..21] (banks 2/3, 3.3 V). That is 14 pairs, one per module. Banks 0/1 (gp/gn[0..7], [22..27]) have no differential inputs. <span class="t v">VERIFIED</span> ULX3S v3.1.7 schematic p.2-3; Lattice FPGA-TN-02032 v1.4 p.14, p.26.</li>
 <li>ECP5 differential inputs are powered from VCCAUX, independent of VCCIO, and on-die <b>DIFFRESISTOR = 100</b> exists on the left and right banks, so the pair goes straight into the pins with no receiver IC and no external termination. <span class="t v">VERIFIED</span> FPGA-TN-02032 v1.4 s.4.3, s.4.10, s.4.11.8; see <a href="research/ulx3s-lvds-input.md">research/ulx3s-lvds-input.md</a>. This closed the earlier open item about LVDS on a 3.3 V bank.</li>
 <li>The ECP5 input threshold is +/-100 mV (ECP5 DS Table 3.13 p.58), against at least 250 mV VOD from the module's fan-out. <span class="t v">VERIFIED</span> for the datasheet figures.</li>
-<li>Still open: ECP5 input common-mode range against the module output's common mode (family datasheet value not retrieved), and DIFFRESISTOR support in nextpnr. <span class="t u">UNRESOLVED</span></li>
+<li>ECP5 LVDS input common-mode range 0.05 to 2.35 V (ECP5 DS FPGA-DS-02012-3.4 Table 3.13 p.58, <span class="t v">VERIFIED</span>) contains the TLV3605's 1.125 to 1.375 V; at the 250 mV minimum VOD the margin over the +/-100 mV threshold is about 25 mV, which only the G1 eye measurement can confirm. <span class="t p">PROPOSED</span></li>
+<li>Still open: DIFFRESISTOR support in nextpnr; one ULX3S has only 7 header pairs free of other loads (pairs 11 to 13 share the on-board ESP32, 14 to 17 the on-board ADC), so 14 lanes on one board is open. See <a href="../firmware/ecp5/README.md">firmware/ecp5/README.md</a>. <span class="t u">UNRESOLVED</span></li>
 </ul>
 
 <h3>6.2 Gateware duties</h3>
@@ -841,7 +842,7 @@ a{color:#000;text-decoration:none}
 <div class="card"><h4>FPGA end and system</h4><ul>
 <li>Host link (FX3 first candidate; the GPIO count of 28 is a belief).</li>
 <li>Breakout board not designed; the polarity constant is not yet recorded in breakout or gateware docs.</li>
-<li>ECP5 input common-mode range; nextpnr DIFFRESISTOR support.</li>
+<li>nextpnr DIFFRESISTOR support; 7 clean LVDS pairs per ULX3S against 14 modules.</li>
 <li>Burst and idle structure of the 8b/10b stream; redundant-lane skew and merge policy.</li>
 <li>Master firmware, and whether the ULX3S's own ESP32 can be the CAN master.</li>
 <li>BER (1e-9), reacquisition (20 ms) and LOS detection (1 ms) goals are provisional and unapproved (requirements.md item 3).</li>

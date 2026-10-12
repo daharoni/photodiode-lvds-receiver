@@ -1,0 +1,93 @@
+# ULX3S constraints for ulx3s_top (v0). Only the pins this design uses.
+# Own file: written from the pin data in emard/ulx3s doc/constraints/ulx3s_v20.lpf
+# (referred to below as "ulx3s_v20.lpf line N"; that file is not copied here because its
+# licence is not asserted). Device LFE5U-xxF-6BG381C (package CABGA381).
+# Labels: pin sites VERIFIED against ulx3s_v20.lpf at the cited lines; electrical choices
+# PROPOSED. LVDS/DIFFRESISTOR handling by nextpnr is reported in the build report.
+
+# --- 25 MHz oscillator (independent clock) ---
+LOCATE COMP "clk_25mhz" SITE "G2";                              # ulx3s_v20.lpf line 6
+IOBUF PORT "clk_25mhz" PULLMODE=NONE IO_TYPE=LVCMOS33;          # ulx3s_v20.lpf line 7
+FREQUENCY PORT "clk_25mhz" 25 MHZ;                              # ulx3s_v20.lpf line 8
+
+# --- Buttons. btn[1] = FIRE1 is the reset request, active HIGH (PULLMODE=DOWN, ulx3s_v20.lpf line 56).
+# The other six are unused in v0 but constrained because nextpnr-ecp5 rejects unconstrained top-level IOs.
+LOCATE COMP "btn[0]" SITE "D6";   # ulx3s_v20.lpf line 47 (BTN_PWRn, inverted logic)
+LOCATE COMP "btn[1]" SITE "R1";   # ulx3s_v20.lpf line 48 (FIRE1)
+LOCATE COMP "btn[2]" SITE "T1";   # ulx3s_v20.lpf line 49 (FIRE2)
+LOCATE COMP "btn[3]" SITE "R18";  # ulx3s_v20.lpf line 50 (UP)
+LOCATE COMP "btn[4]" SITE "V1";   # ulx3s_v20.lpf line 51 (DOWN)
+LOCATE COMP "btn[5]" SITE "U1";   # ulx3s_v20.lpf line 52 (LEFT)
+LOCATE COMP "btn[6]" SITE "H16";  # ulx3s_v20.lpf line 53 (RIGHT)
+IOBUF PORT "btn[0]" PULLMODE=UP IO_TYPE=LVCMOS33 DRIVE=4;    # ulx3s_v20.lpf line 54
+IOBUF PORT "btn[1]" PULLMODE=DOWN IO_TYPE=LVCMOS33 DRIVE=4;  # ulx3s_v20.lpf line 55
+IOBUF PORT "btn[2]" PULLMODE=DOWN IO_TYPE=LVCMOS33 DRIVE=4;  # ulx3s_v20.lpf line 56
+IOBUF PORT "btn[3]" PULLMODE=DOWN IO_TYPE=LVCMOS33 DRIVE=4;  # ulx3s_v20.lpf line 57
+IOBUF PORT "btn[4]" PULLMODE=DOWN IO_TYPE=LVCMOS33 DRIVE=4;  # ulx3s_v20.lpf line 58
+IOBUF PORT "btn[5]" PULLMODE=DOWN IO_TYPE=LVCMOS33 DRIVE=4;  # ulx3s_v20.lpf line 59
+IOBUF PORT "btn[6]" PULLMODE=DOWN IO_TYPE=LVCMOS33 DRIVE=4;  # ulx3s_v20.lpf line 60
+
+# --- LEDs ---
+LOCATE COMP "led[7]" SITE "H3";                                 # ulx3s_v20.lpf line 29
+LOCATE COMP "led[6]" SITE "E1";                                 # ulx3s_v20.lpf line 30
+LOCATE COMP "led[5]" SITE "E2";                                 # ulx3s_v20.lpf line 31
+LOCATE COMP "led[4]" SITE "D1";                                 # ulx3s_v20.lpf line 32
+LOCATE COMP "led[3]" SITE "D2";                                 # ulx3s_v20.lpf line 33
+LOCATE COMP "led[2]" SITE "C1";                                 # ulx3s_v20.lpf line 34
+LOCATE COMP "led[1]" SITE "C2";                                 # ulx3s_v20.lpf line 35
+LOCATE COMP "led[0]" SITE "B2";                                 # ulx3s_v20.lpf line 36
+IOBUF PORT "led[7]" PULLMODE=NONE IO_TYPE=LVCMOS33 DRIVE=4;     # ulx3s_v20.lpf line 44
+IOBUF PORT "led[6]" PULLMODE=NONE IO_TYPE=LVCMOS33 DRIVE=4;     # ulx3s_v20.lpf line 43
+IOBUF PORT "led[5]" PULLMODE=NONE IO_TYPE=LVCMOS33 DRIVE=4;     # ulx3s_v20.lpf line 42
+IOBUF PORT "led[4]" PULLMODE=NONE IO_TYPE=LVCMOS33 DRIVE=4;     # ulx3s_v20.lpf line 41
+IOBUF PORT "led[3]" PULLMODE=NONE IO_TYPE=LVCMOS33 DRIVE=4;     # ulx3s_v20.lpf line 40
+IOBUF PORT "led[2]" PULLMODE=NONE IO_TYPE=LVCMOS33 DRIVE=4;     # ulx3s_v20.lpf line 39
+IOBUF PORT "led[1]" PULLMODE=NONE IO_TYPE=LVCMOS33 DRIVE=4;     # ulx3s_v20.lpf line 38
+IOBUF PORT "led[0]" PULLMODE=NONE IO_TYPE=LVCMOS33 DRIVE=4;     # ulx3s_v20.lpf line 37
+
+# --- FTDI UART (FT231X) ---
+LOCATE COMP "ftdi_rxd" SITE "L4";                               # ulx3s_v20.lpf line 17 (FPGA transmits)
+LOCATE COMP "ftdi_txd" SITE "M1";                               # ulx3s_v20.lpf line 18 (FPGA receives)
+IOBUF PORT "ftdi_rxd" PULLMODE=UP IO_TYPE=LVCMOS33 DRIVE=4;     # ulx3s_v20.lpf line 22
+IOBUF PORT "ftdi_txd" PULLMODE=UP IO_TYPE=LVCMOS33;             # ulx3s_v20.lpf line 23
+
+# --- ESP32 Serial1 UART (UNRESOLVED which ESP32 module is fitted: WROVER uses IO16/IO17 for PSRAM) ---
+LOCATE COMP "wifi_gpio16" SITE "L1";                            # ulx3s_v20.lpf line 183 (FPGA transmits to ESP32 Serial1 RX)
+LOCATE COMP "wifi_gpio17" SITE "N3";                            # ulx3s_v20.lpf line 184 (FPGA receives from ESP32 Serial1 TX)
+IOBUF PORT "wifi_gpio16" PULLMODE=UP IO_TYPE=LVCMOS33 DRIVE=4;  # ulx3s_v20.lpf line 203
+IOBUF PORT "wifi_gpio17" PULLMODE=UP IO_TYPE=LVCMOS33 DRIVE=4;  # ulx3s_v20.lpf line 204
+
+# --- Test pattern outputs on gp[0]/gn[0] (bank 0, no LVDS needed) ---
+LOCATE COMP "tp_p" SITE "B11";                                  # ulx3s_v20.lpf line 354 (gp[0])
+LOCATE COMP "tp_n" SITE "C11";                                  # ulx3s_v20.lpf line 355 (gn[0])
+IOBUF PORT "tp_p" PULLMODE=UP IO_TYPE=LVCMOS33 DRIVE=4;         # ulx3s_v20.lpf line 368
+IOBUF PORT "tp_n" PULLMODE=UP IO_TYPE=LVCMOS33 DRIVE=4;         # ulx3s_v20.lpf line 369
+
+# --- LVDS lane inputs: only the positive pad is a design port; the gn pad is listed in the
+# comment and is claimed by the LVDS input (see build report). Pairs free of other loads
+# (README s.2): gp/gn 8, 9, 10, 18, 19, 20, 21. DIFFRESISTOR=100: on-chip 100 ohm termination.
+LOCATE COMP "lane_p[0]" SITE "A4";  # gp[8], ulx3s_v20.lpf line 384 (gn[8] = A5, line 385)
+IOBUF PORT "lane_p[0]" IO_TYPE=LVDS DIFFRESISTOR=100;  # lane 0 (the reference file line 398 sets LVCMOS33 pull-up on this pad; replaced)
+LOCATE COMP "lane_p[1]" SITE "A2";  # gp[9], ulx3s_v20.lpf line 386 (gn[9] = B1, line 387)
+IOBUF PORT "lane_p[1]" IO_TYPE=LVDS DIFFRESISTOR=100;  # lane 1 (the reference file line 400 sets LVCMOS33 pull-up on this pad; replaced)
+LOCATE COMP "lane_p[2]" SITE "C4";  # gp[10], ulx3s_v20.lpf line 388 (gn[10] = B4, line 389)
+IOBUF PORT "lane_p[2]" IO_TYPE=LVDS DIFFRESISTOR=100;  # lane 2 (the reference file line 402 sets LVCMOS33 pull-up on this pad; replaced)
+LOCATE COMP "lane_p[3]" SITE "H18";  # gp[18], ulx3s_v20.lpf line 419 (gn[18] = H17, line 420)
+IOBUF PORT "lane_p[3]" IO_TYPE=LVDS DIFFRESISTOR=100;  # lane 3 (the reference file line 433 sets LVCMOS33 pull-up on this pad; replaced)
+LOCATE COMP "lane_p[4]" SITE "F17";  # gp[19], ulx3s_v20.lpf line 421 (gn[19] = G18, line 422)
+IOBUF PORT "lane_p[4]" IO_TYPE=LVDS DIFFRESISTOR=100;  # lane 4 (the reference file line 435 sets LVCMOS33 pull-up on this pad; replaced)
+LOCATE COMP "lane_p[5]" SITE "D18";  # gp[20], ulx3s_v20.lpf line 423 (gn[20] = E17, line 424)
+IOBUF PORT "lane_p[5]" IO_TYPE=LVDS DIFFRESISTOR=100;  # lane 5 (the reference file line 437 sets LVCMOS33 pull-up on this pad; replaced)
+LOCATE COMP "lane_p[6]" SITE "C18";  # gp[21], ulx3s_v20.lpf line 439 (gn[21] = D17, line 440)
+IOBUF PORT "lane_p[6]" IO_TYPE=LVDS DIFFRESISTOR=100;  # lane 6 (the reference file line 453 sets LVCMOS33 pull-up on this pad; replaced)
+
+# --- UNRESOLVED shared pins (N_LANES > 7): lanes 7..13 would use these pairs. They are shared with
+# the ESP32 (gp/gn 11, 12, 13: ulx3s_v20.lpf lines 390-395, comments wifi_gpio25/26/32/33/34/35) and
+# with the on-board ADC (gp/gn 14..17: lines 411-418). Not enabled.
+# LOCATE COMP "lane_p[7]"  SITE "F4";    # gp[11], line 390 (gn[11] E3, line 391; ESP32 IO26/IO25)
+# LOCATE COMP "lane_p[8]"  SITE "H4";    # gp[13], line 394 (gn[13] G5, line 395; ESP32 IO35/IO34)
+# LOCATE COMP "lane_p[9]"  SITE "U18";   # gp[14], line 411 (gn[14] U17, line 412; ADC AIN1/AIN0)
+# LOCATE COMP "lane_p[10]" SITE "N17";   # gp[15], line 413 (gn[15] P16, line 414; ADC AIN3/AIN2)
+# LOCATE COMP "lane_p[11]" SITE "N16";   # gp[16], line 415 (gn[16] M17, line 416; ADC AIN5/AIN4)
+# LOCATE COMP "lane_p[12]" SITE "L16";   # gp[17], line 417 (gn[17] L17, line 418; ADC AIN7/AIN6)
+# gp/gn[12] (G3/F3, lines 392-393) is reserved for the CAN transceiver (firmware/esp32/README.md s.10).

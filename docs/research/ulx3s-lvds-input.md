@@ -27,7 +27,7 @@ Yes. The ECP5 can receive the TLV3605 pair directly as a true differential LVDS 
 | 13 | TLV3605 output is LVDS: VOD 250/350/450 mV (min/typ/max), VOCM 1.125/1.2/1.375 V, specified with RLOAD = 100 ohm, VCCI=VCCO = 2.5 to 5 V. | VERIFIED | TLV3605 DS p.7, electrical characteristics |
 | 14 | "When the input of the downstream device is terminated with a 100 ohm resistor, it provides a +/-350 mV LVDS swing"; output designed to drive a standard LVDS input such as high-speed FPGAs. | VERIFIED | TLV3605 DS p.13, s.6.4.2; p.1 |
 | 15 | Layout guidance: "Use a 100 ohm termination resistor across the device's LVDS outputs" (see Section 3 on where). | VERIFIED | TLV3605 DS p.19, layout list item 6 |
-| 16 | ECP5 LVDS input common-mode range, differential threshold and input swing limits. The TN has no "common mode" entry. The family data sheet FPGA-DS-02012 is not in docs/datasheets/; a direct fetch returned an HTML page, not the PDF. | UNRESOLVED | TN searched; DS-02012 not obtained |
+| 16 | ECP5 LVDS input DC limits (2026-10-12, from the family data sheet now in docs/datasheets/ecp5-ds-02012.pdf): VINP/VINM 0 to 2.4 V; VCM "Input Common Mode Voltage" 0.05 to 2.35 V (half the sum of the two inputs); VTHD "Differential Input Threshold" +/-100 mV; IIN +/-10 uA. The LVDS spec on the left and right sides is valid for VCCIO 2.5 V or 3.3 V (table note). On-chip differential termination 100 ohm, tolerance +/-20 % (Table 2.12 note 2). | VERIFIED | FPGA-DS-02012-3.4 (September 2025) Table 3.13 p.58; Table 2.12 p.44 |
 | 17 | Open-source flow (nextpnr-ecp5/Trellis) support for DIFFRESISTOR and LVDS input is not covered by any local document. | UNRESOLVED | none |
 | 18 | The ULX3S bank-7 pair pads GP12/GN12 are labelled PCLKT7_1/PCLKC7_1 on the schematic (pins G3/F3). Pad-level pair labels for the other header pins were not extracted. | VERIFIED (GP12 only) | ULX3S p.2 |
 
@@ -50,7 +50,7 @@ Receiver-board connector sheet (PROPOSED):
 
 ## 4. Open items
 
-1. Obtain FPGA-DS-02012 and record the LVDS input common-mode range and minimum differential input swing; check them against VOCM 1.125-1.375 V and VOD 250-450 mV (UNRESOLVED).
+1. Closed 2026-10-12 (finding 16): VCM 0.05-2.35 V contains the TLV3605's 1.125-1.375 V with wide margin; the +/-100 mV threshold against the 250 mV minimum VOD (+/-125 mV per side) leaves about 25 mV at the worst-case swing, and the data sheet gives no typical or maximum threshold, so the margin at minimum swing is a G1 eye measurement, not a data-sheet result (VERIFIED figures, PROPOSED reading).
 2. Confirm that the open-source flow (if the project uses it) honours DIFFRESISTOR; otherwise use Diamond or the external-termination fallback (UNRESOLVED).
 3. Read VJ1 default and RV2/RV3 on the physical ULX3S; the schematic does not say which is populated (UNRESOLVED).
 4. Confirm the exact gp/gn header-pin to ECP5 ball map for the chosen pair on p.2 (pin-by-pin extraction not done).

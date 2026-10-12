@@ -1,0 +1,75 @@
+# ECP5 gateware (ULX3S): lint, cocotb tests, bitstream build and timing check with the
+# open-source flow (YosysHQ OSS CAD Suite: Yosys, nextpnr-ecp5, prjtrellis, Verilator,
+# Icarus, cocotb).
+#
+# Not yet run: UNTESTED in CI and on hardware as of this commit. The same flow was run
+# locally on macOS (arm64) with the same suite release (2026-10-12), see firmware/ecp5/README.md.
+# Nothing has been loaded on an FPGA.
+#
+# Sources:
+#   YosysHQ/setup-oss-cad-suite README (v3 tag = commit 0d9c798, read via the GitHub API 2026-10-12) (inputs read 2026-10-12): `version` (a release date,
+#     e.g. '2021-05-28'; omitted = latest nightly), `github-token` (avoids API rate limiting),
+#     `python-override` (true puts the suite's bundled python, which has cocotb, ahead of the system one).
+#   Release tag '2026-10-12' was seen in the oss-cad-suite-build releases list on 2026-10-12
+#     (the local tools/fpga-env.sh install is that release); the linux-x64 asset of that
+#     release has not been checked here, a failed download would show on the first run.
+#
+# Artifact ecp5-gateware: firmware/ecp5/build/ulx3s.bit, timing.json, nextpnr.log (DEVICE=85k).
+
+name: ECP5 gateware
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "firmware/ecp5/**"
+      - ".github/workflows/ecp5-gateware.yml"
+  pull_request:
+    paths:
+      - "firmware/ecp5/**"
+      - ".github/workflows/ecp5-gateware.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  gateware:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: firmware/ecp5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install OSS CAD Suite (pinned release)
+        uses: YosysHQ/setup-oss-cad-suite@0d9c798a9db910ff8ea5e3b6ba077a4e5847f352 # v3 (2024-01-29), pinned to the tag's commit
+        with:
+          version: "2026-10-12"
+          python-override: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Tool versions
+        run: make info
+
+      - name: Lint (Verilator -Wall)
+        run: make lint
+
+      - name: Simulation tests (cocotb + Icarus)
+        run: make test
+
+      - name: Build bitstream (DEVICE=85k)
+        run: make bit DEVICE=85k
+
+      - name: Timing check (clk_s >= 200 MHz, clk_c >= 100 MHz)
+        run: make timing DEVICE=85k
+
+      - name: Upload bitstream and timing reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: ecp5-gateware
+          path: |
+            firmware/ecp5/build/ulx3s.bit
+            firmware/ecp5/build/timing.json
+            firmware/ecp5/build/nextpnr.log
+          if-no-files-found: error
+          retention-days: 14
