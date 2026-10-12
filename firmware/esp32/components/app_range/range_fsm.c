@@ -1,5 +1,6 @@
 /* range_fsm.c - see range_fsm.h. README s.6.3, PROPOSED. */
 #include "range_fsm.h"
+#include <math.h>
 #include <string.h>
 
 static uint32_t el(uint32_t now, uint32_t since) { return now - since; }
@@ -16,6 +17,25 @@ const char *range_state_str(range_state_t s)
 {
     static const char *const n[] = {"OFF", "RAMP", "SEARCH", "TRACK", "LOS", "MANUAL", "FAULT"};
     return (unsigned)s < 7u ? n[s] : "?";
+}
+
+int32_t range_manual_code_step(int32_t cur, int32_t target, float bias_v, float hv_min_v, float hv_max_v,
+                               float v_per_code, int32_t max_step, int32_t code_min)
+{
+    if (hv_max_v < hv_min_v) {
+        hv_max_v = hv_min_v;
+    }
+    /* code that would give hv_max / hv_min at the present bias (linear model) */
+    int32_t lo = (int32_t)ceilf((float)cur - (hv_max_v - bias_v) / v_per_code);
+    int32_t hi = (int32_t)floorf((float)cur + (bias_v - hv_min_v) / v_per_code);
+    if (lo < code_min) lo = code_min;
+    if (hi > 0xFFF) hi = 0xFFF;
+    if (hi < lo) hi = lo;
+    int32_t want = target < lo ? lo : (target > hi ? hi : target);
+    int32_t d = want - cur;
+    if (d > max_step) d = max_step;
+    if (d < -max_step) d = -max_step;
+    return cur + d;
 }
 
 void range_fsm_init(range_fsm_t *f)

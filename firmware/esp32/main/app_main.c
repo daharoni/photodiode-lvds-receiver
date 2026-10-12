@@ -270,11 +270,7 @@ void app_main(void)
     app_telemetry_start();
     console_start();
 
-    /* Step 8(c): NVS flag hv_auto with a heard master and no latched faults
-     * (default 0 for the first boards; Daniel decides). */
-    int32_t hv_auto = 0;
-    params_get_i32(PARAM_HV_AUTO, &hv_auto);
-    if (hv_auto && s_bus_mode && fault_get() == 0) {
-        app_safety_hv_request(true);
-    }
+    /* Step 8(c), hv_auto: the safety task polls every 500 ms (app_safety.c auto_poll): HV off, master
+     * heard, no blocking fault, no BROWNOUT/WDT, operator has not turned HV off. This also re-arms after
+     * a CAN_TIMEOUT recovery (README s.5, review finding 7). */
 }

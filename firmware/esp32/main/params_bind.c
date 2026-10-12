@@ -1,5 +1,6 @@
 #include "params_bind.h"
 #include <math.h>
+#include <stdatomic.h>
 #include <string.h>
 #include "app_range.h"
 #include "app_safety.h"
@@ -27,6 +28,7 @@ static const char *TAG = "bind";
 
 static temperature_sensor_handle_t s_tsens;
 static TaskHandle_t s_st_task;
+static atomic_flag s_st_pending = ATOMIC_FLAG_INIT;   /* set from request to the end of the run (finding 13) */
 
 uint16_t params_th_to_code(int32_t th_dmv)
 {
@@ -78,12 +80,27 @@ static esp_err_t a_hv_cmd(int32_t v)
     if (v && app_selftest_running()) return PARAMS_ERR_BUSY;
     return app_safety_hv_request(v != 0);
 }
+/* `dac hv` / CAN dac_hv (review finding 3). Only with `loop manual`, never during a
+ * self-test. HV OFF: any code is written (the next enable re-arms through 0xFFF
+ * anyway). HV ON: a slew-limited code target inside [hv_min, hv_max] via app_range.
+ * During ARMING / RAMP / FAULT: refused. */
 static esp_err_t a_dac_hv(int32_t code)
 {
+    if (app_selftest_running()) return PARAMS_ERR_BUSY;
     int32_t loop = 1;
     params_get_i32(PARAM_LOOP, &loop);
     if (loop != 0) return ESP_ERR_INVALID_STATE;   /* only with `loop manual` (protocol s.2) */
-    return mcp4728_write_volatile(BOARD_DAC_CH_HV, (uint16_t)code) == ESP_OK ? ESP_OK : ESP_FAIL;
+    if (code < 0 || code > 0xFFF) return ESP_ERR_INVALID_ARG;
+    switch (app_safety_hv_state()) {
+    case HV_OFF: {
+        esp_err_t e = app_safety_manual_dac_hv((uint16_t)code);
+        return (e == ESP_OK || e == ESP_ERR_INVALID_STATE) ? e : ESP_FAIL;
+    }
+    case HV_ON:
+        return app_range_manual_set_code((uint16_t)code);
+    default:
+        return ESP_ERR_INVALID_STATE;
+    }
 }
 static esp_err_t a_th(int32_t th_dmv)
 {
@@ -92,7 +109,12 @@ static esp_err_t a_th(int32_t th_dmv)
 static esp_err_t a_tia(int32_t v) { drv_gpio_tia_set(v != 0); return ESP_OK; }
 static esp_err_t a_comp(int32_t v) { drv_gpio_comp_enable(v != 0); return ESP_OK; }
 static esp_err_t a_loop(int32_t v) { app_range_set_mode(v != 0); return ESP_OK; }
-static esp_err_t a_faults_clear(int32_t v) { (void)v; app_safety_faults_clear(); return ESP_OK; }
+static esp_err_t a_faults_clear(int32_t v)
+{
+    (void)v;
+    /* Refused (status 4) while the DAC cannot be re-proved: the I2C_DAC / DAC_EEPROM bits stay. */
+    return app_safety_faults_clear() == ESP_OK ? ESP_OK : ESP_ERR_INVALID_STATE;
+}
 static esp_err_t a_save(int32_t v) { (void)v; return params_save(); }
 static esp_err_t a_defaults(int32_t v) { return params_defaults(v == 2); }
 static esp_err_t a_reboot(int32_t v)
@@ -105,7 +127,7 @@ static esp_err_t a_reboot(int32_t v)
 }
 static esp_err_t a_selftest(int32_t v)
 {
-    if (app_selftest_running()) return PARAMS_ERR_BUSY;
+    if (app_selftest_running() || atomic_flag_test_and_set(&s_st_pending)) return PARAMS_ERR_BUSY;
     xTaskNotify(s_st_task, (uint32_t)v, eSetValueWithOverwrite);
     return ESP_OK;
 }
@@ -117,6 +139,7 @@ static void selftest_worker(void *arg)
         uint32_t v = 0;
         xTaskNotifyWait(0, UINT32_MAX, &v, portMAX_DELAY);
         app_selftest_run(v == 2);
+        atomic_flag_clear(&s_st_pending);
     }
 }
 

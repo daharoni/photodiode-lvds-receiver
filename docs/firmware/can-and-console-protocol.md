@@ -39,7 +39,7 @@ Classes 4-6 are reserved. PROPOSED. A node must never transmit an ID with anothe
 
 ### 1.3 Command frames
 
-GET (0x10n, DLC 2): `[param u16]`. SET (0x11n, DLC 6): `[param u16, value i32]`. Reply (0x20n, DLC 7): `[param u16, status u8, value i32]` (the value read back after the operation). Broadcast (node 15) commands get no reply. Status: 0 OK, 1 unknown param, 2 read-only, 3 out of range, 4 refused in current state, 5 locked (write-once), 6 busy. Only node-0 command frames are accepted. A SET changes RAM only; persisting needs SET `save` = 1. PROPOSED.
+GET (0x10n, DLC 2): `[param u16]`. SET (0x11n, DLC 6): `[param u16, value i32]`. Reply (0x20n, DLC 7): `[param u16, status u8, value i32]` (the value read back after the operation). Broadcast (node 15) commands get no reply. Status: 0 OK, 1 unknown param, 2 read-only, 3 out of range, 4 refused in current state, 5 locked (write-once), 6 busy. Only node-0 command frames are accepted. Broadcast SET (node 15) of `hv_cmd` = 1 and of `dac_hv` is ignored by the module; a broadcast `hv_cmd` = 0 (off) is accepted (PROPOSED, 2026-10-12: these two commands affect the bias and must name one node). A SET changes RAM only; persisting needs SET `save` = 1. PROPOSED.
 
 ### 1.4 Telemetry frames (node to master, 8 bytes each)
 
@@ -76,7 +76,7 @@ CAN id = u16 `param`. Console unit = what you type or read. CAN unit = the i32 o
 | hv_mon | 0x0013 | V (APD_BIAS) | 0.1 V | R | measured bias = AIN0 x 101 |
 | hv_min | 0x0014 | V | 0.1 V | W,S | lower limit, default 100.0 V (docs/calculations/apd-bias-design.md: firmware limit to 100 V and above) |
 | hv_max | 0x0015 | V | 0.1 V | W,S | upper limit, default 200.0 V; absolute cap 220.0 V in code |
-| dac_hv | 0x0016 | code 0..4095 | code | W | manual DAC_HV code (4095 = minimum bias); refused unless loop is MANUAL |
+| dac_hv | 0x0016 | code 0..4095 | code | W | manual DAC_HV code (4095 = minimum bias); refused unless loop is MANUAL and no self-test runs; with HV off any code is written, with HV on a slew-limited target clamped to [hv_min, hv_max] (PROPOSED), refused while ramping |
 | m_est | 0x0017 | M | M x 10 | R | estimated APD gain (section 4 of firmware README) |
 | m_target | 0x0018 | M | M x 10 | W,S | loop target, default 45 |
 | vbr | 0x0019 | V | 0.1 V | W,S | per-unit breakdown voltage at 25 C (`cal vbr`) |
@@ -205,7 +205,7 @@ Defined in `firmware/esp32/README.md` s.8: steps, pass criteria and the LED patt
 ```
 {"selftest":{"mode":"full","sn":17,"ver":"0.1.0","pass":true,
  "steps":[{"id":"i2c","r":"pass"},{"id":"dac_eeprom","r":"pass"}, ...],
- "hv_peak_v":100.4,"usb_ma_est":null}}
+ "hv_peak_v":107.2,"hv_floor_v":107.1,"usb_ma_est":null}}
 ```
 
 Step result values: `pass`, `fail`, `skip`, `info`. UNRESOLVED: nothing measured; every window in the README is a first guess until the first board.

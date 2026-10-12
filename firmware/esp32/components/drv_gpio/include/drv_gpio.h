@@ -3,8 +3,9 @@
 
 /** Configure the GPIOs for boot (README s.4 step 1). SHDN_N and TIA_CTRL are
  *  left as plain inputs so the hardware pull-ups give comparator on and 20k.
- *  LED is an output (off). AUX is high-Z. DAC_LDAC and DAC_RDY belong to
- *  drv_mcp4728 (mcp4728_init configures them). HV_DIS is NOT touched here
+ *  LED is an output (off). AUX is high-Z. DAC_LDAC (IO6) is an output held
+ *  high (UDAC = 0 writes update their own channel). DAC_RDY belongs to
+ *  drv_mcp4728 (mcp4728_init configures it). HV_DIS is NOT touched here
  *  (app_safety owns it). */
 void drv_gpio_init(void);
 

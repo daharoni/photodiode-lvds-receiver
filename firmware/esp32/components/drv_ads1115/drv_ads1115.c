@@ -6,6 +6,7 @@
 #include "drv_ads1115.h"
 #include "board_i2c.h"
 #include "board_pins.h"
+#include "board_time.h"
 #include "esp_log.h"
 #include "fault.h"
 #include "freertos/FreeRTOS.h"
@@ -40,7 +41,7 @@ static esp_err_t take(void)
     if (!m || !s_dev) {
         return ESP_ERR_INVALID_STATE;
     }
-    return xSemaphoreTake(m, pdMS_TO_TICKS(MUTEX_TIMEOUT_MS)) == pdTRUE ? ESP_OK : ESP_ERR_TIMEOUT;
+    return xSemaphoreTake(m, ticks_at_least_1(MUTEX_TIMEOUT_MS)) == pdTRUE ? ESP_OK : ESP_ERR_TIMEOUT;
 }
 
 static void give(void) { xSemaphoreGive(board_i2c_mutex()); }
@@ -70,7 +71,7 @@ esp_err_t ads1115_init(void)
         .scl_speed_hz = BOARD_I2C_FREQ_HZ,
     };
     SemaphoreHandle_t m = board_i2c_mutex();
-    if (m && xSemaphoreTake(m, pdMS_TO_TICKS(MUTEX_TIMEOUT_MS)) != pdTRUE) {
+    if (m && xSemaphoreTake(m, ticks_at_least_1(MUTEX_TIMEOUT_MS)) != pdTRUE) {
         return ESP_ERR_TIMEOUT;
     }
     esp_err_t e = i2c_master_bus_add_device(bus, &cfg, &s_dev);
@@ -115,7 +116,7 @@ static esp_err_t convert_once(uint8_t ain, int16_t *raw)
     }
     TickType_t start = xTaskGetTickCount();
     for (;;) {
-        vTaskDelay(pdMS_TO_TICKS(CONV_POLL_MS));
+        vTaskDelay(ticks_at_least_1(CONV_POLL_MS));
         uint16_t c = 0;
         e = take();
         if (e != ESP_OK) {
@@ -129,7 +130,7 @@ static esp_err_t convert_once(uint8_t ain, int16_t *raw)
         if (c & CFG_OS) {                                            /* OS = 1: conversion done (Table 8-3 p.25) */
             break;
         }
-        if ((xTaskGetTickCount() - start) > pdMS_TO_TICKS(CONV_TIMEOUT_MS)) {
+        if ((xTaskGetTickCount() - start) > ticks_at_least_1(CONV_TIMEOUT_MS)) {
             return ESP_ERR_TIMEOUT;
         }
     }

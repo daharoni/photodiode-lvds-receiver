@@ -10,7 +10,10 @@
 #include "esp_app_desc.h"
 #include "esp_mac.h"
 #include "esp_timer.h"
+#include "driver/usb_serial_jtag.h"
+#include "board_time.h"
 #include "freertos/FreeRTOS.h"
+#include "freertos/queue.h"
 #include "freertos/task.h"
 #include "params.h"
 #include "sense.h"
@@ -33,6 +36,54 @@ static volatile int64_t s_identify_until_us;
 static char s_ring[EVENT_RING][EVENT_LEN];
 static uint32_t s_ring_head, s_ring_count;
 static portMUX_TYPE s_ring_lock = portMUX_INITIALIZER_UNLOCKED;
+
+/* ---- printer queue (review finding 8) ---------------------------------------
+ * Event and stream lines from the range and telemetry tasks go through a queue
+ * drained by a low-priority task, so a closed USB CDC port (whose buffer never
+ * drains, TRM s.32.4 p.1034) cannot block a task that must check in with the
+ * watchdog. Lines are written only while a USB host is connected; otherwise
+ * they are dropped and counted. */
+#define PRINT_Q_LEN     12
+#define PRINT_LINE_LEN  512
+#define PRINT_TASK_PRIO 1       /* PROPOSED: below every other task */
+typedef struct { char s[PRINT_LINE_LEN]; } print_item_t;
+static StaticQueue_t s_pq_ctl;
+static uint8_t s_pq_store[PRINT_Q_LEN * sizeof(print_item_t)];
+static QueueHandle_t s_pq;
+static volatile uint32_t s_print_drops;
+
+uint32_t app_telemetry_print_drops(void) { return s_print_drops; }
+
+bool app_telemetry_print_line(const char *line)
+{
+    if (!s_pq) {
+        s_print_drops++;
+        return false;
+    }
+    print_item_t it;
+    strncpy(it.s, line, PRINT_LINE_LEN - 1);
+    it.s[PRINT_LINE_LEN - 1] = 0;
+    if (xQueueSend(s_pq, &it, 0) != pdTRUE) {
+        s_print_drops++;
+        return false;
+    }
+    return true;
+}
+
+static void printer_task(void *arg)
+{
+    (void)arg;
+    print_item_t it;
+    for (;;) {
+        if (xQueueReceive(s_pq, &it, portMAX_DELAY) == pdTRUE) {
+            if (usb_serial_jtag_is_connected()) {
+                printf("%s\n", it.s);      /* may block up to the console driver timeout: nobody else waits on us */
+            } else {
+                s_print_drops++;
+            }
+        }
+    }
+}
 
 static int32_t pget(uint16_t id, bool *ok)
 {
@@ -82,7 +133,7 @@ void app_telemetry_event(const char *line)
     }
     taskEXIT_CRITICAL(&s_ring_lock);
     if (s_stream) {
-        printf("%s\n", line);
+        app_telemetry_print_line(line);
     }
 }
 
@@ -235,7 +286,7 @@ static void telemetry_task(void *arg)
     int64_t next_us = esp_timer_get_time();
     fault_word_t last_faults = fault_get();
     for (;;) {
-        vTaskDelay(pdMS_TO_TICKS(TLM_TASK_TICK_MS));
+        vTaskDelay(ticks_at_least_1(TLM_TASK_TICK_MS));
         app_safety_task_checkin(APP_TASK_TELEMETRY);
         int64_t now = esp_timer_get_time();
 
@@ -264,7 +315,7 @@ static void telemetry_task(void *arg)
         if (s_stream) {
             int w = app_telemetry_status_json(line, sizeof(line));
             if (w > 0) {
-                printf("%s\n", line);
+                app_telemetry_print_line(line);
             }
         }
     }
@@ -293,7 +344,7 @@ static void led_task(void *arg)
     (void)arg;
     uint32_t tick = 0;
     for (;;) {
-        vTaskDelay(pdMS_TO_TICKS(LED_TICK_MS));
+        vTaskDelay(ticks_at_least_1(LED_TICK_MS));
         if (!app_selftest_running()) {
             drv_gpio_led_set(led_pattern(tick++));
         }
@@ -302,6 +353,8 @@ static void led_task(void *arg)
 
 void app_telemetry_start(void)
 {
+    s_pq = xQueueCreateStatic(PRINT_Q_LEN, sizeof(print_item_t), s_pq_store, &s_pq_ctl);
+    xTaskCreate(printer_task, "printer", 3072, NULL, PRINT_TASK_PRIO, NULL);
     xTaskCreate(telemetry_task, "telemetry", 4096, NULL, TLM_TASK_PRIO, NULL);
     xTaskCreate(led_task, "led", 2048, NULL, LED_TASK_PRIO, NULL);
 }

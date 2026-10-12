@@ -35,7 +35,7 @@ Target name, pins and the esptool probe type are in the bench config example in 
 
 Proven by `selftest quick` (README s.8 steps 1-8): identity, I2C bus, MCP4728 EEPROM defaults, DAC write/readback and the VTH_MON shift, ADC windows with HV off, the GPIO pull-ups, CAN loopback through the transceiver (UNRESOLVED: loopback through an unterminated SN65HVD230 needs a first bench check), die temperature.
 
-Proven by `selftest full` (adds step 9): the LT8365 bias supply reaches the 100 V test bias (110 V absolute cap in that step) and decays after HV_DIS goes high. Run `full` in CI only after the HV safety rules for the bench are settled (200 V creepage/clearance on the module is a design rule; the bench module sits in an enclosure or on standoffs with the HV area untouched): Daniel decides. Default in CI: `quick`.
+Proven by `selftest full` (adds step 9): the LT8365 bias supply comes up at DAC_HV 0xFFF and settles within 95-115 V (`hv_floor_v`, PROPOSED window, UNRESOLVED until measured), the 60-code slope is 10-30 V per V, the step's 120 V absolute cap is enforced by the HV gate machine, and the bias decays after HV_DIS goes high. Run `full` in CI only after the HV safety rules for the bench are settled (200 V creepage/clearance on the module is a design rule; the bench module sits in an enclosure or on standoffs with the HV area untouched): Daniel decides. Default in CI: `quick`.
 
 Not provable on this bench: anything optical (eye, BER, RSSI versus light), the comparator and LVDS output, the range-trim loop against a real link (needs the FPGA CAN master and a modulated light source), the USB-C source classification with real hosts (G1 item in `docs/bringup/gates.md`). The console `cc_class`/`usb_host` fields are logged only.
 

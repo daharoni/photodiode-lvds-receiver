@@ -19,6 +19,7 @@
 #include "app_safety.h"
 #include "app_telemetry.h"
 #include "board_pins.h"
+#include "board_time.h"
 #include "esp_log.h"
 #include "esp_mac.h"
 #include "esp_timer.h"
@@ -39,7 +40,7 @@ static const char *TAG = "can";
 #define TX_QUEUE_DEPTH           8       /* PROPOSED */
 #define TX_POOL                  8       /* must be >= TX_QUEUE_DEPTH + 1 in flight */
 #define TX_RETRY                 3       /* hardware retries before a frame is dropped, PROPOSED */
-#define TASK_TICK_MS             5       /* rx queue wait: also the enum/fault scheduling resolution */
+#define TASK_TICK_MS             5       /* rx queue wait: also the enum/fault scheduling resolution (ticks_at_least_1: 5 ms is 0 ticks at 100 Hz) */
 #define FAULT_CHECK_MS           50      /* PROPOSED */
 #define FAULT_RESEND_MS          1000    /* protocol s.1.6: re-sent every 1 s while latched */
 #define ENUM_MIN_SLOT_MS         2       /* protocol s.1.2: slot_ms >= 2 */
@@ -334,7 +335,7 @@ void can_link_tec_rec(uint8_t *tec, uint8_t *rec)
     twai_node_record_t rcd = {0};
     *tec = 0;
     *rec = 0;
-    if (s_cfg_mtx && xSemaphoreTake(s_cfg_mtx, pdMS_TO_TICKS(20)) == pdTRUE) {
+    if (s_cfg_mtx && xSemaphoreTake(s_cfg_mtx, ticks_at_least_1(20)) == pdTRUE) {
         if (s_node && twai_node_get_info(s_node, &st, &rcd) == ESP_OK) {
             *tec = st.tx_error_count > 255 ? 255 : (uint8_t)st.tx_error_count;
             *rec = st.rx_error_count > 255 ? 255 : (uint8_t)st.rx_error_count;
@@ -369,6 +370,18 @@ void can_link_stats_json(char *buf, size_t len)
     buf[len - 1] = '\0';
 }
 
+static bool node_not_bus_off(void)
+{
+    bool ok = false;
+    twai_node_status_t st = {0};
+    twai_node_record_t rcd = {0};
+    if (s_cfg_mtx && xSemaphoreTake(s_cfg_mtx, ticks_at_least_1(20)) == pdTRUE) {
+        ok = s_node && twai_node_get_info(s_node, &st, &rcd) == ESP_OK && st.state != TWAI_ERROR_BUS_OFF;
+        xSemaphoreGive(s_cfg_mtx);
+    }
+    return ok;
+}
+
 /* ---- frame handling (rx task) ------------------------------------------------------ */
 
 static void send_reply(uint8_t node, uint16_t param, uint8_t status, int32_t value)
@@ -397,6 +410,12 @@ static void handle_get_set(uint8_t func, uint8_t target, const rx_msg_t *m, uint
         }
     } else {
         if (!can_set_decode(m->data, m->dlc, &param, &v)) {
+            return;
+        }
+        /* Broadcast SET is refused for the HV-affecting commands (review finding 3; protocol
+         * doc s.1.3 is silent, PROPOSED rule noted there): hv_cmd = 1 and dac_hv must be
+         * addressed to one node. A broadcast hv_cmd = 0 (off) is the safe direction and passes. */
+        if (target == CAN_NODE_BROADCAST && ((param == PARAM_HV_CMD && v != 0) || param == PARAM_DAC_HV)) {
             return;
         }
         e = params_set_i32(param, v);
@@ -460,6 +479,12 @@ static void handle_frame(const rx_msg_t *m)
         }
         s_last_link_all_us = esp_timer_get_time();
         s_master_seen = true;
+        /* The master heartbeat is back: README s.5 recovery for CAN_TIMEOUT (finding 7). BUSOFF
+         * is dropped once the node is not bus-off any more (frames are being received). */
+        fault_clear(FAULT_CAN_TIMEOUT);
+        if ((fault_get() & FAULT_CAN_BUSOFF) && !s_bus_off_flag && node_not_bus_off()) {
+            fault_clear(FAULT_CAN_BUSOFF);
+        }
         if (me) {
             s_my_nibble = can_link_all_nibble(&l, me);
             s_my_nibble_ok = true;
@@ -539,7 +564,7 @@ static void can_task(void *arg)
     for (;;) {
         app_safety_task_checkin(APP_TASK_CAN);
         rx_msg_t m;
-        if (xQueueReceive(s_rxq, &m, pdMS_TO_TICKS(TASK_TICK_MS)) == pdTRUE) {
+        if (xQueueReceive(s_rxq, &m, ticks_at_least_1(TASK_TICK_MS)) == pdTRUE) {
             handle_frame(&m);
             continue;       /* drain before the housekeeping */
         }
@@ -547,7 +572,7 @@ static void can_task(void *arg)
         if (s_bus_off_flag) {
             s_bus_off_flag = false;
             fault_set(FAULT_CAN_BUSOFF);        /* protocol s.5 bit 6; safety turns HV off */
-            if (s_cfg_mtx && xSemaphoreTake(s_cfg_mtx, pdMS_TO_TICKS(50)) == pdTRUE) {
+            if (s_cfg_mtx && xSemaphoreTake(s_cfg_mtx, ticks_at_least_1(50)) == pdTRUE) {
                 if (s_node) {
                     esp_err_t e = twai_node_recover(s_node);
                     if (e != ESP_OK) {
@@ -630,7 +655,7 @@ esp_err_t can_link_selftest_loopback(int *frames_ok)
         }
         if (e == ESP_OK) {
             twai_node_transmit_wait_all_done(s_node, LOOPBACK_WAIT_MS);
-            vTaskDelay(pdMS_TO_TICKS(5));
+            vTaskDelay(ticks_at_least_1(5));
         }
         twai_node_status_t st = {0};
         twai_node_record_t rcd = {0};

@@ -47,3 +47,7 @@
 
 /* Nominal bias per DAC_HV code, 14.95 mV (README s.4 step 9, calculated) */
 #define BOARD_HV_V_PER_CODE    0.01495f
+/* Bias at DAC_HV = 0xFFF with the trimmer at its default: "about 104 V"
+ * (README s.1 DAC_HV row, calculated; PROPOSED, not measured). Used only for
+ * the open-loop code bound (hv_gate.h, review finding 4). */
+#define BOARD_HV_V_AT_SAFE_CODE 104.0f

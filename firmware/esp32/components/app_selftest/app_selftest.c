@@ -7,12 +7,14 @@
 #include <inttypes.h>
 #include <math.h>
 #include <stdarg.h>
+#include <stdatomic.h>
 #include <stdio.h>
 #include <string.h>
 #include "app_range.h"
 #include "app_safety.h"
 #include "board_i2c.h"
 #include "board_pins.h"
+#include "board_time.h"
 #include "can_codec.h"
 #include "can_link.h"
 #include "drv_ads1115.h"
@@ -45,17 +47,16 @@ static const char *TAG = "selftest";
 #define TEMP_MIN_DC            (-100)   /* step 8: -10 C */
 #define TEMP_MAX_DC            600      /* step 8: 60 C */
 #define CAN_FRAMES             8        /* step 7 */
-#define HV_TEST_V              100.0f   /* step 9: test bias 100 V */
-#define HV_ABS_CAP_V           110.0f   /* step 9: absolute cap 110 V */
-#define HV_ARRIVE_S            5        /* step 9: within 5 s */
-#define HV_ARRIVE_TOL          0.05f    /* step 9: +-5 % */
-#define HV_SAFETY_TIMEOUT_S    12       /* PROPOSED: safety's own ramp timeout is 10 s (README s.4 step 9d) */
+#define HV_ABS_CAP_V           120.0f   /* step 9 (finding 5): per-request cap, enforced in hv_gate (hvg), PROPOSED */
+#define HV_FLOOR_MIN_V         95.0f    /* step 9: floor window 95-115 V, PROPOSED, UNRESOLVED until measured */
+#define HV_FLOOR_MAX_V         115.0f   /* (README s.1: about 104-110 V at code 0xFFF, calculated) */
+#define HV_SETTLE_STABLE_MS    2000     /* step 9: bias stable for 2 s ... */
+#define HV_SETTLE_TOL_V        1.0f     /* ... within 1 V */
+#define HV_SETTLE_TIMEOUT_S    12       /* PROPOSED: overall wait for ON + settle (hv_gate arrival takes 1 s) */
 #define HV_SLOPE_MIN           10.0f    /* step 9: 10..30 V per V (nominal 18.5, calculated) */
 #define HV_SLOPE_MAX           30.0f
-#define HV_SLOPE_CODES         60       /* PROPOSED: DAC step used for the slope measurement (about 0.9 V of bias) */
+#define HV_SLOPE_CODES         60       /* step 9 (finding 5): DAC step of at most 60 codes (about 0.9 V of bias) */
 #define HV_SLOPE_SETTLE_MS     600      /* PROPOSED */
-#define HV_HOLD_MS             2000     /* step 9: hold 2 s */
-#define HV_HOLD_TOL_V          1.0f     /* step 9: stable +-1 V */
 #define HV_DECAY_V             30.0f    /* step 9: wait until bias below 30 V ... */
 #define HV_DECAY_TIMEOUT_S     30       /* ... or 30 s */
 #define DAC_V_PER_CODE         (3.3f / 4096.0f)
@@ -77,14 +78,14 @@ typedef struct {
 static step_t s_steps[MAX_STEPS];
 static int s_nsteps;
 static char s_json[1200];
-static volatile bool s_running;
+static _Atomic bool s_running;     /* set with atomic_exchange: one run at a time (finding 13) */
 static volatile int64_t s_show_until_us;
 static volatile uint8_t s_last_status;
 static volatile int s_led_mode;       /* 0 idle, 1 running, 2 pass, 3 fail */
 static volatile int s_led_fail_step;
 static volatile int64_t s_led_t0_us;
 static TaskHandle_t s_led_task;
-static float s_hv_peak_v;
+static float s_hv_peak_v, s_hv_floor_v;
 
 bool app_selftest_within(double value, double expected, double tol_frac)
 {
@@ -119,7 +120,7 @@ static void led_task(void *arg)
 {
     (void)arg;
     for (;;) {
-        vTaskDelay(pdMS_TO_TICKS(LED_TICK_MS));
+        vTaskDelay(ticks_at_least_1(LED_TICK_MS));
         if (s_led_mode == 0) {
             continue;
         }
@@ -233,7 +234,7 @@ static void st_dac_eeprom(void)
 
 static int32_t th_mv_avg(void)
 {
-    vTaskDelay(pdMS_TO_TICKS(TH_SETTLE_MS));
+    vTaskDelay(ticks_at_least_1(TH_SETTLE_MS));
     int32_t v = 0;
     return read_mv(BOARD_ADC_AIN_VTH_MON, &v) ? v : INT32_MIN;
 }
@@ -347,12 +348,10 @@ static bool fresh_bias(int64_t after_us, float *bias)
             if (*bias > s_hv_peak_v) {
                 s_hv_peak_v = *bias;
             }
-            if (*bias > HV_ABS_CAP_V) {
-                app_safety_hv_off_now();              /* README s.8 step 9: absolute cap */
-            }
+            /* The absolute cap is enforced by the hv_gate machine (per-request cap), not here. */
             return true;
         }
-        vTaskDelay(pdMS_TO_TICKS(POLL_MS / 2));
+        vTaskDelay(ticks_at_least_1(POLL_MS / 2));
     }
     return false;
 }
@@ -363,120 +362,117 @@ static void hv_finish(void)
 {
     app_safety_hv_request(false);
     for (int i = 0; i < 150 && app_safety_hv_state() != HV_OFF; i++) {
-        vTaskDelay(pdMS_TO_TICKS(100));
+        vTaskDelay(ticks_at_least_1(100));
     }
     for (int i = 0; i < HV_DECAY_TIMEOUT_S * 10; i++) {
         float b;
         if (read_bias(&b) && b < HV_DECAY_V) {
             return;
         }
-        vTaskDelay(pdMS_TO_TICKS(100));
+        vTaskDelay(ticks_at_least_1(100));
     }
 }
 
+/* Step 9 (finding 5): enable at 0xFFF (the ramp target is hv_min, below the
+ * hardware floor, so the code stays pinned at 0xFFF), wait for the bias to
+ * settle, record it as hv_floor_v and require 95-115 V; then a slope step of
+ * 60 codes. The absolute cap (120 V) is a per-request input of the hv_gate
+ * machine, which raises HV_DIS and HV_OVER itself. */
 static void st_hv(void)
 {
-    int32_t hv_min_dv = 1000, hv_set_old = 0;
+    int32_t hv_min_dv = 1000;
     params_get_i32(PARAM_HV_MIN, &hv_min_dv);
-    float target = HV_TEST_V > hv_min_dv / 10.0f ? HV_TEST_V : hv_min_dv / 10.0f;
-    if (target > HV_ABS_CAP_V - 5.0f) {
-        step("hv", R_SKIP, "hv_min %.0f V too high", (double)hv_min_dv / 10.0);
+    const float hv_min = hv_min_dv / 10.0f;
+    if (hv_min > HV_FLOOR_MAX_V) {
+        step("hv", R_SKIP, "hv_min %.0f V too high", (double)hv_min);
         return;
     }
     if (step_result("dac_eeprom") != R_PASS || step_result("dac_rw") != R_PASS || step_result("adc") != R_PASS) {
         step("hv", R_SKIP, "precondition failed");
         return;
     }
-    params_get_i32(PARAM_HV_SET, &hv_set_old);
-    params_set_i32(PARAM_HV_SET, (int32_t)lroundf(target * 10.0f));   /* safety ramps toward hv_set */
     s_hv_peak_v = 0;
+    s_hv_floor_v = 0;
     int64_t t_req = esp_timer_get_time();
-    esp_err_t e = app_safety_hv_request(true);
+    esp_err_t e = app_safety_hv_request_ex(true, HV_ABS_CAP_V, hv_min);
     if (e != ESP_OK) {
-        params_set_i32(PARAM_HV_SET, hv_set_old);
         step("hv", R_FAIL, "enable refused %s", esp_err_to_name(e));
         return;
     }
-    /* arrival: within +-5 % of the test bias */
-    float b = 0;
-    bool arrived = false;
-    int64_t t_arr = 0;
-    while ((esp_timer_get_time() - t_req) < (int64_t)HV_SAFETY_TIMEOUT_S * 1000000) {
-        if (read_bias(&b)) {
-            if (b > HV_ABS_CAP_V) {
-                break;
-            }
-            if (fabsf(b - target) <= target * HV_ARRIVE_TOL && app_safety_hv_state() == HV_ON) {
-                arrived = true;
-                t_arr = esp_timer_get_time();
-                break;
-            }
-        }
-        if (app_safety_hv_state() == HV_FAULT || app_safety_hv_state() == HV_OFF) {
-            break;
-        }
-    }
-    float arrive_s = arrived ? (float)(t_arr - t_req) / 1e6f : -1.0f;
     res_t res = R_PASS;
     char d[48];
     snprintf(d, sizeof(d), "ok");
-    if (!arrived) {
+    /* wait for the gate to report ON (arrival), then for 2 s of stable bias */
+    float lo = 1e9f, hi = -1e9f, b = 0;
+    int64_t t_stable = 0;
+    bool settled = false, tripped = false;
+    while ((esp_timer_get_time() - t_req) < (int64_t)HV_SETTLE_TIMEOUT_S * 1000000) {
+        hv_state_t st = app_safety_hv_state();
+        if (st == HV_FAULT || st == HV_OFF) {
+            tripped = true;
+            break;
+        }
+        if (read_bias(&b) && st == HV_ON) {
+            if (!t_stable) {
+                lo = hi = b;
+                t_stable = esp_timer_get_time();
+            } else if ((fmaxf(hi, b) - fminf(lo, b)) > 2.0f * HV_SETTLE_TOL_V) {
+                lo = hi = b;                               /* moved: restart the 2 s window */
+                t_stable = esp_timer_get_time();
+            } else {
+                lo = fminf(lo, b);
+                hi = fmaxf(hi, b);
+            }
+            if ((esp_timer_get_time() - t_stable) >= (int64_t)HV_SETTLE_STABLE_MS * 1000) {
+                settled = true;
+                break;
+            }
+        }
+    }
+    if (tripped) {
         res = R_FAIL;
-        snprintf(d, sizeof(d), "no arrival peak %.0f V", (double)s_hv_peak_v);
-    } else if (arrive_s > HV_ARRIVE_S) {
+        snprintf(d, sizeof(d), "tripped f=0x%04x peak %.0f V", (unsigned)fault_get(), (double)s_hv_peak_v);
+    } else if (!settled) {
         res = R_FAIL;
-        snprintf(d, sizeof(d), "slow %.1f s", (double)arrive_s);
+        snprintf(d, sizeof(d), "no settle peak %.0f V", (double)s_hv_peak_v);
     } else {
-        /* slope: bias change per DAC volt for a small code step, then restore */
-        float v0 = 0, v1 = 0;
-        mcp4728_regs_t r;
-        if (read_bias(&v0) && mcp4728_read_all(&r) == ESP_OK) {
-            uint16_t c0 = r.input[BOARD_DAC_CH_HV].code;
-            uint16_t c1 = c0 >= HV_SLOPE_CODES ? (uint16_t)(c0 - HV_SLOPE_CODES) : 0;   /* lower code = higher bias */
-            if (v0 + HV_SLOPE_CODES * BOARD_HV_V_PER_CODE + 1.0f < HV_ABS_CAP_V &&
-                mcp4728_write_volatile(BOARD_DAC_CH_HV, c1) == ESP_OK) {
-                vTaskDelay(pdMS_TO_TICKS(HV_SLOPE_SETTLE_MS));
+        s_hv_floor_v = 0.5f * (lo + hi);
+        if (s_hv_floor_v < HV_FLOOR_MIN_V || s_hv_floor_v > HV_FLOOR_MAX_V) {
+            res = R_FAIL;
+            snprintf(d, sizeof(d), "floor %.1f V off 95-115", (double)s_hv_floor_v);
+        } else {
+            /* slope: bias change per DAC volt for a small code step, then back to the floor code */
+            float v0 = 0, v1 = 0;
+            int c0 = mcp4728_last_code(BOARD_DAC_CH_HV);
+            if (c0 >= HV_SLOPE_CODES && read_bias(&v0) &&
+                app_range_manual_set_code((uint16_t)(c0 - HV_SLOPE_CODES)) == ESP_OK) {   /* lower code = higher bias */
+                vTaskDelay(ticks_at_least_1(HV_SLOPE_SETTLE_MS));
                 bool got = read_bias(&v1);
-                mcp4728_write_volatile(BOARD_DAC_CH_HV, c0);
-                vTaskDelay(pdMS_TO_TICKS(HV_SLOPE_SETTLE_MS));
-                if (got && c0 > c1) {
-                    float slope = (v1 - v0) / ((float)(c0 - c1) * DAC_V_PER_CODE);
+                app_range_manual_set_code((uint16_t)c0);
+                vTaskDelay(ticks_at_least_1(HV_SLOPE_SETTLE_MS));
+                if (got) {
+                    float slope = (v1 - v0) / ((float)HV_SLOPE_CODES * DAC_V_PER_CODE);
                     if (slope < HV_SLOPE_MIN || slope > HV_SLOPE_MAX) {
                         res = R_FAIL;
                     }
-                    snprintf(d, sizeof(d), "slope %.1f V/V t%.1fs", (double)slope, (double)arrive_s);
+                    snprintf(d, sizeof(d), "floor %.1f V slope %.1f V/V", (double)s_hv_floor_v, (double)slope);
                 } else {
                     res = R_FAIL;
                     snprintf(d, sizeof(d), "slope read failed");
                 }
+            } else {
+                res = R_FAIL;
+                snprintf(d, sizeof(d), "slope setup failed");
             }
-        } else {
-            res = R_FAIL;
-            snprintf(d, sizeof(d), "slope setup failed");
-        }
-        /* hold 2 s within +-1 V */
-        float lo = 1e9f, hi = -1e9f;
-        int64_t t0 = esp_timer_get_time();
-        while ((esp_timer_get_time() - t0) < (int64_t)HV_HOLD_MS * 1000) {
-            float x;
-            if (read_bias(&x)) {
-                lo = x < lo ? x : lo;
-                hi = x > hi ? x : hi;
+            /* VTH_MON window re-read (RSSI window is informational, README: may fall with room light) */
+            int32_t vt = 0;
+            if (!read_mv(BOARD_ADC_AIN_VTH_MON, &vt) || abs(vt - VTH_CENTER_MV) > VTH_TOL_MV) {
+                res = R_FAIL;
+                snprintf(d, sizeof(d), "vth %d mV", (int)vt);
             }
-        }
-        if (hi < lo || (hi - lo) > 2.0f * HV_HOLD_TOL_V) {
-            res = R_FAIL;
-            snprintf(d, sizeof(d), "unstable %.1f..%.1f", (double)lo, (double)hi);
-        }
-        /* VTH_MON window re-read (RSSI window is informational, README: may fall with room light) */
-        int32_t vt = 0;
-        if (!read_mv(BOARD_ADC_AIN_VTH_MON, &vt) || abs(vt - VTH_CENTER_MV) > VTH_TOL_MV) {
-            res = R_FAIL;
-            snprintf(d, sizeof(d), "vth %d mV", (int)vt);
         }
     }
     hv_finish();
-    params_set_i32(PARAM_HV_SET, hv_set_old);
     step("hv", res, "%s", d);
 }
 
@@ -496,25 +492,27 @@ static void build_json(bool full, bool pass)
                       s_steps[i].id, nm[s_steps[i].r], s_steps[i].d);
     }
     if (n < (int)sizeof(s_json)) {
-        snprintf(s_json + n, sizeof(s_json) - n, "],\"hv_peak_v\":%.1f,\"usb_ma_est\":null}}",
-                 (double)s_hv_peak_v);
+        snprintf(s_json + n, sizeof(s_json) - n, "],\"hv_peak_v\":%.1f,\"hv_floor_v\":%.1f,\"usb_ma_est\":null}}",
+                 (double)s_hv_peak_v, (double)s_hv_floor_v);
     }
 }
 
 esp_err_t app_selftest_run(bool full)
 {
-    if (s_running) {
-        return ESP_ERR_INVALID_STATE;
+    if (atomic_exchange(&s_running, true)) {
+        return ESP_ERR_INVALID_STATE;     /* one run at a time (finding 13) */
     }
     if (app_safety_hv_state() != HV_OFF) {
+        s_running = false;
         return ESP_ERR_INVALID_STATE;     /* steps 5 and 9 need HV off at the start */
     }
-    s_running = true;
+    app_safety_set_auto_inhibit(true);    /* hv_auto must not enable HV during the run */
     if (!s_led_task) {
         xTaskCreate(led_task, "st_led", 2048, NULL, 2, &s_led_task);
     }
     s_nsteps = 0;
     s_hv_peak_v = 0;
+    s_hv_floor_v = 0;
     s_json[0] = '\0';
     led_set_mode(1, 0, 0);
     const bool was_auto = app_range_is_auto();
@@ -561,6 +559,7 @@ esp_err_t app_selftest_run(bool full)
         can_link_send_frame(CAN_CLS_RESP, CAN_FN_SELFTEST, d, 8);   /* protocol s.1.6 */
     }
     led_set_mode(pass ? 2 : 3, first_fail, pass ? LED_PASS_MS : (first_fail * 400 + 2000 + 200));
+    app_safety_set_auto_inhibit(false);
     s_running = false;
     (void)LED_SHOW_MAX_MS;
     return ESP_OK;

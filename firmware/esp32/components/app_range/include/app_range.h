@@ -13,6 +13,7 @@
 #pragma once
 #include <stdbool.h>
 #include <stdint.h>
+#include "esp_err.h"
 #include "range_fsm.h"
 #include "range_m_est.h"
 
@@ -33,6 +34,14 @@ int app_range_state(void);
  *  MANUAL regardless (README s.6.5). */
 void app_range_set_mode(bool automatic);
 bool app_range_is_auto(void);
+
+/** Manual DAC_HV code target (console `dac hv`, CAN dac_hv, self-test slope
+ *  step) while HV is ON and the loop is in manual mode. The range task moves
+ *  the code toward it at most 134 codes per 100 ms and keeps the modelled bias
+ *  within [hv_min, hv_max] and the code above the open-loop bound (hv_gate.h
+ *  hvg_code_min). ESP_ERR_INVALID_STATE in auto mode or when HV is not ON,
+ *  ESP_ERR_INVALID_ARG above 0xFFF. */
+esp_err_t app_range_manual_set_code(uint16_t code);
 
 /** Estimated M x 10, or -1 until calibrated (README s.6.4). */
 int32_t app_range_m_est_x10(void);

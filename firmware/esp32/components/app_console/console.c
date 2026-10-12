@@ -111,6 +111,8 @@ static int cmd_status(int argc, char **argv)
     printf("loop_state   %s\n", app_range_state_name());
     printf("mode         %s\n", can_link_mode() == CAN_MODE_BUS ? "bus" : "usb");
     printf("reset        %s\n", app_safety_reset_reason_name());
+    printf("hv_gate      %s\n", app_safety_gate_state_name());
+    printf("print_drops  %lu\n", (unsigned long)app_telemetry_print_drops());
     print_params();
     app_telemetry_events_print();
     printf("ok\n");
@@ -333,7 +335,10 @@ static int cmd_can(int argc, char **argv)
 static int cmd_faults(int argc, char **argv)
 {
     if (argc > 1 && strcmp(argv[1], "clear") == 0) {
-        app_safety_faults_clear();
+        esp_err_t ce = app_safety_faults_clear();
+        if (ce != ESP_OK) {
+            printf("err dac-not-reverified %s (I2C_DAC / DAC_EEPROM stay latched)\n", esp_err_to_name(ce));
+        }
     }
     fault_word_t f = fault_get();
     printf("faults 0x%04x", (unsigned)f);

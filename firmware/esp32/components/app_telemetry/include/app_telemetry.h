@@ -16,9 +16,16 @@ void app_telemetry_stream(bool on, uint32_t period_ms);
 bool app_telemetry_streaming(void);
 
 /** Queue one event line (a complete JSON object) into the 64-entry RAM ring
- *  (README s.6.6); if streaming, it is also printed now. Copies the string
+ *  (README s.6.6); if streaming, it is also queued for printing. Copies the string
  *  (truncated to 159 chars). Thread safe. */
 void app_telemetry_event(const char *json_line);
+
+/** Queue one line (no newline) for the printer task, which writes it only
+ *  while a USB host is connected and drops it otherwise. Never blocks. Returns
+ *  false if the line was dropped (queue full or not started). */
+bool app_telemetry_print_line(const char *line);
+/** Lines dropped so far (no host, queue full); shown by `status`. */
+uint32_t app_telemetry_print_drops(void);
 
 /** Print the ring (oldest first), used by `status`. */
 void app_telemetry_events_print(void);

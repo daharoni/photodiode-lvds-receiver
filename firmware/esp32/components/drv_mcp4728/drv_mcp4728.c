@@ -7,9 +7,9 @@
 #include <string.h>
 #include "board_i2c.h"
 #include "board_pins.h"
+#include "board_time.h"
 #include "driver/gpio.h"
 #include "esp_log.h"
-#include "esp_rom_sys.h"
 #include "fault.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -28,8 +28,10 @@ static const char *TAG = "mcp4728";
 #define PD_NORMAL           0
 #define GAIN_X1             0
 
-#define LDAC_IDLE_LEVEL     0      /* drv_gpio_init() holds LDAC low (its header); pulse = high then low */
-#define LDAC_PULSE_US       2      /* TLDAC >= 210 ns, DS22187E p.6; 2 us gives margin */
+/* LDAC (IO6) is held HIGH by drv_gpio_init(). With LDAC = 1 and UDAC = 0 the
+ * selected channel's output updates at the last data byte's ACK and the other
+ * channels are not touched (DS22187E Table 4-5 p.26, s.5.6.2 p.35). No LDAC
+ * pulse is used (review finding 10; the simpler of the two options). */
 
 #define I2C_TIMEOUT_MS      20     /* PROPOSED: a 24-byte read is ~0.6 ms at 400 kHz */
 #define MUTEX_TIMEOUT_MS    100    /* PROPOSED */
@@ -44,7 +46,7 @@ static esp_err_t take(void)
     if (!m || !s_dev) {
         return ESP_ERR_INVALID_STATE;
     }
-    return xSemaphoreTake(m, pdMS_TO_TICKS(MUTEX_TIMEOUT_MS)) == pdTRUE ? ESP_OK : ESP_ERR_TIMEOUT;
+    return xSemaphoreTake(m, ticks_at_least_1(MUTEX_TIMEOUT_MS)) == pdTRUE ? ESP_OK : ESP_ERR_TIMEOUT;
 }
 
 static void give(void) { xSemaphoreGive(board_i2c_mutex()); }
@@ -64,7 +66,7 @@ esp_err_t mcp4728_init(void)
         .scl_speed_hz = BOARD_I2C_FREQ_HZ,
     };
     SemaphoreHandle_t m = board_i2c_mutex();
-    if (m && xSemaphoreTake(m, pdMS_TO_TICKS(MUTEX_TIMEOUT_MS)) != pdTRUE) {
+    if (m && xSemaphoreTake(m, ticks_at_least_1(MUTEX_TIMEOUT_MS)) != pdTRUE) {
         return ESP_ERR_TIMEOUT;
     }
     esp_err_t e = i2c_master_bus_add_device(bus, &cfg, &s_dev);
@@ -81,16 +83,15 @@ esp_err_t mcp4728_init(void)
         .mode = GPIO_MODE_INPUT,
     };
     gpio_config(&rdy);
-    /* LDAC is configured by drv_gpio_init(); this driver only pulses it. */
+    /* LDAC is configured (output, high) by drv_gpio_init(). */
     return ESP_OK;
 }
 
-static void ldac_pulse(void)
-{
-    gpio_set_level(BOARD_PIN_DAC_LDAC, !LDAC_IDLE_LEVEL);
-    esp_rom_delay_us(LDAC_PULSE_US);
-    gpio_set_level(BOARD_PIN_DAC_LDAC, LDAC_IDLE_LEVEL);
-}
+/* Last code written to (or read back from) each channel's input register.
+ * -1 = unknown. A plain int per channel; updated after the I2C transfer. */
+static volatile int s_last_code[4] = {-1, -1, -1, -1};
+
+int mcp4728_last_code(uint8_t ch) { return ch < 4 ? s_last_code[ch] : -1; }
 
 esp_err_t mcp4728_parse_read(const uint8_t raw[24], mcp4728_regs_t *out)
 {
@@ -128,7 +129,13 @@ esp_err_t mcp4728_read_all(mcp4728_regs_t *out)
         fault_set(FAULT_I2C_DAC);
         return e;
     }
-    return mcp4728_parse_read(raw, out);
+    e = mcp4728_parse_read(raw, out);
+    if (e == ESP_OK) {
+        for (int i = 0; i < 4; i++) {
+            s_last_code[i] = out->input[i].code;
+        }
+    }
+    return e;
 }
 
 esp_err_t mcp4728_write_volatile(uint8_t ch, uint16_t code)
@@ -152,7 +159,7 @@ esp_err_t mcp4728_write_volatile(uint8_t ch, uint16_t code)
         fault_set(FAULT_I2C_DAC);
         return e;
     }
-    ldac_pulse();
+    s_last_code[ch] = code;
     return ESP_OK;
 }
 
@@ -180,7 +187,7 @@ esp_err_t mcp4728_write_eeprom_defaults(void)
     }
     /* EEPROM programming starts at the 4th byte ACK of the last channel (Fig 5-9 note 2 p.40);
      * commands are ignored while RDY/BSY is low (s.5.6.3 p.36). Wait for the pin and the bit. */
-    vTaskDelay(pdMS_TO_TICKS(EEPROM_FIRST_DELAY_MS));
+    vTaskDelay(ticks_at_least_1(EEPROM_FIRST_DELAY_MS));
     TickType_t start = xTaskGetTickCount();
     for (;;) {
         if (rdy_pin_high()) {
@@ -194,12 +201,12 @@ esp_err_t mcp4728_write_eeprom_defaults(void)
                 }
             }
         }
-        if ((xTaskGetTickCount() - start) > pdMS_TO_TICKS(EEPROM_WAIT_MS)) {
+        if ((xTaskGetTickCount() - start) > ticks_at_least_1(EEPROM_WAIT_MS)) {
             ESP_LOGE(TAG, "EEPROM write did not finish in %d ms", EEPROM_WAIT_MS);
             fault_set(FAULT_I2C_DAC);
             return ESP_ERR_TIMEOUT;
         }
-        vTaskDelay(pdMS_TO_TICKS(1));
+        vTaskDelay(ticks_at_least_1(1));
     }
     mcp4728_regs_t r;
     e = mcp4728_read_all(&r);

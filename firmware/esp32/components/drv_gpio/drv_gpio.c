@@ -27,6 +27,16 @@ void drv_gpio_init(void)
     };
     gpio_config(&out);
 
+    /* DAC_LDAC (IO6): output held HIGH. With LDAC = 1 and UDAC = 0 each
+     * MCP4728 write updates only its own channel at the data ACK (DS22187E
+     * Table 4-5 p.26); mcp4728 writes no longer pulse it (review finding 10). */
+    gpio_set_level(BOARD_PIN_DAC_LDAC, 1);
+    gpio_config_t ld = {
+        .pin_bit_mask = 1ULL << BOARD_PIN_DAC_LDAC,
+        .mode = GPIO_MODE_OUTPUT,
+    };
+    gpio_config(&ld);
+
     drv_gpio_aux_set_hiz();
 }
 

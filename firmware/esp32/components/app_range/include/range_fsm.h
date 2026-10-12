@@ -140,6 +140,16 @@ typedef struct {
     bool lower_valid;
 } range_fsm_t;
 
+/** Manual DAC_HV code target, slew-limited and clamped (review finding 3;
+ *  pure, host-tested). cur: code now; target: requested code 0..0xFFF;
+ *  bias_v: measured bias; the move is limited so that the MODELLED bias
+ *  bias_v + (cur - next) x v_per_code stays within [hv_min_v, hv_max_v]
+ *  (a bias already outside is pulled back toward the range); next never goes
+ *  below code_min (open-loop bound) or above 0xFFF; |next - cur| <= max_step.
+ *  Higher code = lower bias. Returns the code to write next (== cur: no move). */
+int32_t range_manual_code_step(int32_t cur, int32_t target, float bias_v, float hv_min_v, float hv_max_v,
+                               float v_per_code, int32_t max_step, int32_t code_min);
+
 /** Initialise to OFF with the default 60 s down-trial interval. */
 void range_fsm_init(range_fsm_t *f);
 /** Restore a saved lock (NVS `state` namespace, README s.6.6): RAMP then starts at hv_set. */

@@ -35,7 +35,8 @@ typedef struct {
 } mcp4728_regs_t;
 
 /** Add the I2C device (0x60, 400 kHz) to board_i2c_bus() and configure
- *  LDAC (output, idle high) and RDY/BSY (input) GPIOs. Needs board_i2c_init() first. */
+ *  RDY/BSY (input). LDAC is configured by drv_gpio_init() (output, held
+ *  high). Needs board_i2c_init() first. */
 esp_err_t mcp4728_init(void);
 
 /** Read command (R/W = 1, 24 bytes): DS22187E s.5.6.9 p.37 and Fig 5-15 p.45.
@@ -46,8 +47,8 @@ esp_err_t mcp4728_read_all(mcp4728_regs_t *out);
 
 /** Volatile write of one channel's input register and output (EEPROM untouched):
  *  Multi-Write, UDAC = 0 (output updates at the 4th byte ACK, DS22187E s.5.6.2
- *  p.35 and Fig 5-8 p.39), VREF = VDD, PD = 00, gain x1; then an LDAC pulse
- *  (low >= 210 ns, p.6). ch 0..3, code 0..0xFFF, else ESP_ERR_INVALID_ARG. */
+ *  p.35 and Fig 5-8 p.39) with LDAC held high so only this channel updates
+ *  (Table 4-5 p.26), VREF = VDD, PD = 00, gain x1. ch 0..3, code 0..0xFFF, else ESP_ERR_INVALID_ARG. */
 esp_err_t mcp4728_write_volatile(uint8_t ch, uint16_t code);
 
 /** Program the power-on defaults into EEPROM with the Sequential Write command
@@ -64,6 +65,10 @@ bool mcp4728_eeprom_defaults_ok(const mcp4728_regs_t *r);
 /** Read back and require input[ch] == {vref 0, pd 0, code}. Sets FAULT_I2C_DAC
  *  on mismatch (protocol s.5 bit 0). ESP_FAIL on mismatch. */
 esp_err_t mcp4728_readback_verify(uint8_t ch, uint16_t code);
+
+/** Last code written (or read back) for channel ch, -1 if unknown. Does no
+ *  I2C. Review finding 9: lets app_safety walk down from the real code. */
+int mcp4728_last_code(uint8_t ch);
 
 /** Pure parser of a 24-byte Read response (exposed for tests). */
 esp_err_t mcp4728_parse_read(const uint8_t raw[24], mcp4728_regs_t *out);

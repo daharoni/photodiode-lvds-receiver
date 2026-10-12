@@ -360,6 +360,53 @@ TEST(ramp_starts_at_saved_lock_when_present)
     ASSERT_NEAR(s.out.bias_target_v, 140.0, 1e-3);
 }
 
+/* ---- manual DAC_HV code target (review finding 3) ---- */
+#define VPC 0.01495f
+
+TEST(manual_code_slew_limited)
+{
+    /* far target: at most max_step codes per call */
+    int32_t c = 4095;
+    c = range_manual_code_step(c, 0, 107.0f, 100.0f, 200.0f, VPC, 134, 0);
+    ASSERT_EQ(c, 4095 - 134);
+    c = range_manual_code_step(c, 0, 109.0f, 100.0f, 200.0f, VPC, 134, 0);
+    ASSERT_EQ(c, 4095 - 268);
+    /* reaching a near target exactly */
+    ASSERT_EQ(range_manual_code_step(3000, 2990, 150.0f, 100.0f, 200.0f, VPC, 134, 0), 2990);
+    /* no move when already there */
+    ASSERT_EQ(range_manual_code_step(3000, 3000, 150.0f, 100.0f, 200.0f, VPC, 134, 0), 3000);
+    /* upward (lower bias) is slew limited too */
+    ASSERT_EQ(range_manual_code_step(2000, 4095, 150.0f, 100.0f, 200.0f, VPC, 134, 0), 2134);
+}
+
+TEST(manual_code_clamped_to_hv_max)
+{
+    /* bias 148 V, hv_max 150 V: at most 2 V / 14.95 mV = 133 codes down */
+    int32_t n = range_manual_code_step(3000, 0, 148.0f, 100.0f, 150.0f, VPC, 500, 0);
+    ASSERT_TRUE(n >= 3000 - 134 && n <= 3000 - 133 + 1);
+    /* at the limit: no further move */
+    ASSERT_EQ(range_manual_code_step(3000, 0, 150.0f, 100.0f, 150.0f, VPC, 500, 0), 3000);
+    /* above the limit already: pulled back (code goes up) even though the target asks for lower */
+    ASSERT_TRUE(range_manual_code_step(3000, 0, 152.0f, 100.0f, 150.0f, VPC, 500, 0) > 3000);
+}
+
+TEST(manual_code_clamped_to_hv_min)
+{
+    /* bias 102 V, hv_min 100 V: at most 133 codes up */
+    int32_t n = range_manual_code_step(2000, 4095, 102.0f, 100.0f, 200.0f, VPC, 500, 0);
+    ASSERT_TRUE(n >= 2000 + 133 && n <= 2000 + 134);
+    ASSERT_EQ(range_manual_code_step(2000, 4095, 100.0f, 100.0f, 200.0f, VPC, 500, 0), 2000);
+}
+
+TEST(manual_code_open_loop_bound)
+{
+    /* code_min 3360 (hv_max 110 V): never below it whatever the bias reading says */
+    ASSERT_EQ(range_manual_code_step(3400, 0, 60.0f, 50.0f, 110.0f, VPC, 500, 3360), 3360);
+    ASSERT_EQ(range_manual_code_step(3360, 0, 60.0f, 50.0f, 110.0f, VPC, 500, 3360), 3360);
+    /* never above 0xFFF */
+    ASSERT_EQ(range_manual_code_step(4090, 4095, 130.0f, 100.0f, 200.0f, VPC, 500, 0), 4095);
+}
+
 TEST(state_names)
 {
     ASSERT_TRUE(strcmp(range_state_str(RANGE_TRACK), "TRACK") == 0);

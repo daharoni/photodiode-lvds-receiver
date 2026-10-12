@@ -6,12 +6,14 @@
 #include "app_safety.h"
 #include "app_telemetry.h"
 #include "board_pins.h"
+#include "board_time.h"
 #include "can_link.h"
 #include "drv_gpio.h"
 #include "drv_mcp4728.h"
 #include "esp_log.h"
 #include "esp_timer.h"
 #include "fault.h"
+#include "hv_gate.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "params.h"
@@ -35,6 +37,7 @@ static const char *TAG = "range";
 static volatile range_state_t s_state = RANGE_OFF;
 static volatile bool s_auto = true;
 static volatile uint16_t s_code = BOARD_DAC_HV_SAFE_CODE;
+static volatile int32_t s_man_code = -1;     /* manual code target, -1 = none */
 static volatile int32_t s_m_x10 = RANGE_M_UNKNOWN_X10;
 static range_fsm_t s_fsm;
 static range_m_est_cfg_t s_cal;
@@ -63,6 +66,18 @@ void app_range_cal_set_code(uint16_t code, float bias_v)
     taskEXIT_CRITICAL(&s_cal_lock);
 }
 
+esp_err_t app_range_manual_set_code(uint16_t code)
+{
+    if (code > 0xFFF) {
+        return ESP_ERR_INVALID_ARG;
+    }
+    if (s_auto || app_safety_hv_state() != HV_ON) {
+        return ESP_ERR_INVALID_STATE;
+    }
+    s_man_code = code;
+    return ESP_OK;
+}
+
 void app_range_set_last_lock(float v_lock)
 {
     s_last_lock_v = v_lock;
@@ -75,6 +90,12 @@ static float param_v(uint16_t id, float fallback)
 {
     int32_t v = 0;
     return params_get_i32(id, &v) == ESP_OK ? (float)v / HV_UNITS_PER_V : fallback;
+}
+
+static bool param_node0(void)
+{
+    int32_t n = 0;
+    return params_get_i32(PARAM_NODE, &n) == ESP_OK && n == 0;
 }
 
 static bool param_flag(uint16_t id, bool fallback)
@@ -95,17 +116,21 @@ static void event(const char *fmt, ...)
 }
 
 /* One closed-loop step of DAC_HV toward target_v. Higher code = lower bias. */
-static void dac_step(float target_v, float bias_v)
+static void dac_step(float target_v, float bias_v, float hv_max_v)
 {
     float err = target_v - bias_v;
     if (fabsf(err) < DAC_DEADBAND_V) {
         return;
     }
+    if (app_safety_hv_state() != HV_ON) {
+        return;                         /* the gate owns the DAC during ramps (review finding 2) */
+    }
     int32_t d = (int32_t)lroundf(err / BOARD_HV_V_PER_CODE);
     if (d > DAC_STEP_MAX_CODES) d = DAC_STEP_MAX_CODES;
     if (d < -DAC_STEP_MAX_CODES) d = -DAC_STEP_MAX_CODES;
     int32_t code = (int32_t)s_code - d;
-    if (code < 0) code = 0;
+    const int32_t cmin = hvg_code_min(hv_max_v);       /* open-loop bound, review finding 4 */
+    if (code < cmin) code = cmin;
     if (code > 0xFFF) code = 0xFFF;
     if (mcp4728_write_volatile(BOARD_DAC_CH_HV, (uint16_t)code) == ESP_OK) {
         s_code = (uint16_t)code;
@@ -121,16 +146,31 @@ static void range_task(void *arg)
     int resync = 0;
     float last_hv_set = -1000.0f;
     bool manual_trim = false;
+    bool node0_warned = false;
     uint32_t pin_since = 0, rail_since = 0, sat_since = 0;
     bool pin_set = false, rail_set = false, sat_set = false;
     TickType_t wake = xTaskGetTickCount();
 
     for (;;) {
-        vTaskDelayUntil(&wake, pdMS_TO_TICKS(RANGE_PERIOD_MS));
+        vTaskDelayUntil(&wake, ticks_at_least_1(RANGE_PERIOD_MS));
         app_safety_task_checkin(APP_TASK_RANGE);
         if (s_last_lock_pending) {
             range_fsm_set_last_lock(&s_fsm, s_last_lock_v);
             s_last_lock_pending = false;
+        }
+        {
+            /* The ramp target is owned here (review finding 16): the soft start walks to
+             * hv_set only if the FSM would (a saved lock exists), otherwise to hv_min.
+             * Same rule as the FSM's RANGE_OFF branch. */
+            const float lo = param_v(PARAM_HV_MIN, 100.0f);
+            float hi = param_v(PARAM_HV_MAX, 200.0f);
+            if (hi < lo) hi = lo;
+            float t = lo;
+            if (s_fsm.have_lock) {
+                t = param_v(PARAM_HV_SET, 100.0f);
+                t = t < lo ? lo : (t > hi ? hi : t);
+            }
+            app_safety_set_ramp_target_dv((int32_t)lroundf(t * HV_UNITS_PER_V));
         }
 
         sense_snapshot_t s;
@@ -141,6 +181,17 @@ static void range_task(void *arg)
         const hv_state_t hs = app_safety_hv_state();
         const float bias = sense_bias_v(&s);
 
+        /* Node 0 (unassigned) in bus mode has no LINK_ALL nibble, so the metrics are meaningless:
+         * force MANUAL (review finding 17). Warn once per episode. */
+        const bool node0_bus = param_node0() && can_link_mode() == CAN_MODE_BUS;
+        if (node0_bus && s_auto && !node0_warned) {
+            node0_warned = true;
+            ESP_LOGW(TAG, "node id 0 in bus mode: loop forced to MANUAL until a node id is assigned");
+            event("{\"ev\":\"warn\",\"msg\":\"node0 bus: loop manual\"}");
+        } else if (!node0_bus) {
+            node0_warned = false;
+        }
+
         range_in_t in = {
             .hv_on = hs == HV_RAMP || hs == HV_ON || hs == HV_HOLD,
             .bias_v = bias,
@@ -148,7 +199,7 @@ static void range_task(void *arg)
             .tia_20k = drv_gpio_tia_get(),
             .link_valid = can_link_link_valid(),
             .err_class = can_link_err_class(),
-            .automatic = s_auto,
+            .automatic = s_auto && !node0_bus,
             .bus_mode = can_link_mode() == CAN_MODE_BUS && can_link_master_seen(),
             .hv_min_v = param_v(PARAM_HV_MIN, 100.0f),
             .hv_max_v = param_v(PARAM_HV_MAX, 200.0f),
@@ -185,7 +236,21 @@ static void range_task(void *arg)
                 }
             }
         }
-        if (controlling) {
+        /* Explicit manual code target (console / CAN / self-test), loop manual only. */
+        const bool code_target = s_man_code >= 0;
+        if (code_target && (s_auto || hs != HV_ON)) {
+            s_man_code = -1;                                   /* stale: loop went auto or HV left ON */
+        } else if (code_target) {
+            int32_t next = range_manual_code_step(s_code, s_man_code, bias, in.hv_min_v, in.hv_max_v,
+                                                  BOARD_HV_V_PER_CODE, DAC_STEP_MAX_CODES,
+                                                  hvg_code_min(in.hv_max_v));
+            if (next != s_code && mcp4728_write_volatile(BOARD_DAC_CH_HV, (uint16_t)next) == ESP_OK) {
+                s_code = (uint16_t)next;
+            }
+        }
+        if (s_man_code >= 0) {
+            manual_trim = false;                               /* the explicit target wins over the one-shot trim */
+        } else if (controlling) {
             if (out.state == RANGE_MANUAL) {
                 /* README s.6.5: hold the code; a changed hv_set triggers one closed-loop trim */
                 if (fabsf(in.hv_set_v - last_hv_set) > MANUAL_SET_CHANGE_V) {
@@ -196,13 +261,13 @@ static void range_task(void *arg)
                     if (fabsf(out.bias_target_v - bias) <= MANUAL_TRIM_DONE_V) {
                         manual_trim = false;
                     } else {
-                        dac_step(out.bias_target_v, bias);
+                        dac_step(out.bias_target_v, bias, in.hv_max_v);
                     }
                 }
             } else {
                 manual_trim = false;
                 last_hv_set = in.hv_set_v;
-                dac_step(out.bias_target_v, bias);
+                dac_step(out.bias_target_v, bias, in.hv_max_v);
             }
         } else {
             manual_trim = false;
