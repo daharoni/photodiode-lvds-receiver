@@ -62,6 +62,16 @@ jobs:
           path: firmware/esp32
           command: idf.py merge-bin -o receiver-esp32c6-merged.bin
 
+      - name: Assemble web flasher (page + merged image + manifest)
+        run: |
+          set -euo pipefail
+          out=firmware/esp32/build/web
+          mkdir -p "$out"
+          cp firmware/esp32/web/index.html firmware/esp32/web/app.js firmware/esp32/web/style.css "$out"/
+          cp firmware/esp32/build/receiver-esp32c6-merged.bin "$out"/
+          ver="$(tr -d '[:space:]' < firmware/esp32/version.txt)"
+          sed "s/__VERSION__/${ver}/" firmware/esp32/web/manifest.template.json > "$out/manifest.json"
+
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v4
         with:
@@ -74,6 +84,7 @@ jobs:
             firmware/esp32/build/partition_table/partition-table.bin
             firmware/esp32/build/receiver-esp32c6-merged.bin
             firmware/esp32/build/flasher_args.json
+            firmware/esp32/build/web/**
           if-no-files-found: error
           retention-days: 14
 

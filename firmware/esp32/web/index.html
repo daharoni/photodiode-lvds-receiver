@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Receiver module: flash and verify</title>
+<link rel="stylesheet" href="style.css">
+<script type="module" src="https://unpkg.com/esp-web-tools@10.2.1/dist/web/install-button.js?module"></script>
+</head>
+<body>
+<main>
+<h1>Receiver module: flash and verify</h1>
+<p class="note">ESP32-C6 controller firmware for the optical receiver module. PROPOSED workflow; not tested on hardware.</p>
+
+<section>
+  <h2>1. Flash</h2>
+  <esp-web-install-button manifest="manifest.json">
+    <button slot="activate">Install firmware</button>
+    <span slot="unsupported">Web Serial is not available in this browser. Use Chrome or Edge.</span>
+    <span slot="not-allowed">Web Serial needs https:// or http://localhost.</span>
+  </esp-web-install-button>
+  <p class="note">Close the console below before flashing (one program can open the port at a time). After a flash the board resets and the USB device re-enumerates; reconnect the console afterwards.</p>
+</section>
+
+<section>
+  <h2>2. Console</h2>
+  <div class="row">
+    <button id="connect">Connect console</button>
+    <button id="reconnect" hidden>Reconnect</button>
+    <button id="disconnect" disabled>Disconnect</button>
+    <span id="state" class="state">disconnected</span>
+  </div>
+  <div class="row">
+    <button class="cmd" data-cmd="status -j" disabled>status -j</button>
+    <button class="cmd" data-cmd="selftest quick" disabled>selftest quick</button>
+    <button class="cmd" id="full" disabled>selftest full</button>
+    <button class="cmd" data-cmd="stream on" disabled>stream on</button>
+    <button class="cmd" data-cmd="stream off" disabled>stream off</button>
+    <button id="clear">Clear log</button>
+  </div>
+  <pre id="log" aria-live="off"></pre>
+  <form id="sendform" class="row">
+    <input id="line" type="text" autocomplete="off" spellcheck="false" placeholder="console command, e.g. help" disabled>
+    <button type="submit" disabled>Send</button>
+  </form>
+  <p id="boot" class="note"></p>
+</section>
+
+<section>
+  <h2>3. Self-test result</h2>
+  <div id="selftest" class="note">No result yet. Run <code>selftest quick</code>.</div>
+</section>
+
+<section>
+  <h2>4. Live telemetry</h2>
+  <div id="telemetry" class="note">Nothing received. Press <code>stream on</code>.</div>
+</section>
+</main>
+
+<footer>
+  <p>Web Serial needs Chrome or Edge (desktop). Serve this page from the repo's GitHub Pages or locally with <code>python3 -m http.server</code> in this directory (https:// or http://localhost is required).</p>
+  <p>UNRESOLVED: nothing here has been tested on hardware. Open items are in docs/research/esp32-usb-tooling.md s.7: browser reset into download mode from running C6 firmware, coexistence of ESP Web Tools and this console, clean-machine tests on Windows, macOS and Linux.</p>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

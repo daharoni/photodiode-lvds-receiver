@@ -1,0 +1,12 @@
+{
+  "name": "Optical receiver module (ESP32-C6)",
+  "version": "__VERSION__",
+  "new_install_prompt_erase": false,
+  "new_install_improv_wait_time": 0,
+  "builds": [
+    {
+      "chipFamily": "ESP32-C6",
+      "parts": [{ "path": "receiver-esp32c6-merged.bin", "offset": 0 }]
+    }
+  ]
+}
