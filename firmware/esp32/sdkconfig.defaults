@@ -1,0 +1,32 @@
+# ESP32-C6 module controller. PROPOSED; README s.2.
+CONFIG_IDF_TARGET="esp32c6"
+
+# Console on the native USB Serial/JTAG port (esp32-usb-tooling.md s.3).
+CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG=y
+
+# Task watchdog panics (reset releases IO0, so HV_DIS goes high). README s.5.
+CONFIG_ESP_TASK_WDT_EN=y
+CONFIG_ESP_TASK_WDT_INIT=y
+CONFIG_ESP_TASK_WDT_PANIC=y
+CONFIG_ESP_TASK_WDT_TIMEOUT_S=5
+CONFIG_ESP_INT_WDT=y
+
+# Brown-out detector on (README s.2).
+CONFIG_ESP_BROWNOUT_DET=y
+
+# Quiet logs: WARN and above only (protocol doc s.4).
+CONFIG_LOG_DEFAULT_LEVEL_WARN=y
+CONFIG_ESP_SYSTEM_PANIC_PRINT_REBOOT=y
+
+# Radio is never initialised (decision 11). CONFIG_ESP_WIFI_ENABLED and
+# CONFIG_ESP_PHY_ENABLED are hidden options in IDF 5.5 (cannot be set to n);
+# the radio is kept out by not requiring esp_wifi/bt/esp_netif and never
+# calling their init functions (verified: no esp_wifi_init / bt init /
+# esp_phy_enable symbol in the linked ELF of the stub build).
+CONFIG_BT_ENABLED=n
+
+# 4 MB flash and custom partition table.
+CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+CONFIG_PARTITION_TABLE_FILENAME="partitions.csv"

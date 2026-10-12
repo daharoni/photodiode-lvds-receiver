@@ -95,6 +95,7 @@ CAN id = u16 `param`. Console unit = what you type or read. CAN unit = the i32 o
 | faults_clear | 0x0051 | `faults clear` | 1 | W | clear latched faults that are no longer true |
 | tlm_ms | 0x0060 | ms | ms | W,S | TLM_ANALOG period (min 50, default 100); other frames scale |
 | bus_timeout | 0x0061 | ms | ms | W,S | master heartbeat timeout in bus mode, default 2000 |
+| hv_auto | 0x0062 | 0/1 | 0/1 | W,S | enable HV automatically when a master is heard and no fault is latched (firmware README s.4 step 8c); default 0 |
 | temp | 0x0070 | C | 0.1 C | R | die temperature (not APD temperature) |
 | selftest_run | 0x0080 | `selftest [quick\|full]` | 1 quick, 2 full | W | start self-test (async result) |
 | save | 0x0090 | `save` | 1 | W | persist all S parameters to NVS |
@@ -192,7 +193,8 @@ The CAN master (FPGA side) emits the same keys from the TLM frames so one dashbo
 | 11 | TIA_5K_SAT | RSSI rail at 5k and bias at hv_min: no further range | none |
 | 12 | SELFTEST | last self-test failed | none |
 | 13 | LOOP_LIMIT | bias pinned at hv_min or hv_max for more than 10 s | none |
-| 14-15 | reserved | | |
+| 14 | NVS | parameters failed CRC or limits at boot; factory defaults loaded (firmware README s.4 step 2) | none, telemetry |
+| 15 | reserved | | |
 
 PROPOSED. Which faults force HV_DIS high follows firmware README s.5.
 

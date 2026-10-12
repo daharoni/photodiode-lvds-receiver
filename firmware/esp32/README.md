@@ -4,6 +4,12 @@ Labels: VERIFIED (document, revision and page cited), PROPOSED (design intent), 
 
 Hard rules carried over (CLAUDE.md): slicing is analog and the module decodes with the ESP32 unprogrammed; this firmware only does slow range trim (APD bias, TIA 20k/5k), monitoring, HV gating, identity, telemetry and the CAN link. The radio is never initialised (decision 11).
 
+## 0. Status
+
+A firmware skeleton exists (2026-10-12), PROPOSED and not run on hardware: ESP-IDF project `receiver_esp32c6` (v0.1.0) with `main/` (boot steps 1-8 of s.4, parameter wiring), and components `board`, `drv_gpio`, `app_safety`, `params`, `app_console` (the s.3 `console/`, renamed because a project component named `console` shadows ESP-IDF's own), `app_telemetry`, plus the drivers, sensing, CAN link, range loop and self-test components written alongside. Build status: see the line below; the first board has not been programmed, no behaviour in this plan has been observed, and every threshold remains a first guess. Hardware-in-the-loop procedure: `firmware/esp32/HIL.md`.
+
+Build: the full project (all twelve components and `main`) compiles and links with ESP-IDF v5.5.5 for esp32c6 on Daniel's Mac (2026-10-12, `source tools/esp-idf-env.sh && cd firmware/esp32 && idf.py set-target esp32c6 && idf.py build`): no warnings, app 0x4fc50 bytes, 84 % of the 2 MB factory partition free. The host unit tests under `test_host/` (CAN codec, range state machine, M estimator: 30 tests) pass with ctest. Nothing has been flashed or run on hardware; the drivers, the TWAI wrapper, the self-test and the boot sequence are untested beyond compiling.
+
 ## 1. What the hardware gives the firmware (all from docs/schematic/*.md, PROPOSED hardware)
 
 | Function | Pin / part | Note |

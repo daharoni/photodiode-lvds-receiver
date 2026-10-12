@@ -1,0 +1,6 @@
+# Name,   Type, SubType, Offset,  Size, Flags
+# PROPOSED: 24 KB nvs (README s.6.6), no phy_init (radio never initialised),
+# one factory app of 2 MB (>= 1.5 MB required). Flash is 4 MB on the
+# ESP32-C6-MINI-1-N4 (MINI DS v1.5 Table 1-2 p.4, "4 MB (Quad SPI)", VERIFIED).
+nvs,      data, nvs,     0x9000,  0x6000,
+factory,  app,  factory, 0x10000, 0x200000,
