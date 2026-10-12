@@ -62,15 +62,18 @@ jobs:
           path: firmware/esp32
           command: idf.py merge-bin -o receiver-esp32c6-merged.bin
 
-      - name: Assemble web flasher (page + merged image + manifest)
+      - name: Assemble web flasher (page + vendored ESP Web Tools + merged image + manifest)
+        # The build directory is created by the ESP-IDF container as root, so the
+        # flasher is assembled next to it, in firmware/esp32/web-dist/ (ignored by git).
         run: |
           set -euo pipefail
-          out=firmware/esp32/build/web
+          out=firmware/esp32/web-dist
           mkdir -p "$out"
-          cp firmware/esp32/web/index.html firmware/esp32/web/app.js firmware/esp32/web/style.css "$out"/
+          cp -r firmware/esp32/web/index.html firmware/esp32/web/app.js firmware/esp32/web/style.css firmware/esp32/web/vendor "$out"/
           cp firmware/esp32/build/receiver-esp32c6-merged.bin "$out"/
           ver="$(tr -d '[:space:]' < firmware/esp32/version.txt)"
           sed "s/__VERSION__/${ver}/" firmware/esp32/web/manifest.template.json > "$out/manifest.json"
+          ls -l "$out"
 
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v4
@@ -84,7 +87,14 @@ jobs:
             firmware/esp32/build/partition_table/partition-table.bin
             firmware/esp32/build/receiver-esp32c6-merged.bin
             firmware/esp32/build/flasher_args.json
-            firmware/esp32/build/web/**
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload web flasher artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: esp32-web-flasher
+          path: firmware/esp32/web-dist/
           if-no-files-found: error
           retention-days: 14
 

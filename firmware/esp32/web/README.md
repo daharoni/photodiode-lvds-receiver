@@ -14,7 +14,7 @@ Static page (no build step, no framework) for the ESP32-C6 module controller. PR
 
 ## How CI fills it
 
-The `build` job in `.github/workflows/esp32-firmware.yml` copies this directory to `firmware/esp32/build/web/`, copies the merged image next to it and writes `manifest.json` from the template with the version from `firmware/esp32/version.txt`. The folder is part of the `esp32-firmware` artifact. There is deliberately no Pages deploy job; Daniel decides on hosting.
+The `build` job in `.github/workflows/esp32-firmware.yml` copies this directory (including `vendor/`) to `firmware/esp32/web-dist/` (outside the root-owned container build directory, git-ignored), copies the merged image next to it and writes `manifest.json` from the template with the version from `firmware/esp32/version.txt`. The folder is uploaded as the `esp32-web-flasher` artifact, separate from `esp32-firmware`. There is deliberately no Pages deploy job; Daniel decides on hosting.
 
 ## Serve locally
 
