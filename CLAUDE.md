@@ -39,7 +39,8 @@ Performance beats cost. No backward compatibility with the Miniscope Zero headst
 
 ## Repo map
 
-- `docs/` : requirements, architecture, decision log, bringup, research, datasheets, calculations
+- `docs/` : requirements, architecture, decision log, bringup, research, datasheets, calculations, pcb (fab settings, placement plan), simulation, firmware protocol
+- `docs/receiver-guide.html` : self-contained field guide DERIVED from the authority docs; update it in the same commit as any design change it describes. `docs/schematic/overview.html` is the parts/pinout page.
 - `hardware/pcb/` : KiCad project; `hardware/mechanical/` : enclosure (TBD)
 - `firmware/` : ECP5 gateware (`ecp5/`); ESP32-C6 module firmware (`esp32/`, TBD)
 - `tools/` : helper scripts
@@ -61,6 +62,7 @@ Performance beats cost. No backward compatibility with the Miniscope Zero headst
 - CLI: `/Users/daharoni/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli` (KiCad 10.0.5; not on PATH) (ERC, DRC, exports).
 - Six sheets since decision 12: Power, Front End, Slicer, Monitor, Connector, Controller (the detector/AGC sheets are gone).
 - Fab outputs under `hardware/pcb/*/fab/` are ignored by git except under `release/`.
+- Layout status (2026-10-12): 6-layer JLC06161H-3313, 75 x 50 mm placeholder outline, 223 footprints placed, nothing routed; see `hardware/pcb/receiver-module/README.md`.
 
 ## Key standing corrections (details in decision-log.md)
 
@@ -73,9 +75,9 @@ TIA input, HV off until the ESP32 drives HV_DIS low); module DACs (MCP4728) are 
 
 ## Bring-up gates
 
-- G1 fast-path proof: APD facts (VBR, gain vs bias, tempco), APD bias supply, supplies, manual-gain optical eye, TIA->VGA interface.
-- G2 detector proof: high/low capture vs eye histograms, error bounds, jitter added.
-- G3 closed-loop proof: loop gain/phase, anti-windup, startup and fade behavior, LOS/latch.
+- G1 fast-path proof: APD facts (VBR, gain vs bias, tempco), APD bias supply, supplies, optical eye at the fixed post-amp gain, TIA->post-amp coupling, comparator small-signal, eFuse, fan-out, USB.
+- G2 range-trim proof: RSSI vs photocurrent, single-setting BER window, trim-loop step response, M vs bias and temperature.
+- G3 system-behaviour proof: dark start, fade and return, DAC_TH eye walk, latch/timeout/CAN, 6.63 MHz field injection.
 - G4 system proof: BER against known truth, redundancy tests, pre-order CAD checks.
 Do not order PCBs before the pre-order checks in G4 pass.
 

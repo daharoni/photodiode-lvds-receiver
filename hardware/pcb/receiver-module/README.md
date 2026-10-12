@@ -4,7 +4,7 @@ Photodiode LVDS Receiver, Rev A0, Aharoni Lab, UCLA.
 
 **Nothing in this project is fabrication-approved.** The six hierarchical sheets are populated
 with lab-library parts, values and footprints per `docs/schematic/rev-a-sheet-specs.md`; project ERC on the root
-reports 0 errors and 0 warnings (kicad-cli 10.0.5, 2026-10-09, revision 4 after decision 14). The netlist has 223 components (Power 79, Controller 55, Connector 33 including mounting holes H1-H4 added 2026-10-09, Front End 26, Slicer 17, Monitor 13) on 144 nets. The PCB has the 220 imported footprints, unplaced; run "Update PCB from Schematic" to pull in H1-H4 (223 in total). H1-H4 need lab-library PR #62 (branch `add-mounting-holes`, symbol and footprint `MountingHole_2.2mm_M2_Pad_Via`) merged or checked out so the symbol resolves. Status labels used
+reports 0 errors and 0 warnings (kicad-cli 10.0.5, 2026-10-09, revision 4 after decision 14). The netlist has 223 components (Power 79, Controller 55, Connector 33 including mounting holes H1-H4 added 2026-10-09, Front End 26, Slicer 17, Monitor 13) on 144 nets. The PCB carries all 223 footprints (H1-H4 included), placed by the first-pass placement script; nothing is routed (see Board below). H1-H4 need lab-library PR #62 (branch `add-mounting-holes`, symbol and footprint `MountingHole_2.2mm_M2_Pad_Via`) merged or checked out so the symbol resolves. Status labels used
 in notes: VERIFIED / PROPOSED / UNRESOLVED.
 
 ## Generated sheets
