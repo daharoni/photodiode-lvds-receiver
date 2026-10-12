@@ -10,7 +10,7 @@ Static page (no build step, no framework) for the ESP32-C6 module controller. PR
 ## Sources
 
 - ESP Web Tools manifest schema and button usage: https://esphome.github.io/esp-web-tools/ (read 2026-10-12). Fields used: `name`, `version`, `new_install_prompt_erase`, `new_install_improv_wait_time` (0 disables Improv detection), `builds[].chipFamily` = `ESP32-C6`, `parts[].path/offset`. The site must be served over https://; cross-origin manifests/firmware need CORS.
-- The page imports `esp-web-tools@10.2.1` from unpkg. The version exists on npm (checked with `npm view esp-web-tools versions`); the doc page itself shows `@10`. Pinned exactly; 10.2.1 was not run here.
+- The page loads ESP Web Tools from `vendor/esp-web-tools/` (the unmodified `dist/web` bundle of the npm package `esp-web-tools@10.2.1`, Apache-2.0, LICENSE included), not from a CDN: no third-party script at run time and no network needed beyond the manifest and image. To update: `npm pack esp-web-tools@<ver>` and copy `package/dist/web/*.js` over the directory. 10.2.1 was not run here.
 
 ## How CI fills it
 
