@@ -5,14 +5,18 @@
 //
 // Ports (clk_c domain, 50 MHz, synchronous active-high reset):
 //   lock             lane lock from lane_rx (aligned and LOCK_SYMBOLS valid symbols)
-//   err_pulse        1 clk per invalid symbol (code_err or disp_err)
+//   err_pulse        1 clk per invalid symbol (code_err or disp_err) or idle_mismatch (lane_rx err_pulse2)
+//   frame_err_pulse  1 clk per failed frame (frame_rx frame_err_p: CRC/length/abort).  A frame
+//                    failure is an error even if every symbol was valid (an inverted or otherwise
+//                    mis-decoded lane has valid 8b/10b symbols, review finding F1).  If it coincides
+//                    with err_pulse both count (the window count is the sum).
 //   los              loss of signal from the watchdog (los_sync of watchdog.v)
 //   nibble[3:0]      {valid, class[2:0]} of the LAST CLOSED window
 //   window_tick      1 clk pulse when a window closes and nibble updates
 //   err_count_last   error count of the last closed window, saturating at 65535
 //
 // Rules (a window is WINDOW_CYCLES clocks; the closing clock belongs to it):
-//   count = err_pulse clocks in the window
+//   count = err_pulse clocks + frame_err_pulse clocks in the window
 //   class: 0 none; 1 = 1-2; 2 = 3-8; 3 = 9-32; 4 = 33-128; 5 = >128;
 //          7 = LOS: los high on ANY clock of the window, or lock low on ANY
 //          clock of the window
@@ -30,6 +34,7 @@ module lane_monitor #(
   input  wire        rst,
   input  wire        lock,
   input  wire        err_pulse,
+  input  wire        frame_err_pulse,
   input  wire        los,
   output reg  [3:0]  nibble,
   output reg         window_tick,
@@ -42,7 +47,7 @@ module lane_monitor #(
   reg          los_seen, nolock_seen;
 
   wire         last   = (cnt == WINDOW_CYCLES - 1);
-  wire [16:0]  errs_s = {1'b0, errs} + {16'd0, err_pulse};
+  wire [16:0]  errs_s = {1'b0, errs} + {16'd0, err_pulse} + {16'd0, frame_err_pulse};
   wire [15:0]  total  = errs_s[16] ? 16'hFFFF : errs_s[15:0];
   wire         los_w  = los_seen | los;
   wire         nolk_w = nolock_seen | ~lock;

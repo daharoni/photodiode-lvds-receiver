@@ -8,6 +8,9 @@ Flow (README section 9, row tb/system):
      start phases, lane skew 0/500/2000 UI by prepending the periodic idle pattern) into the
      lanes as 4-sample words, one per clk_c cycle (50 MHz core clock, 20 ns, samples_valid held high).  Lane 1 is forced to a
      constant level for a stretch in the middle, then restored.
+     F1: lane INV_LANE is fed polarity-inverted (every word XOR 0xF) and must auto-correct (lane_rx
+     AUTO_INVERT): its pol_inv rises, it contributes frames (frames_ok within 10 % of the frames sent,
+     its error count small) and the other lanes stay uninverted.
   3. Python UART receivers decode host_txd (3 Mbaud frames, 16.67 clocks per bit) and esp_txd (1 Mbaud, 0xA5 messages).
 All expectations come from the captured/modelled stream, never from the RTL.
 """
@@ -30,6 +33,7 @@ PPM = [-300, 0, 300]
 PHASE = [0.3, 1.45, 2.6]
 JIT = 0.2
 KILL_LANE = 1
+INV_LANE = 0                     # fed inverted, auto-corrected by lane_rx (F1)
 KILL_A = ENABLE_AT + 100 * FRAME_CYC
 KILL_B = KILL_A + 40000          # 800 us at 20 ns: > WD timeout (40 us) + 2 monitor windows (400 us)
 MON_WINDOW = 10000
@@ -163,6 +167,7 @@ async def end_to_end(dut):
         a, b = (KILL_A, KILL_B) if l == KILL_LANE else (0, 0)
         for w in range(a, b):
             lanes[l][w] = 0x0                        # constant low level, no transitions
+    lanes[INV_LANE] = [w ^ 0xF for w in lanes[INV_LANE]]    # polarity-inverted lane (8b/10b is complement symmetric)
     dut._log.info("lane streams ready (%d words each)", len(lanes[0]))
 
     # ---------------- phase 2: reset and replay
@@ -203,6 +208,15 @@ async def end_to_end(dut):
     merged_ok = int(dut.merged_ok.value)
     lost = int(dut.frames_lost.value)
     dups = int(dut.dups.value)
+    # F1: the inverted lane was corrected by lane_rx and delivered frames on its own
+    lane_scope = dut.u_core.g_lane[INV_LANE]
+    inv_ok = int(lane_scope.u_frx.frames_ok.value)
+    inv_fe = int(lane_scope.u_frx.frame_err.value)
+    pol = int(dut.u_core.pol_inv.value)
+    dut._log.info("inverted lane %d: pol_inv vector %s, frames_ok=%d (of %d), frame_err=%d", INV_LANE, bin(pol), inv_ok, nf, inv_fe)
+    assert pol == 1 << INV_LANE, f"pol_inv {pol:0{N}b}: only lane {INV_LANE} should be inverted"
+    assert inv_ok >= 0.9 * nf, f"inverted lane delivered only {inv_ok} of {nf} frames"
+    assert inv_fe <= 3, f"inverted lane frame_err={inv_fe}"
     dut._log.info("counters: frames=%d merged_ok=%d lost=%d dups=%d host_sent=%d host_drops=%d",
                   nf, merged_ok, lost, dups, host_sent, host_drops)
 

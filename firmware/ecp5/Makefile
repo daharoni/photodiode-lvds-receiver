@@ -35,11 +35,16 @@ lint: | $(BUILD)
 	@echo "verilator lint over: $(RTL_ALL)"
 	verilator --lint-only -Wall --timing -Irtl $(RTL_ALL) --top-module $(TOP)
 
+# Every tb/*/Makefile directory, then the ulx3s_top smoke test (tb/system/Makefile.top, the real top with
+# the simulation PLL model) as its own entry so CI covers the synthesised top too.
 test:
 	@pass=0; fail=0; for d in $(TBDIRS); do \
 	  echo "=== $$d"; \
 	  if $(MAKE) -C $$d; then pass=$$((pass+1)); else fail=$$((fail+1)); echo "FAILED: $$d"; echo "test summary: $$pass passed, $$fail failed (stopped at first failure)"; exit 1; fi; \
-	done; echo "test summary: $$pass passed, $$fail failed"
+	done; \
+	echo "=== tb/system (ulx3s_top smoke, Makefile.top)"; \
+	if $(MAKE) -C tb/system -f Makefile.top && $(MAKE) -C tb/system -f Makefile.top check; then pass=$$((pass+1)); else fail=$$((fail+1)); echo "FAILED: tb/system top smoke"; echo "test summary: $$pass passed, $$fail failed (stopped at first failure)"; exit 1; fi; \
+	echo "test summary: $$pass passed, $$fail failed ($$pass entries: $(words $(TBDIRS)) block directories + 1 system top smoke)"
 
 $(BUILD):
 	mkdir -p $(BUILD)
@@ -83,3 +88,4 @@ flash: $(BUILD)/ulx3s.bit
 clean:
 	rm -rf build
 	@for d in $(TBDIRS); do $(MAKE) -C $$d clean 2>/dev/null || true; done
+	@rm -rf tb/system/sim_build_top tb/system/results_top.xml

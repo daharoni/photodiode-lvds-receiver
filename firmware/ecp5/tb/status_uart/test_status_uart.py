@@ -84,7 +84,7 @@ def pack(vals, w):
     return sum((v & ((1 << w) - 1)) << (w * i) for i, v in enumerate(vals))
 
 
-def drive(dut, nib, lock, err, fe, glob, okl=None):
+def drive(dut, nib, lock, err, fe, glob, okl=None, inv=None, rs=0):
     dut.nibble.value = pack(nib, 4)
     dut.lock.value = pack(lock, 1)
     dut.err_count.value = pack(err, 16)
@@ -95,6 +95,8 @@ def drive(dut, nib, lock, err, fe, glob, okl=None):
     dut.dups.value = glob[2]
     dut.host_drops.value = glob[3]
     dut.frames_sent.value = glob[4]
+    dut.pol_inv.value = pack(inv if inv is not None else [0] * N, 1)
+    dut.resyncs.value = rs
 
 
 def rand_state(rng):
@@ -105,11 +107,13 @@ def rand_state(rng):
         fe=[rng.randrange(65536) for _ in range(N)],
         okl=[rng.choice([0, 10, 100, 12345, 65535]) for _ in range(N)],
         glob=[rng.choice([0, 7, 65535, rng.randrange(65536)]) for _ in range(5)],
+        inv=[rng.randrange(2) for _ in range(N)],
+        rs=rng.choice([0, 1, 65535, rng.randrange(65536)]),
     )
 
 
 def drive_state(dut, s):
-    drive(dut, s["nib"], s["lock"], s["err"], s["fe"], s["glob"], s["okl"])
+    drive(dut, s["nib"], s["lock"], s["err"], s["fe"], s["glob"], s["okl"], s["inv"], s["rs"])
 
 
 @cocotb.test()
@@ -163,21 +167,22 @@ def parse_report(text):
     lines = text.split("\r\n")
     assert lines[-1] == "", repr(lines[-1])
     lines = lines[:-1]
-    m = re.fullmatch(r"LINK seq=(\d+)((?: L\d+=[0-9A-F])+) ok=(\d+) lost=(\d+) dup=(\d+) hdrop=(\d+) sent=(\d+)", lines[0])
+    m = re.fullmatch(r"LINK seq=(\d+)((?: L\d+=[0-9A-F])+) ok=(\d+) lost=(\d+) dup=(\d+) hdrop=(\d+) sent=(\d+) rs=(\d+)", lines[0])
     assert m, repr(lines[0])
     seq = int(m.group(1))
     lanes = re.findall(r" L(\d+)=([0-9A-F])", m.group(2))
     assert [int(a) for a, _ in lanes] == list(range(N))
     nibs = [int(b, 16) for _, b in lanes]
     glob = [int(m.group(i)) for i in range(3, 8)]
+    rs = int(m.group(8))
     per = []
     assert len(lines) == 1 + N, len(lines)
     for i, ln in enumerate(lines[1:]):
-        mm = re.fullmatch(r"LANE(\d+) lock=([01]) err=(\d+) fe=(\d+) ok=(\d+)", ln)
+        mm = re.fullmatch(r"LANE(\d+) lock=([01]) err=(\d+) fe=(\d+) ok=(\d+) inv=([01])", ln)
         assert mm, repr(ln)
         assert int(mm.group(1)) == i
-        per.append(tuple(int(mm.group(j)) for j in range(2, 6)))
-    return seq, nibs, glob, per
+        per.append(tuple(int(mm.group(j)) for j in range(2, 7)))
+    return seq, nibs, glob, rs, per
 
 
 @cocotb.test()
@@ -212,11 +217,12 @@ async def ascii_report(dut):
     assert len(reports) >= 2, len(reports)
     for k, r in enumerate(reports[:2]):
         s = sa if k == 0 else sb
-        seq, nibs, glob, per = parse_report(r)
+        seq, nibs, glob, rs, per = parse_report(r)
         assert seq == k
         assert nibs == s["nib"], (nibs, s["nib"])
         assert glob == s["glob"], (glob, s["glob"])
-        assert per == [(s["lock"][i], s["err"][i], s["fe"][i], s["okl"][i]) for i in range(N)]
+        assert rs == s["rs"], (rs, s["rs"])
+        assert per == [(s["lock"][i], s["err"][i], s["fe"][i], s["okl"][i], s["inv"][i]) for i in range(N)]
     await FallingEdge(dut.clk)
 
 
@@ -244,4 +250,37 @@ async def ascii_enable_low_idles_line(dut):
         await FallingEdge(dut.clk)
         assert int(dut.ftdi_txd.value) == 1
     assert len(ftdi.bytes) <= n_before + 1
+    await FallingEdge(dut.clk)
+
+
+@cocotb.test()
+async def ftdi_busy_matches_character_framing(dut):
+    """F4: ftdi_busy is high from the start bit to the end of the stop bit of every ASCII character
+    and low between characters and while ascii_enable = 0 (the top switches the FTDI mux only when low)."""
+    await setup(dut, asc_en=1)
+    drive_state(dut, rand_state(random.Random(9)))
+    bit = 10_000_000 / 115_200            # clocks per bit (CLK_HZ_TB = 10 MHz)
+    prev_txd, start, n_chars, low_seen = 1, None, 0, 0
+    t = 0
+    while n_chars < 40 and t < APERIOD * 2:
+        await FallingEdge(dut.clk)
+        t += 1
+        txd, busy = int(dut.ftdi_txd.value), int(dut.ftdi_busy.value)
+        if txd == 0 and prev_txd == 1 and start is None:      # start bit
+            start = t
+        if start is not None:
+            if t - start < 9 * bit - 1:
+                assert busy == 1, f"ftdi_busy low {t - start} clocks into a character"
+            if not busy:
+                assert t - start >= 10 * bit - 2, f"character ended after {t - start} clocks"
+                n_chars += 1
+                start = None
+        elif not busy:
+            low_seen += 1
+        prev_txd = txd
+    assert n_chars >= 40 and low_seen > 0
+    dut.ascii_enable.value = 0
+    for _ in range(4):
+        await FallingEdge(dut.clk)
+    assert int(dut.ftdi_busy.value) == 0 and int(dut.ftdi_txd.value) == 1
     await FallingEdge(dut.clk)

@@ -42,7 +42,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install OSS CAD Suite (pinned release)
-        uses: YosysHQ/setup-oss-cad-suite@0d9c798a9db910ff8ea5e3b6ba077a4e5847f352 # v3 (2024-01-29), pinned to the tag's commit
+        uses: YosysHQ/setup-oss-cad-suite@aefa8397bbf8fc6670a0a62af9805a89738f3cde # v3 (2024-01-29): the commit the annotated tag v3 points to
         with:
           version: "2026-10-12"
           python-override: true

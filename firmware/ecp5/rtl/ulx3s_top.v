@@ -9,10 +9,21 @@
 // Parameters
 //   N_LANES           LVDS lane inputs (default 7: gp/gn 8,9,10,18,19,20,21, README s.2;
 //                     constraints/ulx3s.lpf only defines 7 lanes)
-//   LANE_INVERT       per-lane polarity bit vector (bit i = lane i), default all ones (README s.2)
+//   LANE_INVERT       per-lane INITIAL polarity (bit i = lane i), default all ones.  1 means the pad is LOW
+//                     for a logic one (the same meaning as lane_phy INVERT: the samples are inverted).  It
+//                     is the initial value of lane_rx's `inv` flop; lane_phy itself is built with INVERT = 0.
+//                     On the cable SSTXp is HIGH for a logic one (README s.2), but which pin of the pair
+//                     the breakout routes to the gp pad is not designed yet, so the polarity is not
+//                     known and lane_rx detects it (AUTO_INVERT, F1: 8 idle pairs, then a flip and a
+//                     realign); a wrong initial value only costs that detection time.
+//   AUTO_INVERT       1 (default): lane_rx automatic polarity detection (rtl/lane_rx.v header)
+//   ASCII_PERIOD      status_uart ASCII report period in clk_c cycles (default 50_000_000 = 1 s; the
+//                     smoke test shortens it)
 //   LOOPBACK_INTERNAL 1 (default): lane 0's samples come from frame_tx's tx_bit (replicated as a
 //                     4-sample word {4{tx_bit}} every clk_c cycle) instead of the pad, so the
-//                     first bench test needs no wiring; 0: all lanes from the pads.  The lane 0
+//                     first bench test needs no wiring (the loopback samples are XORed with LANE_INVERT[0],
+//                     i.e. they are presented in the polarity lane_rx initially expects);
+//                     0: all lanes from the pads.  The lane 0
 //                     pad stays instantiated either way (and still drives lane_phy).
 //   FTDI_DEBOUNCE     clk_c cycles btn[2] must be stable (default 500_000 = 10 ms at 50 MHz)
 //
@@ -31,17 +42,28 @@
 //   wifi_gpio17      FPGA RX from ESP32 Serial1 TX (unused)
 //
 // FTDI mux (README s.7): a debounced rising edge of btn[2] requests the other mode; the mode flop
-// changes only on a clk_c cycle in which both the ASCII status txd and the host sink txd are high
-// (idle), so no byte is cut on the pin.  The ASCII status path is held in reset while host mode is
+// changes only on a clk_c cycle in which the UART the pin shows NOW is between characters
+// (ftdi_tx_busy low in status mode, host_tx_busy low in host mode), so the departing character or
+// byte is never cut on the pin (F4: the earlier level test "both txd high" is true inside every '1'
+// data bit).  Waiting for BOTH uart_tx instances to be idle at once was tried first and starves:
+// the host sink runs back-to-back at 3 Mbaud and its gaps never coincided with the ASCII gaps in a
+// 30 ms simulation (switch never happened).  Consequence, by design: when the pin is switched TO
+// host mode the sink is usually mid-frame, so the host receiver sees a partial first byte/frame
+// and resynchronises on the next frame (CRC-protected); switching to status mode is clean (the ASCII
+// path is held in reset while host mode is on, so its pin is idle high).  The debounced button state
+// is initialised from the synchronised pin during reset, so a button held at reset does not toggle
+// host mode at boot (F4).  The ASCII status path is held in reset while host mode is
 // on (status_uart ascii_enable = ~host_mode); a host frame in progress when the mode is switched
-// away is abandoned on the pin, the sink itself keeps running.  Reset: host mode off.
+// away is abandoned on the pin at a byte boundary, the sink itself keeps running.  Reset: host mode off.
 // wifi_en is not driven (ESP32 left to its own default).
 `default_nettype none
 module ulx3s_top #(
     parameter N_LANES           = 7,
     parameter LANE_INVERT       = {N_LANES{1'b1}},
+    parameter AUTO_INVERT       = 1,
     parameter LOOPBACK_INTERNAL = 1,
-    parameter FTDI_DEBOUNCE     = 500_000
+    parameter FTDI_DEBOUNCE     = 500_000,
+    parameter ASCII_PERIOD      = 50_000_000
 ) (
     input  wire               clk_25mhz,
     input  wire [6:0]         btn,
@@ -79,10 +101,10 @@ module ulx3s_top #(
     generate
         for (i = 0; i < N_LANES; i = i + 1) begin : g_lane
             wire [3:0] ps;
-            lane_phy #(.INVERT(LANE_INVERT[i])) u_phy (
+            lane_phy #(.INVERT(0)) u_phy (
                 .lvds_p(lane_p[i]), .clk_s(clk_s), .clk_c(clk_c), .samples(ps));
             if (i == 0 && LOOPBACK_INTERNAL != 0) begin : g_lb
-                assign samples[3:0] = {4{tx_bit}};
+                assign samples[3:0] = {4{tx_bit ^ LANE_INVERT[0]}};
                 wire unused_lb = &{1'b0, ps};
             end else begin : g_pad
                 assign samples[4*i +: 4] = ps;
@@ -91,7 +113,9 @@ module ulx3s_top #(
     endgenerate
 
     // ---- receiver core -------------------------------------------------------
-    wire [N_LANES-1:0]   lock, lane_los;
+    wire [N_LANES-1:0]   lock, lane_los, pol_inv;
+    wire [15:0]          resyncs;
+    wire                 ftdi_tx_busy, host_tx_busy;
     wire [4*N_LANES-1:0] nibble;
     wire                 esp_txd, status_txd, host_txd;
     wire                 ascii_enable;
@@ -99,11 +123,13 @@ module ulx3s_top #(
     wire [7:0]           mrg_data, mrg_type, mrg_len;
     wire [15:0]          mrg_seq, merged_ok, frames_lost, dups, host_sent, host_drops;
 
-    receiver_core #(.N_LANES(N_LANES)) u_core (
+    receiver_core #(.N_LANES(N_LANES), .AUTO_INVERT(AUTO_INVERT), .INIT_INVERT(LANE_INVERT),
+                    .ASCII_PERIOD_CYCLES(ASCII_PERIOD)) u_core (
         .clk_c(clk_c), .rst_c(rst_c), .clk25(clk_25mhz), .rst25(rst25),
         .samples(samples), .samples_valid(samples_valid), .frames_sent(frames_sent),
         .ascii_enable(ascii_enable), .esp_txd(esp_txd), .ftdi_status_txd(status_txd),
-        .host_txd(host_txd), .lock(lock), .lane_los(lane_los), .nibble(nibble),
+        .host_txd(host_txd), .lock(lock), .lane_los(lane_los), .pol_inv(pol_inv), .resyncs(resyncs),
+        .ftdi_tx_busy(ftdi_tx_busy), .host_tx_busy(host_tx_busy), .nibble(nibble),
         .mrg_valid(mrg_valid), .mrg_data(mrg_data), .mrg_first(mrg_first), .mrg_last(mrg_last),
         .mrg_seq(mrg_seq), .mrg_type(mrg_type), .mrg_len(mrg_len),
         .merged_ok(merged_ok), .frames_lost(frames_lost), .dups(dups),
@@ -116,20 +142,20 @@ module ulx3s_top #(
     reg  [19:0] db_cnt;
     reg         b2_clean, b2_prev, want_host, host_mode;
     wire        press = b2_clean & ~b2_prev;
-    wire        idle_both = status_txd & host_txd;
+    wire        idle_cur  = host_mode ? ~host_tx_busy : ~ftdi_tx_busy;   // the UART the pin shows now
     always @(posedge clk_c) begin
+        b2s <= {b2s[0], btn[2]};                  // synchroniser runs during reset too
         if (rst_c) begin
-            b2s <= 2'b00; db_cnt <= 20'd0; b2_clean <= 1'b0; b2_prev <= 1'b0;
+            db_cnt <= 20'd0; b2_clean <= b2s[1]; b2_prev <= b2s[1];   // a button held at reset is not a press
             want_host <= 1'b0; host_mode <= 1'b0;
         end else begin
-            b2s     <= {b2s[0], btn[2]};
             b2_prev <= b2_clean;
             if (b2s[1] == b2_clean) db_cnt <= 20'd0;
             else if (db_cnt == FTDI_DEBOUNCE[19:0] - 20'd1) begin
                 db_cnt <= 20'd0; b2_clean <= b2s[1];
             end else db_cnt <= db_cnt + 20'd1;
             if (press) want_host <= ~want_host;
-            if (want_host != host_mode && idle_both) host_mode <= want_host;
+            if (want_host != host_mode && idle_cur) host_mode <= want_host;
         end
     end
     assign ascii_enable = ~host_mode;
@@ -156,7 +182,7 @@ module ulx3s_top #(
 
     // Unused inputs and observation outputs, kept so the LPF/board map is stable.
     wire unused = &{1'b0, btn[6:3], btn[0], ftdi_txd, wifi_gpio17, rst_s, tx_strobe, tx_seq,
-                    lane_los, nibble, mrg_valid, mrg_first, mrg_last, mrg_data, mrg_type, mrg_len,
+                    lane_los, pol_inv, resyncs, nibble, mrg_valid, mrg_first, mrg_last, mrg_data, mrg_type, mrg_len,
                     mrg_seq, merged_ok, frames_lost, dups, host_sent, host_drops, lock32[31:6]};
 endmodule
 `default_nettype wire

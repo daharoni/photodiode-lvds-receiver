@@ -8,6 +8,11 @@
 // lane_merge, one host_sink_uart (merged frame stream -> host_txd) and one status_uart
 // (esp_txd binary, ftdi_status_txd ASCII).  Nothing here uses an ECP5 primitive.
 //
+// Review fixes wired here (README s.5-7): lane_rx pol_inv/AUTO_INVERT polarity correction (F1) and
+// its err_pulse2 (idle_mismatch) ORed into the monitor's error input; frame_rx frame_err_p into the
+// monitor's frame_err_pulse (a failed frame is an error even if every symbol was valid); lane_merge
+// resync (F2); ftdi_tx_busy / host_tx_busy for the top's FTDI mux (F4).
+//
 // Parameters
 //   N_LANES               1..14 (README s.2: 7 clean ULX3S pairs)
 //   CLK_HZ                clk_c frequency, for the UART baud generators (50 MHz)
@@ -19,6 +24,8 @@
 //                         per bit; uart_tx/uart_rx use a phase accumulator, so each bit is 16 or 17
 //                         clocks (<= 1 clock of jitter, no cumulative error; the mean baud is exact)
 //   BUF_AW                frame_rx buffer address bits (>= 8)
+//   AUTO_INVERT           lane_rx automatic polarity detection (default 1); INIT_INVERT[i] initial polarity
+//                         flop of lane i (default 0); RESYNC_DUPS lane_merge resync threshold (default 32)
 //
 // Ports
 //   clk_c, rst_c          50 MHz core clock and its synchronous reset
@@ -31,6 +38,8 @@
 //   ftdi_status_txd       ASCII report, 115200 baud, high when ascii_enable = 0
 //   host_txd              host_sink_uart output (HOST_BAUD)
 //   lock[i], lane_los[i], nibble[4i+:4]   per-lane lock, watchdog LOS (clk_c domain), LINK_ALL nibble
+//   pol_inv[i], resyncs, ftdi_tx_busy, host_tx_busy   lane polarity flops, lane_merge resync count, and
+//                         "this UART is sending a character" for the top's FTDI mux
 //   mrg_*, merged_ok, frames_lost, dups, host_sent, host_drops   merge output stream and counters
 //     (debug/observation ports: the testbench checks the merged stream here; the top ignores them)
 `default_nettype none
@@ -43,7 +52,10 @@ module receiver_core #(
   parameter STATUS_PERIOD_CYCLES = 2_500_000,
   parameter ASCII_PERIOD_CYCLES  = 50_000_000,
   parameter HOST_BAUD            = 3_000_000,
-  parameter BUF_AW               = 9
+  parameter BUF_AW               = 9,
+  parameter AUTO_INVERT          = 1,
+  parameter [N_LANES-1:0] INIT_INVERT = {N_LANES{1'b0}},
+  parameter RESYNC_DUPS          = 32
 ) (
   input  wire                 clk_c,
   input  wire                 rst_c,
@@ -58,6 +70,10 @@ module receiver_core #(
   output wire                 host_txd,
   output wire [N_LANES-1:0]   lock,
   output wire [N_LANES-1:0]   lane_los,
+  output wire [N_LANES-1:0]   pol_inv,
+  output wire [15:0]          resyncs,
+  output wire                 ftdi_tx_busy,
+  output wire                 host_tx_busy,
   output wire [4*N_LANES-1:0] nibble,
   output wire                 mrg_valid,
   output wire [7:0]           mrg_data,
@@ -82,21 +98,22 @@ module receiver_core #(
   generate
     for (i = 0; i < N_LANES; i = i + 1) begin : g_lane
       wire [7:0] data;
-      wire       is_k, data_valid, err_pulse, transition, aligned;
+      wire       is_k, data_valid, err_pulse, err_pulse2, transition, aligned;
       wire       fe_p, ov_p, win_tick;
       wire [15:0] overrun;
 
-      lane_rx u_rx (
+      lane_rx #(.AUTO_INVERT(AUTO_INVERT), .INIT_INVERT(INIT_INVERT[i])) u_rx (
         .clk(clk_c), .rst(rst_c), .samples(samples[4*i +: 4]), .samples_valid(samples_valid[i]),
         .realign_in(los_c[i]), .data(data), .is_k(is_k), .data_valid(data_valid),
-        .err_pulse(err_pulse), .lock(lock[i]), .transition(transition), .aligned(aligned));
+        .err_pulse(err_pulse), .err_pulse2(err_pulse2), .pol_inv(pol_inv[i]),
+        .lock(lock[i]), .transition(transition), .aligned(aligned));
 
       watchdog #(.TIMEOUT_CYCLES(WD_TIMEOUT), .STRETCH_BITS(WD_STRETCH)) u_wd (
         .clk_c(clk_c), .rst_c(rst_c), .transition_async(transition),
         .clk25(clk25), .rst25(rst25), .los(los25[i]), .los_sync(los_c[i]));
 
       lane_monitor #(.WINDOW_CYCLES(MON_WINDOW)) u_mon (
-        .clk(clk_c), .rst(rst_c), .lock(lock[i]), .err_pulse(err_pulse), .los(los_c[i]),
+        .clk(clk_c), .rst(rst_c), .lock(lock[i]), .err_pulse(err_pulse | err_pulse2), .frame_err_pulse(fe_p), .los(los_c[i]),
         .nibble(nibble[4*i +: 4]), .window_tick(win_tick), .err_count_last(err_count[16*i +: 16]));
 
       frame_rx #(.BUF_AW(BUF_AW)) u_frx (
@@ -109,31 +126,33 @@ module receiver_core #(
         .frames_ok(frames_ok[16*i +: 16]), .frame_err(frame_err[16*i +: 16]), .overrun(overrun));
 
       assign lane_los[i] = los_c[i];
-      wire unused_lane = &{1'b0, fe_p, ov_p, win_tick, overrun, aligned, los25[i]};
+      wire unused_lane = &{1'b0, ov_p, win_tick, overrun, aligned, los25[i]};
     end
   endgenerate
 
   wire mg_ready = 1'b1;
-  lane_merge #(.N_LANES(N_LANES), .BUF_AW(BUF_AW)) u_merge (
+  lane_merge #(.N_LANES(N_LANES), .BUF_AW(BUF_AW), .RESYNC_DUPS(RESYNC_DUPS)) u_merge (
     .clk(clk_c), .rst(rst_c), .commit(commit), .c_seq(c_seq), .c_type(c_type), .c_len(c_len),
     .c_bank(c_bank), .rd_data(rd_data), .rel(rel), .rd_addr(rd_addr),
     .out_valid(mrg_valid), .out_data(mrg_data), .out_first(mrg_first), .out_last(mrg_last),
     .out_seq(mrg_seq), .out_type(mrg_type), .out_len(mrg_len), .out_ready(mg_ready),
-    .merged_ok(merged_ok), .frames_lost(frames_lost), .dups(dups));
+    .merged_ok(merged_ok), .frames_lost(frames_lost), .dups(dups), .resyncs(resyncs));
 
   wire sink_ready, sink_busy;
   host_sink_uart #(.CLK_HZ(CLK_HZ), .BAUD(HOST_BAUD)) u_sink (
     .clk(clk_c), .rst(rst_c), .in_valid(mrg_valid), .in_data(mrg_data), .in_first(mrg_first),
     .in_last(mrg_last), .in_seq(mrg_seq), .in_type(mrg_type), .in_len(mrg_len),
     .in_ready(sink_ready), .txd(host_txd), .host_sent(host_sent), .host_drops(host_drops),
-    .busy(sink_busy));
+    .busy(sink_busy), .tx_busy(host_tx_busy));
 
   status_uart #(.N_LANES(N_LANES), .CLK_HZ(CLK_HZ), .STATUS_PERIOD_CYCLES(STATUS_PERIOD_CYCLES),
                 .ASCII_PERIOD_CYCLES(ASCII_PERIOD_CYCLES)) u_status (
     .clk(clk_c), .rst(rst_c), .nibble(nibble), .lock(lock), .err_count(err_count),
     .frame_err(frame_err), .frames_ok(frames_ok), .merged_ok(merged_ok),
     .frames_lost(frames_lost), .dups(dups), .host_drops(host_drops), .frames_sent(frames_sent),
-    .ascii_enable(ascii_enable), .esp_txd(esp_txd), .ftdi_txd(ftdi_status_txd));
+    .pol_inv(pol_inv), .resyncs(resyncs),
+    .ascii_enable(ascii_enable), .esp_txd(esp_txd), .ftdi_txd(ftdi_status_txd),
+    .ftdi_busy(ftdi_tx_busy));
 
   wire unused_core = &{1'b0, sink_ready, sink_busy};
 endmodule

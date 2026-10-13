@@ -17,6 +17,7 @@ from cocotb.triggers import FallingEdge
 
 N = int(os.environ.get("TB_N", "3"))
 AW = 9
+RESYNC_DUPS = int(os.environ.get("TB_RESYNC", "32"))   # lane_merge RESYNC_DUPS (the Makefile passes the same value)
 
 
 class Ref:
@@ -27,6 +28,9 @@ class Ref:
         self.out = []          # (seq, type, payload)
         self.dups = 0
         self.lost = 0
+        self.resyncs = 0
+        self.dup_run = 0
+        self.max_run = 0       # longest run of consecutive dups seen (informational)
 
     def serve(self, seq, ftype, payload):
         if self.seq_next is None:
@@ -35,7 +39,14 @@ class Ref:
             d = (seq - self.seq_next) & 0xFFFF
             if d >= 0x8000:
                 self.dups += 1
+                self.dup_run += 1
+                self.max_run = max(self.max_run, self.dup_run)
+                if self.dup_run == RESYNC_DUPS:      # F2: re-seed on the next frame
+                    self.dup_run = 0
+                    self.seq_next = None
+                    self.resyncs += 1
                 return "dup"
+        self.dup_run = 0
         self.lost += d
         self.out.append((seq, ftype, bytes(payload)))
         self.seq_next = (seq + 1) & 0xFFFF
@@ -212,6 +223,7 @@ def check_against_ref(dut, env):
     assert (ok, lost, dups) == (len(env.ref.out), env.ref.lost & 0xFFFF, env.ref.dups), (
         (ok, lost, dups), (len(env.ref.out), env.ref.lost, env.ref.dups))
     # every commit was served exactly once
+    assert int(dut.resyncs.value) == env.ref.resyncs, (int(dut.resyncs.value), env.ref.resyncs)
     assert len(env.rel_log) == sum(ln.commits for ln in env.lanes)
     assert all(not ln.q for ln in env.lanes)
 
@@ -262,9 +274,10 @@ async def skew_within_period(dut):
     assert [s for s, _, _ in env.ref.out] == [s for s, _, _ in frames]       # all, once, ordered
     assert env.out_frames == frames
     assert env.ref.lost == 0
+    assert int(dut.resyncs.value) == 0, "spurious resync in a normal skew run"
     for ln in env.lanes:
         assert ln.lane_overruns == 0
-    dut._log.info("N=%d skew_within_period: out=%d dups=%d lost=%d", N, len(env.out_frames), env.ref.dups, env.ref.lost)
+    dut._log.info("N=%d skew_within_period: out=%d dups=%d lost=%d longest dup run=%d", N, len(env.out_frames), env.ref.dups, env.ref.lost, env.ref.max_run)
     await FallingEdge(dut.clk)
 
 
@@ -287,8 +300,9 @@ async def skew_large(dut):
     if N == 3:
         assert env.ref.lost >= 1, "the lossy lane should have cost at least one frame"
     commits = sum(ln.commits for ln in env.lanes)
+    assert int(dut.resyncs.value) == 0, "spurious resync in the 2000-cycle skew run"
     assert commits == len(env.out_frames) + env.ref.dups
-    dut._log.info("N=%d skew_large: out=%d dups=%d lost=%d", N, len(env.out_frames), env.ref.dups, env.ref.lost)
+    dut._log.info("N=%d skew_large: out=%d dups=%d lost=%d longest dup run=%d (RESYNC_DUPS=%d)", N, len(env.out_frames), env.ref.dups, env.ref.lost, env.ref.max_run, RESYNC_DUPS)
     await FallingEdge(dut.clk)
 
 
@@ -370,4 +384,35 @@ async def stall_never_drops(dut):
     check_against_ref(dut, env)
     assert [s for s, _, _ in env.out_frames] == [0, 1, 2, 3, 4, 5]
     assert all(ln.lane_overruns == 0 for ln in env.lanes)
+    await FallingEdge(dut.clk)
+
+
+@cocotb.test()
+async def restart_resync(dut):
+    """F2: the transmitter restarts at seq 0 while seq_next = 20000 (behind by >= 32768 from the
+    merge's view: d = 45536).  Without resync every frame would be dropped as a duplicate.  RESYNC_DUPS
+    dups are dropped, then the next frame is delivered: seq RESYNC_DUPS onwards come out, resyncs = 1,
+    no loss counted for the re-seed.  Also a restart from seq_next = 40000 (accepted as 'ahead' at
+    once, no resync, a large frames_lost)."""
+    for first, restart_ok in ((20000, False), (40000, True)):
+        env = await start(dut, ready_p=1.0, seed=11)
+        rng = random.Random(3)
+        t = 30
+        seqs = list(range(first - 3, first)) + list(range(0, 40))
+        for i, sq in enumerate(seqs):
+            env.schedule(i % N, t, sq, i & 255, mk_payload(rng, sq, 8))
+            t += 300
+        await env.run(t + 2000)
+        check_against_ref(dut, env)
+        out = [sq for sq, _, _ in env.out_frames]
+        if restart_ok:
+            assert out == seqs[:3] + list(range(0, 40)), out
+            assert int(dut.resyncs.value) == 0 and int(dut.dups.value) == 0
+            assert int(dut.frames_lost.value) == (0 - first) % 65536 + 0 - 0 and env.ref.lost == int(dut.frames_lost.value)
+        else:
+            assert out == seqs[:3] + list(range(RESYNC_DUPS, 40)), out
+            assert int(dut.resyncs.value) == 1 and int(dut.dups.value) == RESYNC_DUPS
+            assert int(dut.frames_lost.value) == 0, "the re-seed must not count a loss"
+        dut._log.info("restart from seq_next=%d: out %d frames, dups=%d resyncs=%d lost=%d", first,
+                      len(out), int(dut.dups.value), int(dut.resyncs.value), int(dut.frames_lost.value))
     await FallingEdge(dut.clk)

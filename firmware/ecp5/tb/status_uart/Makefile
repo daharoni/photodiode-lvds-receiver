@@ -11,7 +11,7 @@ CLK_HZ_TB = 10000000
 STATUS_PERIOD_TB = 3000
 
 ifdef N
-ASCII_PERIOD_TB = $(shell echo $$((1200 * (100 + 45 * $(N)))))
+ASCII_PERIOD_TB = $(shell echo $$((1200 * (120 + 52 * $(N)))))
 SIM_BUILD = sim_build_$(N)
 COMPILE_ARGS += -Pstatus_uart.N_LANES=$(N) -Pstatus_uart.CLK_HZ=$(CLK_HZ_TB) \
   -Pstatus_uart.STATUS_PERIOD_CYCLES=$(STATUS_PERIOD_TB) -Pstatus_uart.ASCII_PERIOD_CYCLES=$(ASCII_PERIOD_TB)

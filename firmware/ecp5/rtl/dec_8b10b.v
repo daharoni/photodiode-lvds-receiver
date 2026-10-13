@@ -12,6 +12,14 @@
 //   disp_err : valid word whose legal start disparity differs from the tracked
 //              disparity; the byte is still decoded.
 //
+// rd_reset (input, 1 clk pulse): sets the disparity-unknown state (rd_unk), as after a code_err, without
+// touching rd: the next symbol that fixes a disparity loads it and no disp_err is reported before that.
+// lane_rx pulses it when alignment is dropped/re-acquired or the lane polarity is flipped, because
+// the running disparity of the old symbol boundary means nothing after a realignment (review
+// finding F6: the first comma after a realignment could raise one spurious disp_err).
+// It has priority over a symbol decoded in the same cycle (that symbol's disp_err check uses the
+// pre-pulse state; its disparity update is kept, only rd_unk is forced afterwards).
+//
 // Parameters: none.
 //
 // Running disparity: register rd (0 = negative) reset to negative. After a
@@ -33,6 +41,7 @@ module dec_8b10b (
   input  wire       rst,
   input  wire [9:0] symbol,
   input  wire       symbol_valid,
+  input  wire       rd_reset,
   output reg  [7:0] data,
   output reg        is_k,
   output reg        data_valid,
@@ -293,6 +302,7 @@ module dec_8b10b (
           end
         end
       end
+      if (rd_reset) rd_unk <= 1'b1;
     end
   end
 

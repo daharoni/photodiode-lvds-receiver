@@ -7,8 +7,10 @@ COCOTB_TEST_MODULES = test_lane_merge
 export PYTHONPATH := $(PWD)/../..:$(PYTHONPATH)
 
 ifdef N
-SIM_BUILD = sim_build_$(N)
-COMPILE_ARGS += -Plane_merge.N_LANES=$(N)
+SIM_BUILD = sim_build_$(N)_$(RESYNC)
+RESYNC ?= 32
+COMPILE_ARGS += -Plane_merge.N_LANES=$(N) -Plane_merge.RESYNC_DUPS=$(RESYNC)
+export TB_RESYNC = $(RESYNC)
 COCOTB_RESULTS_FILE = results_$(N).xml
 export TB_N = $(N)
 include $(shell cocotb-config --makefiles)/Makefile.sim

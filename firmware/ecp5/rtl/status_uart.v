@@ -12,14 +12,19 @@
 //   The nibble vector is latched at the start of the message.
 //
 // ftdi_txd (115200 8N1), one report per ASCII_PERIOD_CYCLES (default 100,000,000 = 1 s):
-//   LINK seq=<n> L0=<x> ... L<N-1>=<x> ok=<merged_ok> lost=<frames_lost> dup=<dups> hdrop=<host_drops> sent=<frames_sent>\r\n
-//   LANE<i> lock=<0|1> err=<n> fe=<n> ok=<n>\r\n            (one line per lane, i = 0..N_LANES-1)
+//   LINK seq=<n> L0=<x> ... L<N-1>=<x> ok=<merged_ok> lost=<frames_lost> dup=<dups> hdrop=<host_drops> sent=<frames_sent> rs=<resyncs>\r\n
+//   LANE<i> lock=<0|1> err=<n> fe=<n> ok=<n> inv=<0|1>\r\n   (one line per lane, i = 0..N_LANES-1)
+//   rs = lane_merge resyncs (F2); inv = lane_rx pol_inv, the current polarity flop of the lane (F1:
+//   1 = the lane is being inverted before decoding).  Both are ASCII only; the binary 0xA5 message is
+//   unchanged (its format is fixed by docs/firmware/can-and-console-protocol.md s.1.5).
 //   decimal numbers (no leading zeros), <x> = one hex digit (the LINK_ALL nibble, upper case).
 //   seq counts reports, first 0, 16 bits. All inputs are latched at the start of a report.
 //   ascii_enable = 0 resets the ASCII path (report in progress aborted, pending one dropped, its
 //   period counter restarted) and holds ftdi_txd high, so the top level can share the FTDI pin
 //   with host_sink_uart. An abort mid-character truncates that character (a framing error at the
-//   host), so the top should switch the pin mux only while ftdi_txd is high.
+//   host), so the top switches the pin mux only while `ftdi_busy` is low (F4: the UART is between
+//   characters; a level test on ftdi_txd is not enough, txd is high during every '1' data bit).
+//   ftdi_busy = the ASCII uart_tx is sending a character (start bit to the end of the stop bit).
 //   Differences from README section 7 (the interface contract of this task overrides it): the
 //   README LINK line ends "fe=<sum> err=<sum>"; this module sends "sent=<frames_sent>" instead and
 //   the per-lane counters appear only on the LANE lines.
@@ -29,13 +34,14 @@
 //   (a message still in progress when its period expires is skipped, not queued, for the binary
 //   path; the ASCII path keeps one pending report).
 //
-// Inputs: nibble[4i+:4] = {valid, class[2:0]} of lane i; lock[i]; err_count/frame_err/frames_ok
+// Inputs: pol_inv[i] and resyncs: see the ASCII lines above. nibble[4i+:4] = {valid, class[2:0]} of lane i; lock[i]; err_count/frame_err/frames_ok
 //   [16i+:16] per lane; merged_ok, frames_lost, dups, host_drops, frames_sent global 16-bit.
 //
-// ASCII formatter: byte-at-a-time FSM over a 29-step program (pc); literal strings are small
+// ASCII formatter: byte-at-a-time FSM over a 33-step program (pc, 6 bits); literal strings are small
 // constants selected by pc; numbers are converted by repeated subtraction of 10000..1; the lane
 // vectors shift right per lane so no wide muxes are needed. About 4 cycles per output char plus
-// the UART time; a full 7-lane report takes about 40 ms at 115200 baud.
+// the UART time; a full 7-lane report takes about 40 ms at 115200 baud (before ' rs=' and ' inv=' were added; they make it
+// about 12 % longer: 7 characters per LANE line, 8 per LINK line; arithmetic, not measured).
 `default_nettype none
 
 module status_uart #(
@@ -56,9 +62,12 @@ module status_uart #(
   input  wire [15:0]           dups,
   input  wire [15:0]           host_drops,
   input  wire [15:0]           frames_sent,
+  input  wire [N_LANES-1:0]    pol_inv,
+  input  wire [15:0]           resyncs,
   input  wire                  ascii_enable,
   output wire                  esp_txd,
-  output wire                  ftdi_txd
+  output wire                  ftdi_txd,
+  output wire                  ftdi_busy
 );
 
   // ------------------------------------------------------------------ binary path
@@ -131,7 +140,7 @@ module status_uart #(
   reg        apend;
   reg [2:0]  as;
   reg [2:0]  aret;        // state after the character has been accepted
-  reg [4:0]  pc;
+  reg [5:0]  pc;
   reg [3:0]  lane;
   reg [3:0]  pos;         // literal character position
   reg [15:0] aseq;
@@ -146,7 +155,8 @@ module status_uart #(
   reg [4*N_LANES-1:0]  l_nib;
   reg [N_LANES-1:0]    l_lock;
   reg [16*N_LANES-1:0] l_err, l_fe, l_ok;
-  reg [15:0]           l_mok, l_lost, l_dup, l_hdrop, l_sent;
+  reg [N_LANES-1:0]    l_inv;
+  reg [15:0]           l_mok, l_lost, l_dup, l_hdrop, l_sent, l_rs;
 
   wire a_ready;
   wire a_valid = (as == A_SEND) && a_ready && ascii_enable;
@@ -159,23 +169,25 @@ module status_uart #(
     op  = OP_NUM;
     lit = 80'd0;
     case (pc)
-      5'd0:  begin op = OP_LIT; lit = "LINK seq="; end
-      5'd2:  begin op = OP_LIT; lit = " L"; end
-      5'd4:  begin op = OP_LIT; lit = "="; end
-      5'd5:  op = OP_HEX;
-      5'd6:  begin op = OP_LIT; lit = " ok="; end
-      5'd8:  begin op = OP_LIT; lit = " lost="; end
-      5'd10: begin op = OP_LIT; lit = " dup="; end
-      5'd12: begin op = OP_LIT; lit = " hdrop="; end
-      5'd14: begin op = OP_LIT; lit = " sent="; end
-      5'd16: begin op = OP_LIT; lit = {64'd0, 16'h0D0A}; end
-      5'd17: begin op = OP_LIT; lit = "LANE"; end
-      5'd19: begin op = OP_LIT; lit = " lock="; end
-      5'd21: begin op = OP_LIT; lit = " err="; end
-      5'd23: begin op = OP_LIT; lit = " fe="; end
-      5'd25: begin op = OP_LIT; lit = " ok="; end
-      5'd27: begin op = OP_LIT; lit = {64'd0, 16'h0D0A}; end
-      5'd28: op = OP_END;
+      6'd0:  begin op = OP_LIT; lit = "LINK seq="; end
+      6'd2:  begin op = OP_LIT; lit = " L"; end
+      6'd4:  begin op = OP_LIT; lit = "="; end
+      6'd5:  op = OP_HEX;
+      6'd6:  begin op = OP_LIT; lit = " ok="; end
+      6'd8:  begin op = OP_LIT; lit = " lost="; end
+      6'd10: begin op = OP_LIT; lit = " dup="; end
+      6'd12: begin op = OP_LIT; lit = " hdrop="; end
+      6'd14: begin op = OP_LIT; lit = " sent="; end
+      6'd16: begin op = OP_LIT; lit = " rs="; end
+      6'd18: begin op = OP_LIT; lit = {64'd0, 16'h0D0A}; end
+      6'd19: begin op = OP_LIT; lit = "LANE"; end
+      6'd21: begin op = OP_LIT; lit = " lock="; end
+      6'd23: begin op = OP_LIT; lit = " err="; end
+      6'd25: begin op = OP_LIT; lit = " fe="; end
+      6'd27: begin op = OP_LIT; lit = " ok="; end
+      6'd29: begin op = OP_LIT; lit = " inv="; end
+      6'd31: begin op = OP_LIT; lit = {64'd0, 16'h0D0A}; end
+      6'd32: op = OP_END;
       default: op = OP_NUM;
     endcase
   end
@@ -184,16 +196,18 @@ module status_uart #(
   reg [15:0] nsrc;
   always @* begin
     case (pc)
-      5'd1:  nsrc = aseq;
-      5'd3, 5'd18: nsrc = {12'd0, lane};
-      5'd7:  nsrc = l_mok;
-      5'd9:  nsrc = l_lost;
-      5'd11: nsrc = l_dup;
-      5'd13: nsrc = l_hdrop;
-      5'd15: nsrc = l_sent;
-      5'd20: nsrc = {15'd0, l_lock[0]};
-      5'd22: nsrc = l_err[15:0];
-      5'd24: nsrc = l_fe[15:0];
+      6'd1:  nsrc = aseq;
+      6'd3, 6'd20: nsrc = {12'd0, lane};
+      6'd7:  nsrc = l_mok;
+      6'd9:  nsrc = l_lost;
+      6'd11: nsrc = l_dup;
+      6'd13: nsrc = l_hdrop;
+      6'd15: nsrc = l_sent;
+      6'd17: nsrc = l_rs;
+      6'd22: nsrc = {15'd0, l_lock[0]};
+      6'd24: nsrc = l_err[15:0];
+      6'd26: nsrc = l_fe[15:0];
+      6'd30: nsrc = {15'd0, l_inv[0]};
       default: nsrc = l_ok[15:0];
     endcase
   end
@@ -221,7 +235,7 @@ module status_uart #(
       apend <= 1'b0;
       as    <= A_IDLE;
       aret  <= A_IDLE;
-      pc    <= 5'd0;
+      pc    <= 6'd0;
       lane  <= 4'd0;
       pos   <= 4'd0;
       val   <= 16'd0;
@@ -247,7 +261,9 @@ module status_uart #(
             l_dup  <= dups;
             l_hdrop <= host_drops;
             l_sent <= frames_sent;
-            pc     <= 5'd0;
+            l_rs   <= resyncs;
+            l_inv  <= pol_inv;
+            pc     <= 6'd0;
             lane   <= 4'd0;
             as     <= A_DISP;
           end
@@ -293,21 +309,22 @@ module status_uart #(
         default: begin   // A_ADV
           as <= A_DISP;
           case (pc)
-            5'd5: begin
+            6'd5: begin
               lane  <= lane_n;
               l_nib <= l_nib >> 4;
-              pc    <= more ? 5'd2 : 5'd6;
+              pc    <= more ? 6'd2 : 6'd6;
             end
-            5'd16: begin lane <= 4'd0; pc <= 5'd17; end
-            5'd27: begin
+            6'd18: begin lane <= 4'd0; pc <= 6'd19; end
+            6'd31: begin
               lane   <= lane_n;
               l_lock <= l_lock >> 1;
               l_err  <= l_err >> 16;
               l_fe <= l_fe >> 16;
               l_ok <= l_ok >> 16;
-              pc     <= more ? 5'd17 : 5'd28;
+              l_inv  <= l_inv >> 1;
+              pc     <= more ? 6'd19 : 6'd32;
             end
-            default: pc <= pc + 5'd1;
+            default: pc <= pc + 6'd1;
           endcase
         end
       endcase
@@ -318,7 +335,8 @@ module status_uart #(
   uart_tx #(.CLK_HZ(CLK_HZ), .BAUD(115_200)) u_ftdi (
     .clk(clk), .rst(rst || !ascii_enable), .data(adata), .valid(a_valid), .ready(a_ready),
     .txd(a_txd));
-  assign ftdi_txd = a_txd;
+  assign ftdi_txd  = a_txd;
+  assign ftdi_busy = ~a_ready;
 
 endmodule
 `default_nettype wire

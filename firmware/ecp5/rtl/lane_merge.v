@@ -7,6 +7,7 @@
 // Parameters
 //   N_LANES : number of frame_rx lanes, 1..14.
 //   BUF_AW  : frame_rx BUF_AW (>= 8); the per-lane read address is {bank, BUF_AW-bit address}.
+//   RESYNC_DUPS : 32 (PROPOSED), 1..255. Resynchronisation threshold, see below.
 //
 // Per-lane ports are flat vectors, lane i at bits [i*W +: W]. Connection to frame_rx i:
 //   commit[i], c_seq, c_type, c_len, c_bank <- frame_rx; rel[i], rd_addr <- to frame_rx;
@@ -26,17 +27,36 @@
 // After the last payload byte is accepted, seq_next = seq + 1, merged_ok++, rel pulses.
 // The pending flag is cleared when rel is issued, so a lane re-commits only after its release.
 //
+// Resynchronisation (review finding F2; PROPOSED, simulated in tb/lane_merge only): the rule
+// "d >= 32768 is a duplicate" has no recovery by itself.  After a transmitter restart at seq 0
+// while seq_next is in 1..32768, every new frame has d = -seq_next mod 65536 + seq >= 32768 and would
+// be dropped as a duplicate for up to 32768 frames (a restart at seq 0 while seq_next is in
+// 32769..65535 gives d in 1..32767, "ahead": it is accepted at once and counted as a large
+// frames_lost, no stall).  A global counter counts consecutive duplicate decisions with no accepted frame in
+// between; at RESYNC_DUPS the merge clears have_next, so the next frame served is accepted without
+// a loss count and re-seeds seq_next, and `resyncs` is incremented.  Recovery therefore takes
+// RESYNC_DUPS dropped frames, the next one is delivered (RESYNC_DUPS + 1 frames).  Side effect,
+// also on a false trigger: a genuine burst of RESYNC_DUPS consecutive duplicates from slow lanes
+// also resyncs; the effect is one re-seed: the next frame served, possibly an old copy, is
+// delivered once more and frames_lost can over-count by up to the depth of that burst (harmless
+// for the data path, visible in the counters).  Default 32, raised from the first choice of 16
+// because tb/lane_merge's 14-lane run with up to 2000 cycles of lane skew (700 cycle frame
+// period) produces a longest run of 21 consecutive duplicates by itself (7 lanes: 10, 3 lanes: 3,
+// measured in that test; a real 14-lane module with such skews is not expected, the margin over 21
+// is about 1.5x).  tb/lane_merge checks that its 3-, 7- and 14-lane skew runs never resync.
+//
 // Output stream: out_valid/out_ready handshake. out_data is one payload byte; out_first with
 // the first byte, out_last with the last (payload = out_len + 1 bytes); out_seq/out_type/out_len
 // are held from the first byte to the last. out_ready low stalls the merge, nothing is dropped.
 // Throughput: one byte per 2 cycles (address cycle, then data cycle, the RAM read latency is 1),
 // plus 4 cycles of frame set-up (IDLE, MUX, DIFF, DEC; a dup costs the same 4 cycles).
-// Counters (16 bit, wrap): merged_ok, frames_lost, dups.
+// Counters (16 bit, wrap): merged_ok, frames_lost, dups, resyncs.
 `default_nettype none
 
 module lane_merge #(
   parameter N_LANES = 7,
-  parameter BUF_AW  = 9
+  parameter BUF_AW  = 9,
+  parameter RESYNC_DUPS = 32
 ) (
   input  wire                        clk,
   input  wire                        rst,
@@ -58,7 +78,8 @@ module lane_merge #(
   input  wire                        out_ready,
   output reg  [15:0]                 merged_ok,
   output reg  [15:0]                 frames_lost,
-  output reg  [15:0]                 dups
+  output reg  [15:0]                 dups,
+  output reg  [15:0]                 resyncs
 );
 
   function integer clog2;
@@ -87,6 +108,7 @@ module lane_merge #(
   reg [7:0]          r_len;
   reg                r_bank;
   reg [15:0]         diff_r;    // r_seq - seq_next (S_DIFF)
+  reg [7:0]          dup_run;   // consecutive duplicate decisions since the last accepted frame
 
   // ---- arbiter and lane muxes (combinational) ----
   wire [31:0]   rr32  = {{(32-IW){1'b0}}, rr};
@@ -151,7 +173,8 @@ module lane_merge #(
       rel <= {N_LANES{1'b0}};
       out_valid <= 1'b0; out_data <= 8'd0; out_first <= 1'b0; out_last <= 1'b0;
       out_seq <= 16'd0; out_type <= 8'd0; out_len <= 8'd0;
-      merged_ok <= 16'd0; frames_lost <= 16'd0; dups <= 16'd0;
+      merged_ok <= 16'd0; frames_lost <= 16'd0; dups <= 16'd0; resyncs <= 16'd0;
+      dup_run <= 8'd0;
     end else begin
       rel  <= clr;
       pend <= (pend & ~clr) | commit;
@@ -159,8 +182,16 @@ module lane_merge #(
         dups <= dups + 16'd1;
         rr   <= nxt_rr;
         st   <= S_IDLE;
+        if (dup_run == RESYNC_DUPS[7:0] - 8'd1) begin
+          dup_run   <= 8'd0;
+          have_next <= 1'b0;
+          resyncs   <= resyncs + 16'd1;
+        end else begin
+          dup_run <= dup_run + 8'd1;
+        end
       end
       if (do_take) begin
+        dup_run  <= 8'd0;
         bank     <= r_bank;
         cnt      <= 9'd0;
         out_seq  <= r_seq;

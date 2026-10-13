@@ -18,7 +18,10 @@
 // and host_drops++. The 512-byte FIFO holds payload only (<= 256 bytes per accepted frame; the
 // header is sent from registers), so it cannot overflow while the sink only accepts when idle.
 // Counters (16 bit, wrap): host_sent (frames fully handed to the UART), host_drops.
-// busy: a frame is being received or sent. Throughput at 3 Mbaud, 50 MHz (16.67 clocks per bit, 16 or 17 per bit from the uart_tx phase accumulator): about 300 kB/s.
+// busy: a frame is being received or sent.
+// tx_busy: the UART is sending a byte, or a byte has been handed over and is about to start (start bit
+// to the end of the stop bit; low between bytes).  The top uses it so the FTDI pin mux never cuts a
+// byte (F4); busy (frame level) is not the right signal for that. Throughput at 3 Mbaud, 50 MHz (16.67 clocks per bit, 16 or 17 per bit from the uart_tx phase accumulator): about 300 kB/s.
 `default_nettype none
 
 module host_sink_uart #(
@@ -38,7 +41,8 @@ module host_sink_uart #(
   output wire        txd,
   output reg  [15:0] host_sent,
   output reg  [15:0] host_drops,
-  output wire        busy
+  output wire        busy,
+  output wire        tx_busy
 );
 
   localparam [2:0] T_IDLE = 3'd0, T_HDR = 3'd1, T_PAY = 3'd2, T_CRC = 3'd3;
@@ -76,6 +80,7 @@ module host_sink_uart #(
   wire accept = in_valid && in_first && idle;
   wire push   = in_valid && (accept || rx_active);
   assign busy = !idle;
+  assign tx_busy = !u_ready || u_valid;
 
   always @(posedge clk) begin
     if (push) mem[wp[8:0]] <= in_data;

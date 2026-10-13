@@ -26,6 +26,7 @@ class Ref:
 async def reset(dut):
     dut.rst.value = 1
     dut.symbol_valid.value = 0
+    dut.rd_reset.value = 0
     await FallingEdge(dut.clk)
     dut.rst.value = 0
     await FallingEdge(dut.clk)
@@ -35,6 +36,7 @@ async def start(dut):
     cocotb.start_soon(Clock(dut.clk, 10, unit="ns").start())
     dut.symbol.value = 0
     dut.symbol_valid.value = 0
+    dut.rd_reset.value = 0
     dut.rst.value = 1
     await FallingEdge(dut.clk)
     await FallingEdge(dut.clk)
@@ -148,3 +150,41 @@ async def code_err_aligns_and_zeroes_data(dut):
     ref.step(0x000)
     ref.step(D0_0_POS)
     assert got[:4] == ref.step(D0_0_POS)
+
+
+@cocotb.test()
+async def rd_reset_forgets_disparity(dut):
+    """rd_reset (lane_rx pulses it on realignment, F6): the running disparity is unknown afterwards.
+    D0.1 at rd- leaves rd positive; sending it again is a disp_err, unless rd_reset came between
+    (then the repeat is accepted and the disparity is re-learnt: sending it a third time is checked
+    again).  Expected values from the model (Ref)."""
+    await start(dut)
+    w = D0_1_NEG
+    ref = Ref()
+    first = ref.step(w)
+    again = ref.step(w)
+    assert first[3] == 0 and again[3] == 1, "test premise: repeating an rd- word at rd+ is a disp_err"
+    await reset(dut)
+    assert (await push(dut, w))[:4] == first
+    assert (await push(dut, w))[:4] == again              # without the pulse: disp_err
+    # pulse between them (idle cycle): no disp_err, then the disparity is known again
+    await reset(dut)
+    assert (await push(dut, w))[:4] == first
+    dut.rd_reset.value = 1
+    await FallingEdge(dut.clk)
+    dut.rd_reset.value = 0
+    got = await push(dut, w)
+    assert got[:4] == first, got
+    got = await push(dut, w)
+    assert got[3] == 1, got
+    # pulse in the same cycle as a symbol_valid word: that word is judged on the pre-pulse state,
+    # rd_unk is forced afterwards
+    await reset(dut)
+    assert (await push(dut, w))[:4] == first
+    dut.rd_reset.value = 1
+    got = await push(dut, w)
+    dut.rd_reset.value = 0
+    assert got[3] == 1, got
+    got = await push(dut, w)
+    assert got[:4] == first, got
+    await FallingEdge(dut.clk)

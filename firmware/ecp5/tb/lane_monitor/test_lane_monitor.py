@@ -30,6 +30,7 @@ async def reset(dut):
     dut.rst.value = 1
     dut.lock.value = 1
     dut.err_pulse.value = 0
+    dut.frame_err_pulse.value = 0
     dut.los.value = 0
     for _ in range(3):
         await RisingEdge(dut.clk)
@@ -45,10 +46,11 @@ async def run_windows(dut, windows):
     for wd in windows:
         for c in range(W):
             cycles.append((int(c in wd.get("errs", ())), int(c not in wd.get("nolock", ())),
-                           int(c in wd.get("los", ()))))
-    cycles.append((0, 1, 0))                       # one more clock to read the last window
-    for e, lk, ls in cycles:
+                           int(c in wd.get("los", ())), int(c in wd.get("fes", ()))))
+    cycles.append((0, 1, 0, 0))                    # one more clock to read the last window
+    for e, lk, ls, fe in cycles:
         dut.err_pulse.value = e
+        dut.frame_err_pulse.value = fe
         dut.lock.value = lk
         dut.los.value = ls
         await RisingEdge(dut.clk)                  # reads lag the inputs by one edge
@@ -133,3 +135,22 @@ async def no_lock_whole_window(dut):
     assert res[0][1] == 0b0111
     assert res[0][2] == 10
     assert res[1][1] == 0b1000
+
+
+@cocotb.test()
+async def frame_errors_count_as_errors(dut):
+    """F1(b): frame_err_pulse counts into the window error count like err_pulse, with every symbol
+    valid; when both pulse on the same clock both count (sum)."""
+    await reset(dut)
+    wins = [dict(fes={3}), dict(fes=set(range(0, 20, 2))),
+            dict(errs=set(range(0, 10, 2)), fes=set(range(1, 11, 2))),     # 5 + 5, disjoint clocks
+            dict(errs={7, 8}, fes={8, 9}),                                 # 2 + 2 (one shared clock) = 4
+            dict(fes=set(range(129))),                                     # > 128 -> class 5
+            dict()]
+    res, _ = await run_windows(dut, wins)
+    exp = [1, 10, 10, 4, 129, 0]
+    for n, (tick, nib, cnt) in zip(exp, res):
+        assert tick == 1
+        assert cnt == n, f"err_count_last {cnt} != {n}"
+        assert nib == (1 << 3) | class_of(n), f"{n} errors: nibble {nib:04b}"
+    await RisingEdge(dut.clk)
