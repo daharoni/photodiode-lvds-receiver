@@ -714,6 +714,14 @@
       },
       {
         "netclass": "HV",
+        "pattern": "Net-(D1-A)"
+      },
+      {
+        "netclass": "HV",
+        "pattern": "Net-(D1-K)"
+      },
+      {
+        "netclass": "HV",
         "pattern": "/Power/HV_PUMP"
       },
       {

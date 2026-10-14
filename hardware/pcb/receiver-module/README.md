@@ -102,7 +102,7 @@ Design rules (Board Setup > Constraints): min clearance 0.10, track 0.10, connec
 | Class | Track | Clearance | Via | Diff width / gap | Nets |
 |---|---|---|---|---|---|
 | Default | 0.15 | 0.15 | 0.6 / 0.3 | - | all others (LVDS_DBG_P/N included) |
-| HV | 0.30 | 1.0 | 0.6 / 0.3 | - | /APD_BIAS, /Front End/HV_K, /Power/HV_OUT, HV_CLAMP, HV_RAW, HV_V1, HV_PUMP, and Net-(Q1-E), Net-(Q1-B), Net-(R17-Pad2) (clamp transistor nodes, within a few volts of HV; added conservatively, UNRESOLVED whether that is wanted). HV_MON, HV_DIS, DAC_HV, 5V_HVIN are low voltage and stay Default |
+| HV | 0.30 | 1.0 | 0.6 / 0.3 | - | /APD_BIAS, /Front End/HV_K, /Power/HV_OUT, HV_CLAMP, HV_RAW, HV_V1, HV_PUMP, Net-(D1-A) (the LT8365 SW node, swings to the stage-1 voltage every cycle) and Net-(D1-K) (D1 cathode to R7, stage-1 DC; both added 2026-10-14 after the first DRC with the HV class had missed them), and Net-(Q1-E), Net-(Q1-B), Net-(R17-Pad2) (clamp transistor nodes, within a few volts of HV; added conservatively, UNRESOLVED whether that is wanted). HV_MON, HV_DIS, DAC_HV, 5V_HVIN are low voltage and stay Default |
 | HV_LADDER | 0.30 | 0.6 | 0.6 / 0.3 | - | Net-(R20-Pad2) (HV_MON divider midpoint, R20/R32 4.99 M) and Net-(R10-Pad1), Net-(R10-Pad2), Net-(R8-Pad2) (FBX feedback divider R11/R10/R9/R8, 2.05 M each); steps of about 55 V, IPC-2221B 51-100 V band 0.6 mm |
 | DIFF90 | 0.145 | 0.15 | 0.6 / 0.3 | 0.145 / 0.15 | /Connector/LVDS_OUT1_P, _N, LVDS_OUT2_P, _N |
 | USB90 | 0.145 | 0.15 | 0.6 / 0.3 | 0.145 / 0.15 | /USB_DP, /USB_DM |
