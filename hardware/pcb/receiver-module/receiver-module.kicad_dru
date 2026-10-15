@@ -77,3 +77,11 @@
 (rule "hv same footprint pads"
   (condition "(A.hasNetclass('HV') || B.hasNetclass('HV') || A.hasNetclass('HV_LADDER') || B.hasNetclass('HV_LADDER')) && A.Type == 'Pad' && B.Type == 'Pad' && A.Parent == B.Parent")
   (constraint clearance (min 0.15mm)))
+
+# EXCEPTION (must stay last): a track escaping a pad of an HV footprint runs inside that footprint's courtyard,
+# closer than the HV clearance to the part's other pads (and to a neighbouring escape track). The part's own pad
+# gap applies there, as in "hv same footprint pads". Without this the router refuses to start on those pads
+# ("The routing start point violates DRC"). Outside the courtyard the 1.0 mm netclass / 1.25 mm pad rules apply.
+(rule "hv escape inside own courtyard"
+  (condition "A.Type == 'Track' && (B.Type == 'Pad' || B.Type == 'Track') && (((B.memberOfFootprint('U3') || B.intersectsCourtyard('U3')) && A.intersectsCourtyard('U3')) || ((B.memberOfFootprint('D1') || B.intersectsCourtyard('D1')) && A.intersectsCourtyard('D1')) || ((B.memberOfFootprint('D2') || B.intersectsCourtyard('D2')) && A.intersectsCourtyard('D2')) || ((B.memberOfFootprint('D3') || B.intersectsCourtyard('D3')) && A.intersectsCourtyard('D3')) || ((B.memberOfFootprint('D4') || B.intersectsCourtyard('D4')) && A.intersectsCourtyard('D4')) || ((B.memberOfFootprint('D10') || B.intersectsCourtyard('D10')) && A.intersectsCourtyard('D10')) || ((B.memberOfFootprint('Q1') || B.intersectsCourtyard('Q1')) && A.intersectsCourtyard('Q1')) || ((B.memberOfFootprint('Q2') || B.intersectsCourtyard('Q2')) && A.intersectsCourtyard('Q2')) || ((B.memberOfFootprint('R7') || B.intersectsCourtyard('R7')) && A.intersectsCourtyard('R7')) || ((B.memberOfFootprint('R11') || B.intersectsCourtyard('R11')) && A.intersectsCourtyard('R11')) || ((B.memberOfFootprint('R16') || B.intersectsCourtyard('R16')) && A.intersectsCourtyard('R16')) || ((B.memberOfFootprint('R17') || B.intersectsCourtyard('R17')) && A.intersectsCourtyard('R17')) || ((B.memberOfFootprint('R18') || B.intersectsCourtyard('R18')) && A.intersectsCourtyard('R18')) || ((B.memberOfFootprint('R20') || B.intersectsCourtyard('R20')) && A.intersectsCourtyard('R20')))")
+  (constraint clearance (min 0.15mm)))
