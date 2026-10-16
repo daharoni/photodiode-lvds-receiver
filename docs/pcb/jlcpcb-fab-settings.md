@@ -106,7 +106,7 @@ Differential and single-ended geometry on routable controlled layers (L1 and L6 
 
 | Class | Target | Width | Gap | Source row |
 |---|---|---|---|---|
-| DIFF90 (four SuperSpeed pairs), USB90 (USB_DP/USB_DM), CAN90 (CAN_H/CAN_L) | 90 ohm diff | 0.145 mm | 0.15 mm | 90.7 ohm computed at 0.143 mm / 0.149 mm |
+| DIFF90 (four SuperSpeed pairs), USB90 (USB_DP/USB_DN), CAN90 (CAN_P/CAN_N) | 90 ohm diff | 0.145 mm | 0.15 mm | 90.7 ohm computed at 0.143 mm / 0.149 mm |
 | DIFF90 relaxed alternative | 90 ohm diff | 0.16 mm | 0.20 mm | 89.8 ohm computed |
 | DIFF100 (LVDS_P/LVDS_N, U20 to R180) | 100 ohm diff | 0.11 mm | 0.15 mm | 100.2 ohm computed at 0.112 / 0.149 |
 | 50 ohm single-ended (if ever needed) | 50 ohm | 0.155 mm | n/a | 50.0 ohm computed |
@@ -184,14 +184,14 @@ KiCad 10 supports tuning profiles with per-layer width/gap and a calculator base
 | Default | 0.15 | 0.15 | 0.6 / 0.3 | - | lowest | everything else |
 | HV | 0.30 | 1.0 (see below) | 0.6 / 0.3, avoid vias | - | 1 | `HV_*`, `*/HV_*`, `APD_BIAS`, plus HV_K, HV_OUT, HV_CLAMP, HV_V1, HV_RAW, HV_PUMP, HV_FILT (all match `HV_*`); `HV_MON` and `HV_DIS` are low-voltage monitor/control nets that the existing `HV_*` pattern also catches (UNRESOLVED: consider renaming or excluding them to avoid a 1.0 mm clearance on the ESP32 side) |
 | DIFF90 | - | 0.15 | 0.6 / 0.3 | 0.145 / 0.15 | 3 | `*LVDS_OUT1_P`, `*LVDS_OUT1_N`, `*LVDS_OUT2_P`, `*LVDS_OUT2_N` (SSTX pairs), and the CAN pairs at the connector end |
-| CAN90 | - | 0.15 | 0.6 / 0.3 | 0.145 / 0.15 | 3 | `*CAN_H`, `*CAN_L` |
-| USB90 | - | 0.15 | 0.6 / 0.3 | 0.145 / 0.15 | 3 | `*USB_DP`, `*USB_DM` |
+| CAN90 | - | 0.15 | 0.6 / 0.3 | 0.145 / 0.15 | 3 | `*/CAN_P`, `*/CAN_N` |
+| USB90 | - | 0.15 | 0.6 / 0.3 | 0.145 / 0.15 | 3 | `*/USB_DP`, `*/USB_DN` |
 | DIFF100 | - | 0.15 | 0.6 / 0.3 | 0.11 / 0.15 | 3 | `LVDS_P`, `LVDS_N` (U20 to R180) |
 | LVDS (existing) | 0.2 | 0.2 | | | | `LVDS_*` currently catches all LVDS nets; narrow it to avoid overriding the classes above, or give DIFF90/DIFF100 higher priority (lower number) than LVDS. `LVDS_DBG_P/N` (U50 3Y/3Z to J51 scope header) is not an impedance-controlled run in the spec: leave on LVDS/Default (PROPOSED) |
 
 HV clearance: IPC-2221 Table 6-1 (secondary reproduction, IPC), band 171-250 V: B1 internal 0.2 mm; B2 external uncoated up to 3050 m 1.25 mm; B3 external uncoated above 3050 m 6.4 mm; B4 external with permanent polymer coating 0.4 mm; A5 conformal-coated assembly 0.4 mm; A6 uncoated component leads 0.8 mm; A7 0.4 mm. APD_BIAS at 220 V falls in this band. The project's 1.0 mm is above B4/A6 (solder-mask-covered traces, assembled leads) but BELOW B2 (1.25 mm) for exposed (unmasked) copper such as pads and test points. PROPOSED: keep the 1.0 mm netclass, and for HV pads and test points add the 1.25 mm rule in section 4.5 (or accept 1.0 mm with Daniel's explicit sign-off). This is a fabrication-spacing table, not a product-safety isolation standard (IEC 60664-1 would govern certified isolation); the creepage value for any user-accessible HV is UNRESOLVED. KiCad 10 also has a `creepage` DRC constraint (KM) if a creepage figure is later chosen.
 
-KiCad diff-pair recognition (KM, `inDiffPair`): a pair is recognised only if the net names are an _P/_N (or +/-) pair. `LVDS_*_P/N` qualify; `USB_DP/USB_DM` and `CAN_H/CAN_L` may NOT (UNRESOLVED: check in the PCB editor whether the interactive router offers the diff-pair tool on them; if not, either rename nets to USB_D_P/_N and CAN_P/_N in the schematic generator, or route with two single tracks and use explicit length rules).
+KiCad diff-pair recognition (KM, `inDiffPair`): a pair is recognised only if the net names are an _P/_N (or +/-) pair. `LVDS_*_P/N` qualify. USB_DP/USB_DM and CAN_H/CAN_L did not; resolved 2026-10-16 by renaming the nets to USB_DP/USB_DN and CAN_P/CAN_N in the KiCad schematic (no electrical change; CAN_P is CANH, CAN_N is CANL). Netclass patterns are now `*/CAN_P`, `*/CAN_N`, `*/USB_DP`, `*/USB_DN`. That the interactive router offers the diff-pair tool on them has not been checked in the PCB editor (PROPOSED).
 
 ### 4.5 Custom rules (`receiver-module.kicad_dru`, syntax from KM "Custom rules"; PROPOSED values, all untested)
 

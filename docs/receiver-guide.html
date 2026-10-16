@@ -421,10 +421,10 @@ a{color:#000;text-decoration:none}
 <tr><td class="n">A3</td><td>SSTXn1</td><td>LVDS_OUT2_P</td><td>U50 output 2Y, via U51</td></tr>
 <tr><td class="n">B2</td><td>SSTXp2</td><td>LVDS_OUT1_N</td><td>U50 output 1Z, via U52</td></tr>
 <tr><td class="n">B3</td><td>SSTXn2</td><td>LVDS_OUT1_P</td><td>U50 output 1Y, via U52</td></tr>
-<tr><td class="n">B11 / A11</td><td>SSRXp1 / SSRXp2</td><td>CAN_H (bused)</td><td>SN65HVD230 U64</td></tr>
-<tr><td class="n">B10 / A10</td><td>SSRXn1 / SSRXn2</td><td>CAN_L (bused)</td><td>SN65HVD230 U64</td></tr>
+<tr><td class="n">B11 / A11</td><td>SSRXp1 / SSRXp2</td><td>CAN_P (bused; CANH, renamed from CAN_H 2026-10-16 so the KiCad diff-pair router pairs CAN_P/CAN_N)</td><td>SN65HVD230 U64</td></tr>
+<tr><td class="n">B10 / A10</td><td>SSRXn1 / SSRXn2</td><td>CAN_N (bused)</td><td>SN65HVD230 U64</td></tr>
 <tr><td class="n">A6 / B6</td><td>D+ (Dp1, Dp2 tied)</td><td>USB_DP</td><td>USBLC6 U61, 22 ohm R193, ESP32 IO13</td></tr>
-<tr><td class="n">A7 / B7</td><td>D- (Dn1, Dn2 tied)</td><td>USB_DM</td><td>USBLC6 U61, 22 ohm R194, ESP32 IO12</td></tr>
+<tr><td class="n">A7 / B7</td><td>D- (Dn1, Dn2 tied)</td><td>USB_DN</td><td>USBLC6 U61, 22 ohm R194, ESP32 IO12</td></tr>
 <tr><td class="n">A8 / B8</td><td>SBU1 / SBU2 (tied)</td><td>AUX_CAB, then R186 1k to AUX</td><td>ESP32 IO7 via R204 1k; J51 pin 6</td></tr>
 <tr><td class="n">A5</td><td>CC1</td><td>CC1</td><td>Rd R181 5.1k 1 %, 100k/100k/100 nF tap to IO4 (CC1_SENSE)</td></tr>
 <tr><td class="n">B5</td><td>CC2</td><td>CC2</td><td>Rd R184 5.1k 1 %, 100k/100k/100 nF tap to IO5 (CC2_SENSE)</td></tr>
@@ -471,7 +471,7 @@ a{color:#000;text-decoration:none}
 </ul>
 
 <h3>4.9 J51 scope header</h3>
-<p>Six pins, a bench aid (<a href="schematic/connector.md">connector.md</a>): 1 GND, 2 LVDS_DBG_P and 3 LVDS_DBG_N (U50 output 3), 4 CAN_H, 5 CAN_L, 6 AUX. R177 100 ohm across the debug pair is DNP; whether an unloaded output 3 is acceptable is <span class="t u">UNRESOLVED</span>. RSSI, HV_MON, 3V3, 3V3_D and GND go to test points TP50-TP55. <span class="t p">PROPOSED</span></p>
+<p>Six pins, a bench aid (<a href="schematic/connector.md">connector.md</a>): 1 GND, 2 LVDS_DBG_N (U50 3Z) and 3 LVDS_DBG_P (U50 3Y), pair flipped 2026-10-16 for layout (U50 output 3), 4 CAN_P, 5 CAN_N, 6 AUX. R177 100 ohm across the debug pair is DNP; whether an unloaded output 3 is acceptable is <span class="t u">UNRESOLVED</span>. RSSI, HV_MON, 3V3, 3V3_D and GND go to test points TP50-TP55. <span class="t p">PROPOSED</span></p>
 </section>
 
 <section id="controller">
@@ -552,7 +552,7 @@ a{color:#000;text-decoration:none}
 <h3>5.7 CAN link</h3>
 <div class="scroll" tabindex="0"><table>
 <tr><th>Item</th><th>Value</th></tr>
-<tr><td>Physical</td><td>SN65HVD230 on IO19 (TX) / IO18 (RX); CAN_H/CAN_L on both SuperSpeed RX pairs; one split termination at the FPGA end; 125 kbit/s, 8 us bit. <span class="t p">PROPOSED</span></td></tr>
+<tr><td>Physical</td><td>SN65HVD230 on IO19 (TX) / IO18 (RX); CAN_P/CAN_N on both SuperSpeed RX pairs; one split termination at the FPGA end; 125 kbit/s, 8 us bit. <span class="t p">PROPOSED</span></td></tr>
 <tr><td>Controller</td><td>ESP32-C6 TWAI, CAN 2.0, 11-bit standard IDs only. <span class="t v">VERIFIED</span> ESP32-C6 datasheet p.4; MINI-1 datasheet 5.2.1.7 p.21.</td></tr>
 <tr><td>Nodes</td><td>Node 0 is the FPGA-side master (the ULX3S's own ESP32 is a candidate, <span class="t u">UNRESOLVED</span>), node IDs 1..14 for modules (14 on one bus), 15 broadcast. Identity is the factory MAC plus a write-once serial in NVS.</td></tr>
 <tr><td>Master status</td><td><b>LINK_ALL</b> (ID 0x1F0, broadcast, 20 Hz): one nibble per module with a valid bit and a 3-bit error class from the FPGA's invalid-code count per 100 ms, class 7 = LOS. It is also the node's bus heartbeat. Invalid-code counts are not a BER measurement (standing correction 12).</td></tr>
@@ -678,11 +678,11 @@ a{color:#000;text-decoration:none}
 <tr><td>HV</td><td>0.30</td><td>1.0</td><td>-</td><td>APD_BIAS, HV_K, HV_OUT, HV_CLAMP, HV_RAW, HV_V1, HV_PUMP and three clamp-transistor nodes (added conservatively, wanted or not is <span class="t u">UNRESOLVED</span>)</td></tr>
 <tr><td>HV_LADDER</td><td>0.30</td><td>0.6</td><td>-</td><td>HV_MON divider midpoint and the FBX ladder nodes (steps of about 55 V)</td></tr>
 <tr><td>DIFF90</td><td>0.145</td><td>0.15</td><td>0.145 / 0.15</td><td>LVDS_OUT1_P/N, LVDS_OUT2_P/N (U50 to J50)</td></tr>
-<tr><td>USB90</td><td>0.145</td><td>0.15</td><td>0.145 / 0.15</td><td>USB_DP, USB_DM</td></tr>
-<tr><td>CAN90</td><td>0.145</td><td>0.15</td><td>0.145 / 0.15</td><td>CAN_H, CAN_L</td></tr>
+<tr><td>USB90</td><td>0.145</td><td>0.15</td><td>0.145 / 0.15</td><td>USB_DP, USB_DN</td></tr>
+<tr><td>CAN90</td><td>0.145</td><td>0.15</td><td>0.145 / 0.15</td><td>CAN_P, CAN_N</td></tr>
 <tr><td>DIFF100</td><td>0.11</td><td>0.15</td><td>0.11 / 0.15</td><td>LVDS_P, LVDS_N (U20 to R180)</td></tr>
 </table></div>
-<p>The custom DRC file <code>receiver-module.kicad_dru</code> adds HV edge and pad clearances and diff-pair rules. A syntax error makes KiCad silently ignore the whole file, so confirm a rule is live after editing. KiCad pairs nets by name only for _P/_N and +/-, so USB_DP/DM and CAN_H/L may not get the interactive diff-pair router. <span class="t u">UNRESOLVED</span></p>
+<p>The custom DRC file <code>receiver-module.kicad_dru</code> adds HV edge and pad clearances and diff-pair rules. A syntax error makes KiCad silently ignore the whole file, so confirm a rule is live after editing. KiCad pairs nets by name only for _P/_N and +/-, so USB_DP/DM and CAN_P/L may not get the interactive diff-pair router. <span class="t u">UNRESOLVED</span></p>
 
 <h3>7.5 J50 hole waiver and the ordering tier</h3>
 <div class="callout warn">

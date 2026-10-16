@@ -35,7 +35,7 @@ tables (the lab library is global via `${AHARONI_LAB_KICAD_LIB}`); this project 
 | `frontend.kicad_sch` | APD, OPA857 TIA with 20k/5k CTRL, AC coupling, OPA855 x7 post-amp, 68 MHz low-pass, AC coupling to SDET_P (TIA_TAP out, VCM_REF in) |
 | `slicer.kicad_sch` | TLV3605 sliced at VCM_REF baseline with DAC_TH trim and ~3 mV hysteresis, LVDS out |
 | `control.kicad_sch` | Monitor: OPA2320 VCM_REF 1.65 V buffer and BAS70 RSSI minimum detector from TIA_TAP |
-| `connector.kicad_sch` | single 24-pin USB-C J50: VBUS out, USB_DP/USB_DM, CC1_SENSE/CC2_SENSE, AUX (SBU tie), LVDS fan-out U50 to both SuperSpeed TX pairs, CAN on both RX pairs, ESD arrays U51/U52, scope header J51, test points |
+| `connector.kicad_sch` | single 24-pin USB-C J50: VBUS out, USB_DP/USB_DN, CC1_SENSE/CC2_SENSE, AUX (SBU tie), LVDS fan-out U50 to both SuperSpeed TX pairs, CAN on both RX pairs (nets CAN_P/CAN_N (CANH/CANL; renamed from CAN_H/CAN_L 2026-10-16 so the KiCad diff-pair router pairs them)), ESD arrays U51/U52, scope header J51, test points |
 | `controller.kicad_sch` | ESP32-C6-MINI-1, MCP4728 DAC, ADS1115 ADC, SN65HVD230 CAN, USBLC6 and 22R D+/D- (USB from the Connector sheet), RESET/BOOT switches, CC1_SENSE/CC2_SENSE inputs on IO4/IO5 |
 
 `GND` is a global net (global label in every sub-sheet). Other power nets are sheet pins. Nets at or above 50 V are prefixed `HV_` and, with `APD_BIAS`, belong to net class `HV` (1.0 mm clearance).
@@ -118,11 +118,11 @@ Design rules (Board Setup > Constraints): min clearance 0.10, track 0.10, connec
 | HV | 0.30 | 1.0 | 0.6 / 0.3 | - | /APD_BIAS, /Front End/HV_K, /Power/HV_OUT, HV_CLAMP, HV_RAW, HV_V1, HV_PUMP, Net-(D1-A) (the LT8365 SW node, swings to the stage-1 voltage every cycle) and Net-(D1-K) (D1 cathode to R7, stage-1 DC; both added 2026-10-14 after the first DRC with the HV class had missed them), and Net-(Q1-E), Net-(Q1-B), Net-(R17-Pad2) (clamp transistor nodes, within a few volts of HV; added conservatively, UNRESOLVED whether that is wanted). HV_MON, HV_DIS, DAC_HV, 5V_HVIN are low voltage and stay Default |
 | HV_LADDER | 0.30 | 0.6 | 0.6 / 0.3 | - | Net-(R20-Pad2) (HV_MON divider midpoint, R20/R32 4.99 M) and Net-(R10-Pad1), Net-(R10-Pad2), Net-(R8-Pad2) (FBX feedback divider R11/R10/R9/R8, 2.05 M each); steps of about 55 V, IPC-2221B 51-100 V band 0.6 mm |
 | DIFF90 | 0.145 | 0.15 | 0.6 / 0.3 | 0.145 / 0.15 | /Connector/LVDS_OUT1_P, _N, LVDS_OUT2_P, _N |
-| USB90 | 0.145 | 0.15 | 0.6 / 0.3 | 0.145 / 0.15 | /USB_DP, /USB_DM |
-| CAN90 | 0.145 | 0.15 | 0.6 / 0.3 | 0.145 / 0.15 | /CAN_H, /CAN_L |
+| USB90 | 0.145 | 0.15 | 0.6 / 0.3 | 0.145 / 0.15 | */USB_DP, */USB_DN |
+| CAN90 | 0.145 | 0.15 | 0.6 / 0.3 | 0.145 / 0.15 | */CAN_P, */CAN_N |
 | DIFF100 | 0.11 | 0.15 | 0.6 / 0.3 | 0.11 / 0.15 | /LVDS_P, /LVDS_N (U20 to R180) |
 
-Tuning profiles were not created (their JSON schema is not documented in the KiCad manual and has no example in these projects); create `Z90_diff` / `Z100_diff` in the GUI if wanted. KiCad pairs nets by name only for _P/_N and +/-: USB_DP/USB_DM and CAN_H/CAN_L may not get the interactive diff-pair router (UNRESOLVED); the DRC rules are netclass based so they apply either way.
+Tuning profiles were not created (their JSON schema is not documented in the KiCad manual and has no example in these projects); create `Z90_diff` / `Z100_diff` in the GUI if wanted. KiCad pairs nets by name only for _P/_N and +/-. This was UNRESOLVED for CAN_H/CAN_L and USB_DP/USB_DM; resolved 2026-10-16 by renaming to CAN_P/CAN_N and USB_DN (USB_DP unchanged; no electrical change), so the interactive diff-pair router now recognises all of them (netclass patterns `*/CAN_P`, `*/CAN_N`, `*/USB_DP`, `*/USB_DN`; recognition in the router itself not yet exercised on these nets, PROPOSED). The DRC rules are netclass based so they apply either way.
 
 HV same-footprint exception: `hv same footprint pads` (last rule in the .kicad_dru) lowers the clearance to 0.15 mm between two pads of the same footprint when either is HV or HV_LADDER (identified by `A.Parent == B.Parent`). Everything outside one footprint keeps the full 1.0 mm (HV), 0.6 mm (HV_LADDER), and 1.25 mm for exposed HV pads.
 
