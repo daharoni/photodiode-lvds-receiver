@@ -294,7 +294,7 @@
       "internal_id": "",
       "mfg": "",
       "mpn": "",
-      "sch_revision": ""
+      "sch_revision": "A0"
     },
     "layer_pairs": [],
     "layer_presets": [],
@@ -953,12 +953,8 @@
       "Front End"
     ],
     [
-      "c76241d4-a159-4a50-8470-1dcc6f3284a1",
-      "Detector"
-    ],
-    [
       "6cf4481f-61fa-43ad-a5db-39f73b1dcc52",
-      "Control"
+      "Monitor"
     ],
     [
       "32812998-0b35-4309-a51b-1352d244051f",
@@ -970,7 +966,7 @@
     ],
     [
       "9c1b5363-b8fe-46ae-a030-8579ae40f325",
-      "MCU (optional)"
+      "Controller"
     ]
   ],
   "text_variables": {
