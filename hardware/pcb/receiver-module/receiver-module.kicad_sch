@@ -127,7 +127,7 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "Global net GND enters here only to carry a PWR_FLAG for ERC. USB_DP, USB_DM, AUX, CAN_H, CAN_L run Connector <-> Controller; CC1_SENSE, CC2_SENSE Connector -> Controller."
+	(text "Global net GND enters here only to carry a PWR_FLAG for ERC. USB_DP, USB_DN, AUX, CAN_P, CAN_N run Connector <-> Controller; CC1_SENSE, CC2_SENSE Connector -> Controller."
 		(exclude_from_sim yes)
 		(at 25.4 248.92 0)
 		(effects
@@ -906,7 +906,7 @@
 		)
 		(uuid "4a716321-6b29-495a-aba4-4fde82db9925")
 	)
-	(label "USB_DM"
+	(label "USB_DN"
 		(at 312.42 81.28 0)
 		(effects
 			(font
@@ -916,7 +916,7 @@
 		)
 		(uuid "5078e08f-1f58-4cb9-88a6-321f102e6ce3")
 	)
-	(label "CAN_H"
+	(label "CAN_P"
 		(at 236.22 180.34 0)
 		(effects
 			(font
@@ -1006,7 +1006,7 @@
 		)
 		(uuid "68b4a60b-a147-4675-be86-0e3c0eb998a8")
 	)
-	(label "USB_DM"
+	(label "USB_DN"
 		(at 236.22 175.26 0)
 		(effects
 			(font
@@ -1016,7 +1016,7 @@
 		)
 		(uuid "69682e5a-ba10-4ddc-8a26-362b6bcd5707")
 	)
-	(label "CAN_H"
+	(label "CAN_P"
 		(at 312.42 86.36 0)
 		(effects
 			(font
@@ -1126,7 +1126,7 @@
 		)
 		(uuid "a798a862-4d9b-493a-b577-f9c58903eabc")
 	)
-	(label "CAN_L"
+	(label "CAN_N"
 		(at 236.22 185.42 0)
 		(effects
 			(font
@@ -1326,7 +1326,7 @@
 		)
 		(uuid "fc5524a8-9189-46bf-a43c-86b583240e0d")
 	)
-	(label "CAN_L"
+	(label "CAN_N"
 		(at 312.42 91.44 0)
 		(effects
 			(font
@@ -1671,7 +1671,7 @@
 				(justify right)
 			)
 		)
-		(pin "USB_DM" bidirectional
+		(pin "USB_DN" bidirectional
 			(at 307.34 81.28 0)
 			(uuid "c4ca4d57-84b3-48ef-ab53-6d3fe8f63631")
 			(effects
@@ -1681,7 +1681,7 @@
 				(justify right)
 			)
 		)
-		(pin "CAN_H" bidirectional
+		(pin "CAN_P" bidirectional
 			(at 307.34 86.36 0)
 			(uuid "63df2528-f192-4f71-b417-eeded236d0b0")
 			(effects
@@ -1691,7 +1691,7 @@
 				(justify right)
 			)
 		)
-		(pin "CAN_L" bidirectional
+		(pin "CAN_N" bidirectional
 			(at 307.34 91.44 0)
 			(uuid "8e00250d-2514-4ded-96fc-e708c5289573")
 			(effects
@@ -2225,7 +2225,7 @@
 				(justify right)
 			)
 		)
-		(pin "USB_DM" bidirectional
+		(pin "USB_DN" bidirectional
 			(at 231.14 175.26 0)
 			(uuid "56ab76dd-228f-47df-933f-fbbffea53d25")
 			(effects
@@ -2235,7 +2235,7 @@
 				(justify right)
 			)
 		)
-		(pin "CAN_H" bidirectional
+		(pin "CAN_P" bidirectional
 			(at 231.14 180.34 0)
 			(uuid "a58b6a53-ef2c-43db-b486-0f89436ea26e")
 			(effects
@@ -2245,7 +2245,7 @@
 				(justify right)
 			)
 		)
-		(pin "CAN_L" bidirectional
+		(pin "CAN_N" bidirectional
 			(at 231.14 185.42 0)
 			(uuid "974f7f67-8c2f-4bf2-bce7-f2c2d0a1cbe7")
 			(effects

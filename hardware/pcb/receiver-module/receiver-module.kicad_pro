@@ -774,15 +774,15 @@
       },
       {
         "netclass": "USB90",
-        "pattern": "*/USB_DM"
+        "pattern": "*/USB_DN"
       },
       {
         "netclass": "CAN90",
-        "pattern": "*/CAN_H"
+        "pattern": "*/CAN_P"
       },
       {
         "netclass": "CAN90",
-        "pattern": "*/CAN_L"
+        "pattern": "*/CAN_N"
       },
       {
         "netclass": "DIFF100",
