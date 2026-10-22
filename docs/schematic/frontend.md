@@ -30,7 +30,7 @@ Hierarchical pins: in APD_BIAS, 3V3, TIA_CTRL, VCM_REF; out SDET_P, TIA_TAP. SDE
 ## Pin to net (kicad-cli netlist of a scratch root; hierarchical nets show as local names)
 U10 OPA857: 1, 3, 4, 6, 7, 12 GND; 17 PAD GND; 2 CTRL = Net-(JP10-C) (R57 to 3V3); 5 OUTN = Net-(U10-OUTN) (TP12); 8 OUT = Net-(U10-OUT) (C51, R58); 9, 10, 11 VS+ = 3V3; 13 GND; 14 3V3; 15 IN = TIA_IN; 16 NC open.
 U11 OPA855: 1 FB = Net-(U11-FB) (R53 pin 2); 2 NC open; 3 IN- = Net-(U11-IN-) (R53 pin 1, R54 pin 2); 4 IN+ = PA_IN; 5 VS- GND; 6 OUT = Net-(U11-OUT) (TP10, R56); 7 VS+ = 3V3; 8 PD = 3V3; 9 EP GND.
-D10: 1 K = HV_K; 2 CASE = GND; 3 A = TIA_IN.
+D10: 1 A = TIA_IN; 2 CASE = GND; 3 K = HV_K. (D10 pinout corrected 2026-10-22: KAPDA0136EC pin diagram (bottom view) has pin 1 = anode, pin 3 = cathode; the lab-library symbol had them swapped (lab-library branch `fix-s12023-pinout`, commit 1cfe5d7). On the board D10 is rotated 180 degrees about the can axis so the anode pad stays next to U10; the index tab now points to the lower right, toward the TIA.)
 
 ## ERC (scratch copy of the whole directory, old root)
 Only `hier_label_mismatch` for the new pins TIA_TAP and SDET_P (root still carries the old pins). Reference designators used: R50-R54, R56-R60, C50-C59 (C51-C55 coupling and filter parts as above), D10, JP10, TP10-TP12, U10, U11.

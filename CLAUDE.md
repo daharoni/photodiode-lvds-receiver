@@ -66,7 +66,7 @@ Performance beats cost. No backward compatibility with the Miniscope Zero headst
 
 ## Key standing corrections (details in decision-log.md)
 
-Cathode to positive bias, anode to TIA IN; use 6 pF for the S12023-10 and FDS010 alike;
+Cathode to positive bias, anode to TIA IN (S12023 pin 1 = anode, pin 3 = cathode, correction 15; D10 is rotated 180 degrees on the board); use 6 pF for the S12023-10 and FDS010 alike;
 AC-couple everything after the TIA (OUTN is 1.83 V); comparator slices at the AC baseline
 (decision 12 superseded the VGA/AGC corrections 1, 4, 5, 7, 8, 9); TLV3605 SHDN is
 active-low and not a guaranteed zero; FPGA watchdog uses an independent clock; APD bias

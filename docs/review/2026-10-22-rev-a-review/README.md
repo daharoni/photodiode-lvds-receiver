@@ -23,6 +23,8 @@ the board but should be settled before the headstage emitter is frozen.
 
 ### B1. S12023-10 symbol pin mapping is reversed: the APD is forward-biased by the HV rail (orchestrator-verified)
 
+**Status: FIXED 2026-10-22** (Daniel confirmed the pin diagram is a bottom view). Lab-library branch `fix-s12023-pinout` commit 1cfe5d7 swaps the K/A pin numbers on S12023-10 and S12023-05 and corrects the texts; the embedded symbol in `frontend.kicad_sch` has the same edit; D10 is rotated 180 degrees about the can axis on the board (decision 17, standing correction 15). Verified: ERC 0/0, netlist differs from the pre-fix one only at D10 pins 1 and 3, DRC unchanged at 52 items with 0 unconnected pads. Item P1 (pad spacing) still applies.
+
 - Where: Front End D10, lab-library symbol `AharoniLab_Passive:S12023-10` (pin 1 = K, pin 3 = A, pin 2 = CASE);
   netlist: D10 pin 1 = `/Front End/HV_K`, pin 3 = `/Front End/TIA_IN`, pin 2 = GND.
 - Evidence: Hamamatsu KAPD1007E19 p.4, outline (1) "S12023-02/-05/-10/-10A", drawing KAPDA0136EC. The pin diagram
