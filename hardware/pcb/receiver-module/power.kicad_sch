@@ -2681,6 +2681,17 @@
 					)
 				)
 			)
+			(property "MPN" "TPS7A2033PDBVR"
+				(at 0 -15.24 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
 			(property "Contributor" "Daniel Aharoni"
 				(at 0 -17.78 0)
 				(show_name no)
@@ -2705,17 +2716,6 @@
 			)
 			(property "Validated" "No"
 				(at 0 -22.86 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "MPN" "TPS7A2033PDBVR"
-				(at 0 -15.24 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(hide yes)
@@ -13127,7 +13127,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
 			(at 119.38 170.18 0)
 			(hide yes)
 			(show_name no)
@@ -15847,7 +15847,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
 			(at 149.86 40.64 0)
 			(hide yes)
 			(show_name no)
@@ -16134,7 +16134,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
 			(at 162.56 38.1 0)
 			(hide yes)
 			(show_name no)

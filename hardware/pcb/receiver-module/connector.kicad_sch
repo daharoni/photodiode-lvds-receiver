@@ -1744,7 +1744,7 @@
 					)
 				)
 			)
-			(property "Source" "Pins checked against TPDxE05U06 SLVSBO7O (Aug 2024) Table 4-3, RVZ package; symbol drawn to lab conventions"
+			(property "Source" "Pins checked against TPDxE05U06 SLVSBO7O (Aug 2024) Table 4-3, RVZ package; symbol drawn to lab conventions. NC pins 1-4, 6, 7 are native pin stacks on 14-11, 9, 8 (SLVSBO7O Table 4-3: each NC pad is internally tied to the opposite I/O pad) for straight-through routing"
 				(at 0 -38.1 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1791,82 +1791,6 @@
 				)
 			)
 			(symbol "TPD6E05U06_1_1"
-				(pin passive line
-					(at -10.16 7.62 0)
-					(length 5.08)
-					(hide yes)
-					(name "D1+"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -10.16 5.08 0)
-					(length 5.08)
-					(hide yes)
-					(name "D1-"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -10.16 2.54 0)
-					(length 5.08)
-					(hide yes)
-					(name "D2+"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -10.16 0 0)
-					(length 5.08)
-					(hide yes)
-					(name "D2-"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin power_in line
 					(at -2.54 -15.24 90)
 					(length 5.08)
@@ -1878,80 +1802,6 @@
 						)
 					)
 					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -10.16 -2.54 0)
-					(length 5.08)
-					(hide yes)
-					(name "D3+"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -10.16 -5.08 0)
-					(length 5.08)
-					(hide yes)
-					(name "D3-"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -10.16 -5.08 0)
-					(length 5.08)
-					(name "D3-"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -10.16 -2.54 0)
-					(length 5.08)
-					(name "D3+"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1978,34 +1828,16 @@
 					)
 				)
 				(pin passive line
-					(at -10.16 0 0)
+					(at -10.16 7.62 0)
 					(length 5.08)
-					(name "D2-"
+					(name "D1+"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -10.16 2.54 0)
-					(length 5.08)
-					(name "D2+"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "12"
+					(number "[1,14]"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2023,7 +1855,7 @@
 							)
 						)
 					)
-					(number "13"
+					(number "[2,13]"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2032,16 +1864,70 @@
 					)
 				)
 				(pin passive line
-					(at -10.16 7.62 0)
+					(at -10.16 2.54 0)
 					(length 5.08)
-					(name "D1+"
+					(name "D2+"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "14"
+					(number "[3,12]"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -10.16 0 0)
+					(length 5.08)
+					(name "D2-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "[4,11]"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -10.16 -2.54 0)
+					(length 5.08)
+					(name "D3+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "[6,9]"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -10.16 -5.08 0)
+					(length 5.08)
+					(name "D3-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "[7,8]"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4781,7 +4667,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
 			(at 317.5 190.5 0)
 			(hide yes)
 			(show_name no)
@@ -5046,7 +4932,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
 			(at 317.5 210.82 0)
 			(hide yes)
 			(show_name no)
@@ -5210,6 +5096,39 @@
 				)
 			)
 		)
+		(property "Contributor" "Daniel Aharoni"
+			(at 365.76 149.86 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Source" "KiCad official library (Mechanical: MountingHole_Pad), lab properties added"
+			(at 365.76 149.86 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Validated" "No"
+			(at 365.76 149.86 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "d04fed78-51da-4c63-87fb-ecb6db8e0631")
 		)
@@ -5276,6 +5195,39 @@
 			)
 		)
 		(property "Description" "Mounting hole with plated pad (chassis/GND tie)"
+			(at 350.52 149.86 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Contributor" "Daniel Aharoni"
+			(at 350.52 149.86 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Source" "KiCad official library (Mechanical: MountingHole_Pad), lab properties added"
+			(at 350.52 149.86 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Validated" "No"
 			(at 350.52 149.86 0)
 			(hide yes)
 			(show_name no)
@@ -5475,7 +5427,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
 			(at 317.5 200.66 0)
 			(hide yes)
 			(show_name no)
@@ -5606,7 +5558,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
 			(at 317.5 220.98 0)
 			(hide yes)
 			(show_name no)
@@ -5894,6 +5846,39 @@
 			)
 		)
 		(property "Description" "Mounting hole with plated pad (chassis/GND tie)"
+			(at 381 149.86 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Contributor" "Daniel Aharoni"
+			(at 381 149.86 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Source" "KiCad official library (Mechanical: MountingHole_Pad), lab properties added"
+			(at 381 149.86 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Validated" "No"
 			(at 381 149.86 0)
 			(hide yes)
 			(show_name no)
@@ -6557,7 +6542,7 @@
 				)
 			)
 		)
-		(property "Source" "Pins checked against TPDxE05U06 SLVSBO7O (Aug 2024) Table 4-3, RVZ package; symbol drawn to lab conventions"
+		(property "Source" "Pins checked against TPDxE05U06 SLVSBO7O (Aug 2024) Table 4-3, RVZ package; symbol drawn to lab conventions. NC pins 1-4, 6, 7 are native pin stacks on 14-11, 9, 8 (SLVSBO7O Table 4-3: each NC pad is internally tied to the opposite I/O pad) for straight-through routing"
 			(at 172.72 101.6 0)
 			(hide yes)
 			(show_name no)
@@ -6590,22 +6575,22 @@
 				)
 			)
 		)
-		(pin "14"
+		(pin "[3,12]"
 			(uuid "447ef622-c40e-489e-8495-ebbd4fc53ab7")
 		)
-		(pin "13"
+		(pin "[4,11]"
 			(uuid "58b2b0b4-486c-4237-ac06-67c0f446b4cc")
 		)
-		(pin "12"
+		(pin "[1,14]"
 			(uuid "c5b2f008-d3cf-441e-b327-1440f899a61f")
 		)
-		(pin "11"
+		(pin "[6,9]"
 			(uuid "ad09dde1-daa3-41db-9160-24cdaa624a21")
 		)
-		(pin "9"
+		(pin "[7,8]"
 			(uuid "3d4ecaaf-0554-486a-910c-c354131d8ebd")
 		)
-		(pin "8"
+		(pin "[2,13]"
 			(uuid "f494f242-7358-40e5-9e00-96480061c5be")
 		)
 		(pin "5"
@@ -6613,24 +6598,6 @@
 		)
 		(pin "10"
 			(uuid "2293a571-8173-49ac-80ff-3a01e6da9a90")
-		)
-		(pin "1"
-			(uuid "1d1430ba-20e5-41d8-9e3a-895ef61e796c")
-		)
-		(pin "2"
-			(uuid "8b27e9d2-db71-45b0-985e-4b162d878d94")
-		)
-		(pin "3"
-			(uuid "b7c01fd7-db3e-485d-9dc1-0ba37d26df0a")
-		)
-		(pin "4"
-			(uuid "a05144c9-bdf9-41ee-b895-bdbeb43bc791")
-		)
-		(pin "6"
-			(uuid "b101a983-afd3-4754-980c-7699ec5ea0c3")
-		)
-		(pin "7"
-			(uuid "b91b15a5-c0b7-47bf-9b24-b68de18e993b")
 		)
 		(instances
 			(project "receiver-module"
@@ -6672,7 +6639,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
 			(at 317.5 170.18 0)
 			(hide yes)
 			(show_name no)
@@ -7590,6 +7557,39 @@
 				)
 			)
 		)
+		(property "Contributor" "Daniel Aharoni"
+			(at 396.24 149.86 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Source" "KiCad official library (Mechanical: MountingHole_Pad), lab properties added"
+			(at 396.24 149.86 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Validated" "No"
+			(at 396.24 149.86 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "f9231f4b-e8e1-447f-a699-29d394427963")
 		)
@@ -7633,7 +7633,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
 			(at 317.5 180.34 0)
 			(hide yes)
 			(show_name no)
@@ -8831,7 +8831,7 @@
 				)
 			)
 		)
-		(property "Source" "Pins checked against TPDxE05U06 SLVSBO7O (Aug 2024) Table 4-3, RVZ package; symbol drawn to lab conventions"
+		(property "Source" "Pins checked against TPDxE05U06 SLVSBO7O (Aug 2024) Table 4-3, RVZ package; symbol drawn to lab conventions. NC pins 1-4, 6, 7 are native pin stacks on 14-11, 9, 8 (SLVSBO7O Table 4-3: each NC pad is internally tied to the opposite I/O pad) for straight-through routing"
 			(at 172.72 152.4 0)
 			(hide yes)
 			(show_name no)
@@ -8864,23 +8864,17 @@
 				)
 			)
 		)
-		(pin "14"
+		(pin "[4,11]"
 			(uuid "61c9d4f3-185e-41c3-ba05-a4e8850dca1c")
 		)
-		(pin "13"
+		(pin "[3,12]"
 			(uuid "816b22a7-e2c9-4a73-988a-c860664374a9")
 		)
-		(pin "12"
+		(pin "[7,8]"
 			(uuid "1cc9257c-f388-4c3c-adbc-33d88112361b")
 		)
-		(pin "11"
+		(pin "[6,9]"
 			(uuid "752834c9-62b8-432c-8876-64bc0fff5f79")
-		)
-		(pin "9"
-			(uuid "16a273c5-dbcc-4bf1-baea-67bd97ab27f3")
-		)
-		(pin "8"
-			(uuid "c1e1b812-2c88-4e0a-a8a4-728a0c58066c")
 		)
 		(pin "5"
 			(uuid "0145bf15-dbb0-412c-84ca-2b8d101fa7f9")
@@ -8888,22 +8882,10 @@
 		(pin "10"
 			(uuid "7c569b89-abf6-4c6b-92e4-a0862c1ffee5")
 		)
-		(pin "1"
-			(uuid "097d2a45-9234-414d-a781-cf0c5a706892")
-		)
-		(pin "2"
-			(uuid "08ab88cf-cbec-4ac6-b1ea-74ae225848cc")
-		)
-		(pin "3"
-			(uuid "e76b45bd-7cbe-4013-8558-209135088d36")
-		)
-		(pin "4"
-			(uuid "45e88395-6fa2-4653-a6c9-ab195f1f6a0c")
-		)
-		(pin "6"
+		(pin "[2,13]"
 			(uuid "5b68c003-abc8-4503-83ce-197d4f2fcbe4")
 		)
-		(pin "7"
+		(pin "[1,14]"
 			(uuid "fd5b87ba-9a92-40fd-9080-b6a8fcd3aedd")
 		)
 		(instances

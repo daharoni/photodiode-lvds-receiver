@@ -1693,12 +1693,6 @@
 		(path "/427881bb-fa50-4548-bcaf-90e7043b4c71/b9f63bef-5ffa-4e9b-a909-f7b219f89bfe")
 		(sheetname "/Front End/")
 		(sheetfile "frontend.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -3351,12 +3345,6 @@
 		(path "/0c318e1c-a27e-42fc-ba78-2292a9a0a0c3/fa7f6e7e-50cb-41dd-b5f6-0aea95c2ff24")
 		(sheetname "/Connector/")
 		(sheetfile "connector.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "14" "2" "13" "3" "12" "4" "11" "6" "9" "7" "8" "5" "10")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line
@@ -8148,12 +8136,6 @@
 		(path "/427881bb-fa50-4548-bcaf-90e7043b4c71/45f8798c-c907-49fc-b9ec-b24bc8961d31")
 		(sheetname "/Front End/")
 		(sheetfile "frontend.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2" "3")
-			)
-		)
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_circle
@@ -16832,6 +16814,19 @@
 				)
 			)
 		)
+		(property "KiLib_Generator" "capacitor cap"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1a5341a4-42f8-4595-8d51-1bc9cea30e95")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "Validated" "No"
 			(at 0 0 0)
 			(layer "F.Fab")
@@ -16868,29 +16863,10 @@
 				)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "1a5341a4-42f8-4595-8d51-1bc9cea30e95")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
 		(property ki_fp_filters "C_*")
 		(path "/427881bb-fa50-4548-bcaf-90e7043b4c71/cbcdc42b-2605-409a-979a-f293a1e5147f")
 		(sheetname "/Front End/")
 		(sheetfile "frontend.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_line

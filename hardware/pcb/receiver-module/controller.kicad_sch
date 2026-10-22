@@ -5007,6 +5007,16 @@
 		)
 		(uuid "6d1b8b4f-ec19-40c1-9178-509369058b52")
 	)
+	(label "USB_ESD_DP"
+		(at 138.43 88.9 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "703edcd8-d34d-46ff-b1bc-7850f5628965")
+	)
 	(label "SDA"
 		(at 273.05 142.24 180)
 		(effects
@@ -5307,6 +5317,16 @@
 		)
 		(uuid "db1b1a25-7305-4504-aeb5-b39c74bdc007")
 	)
+	(label "USB_ESD_DN"
+		(at 152.4 109.22 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "dc5596e2-97aa-4b8c-9467-9b4ee59f9581")
+	)
 	(label "BOOT"
 		(at 36.83 148.59 0)
 		(effects
@@ -5396,26 +5416,6 @@
 			(justify right bottom)
 		)
 		(uuid "f18c0ca3-b500-467c-925e-b286284095de")
-	)
-	(label "USB_ESD_DP"
-		(at 138.43 88.9 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "703edcd8-d34d-46ff-b1bc-7850f5628965")
-	)
-	(label "USB_ESD_DN"
-		(at 152.4 109.22 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "dc5596e2-97aa-4b8c-9467-9b4ee59f9581")
 	)
 	(label "USB_E_DP"
 		(at 146.05 88.9 0)
@@ -6885,7 +6885,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
 			(at 33.02 180.34 90)
 			(hide yes)
 			(show_name no)
@@ -7781,7 +7781,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
 			(at 33.02 154.94 90)
 			(hide yes)
 			(show_name no)
@@ -8182,7 +8182,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
 			(at 33.02 148.59 90)
 			(hide yes)
 			(show_name no)
@@ -9022,7 +9022,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
 			(at 33.02 173.99 90)
 			(hide yes)
 			(show_name no)
@@ -10708,7 +10708,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
 			(at 33.02 186.69 90)
 			(hide yes)
 			(show_name no)
@@ -11807,7 +11807,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
 			(at 33.02 199.39 90)
 			(hide yes)
 			(show_name no)
@@ -12799,7 +12799,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
 			(at 33.02 142.24 90)
 			(hide yes)
 			(show_name no)
@@ -12932,7 +12932,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
 			(at 33.02 167.64 90)
 			(hide yes)
 			(show_name no)
@@ -13199,7 +13199,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
 			(at 33.02 161.29 90)
 			(hide yes)
 			(show_name no)
@@ -13468,7 +13468,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
 			(at 33.02 193.04 90)
 			(hide yes)
 			(show_name no)

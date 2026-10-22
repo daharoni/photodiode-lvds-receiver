@@ -1834,16 +1834,16 @@
 			)
 			(symbol "S12023-10_1_1"
 				(pin passive line
-					(at -5.08 0 0)
+					(at 2.54 0 180)
 					(length 2.54)
-					(name "K"
+					(name "A"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "3"
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1870,16 +1870,16 @@
 					)
 				)
 				(pin passive line
-					(at 2.54 0 180)
+					(at -5.08 0 0)
 					(length 2.54)
-					(name "A"
+					(name "K"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "1"
+					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4143,7 +4143,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
 			(at 266.7 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -4411,7 +4411,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
 			(at 134.62 121.92 0)
 			(hide yes)
 			(show_name no)
@@ -4544,7 +4544,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
 			(at 220.98 121.92 0)
 			(hide yes)
 			(show_name no)
