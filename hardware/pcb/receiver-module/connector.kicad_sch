@@ -3972,7 +3972,7 @@
 		(uuid "e410cc2f-cb61-403a-8d20-8e756d898545")
 	)
 	(label "CAN_N"
-		(at 157.48 104.14 180)
+		(at 157.48 106.68 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4002,7 +4002,7 @@
 		(uuid "f114a0e3-da05-469c-b189-67aab3dc70b2")
 	)
 	(label "CAN_P"
-		(at 157.48 106.68 180)
+		(at 157.48 104.14 180)
 		(effects
 			(font
 				(size 1.27 1.27)
