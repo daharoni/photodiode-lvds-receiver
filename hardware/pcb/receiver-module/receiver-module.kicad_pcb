@@ -9612,7 +9612,7 @@
 			(drill oval 0.6 1.2)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net "/Connector/SHIELD")
+			(net "GND")
 			(pinfunction "SHIELD_S1")
 			(pintype "passive")
 			(uuid "cbe26cd8-f1c7-4175-b8dd-f92699437e03")
@@ -9623,7 +9623,7 @@
 			(drill oval 0.6 1.2)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net "/Connector/SHIELD")
+			(net "GND")
 			(pinfunction "SHIELD_S1")
 			(pintype "passive")
 			(uuid "4a2671a1-5442-4760-8ffe-43efffcc0bbb")
@@ -9634,7 +9634,7 @@
 			(drill 0.4)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net "/Connector/SHIELD")
+			(net "GND")
 			(pinfunction "SHIELD_S1")
 			(pintype "passive")
 			(uuid "d6af2835-2bd1-4bee-9057-54659010688f")
@@ -9645,7 +9645,7 @@
 			(drill oval 0.2 1)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net "/Connector/SHIELD")
+			(net "GND")
 			(pinfunction "SHIELD_S1")
 			(pintype "passive")
 			(uuid "50aebff0-7cec-426c-822a-7931561868b8")
@@ -9656,7 +9656,7 @@
 			(drill oval 0.2 1)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net "/Connector/SHIELD")
+			(net "GND")
 			(pinfunction "SHIELD_S1")
 			(pintype "passive")
 			(uuid "34f5d27c-947d-4ab1-8b8b-16178fd08094")
@@ -9667,7 +9667,7 @@
 			(drill 0.4)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net "/Connector/SHIELD")
+			(net "GND")
 			(pinfunction "SHIELD_S1")
 			(pintype "passive")
 			(uuid "7b24317b-05d3-44b2-8df7-2f88c567adb7")
@@ -9678,7 +9678,7 @@
 			(drill oval 0.6 1.2)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net "/Connector/SHIELD")
+			(net "GND")
 			(pinfunction "SHIELD_S1")
 			(pintype "passive")
 			(uuid "bca03a5f-0694-481f-b070-a562d5c287df")
@@ -9689,7 +9689,7 @@
 			(drill oval 0.6 1.2)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net "/Connector/SHIELD")
+			(net "GND")
 			(pinfunction "SHIELD_S1")
 			(pintype "passive")
 			(uuid "358dbc21-790b-4f47-9deb-005581344581")
@@ -14719,214 +14719,6 @@
 		)
 		(embedded_fonts no)
 		(model "${AHARONI_LAB_KICAD_LIB}/3dmodels/AharoniLab_Switch_SMD.3dshapes/SW_SPST_PTS810.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
-	)
-	(footprint "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
-		(layer "F.Cu")
-		(uuid "81557ca4-f41f-43c5-891b-914f773e8b8a")
-		(at 122.35 68.825)
-		(descr "IPC-7351 Level B (Nominal), Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
-		(tags "resistor")
-		(property "Reference" "R170"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(uuid "c1d7124e-200b-4d9d-ab60-9cb0f005a44b")
-			(effects
-				(font
-					(size 0.5 0.5)
-					(thickness 0.08)
-				)
-			)
-		)
-		(property "Value" "1M"
-			(at 0 1.43 0)
-			(layer "F.Fab")
-			(uuid "0e00369a-3923-4856-a010-093fc8bf0af2")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "e3d5611a-33ba-4f38-af9a-28a0d3318d4d")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Resistor, small US symbol"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "d8a59cf4-0dd4-4fc0-9217-83f0a9e49a78")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Validated" "No"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "b734e935-a9a3-4cf0-b71f-894711751f3b")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Contributor" "Daniel Aharoni"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "aa90fd64-1783-413e-8b23-846f14596c6d")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Source" "KiCad Device library"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "54d45b07-8d07-4cab-88be-ac9ee925e2ee")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "9be15869-f1da-4a09-ac23-7c8b23019b94")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "ki_fp_filters" "R_*"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "eb75f935-6940-4b70-bb65-c44953300764")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property ki_fp_filters "R_*")
-		(path "/0c318e1c-a27e-42fc-ba78-2292a9a0a0c3/6f107478-02a3-4979-91d6-2e1447f2c6d5")
-		(sheetname "/Connector/")
-		(sheetfile "connector.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
-		(attr smd dnp)
-		(duplicate_pad_numbers_are_jumpers no)
-		(fp_line
-			(start -0.237258 -0.5225)
-			(end 0.237258 -0.5225)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "a45560cc-f42a-47b8-8b17-398b666e4350")
-		)
-		(fp_line
-			(start -0.237258 0.5225)
-			(end 0.237258 0.5225)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "5a59d6c5-7e88-4fb8-a23e-528bae93e288")
-		)
-		(fp_rect
-			(start -1.48 -0.73)
-			(end 1.48 0.73)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(fill no)
-			(layer "F.CrtYd")
-			(uuid "bb2b2a16-1852-49a1-88f0-28162127b802")
-		)
-		(fp_rect
-			(start -0.8 -0.4125)
-			(end 0.8 0.4125)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(fill no)
-			(layer "F.Fab")
-			(uuid "b8944ef4-8f0b-4dce-8f05-c65cece94c3b")
-		)
-		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(uuid "b72d229f-69c5-4efe-a313-b1c4bfc9f754")
-			(effects
-				(font
-					(size 0.4 0.4)
-					(thickness 0.06)
-				)
-			)
-		)
-		(pad "1" smd roundrect
-			(at -0.825 0)
-			(size 0.8 0.95)
-			(layers "F.Cu" "F.Mask" "F.Paste")
-			(roundrect_rratio 0.25)
-			(net "/Connector/SHIELD")
-			(pintype "passive")
-			(uuid "15ca749d-74cf-419e-be22-21bc414f28fc")
-		)
-		(pad "2" smd roundrect
-			(at 0.825 0)
-			(size 0.8 0.95)
-			(layers "F.Cu" "F.Mask" "F.Paste")
-			(roundrect_rratio 0.25)
-			(net "GND")
-			(pintype "passive")
-			(uuid "3ca685ec-1123-459b-86f5-39fea00205eb")
-		)
-		(embedded_fonts no)
-		(model "${AHARONI_LAB_KICAD_LIB}/3dmodels/AharoniLab_Resistor_SMD.3dshapes/R_0603_1608Metric.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -28346,214 +28138,6 @@
 			(net "GND")
 			(pintype "passive")
 			(uuid "316f663a-2631-4e3d-b54b-a7164965e7a7")
-		)
-		(embedded_fonts no)
-		(model "${AHARONI_LAB_KICAD_LIB}/3dmodels/AharoniLab_Capacitor_SMD.3dshapes/C_0603_1608Metric.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
-	)
-	(footprint "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
-		(layer "F.Cu")
-		(uuid "ed24755b-a1ba-498f-a263-c2e9c3423978")
-		(at 122.35 67.275)
-		(descr "IPC-7351 Level B (Nominal), Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
-		(tags "capacitor")
-		(property "Reference" "C181"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(uuid "80ba50d8-a494-49e2-a4dc-587f8cba0a81")
-			(effects
-				(font
-					(size 0.5 0.5)
-					(thickness 0.08)
-				)
-			)
-		)
-		(property "Value" "1nF"
-			(at 0 1.43 0)
-			(layer "F.Fab")
-			(uuid "ce746442-e65f-458a-9b8e-79008553e533")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "3c3414fe-5adf-41c7-8b7e-1e9845a149b1")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "6e57fd5a-9d6d-4a05-bce3-effdb3556c39")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Validated" "No"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "d03db803-9bf4-40b5-8766-8327708061bc")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Contributor" "Daniel Aharoni"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "8e9b3129-e9ae-4f9a-a2d6-4a3dd3aa2c77")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Source" "KiCad Device library"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "20dc0819-e4e6-4f03-8d23-649030af8bb4")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "5ff9641e-00ae-4edc-ab45-86180b011df7")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "ki_fp_filters" "C_*"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "fb29df24-2eb9-4c85-ae07-33452933efd9")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property ki_fp_filters "C_*")
-		(path "/0c318e1c-a27e-42fc-ba78-2292a9a0a0c3/4d50d1ee-3a8b-42d1-b66a-fdacb10aab38")
-		(sheetname "/Connector/")
-		(sheetfile "connector.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
-		(attr smd)
-		(duplicate_pad_numbers_are_jumpers no)
-		(fp_line
-			(start -0.14058 -0.51)
-			(end 0.14058 -0.51)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "82602746-dacf-4d73-acca-0ad02af6d26d")
-		)
-		(fp_line
-			(start -0.14058 0.51)
-			(end 0.14058 0.51)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "F.SilkS")
-			(uuid "2727f2ca-30d8-4c05-a2fe-474a30bb5067")
-		)
-		(fp_rect
-			(start -1.48 -0.73)
-			(end 1.48 0.73)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(fill no)
-			(layer "F.CrtYd")
-			(uuid "3cf5c7a5-fb69-4632-907e-a2e738bef5d0")
-		)
-		(fp_rect
-			(start -0.8 -0.4)
-			(end 0.8 0.4)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(fill no)
-			(layer "F.Fab")
-			(uuid "15a75758-0ef2-4b80-93b5-67bee0ff8557")
-		)
-		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(uuid "443f19d3-5309-4358-bf2a-86f7c6f0442e")
-			(effects
-				(font
-					(size 0.4 0.4)
-					(thickness 0.06)
-				)
-			)
-		)
-		(pad "1" smd roundrect
-			(at -0.775 0)
-			(size 0.9 0.95)
-			(layers "F.Cu" "F.Mask" "F.Paste")
-			(roundrect_rratio 0.25)
-			(net "/Connector/SHIELD")
-			(pintype "passive")
-			(uuid "5ca9c574-ed00-437a-8a99-3386c304a27a")
-		)
-		(pad "2" smd roundrect
-			(at 0.775 0)
-			(size 0.9 0.95)
-			(layers "F.Cu" "F.Mask" "F.Paste")
-			(roundrect_rratio 0.25)
-			(net "GND")
-			(pintype "passive")
-			(uuid "ee48975c-abf1-4ee7-beb6-50d60838ab7a")
 		)
 		(embedded_fonts no)
 		(model "${AHARONI_LAB_KICAD_LIB}/3dmodels/AharoniLab_Capacitor_SMD.3dshapes/C_0603_1608Metric.step"
@@ -53825,14 +53409,6 @@
 		(uuid "12c6e9d2-cba0-44e7-9a3d-9b7464582063")
 	)
 	(segment
-		(start 123.175 67.325)
-		(end 123.125 67.275)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "GND")
-		(uuid "1334c7b3-7e15-47ba-bd15-3b1516bded37")
-	)
-	(segment
 		(start 115.62 77.75)
 		(end 115.67 77.8)
 		(width 0.15)
@@ -53871,14 +53447,6 @@
 		(layer "F.Cu")
 		(net "GND")
 		(uuid "1ce5dd5d-1705-4b7e-9145-e5a183af8627")
-	)
-	(segment
-		(start 123.175 68.825)
-		(end 123.175 70.125)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "GND")
-		(uuid "1d9a8c45-e63d-478d-bdcb-11d32ac68800")
 	)
 	(segment
 		(start 79.18 73.95)
@@ -54001,14 +53569,6 @@
 		(uuid "4f971ebf-8dfe-46c6-8c79-90283a206f52")
 	)
 	(segment
-		(start 123.175 68.825)
-		(end 123.175 67.325)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "GND")
-		(uuid "52963e44-e6cc-490f-8c2f-22fc4c53b707")
-	)
-	(segment
 		(start 90.350126 76.4732)
 		(end 90.350126 75.525126)
 		(width 0.15)
@@ -54047,14 +53607,6 @@
 		(layer "F.Cu")
 		(net "GND")
 		(uuid "5644b876-08d8-4931-b147-b3b1db38142e")
-	)
-	(segment
-		(start 123.125 65.05)
-		(end 123.1 65.025)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "GND")
-		(uuid "5cadb526-8bb5-45f4-9e46-c2bc7d3e4c3b")
 	)
 	(segment
 		(start 89.349874 72.404874)
@@ -54191,14 +53743,6 @@
 		(layer "F.Cu")
 		(net "GND")
 		(uuid "8d5e4328-0253-4421-b5bc-936e92b30fd2")
-	)
-	(segment
-		(start 123.125 67.275)
-		(end 123.125 65.05)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "GND")
-		(uuid "8df3c8e9-9a1d-476b-94d1-5ee44ebe5b4c")
 	)
 	(segment
 		(start 117.48 83.05)
@@ -59487,22 +59031,6 @@
 		(layer "B.Cu")
 		(net "/Connector/CC1")
 		(uuid "7fca05ed-0d2e-4663-acfe-48f0912d5ece")
-	)
-	(segment
-		(start 121.575 70.705)
-		(end 121.55 70.73)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "/Connector/SHIELD")
-		(uuid "02b60539-678a-4fe1-a2e5-dfc908c0b61a")
-	)
-	(segment
-		(start 121.575 67.275)
-		(end 121.575 70.705)
-		(width 0.15)
-		(layer "F.Cu")
-		(net "/Connector/SHIELD")
-		(uuid "6545571d-3047-4ac7-a0cf-50fe6793aa0c")
 	)
 	(segment
 		(start 118.15 90.6)

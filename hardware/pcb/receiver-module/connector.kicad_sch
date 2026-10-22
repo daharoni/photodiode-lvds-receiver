@@ -2429,7 +2429,7 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "J50 pin map (WE 632723300011 p.3, TC Table 3-4 p.76; A5/B5 are labelled CC/VCONN by Wuerth, wired as CC1/CC2: PROPOSED reading)\nA1 GND  A2 SSTXP1=LVDS_OUT2_N  A3 SSTXN1=LVDS_OUT2_P  A4 VBUS  A5 CC1  A6 DP1=USB_DP  A7 DN1=USB_DN  A8 SBU1=AUX_CAB  A9 VBUS  A10 SSRXN2=CAN_N  A11\n  SSRXP2=CAN_P  A12 GND\nB1 GND  B2 SSTXP2=LVDS_OUT1_N  B3 SSTXN2=LVDS_OUT1_P  B4 VBUS  B5 CC2  B6 DP2=USB_DP  B7 DN2=USB_DN  B8 SBU2=AUX_CAB  B9 VBUS  B10 SSRXN1=CAN_N  B11\n  SSRXP1=CAN_P  B12 GND\nJ51 DEBUG (2.54 mm 1x6): 1 GND, 2 LVDS_DBG_N (U50 3Z), 3 LVDS_DBG_P (U50 3Y) (pair flipped 2026-10-16 for layout), 4 CAN_P, 5 CAN_N, 6 AUX.\nTest points TP50-TP55: 3V3, 3V3_D, RSSI, HV_MON, GND, GND. DNP: R170, R177, R182, R183, C180.\nCable rule: passive full-featured USB 3.2 Gen 1, 3 A, e-marked, <= 2 m certified; 3 m only after a bench check (TC Table 3-1 p.44, 3.4.1.1 p.83, 4.4.1\n  p.151). Labelling: USB-C: USB 2.0 and 5 V only on a host; SuperSpeed pairs carry proprietary LVDS/CAN, not USB 3; the module is not USB 3 compliant.\nHV rule: no bare APD_BIAS pad on this sheet; HV_MON (about Vout/101) is the only HV observation point.\nULX3S target pairs (PROPOSED; ULX3S schematics v3.1.7 p.2, Lattice FPGA-TN-02032 v1.4 p.14, p.26): first choice gp/gn[8..13] (bank 7), second\n  gp/gn[14..21]; not [0..7] or [22..27]. Constrain gp only; do not guess polarity."
+	(text "J50 pin map (WE 632723300011 p.3, TC Table 3-4 p.76; A5/B5 are labelled CC/VCONN by Wuerth, wired as CC1/CC2: PROPOSED reading)\nA1 GND  A2 SSTXP1=LVDS_OUT2_N  A3 SSTXN1=LVDS_OUT2_P  A4 VBUS  A5 CC1  A6 DP1=USB_DP  A7 DN1=USB_DN  A8 SBU1=AUX_CAB  A9 VBUS  A10 SSRXN2=CAN_N  A11\n  SSRXP2=CAN_P  A12 GND\nB1 GND  B2 SSTXP2=LVDS_OUT1_N  B3 SSTXN2=LVDS_OUT1_P  B4 VBUS  B5 CC2  B6 DP2=USB_DP  B7 DN2=USB_DN  B8 SBU2=AUX_CAB  B9 VBUS  B10 SSRXN1=CAN_N  B11\n  SSRXP1=CAN_P  B12 GND\nJ51 DEBUG (2.54 mm 1x6): 1 GND, 2 LVDS_DBG_N (U50 3Z), 3 LVDS_DBG_P (U50 3Y) (pair flipped 2026-10-16 for layout), 4 CAN_P, 5 CAN_N, 6 AUX.\nTest points TP50-TP55: 3V3, 3V3_D, RSSI, HV_MON, GND, GND. DNP: R177, R182, R183, C180.\nCable rule: passive full-featured USB 3.2 Gen 1, 3 A, e-marked, <= 2 m certified; 3 m only after a bench check (TC Table 3-1 p.44, 3.4.1.1 p.83, 4.4.1\n  p.151). Labelling: USB-C: USB 2.0 and 5 V only on a host; SuperSpeed pairs carry proprietary LVDS/CAN, not USB 3; the module is not USB 3 compliant.\nHV rule: no bare APD_BIAS pad on this sheet; HV_MON (about Vout/101) is the only HV observation point.\nULX3S target pairs (PROPOSED; ULX3S schematics v3.1.7 p.2, Lattice FPGA-TN-02032 v1.4 p.14, p.26): first choice gp/gn[8..13] (bank 7), second\n  gp/gn[14..21]; not [0..7] or [22..27]. Constrain gp only; do not guess polarity."
 		(exclude_from_sim yes)
 		(at 200 232 0)
 		(effects
@@ -2440,7 +2440,7 @@
 		)
 		(uuid "17250198-36bf-444a-a95d-78adf9bd2a2e")
 	)
-	(text "Design intent (Rev A revision 4, 2026-10-09, decision 14; PROPOSED unless labelled; nothing here is simulated or measured)\nONE CONNECTOR: J50 carries 5 V (VBUS pins A4/A9/B4/B9 tied, hierarchical output VBUS to the Power eFuse and the Controller), USB 2.0 D+/D- (A6/B6 tied\n  = USB_DP, A7/B7 tied = USB_DN), the 50 Mbps LVDS pair on both SuperSpeed TX pairs through the fan-out U50 (1Y/1Z -> B2/B3, 2Y/2Z -> A2/A3, so the pairs do not cross between U50 and the clamps), CAN on\n  both RX pairs (CAN_P = CANH = B11 and A11, CAN_N = CANL = B10 and A10; _P/_N names since 2026-10-16 so the KiCad router treats them as a pair) and the SBU pair tied as AUX (A8/B8 -> AUX_CAB -> R186 1k -> AUX). Plug orientation does\n  not matter: N to SSTXp and P to SSTXn on BOTH pairs (USB Type-C R2.5 Table 3-10 p.83; polarity flipped at J50 on 2026-10-09 for layout, consistent on both\n  pairs, so the cable carries the fan-out output inverted; with LVDS_P low for a logic one this makes SSTXp high for a one).\nRd/CC: R181 and R184 5.1 k 1 % on CC1 and CC2 (Type-C R2.0 Table 4-25 p.236). Taps 100k/100k with 100 nF give CC1_SENSE and CC2_SENSE for the ESP32\n  ADC; 100k/100k keeps the pin below 3.3 V even with 5.5 V VCONN on the unused CC (TC R2.5 p.155). The 200 k tap lowers Rd by about 2.5 %: fold into\n  firmware thresholds.\nU50 SN65LVDS104PW (LVDS104 SLLS396G p.3-5, p.16 Fig. 25): no on-chip termination, so R180 100 ohm 0.1 % across A/B is FITTED; enables active high\n  (section 9.4 Table 2), EN1-EN3 to 3V3, EN4 to GND (output 4 disabled, 4Y/4Z no_connect), output 3 feeds J51 with R177 100 ohm DNP across it\n  (UNRESOLVED whether an unloaded output 3 is acceptable). 23 mA typ, 35 mA max (p.5). VOD 250/350/450 mV (TLV3605 p.7) against the 100 mV buffer\n  threshold: 150 mV margin at minimum VOD (arithmetic). Fail-safe: static high with no TLV3605 power (p.15-16). Do NOT add a second 100 ohm at the\n  FPGA without DIFFRESISTOR consideration: the ECP5 input is terminated on-die (DIFFRESISTOR 100, docs/research/ulx3s-lvds-input.md); each of the two\n  paths sees one load.\nESD: U51 (pin 14 CC1 A5, 13 spare, 12/11 SSTX1 A3/A2 = 2Y/2Z, 9/8 CAN B10/B11) and U52 (14/13 SSTX2 B2/B3 = 1Y/1Z, 12/11 CAN A11/A10, 9 CC2 B5, 8 AUX_CAB A8/B8) TPD6E05U06RVZ, pin order follows the J50 pad rows (TI SLVSBO7O Table 5.4 p.7: 0.47\n  pF, VRWM 5.5 V); place within a few mm of J50. NC pads 1-4, 6, 7 are stacked on 14-11, 9, 8 in the symbol (same net) for TI's optional straight-through routing (SLVSBO7O Table 4-3 p.5): each protected line enters its clamp pad and leaves under the body through the opposite pad (2026-10-16). D+/D- clamp is U61 on the Controller sheet.\nCAN: no termination on the module (SLLA270 p.4, p.8); R182/R183/C180 are DNP for a single-module bench; never fit them on a module in a star. 125\n  kbit/s PROPOSED. Two bused pairs give about 45 ohm in parallel, acceptable at the slowed edges.\nShield: S1 to GND through C181 1 nF with R170 1 M (DNP). Layout rules (not schematic): Dp/Dn ties within 3.5 mm of J50 (TC Table 3-4 note 1 p.77).\nUNRESOLVED: top- or mid-mount J50; SBU exposure to a laptop alternate mode; unidirectional ESD clamp near -0.7 V versus cable GND drop on CAN; the 3.3\n  V-only ESP32 GPIO behind R186 1k."
+	(text "Design intent (Rev A revision 4, 2026-10-09, decision 14; PROPOSED unless labelled; nothing here is simulated or measured)\nONE CONNECTOR: J50 carries 5 V (VBUS pins A4/A9/B4/B9 tied, hierarchical output VBUS to the Power eFuse and the Controller), USB 2.0 D+/D- (A6/B6 tied\n  = USB_DP, A7/B7 tied = USB_DN), the 50 Mbps LVDS pair on both SuperSpeed TX pairs through the fan-out U50 (1Y/1Z -> B2/B3, 2Y/2Z -> A2/A3, so the pairs do not cross between U50 and the clamps), CAN on\n  both RX pairs (CAN_P = CANH = B11 and A11, CAN_N = CANL = B10 and A10; _P/_N names since 2026-10-16 so the KiCad router treats them as a pair) and the SBU pair tied as AUX (A8/B8 -> AUX_CAB -> R186 1k -> AUX). Plug orientation does\n  not matter: N to SSTXp and P to SSTXn on BOTH pairs (USB Type-C R2.5 Table 3-10 p.83; polarity flipped at J50 on 2026-10-09 for layout, consistent on both\n  pairs, so the cable carries the fan-out output inverted; with LVDS_P low for a logic one this makes SSTXp high for a one).\nRd/CC: R181 and R184 5.1 k 1 % on CC1 and CC2 (Type-C R2.0 Table 4-25 p.236). Taps 100k/100k with 100 nF give CC1_SENSE and CC2_SENSE for the ESP32\n  ADC; 100k/100k keeps the pin below 3.3 V even with 5.5 V VCONN on the unused CC (TC R2.5 p.155). The 200 k tap lowers Rd by about 2.5 %: fold into\n  firmware thresholds.\nU50 SN65LVDS104PW (LVDS104 SLLS396G p.3-5, p.16 Fig. 25): no on-chip termination, so R180 100 ohm 0.1 % across A/B is FITTED; enables active high\n  (section 9.4 Table 2), EN1-EN3 to 3V3, EN4 to GND (output 4 disabled, 4Y/4Z no_connect), output 3 feeds J51 with R177 100 ohm DNP across it\n  (UNRESOLVED whether an unloaded output 3 is acceptable). 23 mA typ, 35 mA max (p.5). VOD 250/350/450 mV (TLV3605 p.7) against the 100 mV buffer\n  threshold: 150 mV margin at minimum VOD (arithmetic). Fail-safe: static high with no TLV3605 power (p.15-16). Do NOT add a second 100 ohm at the\n  FPGA without DIFFRESISTOR consideration: the ECP5 input is terminated on-die (DIFFRESISTOR 100, docs/research/ulx3s-lvds-input.md); each of the two\n  paths sees one load.\nESD: U51 (pin 14 CC1 A5, 13 spare, 12/11 SSTX1 A3/A2 = 2Y/2Z, 9/8 CAN_P/CAN_N B11/B10, swapped 2026-10-22 for routing) and U52 (14/13 SSTX2 B2/B3 = 1Y/1Z, 12/11 CAN A11/A10, 9 CC2 B5, 8 AUX_CAB A8/B8) TPD6E05U06RVZ, pin order follows the J50 pad rows (TI SLVSBO7O Table 5.4 p.7: 0.47\n  pF, VRWM 5.5 V); place within a few mm of J50. NC pads 1-4, 6, 7 are stacked on 14-11, 9, 8 in the symbol (same net) for TI's optional straight-through routing (SLVSBO7O Table 4-3 p.5): each protected line enters its clamp pad and leaves under the body through the opposite pad (2026-10-16). D+/D- clamp is U61 on the Controller sheet.\nCAN: no termination on the module (SLLA270 p.4, p.8); R182/R183/C180 are DNP for a single-module bench; never fit them on a module in a star. 125\n  kbit/s PROPOSED. Two bused pairs give about 45 ohm in parallel, acceptable at the slowed edges.\nShield: S1 (all shell posts) tied directly to GND (2026-10-22; C181/R170 RC removed: the cable ties shell to GND in each plug, TC Table 3-10 note 6). Layout rules (not schematic): Dp/Dn ties within 3.5 mm of J50 (TC Table 3-4 note 1 p.77).\nUNRESOLVED: top- or mid-mount J50; SBU exposure to a laptop alternate mode; unidirectional ESD clamp near -0.7 V versus cable GND drop on CAN; the 3.3\n  V-only ESP32 GPIO behind R186 1k."
 		(exclude_from_sim yes)
 		(at 38.1 232 0)
 		(effects
@@ -2490,12 +2490,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6570d395-ed6a-4620-8817-263a959f17ba")
-	)
-	(junction
-		(at 254 129.54)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "79b8962f-e314-4177-b48f-a6e292bb0e4e")
 	)
 	(junction
 		(at 63.5 93.98)
@@ -2733,16 +2727,6 @@
 	)
 	(wire
 		(pts
-			(xy 261.62 134.62) (xy 261.62 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1ff3d045-0204-4303-9fcd-347e7120bc70")
-	)
-	(wire
-		(pts
 			(xy 162.56 99.06) (xy 157.48 99.06)
 		)
 		(stroke
@@ -2973,16 +2957,6 @@
 	)
 	(wire
 		(pts
-			(xy 254 134.62) (xy 254 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "46117576-cadc-4158-8ac1-f71fdb8c51f6")
-	)
-	(wire
-		(pts
 			(xy 45.72 170.18) (xy 53.34 170.18)
 		)
 		(stroke
@@ -3010,16 +2984,6 @@
 			(type default)
 		)
 		(uuid "482b3306-be11-4d07-9a9e-c6af15279cc5")
-	)
-	(wire
-		(pts
-			(xy 254 129.54) (xy 261.62 129.54)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4d0195a1-aa9e-47d6-ad2b-eac05dd825b8")
 	)
 	(wire
 		(pts
@@ -3233,7 +3197,7 @@
 	)
 	(wire
 		(pts
-			(xy 254 124.46) (xy 254 129.54)
+			(xy 254 124.46) (xy 254 137.16)
 		)
 		(stroke
 			(width 0)
@@ -3540,16 +3504,6 @@
 			(justify right bottom)
 		)
 		(uuid "07e00395-5512-4729-b5f3-077425f5deed")
-	)
-	(label "SHIELD"
-		(at 254 129.54 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "0d2cb73b-81a3-4cdf-b166-22f9e5094e73")
 	)
 	(label "AUX_CAB"
 		(at 157.48 157.48 180)
@@ -4402,29 +4356,6 @@
 		(uuid "a376d1c0-04cf-43f6-b532-2710d88ce8e0")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 365.76 154.94 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-	)
-	(global_label "GND"
-		(shape passive)
-		(at 261.62 137.16 270)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "a5f18121-d89e-4d36-9a02-f7cc7f0ca5a1")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 261.62 137.16 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -5910,142 +5841,6 @@
 		)
 	)
 	(symbol
-		(lib_id "AharoniLab_Passive:C_Small")
-		(at 254 132.08 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "4d50d1ee-3a8b-42d1-b66a-fdacb10aab38")
-		(property "Reference" "C181"
-			(at 256 131.08 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1nF"
-			(at 256 133.08 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "AharoniLab_Capacitor_SMD:C_0603_1608Metric_N"
-			(at 254 132.08 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 254 132.08 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 254 132.08 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Validated" "No"
-			(at 254 132.08 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Contributor" "Daniel Aharoni"
-			(at 254 132.08 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Source" "KiCad Device library"
-			(at 254 132.08 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "ki_keywords" "capacitor cap"
-			(at 254 132.08 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "ki_fp_filters" "C_*"
-			(at 254 132.08 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "2189ca11-db36-4199-aa2f-2c5fb2102e8c")
-		)
-		(pin "2"
-			(uuid "fd951fb2-2a2a-4c95-b238-8967e32c7968")
-		)
-		(instances
-			(project "receiver-module"
-				(path "/20237707-2fe5-41a5-bbd6-cb6c24e8ba32/0c318e1c-a27e-42fc-ba78-2292a9a0a0c3"
-					(reference "C181")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "AharoniLab_Connector:MountingHole_Pad")
 		(at 381 149.86 0)
 		(unit 1)
@@ -7106,142 +6901,6 @@
 			(project "receiver-module"
 				(path "/20237707-2fe5-41a5-bbd6-cb6c24e8ba32/0c318e1c-a27e-42fc-ba78-2292a9a0a0c3"
 					(reference "R182")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "AharoniLab_Passive:R_Small_US")
-		(at 261.62 132.08 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp yes)
-		(uuid "6f107478-02a3-4979-91d6-2e1447f2c6d5")
-		(property "Reference" "R170"
-			(at 263.62 131.08 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1M"
-			(at 263.62 133.08 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
-			(at 261.62 132.08 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 261.62 132.08 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Resistor, small US symbol"
-			(at 261.62 132.08 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Validated" "No"
-			(at 261.62 132.08 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Contributor" "Daniel Aharoni"
-			(at 261.62 132.08 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Source" "KiCad Device library"
-			(at 261.62 132.08 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "ki_keywords" "r resistor"
-			(at 261.62 132.08 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "ki_fp_filters" "R_*"
-			(at 261.62 132.08 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "2c3dcdfd-8083-4d4d-8601-a5fcb33202aa")
-		)
-		(pin "2"
-			(uuid "3c19fe30-e2fc-4bb4-b2e3-550862a51e33")
-		)
-		(instances
-			(project "receiver-module"
-				(path "/20237707-2fe5-41a5-bbd6-cb6c24e8ba32/0c318e1c-a27e-42fc-ba78-2292a9a0a0c3"
-					(reference "R170")
 					(unit 1)
 				)
 			)
