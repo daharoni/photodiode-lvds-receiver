@@ -32,9 +32,7 @@
 (rule "pair keepout DIFF90"
   (condition "A.Type == 'Track' && A.hasNetclass('DIFF90') && !B.hasNetclass('DIFF90')")
   (constraint clearance (min 0.3mm)))
-(rule "pair keepout USB90"
-  (condition "A.Type == 'Track' && A.hasNetclass('USB90') && !B.hasNetclass('USB90')")
-  (constraint clearance (min 0.3mm)))
+# USB90 (USB full speed, 12 Mbps) has no extra keepout since 2026-10-22: it uses the 0.15 mm netclass clearance.
 (rule "pair keepout CAN90"
   (condition "A.Type == 'Track' && A.hasNetclass('CAN90') && !B.hasNetclass('CAN90')")
   (constraint clearance (min 0.3mm)))
@@ -43,7 +41,7 @@
   (constraint clearance (min 0.3mm)))
 # Name-paired form (catches pair-to-pair, e.g. LVDS_OUT1 vs LVDS_OUT2, which share a class):
 (rule "pair keepout inDiffPair"
-  (condition "A.Type == 'Track' && A.inDiffPair('*') && !AB.isCoupledDiffPair()")
+  (condition "A.Type == 'Track' && A.inDiffPair('*') && !A.hasNetclass('USB90') && !AB.isCoupledDiffPair()")
   (constraint clearance (min 0.3mm)))
 
 # HV copper (class HV, 1.0 mm from the netclass) to board edge

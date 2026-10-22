@@ -221,9 +221,10 @@ KiCad diff-pair recognition (KM, `inDiffPair`): a pair is recognised only if the
   (condition "A.hasNetclass('DIFF90') || A.hasNetclass('CAN90') || A.hasNetclass('USB90') || A.hasNetclass('DIFF100')")
   (constraint skew (max 1mm) (within_diff_pairs)))
 
-# keep other copper away from coupled pairs (2x gap rule of thumb, PROPOSED)
+# keep other copper away from coupled pairs (2x gap rule of thumb, PROPOSED); the board file splits this into
+# per-class rules. USB90 (USB full speed, 12 Mbps) is exempt since 2026-10-22 and uses the 0.15 mm netclass clearance.
 (rule "pair keepout"
-  (condition "A.inDiffPair('*') && !AB.isCoupledDiffPair()")
+  (condition "A.inDiffPair('*') && !A.hasNetclass('USB90') && !AB.isCoupledDiffPair()")
   (constraint clearance (min 0.3mm)))
 
 # HV to board edge
