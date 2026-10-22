@@ -215,10 +215,11 @@ KiCad diff-pair recognition (KM, `inDiffPair`): a pair is recognised only if the
   (condition "A.hasNetclass('DIFF100')")
   (constraint diff_pair_uncoupled (max 5mm)))
 
-# intra-pair length match 1 mm (rev-a-sheet-specs.md, UI = 20 ns)
+# intra-pair length match 1 mm (rev-a-sheet-specs.md, UI = 20 ns); within_diff_pairs (added 2026-10-22) checks each _P/_N pair
+# on its own; without it KiCad measures every matched net against the longest one in all four classes (KiCad 10 manual, skew constraint)
 (rule "pair skew"
   (condition "A.hasNetclass('DIFF90') || A.hasNetclass('CAN90') || A.hasNetclass('USB90') || A.hasNetclass('DIFF100')")
-  (constraint skew (max 1mm)))
+  (constraint skew (max 1mm) (within_diff_pairs)))
 
 # keep other copper away from coupled pairs (2x gap rule of thumb, PROPOSED)
 (rule "pair keepout"
