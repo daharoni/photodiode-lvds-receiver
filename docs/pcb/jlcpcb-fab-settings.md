@@ -200,12 +200,25 @@ KiCad diff-pair recognition (KM, `inDiffPair`): a pair is recognised only if the
 
 # 90 ohm pairs: gap window around the 0.15 mm target (width comes from the tuning profile)
 (rule "diff90 gap"
-  (condition "A.hasNetclass('DIFF90') || A.hasNetclass('CAN90') || A.hasNetclass('USB90')")
+  (condition "A.hasNetclass('DIFF90')")
   (constraint diff_pair_gap (min 0.13mm) (opt 0.15mm) (max 0.20mm)))
 
 (rule "diff100 gap"
   (condition "A.hasNetclass('DIFF100')")
   (constraint diff_pair_gap (min 0.13mm) (opt 0.15mm) (max 0.20mm)))
+
+# 2026-10-22: CAN90/USB90 (125 kbit/s, 12 Mbps) have no maximum gap (router target only). This also stops KiCad from
+# counting their pin-pitch fan-outs as uncoupled, so their uncoupled-length check is effectively off (accepted: slow buses).
+(rule "slow pair gap"
+  (condition "A.hasNetclass('CAN90') || A.hasNetclass('USB90')")
+  (constraint diff_pair_gap (min 0.13mm) (opt 0.15mm)))
+
+# 2026-10-22: pin fan-out. Inside the courtyard of J50, U50, U51, U52 or U20 the pad pitch sets the gap (max 1.2 mm).
+# intersectsCourtyard is evaluated per segment, so a long segment that only touches a courtyard is exempt as a whole;
+# R180 is left out for that reason. Full condition in hardware/pcb/receiver-module/receiver-module.kicad_dru.
+(rule "pair gap at pins"
+  (condition "(A.hasNetclass('DIFF90') || A.hasNetclass('DIFF100')) && (A.intersectsCourtyard('J50') || A.intersectsCourtyard('U50') || A.intersectsCourtyard('U51') || A.intersectsCourtyard('U52') || A.intersectsCourtyard('U20'))")
+  (constraint diff_pair_gap (min 0.13mm) (opt 0.15mm) (max 1.2mm)))
 
 # uncoupled length (connector fan-out): PROPOSED 10 mm for the SuperSpeed/USB/CAN pairs, 5 mm for the short LVDS run
 (rule "diff90 uncoupled"

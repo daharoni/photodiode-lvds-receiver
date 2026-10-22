@@ -4,15 +4,29 @@
 # (docs/pcb/jlcpcb-fab-settings.md section 4.5). Later rules take precedence over
 # earlier ones, so the same-footprint exception is the LAST HV clearance rule.
 
-# 90 ohm pairs (DIFF90 = SuperSpeed/LVDS_OUT, USB90, CAN90): gap window around the 0.15 mm target
+# 90 ohm SuperSpeed/LVDS_OUT pairs (DIFF90): gap window around the 0.15 mm target on the open route
 (rule "diff90 gap"
-  (condition "A.hasNetclass('DIFF90') || A.hasNetclass('CAN90') || A.hasNetclass('USB90')")
+  (condition "A.hasNetclass('DIFF90')")
   (constraint diff_pair_gap (min 0.13mm) (opt 0.15mm) (max 0.20mm)))
 
-# 100 ohm LVDS pair (U20 to R180)
+# 100 ohm LVDS pair (U20 to R180 to U50)
 (rule "diff100 gap"
   (condition "A.hasNetclass('DIFF100')")
   (constraint diff_pair_gap (min 0.13mm) (opt 0.15mm) (max 0.20mm)))
+
+# CAN (125 kbit/s, slowed edges) and USB full speed (12 Mbps): the gap only sets the router target, no maximum
+# (2026-10-22: their pin-pitch fan-outs at J50, U51/U52, U64 and the J50 D+/D- ties are electrically irrelevant)
+(rule "slow pair gap"
+  (condition "A.hasNetclass('CAN90') || A.hasNetclass('USB90')")
+  (constraint diff_pair_gap (min 0.13mm) (opt 0.15mm)))
+
+# Pin fan-out (2026-10-22): inside the courtyard of a part the pair lands on, the pad pitch sets the gap
+# (J50 rows 0.5/0.8 mm, TPD6E05U06 0.5 mm straight-through, SN65LVDS104 TSSOP 0.65 mm, TLV3605 OUT+/OUT- 1.0 mm apart).
+# R180 is deliberately not exempt: a segment that only touches its courtyard would hide the whole run (intersectsCourtyard is per segment).
+# Must come after "diff90 gap"/"diff100 gap". Outside these courtyards the 0.20 mm maximum applies.
+(rule "pair gap at pins"
+  (condition "(A.hasNetclass('DIFF90') || A.hasNetclass('DIFF100')) && (A.intersectsCourtyard('J50') || A.intersectsCourtyard('U50') || A.intersectsCourtyard('U51') || A.intersectsCourtyard('U52') || A.intersectsCourtyard('U20'))")
+  (constraint diff_pair_gap (min 0.13mm) (opt 0.15mm) (max 1.2mm)))
 
 # uncoupled length: 10 mm for connector fan-out pairs, 5 mm for the short LVDS run
 (rule "diff90 uncoupled"
