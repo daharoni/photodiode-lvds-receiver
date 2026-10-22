@@ -217,6 +217,7 @@ Example MPNs marked (M p.4) are from the DC2838A parts list, (D p.N) from the LT
 | C_C | 1 nF C0G 100 V | TDK CGA3E2C0G2A102J080AA (M p.4) | |
 | R_EN | 2 x 200 k 1 % 0603 | none | |
 | Rt | 4 x 2.05 M 1 % 0603 (<= 55 V each), or 0805 | Vishay CRCW0603 series (499 k used in M p.4; 2.05 M NOT CHECKED) | guard ring, no vias under |
+| Rb_clamp (R17+R18), HV_MON (R20+R32) | 2 x 4.99 M 1 % 0805, 110 V each at 220 V | Yageo RC0805FR-074M99L: 150 V max working, 300 V overload (docs/datasheets/yageo-rc0805.pdf, spec V0 2016-07-26 p.3, VERIFIED); 0603 of the same family is 75 V | changed from 0603 2026-10-22 (review S5, decision 22) |
 | Rs, Rd, Rp, R_df, C_df | 86.6 k, 150 k, 1 M (DNP) 0.1-1 %, 10 k, 100 nF X7R 16 V | none | |
 | NTC | 10 k at 25 C, beta ~3950, 1 % 0603 | none | on APD can ground tab / thermal link |
 | P1 | 50 k multi-turn cermet pot (bench only) | e.g. Bourns 3296W-1-503LF, NOT CHECKED | DNP in production |
@@ -259,5 +260,5 @@ G1 test plan
 - INTVCC level (3.8 V vs 3.2 V) and SS-to-VC ramp time not specified; datasheet gives no formula for SS time.
 - VBR minimum spec and per-unit tempco spread not available (apd-selection.md has only 150 typ/200 max, 0.65 V/C); the 100 V lower end is a guess. DAC reference accuracy (SAMD51) not checked; the 3.3 V pot leg inherits the rail error.
 - Burst/skip/SSFM spectral behaviour at 1 mA, and DC2838A ripple with real spectrum, not available (only 1 V ripple, EMI plots).
-- DFLS1150 surge current, 150 V Schottky leakage at 100 C, HV 0603 resistor voltage rating, 10 nF 400-500 V C0G existence/price, NTC beta/MPN, and all availability are NOT CHECKED. Standards for stored-energy classification not consulted.
+- DFLS1150 surge current, 150 V Schottky leakage at 100 C, 10 nF 400-500 V C0G existence/price (the HV 0603 resistor rating was resolved 2026-10-22 by moving R17/R18/R20/R32 to 0805, 150 V, decision 22), NTC beta/MPN, and all availability are NOT CHECKED. Standards for stored-energy classification not consulted.
 - Datasheet curves (FBX tempco, p.5) are GR; p.30 and the DC2838A connectivity were traced from rendered images and should be re-checked against the ADI design files.
