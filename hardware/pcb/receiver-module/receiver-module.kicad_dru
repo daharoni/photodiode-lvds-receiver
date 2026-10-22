@@ -36,10 +36,13 @@
   (condition "A.hasNetclass('DIFF100')")
   (constraint diff_pair_uncoupled (max 5mm)))
 
-# intra-pair skew 1 mm (UI = 20 ns), checked within each _P/_N pair, not across the whole class
+# intra-pair skew, checked within each _P/_N pair, not across the whole class. 2.5 mm (about 15 ps; UI = 20 ns) since
+# 2026-10-22, DIFF90 only. CAN90/USB90 have no skew check (125 kbit/s, 12 Mbps). DIFF100 (LVDS_P/N, U20 to U50) is excluded
+# because KiCad counts the hysteresis tap from LVDS_P to R87 (about 4.3 mm) in the net length; check that pair's
+# through-path skew by eye. No inter-pair length matching anywhere: each pair is an independent link.
 (rule "pair skew"
-  (condition "A.hasNetclass('DIFF90') || A.hasNetclass('CAN90') || A.hasNetclass('USB90') || A.hasNetclass('DIFF100')")
-  (constraint skew (max 1mm) (within_diff_pairs)))
+  (condition "A.hasNetclass('DIFF90')")
+  (constraint skew (max 2.5mm) (within_diff_pairs)))
 
 # Keep copper that is not part of the pair at least 0.3 mm from the pair's tracks.
 # Netclass form (works for USB_DP/CAN_H even though KiCad does not pair those names):

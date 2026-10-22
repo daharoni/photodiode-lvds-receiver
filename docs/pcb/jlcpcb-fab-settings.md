@@ -228,11 +228,13 @@ KiCad diff-pair recognition (KM, `inDiffPair`): a pair is recognised only if the
   (condition "A.hasNetclass('DIFF100')")
   (constraint diff_pair_uncoupled (max 5mm)))
 
-# intra-pair length match 1 mm (rev-a-sheet-specs.md, UI = 20 ns); within_diff_pairs (added 2026-10-22) checks each _P/_N pair
+# intra-pair length match: 1 mm until 2026-10-22, now 2.5 mm (about 15 ps against a 20 ns UI and edges of a few hundred ps, PROPOSED),
+# DIFF90 only: CAN90/USB90 dropped (slow), DIFF100 LVDS_P/N excluded (KiCad counts the R87 hysteresis tap, about 4.3 mm,
+# in LVDS_P's length; check its through-path skew by eye). No inter-pair matching. within_diff_pairs (added 2026-10-22) checks each _P/_N pair
 # on its own; without it KiCad measures every matched net against the longest one in all four classes (KiCad 10 manual, skew constraint)
 (rule "pair skew"
-  (condition "A.hasNetclass('DIFF90') || A.hasNetclass('CAN90') || A.hasNetclass('USB90') || A.hasNetclass('DIFF100')")
-  (constraint skew (max 1mm) (within_diff_pairs)))
+  (condition "A.hasNetclass('DIFF90')")
+  (constraint skew (max 2.5mm) (within_diff_pairs)))
 
 # keep other copper away from coupled pairs (2x gap rule of thumb, PROPOSED); the board file splits this into
 # per-class rules. USB90 (USB full speed, 12 Mbps) is exempt since 2026-10-22 and uses the 0.15 mm netclass clearance.
