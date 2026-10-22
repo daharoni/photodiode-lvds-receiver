@@ -21,7 +21,7 @@ Top-left block (revision 4): U5 TPS259631DDAR eFuse with the R35/R36/R37 UVLO/OV
 | U3 BIAS | R28 0R to GND fitted, R29 0R to 5V_HVIN DNP (fit exactly one) | "If unused tie to GND" VERIFIED (LT p.7); option PROPOSED |
 | U3 passives | INTVCC 1 uF (LT p.7 "bypassed with 1 uF"), RT 84.5k, SS 0.22 uF, VC 84.5k + 1 nF C0G + 10 pF DNP, EN 200k/200k (always connected) | VERIFIED/PROPOSED per calc doc 3.2 |
 | Pi filter | C18 10 uF 50 V, L2 0.47 uH (0805 footprint), C19 10 uF 50 V, C20 4.7 uF 50 V | PROPOSED (calc doc 3.2; demo manual p.4) |
-| Stage 1 + doubler | L1 10 uH (Wurth 74437324100), D1 R7 20R C5; C6, D3, D4, C7 0.1 uF 200 V; R30 47R; C25 1 nF 500 V; D2 DNP | PROPOSED (calc doc 2, 3.2; LT p.30) |
+| Stage 1 + doubler | L1 10 uH (Wurth 74437324100), D1 straight from SW to HV_V1 (C5); R7 20R from HV_V1 to the D3 anode (pump-charge resistor, as LT p.30 R8 and DC2838A R10; it was wired in series with D1 until 2026-10-22, review S1); C6, D3, D4, C7 0.1 uF 200 V; R30 47R; C25 1 nF 500 V; D2 DNP | PROPOSED (calc doc 2, 3.2; LT p.30); R7 position VERIFIED against LT8365 Rev. A p.30 and DC2838A REV02 |
 | FBX | R8-R11 4 x 2.05M; R12 86.6k + TH1 10k NTC; DAC leg R13 10k, C27 100 nF, R14 442k; pot leg RV1 50k + R15 274k (DNP); C26 10 pF DNP | PROPOSED (calc doc 3.2) |
 | Clamp | Q1 MMBTA42, Q2 MMBT3904, R16 4.02k, R17+R18 2 x 4.99M | PROPOSED (calc doc 4); topology checked in netlist below |
 | Filter 1 | R19 27k 1206 200 V, C8 10 nF 500 V C0G 1210 | PROPOSED (calc doc 4) |
@@ -38,6 +38,7 @@ Reference numbers beyond the spec: R22/R23 EN divider, R33 gate pull-up, R34 gat
 - Q3: 1 G net Net-(J1-Pin_1) (R34 pin 1, R33 pin 2, J1 pin 1); 2 S GND; 3 D /Power/EN (U3 pin 1 EN/UVLO, R22, R23).
 - U3 pin 1 EN/UVLO = net EN = Q3 drain + R22 bottom + R23 top (200k/200k from 5V_HVIN).
 - U3: 1 EN; 3 VIN 5V_HVIN; 5 INTVCC (C21); 6 NC no-connect; 7 BIAS; 8 VC; 9 FBX; 10 RT; 11 SS; 12 SYNC; 14 and 16 SW (D1 anode, L1, C6); 17 GND.
+- Stage 1 and pump (since 2026-10-22): D1 K = HV_V1 (C5, C7 top, R7 pin 2); R7 pin 1 = `Net-(D3-A)` = D3 anode only; D3 K = HV_PUMP (C6, D4 anode); D4 K = HV_RAW (C7 bottom, R30). The old net `Net-(D1-K)` (D1 K to R7) no longer exists.
 - Q1: B (R18, Q2 collector); E (R16, Q2 base); C HV_OUT. Q2: B Q1 emitter; E HV_CLAMP; C Q1 base.
 
 ## HV disable logic (decision 11)

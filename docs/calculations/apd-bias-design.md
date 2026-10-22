@@ -45,7 +45,7 @@ so I rendered the pages and traced connectivity by eye; stage structure is there
 ## 2. DC2838A topology (manual Rev. 0; schematic REV02)
 
 - Spec (manual p.1): VIN 9-30 V, 250 V (245-255 V) at 10 mA, f_sw 400 kHz, efficiency 77 % and **ripple 1 V** (12 V in, 10 mA), max 10 mA at VIN = 9 V. "Component selection restricts the input voltage to 30 V" (IC itself 60 V). No ripple/noise number with spectrum is given; radiated EMI plots only (pp.3-4, image-only, 12 V in, SSFM on).
-- Structure (schematic, DER by tracing): L1 10 uH from VIN to SW. **Stage 1 (boost):** D1 (SW -> 20 ohm R10) charges C14 0.22 uF/200 V to V1 ~125 V. **Stage 2 (one charge-pump doubler):** C2 0.1 uF/200 V couples SW to NET1; D3 charges it from V1; D4 passes NET1 to C15 0.22 uF/200 V stacked on C14, so Vout = V(C14)+V(C15) = 2*V1 - Vd ~ 250 V. Switch peak is only ~V1 (125 V < 150 V). Output R12 47 ohm and C17 1 nF/500 V. D1, D3, D4 = DFLS1150.
+- Structure (schematic, DER by tracing): L1 10 uH from VIN to SW. **Stage 1 (boost):** D1 (SW -> C14, no series resistor) charges C14 0.22 uF/200 V to V1 ~125 V; R10 20 ohm runs from V1 to the D3 anode, i.e. it is in the pump-charge path, not the boost rectifier path (re-read 2026-10-22, DC2838A REV02 and LT8365 Rev. A p.30 R8 agree; the earlier reading here put R10 in series with D1 and the Rev A schematic copied that until review item S1). **Stage 2 (one charge-pump doubler):** C2 0.1 uF/200 V couples SW to NET1; D3 charges it from V1; D4 passes NET1 to C15 0.22 uF/200 V stacked on C14, so Vout = V(C14)+V(C15) = 2*V1 - Vd ~ 250 V. Switch peak is only ~V1 (125 V < 150 V). Output R12 47 ohm and C17 1 nF/500 V. D1, D3, D4 = DFLS1150.
 - "Optional third charge pump stage" (manual p.1): remove R14 (0 ohm), fit C3, D5, D6, R11, C16 (NET1-NET3 chain, drawing) for higher Vout (x3, ~375 V DER).
 - FBX: R4 + R13 = 499 k + 499 k over R5 6.49 k -> 1.6*(1 + 998/6.49) = 247.7 V (DER). RT R7 107 k (400 kHz). VC: R6 84.5 k + C9 1 nF C0G (C8 option). SS C6 0.22 uF. INTVCC C7 1 uF. VIN C10 1 uF/50 V, plus 2x4.7 uF + 10 uF + 68 uF with L2 0.47 uH pi filter. EN/UVLO R1 1 M / R3 287 k -> turn-on 1.68*(1+1000/287) = 7.5 V (DER); JP1 selects SYNC / Burst (default) / Burst+SSFM / skip / skip+SSFM. Parts: manual p.4.
 - Datasheet p.30 is closer to us: "400 kHz, 3 V to 6 V Input, 250 V Output Boost Converter" **1.5 mA**, L1 3.3 uH (74437324033), DFLS1150 x4 (D1-D3 as above, plus D4 anode GND/cathode SW, purpose not stated), C5-C7 0.22 uF X7T 200 V, R8 20 ohm, R6/R5 1 M/6.49 k, RT 107 k. Same 3-capacitor doubler. This is the 5 V-in precedent (read from rendered image).
@@ -63,7 +63,7 @@ Mode: default SYNC/MODE floating (pulse-skip, clock-aligned pulses, "hundreds of
 |---|---|---|
 | L1 | 10 uH, Isat >= 1.5 A (Wurth 74437324100) | DS p.14 formula gives ~15 uH for CCM at full rated load; DCM at 1 mA allows less (p.12). Ipk 0.36 A worst |
 | V1 diode/caps | D1-D4 DFLS1150 (150 V), C5, C6, C7 0.1 uF X7R 200 V; stress 111 V = 1.35x diode, 1.81x cap | DER; DS p.16 |
-| Pump R (R8) 20 ohm, R_out 47 ohm | as DC2838A R10, R12 | manual p.4 |
+| Pump R (R8) 20 ohm, R_out 47 ohm | as DC2838A R10, R12; R8/R10 sits between V1 and the pump diode anode (our R7, HV_V1 to D3 anode since 2026-10-22) | manual p.4; LT p.30 |
 | RT | 84.5 k (500 kHz; 465-535 kHz) | DS p.11 |
 | VC | 84.5 k + 1 nF C0G, optional 2.2-22 pF | DS p.13, demo p.4; **tune on bench** |
 | SS | 0.22 uF (2 uA/0.22 uF = 9.1 V/s on SS; 176 ms is an upper bound for 1.6 V, ASM) | DS p.4, examples |

@@ -366,6 +366,7 @@ a{color:#000;text-decoration:none}
 <p><b>Why this topology.</b> A boost at 5 V cannot do 220 V alone (150 V switch maximum, LT8365 Rev. A p.2). Boosting to V1 of about (Vout + diode drop)/2, 70 V at 140 V out and 110 V at 220 V out, and doubling once keeps the switch node well under 150 V (17 V margin at 220 V after a 20 % ring allowance, an assumption), and means a short on the output never creates a DC path through the inductor and diode. The datasheet frequency limit is 500 kHz (RT 84.5k), so the 1 MHz first asked for is not available; attenuation goes into the filter instead. At 1 mA or less the part runs in deep discontinuous mode and pulse-skips. This follows the Analog Devices DC2838A demo circuit (manual Rev. 0) and the 5 V-in precedent on LT8365 datasheet p.30, with the topology traced by eye from images. <span class="t p">PROPOSED</span></p>
 <ul>
 <li>L1 10 uH (Wurth 74437324100), D1, D3, D4 150 V Schottky (D2 is fitted DNP, purpose not stated in LT8365 p.30), 0.1 uF 200 V pump capacitors, SYNC floating (pulse-skip; footprints for Burst options), BIAS tied to GND, SS 0.22 uF, INTVCC 1 uF. <span class="t v">VERIFIED</span> SYNC/MODE table and BIAS rule, LT8365 Rev. A p.7; the choices are <span class="t p">PROPOSED</span>.</li>
+<li>R7 20 ohm sits between HV_V1 and the D3 anode, in the pump-charge path, as R8 on LT8365 p.30 and R10 on the DC2838A; D1 goes straight from SW to C5. <span class="t v">VERIFIED</span> against both drawings 2026-10-22 (design review S1): until then R7 was in series with D1, where it carried the full inductor peak current (about 0.3 A in DCM, an estimate) and cost about 6-7 V of margin on the 150 V SW pin while leaving the flying-capacitor recharge undamped. The board still has to follow (Update PCB from Schematic; D3 or C7 moves to keep the 1.25 mm HV pad clearance).</li>
 <li>Output set by the FBX divider: four 2.05 M resistors, R12 86.6k with a 10k NTC (TH1) for temperature tracking, a DAC leg (DAC_HV through R13 10k, R14 442k) for firmware trim, and a DNP pot leg. The NTC tracks about 0.64 V/C against the APD's 0.65 V/C with +/-0.7 V residual over 15-35 C. <span class="t c">calculated</span> <span class="t p">PROPOSED</span></li>
 <li>DAC_HV polarity: 0 V gives the <b>maximum</b> bias (about 215 V) and full scale gives the minimum (about 104 V with the trimmer at default). The MCP4728 factory EEPROM is 0 V, so an unprogrammed DAC means maximum bias. Hence HV stays disabled until the ESP32 verifies the DAC. <span class="t c">calculated</span></li>
 <li><b>Open risk:</b> the C50 capacitor dump into a sacrificial TIA at an HV fault (C50 10 nF versus 4.7 nF). Steady hard-short current into the TIA is 5.95 mA at 220 V through R50 plus the upstream resistor against the OPA857 abs max of 10 mA (<span class="t v">VERIFIED</span> SBOS630D p.5); with the clamp upstream it is about 0.17 mA. Stored energy at 220 V is about 2.3 mJ. All <span class="t c">calculated</span>; the G1 discharge test decides.</li>
@@ -877,9 +878,13 @@ a{color:#000;text-decoration:none}
 <tr><td>12</td><td class="n">2026-10-08</td><td>Fixed-gain OPA855 x7 post-amp and baseline slicer replace the VCA821, AGC loop and peak detectors; firmware range trim. Approved by Daniel. <span class="t p">PROPOSED</span></td><td>Active</td></tr>
 <tr><td>13</td><td class="n">2026-10-09</td><td>USB standalone power and programming (requirement kept). The TPS2121 mux, PWR_SRC, VBUS_SENSE, 16-pin J60 and 12-pin J50 are superseded.</td><td>Requirement active; parts superseded by 14</td></tr>
 <tr><td>14</td><td class="n">2026-10-09</td><td>One 24-pin USB-C per module; TPS259631 eFuse; SN65LVDS104 fan-out; CAN on both RX pairs; SBU as AUX; J51 kept as scope header; cable rule. <span class="t p">PROPOSED</span></td><td>Active</td></tr>
+<tr><td>15</td><td class="n">2026-10-09</td><td>Layout-phase decisions: generators frozen, 6-layer JLC06161H-3313, hand placement; see decision-log.md entry 15. <span class="t p">PROPOSED</span></td><td>Active</td></tr>
+<tr><td>16</td><td class="n">2026-10-22</td><td>J50 shell tied directly to GND (C181 and R170 deleted); every shell post gets several GND vias. <span class="t p">PROPOSED</span></td><td>Active</td></tr>
+<tr><td>17</td><td class="n">2026-10-22</td><td>S12023 pinout corrected: pin 1 = anode, pin 3 = cathode (KAPDA0136EC bottom view); D10 rotated 180 degrees on the board. <span class="t v">VERIFIED</span></td><td>Active; standing correction 15</td></tr>
+<tr><td>18</td><td class="n">2026-10-22</td><td>R7 20 ohm moved from series with D1 into the pump-charge path (HV_V1 to D3 anode), as LT8365 p.30 R8 / DC2838A R10. <span class="t v">VERIFIED</span></td><td>Active; board update pending</td></tr>
 </table></div>
 
-<h3>11.2 The 14 standing corrections</h3>
+<h3>11.2 The 15 standing corrections</h3>
 <p>Corrections 1, 4, 5, 7, 8 and 9 refer to the VCA821 and AGC chain and are superseded by decision 12. Correction 11 still applies. The log marks no others as superseded; notes on 6, 10, 13 and 14 are this guide's reading of what remains relevant.</p>
 <div class="scroll" tabindex="0"><table>
 <tr><th>#</th><th>Correction</th><th>Status</th></tr>
@@ -897,6 +902,7 @@ a{color:#000;text-decoration:none}
 <tr><td>12</td><td>FPGA watchdog runs on an independent local clock; reacquire CDR and framing after release; invalid-code counts are not a BER measurement.</td><td>Active.</td></tr>
 <tr><td>13</td><td>SAMD51 DACs are 12-bit; OPA320 is single, OPA2320 dual.</td><td>The SAMD51 is gone; module DACs (MCP4728) are 12-bit; the dual OPA2320 is on the Monitor sheet.</td></tr>
 <tr><td>14</td><td>LM27762 positive and negative references differ. The MAX15032 bias rule (VIN + 1 V, 6.5 V or more) applied to the PIN design.</td><td>Both parts are gone (decisions 8 and 12). History only.</td></tr>
+<tr><td>15</td><td>S12023-10/-05 TO-18 pins: 1 = anode, 2 = case, 3 = cathode (KAPDA0136EC pin diagram, bottom view). <span class="t v">VERIFIED</span></td><td>Active since 2026-10-22 (decision 17); D10 is rotated 180 degrees on Rev A.</td></tr>
 </table></div>
 </section>
 

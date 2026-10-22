@@ -718,7 +718,7 @@
       },
       {
         "netclass": "HV",
-        "pattern": "Net-(D1-K)"
+        "pattern": "Net-(D3-A)"
       },
       {
         "netclass": "HV",
