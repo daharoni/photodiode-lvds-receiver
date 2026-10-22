@@ -777,6 +777,22 @@
         "pattern": "*/USB_DN"
       },
       {
+        "netclass": "USB90",
+        "pattern": "*/USB_ESD_DP"
+      },
+      {
+        "netclass": "USB90",
+        "pattern": "*/USB_ESD_DN"
+      },
+      {
+        "netclass": "USB90",
+        "pattern": "*/USB_E_DP"
+      },
+      {
+        "netclass": "USB90",
+        "pattern": "*/USB_E_DN"
+      },
+      {
         "netclass": "CAN90",
         "pattern": "*/CAN_P"
       },

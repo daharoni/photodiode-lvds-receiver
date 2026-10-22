@@ -106,7 +106,7 @@ Differential and single-ended geometry on routable controlled layers (L1 and L6 
 
 | Class | Target | Width | Gap | Source row |
 |---|---|---|---|---|
-| DIFF90 (four SuperSpeed pairs), USB90 (USB_DP/USB_DN), CAN90 (CAN_P/CAN_N) | 90 ohm diff | 0.145 mm | 0.15 mm | 90.7 ohm computed at 0.143 mm / 0.149 mm |
+| DIFF90 (four SuperSpeed pairs), USB90 (USB_DP/USB_DN, USB_ESD_DP/USB_ESD_DN, USB_E_DP/USB_E_DN), CAN90 (CAN_P/CAN_N) | 90 ohm diff | 0.145 mm | 0.15 mm | 90.7 ohm computed at 0.143 mm / 0.149 mm |
 | DIFF90 relaxed alternative | 90 ohm diff | 0.16 mm | 0.20 mm | 89.8 ohm computed |
 | DIFF100 (LVDS_P/LVDS_N, U20 to R180) | 100 ohm diff | 0.11 mm | 0.15 mm | 100.2 ohm computed at 0.112 / 0.149 |
 | 50 ohm single-ended (if ever needed) | 50 ohm | 0.155 mm | n/a | 50.0 ohm computed |
@@ -185,7 +185,7 @@ KiCad 10 supports tuning profiles with per-layer width/gap and a calculator base
 | HV | 0.30 | 1.0 (see below) | 0.6 / 0.3, avoid vias | - | 1 | `HV_*`, `*/HV_*`, `APD_BIAS`, plus HV_K, HV_OUT, HV_CLAMP, HV_V1, HV_RAW, HV_PUMP, HV_FILT (all match `HV_*`); `HV_MON` and `HV_DIS` are low-voltage monitor/control nets that the existing `HV_*` pattern also catches (UNRESOLVED: consider renaming or excluding them to avoid a 1.0 mm clearance on the ESP32 side) |
 | DIFF90 | - | 0.15 | 0.6 / 0.3 | 0.145 / 0.15 | 3 | `*LVDS_OUT1_P`, `*LVDS_OUT1_N`, `*LVDS_OUT2_P`, `*LVDS_OUT2_N` (SSTX pairs), and the CAN pairs at the connector end |
 | CAN90 | - | 0.15 | 0.6 / 0.3 | 0.145 / 0.15 | 3 | `*/CAN_P`, `*/CAN_N` |
-| USB90 | - | 0.15 | 0.6 / 0.3 | 0.145 / 0.15 | 3 | `*/USB_DP`, `*/USB_DN` |
+| USB90 | - | 0.15 | 0.6 / 0.3 | 0.145 / 0.15 | 3 | `*/USB_DP`, `*/USB_DN`, `*/USB_ESD_DP`, `*/USB_ESD_DN`, `*/USB_E_DP`, `*/USB_E_DN` (the last four added 2026-10-22: U61 -> R193/R194 and R193/R194 -> ESP32, renamed so the names end in P/N) |
 | DIFF100 | - | 0.15 | 0.6 / 0.3 | 0.11 / 0.15 | 3 | `LVDS_P`, `LVDS_N` (U20 to R180) |
 | LVDS (existing) | 0.2 | 0.2 | | | | `LVDS_*` currently catches all LVDS nets; narrow it to avoid overriding the classes above, or give DIFF90/DIFF100 higher priority (lower number) than LVDS. `LVDS_DBG_P/N` (U50 3Y/3Z to J51 scope header) is not an impedance-controlled run in the spec: leave on LVDS/Default (PROPOSED) |
 

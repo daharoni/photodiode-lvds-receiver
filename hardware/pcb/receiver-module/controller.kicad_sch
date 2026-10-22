@@ -2933,7 +2933,7 @@
 		)
 		(uuid "534b22a4-624a-4da4-b912-2ae5bae81049")
 	)
-	(text "USB D+/D- (PROPOSED, decision 14): USB_DP/USB_DN\n  arrive from J50 on the Connector sheet\n  (hierarchical, bidirectional). R193/R194 22R\n  (ESP32-C6 Hardware Design Guidelines p.18 section\n  1.3.13: reserve 22/33 ohm and capacitors to\n  ground; MINI-1 datasheet v1.5 Fig. 9-1 p.40 leaves\n  them TBD), with DNP C206/C207 (0402, value TBD)\n  from USB_DP_E/USB_DN_E to GND on the module side.\n  UNRESOLVED: effect of 22 ohm with USBLC6 and auto-\n  reset through them, untested. VBUS surge\n  protection is the eFuse U5 on the Power sheet (21\n  V abs max, TPS2596 p.5), not the USBLC6;\n  USBLC6-2SC6 VBUS-pin clamp behaviour UNRESOLVED\n  (ST datasheet not read). Place U61 near J50 at\n  layout."
+	(text "USB D+/D- (PROPOSED, decision 14): USB_DP/USB_DN\n  arrive from J50 on the Connector sheet\n  (hierarchical, bidirectional). R193/R194 22R\n  (ESP32-C6 Hardware Design Guidelines p.18 section\n  1.3.13: reserve 22/33 ohm and capacitors to\n  ground; MINI-1 datasheet v1.5 Fig. 9-1 p.40 leaves\n  them TBD), with DNP C206/C207 (0402, value TBD)\n  from USB_E_DP/USB_E_DN to GND on the module side.\n  UNRESOLVED: effect of 22 ohm with USBLC6 and auto-\n  reset through them, untested. VBUS surge\n  protection is the eFuse U5 on the Power sheet (21\n  V abs max, TPS2596 p.5), not the USBLC6;\n  USBLC6-2SC6 VBUS-pin clamp behaviour UNRESOLVED\n  (ST datasheet not read). Place U61 near J50 at\n  layout."
 		(exclude_from_sim yes)
 		(at 68.58 12.7 0)
 		(effects
@@ -4977,7 +4977,7 @@
 		)
 		(uuid "5f14f6b9-b7df-4f2e-bc0d-f1a105730d16")
 	)
-	(label "USB_DN_E"
+	(label "USB_E_DN"
 		(at 182.88 114.3 180)
 		(effects
 			(font
@@ -5067,7 +5067,7 @@
 		)
 		(uuid "7c3d71be-7cee-4a90-bbde-539a08914fa0")
 	)
-	(label "USB_DN_E"
+	(label "USB_E_DN"
 		(at 160.02 109.22 0)
 		(effects
 			(font
@@ -5347,7 +5347,7 @@
 		)
 		(uuid "e7c09d36-dff5-4a96-8fce-d817b9e3dd12")
 	)
-	(label "USB_DP_E"
+	(label "USB_E_DP"
 		(at 182.88 116.84 180)
 		(effects
 			(font
@@ -5397,7 +5397,27 @@
 		)
 		(uuid "f18c0ca3-b500-467c-925e-b286284095de")
 	)
-	(label "USB_DP_E"
+	(label "USB_ESD_DP"
+		(at 138.43 88.9 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "703edcd8-d34d-46ff-b1bc-7850f5628965")
+	)
+	(label "USB_ESD_DN"
+		(at 152.4 109.22 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "dc5596e2-97aa-4b8c-9467-9b4ee59f9581")
+	)
+	(label "USB_E_DP"
 		(at 146.05 88.9 0)
 		(effects
 			(font
