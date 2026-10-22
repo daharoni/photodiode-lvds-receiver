@@ -2,7 +2,7 @@
 
 Labels: VERIFIED (document, revision and page cited), PROPOSED (design intent), UNRESOLVED (open). Written 2026-10-09. Nothing here is implemented, simulated or measured; every threshold and time constant below is a first guess to be tuned at gates G1-G3 (docs/bringup/gates.md). Companion documents: `docs/firmware/can-and-console-protocol.md` (commands, telemetry, self-test result), `docs/research/esp32-usb-tooling.md` (USB, flashing, browser workflow).
 
-Hard rules carried over (CLAUDE.md): slicing is analog and the module decodes with the ESP32 unprogrammed; this firmware only does slow range trim (APD bias, TIA 20k/5k), monitoring, HV gating, identity, telemetry and the CAN link. The radio is never initialised (decision 11).
+Hard rules carried over (CLAUDE.md, decision 21): slicing is analog and the signal path from APD to LVDS needs nothing from the ESP32; the APD bias is enabled only by this firmware (HV_DIS interlock, decision 20), so an unprogrammed module is safe but dark. This firmware only does slow range trim (APD bias, TIA 20k/5k), monitoring, HV gating, identity, telemetry and the CAN link. The radio is never initialised (decision 11).
 
 ## 0. Status
 

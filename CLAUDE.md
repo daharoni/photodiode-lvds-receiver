@@ -15,10 +15,12 @@ Performance beats cost. No backward compatibility with the Miniscope Zero headst
 
 ## Hard rules
 
-1. Analog-first is a firm user decision: slicing is analog and the module
-   decodes with the ESP32 unprogrammed. Do not propose an MCU/ADC-first
-   architecture. The ESP32-C6 (decisions 11, 12) does slow range trim only
-   (APD bias DAC, TIA gain select), monitors, slow GPIO and the CAN link.
+1. Analog-first is a firm user decision: slicing is analog and the signal
+   path from APD to LVDS needs nothing from the ESP32. The APD bias is
+   enabled only by the provisioned ESP32 (decision 20: HV_DIS interlock), so
+   an unprogrammed module is safe but dark (decision 21). Do not propose an
+   MCU/ADC-first architecture. The ESP32-C6 (decisions 11, 12) does slow range
+   trim only (APD bias DAC, TIA gain select), monitors, slow GPIO and the CAN link.
 2. Label every design claim in docs as VERIFIED, PROPOSED or UNRESOLVED.
    VERIFIED means checked against a datasheet or measurement that is cited.
 3. Cite the datasheet (document, revision, page/figure) next to the claim.

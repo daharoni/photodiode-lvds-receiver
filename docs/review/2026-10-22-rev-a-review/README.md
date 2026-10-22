@@ -71,7 +71,7 @@ the board but should be settled before the headstage emitter is frozen.
   the Q = 6 sensitivity point. Fix: make EEPROM provisioning (C = 0xFFF, B = 0x800) a mandatory first-article
   step in gates.md; correct the two docs; consider a DNP-able 0R in the DAC leg so a no-firmware bench build can
   use the pot leg alone; firmware should treat the MCP4728 POR bit as a fault. [controller M1, frontend M1]
-- **S4. "Decodes with the ESP32 unprogrammed" is not true as built.** R33 pulls HV_DIS up (HV off, correct safety
+- **S4. "Decodes with the ESP32 unprogrammed" is not true as built.** **Status: CLOSED 2026-10-22, decision 21** (reworded in CLAUDE.md hard rule 1, decision 12, guide, controller.md, firmware README: signal path firmware-free, bias enable is the firmware interlock; no hardware). R33 pulls HV_DIS up (HV off, correct safety
   choice) and J1 is DNP, so an unprogrammed module has no APD bias. Either reword hard rule 1 / decision 12 /
   architecture.md ("slicing is analog; APD bias needs a provisioned ESP32 or J1 plus the pot leg") or implement
   S3's pot-leg option and fit J1 on first-article boards, and add a G1 item that proves the analog-only mode.
