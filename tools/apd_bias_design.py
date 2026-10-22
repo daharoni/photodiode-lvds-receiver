@@ -27,9 +27,10 @@ P = dict(
     vfb=1.600, vfb_lo=1.568, vfb_hi=1.636, # DS p.3
     ifbx=10e-9,                            # DS p.3 max
     # FBX network
-    rt=8.2e6, rd=442e3, rp=274e3,          # top chain (4 x 2.05M), DAC leg, pot leg
-    ntc_r25=10e3, ntc_beta=3950.0, rs_fix=82.5e3,
-    vtrim_mid=1.65, vtrim_max=3.3,         # SAMD51 DAC / pot rail
+    rt=8.2e6, rd=160e3, rp=274e3,          # top chain (4 x 2.05M), DAC leg (R13 10k + R14 150k since 2026-10-22, was 452k), pot leg
+    pot_fitted=False,                      # RV1/R15 are DNP in production (review S2, 2026-10-22); True = bench build with the pot leg
+    ntc_r25=10e3, ntc_beta=3950.0, rs_fix=86.6e3,
+    vtrim_mid=1.65, vtrim_max=3.3,         # MCP4728 DAC with VDD (3.3 V) reference / pot rail
     tc_target=0.65,                        # V/degC, S12023 dVBR/dT (apd-selection.md)
     # cathode filter
     r1=27e3, c1=10e-9, r2=10e3, c2=10e-9,
@@ -76,10 +77,14 @@ def ntc(t_c, r25=None, beta=None):
     return r25 * math.exp(beta * (1 / t - 1 / 298.15))
 
 
-def vout_net(rb, vdac, vw, vfb=None):
+def vout_net(rb, vdac, vw=None, vfb=None, pot=None):
+    """FBX summing divider. vw = pot wiper voltage; the pot leg is only in the sum when fitted (production: DNP)."""
     vfb = vfb or P['vfb']
-    return (vfb * (1 + P['rt'] / rb + P['rt'] / P['rd'] + P['rt'] / P['rp'])
-            - vdac * P['rt'] / P['rd'] - vw * P['rt'] / P['rp'])
+    pot = P['pot_fitted'] if pot is None else pot
+    gp = P['rt'] / P['rp'] if pot else 0.0
+    vw = P['vtrim_mid'] if vw is None else vw
+    return (vfb * (1 + P['rt'] / rb + P['rt'] / P['rd'] + gp)
+            - vdac * P['rt'] / P['rd'] - vw * gp)
 
 
 # ----------------------------------------------------------------------------- 3a. converter
@@ -146,58 +151,77 @@ def converter():
 
 # ----------------------------------------------------------------------------- 3b. FBX divider
 def divider():
-    print("\n== 3b. FBX divider: Vout = Vfb*(1+Rt/Rb+Rt/Rd+Rt/Rp) - Vdac*Rt/Rd - Vw*Rt/Rp ; Rb = Rs + NTC(T)")
+    pot = P['pot_fitted']
+    print("\n== 3b. FBX divider: Vout = Vfb*(1+Rt/Rb+Rt/Rd[+Rt/Rp]) - Vdac*Rt/Rd[- Vw*Rt/Rp] ; Rb = Rs + NTC(T)"
+          f"   [pot leg {'FITTED (bench)' if pot else 'DNP (production: RV1/R15 not fitted)'}]")
     rt, rd, rp = P['rt'], P['rd'], P['rp']
-    mid = P['vtrim_mid']
-    k = (P['vout'] + 0 - (P['vfb'] - mid) * (rt / rd + rt / rp)) / P['vfb']       # 1 + Rt/Rb
+    mid, vmax_dac = P['vtrim_mid'], P['vtrim_max']
+    span_req = P['vout_max'] - P['vout_min']
+    rd_req = vmax_dac * rt / span_req
+    print(f"  Rt = {eng(rt,'ohm')} (4 x 2.05M, <=55 V each); DAC leg Rd = {eng(rd,'ohm')} (R13 10k + R14 {eng(rd-10e3,'ohm')})"
+          f"{'; pot leg Rp = ' + eng(rp,'ohm') if pot else '; pot leg absent'}")
+    print(f"  DAC span = Vdac_max*Rt/Rd: {P['vout_min']:.0f}-{P['vout_max']:.0f} V needs Rd <= {eng(rd_req,'ohm')}; with Rd = {eng(rd,'ohm')} the span is {vmax_dac*rt/rd:.1f} V,"
+          f" LSB(12-bit) = {vmax_dac/4096*rt/rd*1e3:.1f} mV")
+    # Rb for code 0 (Vdac = 0) = vout_max  (pot, if fitted, at mid)
+    k = P['vout_max'] / P['vfb'] - rt / rd - ((rt / rp) * (1 - mid / P['vfb']) if pot else 0.0)   # = 1 + Rt/Rb
     rb_req = rt / (k - 1)
     alpha = -P['ntc_beta'] / 298.15 ** 2
-    alpha_req = -P['tc_target'] / (P['vfb'] * (k - 1))
-    print(f"  Rt = {eng(rt,'ohm')} (4 x 2.05M, <=55 V each), Rd = {eng(rd,'ohm')}, Rp = {eng(rp,'ohm')}")
-    print(f"  Needed Rb(25C) for 140.0 V at Vdac=Vw=1.65 V: {eng(rb_req,'ohm')};  needed alpha_Rb = {alpha_req*100:.3f} %/C;"
-          f" NTC alpha(25C) = {alpha*100:.3f} %/C -> NTC fraction {alpha_req/alpha:.3f} -> NTC25 = {alpha_req/alpha*rb_req/1e3:.2f} k (use {P['ntc_r25']/1e3:.0f} k)")
+    v_mid_nom = vout_net(rb_req, mid)
+    alpha_req = -P['tc_target'] / (P['vfb'] * rt / rb_req)
+    print(f"  Needed Rb(25C) for {P['vout_max']:.0f} V at Vdac = 0: {eng(rb_req,'ohm')};  needed alpha_Rb = {alpha_req*100:.3f} %/C;"
+          f" NTC alpha(25C) = {alpha*100:.3f} %/C -> NTC fraction {alpha_req/alpha:.3f} -> NTC25 = {alpha_req/alpha*rb_req/1e3:.2f} k (fitted: {P['ntc_r25']/1e3:.0f} k)")
     def worst(rs_):
-        v25_ = vout_net(rs_ + ntc(25), mid, mid)
-        return max(abs(vout_net(rs_ + ntc(t), mid, mid) - v25_ - P['tc_target'] * (t - 25)) for t in range(15, 36))
-    cands = [e * 10 ** d for d in (4,) for e in E96] + [e * 1e3 * 100 for e in E96[:20]]
-    rs_best = min(cands, key=worst)
-    print(f"  Rs search over E96 (70-100k) minimising max |error| over 15-35C vs 0.65 V/C line: best {eng(rs_best,'ohm')} ({worst(rs_best):.2f} V);"
-          f" for reference 82.5k -> {worst(82.5e3):.2f} V, 84.5k -> {worst(84.5e3):.2f} V")
-    rs = P['rs_fix'] = rs_best
+        v25_ = vout_net(rs_ + ntc(25), mid)
+        return max(abs(vout_net(rs_ + ntc(t), mid) - v25_ - P['tc_target'] * (t - 25)) for t in range(15, 36))
+    def top_err(rs_):
+        return abs(vout_net(rs_ + ntc(25), 0.0) - P['vout_max'])
+    cands = [e * 10 ** d for d in (4,) for e in E96]
+    rs_fit = min(cands, key=top_err)
+    print(f"  Rs (E96) that puts code 0 closest to {P['vout_max']:.0f} V: {eng(rs_fit,'ohm')} -> {vout_net(rs_fit+ntc(25),0.0):.1f} V; tempco error with it {worst(rs_fit):.2f} V (max over 15-35 C)")
+    print("  Note: dVout/dT = -Vfb*Rt*(dRb/dT)/Rb^2 does not depend on Rd, so the DAC leg sets the span and Rb/NTC set the tempco independently;"
+          " Rb is kept at the tempco-optimised value and Rd alone is lowered to reach vout_max at code 0.")
+    rs = P['rs_fix']
     rb25 = rs + ntc(25)
-    v25 = vout_net(rb25, mid, mid)
-    print(f"  Chosen Rs = {eng(rs,'ohm')} (E96) + NTC {P['ntc_r25']/1e3:.0f}k b={P['ntc_beta']:.0f}: Rb(25C) = {eng(rb25,'ohm')};  Vout(25C, mid trims) = {v25:.2f} V")
-    print("   T(C)  NTC(k)   Rb(k)   Vout(V)  ideal(V)  err(V)   [ideal = Vout(25)+0.65*(T-25)]")
+    v25 = vout_net(rb25, mid)
+    print(f"  Chosen Rs = {eng(rs,'ohm')} (E96) + NTC {P['ntc_r25']/1e3:.0f}k b={P['ntc_beta']:.0f}: Rb(25C) = {eng(rb25,'ohm')};  Vout(25C, Vdac = mid {mid} V) = {v25:.2f} V")
+    print("   T(C)  NTC(k)   Rb(k)   Vout(V)  ideal(V)  err(V)   [Vdac = mid; ideal = Vout(25)+0.65*(T-25)]")
     errs = []
     for t in (15, 20, 25, 30, 35):
-        vo = vout_net(rs + ntc(t), mid, mid)
+        vo = vout_net(rs + ntc(t), mid)
         ideal = v25 + P['tc_target'] * (t - 25)
         errs.append(vo - ideal)
         print(f"   {t:3d}  {ntc(t)/1e3:7.3f}  {(rs+ntc(t))/1e3:7.2f}  {vo:7.2f}  {ideal:7.2f}  {vo-ideal:+6.2f}")
-    sl = (vout_net(rs + ntc(26), mid, mid) - vout_net(rs + ntc(24), mid, mid)) / 2
-    slb = (vout_net(rs + ntc(35), mid, mid) - vout_net(rs + ntc(15), mid, mid)) / 20
+    sl = (vout_net(rs + ntc(26), mid) - vout_net(rs + ntc(24), mid)) / 2
+    slb = (vout_net(rs + ntc(35), mid) - vout_net(rs + ntc(15), mid)) / 20
     half = (max(errs) - min(errs)) / 2
     print(f"  Slope at 25C (central diff) = {sl:.3f} V/C; 15-35C average = {slb:.3f} V/C (target 0.65); error span {min(errs):+.2f}..{max(errs):+.2f} V"
           f" -> +/-{half:.2f} V if the 25C trim is re-centred (= +/-{half*7:.0f} % gain at M~100, DER 7 %/V)")
+    for r25_alt in (6.8e3, 8.2e3, 10e3, 12e3):
+        rs_alt = min(cands, key=lambda r: abs(vout_net(r + ntc(25, r25=r25_alt), 0.0) - P['vout_max']))
+        sl_alt = (vout_net(rs_alt + ntc(35, r25=r25_alt), mid) - vout_net(rs_alt + ntc(15, r25=r25_alt), mid)) / 20
+        print(f"    NTC {r25_alt/1e3:4.1f}k with Rs {eng(rs_alt,'ohm')}: slope {sl_alt:.3f} V/C, code 0 -> {vout_net(rs_alt+ntc(25,r25=r25_alt),0.0):.1f} V")
     chk("band-average tempco within 5 % of 0.65 V/C", abs(slb / 0.65 - 1) < 0.05, f"{slb:.3f} V/C")
     chk("re-centred error over 15-35 C <= +/-0.75 V (beta/NTC tolerance excluded)", half <= 0.75, f"+/-{half:.2f} V")
-    # tolerance sensitivities
     for lab, kw in (("beta +/-1 %", dict(beta=3950 * 1.01)),):
-        v35 = vout_net(rs + ntc(35, beta=kw['beta']), mid, mid)
-        v15 = vout_net(rs + ntc(15, beta=kw['beta']), mid, mid)
-        print(f"  Sensitivity {lab}: slope {(v35-v15)/20:.3f} V/C (vs {(vout_net(rs+ntc(35),mid,mid)-vout_net(rs+ntc(15),mid,mid))/20:.3f})")
+        v35 = vout_net(rs + ntc(35, beta=kw['beta']), mid)
+        v15 = vout_net(rs + ntc(15, beta=kw['beta']), mid)
+        print(f"  Sensitivity {lab}: slope {(v35-v15)/20:.3f} V/C (vs {slb:.3f})")
     dvfb = 26e-6 * (1 + rt / rb25)
     print(f"  Vfb tempco (GRAPH-READ DS p.5, ~+26 uV/C) adds {dvfb*1e3:.1f} mV/C at Vout (negligible); Vfb tol {P['vfb_lo']}-{P['vfb_hi']} V "
-          f"-> {vout_net(rb25,mid,mid,P['vfb_lo'])-v25:+.1f}/{vout_net(rb25,mid,mid,P['vfb_hi'])-v25:+.1f} V -> per-unit trim REQUIRED")
+          f"-> {vout_net(rb25,mid,vfb=P['vfb_lo'])-v25:+.1f}/{vout_net(rb25,mid,vfb=P['vfb_hi'])-v25:+.1f} V -> per-unit trim REQUIRED")
     print(f"  FBX current +/-10 nA (DS p.3) x Rt||Rb = +/-{P['ifbx']*rt*rb25/(rt+rb25)*(rt/rb25+1)*1e3:.0f} mV at Vout")
-    # ranges
-    pts = ((mid, mid), (0.0, mid), (3.3, mid), (mid, 0.0), (mid, 3.3), (0.0, 0.0), (3.3, 3.3))
-    print("  Set-point (T=25C) for (Vdac,Vw) = " + " | ".join(f"({a:.2f},{b:.2f}): {vout_net(rb25, a, b):.1f} V" for a, b in pts))
-    print(f"  DAC authority: {P['vtrim_max']*rt/rd:.1f} V span ({P['vtrim_max']*rt/rd/2:.1f} V), LSB(12-bit) = {P['vtrim_max']/4096*rt/rd*1e3:.1f} mV;"
-          f" pot (Vw=0..3.3) span {P['vtrim_max']*rt/rp:.1f} V; DAC pin Hi-Z (leg open, pot mid) -> {vout_net(rb25, P['vfb'], mid):.1f} V")
-    vmax_hw = vout_net(rb25, 0.0, 0.0)
-    chk("hardware maximum (both trims at 0 V) <= 225 V and >= 205 V (covers 200-V-VBR units)", 205 <= vmax_hw <= 225, f"{vmax_hw:.1f} V")
-    chk("DAC alone gives >= +/-30 V about mid", P['vtrim_max'] * rt / rd / 2 >= 30, f"+/-{P['vtrim_max']*rt/rd/2:.1f} V")
+    print("  Set-point vs DAC (pot " + ("at mid" if pot else "absent") + "):")
+    print("   T(C)   Vdac=0 (code 0, MCP4728 power-up)   Vdac=1.65   Vdac=3.3 (code 4095)")
+    for t in (15, 25, 35):
+        rb_t = rs + ntc(t)
+        print(f"   {t:3d}   {vout_net(rb_t,0.0):7.1f} V{' '*27}{vout_net(rb_t,mid):7.1f} V   {vout_net(rb_t,vmax_dac):7.1f} V")
+    v0, vfs = vout_net(rb25, 0.0), vout_net(rb25, vmax_dac)
+    chk(f"code 0 (blank DAC) within {P['vout_max']-5:.0f}-{P['vout_max']+5:.0f} V", P['vout_max'] - 5 <= v0 <= P['vout_max'] + 5, f"{v0:.1f} V")
+    chk(f"full scale <= {P['vout_min']+5:.0f} V (firmware limits codes to >= {P['vout_min']:.0f} V)", vfs <= P['vout_min'] + 5, f"{vfs:.1f} V")
+    chk("switch node at code 0: (Vout+Vd)/2 x ring < 150 V", (v0 + P['vd']) / 2 * P['ring'] < P['vsw_abs'], f"{(v0+P['vd'])/2*P['ring']:.0f} V")
+    print(f"  Bench build with the pot leg fitted (Rp = {eng(rp,'ohm')}, same Rb): Vw = 0, Vdac = 0 -> {vout_net(rb25,0.0,0.0,pot=True):.1f} V;"
+          f" Vw = 3.3, Vdac = 3.3 -> {vout_net(rb25,vmax_dac,vmax_dac,pot=True):.1f} V; Vw = mid, Vdac = mid -> {vout_net(rb25,mid,mid,pot=True):.1f} V"
+          f" (the pot adds +/-{vmax_dac*rt/rp/2:.0f} V about mid; firmware code bounds must then come from HV_MON, not from the code alone)")
     ibot = P['vout'] / (rt + rb25)
     print(f"  Divider/bleeder current at 140 V = {ibot*1e6:.1f} uA ({ibot*P['vout']*1e3:.2f} mW); at 220 V = {P['vout_max']/(rt+rb25)*1e6:.1f} uA")
     return rb25

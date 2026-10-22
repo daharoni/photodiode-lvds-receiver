@@ -367,8 +367,8 @@ a{color:#000;text-decoration:none}
 <ul>
 <li>L1 10 uH (Wurth 74437324100), D1, D3, D4 150 V Schottky (D2 is fitted DNP, purpose not stated in LT8365 p.30), 0.1 uF 200 V pump capacitors, SYNC floating (pulse-skip; footprints for Burst options), BIAS tied to GND, SS 0.22 uF, INTVCC 1 uF. <span class="t v">VERIFIED</span> SYNC/MODE table and BIAS rule, LT8365 Rev. A p.7; the choices are <span class="t p">PROPOSED</span>.</li>
 <li>R7 20 ohm sits between HV_V1 and the D3 anode, in the pump-charge path, as R8 on LT8365 p.30 and R10 on the DC2838A; D1 goes straight from SW to C5. <span class="t v">VERIFIED</span> against both drawings 2026-10-22 (design review S1): until then R7 was in series with D1, where it carried the full inductor peak current (about 0.3 A in DCM, an estimate) and cost about 6-7 V of margin on the 150 V SW pin while leaving the flying-capacitor recharge undamped. The board followed the same day (R7 vertical between the HV_V1 row and D3, C5 and C7 moved); four HV pad clearance items around them remain to be cleared.</li>
-<li>Output set by the FBX divider: four 2.05 M resistors, R12 86.6k with a 10k NTC (TH1) for temperature tracking, a DAC leg (DAC_HV through R13 10k, R14 442k) for firmware trim, and a DNP pot leg. The NTC tracks about 0.64 V/C against the APD's 0.65 V/C with +/-0.7 V residual over 15-35 C. <span class="t c">calculated</span> <span class="t p">PROPOSED</span></li>
-<li>DAC_HV polarity: 0 V gives the <b>maximum</b> bias (about 215 V) and full scale gives the minimum (about 104 V with the trimmer at default). The MCP4728 factory EEPROM is 0 V, so an unprogrammed DAC means maximum bias. Hence HV stays disabled until the ESP32 verifies the DAC. <span class="t c">calculated</span></li>
+<li>Output set by the FBX divider: four 2.05 M resistors, R12 86.6k with a 10k NTC (TH1) for temperature tracking, a DAC leg (DAC_HV through R13 10k, R14 150k) for firmware trim, and a DNP pot leg (R15 1M). The NTC tracks about 0.64 V/C against the APD's 0.65 V/C with +/-0.7 V residual over 15-35 C. <span class="t c">calculated</span> <span class="t p">PROPOSED</span> R14 was 442k until 2026-10-22 (review S2, decision 19): with the pot leg not fitted the DAC alone then spanned only 106 to 167 V, so a 200 V VBR unit could not be biased. 150k gives 50 to 219 V from the DAC alone (LSB 41 mV); the tempco depends only on the bottom leg, so R12 and TH1 are unchanged.</li>
+<li>DAC_HV polarity: 0 V gives the <b>maximum</b> bias (about 219 V at 25 C, 225 V at 35 C) and full scale gives the minimum (about 50 V, below the 100 V firmware floor). The MCP4728 factory EEPROM is code 0, so an unprogrammed DAC means maximum bias. Hence HV stays disabled until the ESP32 verifies the DAC. <span class="t c">calculated</span></li>
 <li><b>Open risk:</b> the C50 capacitor dump into a sacrificial TIA at an HV fault (C50 10 nF versus 4.7 nF). Steady hard-short current into the TIA is 5.95 mA at 220 V through R50 plus the upstream resistor against the OPA857 abs max of 10 mA (<span class="t v">VERIFIED</span> SBOS630D p.5); with the clamp upstream it is about 0.17 mA. Stored energy at 220 V is about 2.3 mJ. All <span class="t c">calculated</span>; the G1 discharge test decides.</li>
 </ul>
 
@@ -387,7 +387,7 @@ a{color:#000;text-decoration:none}
 <tr><td>low (ESP32 drives it after verifying the DAC)</td><td>off</td><td>200k/200k divider gives 2.5 V at 5 V</td><td><b>ON</b></td></tr>
 </table></div>
 <ul>
-<li>Bench jumper J1 "HV FORCE ON" (DNP) ties the gate to GND, so HV is on regardless of firmware. Set the DAC first: with an unprogrammed DAC the bias goes to about 215 V.</li>
+<li>Bench jumper J1 "HV FORCE ON" (DNP) ties the gate to GND, so HV is on regardless of firmware. Set the DAC first: with an unprogrammed DAC the bias goes to about 220 V.</li>
 <li>If 3V3_D is absent the gate floats and the HV state is <span class="t u">UNRESOLVED</span>. In practice 3V3_D comes up with the same 5 V rail that feeds the LT8365.</li>
 <li>The Q3 gate threshold and the EN/UVLO threshold were not rechecked against datasheets. <span class="t u">UNRESOLVED</span></li>
 </ul>
@@ -509,7 +509,7 @@ a{color:#000;text-decoration:none}
 <h3>5.3 When the ESP32 is not programmed</h3>
 <div class="callout"><ul>
 <li>TIA_CTRL floats and the pull-up gives <b>20k</b>. SHDN_N is pulled up so the comparator is on. The module decodes whatever light arrives.</li>
-<li><b>No APD bias</b> unless bench jumper J1 is fitted, because HV_DIS floats high through R33. With J1 fitted and an unprogrammed DAC the bias goes to about 215 V; firmware cannot prevent that.</li>
+<li><b>No APD bias</b> unless bench jumper J1 is fitted, because HV_DIS floats high through R33. With J1 fitted and an unprogrammed DAC the bias goes to about 220 V; firmware cannot prevent that.</li>
 <li>DAC_TH comes up at the MCP4728 EEPROM default (0 V on every channel from the factory), a safe-default direction that is <span class="t u">UNRESOLVED</span> for DAC_TH.</li>
 </ul></div>
 
@@ -522,7 +522,7 @@ a{color:#000;text-decoration:none}
 <li>Force live outputs to safe values, check the ADC with HV off (HV_MON should read about 0.05 V; more than 30 V of bias while disabled sets HV_STUCK).</li>
 <li>Read CC1/CC2 and watch for USB SOF, then start CAN in listen-only for 1.5 s or more to find the mode.</li>
 <li>HV stays off until commanded: console <code>hv on</code> (standalone), master <code>hv_cmd</code> over CAN, or a stored <code>hv_auto</code> flag with a heard master and no faults (default 0).</li>
-<li>Soft start: first write DAC_HV = 0xFFF and read it back (the only path that lowers HV_DIS), then drive HV_DIS low, let the LT8365 soft-start (SS 0.22 uF) reach the DAC minimum of about 104-110 V, then walk DAC_HV down closed-loop on HV_MON at no more than 20 V/s with a code bound derived from hv_max and a trip if the bias does not follow the code. Timeout 10 s gives HV_UNDER and HV off.</li>
+<li>Soft start: first write DAC_HV = 0xFFF and read it back (the only path that lowers HV_DIS), then drive HV_DIS low, let the LT8365 soft-start (SS 0.22 uF) reach the full-scale DAC value of about 50 V, then walk DAC_HV down closed-loop on HV_MON at no more than 20 V/s with a code bound derived from hv_max and a trip if the bias does not follow the code. Timeout 10 s gives HV_UNDER and HV off.</li>
 </ol>
 <p>Any ESP32 reset, crash or loss of 3V3_D releases IO0, so HV turns off with no firmware action. HV also goes off within 10 ms of: I2C or ADC failure, HV out of range, CAN bus-off or no LINK_ALL for the 2 s default in bus mode. <span class="t p">PROPOSED</span></p>
 
@@ -882,6 +882,7 @@ a{color:#000;text-decoration:none}
 <tr><td>16</td><td class="n">2026-10-22</td><td>J50 shell tied directly to GND (C181 and R170 deleted); every shell post gets several GND vias. <span class="t p">PROPOSED</span></td><td>Active</td></tr>
 <tr><td>17</td><td class="n">2026-10-22</td><td>S12023 pinout corrected: pin 1 = anode, pin 3 = cathode (KAPDA0136EC bottom view); D10 rotated 180 degrees on the board. <span class="t v">VERIFIED</span></td><td>Active; standing correction 15</td></tr>
 <tr><td>18</td><td class="n">2026-10-22</td><td>R7 20 ohm moved from series with D1 into the pump-charge path (HV_V1 to D3 anode), as LT8365 p.30 R8 / DC2838A R10. <span class="t v">VERIFIED</span></td><td>Active</td></tr>
+<tr><td>19</td><td class="n">2026-10-22</td><td>DAC leg R14 442k to 150k: production bias range (pot leg DNP) 50-219 V from the DAC alone, LSB 41 mV, tempco unchanged; R15 (DNP) 274k to 1M. <span class="t p">PROPOSED</span> calculated</td><td>Active</td></tr>
 </table></div>
 
 <h3>11.2 The 15 standing corrections</h3>

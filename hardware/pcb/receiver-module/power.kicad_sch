@@ -10784,7 +10784,7 @@
 				)
 			)
 		)
-		(property "Value" "442k 0.1%"
+		(property "Value" "150k 0.1%"
 			(at 180.34 172.72 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12140,7 +12140,7 @@
 				)
 			)
 		)
-		(property "Value" "274k"
+		(property "Value" "1M"
 			(at 246.38 195.58 90)
 			(show_name no)
 			(do_not_autoplace no)

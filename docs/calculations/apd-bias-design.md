@@ -72,14 +72,14 @@ Mode: default SYNC/MODE floating (pulse-skip, clock-aligned pulses, "hundreds of
 | Input | 10 uF 50 V + 4.7 uF 50 V + 0.47 uH/10 uF pi filter from the 5 V rail | demo p.4 |
 | Rt (FBX top) | 4 x 2.05 M in series = 8.2 M (55 V each at 220 V) | DER |
 | Rb (FBX bottom) | 86.6 k (E96) + 10 k NTC (beta 3950): Rb(25C) = 96.6 k | DER |
-| Rd (DAC leg) | 442 k from DAC through 10 k + 100 nF filter | DER |
-| Rp (pot leg) | 274 k from wiper of 50 k pot across 3.3 V (DNP in production) | DER |
+| Rd (DAC leg) | 150 k (R14; was 442 k until 2026-10-22, review S2) from DAC through 10 k + 100 nF filter: Rd = 160 k | DER |
+| Rp (pot leg) | 1 M (was 274 k) from wiper of 50 k pot across 3.3 V (DNP in production). With Rd = 160 k a 274 k pot leg at wiper 0 V would reach 267 V (switch node over 150 V); 1 M limits the pot to +/-13.5 V about the DAC set-point | DER |
 
 Divider equation (FBX current +/-10 nA gives +/-82 mV, negligible):
 `Vout = Vfb*(1 + Rt/Rb + Rt/Rd + Rt/Rp) - Vdac*Rt/Rd - Vw*Rt/Rp`, with `Rb = Rs + R_ntc(T)`, `R_ntc = R25*exp(beta*(1/T - 1/298.15))`.
 Tempco: dVout/dT = -Vfb*(Rt/Rb)*(1/Rb)dRb/dT, needs alpha_Rb = -0.65/(Vfb*(Rt/Rb)) = -0.462 %/C, NTC alpha = -beta/T^2 = -4.44 %/C, so NTC share = 10.4 % of Rb (Rb 93 k, NTC 9.7 k); the 10 k NTC therefore fits Rt = 8.2 M. Trim legs do not change the tempco (derivative is through Rb only).
 Worked result (DER): slope 0.625 V/C at 25 C, **0.642 V/C averaged over 15-35 C**; error vs 0.65 V/C line spans -1.40..0 V, i.e. **+/-0.70 V if the 25 C trim is re-centred** (about +/-5 % gain at M~100, 7 %/V from apd-selection.md); Rs = 82.5 k would give 1.92 V worst error. NTC beta +/-1 % moves the slope 0.642 -> 0.649 V/C. Vfb temperature drift only +2 mV/C. Vfb tolerance (-4.3/+4.8 V) and VBR spread demand a per-unit trim. Smaller NTC (2.2 k) would allow Rt ~1.8 M but not checked in the script run.
-Range (T=25 C): mid trims 135 V; pot wiper ~1.48 V sets 140 V default. DAC alone +/-30.6 V (61 V span, LSB 14.9 mV, 12-bit), pot span 99 V; both at 0 V = **215 V hardware maximum**; both at 3.3 V = 55 V (firmware limit to >= 100 V). DAC pin Hi-Z at reset -> 135.9 V. Covers VBR 150 typ -> bias ~135-140 V and VBR 200 max -> ~185 V (pot 1.65 -> 0 V gives 184 V; adding the DAC reaches 215 V). Divider load 17 uA at 140 V.
+Range (T=25 C, production build: RV1/R15 not fitted, DAC leg only, Rd = 160 k since 2026-10-22): DAC code 0 (0 V) = **219.4 V hardware maximum**, mid (1.65 V) = 134.9 V, full scale (3.3 V) = 50.3 V (firmware limits codes to >= 100 V); span 169 V, LSB 41.3 mV (12-bit). At 15/35 C the code-0 value is 211.7/224.5 V. Covers VBR 150 typ -> bias ~135-140 V and VBR 200 max -> ~190 V from the DAC alone. The MCP4728 powers up at code 0 (internal EEPROM default, DS22187E Table 4-2), i.e. at the maximum: see decision 19 and review S3. Earlier text (until 2026-10-22, review S2) assumed the pot leg fitted at mid and quoted 104-215 V with the DAC adding +/-31 V; with the pot leg DNP and Rd = 452 k the real production range was only 106.6-166.5 V, which cannot bias a 200 V VBR unit. Lowering Rd alone fixes it because the tempco depends only on Rb (see above), so R12/TH1 stay. Bench build with the pot leg fitted (R15 now 1 M): pot adds +/-13.5 V about the DAC set-point. Divider load 17 uA at 140 V, 27 uA at 220 V.
 
 ## 4. Cathode filter and protection (HV_RAW -> clamp -> R1 -> C1 -> R2 -> C2 at cathode)
 - R1 27 k, C1 10 nF, R2 10 k, C2 10 nF **C0G/NP0 or film, rated >= 400 V** (220 V is 88 % of a 250 V part; with 235 V fault level the requested 250 V part has no margin). C2 within 3 mm of the cathode pad, 100 pF C0G in parallel optional for >30 MHz (ESL ASM 1.2 nH). **No resistor between C2 and the cathode**: R in series with Cj (6 pF) low-passes the signal at 1/(2 pi R Cj) (47 k -> 560 kHz) and R thermal noise (4kT/R current) adds ~6-30 nA (hand calc, 47 k to 1 k), comparable with the TIA's 26 nA (DER).
@@ -126,27 +126,38 @@ APD bias supply Rev A design check: Vin 5.0 V +/-5 %, Vout 140 V (100-220), Iloa
   SS: 2 uA charge (DS p.4), C_SS = 220 nF -> dV/dt = 9.1 V/s (1.6 V full-scale would take 176 ms, ASM upper bound; DS Fig.3 p.13 is drawn at 10 ms/DIV)
   Input current at 140 V/1 mA: 40 mA + ~1.2 mA active IQ (DS p.3); stored energy in pump caps follows in 4.
 
-== 3b. FBX divider: Vout = Vfb*(1+Rt/Rb+Rt/Rd+Rt/Rp) - Vdac*Rt/Rd - Vw*Rt/Rp ; Rb = Rs + NTC(T)
-  Rt = 8.2 Mohm (4 x 2.05M, <=55 V each), Rd = 442 kohm, Rp = 274 kohm
-  Needed Rb(25C) for 140.0 V at Vdac=Vw=1.65 V: 93.17 kohm;  needed alpha_Rb = -0.462 %/C; NTC alpha(25C) = -4.444 %/C -> NTC fraction 0.104 -> NTC25 = 9.68 k (use 10 k)
-  Rs search over E96 (70-100k) minimising max |error| over 15-35C vs 0.65 V/C line: best 86.6 kohm (1.40 V); for reference 82.5k -> 1.92 V, 84.5k -> 1.58 V
-  Chosen Rs = 86.6 kohm (E96) + NTC 10k b=3950: Rb(25C) = 96.6 kohm;  Vout(25C, mid trims) = 134.99 V
-   T(C)  NTC(k)   Rb(k)   Vout(V)  ideal(V)  err(V)   [ideal = Vout(25)+0.65*(T-25)]
-    15   15.837   102.44   127.25   128.49   -1.24
-    20   12.535    99.14   131.52   131.74   -0.22
-    25   10.000    96.60   134.99   134.99   +0.00
-    30    8.037    94.64   137.81   138.24   -0.43
-    35    6.506    93.11   140.09   141.49   -1.40
+== 3b. FBX divider: Vout = Vfb*(1+Rt/Rb+Rt/Rd[+Rt/Rp]) - Vdac*Rt/Rd[- Vw*Rt/Rp] ; Rb = Rs + NTC(T)   [pot leg DNP (production: RV1/R15 not fitted)]
+  Rt = 8.2 Mohm (4 x 2.05M, <=55 V each); DAC leg Rd = 160 kohm (R13 10k + R14 150 kohm); pot leg absent
+  DAC span = Vdac_max*Rt/Rd: 100-220 V needs Rd <= 225.5 kohm; with Rd = 160 kohm the span is 169.1 V, LSB(12-bit) = 41.3 mV
+  Needed Rb(25C) for 220 V at Vdac = 0: 96.19 kohm;  needed alpha_Rb = -0.477 %/C; NTC alpha(25C) = -4.444 %/C -> NTC fraction 0.107 -> NTC25 = 10.32 k (fitted: 10 k)
+  Rs (E96) that puts code 0 closest to 220 V: 86.6 kohm -> 219.4 V; tempco error with it 1.40 V (max over 15-35 C)
+  Note: dVout/dT = -Vfb*Rt*(dRb/dT)/Rb^2 does not depend on Rd, so the DAC leg sets the span and Rb/NTC set the tempco independently; Rb is kept at the tempco-optimised value and Rd alone is lowered to reach vout_max at code 0.
+  Chosen Rs = 86.6 kohm (E96) + NTC 10k b=3950: Rb(25C) = 96.6 kohm;  Vout(25C, Vdac = mid 1.65 V) = 134.86 V
+   T(C)  NTC(k)   Rb(k)   Vout(V)  ideal(V)  err(V)   [Vdac = mid; ideal = Vout(25)+0.65*(T-25)]
+    15   15.837   102.44   127.12   128.36   -1.24
+    20   12.535    99.14   131.38   131.61   -0.22
+    25   10.000    96.60   134.86   134.86   +0.00
+    30    8.037    94.64   137.67   138.11   -0.43
+    35    6.506    93.11   139.95   141.36   -1.40
   Slope at 25C (central diff) = 0.625 V/C; 15-35C average = 0.642 V/C (target 0.65); error span -1.40..+0.00 V -> +/-0.70 V if the 25C trim is re-centred (= +/-5 % gain at M~100, DER 7 %/V)
+    NTC  6.8k with Rs 88.7 kohm: slope 0.449 V/C, code 0 -> 221.0 V
+    NTC  8.2k with Rs 88.7 kohm: slope 0.525 V/C, code 0 -> 219.0 V
+    NTC 10.0k with Rs 86.6 kohm: slope 0.642 V/C, code 0 -> 219.4 V
+    NTC 12.0k with Rs 84.5 kohm: slope 0.769 V/C, code 0 -> 219.6 V
   [PASS] band-average tempco within 5 % of 0.65 V/C: 0.642 V/C
   [PASS] re-centred error over 15-35 C <= +/-0.75 V (beta/NTC tolerance excluded): +/-0.70 V
   Sensitivity beta +/-1 %: slope 0.649 V/C (vs 0.642)
-  Vfb tempco (GRAPH-READ DS p.5, ~+26 uV/C) adds 2.2 mV/C at Vout (negligible); Vfb tol 1.568-1.636 V -> -4.3/+4.8 V -> per-unit trim REQUIRED
+  Vfb tempco (GRAPH-READ DS p.5, ~+26 uV/C) adds 2.2 mV/C at Vout (negligible); Vfb tol 1.568-1.636 V -> -4.4/+4.9 V -> per-unit trim REQUIRED
   FBX current +/-10 nA (DS p.3) x Rt||Rb = +/-82 mV at Vout
-  Set-point (T=25C) for (Vdac,Vw) = (1.65,1.65): 135.0 V | (0.00,1.65): 165.6 V | (3.30,1.65): 104.4 V | (1.65,0.00): 184.4 V | (1.65,3.30): 85.6 V | (0.00,0.00): 215.0 V | (3.30,3.30): 55.0 V
-  DAC authority: 61.2 V span (30.6 V), LSB(12-bit) = 14.9 mV; pot (Vw=0..3.3) span 98.8 V; DAC pin Hi-Z (leg open, pot mid) -> 135.9 V
-  [PASS] hardware maximum (both trims at 0 V) <= 225 V and >= 205 V (covers 200-V-VBR units): 215.0 V
-  [PASS] DAC alone gives >= +/-30 V about mid: +/-30.6 V
+  Set-point vs DAC (pot absent):
+   T(C)   Vdac=0 (code 0, MCP4728 power-up)   Vdac=1.65   Vdac=3.3 (code 4095)
+    15     211.7 V                             127.1 V      42.6 V
+    25     219.4 V                             134.9 V      50.3 V
+    35     224.5 V                             140.0 V      55.4 V
+  [PASS] code 0 (blank DAC) within 215-225 V: 219.4 V
+  [PASS] full scale <= 105 V (firmware limits codes to >= 100 V): 50.3 V
+  [PASS] switch node at code 0: (Vout+Vd)/2 x ring < 150 V: 132 V
+  Bench build with the pot leg fitted (Rp = 274 kohm, same Rb): Vw = 0, Vdac = 0 -> 267.3 V; Vw = 3.3, Vdac = 3.3 -> -0.6 V; Vw = mid, Vdac = mid -> 133.4 V (the pot adds +/-49 V about mid; firmware code bounds must then come from HV_MON, not from the code alone)
   Divider/bleeder current at 140 V = 16.9 uA (2.36 mW); at 220 V = 26.5 uA
 
 == 4. Cathode filter: HV_RAW -R1-[C1]-R2-[C2 at cathode]  (no series R after C2: it would form a pole with Cj)
@@ -186,7 +197,7 @@ APD bias supply Rev A design check: Vin 5.0 V +/-5 %, Vout 140 V (100-220), Iloa
   [PASS] clamp passes 100 uA at +60 C and fault current < S12023 Ir max 200 uA at -20 C: see table (soft knee not modelled)
   Q1 fault dissipation = 220 V x ~150 uA = 33 mW (SOT-23 class OK, ASM)
 
-SUMMARY: 14/14 checks passed
+SUMMARY: 15/15 checks passed
 ```
 
 ## 6. Bill of materials, bias block (availability and price NOT CHECKED for every line)
@@ -206,7 +217,7 @@ Example MPNs marked (M p.4) are from the DC2838A parts list, (D p.N) from the LT
 | C_C | 1 nF C0G 100 V | TDK CGA3E2C0G2A102J080AA (M p.4) | |
 | R_EN | 2 x 200 k 1 % 0603 | none | |
 | Rt | 4 x 2.05 M 1 % 0603 (<= 55 V each), or 0805 | Vishay CRCW0603 series (499 k used in M p.4; 2.05 M NOT CHECKED) | guard ring, no vias under |
-| Rs, Rd, Rp, R_df, C_df | 86.6 k, 442 k, 274 k 0.1-1 %, 10 k, 100 nF X7R 16 V | none | |
+| Rs, Rd, Rp, R_df, C_df | 86.6 k, 150 k, 1 M (DNP) 0.1-1 %, 10 k, 100 nF X7R 16 V | none | |
 | NTC | 10 k at 25 C, beta ~3950, 1 % 0603 | none | on APD can ground tab / thermal link |
 | P1 | 50 k multi-turn cermet pot (bench only) | e.g. Bourns 3296W-1-503LF, NOT CHECKED | DNP in production |
 | R1, R2 | 27 k, 10 k thick/thin film 1206, >= 200 V | none | each sees up to 170 V / 65 V in a short |
@@ -233,7 +244,7 @@ Layout and safety rules
 G1 test plan
 1. Bring-up with a 10 Mohm/1 Mohm dummy load: check f_sw (465-535 kHz), SW waveform peak (expect ~V1 + ring < 135 V), Ipk (current probe on L1, expect ~0.3 A), startup overshoot at 5.25 V and 4.75 V in, with SS 0.22 uF and with EN toggled by GPIO.
 2. Set-point vs temperature: chamber or heater/cold spray over 15-35 C (extend 0-50 C), NTC thermally coupled to a dummy APD can; record Vout at HV_RAW each 2 C; compare with 0.65 V/C line; fit slope and span, set pot/DAC at 25 C; criteria slope 0.62-0.68 V/C, span <= +/-0.75 V re-centred.
-3. Range: sweep DAC 0-3.3 V at pot mid/0/3.3, confirm 55-215 V hardware limits, LSB ~15 mV, Hi-Z reset value ~136 V.
+3. Range: sweep DAC code 0-4095 (0-3.3 V) with the pot leg not fitted; confirm about 219 V at code 0 and about 50 V at full scale (25 C), LSB ~41 mV; record the HV_MON reading at both ends. Note the code-0 (blank DAC) value is the maximum: do the first sweep downward from full scale.
 4. Ripple at the cathode with the TIA running and APD attached: 50-ohm-terminated or active-probe ground spring on C2, then a spectrum (100 kHz-100 MHz, RBW 10 kHz); check f_sw line, harmonics, burst subharmonics; criterion < 10 uV rms in band; repeat with the 6.63 MHz wireless-power field on at full power and the shield on/off, and with SYNC modes (skip, Burst, Burst+SSFM, external clock). Also read TIA output rms with the APD dark.
 5. Photocurrent: inject 10, 50, 100, 150, 250 uA from a source in place of the APD; confirm clamp knee 100-170 uA, drop across R1/R2 matches 37 k, no oscillation.
 6. Short-circuit survival: with a current-limited bench supply feeding HV_RAW, short cathode node to a **sacrificial** OPA857 input through a mechanical contact; measure peak current and recovery; repeat Vout (pump) to GND, with scope on SW and VIN. Decide C2 value (10 / 4.7 / 2.2 nF) here.

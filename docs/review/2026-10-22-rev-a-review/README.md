@@ -57,7 +57,7 @@ the board but should be settled before the headstage emitter is frozen.
   pump branch undamped. apd-bias-design.md 3.2 itself says "Pump R (R8) 20 ohm as DC2838A R10", so this is a
   wiring slip. Fix: D1 cathode straight to HV_V1, R7 between HV_V1 and the D3 anode. One trace on the board.
   [power-connector M1]
-- **S2. Production bias range is about 106 to 167 V, not 100 to 220 V (orchestrator-verified arithmetic).** RV1 and R15
+- **S2. Production bias range is about 106 to 167 V, not 100 to 220 V (orchestrator-verified arithmetic).** **Status: FIXED 2026-10-22, decision 19** (R14 442k -> 150k: DAC alone 50-219 V at 25 C, LSB 41 mV, tempco unchanged; R15 DNP 274k -> 1M; tools/apd_bias_design.py now models the pot-DNP build, 0 FAIL). RV1 and R15
   are DNP, so only the DAC leg (R13 10k + R14 442k) trims: Vout = 1.6(1 + 8.2M/96.6k) + (1.6 - Vdac) 8.2M/452k gives
   166.5 V at 0 V and 106.6 V at 3.3 V (25 C). The "215 V hardware maximum" in the docs needs the pot leg fitted. A
   unit with VBR near 200 V cannot be biased. Decide the range requirement against the VBR bins, then either fit
