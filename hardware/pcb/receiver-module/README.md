@@ -112,17 +112,19 @@ Stackup: JLC06161H-3313, 1.6 mm, ENIG, outer copper 1 oz (0.035 mm), inner 0.5 o
 | L5 | In4.Cu | GND2 | solid GND |
 | L6 | B.Cu | B.Cu | bottom components, slow routing |
 
+Vias (Daniel, 2026-10-22): one size on every net, 0.45 mm pad / 0.25 mm drill (standard JLCPCB price for a 0.25 mm drill at >= 0.45 mm pad, capabilities page read 2026-10-22), several in parallel for power; no HV-class net has a via. All 209 board vias resized; netclass defaults set to 0.45/0.25; custom rule "via annular" (0.10 mm, vias only) keeps the 0.15 mm Board Setup minimum for PTH pads.
+
 Design rules (Board Setup > Constraints): min clearance 0.10, track 0.10, connection 0.10, annular 0.15, via diameter 0.45, through hole 0.20, hole to hole 0.45, copper to hole 0.30, copper to edge 0.30, mask expansion 0, mask min web 0.10, mask to copper 0.09, silk text 1.0 / 0.15 mm, silk to pad 0.15, courtyard overlap = error, vias tented.
 
 | Class | Track | Clearance | Via | Diff width / gap | Nets |
 |---|---|---|---|---|---|
-| Default | 0.15 | 0.15 | 0.6 / 0.3 | - | all others (LVDS_DBG_P/N included) |
-| HV | 0.30 | 1.0 | 0.6 / 0.3 | - | /APD_BIAS, /Front End/HV_K, /Power/HV_OUT, HV_CLAMP, HV_RAW, HV_V1, HV_PUMP, Net-(D1-A) (the LT8365 SW node, swings to the stage-1 voltage every cycle) and Net-(D1-K) (D1 cathode to R7, stage-1 DC; both added 2026-10-14 after the first DRC with the HV class had missed them), and Net-(Q1-E), Net-(Q1-B), Net-(R17-Pad2) (clamp transistor nodes, within a few volts of HV; added conservatively, UNRESOLVED whether that is wanted). HV_MON, HV_DIS, DAC_HV, 5V_HVIN are low voltage and stay Default |
-| HV_LADDER | 0.30 | 0.6 | 0.6 / 0.3 | - | Net-(R20-Pad2) (HV_MON divider midpoint, R20/R32 4.99 M) and Net-(R10-Pad1), Net-(R10-Pad2), Net-(R8-Pad2) (FBX feedback divider R11/R10/R9/R8, 2.05 M each); steps of about 55 V, IPC-2221B 51-100 V band 0.6 mm |
-| DIFF90 | 0.145 | 0.15 | 0.6 / 0.3 | 0.145 / 0.15 | /Connector/LVDS_OUT1_P, _N, LVDS_OUT2_P, _N |
-| USB90 | 0.145 | 0.15 | 0.6 / 0.3 | 0.145 / 0.15 | */USB_DP, */USB_DN, */USB_ESD_DP, */USB_ESD_DN, */USB_E_DP, */USB_E_DN (last four added 2026-10-22; U61 -> R193/R194 was unnamed and the ESP32 side was USB_DP_E/USB_DN_E, neither ending in P/N) |
-| CAN90 | 0.145 | 0.15 | 0.6 / 0.3 | 0.145 / 0.15 | */CAN_P, */CAN_N |
-| DIFF100 | 0.11 | 0.15 | 0.6 / 0.3 | 0.11 / 0.15 | /LVDS_P, /LVDS_N (U20 to R180) |
+| Default | 0.15 | 0.15 | 0.45 / 0.25 | - | all others (LVDS_DBG_P/N included) |
+| HV | 0.30 | 1.0 | 0.45 / 0.25 | - | /APD_BIAS, /Front End/HV_K, /Power/HV_OUT, HV_CLAMP, HV_RAW, HV_V1, HV_PUMP, Net-(D1-A) (the LT8365 SW node, swings to the stage-1 voltage every cycle) and Net-(D1-K) (D1 cathode to R7, stage-1 DC; both added 2026-10-14 after the first DRC with the HV class had missed them), and Net-(Q1-E), Net-(Q1-B), Net-(R17-Pad2) (clamp transistor nodes, within a few volts of HV; added conservatively, UNRESOLVED whether that is wanted). HV_MON, HV_DIS, DAC_HV, 5V_HVIN are low voltage and stay Default |
+| HV_LADDER | 0.30 | 0.6 | 0.45 / 0.25 | - | Net-(R20-Pad2) (HV_MON divider midpoint, R20/R32 4.99 M) and Net-(R10-Pad1), Net-(R10-Pad2), Net-(R8-Pad2) (FBX feedback divider R11/R10/R9/R8, 2.05 M each); steps of about 55 V, IPC-2221B 51-100 V band 0.6 mm |
+| DIFF90 | 0.145 | 0.15 | 0.45 / 0.25 | 0.145 / 0.15 | /Connector/LVDS_OUT1_P, _N, LVDS_OUT2_P, _N |
+| USB90 | 0.145 | 0.15 | 0.45 / 0.25 | 0.145 / 0.15 | */USB_DP, */USB_DN, */USB_ESD_DP, */USB_ESD_DN, */USB_E_DP, */USB_E_DN (last four added 2026-10-22; U61 -> R193/R194 was unnamed and the ESP32 side was USB_DP_E/USB_DN_E, neither ending in P/N) |
+| CAN90 | 0.145 | 0.15 | 0.45 / 0.25 | 0.145 / 0.15 | */CAN_P, */CAN_N |
+| DIFF100 | 0.11 | 0.15 | 0.45 / 0.25 | 0.11 / 0.15 | /LVDS_P, /LVDS_N (U20 to R180) |
 
 Tuning profiles were not created (their JSON schema is not documented in the KiCad manual and has no example in these projects); create `Z90_diff` / `Z100_diff` in the GUI if wanted. KiCad pairs nets by name only for _P/_N and +/-. This was UNRESOLVED for CAN_H/CAN_L and USB_DP/USB_DM; resolved 2026-10-16 by renaming to CAN_P/CAN_N and USB_DN (USB_DP unchanged; no electrical change), so the interactive diff-pair router now recognises all of them (netclass patterns `*/CAN_P`, `*/CAN_N`, `*/USB_DP`, `*/USB_DN`; recognition in the router itself not yet exercised on these nets, PROPOSED). The DRC rules are netclass based so they apply either way.
 

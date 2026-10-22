@@ -160,7 +160,7 @@ Board thickness 1.6 mm, copper finish ENIG. Loss tangent is not published by JLC
 | Minimum track width | 0.10 mm | needed for 0.11 mm DIFF100 traces; JLCPCB 0.09 |
 | Minimum connection width | 0.10 mm | |
 | Minimum annular width | 0.15 mm | JLCPCB absolute minimum 0.15; recommended 0.20 for PTH pads (check the connector THT pads) |
-| Minimum via diameter | 0.45 mm | smaller costs more (CAP); project via 0.6/0.3 stays |
+| Minimum via diameter | 0.45 mm | smaller costs more (CAP); project via 0.45/0.25 on every net since 2026-10-22 (Daniel), several in parallel for power; custom rule "via annular" allows 0.10 mm on vias only |
 | Minimum through hole | 0.20 mm (component PTH >= 0.5 mm recommended) | CAP preferred minimum 0.2 mm |
 | Hole to hole clearance | 0.45 mm | CAP pad hole-to-hole 0.45 (via-to-via only 0.2) |
 | Copper to hole clearance | 0.30 mm | CAP inner PTH 0.3, PTH to track 0.28 |
@@ -181,12 +181,12 @@ KiCad 10 supports tuning profiles with per-layer width/gap and a calculator base
 
 | Class | Track | Clearance | Via (dia/drill) | Diff pair width/gap | Priority | Nets (pattern, hierarchical names carry a sheet prefix, so use wildcards) |
 |---|---|---|---|---|---|---|
-| Default | 0.15 | 0.15 | 0.6 / 0.3 | - | lowest | everything else |
-| HV | 0.30 | 1.0 (see below) | 0.6 / 0.3, avoid vias | - | 1 | `HV_*`, `*/HV_*`, `APD_BIAS`, plus HV_K, HV_OUT, HV_CLAMP, HV_V1, HV_RAW, HV_PUMP, HV_FILT (all match `HV_*`); `HV_MON` and `HV_DIS` are low-voltage monitor/control nets that the existing `HV_*` pattern also catches (UNRESOLVED: consider renaming or excluding them to avoid a 1.0 mm clearance on the ESP32 side) |
-| DIFF90 | - | 0.15 | 0.6 / 0.3 | 0.145 / 0.15 | 3 | `*LVDS_OUT1_P`, `*LVDS_OUT1_N`, `*LVDS_OUT2_P`, `*LVDS_OUT2_N` (SSTX pairs), and the CAN pairs at the connector end |
-| CAN90 | - | 0.15 | 0.6 / 0.3 | 0.145 / 0.15 | 3 | `*/CAN_P`, `*/CAN_N` |
-| USB90 | - | 0.15 | 0.6 / 0.3 | 0.145 / 0.15 | 3 | `*/USB_DP`, `*/USB_DN`, `*/USB_ESD_DP`, `*/USB_ESD_DN`, `*/USB_E_DP`, `*/USB_E_DN` (the last four added 2026-10-22: U61 -> R193/R194 and R193/R194 -> ESP32, renamed so the names end in P/N) |
-| DIFF100 | - | 0.15 | 0.6 / 0.3 | 0.11 / 0.15 | 3 | `LVDS_P`, `LVDS_N` (U20 to R180) |
+| Default | 0.15 | 0.15 | 0.45 / 0.25 | - | lowest | everything else |
+| HV | 0.30 | 1.0 (see below) | 0.45 / 0.25, avoid vias | - | 1 | `HV_*`, `*/HV_*`, `APD_BIAS`, plus HV_K, HV_OUT, HV_CLAMP, HV_V1, HV_RAW, HV_PUMP, HV_FILT (all match `HV_*`); `HV_MON` and `HV_DIS` are low-voltage monitor/control nets that the existing `HV_*` pattern also catches (UNRESOLVED: consider renaming or excluding them to avoid a 1.0 mm clearance on the ESP32 side) |
+| DIFF90 | - | 0.15 | 0.45 / 0.25 | 0.145 / 0.15 | 3 | `*LVDS_OUT1_P`, `*LVDS_OUT1_N`, `*LVDS_OUT2_P`, `*LVDS_OUT2_N` (SSTX pairs), and the CAN pairs at the connector end |
+| CAN90 | - | 0.15 | 0.45 / 0.25 | 0.145 / 0.15 | 3 | `*/CAN_P`, `*/CAN_N` |
+| USB90 | - | 0.15 | 0.45 / 0.25 | 0.145 / 0.15 | 3 | `*/USB_DP`, `*/USB_DN`, `*/USB_ESD_DP`, `*/USB_ESD_DN`, `*/USB_E_DP`, `*/USB_E_DN` (the last four added 2026-10-22: U61 -> R193/R194 and R193/R194 -> ESP32, renamed so the names end in P/N) |
+| DIFF100 | - | 0.15 | 0.45 / 0.25 | 0.11 / 0.15 | 3 | `LVDS_P`, `LVDS_N` (U20 to R180) |
 | LVDS (existing) | 0.2 | 0.2 | | | | `LVDS_*` currently catches all LVDS nets; narrow it to avoid overriding the classes above, or give DIFF90/DIFF100 higher priority (lower number) than LVDS. `LVDS_DBG_P/N` (U50 3Y/3Z to J51 scope header) is not an impedance-controlled run in the spec: leave on LVDS/Default (PROPOSED) |
 
 HV clearance: IPC-2221 Table 6-1 (secondary reproduction, IPC), band 171-250 V: B1 internal 0.2 mm; B2 external uncoated up to 3050 m 1.25 mm; B3 external uncoated above 3050 m 6.4 mm; B4 external with permanent polymer coating 0.4 mm; A5 conformal-coated assembly 0.4 mm; A6 uncoated component leads 0.8 mm; A7 0.4 mm. APD_BIAS at 220 V falls in this band. The project's 1.0 mm is above B4/A6 (solder-mask-covered traces, assembled leads) but BELOW B2 (1.25 mm) for exposed (unmasked) copper such as pads and test points. PROPOSED: keep the 1.0 mm netclass, and for HV pads and test points add the 1.25 mm rule in section 4.5 (or accept 1.0 mm with Daniel's explicit sign-off). This is a fabrication-spacing table, not a product-safety isolation standard (IEC 60664-1 would govern certified isolation); the creepage value for any user-accessible HV is UNRESOLVED. KiCad 10 also has a `creepage` DRC constraint (KM) if a creepage figure is later chosen.
