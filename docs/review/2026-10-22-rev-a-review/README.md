@@ -51,7 +51,7 @@ the board but should be settled before the headstage emitter is frozen.
 
 ### Schematic
 
-- **S1. R7 (20 ohm) is in series with D1, not in the pump-charge branch (orchestrator-verified).** **Status: schematic FIXED 2026-10-22** (D1 K to HV_V1, R7 between HV_V1 and the D3 anode, net `Net-(D3-A)` in the HV class; ERC 0/0); the board update is Daniel's (D3 or C7 must move for the 1.25 mm HV pad rule). LT8365 Rev. A p.30
+- **S1. R7 (20 ohm) is in series with D1, not in the pump-charge branch (orchestrator-verified).** **Status: FIXED 2026-10-22** (schematic dbb6539: D1 K to HV_V1, R7 between HV_V1 and the D3 anode, net `Net-(D3-A)` in the HV class, ERC 0/0; board 40262da by Daniel). Four 'hv pad clearance' items around C5/C7/D3/R7 remain to be cleared (PCB README). LT8365 Rev. A p.30
   and the DC2838A REV02 schematic both put the 20 ohm in series with the pump diode (V1 to D3); here it carries
   the full stage-1 inductor current, costing about 7 V of SW-pin margin to the 150 V abs max and leaving the
   pump branch undamped. apd-bias-design.md 3.2 itself says "Pump R (R8) 20 ohm as DC2838A R10", so this is a

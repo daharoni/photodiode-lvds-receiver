@@ -4143,7 +4143,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 			(at 266.7 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -4411,7 +4411,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 			(at 134.62 121.92 0)
 			(hide yes)
 			(show_name no)
@@ -4544,7 +4544,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:TestPoint_Plated_Hole_D1.0mm_interconnect"
+		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
 			(at 220.98 121.92 0)
 			(hide yes)
 			(show_name no)
