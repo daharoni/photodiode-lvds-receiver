@@ -387,7 +387,7 @@ a{color:#000;text-decoration:none}
 <tr><td>low (ESP32 drives it after verifying the DAC)</td><td>off</td><td>200k/200k divider gives 2.5 V at 5 V</td><td><b>ON</b></td></tr>
 </table></div>
 <ul>
-<li>Bench jumper J1 "HV FORCE ON" (DNP) ties the gate to GND, so HV is on regardless of firmware. Set the DAC first: with an unprogrammed DAC the bias goes to about 220 V.</li>
+<li>Bench jumper J1 "HV FORCE ON" (DNP) ties the gate to GND, so HV is on regardless of firmware. Set the DAC first: with an unprogrammed DAC the bias goes to about 220 V. Fit J1 only on a board whose firmware has already run once and provisioned the DAC EEPROM (decision 20).</li>
 <li>If 3V3_D is absent the gate floats and the HV state is <span class="t u">UNRESOLVED</span>. In practice 3V3_D comes up with the same 5 V rail that feeds the LT8365.</li>
 <li>The Q3 gate threshold and the EN/UVLO threshold were not rechecked against datasheets. <span class="t u">UNRESOLVED</span></li>
 </ul>
@@ -509,7 +509,7 @@ a{color:#000;text-decoration:none}
 <h3>5.3 When the ESP32 is not programmed</h3>
 <div class="callout"><ul>
 <li>TIA_CTRL floats and the pull-up gives <b>20k</b>. SHDN_N is pulled up so the comparator is on. The module decodes whatever light arrives.</li>
-<li><b>No APD bias</b> unless bench jumper J1 is fitted, because HV_DIS floats high through R33. With J1 fitted and an unprogrammed DAC the bias goes to about 220 V; firmware cannot prevent that.</li>
+<li><b>No APD bias</b> unless bench jumper J1 is fitted, because HV_DIS floats high through R33. With J1 fitted and an unprogrammed DAC the bias goes to about 220 V; firmware cannot prevent that, hence the rule that J1 goes on only after the first firmware boot (decision 20).</li>
 <li>DAC_TH comes up at the MCP4728 EEPROM default (0 V on every channel from the factory), a safe-default direction that is <span class="t u">UNRESOLVED</span> for DAC_TH.</li>
 </ul></div>
 
@@ -518,7 +518,7 @@ a{color:#000;text-decoration:none}
 <li>First instruction: write HV_DIS = 1, then enable the pin as an output. Read the reset reason; after a brown-out or watchdog reset HV stays off until a deliberate command.</li>
 <li>Load and clamp the stored parameters (hv_min at least 100 V, default hv_max 200 V, absolute 220 V).</li>
 <li>Recover and probe I2C. If the DAC or ADC is missing, HV stays off but console and CAN still start.</li>
-<li>Verify the MCP4728 EEPROM with the Read command (channel C must read VREF = VDD, code 0xFFF, minimum bias; channel B 0x800). The General Call Read named in older notes only returns address bits (DS22187E 5.4.4 p.32-33, <span class="t v">VERIFIED</span>). A guarded console command provisions the defaults.</li>
+<li>Verify the MCP4728 EEPROM with the Read command (channel C must read VREF = VDD, code 0xFFF, minimum bias; channel B 0x800). The General Call Read named in older notes only returns address bits (DS22187E 5.4.4 p.32-33, <span class="t v">VERIFIED</span>). If the EEPROM is blank (factory: code 0 on every channel) or wrong, the firmware provisions it at this step itself; there is no external I2C programming step (decision 20). A mismatch that survives the write is a DAC_EEPROM fault.</li>
 <li>Force live outputs to safe values, check the ADC with HV off (HV_MON should read about 0.05 V; more than 30 V of bias while disabled sets HV_STUCK).</li>
 <li>Read CC1/CC2 and watch for USB SOF, then start CAN in listen-only for 1.5 s or more to find the mode.</li>
 <li>HV stays off until commanded: console <code>hv on</code> (standalone), master <code>hv_cmd</code> over CAN, or a stored <code>hv_auto</code> flag with a heard master and no faults (default 0).</li>
@@ -883,6 +883,7 @@ a{color:#000;text-decoration:none}
 <tr><td>17</td><td class="n">2026-10-22</td><td>S12023 pinout corrected: pin 1 = anode, pin 3 = cathode (KAPDA0136EC bottom view); D10 rotated 180 degrees on the board. <span class="t v">VERIFIED</span></td><td>Active; standing correction 15</td></tr>
 <tr><td>18</td><td class="n">2026-10-22</td><td>R7 20 ohm moved from series with D1 into the pump-charge path (HV_V1 to D3 anode), as LT8365 p.30 R8 / DC2838A R10. <span class="t v">VERIFIED</span></td><td>Active</td></tr>
 <tr><td>19</td><td class="n">2026-10-22</td><td>DAC leg R14 442k to 150k: production bias range (pot leg DNP) 50-219 V from the DAC alone, LSB 41 mV, tempco unchanged; R15 (DNP) 274k to 1M. <span class="t p">PROPOSED</span> calculated</td><td>Active</td></tr>
+<tr><td>20</td><td class="n">2026-10-22</td><td>Blank MCP4728 (code 0 = maximum bias, -16 mV threshold) handled by the HV_DIS interlock plus firmware self-provisioning of the EEPROM at first boot; J1 only after that; ESP32 brownout level above the DAC POR. No hardware change, no external programming step. <span class="t p">PROPOSED</span></td><td>Active</td></tr>
 </table></div>
 
 <h3>11.2 The 15 standing corrections</h3>

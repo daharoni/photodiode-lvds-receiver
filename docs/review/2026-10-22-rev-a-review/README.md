@@ -62,7 +62,7 @@ the board but should be settled before the headstage emitter is frozen.
   166.5 V at 0 V and 106.6 V at 3.3 V (25 C). The "215 V hardware maximum" in the docs needs the pot leg fitted. A
   unit with VBR near 200 V cannot be biased. Decide the range requirement against the VBR bins, then either fit
   R15 plus a fixed divider or lower R14 and re-centre Rb, and re-run tools/apd_bias_design.py. [power-connector M2]
-- **S3. MCP4728 powers up at 0 V on every channel, which is the maximum-bias end (orchestrator-verified).** DS22187E
+- **S3. MCP4728 powers up at 0 V on every channel, which is the maximum-bias end (orchestrator-verified).** **Status: CLOSED 2026-10-22, decision 20** (no hardware: HV_DIS interlock already keeps HV off; firmware provisions the EEPROM itself at first boot, J1 only after that, brownout level above the DAC POR; firmware README numbers updated for decision 19). DS22187E
   Table 4-2 p.24: factory EEPROM is code 0, internal 2.048 V ref, normal mode, so DAC_HV = 0 V and DAC_TH = 0 V
   at power-up. apd-bias-design.md line 82 ("DAC pin Hi-Z at reset -> 135.9 V") is wrong for this part: a blank
   DAC gives about 167 V (pot DNP) or 215 V (pot fitted). The firmware already provisions the EEPROM before

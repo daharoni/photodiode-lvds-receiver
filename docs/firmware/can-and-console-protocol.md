@@ -143,7 +143,7 @@ The console is the ESP-IDF REPL on the USB CDC port (CONFIG_ESP_CONSOLE_USB_SERI
 | `identify [s]` | blink LED | (IDENTIFY) |
 | `serial set <n>`, `rev set <n>` | write-once identity | serial, board_rev |
 | `node set <1..14>` | CAN node ID | node |
-| `dac show` / `dac provision` | read MCP4728 input registers and EEPROM / program the power-on defaults (guarded, asks `dac provision confirm`) | |
+| `dac show` / `dac provision` | read MCP4728 input registers and EEPROM / re-run by hand the power-on-default write that boot step 4 does automatically (guarded, asks `dac provision confirm`) | |
 | `can stat` | TEC, REC, bus state, frames seen, master heartbeat age | |
 | `faults`, `faults clear` | list / clear | faults |
 | `reboot` | reset | reboot |
@@ -181,7 +181,7 @@ The CAN master (FPGA side) emits the same keys from the TLM frames so one dashbo
 |---|---|---|---|
 | 0 | I2C_DAC | MCP4728 NACK or readback mismatch | HV off |
 | 1 | I2C_ADC | ADS1115 NACK or conversion timeout | HV off |
-| 2 | DAC_EEPROM | EEPROM defaults not as expected at boot | HV stays off, no enable accepted |
+| 2 | DAC_EEPROM | EEPROM defaults still wrong after the boot-time provisioning write, or DAC POR bit seen while HV was on | HV stays off, no enable accepted |
 | 3 | HV_OVER | AIN0 x 101 above hv_max + 5 V | HV off |
 | 4 | HV_UNDER | bias did not reach target within the ramp timeout, or collapsed below 70 % of set | HV off |
 | 5 | HV_STUCK | bias above 20 V more than 30 s after HV_DIS was driven high (should have decayed; LT8365 output is not actively discharged) | none possible; report |

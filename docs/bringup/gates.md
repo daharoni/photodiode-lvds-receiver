@@ -37,6 +37,7 @@ Goal: show that the ESP32's slow trim (APD bias via DAC_HV, TIA_CTRL 20k/5k) hol
 - [ ] PRBS BER vs photocurrent at fixed settings: confirm the ~39 dB single-setting window and the clip-region behaviour
 - [ ] Trim-loop step response: light step of 10 dB up and down; time to valid frames; no oscillation between 20k/5k
 - [ ] APD M vs bias and temperature per unit; DAC_HV EEPROM default and HV_DIS gating verified
+- [ ] First boot of every board (decision 20): with a blank MCP4728 HV stays off; the firmware provisions the EEPROM itself (C = 0xFFF, B = 0x800, VREF = VDD) and self-test step 3 passes; J1 is never fitted before that
 
 ## G3: system-behaviour proof
 
