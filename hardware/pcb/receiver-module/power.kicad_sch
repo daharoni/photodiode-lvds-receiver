@@ -4305,12 +4305,6 @@
 		(uuid "58e5aa41-e1be-4ff9-9524-4565f25c72c6")
 	)
 	(junction
-		(at 203.2 149.86)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "5930b402-3b9a-4e33-8f46-ee700c8ec809")
-	)
-	(junction
 		(at 88.9 33.02)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4607,16 +4601,6 @@
 			(type default)
 		)
 		(uuid "1c3f8efd-ac04-41af-9246-8e437b8e4d07")
-	)
-	(wire
-		(pts
-			(xy 203.2 149.86) (xy 203.2 154.94)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1ce09acb-8da5-4ba8-9d42-a35983a20342")
 	)
 	(wire
 		(pts
@@ -4937,16 +4921,6 @@
 			(type default)
 		)
 		(uuid "5553dd29-13d6-4a87-b24f-7e27849a2cb1")
-	)
-	(wire
-		(pts
-			(xy 203.2 149.86) (xy 208.28 149.86)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "58717b70-f421-4e5e-b5e1-b26035ede1b5")
 	)
 	(wire
 		(pts
@@ -7391,6 +7365,118 @@
 		)
 	)
 
+	(wire
+		(pts
+			(xy 203.2 134.62) (xy 215.9 134.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4557ac53-9771-43d8-922c-89684858b7a7")
+	)
+	(junction
+		(at 203.2 134.62)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1f274e04-7f42-450f-8760-903937c13ab9")
+	)
+	(wire
+		(pts
+			(xy 203.2 149.86) (xy 205.74 149.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "92993b6c-d28f-45ee-b94e-f0d9c7c08371")
+	)
+	(wire
+		(pts
+			(xy 205.74 149.86) (xy 205.74 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8f30dbf6-45c6-41b4-b7c0-b7039bdb9420")
+	)
+	(wire
+		(pts
+			(xy 205.74 139.7) (xy 208.28 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c41b3e03-8168-4ba4-befe-ef339ffa376b")
+	)
+	(wire
+		(pts
+			(xy 215.9 144.78) (xy 215.9 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a2686288-4da6-4ae2-839a-66544a937e48")
+	)
+	(wire
+		(pts
+			(xy 215.9 147.32) (xy 208.28 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c935135c-9a0f-43fd-b8ee-09a0b0a7a8ca")
+	)
+	(wire
+		(pts
+			(xy 208.28 147.32) (xy 208.28 149.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3e30e9ac-5a84-48da-b9cc-2d38dea05a9d")
+	)
+	(wire
+		(pts
+			(xy 208.28 149.86) (xy 208.28 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "505ce2a0-196c-4dc9-a7c7-2265e2b9e0e5")
+	)
+	(wire
+		(pts
+			(xy 208.28 152.4) (xy 203.2 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7eb93324-1744-45d2-a65e-fdfa3b0695aa")
+	)
+	(wire
+		(pts
+			(xy 203.2 152.4) (xy 203.2 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9ec72774-c136-4c9b-b185-e3087c215a34")
+	)
+	(junction
+		(at 208.28 149.86)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9a42244c-2c96-41cf-a85f-9f87d473c07f")
+	)
 	(symbol
 		(lib_id "AharoniLab_Passive:R_Small_US")
 		(at 236.22 127 0)
@@ -8816,7 +8902,7 @@
 	)
 	(symbol
 		(lib_id "AharoniLab_Transistor:MMBTA42")
-		(at 200.66 144.78 0)
+		(at 213.36 139.7 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -8826,7 +8912,7 @@
 		(dnp no)
 		(uuid "0ef250f1-e467-43ec-bc3f-d0cda758e9b4")
 		(property "Reference" "Q1"
-			(at 205.74 142.88 0)
+			(at 218.44 137.8 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8837,7 +8923,169 @@
 			)
 		)
 		(property "Value" "MMBTA42"
-			(at 205.74 144.78 0)
+			(at 218.44 139.7 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "AharoniLab_Package_SOT:SOT-23"
+			(at 213.36 139.7 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/MMBTA42.pdf"
+			(at 213.36 139.7 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "NPN high-voltage transistor, 300V Vceo, 300V Vcbo, SOT-23 (pin 1 B, pin 2 E, pin 3 C)"
+			(at 213.36 139.7 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "Diodes Incorporated"
+			(at 213.36 139.7 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "MMBTA42-7-F"
+			(at 213.36 139.7 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Contributor" "Daniel Aharoni"
+			(at 213.36 139.7 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Validated" "No"
+			(at 213.36 139.7 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Source" "Diodes MMBTA42 datasheet DS30062 Rev. 15-2 (December 2025), top-view pinout B/E/C (SOT-23 pins 1/2/3); symbol graphics from KiCad Transistor_BJT Q_NPN_BEC"
+			(at 213.36 139.7 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "npn transistor high voltage 300v sot23 mmbta42"
+			(at 213.36 139.7 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "SOT?23*"
+			(at 213.36 139.7 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "9be0d77e-bc10-4579-b3ee-136e4a2a2bfa")
+		)
+		(pin "2"
+			(uuid "9bfe6829-6ddd-4af4-9c3c-066bbfbe1be9")
+		)
+		(pin "3"
+			(uuid "ba1a4e55-1a66-4f99-ab8f-550ff86ff5d8")
+		)
+		(instances
+			(project "receiver-module"
+				(path "/20237707-2fe5-41a5-bbd6-cb6c24e8ba32/f087ee84-7be7-4353-8fb4-af1df1a9d623"
+					(reference "Q1")
+					(unit 1)
+				)
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "AharoniLab_Transistor:MMBTA42")
+		(at 200.66 144.78 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "1e7ba1fe-573c-458e-84dc-1a1aed9ba2b9")
+		(property "Reference" "Q4"
+			(at 204.47 136.52 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "MMBTA42"
+			(at 204.47 138.43 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -8958,18 +9206,18 @@
 			)
 		)
 		(pin "1"
-			(uuid "9be0d77e-bc10-4579-b3ee-136e4a2a2bfa")
+			(uuid "e007d75a-2a5d-4ab9-929d-3967b3d12ae9")
 		)
 		(pin "2"
-			(uuid "9bfe6829-6ddd-4af4-9c3c-066bbfbe1be9")
+			(uuid "478988c3-f7a5-407f-bd75-a807f95a9656")
 		)
 		(pin "3"
-			(uuid "ba1a4e55-1a66-4f99-ab8f-550ff86ff5d8")
+			(uuid "a3f9c861-8dbd-42d0-9e44-04c1bcbed306")
 		)
 		(instances
 			(project "receiver-module"
 				(path "/20237707-2fe5-41a5-bbd6-cb6c24e8ba32/f087ee84-7be7-4353-8fb4-af1df1a9d623"
-					(reference "Q1")
+					(reference "Q4")
 					(unit 1)
 				)
 			)

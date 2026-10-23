@@ -342,6 +342,11 @@ def clamp():
             ok &= (ic + P['vout_max'] / P['rb_clamp'] < 200e-6) if t == -20 else (ic > P['i_apd_max'])
     chk("clamp passes 100 uA at +60 C and fault current < S12023 Ir max 200 uA at -20 C", ok, "see table (soft knee not modelled)")
     print(f"  Q1 fault dissipation = 220 V x ~{(P['vbe']/P['rs_clamp'])*1e6:.0f} uA = {P['vout_max']*P['vbe']/P['rs_clamp']*1e3:.0f} mW (SOT-23 class OK, ASM)")
+    print("  Base-feed drop at the APD side = Ic x Rb / hFE(eff) (+ Vbe per stage), invisible to HV_MON (review S5b; MMBTA42 hFE at 10-100 uA UNRESOLVED, 30 assumed):")
+    print("   Ic(uA)   single Q1 hFE 30   Darlington Q4+Q1 hFE 30x30 (decision 24)")
+    for ic in (1e-6, 10e-6, 60e-6, 100e-6):
+        print(f"   {ic*1e6:6.0f}   {ic*P['rb_clamp']/30:8.1f} V         {ic*P['rb_clamp']/900:6.2f} V  (+ 2 x Vbe = 1.2 V fixed)")
+    chk("Darlington base-feed drop at 60 uA <= 1 V above the fixed 2 x Vbe", 60e-6*P['rb_clamp']/900 <= 1.0, f"{60e-6*P['rb_clamp']/900:.2f} V")
 
 
 if __name__ == "__main__":

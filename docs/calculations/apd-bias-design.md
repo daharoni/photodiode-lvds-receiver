@@ -196,8 +196,15 @@ APD bias supply Rev A design check: Vin 5.0 V +/-5 %, Vout 140 V (100-220), Iloa
     85    0.480        120           142
   [PASS] clamp passes 100 uA at +60 C and fault current < S12023 Ir max 200 uA at -20 C: see table (soft knee not modelled)
   Q1 fault dissipation = 220 V x ~150 uA = 33 mW (SOT-23 class OK, ASM)
+  Base-feed drop at the APD side = Ic x Rb / hFE(eff) (+ Vbe per stage), invisible to HV_MON (review S5b; MMBTA42 hFE at 10-100 uA UNRESOLVED, 30 assumed):
+   Ic(uA)   single Q1 hFE 30   Darlington Q4+Q1 hFE 30x30 (decision 24)
+        1        0.3 V           0.01 V  (+ 2 x Vbe = 1.2 V fixed)
+       10        3.3 V           0.11 V  (+ 2 x Vbe = 1.2 V fixed)
+       60       20.0 V           0.67 V  (+ 2 x Vbe = 1.2 V fixed)
+      100       33.3 V           1.11 V  (+ 2 x Vbe = 1.2 V fixed)
+  [PASS] Darlington base-feed drop at 60 uA <= 1 V above the fixed 2 x Vbe: 0.67 V
 
-SUMMARY: 15/15 checks passed
+SUMMARY: 16/16 checks passed
 ```
 
 ## 6. Bill of materials, bias block (availability and price NOT CHECKED for every line)
@@ -228,6 +235,10 @@ Example MPNs marked (M p.4) are from the DC2838A parts list, (D p.N) from the LT
 | Q1, Q2 | HV NPN Vceo >= 300 V SOT-23; small-signal NPN | none (MMBTA42 / MMBT3904 class, from memory) | |
 | R_s,clamp, R_b,clamp | 4.02 k 1 %; 2 x 4.99 M 1 % | none | Iclamp ~149 uA at Vbe 0.6 V |
 | Shield, ferrite | can over U1/L1/D/C5-7; bead on 5 V | none | 6.63 MHz |
+
+## 6a. Clamp pass transistor as a Darlington (added 2026-10-22, review S5b, decision 24)
+
+Q1 (MMBTA42) carries the whole APD current and its base is fed only through Rb = 10 M (R17 + R18). The APD-side bias is HV_OUT - Ic x Rb / hFE - Vbe, and HV_MON is upstream of it. With hFE about 30 at tens of uA (MMBTA42 guarantees 40 only at 1 mA; the low-current value is UNRESOLVED) that is 3 V at 10 uA and 20 V at 60 uA, i.e. the bias collapses under the ambient light the filter lets through, and the firmware M estimate (from HV_MON) does not see it. Fix: Q4 (second MMBTA42) as an emitter follower driving Q1's base (Darlington): Rb now feeds Q4's base, Q2's collector pulls Q4's base (the 10 M node, net Net-(Q2-C)), and Q4's emitter drives Q1's base (Net-(Q1-B)). Effective gain about hFE^2, 900 assumed: 0.1 V at 10 uA, 0.7 V at 60 uA, plus a fixed 2 x Vbe = 1.2 V that the per-unit trim absorbs. Fault current unchanged (the limiter knee is still Vbe/R16 at Q2). Q4 carries only Ic/hFE, so its hFE at a few uA is lower; the 900 figure is an assumption, G1 item 3b measures the real drop. Rejected: lowering Rb (fault current through Rb adds to the clamp current and exceeds the APD's 200 uA maximum below about 3 M, and 3 M still leaves 6 V at 60 uA); a MOSFET source follower (no current-dependent drop, but a gate rated +/-20 V needs a gate-source Zener for the case of HV_OUT shorted while the cathode capacitors still hold 220 V, two new library parts, limiter loop not simulated) is the Rev B option if G1 shows the residual matters.
 
 ## 6b. Over-voltage limiter (added 2026-10-22, review S6, decision 23)
 

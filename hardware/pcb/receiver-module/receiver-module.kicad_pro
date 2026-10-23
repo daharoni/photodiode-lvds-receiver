@@ -732,6 +732,10 @@
         "netclass": "HV",
         "pattern": "Net-(Q1-B)"
       },
+        {
+        "netclass": "HV",
+        "pattern": "Net-(Q2-C)"
+      },
       {
         "netclass": "HV",
         "pattern": "Net-(R17-Pad2)"
