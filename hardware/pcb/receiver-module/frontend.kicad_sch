@@ -2087,7 +2087,7 @@
 		(uuid "86b59b51-1689-4e2f-91b5-e09a6764f291")
 	)
 	(junction
-		(at 220.98 114.3)
+		(at 231.14 114.3)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a529c0a0-1a85-459b-bd55-acee83bb36fd")
@@ -2188,7 +2188,7 @@
 	)
 	(wire
 		(pts
-			(xy 220.98 114.3) (xy 220.98 121.92)
+			(xy 231.14 114.3) (xy 231.14 121.92)
 		)
 		(stroke
 			(width 0)
@@ -4513,7 +4513,7 @@
 	)
 	(symbol
 		(lib_id "AharoniLab_Connector:TestPoint")
-		(at 220.98 121.92 0)
+		(at 231.14 121.92 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -4523,7 +4523,7 @@
 		(dnp no)
 		(uuid "33e6db6f-8cf9-4f59-ba25-23e47ba3ba85")
 		(property "Reference" "TP10"
-			(at 222.88 121.32 0)
+			(at 233.04 121.32 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4534,7 +4534,7 @@
 			)
 		)
 		(property "Value" "PA_OUT"
-			(at 222.88 122.82 0)
+			(at 233.04 122.82 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -4545,7 +4545,7 @@
 			)
 		)
 		(property "Footprint" "AharoniLab_Connector:TestPoint_Pad_1.0x1.0mm_interconnect"
-			(at 220.98 121.92 0)
+			(at 231.14 121.92 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4556,7 +4556,7 @@
 			)
 		)
 		(property "Datasheet" "https://github.com/Aharoni-Lab/kicad-lab-library"
-			(at 220.98 121.92 0)
+			(at 231.14 121.92 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4567,7 +4567,7 @@
 			)
 		)
 		(property "Description" "Test point, single pin; default footprint is the 1.0mm plated hole, SMD pad variants are in AharoniLab_Connector"
-			(at 220.98 121.92 0)
+			(at 231.14 121.92 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4578,7 +4578,7 @@
 			)
 		)
 		(property "Contributor" "Daniel Aharoni"
-			(at 220.98 121.92 0)
+			(at 231.14 121.92 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4589,7 +4589,7 @@
 			)
 		)
 		(property "Source" "KiCad official library (Connector: TestPoint), lab properties added"
-			(at 220.98 121.92 0)
+			(at 231.14 121.92 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4600,7 +4600,7 @@
 			)
 		)
 		(property "Validated" "No"
-			(at 220.98 121.92 0)
+			(at 231.14 121.92 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4611,7 +4611,7 @@
 			)
 		)
 		(property "ki_keywords" "test point tp probe"
-			(at 220.98 121.92 0)
+			(at 231.14 121.92 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4622,7 +4622,7 @@
 			)
 		)
 		(property "ki_fp_filters" "TestPoint*"
-			(at 220.98 121.92 0)
+			(at 231.14 121.92 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)

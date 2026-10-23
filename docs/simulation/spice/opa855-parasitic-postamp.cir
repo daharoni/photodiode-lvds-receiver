@@ -1,0 +1,38 @@
+* Sim 1 + layout parasitics (derived from sim1_postamp.cir, original untouched). Sim 1: OPA855 post-amp as drawn (Front End sheet, docs/schematic/frontend.md, gen/frontend.py)
+* Closed-loop AC (v(OUT), v(SDET_P)), loop gain (large-L/large-C break at IN-), transient steps.
+* Model: TI OPA855_A PSpice macromodel (SBOMB43), see docs/simulation/README.md.
+* Parts (frontend.md): R53=RF 301 (FB to IN-), R54=RG 49.9 (IN- to PA_REF), R60 10 + C53 1u (PA_REF),
+*   C51 100n + R51 1k (input coupling/return), R56 49.9 + C54 47p (low-pass), C55 100n + R59 1k, 2 pF comparator input.
+* Source: OPA857 OUT as ideal source behind 25 ohm (R4 in the TI OPA857 model). VCM_REF ideal 1.65 V here.
+.param RF=301 RG=49.9 VAMP=-0.010 TR=20n TW=100n CP=0.5p CF=0
+* Review P3 parasitics: CP from IN- (pin 3 node) to ground and from OUT to ground; CF across R53 (stray).
+.include ../../research/downloads/spice-models/opa855/SBOMB43/opa855_pspice/opa855_a.lib
+VDD 3V3 0 3.3
+VCM VCM_REF 0 1.65
+* TIA_OUT idles at 1.83 V (OUTN); light on pulls it DOWN (OPA857 SBOS630D p.19), so steps are negative.
+Vsrc SRC 0 DC 1.83 AC 1 PWL(0 1.83 1u 1.83 {1u+TR} {1.83+VAMP} {1u+TR+TW} {1.83+VAMP} {1u+2*TR+TW} 1.83)
+Rsrc SRC TIA_OUT 25
+C51 TIA_OUT PA_IN 100n
+R51 PA_IN VCM_REF 1k
+R60 VCM_REF PA_REF 10
+C53 PA_REF 0 1u
+XU11 PA_IN INM OUT 3V3 0 OPA855
+R53 OUT INM {RF}
+R54 INM PA_REF {RG}
+CPIN INM 0 {CP}
+CPOUT OUT 0 {CP}
+CF53 OUT INM {CF}
+R56 OUT LP 49.9
+C54 LP 0 47p
+C55 LP SDET_P 100n
+R59 SDET_P VCM_REF 1k
+CCMP SDET_P 0 2p
+.control
+op
+print v(out) v(pa_in) v(sdet_p)
+ac dec 200 1k 20G
+wrdata par_ac_out.txt v(out) v(sdet_p)
+tran 0.02n 1.35u 0.9u
+wrdata par_tran_out.txt v(out) v(sdet_p)
+.endc
+.end

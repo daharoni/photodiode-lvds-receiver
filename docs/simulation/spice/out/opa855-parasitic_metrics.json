@@ -1,0 +1,98 @@
+{
+ "cp0_cf0": {
+  "CP_pF": 0.0,
+  "CF_pF": 0.0,
+  "PM_deg": 77.1,
+  "fc_GHz": 1.039,
+  "passband_dB": 16.7,
+  "peaking_dB": 0.1,
+  "f_peak_MHz": 128.0,
+  "f3dB_GHz": 2.127,
+  "Ms_peak_dB": 7.84,
+  "overshoot_0.2ns_pct": 3.2
+ },
+ "cp0.3_cf0": {
+  "CP_pF": 0.3,
+  "CF_pF": 0.0,
+  "PM_deg": 76.1,
+  "fc_GHz": 1.042,
+  "passband_dB": 16.7,
+  "peaking_dB": 0.13,
+  "f_peak_MHz": 276.0,
+  "f3dB_GHz": 3.094,
+  "Ms_peak_dB": 8.02,
+  "overshoot_0.2ns_pct": 3.4
+ },
+ "cp0.5_cf0": {
+  "CP_pF": 0.5,
+  "CF_pF": 0.0,
+  "PM_deg": 75.4,
+  "fc_GHz": 1.044,
+  "passband_dB": 16.7,
+  "peaking_dB": 0.37,
+  "f_peak_MHz": 853.0,
+  "f3dB_GHz": 2.822,
+  "Ms_peak_dB": 8.08,
+  "overshoot_0.2ns_pct": 6.6
+ },
+ "cp1.0_cf0": {
+  "CP_pF": 1.0,
+  "CF_pF": 0.0,
+  "PM_deg": 73.7,
+  "fc_GHz": 1.047,
+  "passband_dB": 16.7,
+  "peaking_dB": 1.79,
+  "f_peak_MHz": 1111.0,
+  "f3dB_GHz": 2.385,
+  "Ms_peak_dB": 8.01,
+  "overshoot_0.2ns_pct": 16.6
+ },
+ "cp0_cf0.1": {
+  "CP_pF": 0.0,
+  "CF_pF": 0.1,
+  "PM_deg": 86.3,
+  "fc_GHz": 1.062,
+  "passband_dB": 16.7,
+  "peaking_dB": 0.08,
+  "f_peak_MHz": 92.0,
+  "f3dB_GHz": 1.321,
+  "Ms_peak_dB": 7.53,
+  "overshoot_0.2ns_pct": 2.0
+ },
+ "cp0.3_cf0.1": {
+  "CP_pF": 0.3,
+  "CF_pF": 0.1,
+  "PM_deg": 85.3,
+  "fc_GHz": 1.065,
+  "passband_dB": 16.7,
+  "peaking_dB": 0.09,
+  "f_peak_MHz": 111.0,
+  "f3dB_GHz": 1.603,
+  "Ms_peak_dB": 8.0,
+  "overshoot_0.2ns_pct": 2.7
+ },
+ "cp0.5_cf0.1": {
+  "CP_pF": 0.5,
+  "CF_pF": 0.1,
+  "PM_deg": 84.6,
+  "fc_GHz": 1.067,
+  "passband_dB": 16.7,
+  "peaking_dB": 0.1,
+  "f_peak_MHz": 135.0,
+  "f3dB_GHz": 1.835,
+  "Ms_peak_dB": 8.23,
+  "overshoot_0.2ns_pct": 3.4
+ },
+ "cp1.0_cf0.1": {
+  "CP_pF": 1.0,
+  "CF_pF": 0.1,
+  "PM_deg": 82.9,
+  "fc_GHz": 1.071,
+  "passband_dB": 16.7,
+  "peaking_dB": 0.43,
+  "f_peak_MHz": 769.0,
+  "f3dB_GHz": 2.216,
+  "Ms_peak_dB": 8.61,
+  "overshoot_0.2ns_pct": 5.8
+ }
+}

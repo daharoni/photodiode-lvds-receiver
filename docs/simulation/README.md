@@ -114,7 +114,7 @@ Loop gain at 10 Hz is about 123 dB. VCM_REF moves by about 1 % of the injected 1
 ## Limitations (all sims)
 
 - Vendor macromodels, not silicon: bandwidth, slew, overdrive, output swing and bias polarity are what TI modelled (the OPA855 low limit and bias sign differ from the datasheet, see issues 2 and 3). No temperature or tolerance sweeps (RF/RG/C at 1 %, C at 10-20 %); no corner models.
-- No PCB parasitics, no package parasitics on FB/IN-, no pad capacitance, ideal supplies and ideal VCM_REF (Sims 1, 2), ideal 3.3 V supply (Sim 3). The OPA855's recommended FB-to-IN- layout (SBOS622D p.17, p.29) is not represented.
+- No PCB parasitics in Sims 1-3 (lumped 0.3 to 1.0 pF on the OPA855 IN- and OUT are covered in the review-P3 section below), no package parasitics on FB/IN-, no pad capacitance, ideal supplies and ideal VCM_REF (Sims 1, 2), ideal 3.3 V supply (Sim 3). The OPA855's recommended FB-to-IN- layout (SBOS622D p.17, p.29) is not represented as geometry.
 - Sim 1 source is an ideal source behind 25 ohm: the real OPA857 output impedance, the R58 tap, the RSSI diode and the OPA855's own input capacitance (0.6 pF CM, 0.2 pF diff per datasheet) are not in the loop. The cascade OPA857 -> C51 -> OPA855 was not simulated end to end.
 - Photodiode model in Sim 2 is capacitance only; no APD multiplication noise, dark current, series resistance or optical rise/fall beyond the 2 ns edges.
 - Sim 3 settling numbers depend on the OPA320 model's output stage and on the 1 k loads; real return currents are microamps.
@@ -124,3 +124,35 @@ Loop gain at 10 Hz is about 123 dB. VCM_REF moves by about 1 % of the injected 1
 
 - No end-to-end TIA -> post-amp -> comparator simulation, no noise or BER, no TLV3605 model (none obtained).
 - No fix for the OPA855 AC polarity quirk; a PSpice/TINA run of the same netlist would settle whether it is ngspice-specific.
+- Review P3: the parasitic values are the reviewer's hand estimates, not extracted from the board; no trace inductance or delay; the 2 ns system edges were not re-run with parasitics.
+
+## OPA855 with layout parasitics (review P3, 2026-10-22)
+
+Status: **PROPOSED (simulated, not measured)**. Same TI OPA855 Rev A macromodel, circuit and loop probe as Sim 1 (RF 301 / RG 49.9, gain 7.03), with lumped capacitors added: CP from the IN- pin node to ground and CP from OUT to ground (same value on both, a hand estimate from the review, not extracted from the board), and optionally CF = 0.1 pF across R53 (stray). The review (docs/review/2026-10-22-rev-a-review/README.md P3) asks for this because the board has no plane window under IN-, FB and OUT, contrary to the OPA855 layout guidance (SBOS622D section 9.4.1, Fig. 9-12), and the review's hand estimate was 10 to 15 degrees of phase-margin loss. CP sits on the op-amp side of the loop break. Metric: PM = 180 - |angle of T at |T| = 1|, with the lower-confidence caveat of issue 1 above (ngspice AC polarity quirk); peaking and -3 dB are on v(OUT) closed loop relative to 100 kHz (the closed-loop magnitude was checked against transient in Sim 1); overshoot is a 10 mV step with 0.2 ns edges (stress case) at OUT, Sim 1b method.
+
+| CP (IN- and OUT) | CF across R53 | PM | T crossover | OUT closed-loop peaking | OUT -3 dB | overshoot, 0.2 ns edges |
+|---|---|---|---|---|---|---|
+| 0 (baseline = Sim 1) | 0 | 77.1 deg | 1.04 GHz | 0.10 dB @ 128 MHz | 2.13 GHz | 3.2 % |
+| 0.3 pF | 0 | 76.1 deg | 1.04 GHz | 0.13 dB @ 276 MHz | 3.09 GHz | 3.4 % |
+| 0.5 pF | 0 | 75.4 deg | 1.04 GHz | 0.37 dB @ 853 MHz | 2.82 GHz | 6.6 % |
+| 1.0 pF | 0 | 73.7 deg | 1.05 GHz | 1.79 dB @ 1.11 GHz | 2.39 GHz | 16.6 % |
+| 0 | 0.1 pF | 86.3 deg | 1.06 GHz | 0.08 dB | 1.32 GHz | 2.0 % |
+| 0.3 pF | 0.1 pF | 85.3 deg | 1.07 GHz | 0.09 dB | 1.60 GHz | 2.7 % |
+| 0.5 pF | 0.1 pF | 84.6 deg | 1.07 GHz | 0.10 dB | 1.84 GHz | 3.4 % |
+| 1.0 pF | 0.1 pF | 82.9 deg | 1.07 GHz | 0.43 dB | 2.22 GHz | 5.8 % |
+
+Reading (all SIMULATED, model-limited):
+
+- In this model 0.5 pF on IN- and OUT costs about 1.7 degrees of PM (77.1 to 75.4), and 1.0 pF about 3.4 degrees; the review's 10 to 15 degree hand estimate is not reproduced. The loop crossover barely moves (about 1.04 GHz) because the capacitors load a low-impedance feedback node (RF || RG about 43 ohm) and a 25 ohm-class output; |T| flattens at about -4 dB between 2 and 3 GHz and does not recross 0 dB in any case.
+- The visible effect is closed-loop peaking in the 0.8 to 1.1 GHz region: 0.37 dB at 0.5 pF and 1.8 dB at 1.0 pF, and a 0.2 ns-edge overshoot of 6.6 % and 16.6 % (3.2 % baseline). At the 2 ns-class edges this system actually sees (Sim 1b) the effect would be far smaller; that was not re-run here. Downstream, the 68 MHz R56/C54 low-pass removes this peaking from the comparator input, so the practical consequence is margin and not eye shape (reasoning, not simulated).
+- CF = 0.1 pF across R53 adds PM (to about 85 deg at 0.5 pF) and removes the peaking, at the cost of OUT bandwidth (-3 dB 1.3 to 2.2 GHz, still far above the 68 MHz low-pass). It is a feedback-zero effect: it helps only if the real stray value is near 0.1 pF; the case is a bounding check, not a prediction, and should not be relied on as margin.
+- Limits: lumped C only, no layout inductance or trace delay, no OPA855 package/pad capacitance beyond the macromodel (which has none, see the provenance table), ideal VCM_REF, ideal source behind 25 ohm. The OPA855 margin measured on the board (G1, small-signal and step at the post-amp output, with TP10 stub and without) is still required; nothing here is measured.
+
+Files: decks `spice/opa855-parasitic-postamp.cir` (closed-loop AC and transient) and `spice/opa855-parasitic-loop.cir` (loop gain), parameters CP and CF; `spice/run_opa855_parasitic.sh` (sweep), `spice/analyze_opa855_parasitic.py` (metrics to `spice/out/opa855-parasitic_metrics.json`); plots [AC and loop gain](plots/opa855-parasitic-ac.png), [step](plots/opa855-parasitic-step.png). The Sim 1 decks are unmodified.
+
+Commands (from `docs/simulation/spice`, venv python with numpy and matplotlib):
+
+```
+./run_opa855_parasitic.sh
+python -I analyze_opa855_parasitic.py
+```

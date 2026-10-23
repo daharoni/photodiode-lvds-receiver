@@ -10,7 +10,7 @@ Hierarchical pins: in APD_BIAS, 3V3, TIA_CTRL, VCM_REF; out SDET_P, TIA_TAP. SDE
 3. Coupling: C51 100n from TIA_OUT to PA_IN, R51 1k to VCM_REF (corner 1.6 kHz, 100 us). TIA_TAP = TIA_OUT through R58 1k. TIA_REF (OUTN) goes only to TP12.
 4. OPA855 (U11), non-inverting, gain 1 + R53/R54 = 1 + 301/49.9 = 7.03. IN+ = PA_IN; RF R53 between FB (pin 1) and IN- (pin 3), drawn as a loop over the top; RG R54 from IN- to PA_REF; OUT (6) drives the load. PA_REF = VCM_REF through R60 10 ohm with C53 1u to GND. VS+ (7) = 3V3 with C52 100n 0402 + C58 1u 0603; VS- (5) and EP (9) = GND; PD (8) = 3V3 directly.
 5. Low-pass: R56 49.9 + C54 47p = 68 MHz (PROPOSED; research asks 60-80 MHz).
-6. C55 100n to SDET_P, R59 1k to VCM_REF. TP10 PA_OUT, TP11 SDET_P, TP12 TIA_REF.
+6. C55 100n to SDET_P, R59 1k to VCM_REF. TP10 PA_OUT on LPF_OUT since 2026-10-22 (decision 27: moved off the OPA855 output node so the probe pad does not load it; hand edit, ERC 0/0), TP11 SDET_P, TP12 TIA_REF.
 
 ## Datasheet facts that set values
 - VERIFIED OPA855 p.17 (8.3.2, Fig. 8-4): FB (pin 1) is internally connected to the amplifier output; the feedback resistor goes between FB and IN- on the same side of the package; NC pin 2 must stay floating. OUT drives the load (the FB and OUT pins are two different external nets). Fig. 8-1 (p.16): non-inverting gain (1 + RF/RG) referenced to VREF.
@@ -29,7 +29,7 @@ Hierarchical pins: in APD_BIAS, 3V3, TIA_CTRL, VCM_REF; out SDET_P, TIA_TAP. SDE
 
 ## Pin to net (kicad-cli netlist of a scratch root; hierarchical nets show as local names)
 U10 OPA857: 1, 3, 4, 6, 7, 12 GND; 17 PAD GND; 2 CTRL = Net-(JP10-C) (R57 to 3V3); 5 OUTN = Net-(U10-OUTN) (TP12); 8 OUT = Net-(U10-OUT) (C51, R58); 9, 10, 11 VS+ = 3V3; 13 GND; 14 3V3; 15 IN = TIA_IN; 16 NC open.
-U11 OPA855: 1 FB = Net-(U11-FB) (R53 pin 2); 2 NC open; 3 IN- = Net-(U11-IN-) (R53 pin 1, R54 pin 2); 4 IN+ = PA_IN; 5 VS- GND; 6 OUT = Net-(U11-OUT) (TP10, R56); 7 VS+ = 3V3; 8 PD = 3V3; 9 EP GND.
+U11 OPA855: 1 FB = Net-(U11-FB) (R53 pin 2); 2 NC open; 3 IN- = Net-(U11-IN-) (R53 pin 1, R54 pin 2); 4 IN+ = PA_IN; 5 VS- GND; 6 OUT = Net-(U11-OUT) (R56 only; TP10 is on LPF_OUT since decision 27); 7 VS+ = 3V3; 8 PD = 3V3; 9 EP GND.
 D10: 1 A = TIA_IN; 2 CASE = GND; 3 K = HV_K. (D10 pinout corrected 2026-10-22: KAPDA0136EC pin diagram (bottom view) has pin 1 = anode, pin 3 = cathode; the lab-library symbol had them swapped (lab-library branch `fix-s12023-pinout`, commit 1cfe5d7). On the board D10 is rotated 180 degrees about the can axis so the anode pad stays next to U10; the index tab now points to the lower right, toward the TIA.)
 
 ## ERC (scratch copy of the whole directory, old root)

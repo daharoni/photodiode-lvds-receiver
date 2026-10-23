@@ -113,7 +113,12 @@ the board but should be settled before the headstage emitter is frozen.
   4.5 mm from the pins, and TP10 hangs a 2.5 mm stub plus a 1 mm pad on OUT ahead of R56.** Hand estimate: 0.3 to
   0.5 pF on IN- and OUT, maybe 10 to 15 degrees of the 77 degrees simulated phase margin (not simulated). Fix:
   small no-fill rule area under pins 1-4 and 6, R53/R54 within 1.5 mm, TP10 moved behind R56; re-run the OPA855
-  stability sim with 0.5 pF added. [fastpath M3]
+  stability sim with 0.5 pF added. [fastpath M3] **Status: FIXED 2026-10-22, decision 27.** Sim first
+  (docs/simulation/README.md, "OPA855 with layout parasitics"): 0.5 pF on IN- and OUT costs 1.7 degrees of PM
+  (77.1 to 75.4), 1.0 pF 3.4 degrees; the effect is 1 GHz peaking the 68 MHz low-pass hides, so the 10 to 15 degree
+  estimate is not reproduced. Layout anyway: U11 rotated 270 degrees so the input pins face R53/R54 (FB 1.38 mm,
+  IN- node 3.15 mm), R56/C54/C52 moved to the output side, two no-pour windows on all layers, TP10 moved to
+  LPF_OUT in the schematic and placed on that run. DRC 52, parity clean, ERC 0/0.
 - **P4. Net-(Q1-B) (clamp base, within about 1 V of APD_BIAS) has 3 vias and 10.1 mm on In2**, contradicting the
   README "no HV-class net has a via". Re-route on F.Cu (room along y 3.4 to 5.8) or record the exception.
   [fastpath M4]
