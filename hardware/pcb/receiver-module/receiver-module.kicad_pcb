@@ -274,12 +274,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "4e6435c0-54a4-4044-990c-1ca36945c1d2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "36f1f268-9f0c-4ea1-be56-c910da094e3d")
+			(uuid "456aa378-b72b-4fa6-a3fb-6c28b248a3ab")
 			(effects
 				(font
 					(size 1 1)
@@ -469,12 +482,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "af7ffccc-8e99-45cb-b534-aafae9b1c3cf")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "66f7d1b8-8dab-42a4-bd2a-aa2e9fdc366a")
+			(uuid "13c1414e-0d08-45b5-b000-236e6f6e2374")
 			(effects
 				(font
 					(size 1 1)
@@ -664,12 +690,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1e654952-9272-49ed-acb2-324fe01c166e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "3f69ca21-120c-4d29-a765-8517e7f62f9a")
+			(uuid "847e2e56-cda5-4a8e-975e-990a0fbc13d2")
 			(effects
 				(font
 					(size 1 1)
@@ -859,12 +898,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a03ccd15-f6e6-4944-bdda-fc8205db5a51")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "9cb4b5b7-40b1-417d-a483-7eac650760c2")
+			(uuid "11b1d321-f316-4bc6-879a-5b0cb2313de5")
 			(effects
 				(font
 					(size 1 1)
@@ -1054,12 +1106,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b2033235-67d8-410b-9374-1280cbe27c0d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "eda76ebc-137f-4154-ae2f-a8092c67a03d")
+			(uuid "401b1fa2-cdaf-4367-b3a2-dbd7fd941c86")
 			(effects
 				(font
 					(size 1 1)
@@ -1249,12 +1314,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "fc7540eb-70dd-4543-bc19-77142eb936bb")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "0458578f-9b09-4133-bb95-fe0e9465978c")
+			(uuid "f052adde-6fbc-4041-b410-c386877da38b")
 			(effects
 				(font
 					(size 1 1)
@@ -1483,6 +1561,19 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "*PowerDI?123*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a46d9e97-920f-4778-ae07-ff2b09f23c23")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "*PowerDI?123*")
 		(path "/f087ee84-7be7-4353-8fb4-af1df1a9d623/67b9ac28-990d-446f-a3e8-9a0ce0e9e9ee")
 		(sheetname "/Power/")
@@ -1682,6 +1773,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "0064cca3-67b0-4f15-8901-c4994c353034")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ca30eb5c-be32-4bff-97bb-0acab4defee0")
 			(effects
 				(font
 					(size 1 1)
@@ -1897,6 +2001,19 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "LED* LED_SMD:* LED_THT:*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "06e7924c-e14d-4f49-8457-03882e44c144")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "LED* LED_SMD:* LED_THT:*")
 		(path "/9c1b5363-b8fe-46ae-a030-8579ae40f325/54aa79ad-162c-4f37-8d8f-cc30dba41f7f")
 		(sheetname "/Controller/")
@@ -2094,6 +2211,19 @@
 				)
 			)
 		)
+		(property "Validated" "No"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2d49f7b4-2afb-4971-aee8-442c8de8cdcf")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "Contributor" "Daniel Aharoni"
 			(at 0 0 0)
 			(unlocked yes)
@@ -2113,19 +2243,6 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "02ec4ce4-da74-430f-bb15-20ee4c66fdd7")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Validated" "No"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "2d49f7b4-2afb-4971-aee8-442c8de8cdcf")
 			(effects
 				(font
 					(size 1 1)
@@ -2373,12 +2490,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "fd76ce41-24b3-4d27-aec5-bb1204f5e174")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "b82038ce-506d-4645-a74e-66a264730f6e")
+			(uuid "7f273a4a-ba4e-4a91-8d72-13e778053950")
 			(effects
 				(font
 					(size 1 1)
@@ -2568,12 +2698,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6a65a09a-5e41-483b-8c27-c55ad5b71e12")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "9d3a5adb-3843-4eb0-95b7-c3acdb7b785a")
+			(uuid "5bf2f798-3679-4983-bafe-f7712b3d22c8")
 			(effects
 				(font
 					(size 1 1)
@@ -2763,12 +2906,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e4a17123-f6ba-4a66-8185-ccecf4b3b17a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "94bc4c88-b5ae-4480-92ea-f2ca2395d9ce")
+			(uuid "348b61b5-9ace-4a9b-ad5f-81d9a8060714")
 			(effects
 				(font
 					(size 1 1)
@@ -2958,12 +3114,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a8164071-eb91-47fa-9115-04033eff2bfe")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "d7572d84-4d89-4e74-a6d8-338bd7c9817b")
+			(uuid "fdda1bb5-c5d7-4989-9c4a-e498c456e990")
 			(effects
 				(font
 					(size 1 1)
@@ -3153,12 +3322,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b1a79771-d994-4019-ac0e-f74e8b595a6f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "2509cfd2-4d85-4603-9285-b657831cc633")
+			(uuid "8f7f39c7-9390-4c75-81ea-45720c27f09f")
 			(effects
 				(font
 					(size 1 1)
@@ -3830,6 +4012,19 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e17cc4a0-3620-43c5-98c1-956b43e73285")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/9c1b5363-b8fe-46ae-a030-8579ae40f325/3ccc8848-a7d1-4de6-b3af-c8a7cba5b08e")
 		(sheetname "/Controller/")
@@ -3960,12 +4155,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "59e802b6-185e-4890-a0af-8ea9072f2110")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "a4b139e7-eb07-47da-9a86-4765aba84428")
+			(uuid "579c003f-f84e-48da-bcc8-ad8cf2eaaf34")
 			(effects
 				(font
 					(size 1 1)
@@ -4155,12 +4363,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9f8ac7f3-5fd8-44d2-94f5-93019cd32974")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "d5523c0e-375d-487d-b9e8-abaf3906a928")
+			(uuid "00bf2ef0-a098-49c4-a256-3c52c9e82e53")
 			(effects
 				(font
 					(size 1 1)
@@ -4350,12 +4571,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "0410d2e8-d19e-4a2a-82c1-5014ce6add38")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "cf94566e-2597-425d-a936-98c5ab3dca69")
+			(uuid "3c6bdc02-3b31-4e2e-a3ca-142e74ad6129")
 			(effects
 				(font
 					(size 1 1)
@@ -4545,12 +4779,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "27ddbb0f-c20a-4ba2-8aee-26a2671919c5")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "f642a0fd-3cf5-45cc-b640-35b5c7d06bcf")
+			(uuid "3429a0d9-3cbb-4234-a148-3a1d50d3d8cb")
 			(effects
 				(font
 					(size 1 1)
@@ -4740,12 +4987,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3f9cd1b1-98e4-4fbd-a78a-8c75015ad171")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "a58942c2-33db-48dc-b64a-68df7fcdd3ab")
+			(uuid "7bb16c99-0360-447e-8d9e-7e9e2f2d1686")
 			(effects
 				(font
 					(size 1 1)
@@ -5421,12 +5681,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3b3a845d-eb00-4474-8359-6913b793c53b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "4e5fc434-2880-46a7-a010-98de78d0be79")
+			(uuid "31fd7005-4ab5-44e0-be7b-0f8afbbcf6c4")
 			(effects
 				(font
 					(size 1 1)
@@ -5616,12 +5889,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "4399c6b7-5404-4019-b8d0-fb994fd65036")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "49c07c68-b64d-421a-aa23-23980d5144ab")
+			(uuid "1ac256b8-cdb8-4242-a0c3-4fb056d32433")
 			(effects
 				(font
 					(size 1 1)
@@ -5811,12 +6097,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "184ee0b8-b209-437c-ad6c-4f33b521cf11")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "5314b807-03ab-4e9a-b7ce-108c5bd3c0b6")
+			(uuid "1d20e997-ed62-4099-b827-ada8cf2aa895")
 			(effects
 				(font
 					(size 1 1)
@@ -6040,6 +6339,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "7320e9bd-5179-4bb4-8923-fd9ef12c83bc")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "ki_fp_filters" "*MSOP*16*EP*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6e44559c-c0b9-44e5-a762-8c62cc2309f4")
 			(effects
 				(font
 					(size 1 1)
@@ -6385,12 +6697,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a01f5b7c-c7a3-4377-84cc-2c106a01ee13")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "1a5069c8-21ff-4e66-b791-8df11e738a11")
+			(uuid "362df8c1-2533-4eee-8037-3d4dae1a09a1")
 			(effects
 				(font
 					(size 1 1)
@@ -6598,6 +6923,19 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6659fb9c-179b-4d89-ac86-84cc765d06e2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/0c318e1c-a27e-42fc-ba78-2292a9a0a0c3/3986d5b3-6abb-4a83-b658-9f5c1408665f")
 		(sheetname "/Connector/")
@@ -6734,6 +7072,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "79e72250-a789-4bf0-a42c-6ee943eb889f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "66ba55de-46ba-4c50-910e-55d8fc898538")
 			(effects
 				(font
 					(size 1 1)
@@ -6923,12 +7274,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "124267ea-5f96-4705-b379-24c2f544552a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "0dcb27b4-0485-4e9c-9018-88936eb534d6")
+			(uuid "353596ae-ef56-4141-bb55-805759a39e3e")
 			(effects
 				(font
 					(size 1 1)
@@ -7118,12 +7482,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "928374b2-915f-4917-a4b8-741a587d0b88")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "dfa342aa-6205-4aba-b552-f642c16bf9c3")
+			(uuid "6bb9722b-e539-4ce6-9359-af62e3d2fafb")
 			(effects
 				(font
 					(size 1 1)
@@ -7326,6 +7703,19 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1e091660-f306-4b63-ab0f-a0ffd68960c2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "R_*")
 		(path "/f087ee84-7be7-4353-8fb4-af1df1a9d623/5f85ae22-3cbb-4553-a37f-786992032d97")
 		(sheetname "/Power/")
@@ -7508,12 +7898,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "86d3e945-2be7-4786-8281-64a98eefd95a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "044044f3-120c-423c-a8eb-c17b5a7d710d")
+			(uuid "c1ec608d-c0c0-4eb9-b788-9cbd232e2ab6")
 			(effects
 				(font
 					(size 1 1)
@@ -7721,6 +8124,19 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "181cdef7-1f24-493a-bbac-b7b6bff8fa0e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/0c318e1c-a27e-42fc-ba78-2292a9a0a0c3/66547ed5-41ae-4864-b89a-3e75dd9a2a7c")
 		(sheetname "/Connector/")
@@ -7851,12 +8267,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "Connector*:*_1x02_*"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6c3aa75d-c545-4c07-885e-8127da76f4da")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "connector pin header 1x02"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "052eae14-7b78-4b34-818a-1c5442d7f562")
+			(uuid "99ba1372-66eb-4b81-85d8-b7743afa8c91")
 			(effects
 				(font
 					(size 1 1)
@@ -8183,6 +8612,19 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "*TO-18*S12023*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "11d3894e-79fe-402d-84e2-586373523fbc")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "*TO-18*S12023*")
 		(path "/427881bb-fa50-4548-bcaf-90e7043b4c71/45f8798c-c907-49fc-b9ec-b24bc8961d31")
 		(sheetname "/Front End/")
@@ -8424,12 +8866,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e2397c90-c2dd-4e3e-86f2-b2b3a4c6f4ea")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "0e547c6f-82ff-40e4-ac96-cb9c8ad34fd4")
+			(uuid "a0d07759-dc80-4f52-a9ea-17f423450021")
 			(effects
 				(font
 					(size 1 1)
@@ -8630,6 +9085,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "4c8b22a7-e8b0-42d6-83c1-e42d50704650")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ec03fc7e-0461-49fe-af51-214290def9f7")
 			(effects
 				(font
 					(size 1 1)
@@ -9353,12 +9821,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "22312823-915c-4733-b4e7-84376931f26b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "cf711ad1-0907-4bb9-8ad8-7eaee59814fd")
+			(uuid "f253bd66-f21a-4e15-9b6d-5faff7cadf10")
 			(effects
 				(font
 					(size 1 1)
@@ -9548,12 +10029,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d6333dcc-01b3-4e3e-97b2-4a5a3973763c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "77e20a29-749c-49b7-98c5-419c03501d8a")
+			(uuid "84333899-c33d-4922-b494-62ffea8597f5")
 			(effects
 				(font
 					(size 1 1)
@@ -9743,12 +10237,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e155cfdc-aa67-43e6-b790-6b9b556083e7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "f3d5e8e5-1f6c-48aa-b921-37110814e7ab")
+			(uuid "be5acef3-5177-4468-8bcc-0e8ead4b48c7")
 			(effects
 				(font
 					(size 1 1)
@@ -9943,7 +10450,7 @@
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "789efe0c-9eb6-44a3-88e6-49b03c06a98e")
+			(uuid "0c4042ab-a407-4278-acee-87da2ca16d16")
 			(effects
 				(font
 					(size 1 1)
@@ -10150,6 +10657,19 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b898aa8c-58d6-4544-ae38-ab472fa53785")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/32812998-0b35-4309-a51b-1352d244051f/1763e533-ff84-4664-a8fa-38fd6c216e9b")
 		(sheetname "/Slicer/")
@@ -10299,6 +10819,19 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e386d2b3-5ace-4ab4-ab88-ccdf884722d4")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/427881bb-fa50-4548-bcaf-90e7043b4c71/25e76128-4aa9-4bcc-8642-134f2ae040b7")
 		(sheetname "/Front End/")
@@ -10429,12 +10962,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e3e5087d-0a43-4a38-9e3d-b88c113e4d41")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "ad052e35-ceb8-487c-aee0-d21e872521f8")
+			(uuid "fac5a7b9-6b21-423c-872a-8efc6bfb0533")
 			(effects
 				(font
 					(size 1 1)
@@ -10624,12 +11170,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3936a024-f4b9-4515-bcab-c15a134fd8a9")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "2acad27e-afc5-41b6-91a3-29db9ed7de38")
+			(uuid "4c4bd2c4-4e69-48df-a8b4-293d88376514")
 			(effects
 				(font
 					(size 1 1)
@@ -10819,12 +11378,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ccd1e6ad-7e1f-4539-ba45-d7e760ff0dca")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "9444122a-fd0f-4fdc-a50f-fc5a2760d527")
+			(uuid "12a32e6c-1788-4f8e-93a4-84c7f15b44bf")
 			(effects
 				(font
 					(size 1 1)
@@ -11014,12 +11586,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "91202918-3628-4e44-b85e-c7ade5f619a5")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "1793e370-6e4e-43c9-85bb-4f5187b6cdc8")
+			(uuid "9354c66a-c7ba-4266-96bd-b7f5a7846098")
 			(effects
 				(font
 					(size 1 1)
@@ -11209,12 +11794,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "16ef80d9-bae9-4018-90aa-d0b90aa3c890")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "f87a6022-6f47-4f18-aa87-abc3cf775809")
+			(uuid "7d53289e-130b-4ce3-91de-c96cacb8d8b2")
 			(effects
 				(font
 					(size 1 1)
@@ -11404,12 +12002,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ea5ce515-8494-4a89-a64e-2601384038d2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "7657b70c-dcbe-40d5-95fd-f0c5afaba5a4")
+			(uuid "1123bc92-cd72-4ee7-bf63-319cb4870737")
 			(effects
 				(font
 					(size 1 1)
@@ -11617,6 +12228,19 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "06387148-b1dd-4b02-84ed-3b87954f73d0")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/0c318e1c-a27e-42fc-ba78-2292a9a0a0c3/257924f1-645b-419c-b8c7-b07e2a57938e")
 		(sheetname "/Connector/")
@@ -11747,12 +12371,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7bc75594-95a0-4189-ac67-353b232aebc2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "8a4f1248-0577-467a-8843-2092df4a1a4f")
+			(uuid "8750aee5-41bf-4d80-816a-f614e1940c16")
 			(effects
 				(font
 					(size 1 1)
@@ -11942,12 +12579,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ec9f8207-b5a0-47c6-9abb-a3937233a95c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "d6193026-dd94-435a-b904-6b82ee85e7c0")
+			(uuid "461c744d-9a0a-441f-97c1-81dd84532f38")
 			(effects
 				(font
 					(size 1 1)
@@ -12176,6 +12826,19 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "*PowerDI?123*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b7ef57ab-c8f7-4cd9-a418-90f3882139b4")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "*PowerDI?123*")
 		(path "/f087ee84-7be7-4353-8fb4-af1df1a9d623/e465ccbb-f825-4764-afd1-bf18f1c68771")
 		(sheetname "/Power/")
@@ -12369,12 +13032,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "7d04c319-f928-44e7-96e7-0ec242c036cf")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "30935113-f885-429e-b4d8-894ce075a5ab")
+			(uuid "e082a5b9-cdfe-4f0a-bf11-d52e12f75f8f")
 			(effects
 				(font
 					(size 1 1)
@@ -12564,12 +13240,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9b9992c7-e73f-41d4-9848-6212449ae4ee")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "874a7371-6b72-4cb6-b32f-bd42e62fa423")
+			(uuid "1e4392b6-7648-44bc-bbf7-e9f4bcbf6ea2")
 			(effects
 				(font
 					(size 1 1)
@@ -12777,6 +13466,19 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "102f368f-791f-438a-af9e-efb7b69d01e4")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/9c1b5363-b8fe-46ae-a030-8579ae40f325/e4ca628e-5129-40f9-b9df-6a26c56b5926")
 		(sheetname "/Controller/")
@@ -12907,12 +13609,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f8d61f01-c93c-46b9-81d3-27ff1bb54756")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "83446cdb-c784-4b2e-8758-43b28e2f9a54")
+			(uuid "01ef1d74-1fbb-4b76-a910-a06752bae5cc")
 			(effects
 				(font
 					(size 1 1)
@@ -13102,12 +13817,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3a1f2e5d-c91d-4eec-b166-7c753355bd52")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "f7bf3f04-feec-4872-82f7-2c13f2252e78")
+			(uuid "a40fe270-384c-4cf5-8b73-ba3dd5426008")
 			(effects
 				(font
 					(size 1 1)
@@ -13297,12 +14025,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b2815c80-f950-4c36-9f4c-25d677c42b86")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "d21901e0-464e-4d00-8b9f-c3763eb5350e")
+			(uuid "b47d383a-3437-4a0e-a294-92c178f6551f")
 			(effects
 				(font
 					(size 1 1)
@@ -13492,12 +14233,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "02f3ae15-66d9-4b37-9e63-c953c2137bff")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "954e76f5-7c15-4d1f-b623-e1540c7a441c")
+			(uuid "69ed2da2-fbdc-490c-8cee-50f784a5cd03")
 			(effects
 				(font
 					(size 1 1)
@@ -13721,6 +14475,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "3809fec8-1527-4868-9b62-790629865ca6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "ki_fp_filters" "SW_SPST_PTS810*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9f81d97c-af7d-46bc-ae04-7c80782feecd")
 			(effects
 				(font
 					(size 1 1)
@@ -14088,12 +14855,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "020fc501-fcd0-4542-b623-51c34948a177")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "ab305074-a833-4ae2-b8f8-2e4acf6c6fcf")
+			(uuid "daa79b4b-873a-429d-aef1-62fea25318e9")
 			(effects
 				(font
 					(size 1 1)
@@ -14283,12 +15063,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "fca8a479-6446-43f1-af4c-eac99b85ebba")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "65894f6e-7721-47c1-abd6-77582b30f3ef")
+			(uuid "1075a3be-7284-4abc-b722-e642127f5759")
 			(effects
 				(font
 					(size 1 1)
@@ -14478,12 +15271,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ec59c21e-eb98-4625-bfec-b8f742221907")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "5c3a43d0-cc38-45a4-b054-efb65007c649")
+			(uuid "7504cac8-0c75-41d0-9a6f-9a7b57369ed6")
 			(effects
 				(font
 					(size 1 1)
@@ -14673,12 +15479,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "000014ed-e428-4b86-9a51-d9d6c2eac208")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "5fdeca49-c87f-4740-823b-1436df2d96eb")
+			(uuid "63e60758-5412-4fcd-842f-a5cd77dd479d")
 			(effects
 				(font
 					(size 1 1)
@@ -14886,6 +15705,19 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1ba1664b-4cc8-4d3a-abbc-f00d605092c8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/0c318e1c-a27e-42fc-ba78-2292a9a0a0c3/a7b24383-7506-4bca-a7a3-789095b78e94")
 		(sheetname "/Connector/")
@@ -15016,12 +15848,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "16382410-2e31-464b-881b-1c1063ccd116")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "2d466f29-f3bf-4982-aaaf-1a61bececaba")
+			(uuid "9de7caaf-1568-48bd-88d5-4081e3200b5d")
 			(effects
 				(font
 					(size 1 1)
@@ -15211,12 +16056,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "41c828b3-57a9-4dc0-8fad-74828def1b17")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "dfd64bb2-2d6a-435a-afa4-fafb09b7ea66")
+			(uuid "80e1462b-1423-4f15-86d5-6795836c684e")
 			(effects
 				(font
 					(size 1 1)
@@ -15406,12 +16264,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "abfd1039-2553-4613-86df-f8e88f13482d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "f8a6b435-2b2d-4fdb-853e-3d13bded3f95")
+			(uuid "b3359a6c-724d-456f-9ab3-4f85bfcd736d")
 			(effects
 				(font
 					(size 1 1)
@@ -15601,12 +16472,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6c4a5200-a471-4ba5-9095-5674fdd6dc89")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "f6770f07-59b7-4c8f-9864-59da977f7400")
+			(uuid "7a19b41c-299b-421a-bc63-dfb046c9d8da")
 			(effects
 				(font
 					(size 1 1)
@@ -15796,12 +16680,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c609cf11-85c5-46e0-aa61-525db1c33f61")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "0eaa3f70-ed46-4bab-a66d-75c0e3f411f7")
+			(uuid "b90f8caa-14ca-4d59-af75-570d9b20ad24")
 			(effects
 				(font
 					(size 1 1)
@@ -15955,6 +16852,19 @@
 				)
 			)
 		)
+		(property "Validated" "No"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a54f822d-5334-4b4c-a770-4601dc39ba0f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "Contributor" "Daniel Aharoni"
 			(at 0 0 0)
 			(unlocked yes)
@@ -15974,19 +16884,6 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "01e34dd9-cbb7-475f-9331-b7ed04f7b3e5")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Validated" "No"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "a54f822d-5334-4b4c-a770-4601dc39ba0f")
 			(effects
 				(font
 					(size 1 1)
@@ -16234,12 +17131,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "Connector*:*_1x06_*"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "79f2ed26-238d-4d23-8a0b-50d4eccea57d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "connector pin header 1x06"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "4d9e19d4-9249-495f-8136-5d087bd1f5df")
+			(uuid "aadfd019-a984-4a74-a5ce-c8c55065d695")
 			(effects
 				(font
 					(size 1 1)
@@ -16556,12 +17466,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "6c8d15b3-9143-44c6-8997-6280cd27acee")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "2cd4a586-da70-45c8-8cf5-4b444e08af11")
+			(uuid "5ea58b42-c92c-4e78-a19b-222f7b516674")
 			(effects
 				(font
 					(size 1 1)
@@ -16751,12 +17674,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "150d1d83-5510-4399-96f2-a212a934e489")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "a146e8a5-404e-48fa-9c46-fc960b65e4cd")
+			(uuid "335d72d3-bb64-40b2-ba85-db6db490173c")
 			(effects
 				(font
 					(size 1 1)
@@ -16946,12 +17882,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ba07ed3c-da26-4345-afc3-0757507eaf48")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "0e6c9d45-c628-40dd-ab27-aa9800b7db67")
+			(uuid "422cdc3d-4f60-4974-8987-fa67d6784486")
 			(effects
 				(font
 					(size 1 1)
@@ -17141,12 +18090,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e2369a79-067b-4398-ab68-c1bab01650f9")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "9e6104f6-87a2-4e00-a9ef-feb2a6282069")
+			(uuid "b7324bdc-d56f-46dd-83a0-537b2653e4a6")
 			(effects
 				(font
 					(size 1 1)
@@ -17346,6 +18308,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "e343fc18-99b2-48f8-9e8b-3babba3981b7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "ki_fp_filters" "SolderJumper*Open*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9756d3ec-cd70-45f5-b79d-c106032345b5")
 			(effects
 				(font
 					(size 1 1)
@@ -17700,12 +18675,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f2bf8ba1-96d8-4198-a238-969695400519")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "6b3d8cf6-d446-45b4-97c0-dfd0373a8461")
+			(uuid "5046bf6f-3447-40b9-be18-5e63396107fa")
 			(effects
 				(font
 					(size 1 1)
@@ -17895,12 +18883,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "772b64c8-1ad0-47b5-abf5-b9c34c017b8d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "8c279c42-db61-449c-b337-93ac93ab669f")
+			(uuid "b58a9fe4-0bbb-4cfc-a418-a4495b416b8a")
 			(effects
 				(font
 					(size 1 1)
@@ -18125,6 +19126,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "8a48491f-8615-420b-957d-af511504e873")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "ki_fp_filters" "RGT0016A RGT0016A_NV"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "84a30327-d116-4257-9b66-0a14c7118890")
 			(effects
 				(font
 					(size 1 1)
@@ -18468,7 +19482,6 @@
 			(net "GND")
 			(pinfunction "PAD_17")
 			(pintype "power_in")
-			(zone_connect 2)
 			(uuid "edba0a0f-864c-4c3b-b837-11d9cd30f5f8")
 		)
 		(embedded_fonts no)
@@ -18581,6 +19594,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "a4c68504-6dd4-4802-aa8f-d990872c8ae8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "98898edb-ee43-4b52-b41a-ed9c5e401da9")
 			(effects
 				(font
 					(size 1 1)
@@ -18736,6 +19762,19 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "1b700c53-7f9e-46aa-ba3c-2ef020772210")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/9c1b5363-b8fe-46ae-a030-8579ae40f325/4b2f5a27-dcd2-4410-bc53-a1c3dca505ef")
 		(sheetname "/Controller/")
@@ -18866,12 +19905,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "2fb1b0bf-cf08-44fd-b797-4018c4905995")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "33a721ea-49ed-496e-a0b7-5407605b5e2a")
+			(uuid "3539238a-1993-48b0-aead-29fb4d1cc990")
 			(effects
 				(font
 					(size 1 1)
@@ -19061,12 +20113,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e65d4ed5-6a82-4173-80a7-49dedacbcf21")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "a75308cd-d150-4811-aeee-c947e902f707")
+			(uuid "2e758657-0fdc-4b11-8c74-cadfaafa1388")
 			(effects
 				(font
 					(size 1 1)
@@ -19256,12 +20321,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f851ac98-d263-4c7c-b9fb-67111c06f8f8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "c9b0fc95-302c-4f6b-a9e7-f96386877d3a")
+			(uuid "68d62d63-4bfb-4fb9-b0de-855324e17acf")
 			(effects
 				(font
 					(size 1 1)
@@ -19451,12 +20529,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "09e0301d-4799-4d48-8a70-fa3466c610fe")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "e9e4d11c-62bb-42b0-80a5-bf4b108cf4dd")
+			(uuid "9e65a734-b34a-4fba-a592-1d677d637d17")
 			(effects
 				(font
 					(size 1 1)
@@ -19680,6 +20771,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "02ba9899-03bd-4c8e-be6a-56131f0d4294")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "ki_fp_filters" "Texas_DSG0008A*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "f96dbb6d-1105-4911-b9bb-45a6da372443")
 			(effects
 				(font
 					(size 1 1)
@@ -19955,12 +21059,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "71cbfe6d-c2cd-462b-a5db-4a9fc5067346")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "f5943b1d-5477-47a3-8862-24d69dbd1fbd")
+			(uuid "871a0c06-efe8-4dbe-9f2e-81ca64a55203")
 			(effects
 				(font
 					(size 1 1)
@@ -20182,6 +21299,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "655e6bee-beef-45ee-8a45-eb108cb9a3fb")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "ki_fp_filters" "SOT?23*"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "308ed6ed-6e49-4c26-9e4f-a49dbc33d2c7")
 			(effects
 				(font
 					(size 1 1)
@@ -20595,12 +21725,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "3d8ae9f2-85e7-4496-bf26-1d73cd987174")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "c8445eb6-f4bb-4aa3-912e-d513bcc55070")
+			(uuid "2f5437b5-dd2e-44a5-b546-7928b40aa9d4")
 			(effects
 				(font
 					(size 1 1)
@@ -20829,6 +21972,19 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "*PowerDI?123*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "df808062-68e7-4070-9a21-9a556ca67a12")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "*PowerDI?123*")
 		(path "/f087ee84-7be7-4353-8fb4-af1df1a9d623/bd98353d-0053-4e3f-96f9-3c9251fd3c80")
 		(sheetname "/Power/")
@@ -21040,6 +22196,19 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b917dcc9-adb5-4683-8f0a-533d03b1dd62")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/427881bb-fa50-4548-bcaf-90e7043b4c71/33e6db6f-8cf9-4f59-ba25-23e47ba3ba85")
 		(sheetname "/Front End/")
@@ -21170,12 +22339,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a6297a87-fd5b-431c-9c2a-a264da7b2ed9")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "830aa44f-dc65-4695-9227-a1e5a3412593")
+			(uuid "f95f5f61-2d0f-4929-99de-fee485be9686")
 			(effects
 				(font
 					(size 1 1)
@@ -21329,6 +22511,19 @@
 				)
 			)
 		)
+		(property "Validated" "No"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "23a70d6a-069d-47fb-8a0e-428cbce569b3")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "Contributor" "Daniel Aharoni"
 			(at 0 0 0)
 			(unlocked yes)
@@ -21348,19 +22543,6 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "62b62a0c-a23c-4e21-87c7-bf67b1a921e3")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Validated" "No"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "23a70d6a-069d-47fb-8a0e-428cbce569b3")
 			(effects
 				(font
 					(size 1 1)
@@ -21608,12 +22790,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "957df114-3bf6-4ee1-b6c0-790417f34451")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "d4879c6b-26c5-4298-ac18-7df51b9435e7")
+			(uuid "04102081-35a0-497f-ba8c-c988d6fb2e97")
 			(effects
 				(font
 					(size 1 1)
@@ -21809,6 +23004,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "62d9bd70-9618-48a1-bbbc-01918b528c0b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "ki_fp_filters" "Potentiometer*"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "bafc38bf-dc75-41aa-b289-a73f5ae4e61c")
 			(effects
 				(font
 					(size 1 1)
@@ -22078,6 +23286,19 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "bebc2bb7-8cde-43fd-a24f-b78dca0ca3a1")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/0c318e1c-a27e-42fc-ba78-2292a9a0a0c3/028512ab-5e48-4646-8592-071c1a728f09")
 		(sheetname "/Connector/")
@@ -22208,12 +23429,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "902272da-c422-42a5-919b-ea24751b8beb")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "e4b790cb-207d-451a-8d6c-6e9355559917")
+			(uuid "59431249-25c4-46a7-a54f-dfb4d9fbdb17")
 			(effects
 				(font
 					(size 1 1)
@@ -22442,6 +23676,19 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "*PowerDI?123*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "678594fe-a2c4-4b7f-a05a-ce59db92476d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "*PowerDI?123*")
 		(path "/f087ee84-7be7-4353-8fb4-af1df1a9d623/0ff2279f-5ba0-4ea3-bdae-d07c2f7fba1d")
 		(sheetname "/Power/")
@@ -22635,12 +23882,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b6195557-5e40-4183-8f46-d4ed64debf63")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "aca3b43d-f75e-4d88-bb57-4e35b85977bf")
+			(uuid "9aac2b2a-142c-4de9-8084-6eb5aeefe8ce")
 			(effects
 				(font
 					(size 1 1)
@@ -22830,12 +24090,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "747a3eb0-f012-4245-93be-8262ceec9c0c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "724553a6-2185-4e70-9ee3-b4c1f455d51b")
+			(uuid "01df616b-9509-4619-aa22-cc235b78ebcd")
 			(effects
 				(font
 					(size 1 1)
@@ -23043,6 +24316,19 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "233ab438-5449-403b-868e-770a1c710d3b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/9c1b5363-b8fe-46ae-a030-8579ae40f325/ee6d3469-3345-4351-b99f-2d27f6e22aad")
 		(sheetname "/Controller/")
@@ -23173,12 +24459,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "9629c854-8955-4b4b-8ea9-c3a51fa8df21")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "a6bdb48e-efd8-43d5-926c-9e5136ab58f4")
+			(uuid "5e648776-790b-4710-856c-3c1285d1e724")
 			(effects
 				(font
 					(size 1 1)
@@ -23400,6 +24699,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "1ab9a878-81f8-4c07-b543-66782e947bef")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "ki_fp_filters" "SOT?23*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "38d5321e-a322-41ff-b07c-97e4e36ecc51")
 			(effects
 				(font
 					(size 1 1)
@@ -23831,6 +25143,19 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c7c16ea4-a2d3-43fc-9ef9-63fb43220379")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/0c318e1c-a27e-42fc-ba78-2292a9a0a0c3/3912085c-c829-4f1c-84bd-9ea05076d9ab")
 		(sheetname "/Connector/")
@@ -23993,6 +25318,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "0d16c96b-6f05-41f7-81c7-b9e1e21412c5")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "ki_fp_filters" "SOT?23*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "254b5557-0a9a-4ac7-95c6-35df57031414")
 			(effects
 				(font
 					(size 1 1)
@@ -24406,12 +25744,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "b60a726e-5ea8-44c5-9a82-aabc438146b3")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "f52fda14-6071-41c6-8952-2236e8e1b86a")
+			(uuid "39b7cc66-599e-436f-ab11-4774a833dafa")
 			(effects
 				(font
 					(size 1 1)
@@ -25106,6 +26457,19 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "*QFN*WQFN*RVK*"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "41dbea9e-b5d8-49f1-9961-2f498a37bb44")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "*QFN*WQFN*RVK*")
 		(path "/32812998-0b35-4309-a51b-1352d244051f/eb742ba6-9018-4428-bf70-cf754b8c061c")
 		(sheetname "/Slicer/")
@@ -25502,6 +26866,19 @@
 				)
 			)
 		)
+		(property "Validated" "No"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "de6e73fd-9bb4-4d7c-82fa-fea0dab2dd9e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "Contributor" "Daniel Aharoni"
 			(at 0 0 0)
 			(unlocked yes)
@@ -25521,19 +26898,6 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "2d926d39-82fb-4305-ab6c-ca92a0f0e3ea")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Validated" "No"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "de6e73fd-9bb4-4d7c-82fa-fea0dab2dd9e")
 			(effects
 				(font
 					(size 1 1)
@@ -25781,12 +27145,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d9dd8560-2abf-4191-b2ea-cf1d06266520")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "d9bb6c37-848d-48f9-ac7c-d213500ed2a4")
+			(uuid "90bdf360-6314-4d9b-8548-8b0d6bfd2c80")
 			(effects
 				(font
 					(size 1 1)
@@ -25976,12 +27353,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "fcd073fb-5ccf-4154-98b4-b8825f30ac1f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "5eab107a-646b-4946-9ff6-a5fcd0c76834")
+			(uuid "01b88846-387e-48f9-b80b-e796aa987ffd")
 			(effects
 				(font
 					(size 1 1)
@@ -26171,12 +27561,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "cce41eac-8807-41e9-ba44-f13fecbf480b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "14225fdc-a637-432c-9214-dca1d4332929")
+			(uuid "1a141e3d-62e5-45f3-85c0-e31652e2bdc6")
 			(effects
 				(font
 					(size 1 1)
@@ -26366,12 +27769,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "67ed736c-8a66-483e-b0cc-0ba60d7d204f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "49bc4237-7b50-420c-a36a-22d1ce1b2f51")
+			(uuid "3aa20688-2813-4426-a322-17686d8b2438")
 			(effects
 				(font
 					(size 1 1)
@@ -26561,12 +27977,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "63a084cd-3741-4909-8364-eee1528e46d6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "009f6e89-ce0e-44da-8044-f90d9ac3e4a7")
+			(uuid "c46586ed-c928-45e0-bef9-60742169e4ac")
 			(effects
 				(font
 					(size 1 1)
@@ -26756,12 +28185,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "Choke_* *Coil* Inductor_* L_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "718b11ab-eaaf-4432-ac01-790ffeea39c0")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "inductor choke coil reactor magnetic"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "f8cfca57-207f-4ada-8fb3-ca3cff25eae8")
+			(uuid "ec949c7b-4ae9-4506-a229-9e40407f251f")
 			(effects
 				(font
 					(size 1 1)
@@ -26953,12 +28395,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "25051889-7f8c-42d6-871d-ca39e34c0d6c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "0f037038-ac39-456a-b713-be37f0dc94f6")
+			(uuid "9a4a9eb1-8fb4-45be-b846-255a84e13e46")
 			(effects
 				(font
 					(size 1 1)
@@ -27182,6 +28637,19 @@
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "f9ff4106-c0cc-4ce8-9f70-263ff052bc82")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "ki_fp_filters" "SW_SPST_PTS810*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "e566235a-fac7-4abb-9788-36d069f923c3")
 			(effects
 				(font
 					(size 1 1)
@@ -27562,6 +29030,19 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "Choke_* *Coil* Inductor_* L_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "4e89671b-2ad7-44c8-8314-5281280c908b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "Choke_* *Coil* Inductor_* L_*")
 		(path "/f087ee84-7be7-4353-8fb4-af1df1a9d623/976863f7-55f0-4a9e-8d47-160baf163d5b")
 		(sheetname "/Power/")
@@ -27756,12 +29237,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "c3f6828a-a41e-4d6f-905f-260a40165fb4")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "00a0a52a-e98e-45cd-82d7-6d51c5a55dfd")
+			(uuid "a6a6d1ef-9364-42b3-9a84-9d21ed7bf51f")
 			(effects
 				(font
 					(size 1 1)
@@ -27951,12 +29445,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "ac07bb58-0364-4a8f-b0f0-a3031feada7c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "f8a0c341-b1be-4dea-9b6d-8a95e38dce87")
+			(uuid "8190d973-9cb1-402f-b763-75c08435a63d")
 			(effects
 				(font
 					(size 1 1)
@@ -28146,12 +29653,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "972692d8-cf6f-419b-bc55-99773d1a695e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "r resistor"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "2a9970f7-4ea2-421d-ae6a-28245ac2842b")
+			(uuid "7efb9dd1-e16d-42ea-962b-5b582b5e51ef")
 			(effects
 				(font
 					(size 1 1)
@@ -28341,12 +29861,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "fe2a5622-2cef-47f3-8f6f-bcbbdc6ab6c0")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "6874b788-f543-444f-9d50-4f92a01a72b7")
+			(uuid "7bf808d1-e0e7-4c69-897c-05a1883d77a1")
 			(effects
 				(font
 					(size 1 1)
@@ -28554,6 +30087,19 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "d62fafcf-49c5-4498-a253-9326232a0d47")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/f087ee84-7be7-4353-8fb4-af1df1a9d623/7ab6b375-ca3f-431c-ac18-6b366dfc8a42")
 		(sheetname "/Power/")
@@ -28684,12 +30230,25 @@
 				)
 			)
 		)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "905780ef-6be5-40d6-9492-bce6804ece5b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
 		(property "ki_keywords" "capacitor cap"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "1273532d-0176-42c0-9d5f-26657e92ce2e")
+			(uuid "a00f500f-9066-45cb-9d1e-d6147d29ca00")
 			(effects
 				(font
 					(size 1 1)
@@ -28886,12 +30445,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "0a18d32e-8f2c-4983-9787-19e34cf928ce")
+			(uuid "20043eac-0d57-4379-92b2-1f05633284ec")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "8c76828c-c4f3-46f2-b6b5-6d37bc71eeb0")
 			(effects
 				(font
 					(size 1 1)
@@ -29109,6 +30682,20 @@
 				(justify mirror)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "7ca25f51-9a06-4cc5-b2b9-863963ae1c34")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/6cf4481f-61fa-43ad-a5db-39f73b1dcc52/2293f60e-d23d-4c8e-9a0b-8f0715915949")
 		(sheetname "/Monitor/")
@@ -29247,12 +30834,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "d9ad9342-b753-492f-ae12-54ba76ae479d")
+			(uuid "849b1a79-c66e-4df1-af18-f9a63c9223a5")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "cc2f8027-4168-4ffd-a006-ea686e1aa5ad")
 			(effects
 				(font
 					(size 1 1)
@@ -29800,12 +31401,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 0)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "228eefa6-93db-460e-81d1-244c385ced09")
+			(uuid "2d04bb1e-8699-4c9a-a6a1-d93451605ba8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "6f579d6c-3379-4fa0-869a-39880d88cd59")
 			(effects
 				(font
 					(size 1 1)
@@ -30023,6 +31638,20 @@
 				(justify mirror)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "e55d9fd4-8843-4b1c-bd8c-7831a91e60b5")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/9c1b5363-b8fe-46ae-a030-8579ae40f325/cea5df09-b6ba-4cc1-bd0f-bac2aff51782")
 		(sheetname "/Controller/")
@@ -30180,6 +31809,20 @@
 				(justify mirror)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "b1462be5-4757-45e6-bedd-fed8b887e35d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/9c1b5363-b8fe-46ae-a030-8579ae40f325/a7130beb-a7be-4d36-be6e-b0c82848c13f")
 		(sheetname "/Controller/")
@@ -30318,12 +31961,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "228691ca-2757-401e-a56b-734edfaf436d")
+			(uuid "d59dd14b-4622-42b6-8871-0a3cbfafbe5a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "76924a27-831f-47aa-be07-31569030d407")
 			(effects
 				(font
 					(size 1 1)
@@ -30522,12 +32179,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 180)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "fd9dd5fa-4352-4eac-80dc-8f718f3d95c7")
+			(uuid "07817903-28b5-4574-9582-33730d8666f8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "9dbf0a33-ade8-4597-a461-55591d0184f6")
 			(effects
 				(font
 					(size 1 1)
@@ -30726,12 +32397,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 0)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "2dde15c5-4bb8-4b41-849c-97ae442ad6d2")
+			(uuid "7d7befba-7865-461b-9a37-d2a42cc9453f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "46d38ce3-dccf-4db6-b549-7ceee95d76ef")
 			(effects
 				(font
 					(size 1 1)
@@ -30941,6 +32626,20 @@
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "bc505a23-65c7-49fb-b45a-06c5c0d3f45e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "28e31df8-3313-45ee-9644-5b66c4737074")
 			(effects
 				(font
 					(size 1 1)
@@ -31934,12 +33633,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 180)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "4c4f84cf-7efc-41f1-9245-0c293305af4e")
+			(uuid "5a4cf5bc-0ecd-48e1-9437-adda7eab7a11")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "5ceb7af5-e7b7-46d3-9fe9-e05ad7fd63c1")
 			(effects
 				(font
 					(size 1 1)
@@ -32138,12 +33851,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "42f3886c-6dd2-4bcd-90ba-b518b28f39ff")
+			(uuid "c14f5922-697a-437a-87a5-4fcf0bc669ff")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "e1673120-0c7b-406d-9a16-080401372c6a")
 			(effects
 				(font
 					(size 1 1)
@@ -32342,12 +34069,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 180)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "43e6a930-97f5-4dae-b39a-efd93e7b22c6")
+			(uuid "cee214e8-e145-476b-9c0f-32cc69a9bd75")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "6882d86a-9cd0-4d69-8202-f09685799a77")
 			(effects
 				(font
 					(size 1 1)
@@ -32580,6 +34321,20 @@
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "7fa670f5-d89a-44ee-8430-90ef30dcd188")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_fp_filters" "SOIC*3.9x4.9mm*P1.27mm*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "c1455f86-80fe-48c7-8a9b-085e779c2378")
 			(effects
 				(font
 					(size 1 1)
@@ -33002,12 +34757,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 180)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "a9b986c8-f04c-4fe1-ab5c-9e88593acd5d")
+			(uuid "60a72cfe-508d-49f6-82b0-854c24f582a3")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "58b5170d-4394-4e99-82ab-df0828b0bf85")
 			(effects
 				(font
 					(size 1 1)
@@ -33206,12 +34975,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 180)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "b37b7c41-42e4-4195-9253-74d127e55bb7")
+			(uuid "b08fe53c-6a97-4967-8745-655ed1e49b4e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "ce402781-d6ef-4bef-84e7-310aef135437")
 			(effects
 				(font
 					(size 1 1)
@@ -33410,12 +35193,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 180)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "305000f1-1ffb-4506-954f-c2c3cd7bbfbf")
+			(uuid "193afc60-5479-4391-b9a0-3d3969c4c434")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "a53759a2-1f78-4c2e-8940-0721de090f03")
 			(effects
 				(font
 					(size 1 1)
@@ -33614,12 +35411,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 180)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "2693f233-ac72-4e37-97d5-e5a055a0d200")
+			(uuid "7d5f52f9-bf32-47af-bf2e-b3de0a0c2c2d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "b4a87fe7-1647-4b21-a7bf-560089e59e8c")
 			(effects
 				(font
 					(size 1 1)
@@ -33818,12 +35629,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 0)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "ef74e8f9-4f80-4a5e-8f04-f1d575fef446")
+			(uuid "9efed584-3ee0-4aaa-957e-81d743493a52")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "d4e2d43e-a170-4ed4-b16b-1a9a03bbb595")
 			(effects
 				(font
 					(size 1 1)
@@ -34022,12 +35847,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 180)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "fe53ea35-71cd-4ac1-b58a-87233b331d0b")
+			(uuid "3572b04e-4117-4582-936e-6a7aca040928")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "759e36bd-db37-42ea-abb3-424caab674d3")
 			(effects
 				(font
 					(size 1 1)
@@ -34226,12 +36065,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "f763b1cc-6716-48fc-aced-2071b14848b6")
+			(uuid "a879692a-51b4-422b-bee5-7148cc673480")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "f05ca328-c096-4c7e-887d-072a9361044e")
 			(effects
 				(font
 					(size 1 1)
@@ -34430,12 +36283,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 180)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "6b38bed6-f6a8-42d3-925c-3c4cadc082db")
+			(uuid "9af31a8b-aacf-4fb1-ae5c-40d8fef531bf")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "3348e877-2372-4bd3-b887-098227c8bd11")
 			(effects
 				(font
 					(size 1 1)
@@ -34634,12 +36501,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "9744bf17-4f1f-472c-8135-ce864cad75b9")
+			(uuid "dc4cdbfa-7122-44c5-b766-cccb22f59743")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "07d0251e-7c53-434b-87d9-41bd4c7cb0f7")
 			(effects
 				(font
 					(size 1 1)
@@ -34838,12 +36719,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 0)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "3b10df07-7585-4476-bb8e-f135ab0c7dbc")
+			(uuid "db0159b4-9c24-4a9d-bfd6-9859bfc8db2a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "88e67938-ae92-4106-8dfe-186e1acc88ac")
 			(effects
 				(font
 					(size 1 1)
@@ -35076,6 +36971,20 @@
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "28fa2476-2aa8-4a6c-9e92-897199170067")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_fp_filters" "SOIC*3.9x4.9mm*P1.27mm*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "d6f405b3-0268-4f11-a9d3-838e782f34cb")
 			(effects
 				(font
 					(size 1 1)
@@ -35504,12 +37413,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 0)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "8e452282-4834-40af-812b-aba778db8d03")
+			(uuid "d9271918-cc73-4f7f-aab8-8e5eee8afd02")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "dc10fbb5-449a-427a-821d-789e989e4fc9")
 			(effects
 				(font
 					(size 1 1)
@@ -35708,12 +37631,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 180)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "0246d248-9e4d-44f0-958d-c7173f58278c")
+			(uuid "f682680b-a329-49a5-bde8-838fdfb4d683")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "8f0068f0-4d78-496c-871d-fb9f1bcdb63d")
 			(effects
 				(font
 					(size 1 1)
@@ -35912,12 +37849,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "083d0e31-b454-4531-bf3a-b66186809db9")
+			(uuid "2f39ea89-ef8f-42ab-9db3-0156bda8626b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "84733c96-4742-4bbe-8ad6-2cfa2a6b184e")
 			(effects
 				(font
 					(size 1 1)
@@ -36116,12 +38067,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 180)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "ce998024-e26e-4b77-95aa-b9b800eb27d3")
+			(uuid "eecc368d-7f6e-491f-ba43-fc1075da3216")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "0af9db1c-9196-4747-b89f-0b69e7b4644a")
 			(effects
 				(font
 					(size 1 1)
@@ -36320,12 +38285,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "d3d482a8-7ef8-4b3c-8b10-04ba0bd8fcd1")
+			(uuid "1cbd6cf1-ff8d-437f-ba8b-c888953b5a51")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "5859e841-1530-4723-8b0c-9564f5046c65")
 			(effects
 				(font
 					(size 1 1)
@@ -36524,12 +38503,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "79873367-d482-42e7-ad8e-dc705bfbaa75")
+			(uuid "4998dfe4-7612-41d9-93ca-a09fc19814de")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "60300cc0-ff50-4212-aeba-8c61c6e590c1")
 			(effects
 				(font
 					(size 1 1)
@@ -36728,12 +38721,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 180)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "d60372cc-256f-4cf3-ac74-3c31a1f23ef9")
+			(uuid "3325e17d-c80e-431d-882e-7b8e686bb2e2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "3478a094-b2e4-4581-ba7d-deee119b4212")
 			(effects
 				(font
 					(size 1 1)
@@ -36932,12 +38939,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 270)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "260cb554-ff0b-4d70-a981-3860172beadd")
+			(uuid "2e215784-eb4d-4299-afbf-3455b1c6c0ed")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "015981d5-44a4-46ec-acf0-67c9cac55c9a")
 			(effects
 				(font
 					(size 1 1)
@@ -37170,6 +39191,20 @@
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "36365c90-70a9-4cf5-8002-33ec9ff34a32")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_fp_filters" "MSOP*3x3mm*P0.5mm*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "5f38b761-2714-4338-8bfd-93788b3225a9")
 			(effects
 				(font
 					(size 1 1)
@@ -37631,6 +39666,20 @@
 				(justify mirror)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "1d617915-cd37-4c94-9217-6bc23f241e80")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/9c1b5363-b8fe-46ae-a030-8579ae40f325/5d131021-89fa-43bb-ae29-79101820138a")
 		(sheetname "/Controller/")
@@ -37769,12 +39818,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 180)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "b6e4ebc9-92fa-42a4-9bd5-c0675dcf2207")
+			(uuid "abb4ac00-6131-451f-8567-6cce4f3245d6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "e268c6fc-7fd7-430b-90ae-6613fa6e874d")
 			(effects
 				(font
 					(size 1 1)
@@ -37973,12 +40036,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "17446c7d-1e1e-440e-8bad-53a3deee507c")
+			(uuid "fb8ac950-c55c-4263-ae10-625b2ebd8736")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "9e402a2c-0769-440e-90a5-e9ce88bd2f72")
 			(effects
 				(font
 					(size 1 1)
@@ -38177,12 +40254,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 180)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "bb432574-7ec0-449b-8564-52a9eb3158cd")
+			(uuid "58643d0b-289d-4648-85e7-17e382773ef9")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "8e65d830-fc43-44d1-b0da-08e702b1c166")
 			(effects
 				(font
 					(size 1 1)
@@ -38381,12 +40472,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 270)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "b5b7825b-c9fc-46ab-bdc8-f4c546c698a2")
+			(uuid "fceefab1-0922-4bd3-ae85-539922a7f5c7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 90)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "c4d76ccd-fe00-49c8-a98a-4513e497b23a")
 			(effects
 				(font
 					(size 1 1)
@@ -38604,6 +40709,20 @@
 				(justify mirror)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 270)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "4d4d14e6-06a7-4d92-8c73-843eac3f808a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/9c1b5363-b8fe-46ae-a030-8579ae40f325/1e633a6d-8e10-40a3-9b6e-991fc86b30b5")
 		(sheetname "/Controller/")
@@ -38761,6 +40880,20 @@
 				(justify mirror)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "fe506a95-7df4-4667-85f4-36dc210e8c92")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/6cf4481f-61fa-43ad-a5db-39f73b1dcc52/93fc07e7-e173-460d-a861-6c46b01fb8c1")
 		(sheetname "/Monitor/")
@@ -38899,12 +41032,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "b12ce143-eb61-4134-bb5b-0cde8458bb89")
+			(uuid "1b7663fb-9eb3-4cb3-a23f-39ff2e189793")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "9de9be85-b76f-4730-8689-37ef90b98dbd")
 			(effects
 				(font
 					(size 1 1)
@@ -39103,12 +41250,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 0)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "05a6c669-f62c-4aa5-b874-1bcabbf2a5ad")
+			(uuid "8b3f95de-36b4-4422-961b-3bb35a91d2f1")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "8f7717eb-ff97-418f-a8b7-9278516c0595")
 			(effects
 				(font
 					(size 1 1)
@@ -39307,12 +41468,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 180)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "f586f72c-3f95-4564-92a2-27b4ae635b30")
+			(uuid "104665e5-9902-4268-889a-5b26bc12f1f8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "0a485f3e-0a80-4d77-b706-332f80b132c8")
 			(effects
 				(font
 					(size 1 1)
@@ -39511,12 +41686,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "5423518d-c05a-4a45-a381-44ab4a25e04f")
+			(uuid "d552ad0d-c10d-490c-8c91-e6372b7525d2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "459c24f4-6864-4051-8307-830625960f01")
 			(effects
 				(font
 					(size 1 1)
@@ -39715,12 +41904,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 180)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "1f484d43-ec11-4aa0-b1bd-c1842366912f")
+			(uuid "b477b4a2-8f0c-4ba0-9de4-65e8bf413e89")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "a2605066-bd8a-4853-b76d-30a5455ab6de")
 			(effects
 				(font
 					(size 1 1)
@@ -39955,6 +42158,20 @@
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "ed2bc8ce-d159-4d82-a2bc-130ab94f6324")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_fp_filters" "SOT?23?5*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "24ea2ec0-2d20-4a26-96ed-ac42a7eeb497")
 			(effects
 				(font
 					(size 1 1)
@@ -40397,12 +42614,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "02068f7a-6172-4e46-8972-aed25c916cae")
+			(uuid "b86bfd24-c10b-419c-8715-eb6415f370a2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "dcdf655e-00ef-4cca-8b56-2931524f74cb")
 			(effects
 				(font
 					(size 1 1)
@@ -40601,12 +42832,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "32005e3b-2deb-4adb-be0b-a760658e88e0")
+			(uuid "d724ab5c-4df7-42aa-b420-a21fcef7ec20")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "966f1569-2333-4a66-83ef-d39f71c15eb9")
 			(effects
 				(font
 					(size 1 1)
@@ -40805,12 +43050,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 0)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "d34f2b2f-5e4d-419b-a4a5-44661009782c")
+			(uuid "56e35bbf-788f-4b80-b022-588021d94c36")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "04a4d844-995b-4137-a853-5ddfcec8cdbb")
 			(effects
 				(font
 					(size 1 1)
@@ -41009,12 +43268,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "5e38d646-3224-4b13-ac76-64740081b664")
+			(uuid "80e72f33-9377-4e2e-9354-a6e584bab179")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "e50d7a0c-ea34-4671-ae6f-c53972d07d29")
 			(effects
 				(font
 					(size 1 1)
@@ -41249,6 +43522,20 @@
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "ed29f22c-b847-4185-aa37-330201ebd9eb")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_fp_filters" "SOT?23*5*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "423481be-a25c-4f71-bf59-2885be035318")
 			(effects
 				(font
 					(size 1 1)
@@ -41691,12 +43978,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 180)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "e98d7dee-1574-4e49-8ad4-c99019121dfe")
+			(uuid "2358de3a-114b-4de6-9696-f6d95e42261f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "728ca2f3-7605-446d-ac5f-dfc786d8ddd3")
 			(effects
 				(font
 					(size 1 1)
@@ -41895,12 +44196,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 180)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "aa292270-d9df-4ce6-a720-98ba3d433708")
+			(uuid "36c4350f-3a57-4b68-93e2-a1a057cdc778")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "fa74851e-9237-4b71-b406-1f7d97b4f2b8")
 			(effects
 				(font
 					(size 1 1)
@@ -42099,12 +44414,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "0c3d65b0-6aa8-43a8-9953-25714230928f")
+			(uuid "7acc5a5b-9aab-4568-80d4-0b4a261f0d91")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "16f591b7-353b-41b8-8a89-f04048430d90")
 			(effects
 				(font
 					(size 1 1)
@@ -42303,12 +44632,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 0)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "118c0078-bd84-487e-8d57-a3435c2298fe")
+			(uuid "a9fbdabd-241f-4508-9a1f-f55888c8a90e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "992e2561-67c8-43b5-ac73-cb93f4b31cb0")
 			(effects
 				(font
 					(size 1 1)
@@ -42507,12 +44850,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 0)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "a5c2d7b1-3771-45af-9b20-5ec5564e9804")
+			(uuid "7ea1a2d8-4360-446b-9b22-3cdb745c81f0")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "ba5f1b85-206c-4cb0-8501-912d3fb7fcc3")
 			(effects
 				(font
 					(size 1 1)
@@ -42711,12 +45068,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "9bd71c8d-dc25-4537-80cc-9cfc2af693fe")
+			(uuid "ce56aadd-f783-4cac-b710-7fde190f8dde")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "8fedb1fc-fcf3-4bec-9277-48d3d391dbc9")
 			(effects
 				(font
 					(size 1 1)
@@ -42915,12 +45286,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 0)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "75463b74-05ab-4872-b1ac-dda54ceef107")
+			(uuid "86f53527-3e83-45d2-9826-e05a52e5ddf0")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "425982ee-e31a-47c3-a58a-e408fa99b6b6")
 			(effects
 				(font
 					(size 1 1)
@@ -43153,6 +45538,20 @@
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "7cc5d84e-68ba-4951-bde4-8cc11106787c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_fp_filters" "MSOP*3x3mm*P0.5mm* VSSOP*3x3mm*P0.5mm*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "d2687769-bdb1-4740-8676-1cdd0b046d49")
 			(effects
 				(font
 					(size 1 1)
@@ -43595,12 +45994,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 0)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "f28499ae-ecc5-4db8-9953-b339e43336d6")
+			(uuid "b5151819-b77f-4f7b-bb12-d53ec780694b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "a0912c82-33f9-40bd-ab1d-4ab4281b4a70")
 			(effects
 				(font
 					(size 1 1)
@@ -43818,6 +46231,20 @@
 				(justify mirror)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "aa7cf993-5fbf-4c9d-aa5c-4563032c0a1f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/f087ee84-7be7-4353-8fb4-af1df1a9d623/bd70c033-3c9f-4a72-9fb7-e553592191e9")
 		(sheetname "/Power/")
@@ -43956,12 +46383,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 0)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "4b3ce34f-ac44-4838-a20d-a308b939a15a")
+			(uuid "b9c5ab28-45dc-4d9d-8fd2-01bfd63ef440")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "cff86e31-6ee8-4459-94ca-bcfe773e2a45")
 			(effects
 				(font
 					(size 1 1)
@@ -44160,12 +46601,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 0)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "2124dd3e-a3af-408e-bfac-0f9e37dd52a6")
+			(uuid "ca901f99-c946-42b2-a970-b067fd178c83")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "85ea3835-ef20-4f1f-9669-2f35bb3829c2")
 			(effects
 				(font
 					(size 1 1)
@@ -44364,12 +46819,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 0)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "8dd967cd-541b-4cd7-bb2c-8ad62457c854")
+			(uuid "984305b3-4713-4d22-a73b-581d131fc773")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "de886851-a775-42ee-a546-81b9f14a14e6")
 			(effects
 				(font
 					(size 1 1)
@@ -44568,12 +47037,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 0)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "2597e6c8-39d3-45e0-b70d-b1c892e8684e")
+			(uuid "32f78f46-2f61-40aa-a5c1-0b2e0b3f5837")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "8d80e076-eb1d-4543-967e-58d6b7aaa321")
 			(effects
 				(font
 					(size 1 1)
@@ -44772,12 +47255,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "b851ff64-4727-4e86-90fc-df1dba19790f")
+			(uuid "450dde5e-91bc-484f-9d89-59217f05aa6e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "ddd249bf-15fd-41c2-bff6-b69d6e9c5c59")
 			(effects
 				(font
 					(size 1 1)
@@ -44976,12 +47473,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 0)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "1d4b1c68-75e9-47c7-84f0-33cdd6084378")
+			(uuid "d0652b18-1df7-43b7-a39c-bb6970af22ef")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "3c24aa1a-8bfb-49c5-91aa-3ffda574d449")
 			(effects
 				(font
 					(size 1 1)
@@ -45180,12 +47691,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "f6c64d7f-9223-4fe2-b395-b733bfe1a9c1")
+			(uuid "4289da98-fb7a-4c55-aeb8-6fddc238971d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "ac25fe06-8f50-4cac-b040-1366374d6590")
 			(effects
 				(font
 					(size 1 1)
@@ -45699,12 +48224,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 0)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "8cb592ac-5fa5-4b18-a7b4-eb71c4a6ae20")
+			(uuid "e7812969-2eec-4e3c-babe-5cc5fe0a94e8")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "0550ba2b-3d1f-4885-978c-8bb53a535123")
 			(effects
 				(font
 					(size 1 1)
@@ -45922,6 +48461,20 @@
 				(justify mirror)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "278f1532-0880-406f-89b1-559fdd387ac7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/9c1b5363-b8fe-46ae-a030-8579ae40f325/f924ce5a-1485-4a16-87de-282530d2f9f5")
 		(sheetname "/Controller/")
@@ -46060,12 +48613,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 180)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "77d99fb8-be7a-4008-8081-f8d451aeab6c")
+			(uuid "9a0225ec-6e53-4dd4-a4df-fde9c6b778f2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "41a3da77-2dd3-4e21-b759-f4c8f1ba9d90")
 			(effects
 				(font
 					(size 1 1)
@@ -46264,12 +48831,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "d7638fa0-cb45-4c16-8361-780b322c7777")
+			(uuid "a9c2eed5-95c3-45b6-bd6a-1ee892b49e7d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "3a4eb077-f445-4ba4-a17c-80486cdcfcad")
 			(effects
 				(font
 					(size 1 1)
@@ -46502,6 +49083,20 @@
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "0e58d6f2-ad5a-4f73-807e-38add301fc49")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_fp_filters" "SOT?23*"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "9998bb62-0aa1-4bf1-9d43-9d7bdaf7be9b")
 			(effects
 				(font
 					(size 1 1)
@@ -46924,12 +49519,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 180)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "ede0025f-7840-4a23-a7e0-59190585cb3f")
+			(uuid "857cda65-cba2-4422-926d-48da589f6692")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "5f81a273-d5b6-4a6f-a92e-b401fbf1c510")
 			(effects
 				(font
 					(size 1 1)
@@ -47128,12 +49737,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 180)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "e400b8e0-9d2e-4ef0-9a10-5cd8156022da")
+			(uuid "fc0961bd-4bfe-4d3e-994b-595312cbf710")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "5030b829-50de-49de-ae04-b847136887f3")
 			(effects
 				(font
 					(size 1 1)
@@ -47332,12 +49955,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "98c4f790-f765-4d30-a567-6d954855f5ee")
+			(uuid "c8ebaa81-9327-415b-8297-930d06370d6c")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "8599fd05-bada-4ca6-9aef-6cf64403b584")
 			(effects
 				(font
 					(size 1 1)
@@ -47536,12 +50173,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 0)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "9cc34e7b-a96a-4733-9548-37525bebb7df")
+			(uuid "1e91769e-309f-4a1c-8613-0756668a9fc6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "683610e0-bca4-4f86-b1ee-a58c5e903dec")
 			(effects
 				(font
 					(size 1 1)
@@ -47740,12 +50391,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "1ba94257-608d-441a-84f8-11adab4f3214")
+			(uuid "f1bf6ca5-a8f0-4081-9ac3-ef1fae3c1f36")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "97c032a1-8b29-4e07-b5e5-beb40e68a709")
 			(effects
 				(font
 					(size 1 1)
@@ -47963,6 +50628,20 @@
 				(justify mirror)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "78e1f6b5-8bdc-4e3e-b1b9-396e981730c6")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/f087ee84-7be7-4353-8fb4-af1df1a9d623/cca58d0b-5e66-432e-8f4e-9b047ee4a104")
 		(sheetname "/Power/")
@@ -48101,12 +50780,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "b170b301-b10c-439a-8a9b-e436e3fff716")
+			(uuid "990eb328-125a-4be3-9d44-fa901f41fb8e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "d7c4fdeb-032f-49e5-9a4b-26dcd805e055")
 			(effects
 				(font
 					(size 1 1)
@@ -48305,12 +50998,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "dc2cd960-bcb1-4aaa-a228-e8e29f55061e")
+			(uuid "d4395ddc-ac71-4342-97f9-7083f6a0374f")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "fa91facf-770e-4c3b-8c45-22bcdb49a312")
 			(effects
 				(font
 					(size 1 1)
@@ -48509,12 +51216,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "cc66baee-f13c-4dd4-abeb-8905ed84ec20")
+			(uuid "19c51f55-2ac0-40a9-8ce8-c29b0ea3a3ea")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "c11d7e3a-b0fe-41a5-b193-21c0fb4f3db3")
 			(effects
 				(font
 					(size 1 1)
@@ -48713,12 +51434,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "222cfb34-1809-46f2-b5b1-3210d014b804")
+			(uuid "8823b2b1-2f68-4fee-a301-7c1f3d0d7737")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "5a3ad14c-e672-429f-a82a-8137cae224d0")
 			(effects
 				(font
 					(size 1 1)
@@ -48917,12 +51652,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 0)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "eb5072b0-90ae-4437-b7fc-447d603072a9")
+			(uuid "30acd1da-aba1-4d0c-8f04-40c6069f097a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "e97d7e17-05c9-4fa8-8224-c8abba435864")
 			(effects
 				(font
 					(size 1 1)
@@ -49121,12 +51870,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "capacitor cap"
-			(at 0 0 0)
+		(property "ki_fp_filters" "C_*"
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "e86401a8-d55b-4040-ae39-128385432c12")
+			(uuid "3521a769-b263-457c-8f12-a856e906cc41")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "capacitor cap"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "7d6d6ebd-2615-4a9f-99ad-4e481348bb33")
 			(effects
 				(font
 					(size 1 1)
@@ -49325,12 +52088,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 180)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "4d17c56c-a0ce-4a6f-ad3c-ad65306df76b")
+			(uuid "1fa2e10a-f9d9-43b5-a7da-8a656724eec9")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "cae7a336-b455-430f-a77c-d681c7bf0fd8")
 			(effects
 				(font
 					(size 1 1)
@@ -49548,6 +52325,20 @@
 				(justify mirror)
 			)
 		)
+		(property "ki_fp_filters" "TestPoint*"
+			(at 0 0 180)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "3b1ecae0-b97a-4249-a5fa-9032376ad4c2")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
 		(property ki_fp_filters "TestPoint*")
 		(path "/9c1b5363-b8fe-46ae-a030-8579ae40f325/e752c79a-27d7-4699-bd58-4cf513028dcd")
 		(sheetname "/Controller/")
@@ -49686,12 +52477,26 @@
 				(justify mirror)
 			)
 		)
-		(property "ki_keywords" "r resistor"
-			(at 0 0 180)
+		(property "ki_fp_filters" "R_*"
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "fa1b7f9f-e460-4861-aa1c-b9de36a37561")
+			(uuid "b96fbe05-e219-44fe-bd73-b2bc4a7a0f4a")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "ebda6935-7b35-4c68-8ad8-756e945b8875")
 			(effects
 				(font
 					(size 1 1)
