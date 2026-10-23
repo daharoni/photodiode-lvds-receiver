@@ -124,7 +124,8 @@ the board but should be settled before the headstage emitter is frozen.
   [fastpath M4]
 - **P5. LT8365 boost loop return: C5's GND reaches the plane through one via on a 0.15 mm neck about 16 mm from U3,
   and the U3 exposed pad has only 2 vias.** Add 2-3 vias at C5, widen the neck, 4-6 vias in the U3 pad, consider
-  moving C5 closer to D1. This is the ripple/EMI path to the 10 uV cathode target. [fastpath M5]
+  moving C5 closer to D1. This is the ripple/EMI path to the 10 uV cathode target. [fastpath M5] **Status: PARTLY
+  FIXED 2026-10-22, decision 28** (C5 GND pad 3 vias, U3 EP 5 vias; the pour neck and the C5 move are Daniel's call).
 - **P6. Via-in-pad on 155 of 209 vias (ESP32 thermal pad, every EP, 12 0402 caps, most 0603 GND pads) with no
   fill/cap specified anywhere.** "Vias tented" cannot apply inside a pad. Either specify epoxy-filled-and-capped
   for all vias at order time (confirm JLCPCB accepts 0.25/0.45 with it, and the price) or move the cap and
@@ -132,9 +133,12 @@ the board but should be settled before the headstage emitter is frozen.
   when filled. Add to the G4 pre-order checklist. [pi-dfm M1]
 - **P7. J50 shell posts have no GND vias and thermal-relief connections (4 of the 5 starved_thermal items)**, against
   decision 16 ("several vias each"). Set the 8 S1 pads to solid connection and add 2-3 GND vias beside each large
-  post, outside the B-row antipad. [pi-dfm M2]
+  post, outside the B-row antipad. [pi-dfm M2] **Status: FIXED 2026-10-22 except one post, decision 28** (8 S1 pads
+  solid, 10 vias at 5 posts; no legal spot at the (66.82, 20.73) post because of LVDS_OUT1 and U5/VBUS underneath).
 - **P8. Ground returns far from vias: U50 SN65LVDS104 GND pins 3.0 and 4.7 mm from the nearest GND via, its caps
   C184/C185 3.0 to 3.2 mm, U51 pin 5 2.3 mm, U4 output caps 4.5 to 5.2 mm.** Add one via at each. [pi-dfm M3]
+  **Status: PARTLY FIXED 2026-10-22, decision 28** (U50 pin 8, C56, C57 done; the rest have no legal via spot within
+  about 2 mm without a local re-route, list in decision 28).
 
 ### Approach
 
