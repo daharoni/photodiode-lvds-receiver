@@ -174,6 +174,13 @@ the board but should be settled before the headstage emitter is frozen.
 - **A3. No headstage-to-receiver interface specification.** Two 100 us AC couplings require continuous idle with no
   dark gaps; LED rise times of 11 to 14 ns and the 4x blind-oversampling CDR (+-0.125 UI) are not budgeted; no
   jitter or eye budget exists. Write one interface page and reference it from requirements.md. [approach A5]
+  **Status: DONE 2026-10-23 (PROPOSED, nothing measured).** docs/optical-link-interface.md: physical layer
+  (levels, ER, duty, edge speed), line coding and framing (pointing at the gateware README as the executable
+  definition), the continuity obligation (idle at all times, 1 ms idle after any LED stop, within-frame droop),
+  the eye and jitter budget with the CDR quantisation (tools/eye_budget.py), receiver guarantees, open items.
+  New finding: at the Q = 6 floor an optical edge of 11 to 14 ns makes timing, not amplitude, the limiting
+  mechanism (jitter-alone BER 1.5e-7 to 6e-5 per transition; 1.2 to 3.4 dB more optical power to recover), so the
+  page requires <= 8 ns 10-90 at the APD. Requirements row 1 and open items 3 and 7 reference the page.
 - **A4. Biggest uncertainty is the optical power actually delivered to the APD; it needs no Rev A board to measure.**
   Candidate emitter at the real geometry through the real filter onto a calibrated photodiode or the APD at
   M = 1, DC or lock-in photocurrent, plus an ambient reading with the emitter off. Do it before freezing the

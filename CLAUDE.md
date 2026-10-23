@@ -41,7 +41,7 @@ Performance beats cost. No backward compatibility with the Miniscope Zero headst
 
 ## Repo map
 
-- `docs/` : requirements, architecture, decision log, bringup, research, datasheets, calculations, pcb (fab settings, placement plan), simulation, firmware protocol
+- `docs/` : requirements, architecture, decision log, bringup, research, datasheets, calculations, pcb (fab settings, placement plan), simulation, firmware protocol, optical-link-interface.md (headstage transmitter obligations, eye budget)
 - `docs/receiver-guide.html` : self-contained field guide DERIVED from the authority docs; update it in the same commit as any design change it describes. `docs/schematic/overview.html` is the parts/pinout page.
 - `hardware/pcb/` : KiCad project; `hardware/mechanical/` : enclosure (TBD)
 - `firmware/` : ECP5 gateware (`ecp5/`); ESP32-C6 module firmware (`esp32/`, TBD)
