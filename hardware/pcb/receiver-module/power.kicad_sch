@@ -3881,6 +3881,247 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "AharoniLab_Power:TLV431"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "U"
+				(at 2.54 1.27 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "TLV431"
+				(at 2.54 -1.27 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" "AharoniLab_Package_SOT:SOT-23"
+				(at 0 0 0)
+				(hide yes)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tlv431.pdf"
+				(at 0 0 0)
+				(hide yes)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Low-voltage adjustable precision shunt regulator, VREF 1.24 V, cathode 1.24-6 V, 80 uA min cathode current, SOT-23-3 (DBZ: 1 REF, 2 CATHODE, 3 ANODE)"
+				(at 0 0 0)
+				(hide yes)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Manufacturer" "Texas Instruments"
+				(at 0 0 0)
+				(hide yes)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "MPN" "TLV431AIDBZR"
+				(at 0 0 0)
+				(hide yes)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Contributor" "Daniel Aharoni"
+				(at 0 0 0)
+				(hide yes)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Validated" "No"
+				(at 0 0 0)
+				(hide yes)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Source" "Pins checked against TLV431 datasheet SLVS139Z (June 2024) Figure 4-3 and the pin functions table p.3, DBZ package: 1 REF, 2 CATHODE, 3 ANODE; graphics follow KiCad Reference_Voltage TL431DBZ (diode-with-reference symbol), drawn 2026-10-22"
+				(at 0 0 0)
+				(hide yes)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "shunt regulator voltage reference TLV431 TI OVP"
+				(at 0 0 0)
+				(hide yes)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "SOT?23*"
+				(at 0 0 0)
+				(hide yes)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "TLV431_0_1"
+				(polyline
+					(pts
+						(xy -0.762 -0.762) (xy 0.762 -0.762) (xy 0 0.762) (xy -0.762 -0.762)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.016 0.508) (xy -0.762 0.762) (xy 0.762 0.762) (xy 1.016 1.016)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.27 0) (xy 0 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "TLV431_1_1"
+				(pin input line
+					(at -2.54 0 0)
+					(length 2.54)
+					(name "REF"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 2.54 270)
+					(length 2.54)
+					(name "K"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -2.54 90)
+					(length 2.54)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 	)
 	(text "U5 TPS259631DDAR eFuse (PROPOSED; TPS2596 SLVSET8A p.4, p.22):\nIN = VBUS, OUT = +5V. R35 357k / R36 43.2k / R37 100k set UVLO and OVLO,\nR38 1.21k sets ILM, C32 47 nF sets dVdt, C33 4.7 uF on VBUS.\nFLT open-drain (TP4); R39 pull-up DNP. Not simulated or measured."
 		(exclude_from_sim yes)
@@ -6627,7 +6868,7 @@
 	)
 	(global_label "GND"
 		(shape passive)
-		(at 236.22 124.46 270)
+		(at 236.22 129.54 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6637,7 +6878,7 @@
 		)
 		(uuid "b83b4518-a7b2-4bff-92a1-0460df2d9bc9")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 236.22 124.46 0)
+			(at 236.22 129.54 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7069,6 +7310,384 @@
 			(justify left)
 		)
 		(uuid "e96048c1-93da-48de-8b91-3782ce2724e6")
+	)
+	(wire
+		(pts
+			(xy 231.14 124.46) (xy 236.22 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1f5e0111-f1fc-4c36-b387-8a32da3a03b9")
+	)
+	(junction
+		(at 236.22 124.46)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "64c4005c-0fd7-43e4-9ea8-7217dc12f42b")
+	)
+	(wire
+		(pts
+			(xy 228.6 121.92) (xy 228.6 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "efb403cf-4574-48a7-8a25-fb867f80d97a")
+	)
+	(wire
+		(pts
+			(xy 228.6 127) (xy 228.6 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a550e017-1f95-4a99-ab2a-9753dfbd07a5")
+	)
+	(label "EN"
+		(at 228.6 119.38 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f39b3316-2026-47fa-ac41-9262b6c30ac3")
+	)
+	(label "OVP_REF"
+		(at 233.68 124.46 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f8b9917b-4a9c-4dd1-ba23-7af740fb60b8")
+	)
+	(global_label "GND"
+		(shape passive)
+		(at 228.6 129.54 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "87a6b4f8-3cb3-481a-b540-d365021cd51b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 228.6 129.54 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+
+	(symbol
+		(lib_id "AharoniLab_Passive:R_Small_US")
+		(at 236.22 127 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "8b917c8a-b8fe-48e8-92b1-3bb1fcb573a6")
+		(property "Reference" "R45"
+			(at 236.982 126.49 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "54.9k 1%"
+			(at 236.982 128.02 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
+			(at 236.22 127 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 236.22 127 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor, small US symbol"
+			(at 236.22 127 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Validated" "No"
+			(at 236.22 127 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Contributor" "Daniel Aharoni"
+			(at 236.22 127 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Source" "KiCad Device library"
+			(at 236.22 127 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 236.22 127 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "R_*"
+			(at 236.22 127 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "3bad0df7-d074-4929-a079-a67ca14fa27f")
+		)
+		(pin "2"
+			(uuid "d1c50746-90b5-41ee-987e-453453d05ab3")
+		)
+		(instances
+			(project "receiver-module"
+				(path "/20237707-2fe5-41a5-bbd6-cb6c24e8ba32/f087ee84-7be7-4353-8fb4-af1df1a9d623"
+					(reference "R45")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "AharoniLab_Power:TLV431")
+		(at 228.6 124.46 0)
+		(mirror y)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "66f0b2b0-c3e3-4d8c-bcc7-92e3c5e8e071")
+		(property "Reference" "U6"
+			(at 231.14 122.555 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TLV431"
+			(at 231.14 126.365 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "AharoniLab_Package_SOT:SOT-23"
+			(at 228.6 124.46 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tlv431.pdf"
+			(at 228.6 124.46 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Low-voltage adjustable precision shunt regulator, VREF 1.24 V, cathode 1.24-6 V, 80 uA min cathode current, SOT-23-3 (DBZ: 1 REF, 2 CATHODE, 3 ANODE)"
+			(at 228.6 124.46 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "Texas Instruments"
+			(at 228.6 124.46 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "TLV431AIDBZR"
+			(at 228.6 124.46 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Contributor" "Daniel Aharoni"
+			(at 228.6 124.46 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Validated" "No"
+			(at 228.6 124.46 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Source" "Pins checked against TLV431 datasheet SLVS139Z (June 2024) Figure 4-3 and the pin functions table p.3, DBZ package: 1 REF, 2 CATHODE, 3 ANODE; graphics follow KiCad Reference_Voltage TL431DBZ (diode-with-reference symbol), drawn 2026-10-22"
+			(at 228.6 124.46 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "shunt regulator voltage reference TLV431 TI OVP"
+			(at 228.6 124.46 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "SOT?23*"
+			(at 228.6 124.46 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "ab483d2f-0ab7-4063-9d5e-684bb79b5ae9")
+		)
+		(pin "2"
+			(uuid "6b0980d5-93af-40ed-a9bc-91bbb82a637c")
+		)
+		(pin "3"
+			(uuid "986a8f6b-47bf-4816-80b7-5c1db1affed8")
+		)
+		(instances
+			(project "receiver-module"
+				(path "/20237707-2fe5-41a5-bbd6-cb6c24e8ba32/f087ee84-7be7-4353-8fb4-af1df1a9d623"
+					(reference "U6")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "AharoniLab_Passive:C_Small")
@@ -11599,7 +12218,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100k 1%"
+		(property "Value" "45.3k 1%"
 			(at 236.982 120.4 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11871,7 +12490,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "200k 1%"
+		(property "Value" "20k 1%"
 			(at 31.242 168.66 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -17702,7 +18321,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "200k 1%"
+		(property "Value" "20k 1%"
 			(at 31.242 173.74 0)
 			(show_name no)
 			(do_not_autoplace no)

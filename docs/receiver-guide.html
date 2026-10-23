@@ -376,7 +376,7 @@ a{color:#000;text-decoration:none}
 <ul>
 <li><b>Two-stage RC filter.</b> Stage 1 on the Power sheet is R19 27k with C8 10 nF (500 V C0G); stage 2 at the cathode is R50 10k with C50 10 nF. Calculated attenuation about 108 dB at 500 kHz and 142 dB at 6.63 MHz with parasitics, cathode noise about 1.4 uV rms against a 10 uV target (assumes a 1 Vpp source). <span class="t c">calculated</span> <span class="t p">PROPOSED</span></li>
 <li><b>Clamp.</b> Q1 MMBTA42 and Q2 MMBT3904 with R16 4.02k and 2 x 4.99 M (0805, 150 V working, Yageo RC0805 spec V0 p.3 <span class="t v">VERIFIED</span>; they were 0603, 75 V class, until decision 22) limit the current an HV fault can push toward the TIA. Topology checked in the netlist. <span class="t p">PROPOSED</span> Open (review S5): Q1's base is fed only through the 10 M, so the bias at the APD side falls by Ic x 10 M / hFE, about 1 V per 10 uA at hFE 100, which HV_MON cannot see; a MOSFET pass device would remove the term. <span class="t u">UNRESOLVED</span></li>
-<li><b>HV_MON.</b> 2 x 4.99 M (0805, 150 V, decision 22) over R21 100k, C28 10 nF: HV_MON = HV_OUT/101. It is the only HV observation point. There is no bare APD_BIAS pad.</li>
+<li><b>HV_MON.</b> 2 x 4.99 M (0805, 150 V, decision 22) over R21 45.3k + R45 54.9k, C28 10 nF: HV_MON = HV_OUT/101.2. It is the only HV observation point. There is no bare APD_BIAS pad.</li>
 </ul>
 
 <h3>3.5 HV_DIS: HV is off unless the ESP32 allows it</h3>
@@ -394,6 +394,7 @@ a{color:#000;text-decoration:none}
 
 <h3>3.6 HV safety rules</h3>
 <div class="callout warn"><ul>
+<li><b>Over-voltage limiter (decision 23).</b> U6 TLV431A watches the tap between R21 and R45 (0.548 x HV_MON) and pulls the LT8365 EN/UVLO pin to 1.24 V, below its 1.545 V minimum falling threshold, when HV_OUT reaches about 228 V (+/-3 V budget). An open resistor in the 8.2 M FBX chain or an FBX short would otherwise run the converter to the 150 V diode ratings in about 3 ms, faster than any firmware loop, and with J1 fitted nothing else would stop it. R22/R23 are 20k so the EN node can source the TLV431 minimum cathode current. <span class="t p">PROPOSED</span> calculated from TLV431 SLVS139Z p.5-7 and LT8365 Rev. A p.4, nothing measured.</li>
 <li>APD bias is 100-220 V. Layout uses 200 V creepage and clearance; net class HV is 1.0 mm clearance (HV_LADDER 0.6 mm for the 4.99 M and 2.05 M resistor ladders, steps of about 55 V).</li>
 <li>Every net at or above 50 V is prefixed <code>HV_</code>. HV_MON is the only observation point; no bare APD_BIAS test pad.</li>
 <li>Series current limit (R50, plus the clamp) and a keep-out from the TIA input, including inner layers.</li>
@@ -886,6 +887,7 @@ a{color:#000;text-decoration:none}
 <tr><td>20</td><td class="n">2026-10-22</td><td>Blank MCP4728 (code 0 = maximum bias, -16 mV threshold) handled by the HV_DIS interlock plus firmware self-provisioning of the EEPROM at first boot; J1 only after that; ESP32 brownout level above the DAC POR. No hardware change, no external programming step. <span class="t p">PROPOSED</span></td><td>Active</td></tr>
 <tr><td>21</td><td class="n">2026-10-22</td><td>Hard rule 1 reworded: the signal path is firmware-free, the APD bias is enabled only by the provisioned ESP32; an unprogrammed module is safe but dark. <span class="t v">VERIFIED</span> netlist</td><td>Active</td></tr>
 <tr><td>22</td><td class="n">2026-10-22</td><td>R17, R18, R20, R32 (4.99 M, 110 V each at 220 V) moved from 0603 to 0805: 150 V working rating, Yageo RC0805 spec V0 p.3. <span class="t v">VERIFIED</span> rating</td><td>Active</td></tr>
+<tr><td>23</td><td class="n">2026-10-22</td><td>Hardware over-voltage limiter on the HV supply: TLV431A on the HV_MON tap (R21 split 45.3k/54.9k) pulls LT8365 EN low at about 228 V; R22/R23 20k. <span class="t p">PROPOSED</span> calculated</td><td>Active</td></tr>
 </table></div>
 
 <h3>11.2 The 15 standing corrections</h3>

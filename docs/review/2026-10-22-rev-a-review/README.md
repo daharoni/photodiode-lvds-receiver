@@ -83,7 +83,7 @@ the board but should be settled before the headstage emitter is frozen.
   photocurrent. Fix: HV-rated 0805/1206 or series parts with a cited rating; rethink the base feed (lower total
   resistance, or a FET pass device), and add a G1 sweep that measures bias at the APD side vs injected current.
   [power-connector M3]
-- **S6. No hardware over-voltage limit on the HV chain.** One open resistor in the 8.2 M FBX ladder lets the converter
+- **S6. No hardware over-voltage limit on the HV chain.** **Status: FIXED 2026-10-22, decision 23** (TLV431A U6 on the HV_MON tap pulls EN low at about 228 V; R21 split into 45.3k/54.9k, R22/R23 20k; placed and routed by script, DRC 52, parity clean; the Zener-into-FBX idea was rejected for leakage into the summing node). One open resistor in the 8.2 M FBX ladder lets the converter
   run past the 150 V SW/diode ratings; only firmware polling HV_MON protects, and not at all with J1 fitted.
   Cheap option: a Zener string from HV_OUT to FBX. Layout change, so decide before the order. [power-connector M4]
 

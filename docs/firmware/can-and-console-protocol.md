@@ -45,7 +45,7 @@ GET (0x10n, DLC 2): `[param u16]`. SET (0x11n, DLC 6): `[param u16, value i32]`.
 
 | Frame | Rate (default) | Bytes (little endian) |
 |---|---|---|
-| TLM_ANALOG 0x30n | 10 Hz | `hv_dv u16` (APD bias, 0.1 V, = HV_MON x 101), `rssi_mv u16` (ADS1115 AIN1 raw millivolts), `vth_mv u16` (AIN2), `m_x10 u16` (estimated M x 10; 0xFFFF = unknown) |
+| TLM_ANALOG 0x30n | 10 Hz | `hv_dv u16` (APD bias, 0.1 V, = HV_MON x 101.2 since decision 23), `rssi_mv u16` (ADS1115 AIN1 raw millivolts), `vth_mv u16` (AIN2), `m_x10 u16` (estimated M x 10; 0xFFFF = unknown) |
 | TLM_STATE 0x31n | 2 Hz and on change | byte0: bits 2:0 `hv_state`, bit3 `tia` (1 = 20k), bit4 `mode` (1 = bus), bit5 `comp_en`, bit6 `link_valid` (last LINK_ALL nibble), bit7 `tia_auto`; byte1 `loop_state`; bytes 2-3 `faults u16`; bytes 4-5 `dac_hv u16` (12-bit code); byte6 `link_err` (0-7 echo of the master nibble); byte7 bits 1:0 `selftest_last` (0 never, 1 pass, 2 fail), bit2 `aux_in`, bits 4:3 `src` (0 `system` = LINK_ALL heard, 1 `host` = SOF seen without LINK_ALL, 2 `unknown`); `cc_class` and `cc_orient` are console/GET only unless 4 bits (class 2, orientation 2) are reserved in TLM_SLOW (UNRESOLVED, byte layout open) |
 | TLM_SLOW 0x32n | 0.2 Hz | `uptime_s u32`, `temp_dc i16` (die temperature, 0.1 C), `can_tec u8`, `can_rec u8` |
 
@@ -73,7 +73,7 @@ CAN id = u16 `param`. Console unit = what you type or read. CAN unit = the i32 o
 | hv_cmd | 0x0010 | `hv on` / `hv off` | 1 / 0 | W | HV request (drives HV_DIS through the boot gate) |
 | hv_state | 0x0011 | text | enum | R | OFF/RAMP/ON/HOLD/FAULT |
 | hv_set | 0x0012 | V | 0.1 V | W,S | requested APD bias trim target (see firmware README s.6 for what it means with the NTC) |
-| hv_mon | 0x0013 | V (APD_BIAS) | 0.1 V | R | measured bias = AIN0 x 101 |
+| hv_mon | 0x0013 | V (APD_BIAS) | 0.1 V | R | measured bias = AIN0 x 101.2 (decision 23) |
 | hv_min | 0x0014 | V | 0.1 V | W,S | lower limit, default 100.0 V (docs/calculations/apd-bias-design.md: firmware limit to 100 V and above) |
 | hv_max | 0x0015 | V | 0.1 V | W,S | upper limit, default 200.0 V; absolute cap 220.0 V in code |
 | dac_hv | 0x0016 | code 0..4095 | code | W | manual DAC_HV code (4095 = minimum bias); refused unless loop is MANUAL and no self-test runs; with HV off any code is written, with HV on a slew-limited target clamped to [hv_min, hv_max] (PROPOSED), refused while ramping |
@@ -164,7 +164,7 @@ One JSON object per line, keys always present, unknown values `null`:
 |---|---|---|
 | t | ms since boot | |
 | node, sn, ver, up | identity | |
-| hv, hv_v, hv_set, dac_hv | hv_state, AIN0 x 101, set point, DAC code | bias is HV_MON x 101; ADS1115 LSB 125 uV at the 4.096 V range gives about 12.6 mV of bias per count (calculated) |
+| hv, hv_v, hv_set, dac_hv | hv_state, AIN0 x 101.2, set point, DAC code | bias is HV_MON x 101.2; ADS1115 LSB 125 uV at the 4.096 V range gives about 12.6 mV of bias per count (calculated) |
 | m | estimated M | null until calibrated (README s.6) |
 | rssi_mv, rssi_drop | AIN1 | relative, not a calibrated optical power |
 | vth_mv, th_mv | AIN2, threshold trim | |
@@ -182,7 +182,7 @@ The CAN master (FPGA side) emits the same keys from the TLM frames so one dashbo
 | 0 | I2C_DAC | MCP4728 NACK or readback mismatch | HV off |
 | 1 | I2C_ADC | ADS1115 NACK or conversion timeout | HV off |
 | 2 | DAC_EEPROM | EEPROM defaults still wrong after the boot-time provisioning write, or DAC POR bit seen while HV was on | HV stays off, no enable accepted |
-| 3 | HV_OVER | AIN0 x 101 above hv_max + 5 V | HV off |
+| 3 | HV_OVER | AIN0 x 101.2 above hv_max + 5 V (the hardware limiter U6 holds about 228 V, decision 23) | HV off |
 | 4 | HV_UNDER | bias did not reach target within the ramp timeout, or collapsed below 70 % of set | HV off |
 | 5 | HV_STUCK | bias above 20 V more than 30 s after HV_DIS was driven high (should have decayed; LT8365 output is not actively discharged) | none possible; report |
 | 6 | CAN_BUSOFF | TWAI bus-off | HV off |

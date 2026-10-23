@@ -219,6 +219,7 @@ Example MPNs marked (M p.4) are from the DC2838A parts list, (D p.N) from the LT
 | Rt | 4 x 2.05 M 1 % 0603 (<= 55 V each), or 0805 | Vishay CRCW0603 series (499 k used in M p.4; 2.05 M NOT CHECKED) | guard ring, no vias under |
 | Rb_clamp (R17+R18), HV_MON (R20+R32) | 2 x 4.99 M 1 % 0805, 110 V each at 220 V | Yageo RC0805FR-074M99L: 150 V max working, 300 V overload (docs/datasheets/yageo-rc0805.pdf, spec V0 2016-07-26 p.3, VERIFIED); 0603 of the same family is 75 V | changed from 0603 2026-10-22 (review S5, decision 22) |
 | Rs, Rd, Rp, R_df, C_df | 86.6 k, 150 k, 1 M (DNP) 0.1-1 %, 10 k, 100 nF X7R 16 V | none | |
+| U6, R21/R45, R22/R23 (OVP limiter) | TLV431A SOT-23; 45.3 k + 54.9 k 1 % 0603; 2 x 20 k 1 % 0603 | TI TLV431AIDBZR (docs/datasheets/tlv431.pdf SLVS139Z) | decision 23 |
 | NTC | 10 k at 25 C, beta ~3950, 1 % 0603 | none | on APD can ground tab / thermal link |
 | P1 | 50 k multi-turn cermet pot (bench only) | e.g. Bourns 3296W-1-503LF, NOT CHECKED | DNP in production |
 | R1, R2 | 27 k, 10 k thick/thin film 1206, >= 200 V | none | each sees up to 170 V / 65 V in a short |
@@ -227,6 +228,14 @@ Example MPNs marked (M p.4) are from the DC2838A parts list, (D p.N) from the LT
 | Q1, Q2 | HV NPN Vceo >= 300 V SOT-23; small-signal NPN | none (MMBTA42 / MMBT3904 class, from memory) | |
 | R_s,clamp, R_b,clamp | 4.02 k 1 %; 2 x 4.99 M 1 % | none | Iclamp ~149 uA at Vbe 0.6 V |
 | Shield, ferrite | can over U1/L1/D/C5-7; bead on 5 V | none | 6.63 MHz |
+
+## 6b. Over-voltage limiter (added 2026-10-22, review S6, decision 23)
+
+Failure: an open resistor in the 8.2 M FBX chain, or an FBX short to ground, makes the LT8365 see zero feedback and run at its limit. The output node holds about 50 nF (C7 stacked on C5 plus C25); at 0.55 uJ per cycle and 500 kHz it rises about 25 V/ms from 220 V, so the 150 V diodes avalanche (output near 300 V) about 3 ms after the fault (DER, not simulated). Firmware polling HV_MON cannot react in time and with J1 fitted it does not react at all. The LT8365 has no OVP pin.
+
+Limiter: R21 is split into 45.3k (top) and 54.9k (bottom) so the tap OVP_REF is 0.548 x HV_MON; U6 TLV431A (VREF 1.24 V, 1 %) with REF on the tap and cathode on EN/UVLO pulls EN to 1.24 V, below the 1.545 V minimum falling threshold (LT p.4), when HV_MON reaches 2.263 V, i.e. HV_OUT = 2.263 x (9.98 M + 100.2 k)/100.2 k = 228 V. The converter stops, SS resets, the output decays through the ladder and the load, EN releases, and the supply sawtooths at the trip level. Error budget: VREF 1 % (2.3 V), I_ref 0.5 uA max into the 24.8 k tap source (0.7 V), resistor 1 % (about 2 V): roughly +/-3 V. At 228 V the switch node is 114 V plus the 20 % ring allowance = 137 V, inside 150 V. R22/R23 go from 200k to 20k so the EN node can source the TLV431 minimum cathode current (80 uA max; 125 uA available), ratio unchanged. Nothing measured; G1 item 5b verifies the trip.
+
+Rejected: a Zener string from HV_OUT into FBX (review suggestion). Zener leakage into the FBX summing node moves the set-point by 8 V per uA through the 8.2 M chain, and it would drift with temperature.
 
 ## 7. Safety, layout and G1 test plan
 
@@ -246,6 +255,7 @@ G1 test plan
 1. Bring-up with a 10 Mohm/1 Mohm dummy load: check f_sw (465-535 kHz), SW waveform peak (expect ~V1 + ring < 135 V), Ipk (current probe on L1, expect ~0.3 A), startup overshoot at 5.25 V and 4.75 V in, with SS 0.22 uF and with EN toggled by GPIO.
 2. Set-point vs temperature: chamber or heater/cold spray over 15-35 C (extend 0-50 C), NTC thermally coupled to a dummy APD can; record Vout at HV_RAW each 2 C; compare with 0.65 V/C line; fit slope and span, set pot/DAC at 25 C; criteria slope 0.62-0.68 V/C, span <= +/-0.75 V re-centred.
 3. Range: sweep DAC code 0-4095 (0-3.3 V) with the pot leg not fitted; confirm about 219 V at code 0 and about 50 V at full scale (25 C), LSB ~41 mV; record the HV_MON reading at both ends. Note the code-0 (blank DAC) value is the maximum: do the first sweep downward from full scale.
+3c. OVP limiter (review S6): with a dummy load, raise the DAC code toward 0 and past it by lifting R8 (or shorting FBX through 1 M to ground); confirm EN drops and the output holds near 228 V (sawtooth), record the trip level at 15/25/35 C; confirm HV_MON ratio 1/101.2 after the R21 split.
 3b. Clamp drop (review S5b): inject 10-250 uA at the APD node with HV at 150 V and 220 V; record HV_MON, HV_CLAMP and the APD-side bias (R19/C8 node) versus current; the slope of (HV_OUT - APD bias) against current gives Rb_clamp/hFE, and the knee gives the limit. Repeat at 15 and 35 C.
 4. Ripple at the cathode with the TIA running and APD attached: 50-ohm-terminated or active-probe ground spring on C2, then a spectrum (100 kHz-100 MHz, RBW 10 kHz); check f_sw line, harmonics, burst subharmonics; criterion < 10 uV rms in band; repeat with the 6.63 MHz wireless-power field on at full power and the shield on/off, and with SYNC modes (skip, Burst, Burst+SSFM, external clock). Also read TIA output rms with the APD dark.
 5. Photocurrent: inject 10, 50, 100, 150, 250 uA from a source in place of the APD; confirm clamp knee 100-170 uA, drop across R1/R2 matches 37 k, no oscillation.
