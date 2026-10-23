@@ -90,7 +90,13 @@ the board but should be settled before the headstage emitter is frozen.
 ### PCB
 
 - **P1. D10 pad geometry: HV pad 0.35 mm from the case (GND) pad and 1.34 mm from the TIA_IN pad; hidden by the
-  same-footprint DRC exception.** Below the project's own 0.4 mm coated and 2 mm HV-to-TIA-input figures, and a
+  same-footprint DRC exception.** **Status: FIXED 2026-10-22, decision 25** (the 0.35 mm figure was the square pad's corner
+  while pad 1 was still the cathode; after the B1 rotation the cathode is the round pad 3, 0.60 mm from the case pad.
+  Lab-library PR #65 shrinks all three pads to 1.0 mm on the 0.7 mm drill: cathode-to-case 0.80 mm, cathode-to-anode
+  1.54 mm, VERIFIED by pcbnew shape distance; board updated with KiCad closed, zones refilled, DRC 52, parity clean.
+  Waiver recorded in the .kicad_dru and calc doc rule 1; clean-and-conformal-coat rule added to G4. The guard track was
+  not added: the leakage is DC into the TIA and the track would load the input. The can-standoff question moves to P2.)
+  Below the project's own 0.4 mm coated and 2 mm HV-to-TIA-input figures, and a
   surface-leakage path into the TIA input. Fix (lab-library footprint PR): 1.0 mm round pads 1 and 2 (0.80 mm and
   1.54 mm gaps), keep the mask web, conformal-coat the HV end, record the waiver in the .kicad_dru. [fastpath M1]
 - **P2. C50 is 6.8 mm of trace from the cathode pin (rule says <= 3 mm), and 1.65 mm of the 220 V HV_K trace runs

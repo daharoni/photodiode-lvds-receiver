@@ -96,6 +96,11 @@
 
 # EXCEPTION (must stay last): two pads of the SAME footprint (Q1, Q2, Q4, D3, D4, D10, D11, U3, R/C bodies) cannot be
 # spaced by the layout, the part's own pad gap applies. Everything outside one footprint keeps the HV/HV_LADDER clearance.
+# RECORDED WAIVER, D10 (review 2026-10-22 P1, decision 25): the S12023 TO-18 leads sit on a 2.54 mm circle, so the 220 V
+# cathode pad (3) is 0.80 mm from the case pad (2, GND) and 1.54 mm from the anode pad (1, TIA_IN) with the 1.0 mm pads
+# of the lab footprint (0.60 / 1.34 mm with the earlier 1.2 mm pads). No pad size reaches the 1.25 mm uncoated figure;
+# both gaps meet the 0.4 mm coated figure, so the assembly rule is: clean the APD end after soldering and conformal-coat
+# the solder side around D10 (window kept clear). The 1.25 mm "hv pad clearance" rule still applies to everything else.
 (rule "hv same footprint pads"
   (condition "(A.hasNetclass('HV') || B.hasNetclass('HV') || A.hasNetclass('HV_LADDER') || B.hasNetclass('HV_LADDER')) && A.Type == 'Pad' && B.Type == 'Pad' && A.Parent == B.Parent")
   (constraint clearance (min 0.15mm)))
