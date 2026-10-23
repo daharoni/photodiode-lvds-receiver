@@ -121,7 +121,9 @@ the board but should be settled before the headstage emitter is frozen.
   LPF_OUT in the schematic and placed on that run. DRC 52, parity clean, ERC 0/0.
 - **P4. Net-(Q1-B) (clamp base, within about 1 V of APD_BIAS) has 3 vias and 10.1 mm on In2**, contradicting the
   README "no HV-class net has a via". Re-route on F.Cu (room along y 3.4 to 5.8) or record the exception.
-  [fastpath M4]
+  [fastpath M4] **Status: CLOSED 2026-10-22, decision 29** (exception recorded: five vias on Net-(Q1-B)/Net-(Q2-C)
+  kept by Daniel; 220 V across 0.1088 mm prepreg is about 2 kV/mm, an order of magnitude under FR4 breakdown; README
+  claim corrected, calc rule 2 amended).
 - **P5. LT8365 boost loop return: C5's GND reaches the plane through one via on a 0.15 mm neck about 16 mm from U3,
   and the U3 exposed pad has only 2 vias.** Add 2-3 vias at C5, widen the neck, 4-6 vias in the U3 pad, consider
   moving C5 closer to D1. This is the ripple/EMI path to the 10 uV cathode target. [fastpath M5] **Status: PARTLY
