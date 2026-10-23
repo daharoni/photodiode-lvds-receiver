@@ -3726,7 +3726,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "47p"
+		(property "Value" "47pF C0G"
 			(at 238.22 119.38 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6122,7 +6122,7 @@
 				)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "10k 200V"
 			(at 50.8 99.4 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6257,7 +6257,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "49.9"
+		(property "Value" "49.9 0.1%"
 			(at 185.96 106.68 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6393,7 +6393,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10n"
+		(property "Value" "10nF 500V C0G"
 			(at 52.8 111.76 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6664,7 +6664,7 @@
 				)
 			)
 		)
-		(property "Value" "301"
+		(property "Value" "301 0.1%"
 			(at 205.74 91.78 90)
 			(show_name no)
 			(do_not_autoplace no)

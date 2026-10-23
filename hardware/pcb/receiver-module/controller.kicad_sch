@@ -3919,7 +3919,7 @@
 	)
 	(wire
 		(pts
-			(xy 185.42 129.54) (xy 180.34 129.54)
+			(xy 180.34 129.54) (xy 175.26 129.54)
 		)
 		(stroke
 			(width 0)
@@ -6092,7 +6092,7 @@
 	)
 	(hierarchical_label "TIA_CTRL"
 		(shape output)
-		(at 180.34 129.54 180)
+		(at 175.26 129.54 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6725,7 +6725,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "1d320451-eae1-4193-a158-ecc457560c08")
 		(property "Reference" "C200"
 			(at 345.694 173.482 0)
@@ -7279,7 +7279,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100k"
+		(property "Value" "91k"
 			(at 240.792 204.216 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8690,6 +8690,140 @@
 			(project "receiver-module"
 				(path "/20237707-2fe5-41a5-bbd6-cb6c24e8ba32/9c1b5363-b8fe-46ae-a030-8579ae40f325"
 					(reference "R204")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "AharoniLab_Passive:R_Small_US")
+		(at 182.88 129.54 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "175da5fc-566a-4693-b989-d6106fb4fd1b")
+		(property "Reference" "R214"
+			(at 182.88 126.492 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2.2k"
+			(at 182.88 132.588 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
+			(at 182.88 129.54 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 182.88 129.54 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor, small US symbol"
+			(at 182.88 129.54 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Validated" "No"
+			(at 182.88 129.54 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Contributor" "Daniel Aharoni"
+			(at 182.88 129.54 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Source" "KiCad Device library"
+			(at 182.88 129.54 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "r resistor"
+			(at 182.88 129.54 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "R_*"
+			(at 182.88 129.54 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "6075e672-ac2a-44ab-b2a6-3db82561b02a")
+		)
+		(pin "2"
+			(uuid "3ed16438-04f7-4909-a6e0-62a4607146b6")
+		)
+		(instances
+			(project "receiver-module"
+				(path "/20237707-2fe5-41a5-bbd6-cb6c24e8ba32/9c1b5363-b8fe-46ae-a030-8579ae40f325"
+					(reference "R214")
 					(unit 1)
 				)
 			)

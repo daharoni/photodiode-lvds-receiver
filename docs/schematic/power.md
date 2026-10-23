@@ -15,13 +15,13 @@ Top-left block (revision 4): U5 TPS259631DDAR eFuse with the R35/R36/R37 UVLO/OV
 | U5 dVdt | C32 47 nF X7R 10 V 0603 | about 5.3 ms ramp, about 23 mA inrush into an assumed 25 uF on +5V (estimate, measure in G1). PROPOSED |
 | U5 FLT | pin 6 open-drain, TP4; R39 100k pull-up to 3V3_D, DNP | UNRESOLVED: both rails are off while the eFuse is cut off, so a pull-up cannot separate fault from no power; FLT is not routed to the ESP32; FLT pin abs max not read |
 | U5 input cap | C33 4.7 uF 25 V X5R 0805 on VBUS at IN | PROPOSED. Margin (arithmetic): a compliant 3 A cable drops at most 75 mV at 0.3 A (TC R2.5 4.4.1 p.151), so the module sees at least about 4.66 V against UV rising 4.06-4.32 V; a non-compliant 28 AWG 3 m cable would leave about 4.37 V: UNRESOLVED (cable rule, decision 14) |
-| U1 | R1 17.8k / R2 10.0k, VFB 1.193 V -> 3.316 V; EN tied to IN; CIN 1 uF; COUT 2 x 4.7 uF | VFB VERIFIED (TPS p.5, EC table 1.169/1.193/1.217 V); divider PROPOSED |
+| U1 | R1 18.7k / R2 10.0k, VFB 1.193 V -> 3.42 V nominal (was 17.8k, 3.32 V, 2026-10-23); EN tied to IN; CIN 1 uF; COUT 2 x 4.7 uF | VFB VERIFIED (TPS p.5, EC table 1.169/1.193/1.217 V); divider PROPOSED. Window with the 2 % overall accuracy (VFB 1.169 to 1.217 V, `docs/datasheets/tps799.pdf` electrical characteristics) plus 1 % divider parts: about 3.34 to 3.50 V (was 3.25 to 3.38 V, below the OPA855 3.3 V minimum). PROPOSED |
 | U1 CFB | **1 nF** (spec said 10 nF) | VERIFIED rule: CFB required, 3 pF to 1 nF for R1 parallel R2 = 250k, <5 pF for fast start, larger improves noise (TPS p.14, 8.2.2.6). 10 nF is outside the stated range. Here R1\|\|R2 = 6.4k, outside the stated 250k condition: UNRESOLVED, 1 nF is PROPOSED |
 | U3 mode | SYNC floating (pulse-skip); R26 100k and R27 0R to GND DNP (Burst+SSFM, Burst); TP2 external clock | Table VERIFIED (LT p.7 SYNC/MODE); choice PROPOSED (calc doc 3.1) |
 | U3 BIAS | R28 0R to GND fitted, R29 0R to 5V_HVIN DNP (fit exactly one) | "If unused tie to GND" VERIFIED (LT p.7); option PROPOSED |
 | U3 passives | INTVCC 1 uF (LT p.7 "bypassed with 1 uF"), RT 84.5k, SS 0.22 uF, VC 84.5k + 1 nF C0G + 10 pF DNP, EN 20k/20k (was 200k/200k until decision 23; same 2.5 V ratio, 125 uA so the TLV431 limiter can hold the node) | VERIFIED/PROPOSED per calc doc 3.2 |
 | Pi filter | C18 10 uF 50 V, L2 0.47 uH (0805 footprint), C19 10 uF 50 V, C20 4.7 uF 50 V | PROPOSED (calc doc 3.2; demo manual p.4) |
-| Stage 1 + doubler | L1 10 uH (Wurth 74437324100), D1 straight from SW to HV_V1 (C5); R7 20R from HV_V1 to the D3 anode (pump-charge resistor, as LT p.30 R8 and DC2838A R10; it was wired in series with D1 until 2026-10-22, review S1); C6, D3, D4, C7 0.1 uF 200 V; R30 47R; C25 1 nF 500 V; D2 DNP | PROPOSED (calc doc 2, 3.2; LT p.30); R7 position VERIFIED against LT8365 Rev. A p.30 and DC2838A REV02 |
+| Stage 1 + doubler | L1 10 uH (Wurth 74437324100), D1 straight from SW to HV_V1 (C5); R7 20R from HV_V1 to the D3 anode (pump-charge resistor, as LT p.30 R8 and DC2838A R10; it was wired in series with D1 until 2026-10-22, review S1); C6, D3, D4, C7 0.1 uF 200 V; R30 47R; C25 1 nF 500 V; D2 DFLS1150-7 fitted (was DNP; the LT8365 reference-circuit SW-to-GND clamp, fitted for the first bench build, 2026-10-23) | PROPOSED (calc doc 2, 3.2; LT p.30); R7 position VERIFIED against LT8365 Rev. A p.30 and DC2838A REV02 |
 | FBX | R8-R11 4 x 2.05M; R12 86.6k + TH1 10k NTC; DAC leg R13 10k, C27 100 nF, R14 150k (was 442k until 2026-10-22, review S2 / decision 19: DAC alone now 50-219 V at 25 C, code 0 = maximum, LSB 41 mV); pot leg RV1 50k + R15 1M (DNP; was 274k, lowered authority to +/-13.5 V so a fitted pot cannot push the switch node past 150 V); C26 10 pF DNP | PROPOSED (calc doc 3.2, tools/apd_bias_design.py 0 FAIL) |
 | Clamp | Q1 MMBTA42 pass, Q4 MMBTA42 Darlington driver (decision 24), Q2 MMBT3904 sense, R16 4.02k, R17+R18 2 x 4.99M 0805 (was 0603; 110 V each at 220 V against the 0805 150 V working rating, Yageo RC0805 spec V0 2016-07-22 p.3; decision 22) | PROPOSED (calc doc 4, 6a); topology checked in netlist below. The single-transistor version dropped Ic x 10 M / hFE at the APD side (about 3 V per 10 uA at hFE 30, invisible to HV_MON, review S5b); the Darlington divides that by a second hFE. MMBTA42 hFE at uA currents UNRESOLVED; G1 item 3b measures the residual |
 | Filter 1 | R19 27k 1206 200 V, C8 10 nF 500 V C0G 1210 | PROPOSED (calc doc 4) |
@@ -55,7 +55,7 @@ Revision 4 root ERC (kicad-cli 10.0.5, 2026-10-09): 0 errors, 0 warnings. +5V ha
 
 ## Open points
 - Resolved by the HV disable gate: EN/UVLO is always driven by the divider/Q3 (the old floating-EN case is gone).
-- UNRESOLVED: D2 purpose not stated (LT p.30); fitted as DNP.
+- UNRESOLVED: D2 purpose not stated (LT p.30); fitted since 2026-10-23 as the reference-circuit SW-to-GND clamp for the first bench build (PROPOSED).
 - HV test: nothing on this sheet was measured; layout (guard, 1.0 mm HV netclass, 200 V creepage) is not done.
 
 ## Revision 2 (decision 12, 2026-10-08)
@@ -67,3 +67,10 @@ Added U5 TPS2121RUXR with R35-R42, C32-C34 (see the values table). The +5V hiera
 
 ## Revision 4 (decision 14, 2026-10-09)
 U5 TPS2121 is replaced by the TPS259631DDAR eFuse (see the values table). Removed: TPS2121, +5V_CABLE, PWR_SRC, old R39-R42, C34, the PR1 divider; R35-R39, C32, C33 are reused with new values and roles; new TP3 (IMON) and TP4 (FLT). Hierarchical pins now: in VBUS, DAC_HV, HV_DIS; out 3V3, 3V3_D, APD_BIAS, HV_MON. Budget about 0.19 A worst case from +5V plus up to 35 mA on 3V3 for the LVDS104 fan-out U50 (estimates, not measured); radio must stay disabled. UNRESOLVED: whether a bus-powered hub holds the module to 100 mA ("use a laptop root port or a powered hub"); USB-alone HV start is stepped from the low-bias end. The revision 3 TPS2121 text above is superseded.
+
+## Revision 5 (review MINOR set, 2026-10-23, decision 32; hand edit with KiCad closed, PROPOSED)
+- R1 17.8k -> 18.7k 1 %: 3V3 = 1.193 V x (1 + 18.7/10) = 3.42 V nominal, window about 3.34 to 3.50 V (TPS79901 VFB 1.169 to 1.217 V, 2 % overall accuracy, `docs/datasheets/tps799.pdf` electrical characteristics, plus 1 % divider parts). Reason: OPA855 VS minimum is 3.3 V (SBOS622D recommended operating conditions) and the old 3.25 to 3.38 V window dipped below it. VERIFIED against those datasheets; the arithmetic is PROPOSED, nothing measured.
+- Ceiling check: OPA857 VS max 3.6 V (SBOS630D recommended operating conditions), SN65LVDS104 VCC 3.0 to 3.6 V (`docs/research/lvds-fanout-and-foreign-host.md` supply row), TLV3605 up to 5.5 V. The 3.50 V worst case clears all three.
+- D2 DFLS1150-7 is now fitted (dnp no). It is the LT8365 reference-circuit SW-to-GND clamp, fitted for the first bench build.
+- Checked, no change: R33 100k pull-up stays on 3V3_D, not +5V. IO0 (HV_DIS) is Hi-Z at reset (C6 datasheet Table 2-2), so the pull-up holds Q3 on; a +5V pull-up would feed 5 V into a non-5 V-tolerant ESP32 pad. If 3V3_D is absent the ESP32 is unpowered too; that case stays UNRESOLVED as above.
+- Deferred: a VBUS TVS ahead of the eFuse needs a part (none in the lab library; a 5 V SMF/SMAJ class TVS). Not added. UNRESOLVED.

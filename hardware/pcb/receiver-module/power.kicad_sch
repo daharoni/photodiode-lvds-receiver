@@ -8907,7 +8907,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
-		(dnp yes)
+		(dnp no)
 		(uuid "0ff2279f-5ba0-4ea3-bdae-d07c2f7fba1d")
 		(property "Reference" "D2"
 			(at 119.38 106.68 0)
@@ -13429,7 +13429,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "17.8k 1%"
+		(property "Value" "18.7k 1%"
 			(at 137.922 69.596 0)
 			(show_name no)
 			(do_not_autoplace no)

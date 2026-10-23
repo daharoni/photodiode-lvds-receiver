@@ -28,7 +28,7 @@ hierarchical sheets, 221 components, 144 nets, ERC 0 errors / 0 warnings, spec
 revision 4 after decision 14); the generators are frozen and edits go through the
 KiCad GUI. The PCB is a 6-layer JLCPCB JLC06161H-3313 board on a 75 x 50 mm
 placeholder outline with all 221 footprints placed by the first-pass placement
-script; nothing is routed. No hardware, no measurements; three ngspice simulations
+script; routing is complete (0 unconnected, DRC baseline 44 dispositioned in the review README). No hardware, no measurements; three ngspice simulations
 with TI models exist (`docs/simulation/README.md`, SIMULATED, not VERIFIED).
 Component choices are provisional until the bring-up gates in
 `docs/bringup/gates.md` pass. The largest open risks are the APD bias supply, the

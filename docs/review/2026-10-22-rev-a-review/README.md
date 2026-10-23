@@ -193,16 +193,20 @@ the board but should be settled before the headstage emitter is frozen.
 
 ## MINOR (condensed; details and page citations in the reports)
 
-Schematic: OPA855 gain 7.03 at the minimum stable gain of 7 with 1 % parts (use 0.1 % or ~7.6); 3V3 rail window
-3.25 to 3.38 V dips below the OPA855 3.3 V minimum (retarget ~3.45 V); TIA_CTRL is a bare GPIO tie with a
-solder jumper on the net (add 1 to 4.7k); OPA857 10 nF HF bypass from the datasheet layout example absent;
-dielectric/voltage/tolerance fields missing from all passives (C50 >= 400 V C0G, R50 200 V, C54/C87 C0G);
-TLV3605 LE/HYS floating; C200 has both pins on GND (orchestrator-verified; ADC_AIN3 has only R209 and U63.7);
-TPS7A2033 300 mA vs the ESP32-C6 0.5 A supply requirement (radio must stay off, enforce in firmware config);
-R199 100k at the SN65HVD230 Rs maximum (use 82 to 91k); RS has no GPIO so "RS high standby" in the docs is not
-available; VBUS has no TVS ahead of the eFuse; R33 pulls HV_DIS up to 3V3_D, so the gate floats if that rail is
-absent (pull up to +5V instead); HV_MON loads the ADS1115 by ~1.7 % (calibratable); D2 (DNP) is the SW-to-GND
-clamp of the p.30 reference, fit it for the first bench build; eFuse FLT not routed to the ESP32 (documented).
+Schematic (status 2026-10-23, decision 32): OPA855 gain 7.03 at the minimum stable gain of 7 with 1 % parts
+(DONE: R53/R54 0.1 %); 3V3 rail window 3.25 to 3.38 V dips below the OPA855 3.3 V minimum (DONE: R1 18.7k,
+3.42 V nominal, 3.34 to 3.50 V); TIA_CTRL is a bare GPIO tie with a solder jumper on the net (DONE: R214 2.2k in
+series, placed on the PCB); OPA857 10 nF HF bypass from the datasheet layout example absent (CHECKED, NO CHANGE: the
+datasheet text asks for 0.1 uF at +VS, which C56/C57 are); dielectric/voltage/tolerance fields missing from all
+passives (DONE for the parts that matter: C50 500 V C0G, R50 200 V, C54/C87 C0G in the value fields; the lab symbols
+have no separate fields); TLV3605 LE/HYS floating (CHECKED, NO CHANGE: datasheet-characterised, VHYST 0 mV for
+RHYST floating); C200 has both pins on GND (DONE: C200 DNP); TPS7A2033 300 mA vs the ESP32-C6 0.5 A supply
+requirement (DONE: firmware README states the radio is never started); R199 100k at the SN65HVD230 Rs maximum
+(DONE: 91k); RS has no GPIO so "RS high standby" in the docs is not available (DONE: wording fixed); VBUS has no
+TVS ahead of the eFuse (DEFERRED: needs a lab-library part); R33 pulls HV_DIS up to 3V3_D (KEPT: IO0 is Hi-Z at
+reset so the pull-up holds HV off, and a +5V pull-up would feed a non-5 V-tolerant pad); HV_MON loads the ADS1115
+by ~1.7 % (ACCEPTED, calibratable); D2 (DNP) is the SW-to-GND clamp of the p.30 reference (DONE: fitted); eFuse
+FLT not routed to the ESP32 (ACCEPTED, documented).
 
 PCB: TIA_IN_WINDOW is L-shaped and leaves inner planes 0.13 mm from the IN pad under pins 13/14 (make it a
 rectangle); SYNC pin has a 7.9 mm stub to DNP parts 0.7 mm from the SW pad (cut back); D2 DNP branch hangs 3.1 mm
@@ -216,15 +220,16 @@ a single via with 0.15 mm necks (add a second via, widen); GND stitching absent 
 fiducials, no panel plan, J50 overhang and the ESP32 0.25 mm from the edge constrain process rails; J50 shell
 slots 0.2 mm vs the 0.35 mm plated-slot minimum (confirm at upload); mounting-hole via rings 0.35 mm wall-to-wall
 (move to r = 1.8 mm or use the `_Pad` variant, clears all 32 hole_to_hole items); duplicate GND via at
-(52.65, 11.7); dangling vias on VCM_REF and TIA_CTRL and a 0.05 mm EN nub (delete); no test points for VBUS or
+(52.65, 11.7) (DONE 2026-10-23); dangling vias on VCM_REF and TIA_CTRL and a 0.05 mm EN nub (DONE 2026-10-23, DRC
+48 to 44); no test points for VBUS or
 +5V; no silkscreen text at all (no HV warning, no TP names, no K/A mark at D10); ESP32 antenna keep-out matches
 Espressif Fig. 25 margins but the module is mid-edge (radio unused; README fix). Optical window: a filter holder
 over about 8.6 mm OD collides with C50 (moving C50 for P2 helps).
 
-Docs: CLAUDE.md, the PCB README, architecture.md and receiver-guide.html still say "nothing routed";
-requirements.md still calls the 3.3 V-bank LVDS input UNVERIFIED (decision 3 says VERIFIED); decision 9's
-"external HV module pads" are not in the netlist; architecture.md "Q(M) peaks at M 35-60"; module-controller.md
-line 69 has the old HV_EN polarity; firmware/esp32 README quotes the trimmer-fitted DAC span.
+Docs: CLAUDE.md, the PCB README, architecture.md and receiver-guide.html still say "nothing routed" (fixed 2026-10-23);
+requirements.md still calls the 3.3 V-bank LVDS input UNVERIFIED (decision 3 says VERIFIED) (fixed 2026-10-23); decision 9's
+"external HV module pads" are not in the netlist (addendum on decision 9, 2026-10-23); architecture.md "Q(M) peaks at M 35-60" (fixed 2026-10-23, decision 31); module-controller.md
+line 69 has the old HV_EN polarity (fixed 2026-10-23); firmware/esp32 README quotes the trimmer-fitted DAC span (fixed 2026-10-23).
 
 ## DRC disposition (52 items)
 

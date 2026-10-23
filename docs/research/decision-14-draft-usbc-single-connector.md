@@ -70,7 +70,7 @@ The choices below are the orchestrator's reconciliation of CONN, FAN and PWR. Wh
 **c. CAN.**
 - R199 (HVD230 RS resistor) from 10 k to 100 k. With 10 k the rise time is 80/120/160 ns and the SLLA270 p.9 one-third-critical-length rule allows a stub of only about 2.7 m at the minimum edge; with 100 k the rise time is 600/800/1200 ns (HVD230 p.8) and the same rule allows at least 20 m, with t(LOOP) 535 to 990 ns still about 12 % of the 8 us bit at 125 kbit/s (VERIFIED datasheet numbers, PROPOSED arithmetic, FAN 4.2). Bench-verify.
 - Termination at the breakout only (split 2 x 60.4 ohm + 4.7 nF, SLLA270 p.4 and p.8 Fig. 10); the module's R182/R183/C180 stay DNP for single-module bench use. Two bused cable pairs form about 45 ohm in parallel; acceptable at these edge rates (PROPOSED).
-- Firmware keeps CAN silent (RS high standby or listen-only) until it sees bus traffic or the FPGA master, so a lone module on a laptop never transmits into the host's SS receive pair (PROPOSED, FAN 3.2 item 6).
+- Firmware keeps CAN silent until it sees bus traffic or the FPGA master, so a lone module on a laptop never transmits into the host's SS receive pair (PROPOSED, FAN 3.2 item 6). The HVD230 RS pin is a fixed resistor (R199 91k), not a GPIO, so silence means not transmitting (listen-only); standby mode is not available.
 - HVD230 CANH/CANL tolerate -4 to 16 V and +-25 V transient (HVD230 p.5, VERIFIED); input resistance 20 to 50 kohm per pin (p.7) is three orders above a USB 3 receiver termination of 18 to 30 ohm (TUSB p.8, secondary), so a USB 3 host should not detect a receiver (PROPOSED; USB 3.2 spec not obtained).
 
 **d. Power input: TPS259631DDAR eFuse replaces the TPS2121 U5 (fallback: TPS2121 with IN2 grounded).**

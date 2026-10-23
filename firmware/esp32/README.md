@@ -26,7 +26,7 @@ Build: the full project (all twelve components and `main`) compiles and links wi
 | BOOT / RESET | tactile switches on IO9 and EN | same document |
 | AUX | IO7, 1 k to the tied SBU1/SBU2 net (AUX_CAB) on the USB-C receptacle; IO21 is free (AUX2 removed, decision 14) | spare GPIO to the FPGA (used for lane identification, protocol doc s.1.2); firmware holds the AUX driver high-Z until LINK_ALL or the host class is known |
 | STATUS LED | IO23 | |
-| DAC_HV | MCP4728 OUTC | 0 V = MAXIMUM bias about 215 V, full scale = minimum (about 104 V with the trimmer at its default; 55 V hardware floor with both trims at full scale); DAC alone spans 61 V, 14.9 mV per code at the DAC pin, about 15 mV of bias per code (apd-bias-design.md s.3.2, calculated) |
+| DAC_HV | MCP4728 OUTC | 0 V = MAXIMUM bias about 219 V, full scale = minimum. The trimmer is gone: RV1/R15 are not fitted and the span is set by DAC_HV through the LT8365 feedback (production build, Rd = 160 k, 25 C): code 0 = 219.4 V hardware maximum, mid = 134.9 V, 0xFFF = 50.3 V, span 169 V, about 41.3 mV of bias per code; firmware clamps hv_min >= 100 V (apd-bias-design.md line 82 and docs/schematic/power.md, calculated) |
 | DAC_TH | MCP4728 OUTB | threshold offset = (DAC - VCM_REF) x 1/101, +-16.3 mV, 8 uV per code (slicer.md, calculated); code 2048 (1.65 V at VDD ref) = zero offset |
 | ADS1115 | AIN0 HV_MON = APD_BIAS/101, AIN1 RSSI (negative-peak detector of the TIA output, falls with light, idle about 1.9-2.0 V, tau 1 ms), AIN2 VTH_MON (comparator threshold node), AIN3 GND | each input 10 k + 10 nF; inputs must stay within GND-0.3 V to VDD+0.3 V (SBAS444E p.2, VERIFIED) |
 | Temperature | NTC in the LT8365 feedback divider (hardware, not readable); ESP32-C6 die sensor (-40 to 125 C, C6 DS s.4.2.2.2 p.58, VERIFIED) | die temperature is telemetry only; it is not the APD temperature |
@@ -187,6 +187,8 @@ Result codes drive the STATUS LED (IO23), PROPOSED: running = fast 5 Hz blink; P
 The static page described in research/esp32-usb-tooling.md s.4 flashes (ESP Web Tools), then opens Web Serial, sends `selftest`, renders each step as pass or fail and shows the live JSON telemetry. Flashing needs Chrome or Edge on Windows, macOS or Linux; the CDC port needs no driver (TRM s.32.2-32.3 p.1027-1029, Microsoft Usbser.sys; clean Windows 10 test pending). No FPGA, cable or toolchain involved. PROPOSED.
 
 ## 9. USB-only operation and its current budget (input to the hardware agent)
+
+The TPS7A2033 3V3_D regulator is rated 300 mA, so the Wi-Fi/BLE radio must never be started (sdkconfig: radio disabled); the budget row below already assumes "radio never started" (PROPOSED).
 
 The USB power path is PROPOSED hardware described in `docs/research/usb-standalone-power.md` (historical decision-13 text; decision 14 replaced the mux with a TPS259631 eFuse on one 24-pin USB-C; worst-case 5 V draw there about 0.19 A with a 1 mA HV load, 0.24 A with margin). This section gives the firmware-side self-test draw, to be compared with that budget. Estimates only, nothing measured; datasheet typical-to-maximum values, from 5 V:
 
