@@ -132,7 +132,9 @@ the board but should be settled before the headstage emitter is frozen.
   fill/cap specified anywhere.** "Vias tented" cannot apply inside a pad. Either specify epoxy-filled-and-capped
   for all vias at order time (confirm JLCPCB accepts 0.25/0.45 with it, and the price) or move the cap and
   signal vias 0.6 to 0.8 mm off the pads; a 0.45 mm via leaves almost no solderable area on a 0402 pad even
-  when filled. Add to the G4 pre-order checklist. [pi-dfm M1]
+  when filled. Add to the G4 pre-order checklist. [pi-dfm M1] **Status: DECIDED 2026-10-22, decision 30** (all vias
+  epoxy filled and capped at order; G4 item added with the DFM and price checks; the 0402 solderable-area point is
+  recorded as an assembly watch item).
 - **P7. J50 shell posts have no GND vias and thermal-relief connections (4 of the 5 starved_thermal items)**, against
   decision 16 ("several vias each"). Set the 8 S1 pads to solid connection and add 2-3 GND vias beside each large
   post, outside the B-row antipad. [pi-dfm M2] **Status: FIXED 2026-10-22, decision 28** (8 S1 pads solid on every layer, the

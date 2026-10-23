@@ -33,7 +33,7 @@ All rows VERIFIED from CAP unless noted. Where JLCPCB gives one multilayer figur
 | Outer copper | 1 oz or 2 oz (multilayer) | the impedance calculator supports only 1 oz outer |
 | Board thickness | FR-4 0.4/0.6/0.8/1.0/1.2/1.6/2.0 mm; tolerance +/-10 % at >= 1.0 mm (1.6 mm: 1.44-1.76 mm) | |
 | Surface finish | HASL (leaded / lead-free), ENIG, OSP. FR-4 with 6 or more layers does NOT support HASL | so 6 layers implies ENIG or OSP |
-| Via-in-pad / filled vias | "Epoxy filled & capped" or "copper paste filled & capped", via diameter 0.15-0.55 mm; "default for 6-layer and above" (CAP wording); vias plugged with mask must be <= 0.5 mm with >= 0.35 mm clearance to mask openings | Cost of filling not stated on CAP (UNRESOLVED) |
+| Via-in-pad / filled vias | "Epoxy filled & capped" or "copper paste filled & capped", via diameter 0.15-0.55 mm; "default for 6-layer and above" (CAP wording); vias plugged with mask must be <= 0.5 mm with >= 0.35 mm clearance to mask openings | Cost of filling not stated on CAP (UNRESOLVED). **Order choice (Daniel, 2026-10-22, decision 30): Epoxy Filled & Capped for every via**, since 155 of the 209 vias are in pads |
 | Castellations | not needed (CAP: 0.5 mm min if ever used) | |
 | Impedance as order option | Yes, multilayer only; calculator-defined stackup | |
 
