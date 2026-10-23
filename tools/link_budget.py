@@ -5,7 +5,17 @@ Chain: LED radiant intensity -> irradiance at receiver -> collected power
 (detector area x optical gain, limited by etendue) -> photocurrent (x avalanche
 gain for an APD) -> TIA swing and noise -> Q / BER -> required VGA gain.
 
-Python 3 standard library only.  Modes: --sweep (tables 1-7), --apd-sweep (APD tables).  Run `python3 tools/link_budget.py --help`.
+Python 3 standard library only.  Modes: --sweep (tables 1-7), --apd-sweep (APD tables),
+--apd-budget (review A1/A2 tables R0-R5: chain noise bandwidth, energy check, required
+emitter, Q vs M, range in optical dB, weak-end margin).  Run `python3 tools/link_budget.py --help`.
+
+Revision 2026-10-22 (review A1, A2): default noise bandwidth is the as-built ~70 MHz
+(OPA857 ~100 MHz into the 68 MHz R56/C54 low-pass), not 0.7 x bit rate; APD tables use
+the OPA857 Fig. 9 noise at the detector capacitance by default; target emitters are
+costed from radiant FLUX and a wall-plug efficiency (WPE), not from the SFH 4715AS
+0.9 mW/sr/mA figure (a +/-45 deg part) applied to a 140 deg beam.
+Range figures: photocurrent is proportional to optical power, so
+optical dB = 10 log10(P2/P1) = (20 log10(I2/I1)) / 2 = electrical dB / 2.
 Values tagged DATASHEET come from vendor documents; DATASHEET-DERIVED are scaled
 from them; ASSUMED are engineering guesses.  See docs/calculations/link-budget.md.
 
@@ -27,7 +37,25 @@ V_625 = 0.321                  # photopic V(625 nm), ASSUMED from CIE table (app
 BIT_RATE = 50e6                # baud, 8b/10b NRZ, UI = 20 ns
 BW_REF = 135e6                 # OPA857 noise-spec brickwall, Hz
 DUTY = 0.5                     # NRZ average duty for electrical power
-WPE = 0.30                     # wall-plug efficiency for flux->electrical estimates, ASSUMED
+WPE = 0.30                     # wall-plug efficiency for flux->electrical estimates, ASSUMED (optimistic)
+BW_BUILT_MHZ = 70.0            # as-built noise-equivalent bandwidth, PROPOSED (see chain_neb())
+F_LPF = 1 / (2 * math.pi * 49.9 * 47e-12)   # R56 49.9 ohm / C54 47 pF = 67.9 MHz (frontend.md item 5)
+# OPA857 20k closed-loop -3 dB: 105 MHz at 1.5 pF (SBOS630D p.6, DATASHEET); 99 MHz at 6 pF (ngspice, SIMULATED)
+F_TIA_RANGE = (99e6, 106e6)
+# Clip / saturation levels of the built chain, peak-to-peak photocurrent at the TIA input (after M):
+# post-amp clip = Vswing / (G x Rt_eff), G = 7, Rt_eff 18.2k (20k) / 4.5k (5k) (OPA857 SBOS630D p.6 note 4);
+# Vswing 1.0 Vpp (symmetric about the 1.65 V baseline: VOL 1.15 V max, VOH 2.35 V min at 3.3 V,
+# OPA855 SBOS622D p.7) .. 1.15 Vpp (docs/research/post-amp-slicer.md).  TIA saturation 60 / 240 uA
+# (OPA857 SBOS630D p.15, section 7.3.1).
+G_POST = 7.0
+RT_EFF = {20e3: 18.2e3, 5e3: 4.5e3}
+POST_SWING_VPP = (1.0, 1.15)
+TIA_SAT = {20e3: 60e-6, 5e3: 240e-6}
+# Reference NIR emitter QBLP601-2IR4 (link-components.md section 4, datasheet V1.0 2021-09-17):
+# 1.0 mW/sr typ at 20 mA, 140 deg, Vf 1.6 V typ.  WPE implied by a cos^m beam is computed in
+# wpe_reference() (DATASHEET-DERIVED; the datasheet gives no radiant flux).
+QBLP_IE_20MA = 1.0e-3
+QBLP_VF = 1.6
 
 
 # --------------------------------------------------------------------------
@@ -68,7 +96,7 @@ EMITTERS = {
     "red": Emitter("Red Wurth 150060RS75003 (625 nm)", 625.0,
                    mcd_to_w_per_sr(530.0), 20.0, 30.0, 140.0, 2.0),   # DATASHEET + V(l); Vf ASSUMED
     "nir": Emitter("NIR QT Brightek QBLP601-2IR4 (765 nm)", 765.0,
-                   1.0e-3, 20.0, 50.0, 140.0, 1.5),                    # DATASHEET typ; Vf ASSUMED
+                   1.0e-3, 20.0, 50.0, 140.0, 1.6),                    # DATASHEET typ (Ie, Vf 1.6 V typ)
     # OSRAM SFH 4550 v1.8 (2021-11-18): Ie typ 1100 mW/sr @100 mA (710..2800 bins),
     # half angle typ 3 deg, IF max 100 mA, Vf typ 1.5 V, tr/tf typ 12 ns.  Pulsed 1 A
     # (tp<=400us, D<=0.5%) gives 8500 mW/sr typ -- NOT usable for continuous NRZ.
@@ -356,6 +384,103 @@ def apd_m_needed(q_target, bound="lo", m_max=1000.0, **kw):
 
 
 # --------------------------------------------------------------------------
+# Review A1/A2 helpers (2026-10-22): energy, bandwidth, M optimum, optical-dB ranges
+# --------------------------------------------------------------------------
+def wpe_reference():
+    """WPE of the reference QBLP601-2IR4 at 20 mA: flux (cos^m, 140 deg) / (I x Vf).
+
+    1.0 mW/sr x 2 pi/(m+1) = 3.82 mW optical from 20 mA x 1.6 V = 32 mW -> ~12 %
+    (DATASHEET-DERIVED: the beam shape is the cos^m assumption, not a datasheet flux).
+    """
+    return QBLP_IE_20MA * beam_flux_factor(140.0) / (20e-3 * QBLP_VF)
+
+
+def emitter_cost(i_e, view_deg, wpe):
+    """(on-state flux W, average electrical W at 50 % duty) for on-axis intensity i_e (W/sr)."""
+    flux = i_e * beam_flux_factor(view_deg)
+    return flux, flux / wpe * DUTY
+
+
+def chain_neb(f_tia, q_tia=0.7071, f_lpf=F_LPF, f_max=3e9, n=60000):
+    """Noise-equivalent bandwidth (Hz) of OPA857 (2nd-order, f_tia, Q) x one-pole low-pass.
+
+    Also returns the 'equivalent B' for the flat-density scaling I135 sqrt(B/135 MHz), if the
+    datasheet 135 MHz brickwall figure already includes the OPA857's own roll-off.
+    Model only (PROPOSED): real response at 6 pF shows ~1 dB peaking (frontend.md, SIMULATED).
+    """
+    def h2_tia(f):
+        x = f / f_tia
+        return 1 / ((1 - x * x) ** 2 + (x / q_tia) ** 2)
+
+    def h2_lpf(f):
+        return 1 / (1 + (f / f_lpf) ** 2)
+
+    def integ(g, fmax):
+        df = fmax / n
+        return sum(g((i + 0.5) * df) for i in range(n)) * df
+
+    full = integ(lambda f: h2_tia(f) * h2_lpf(f), f_max)
+    to135 = integ(h2_tia, BW_REF)
+    return full, BW_REF * full / to135
+
+
+def tia_i135(rt, cs_pf, mode):
+    """OPA857 i_rms in a 135 MHz brickwall: 'datasheet' = 1.5 pF table value, else Fig. 9/10 read at cs_pf."""
+    if mode == "datasheet":
+        return TIA_IRMS_135[rt]
+    return tia_noise_fig(rt, cs_pf)
+
+
+def q_apd_power(p_on, det, wl_nm, m, rt, bw, i135, bound="lo", er=math.inf, ambient=0.0):
+    """Q for on-state optical power p_on (W) on the die, avalanche gain m."""
+    r = responsivity(det, wl_nm)
+    pp, avg = ook_levels(r * p_on, er)
+    f = excess_noise_factor(m, det["k"], det.get("x")) if det.get("apd") else 1.0
+    n = noise_rms(rt, avg, bw, det["dark_nA"] * 1e-9, ambient, bound, m, f, i135)
+    return q_factor(pp * m, n)
+
+
+def m_grid(m_hi, pts=400):
+    return [10 ** (i * math.log10(m_hi) / pts) for i in range(pts + 1)]
+
+
+def best_m_for_power(p_on, m_cap, **kw):
+    """(Q_max, M at Q_max) over 1 <= M <= m_cap."""
+    best = (-1.0, 1.0)
+    for mm in m_grid(m_cap):
+        q = q_apd_power(p_on, m=mm, **kw)
+        if q > best[0]:
+            best = (q, mm)
+    return best
+
+
+def p_floor(q_target, m=None, m_cap=100.0, **kw):
+    """Smallest on-state optical power (W) on the die reaching q_target.
+
+    m given: at that fixed M.  m None: at the best M <= m_cap (the weak-end setting).
+    Returns (P, M used).
+    """
+    def ok(p):
+        if m is not None:
+            return q_apd_power(p, m=m, **kw) >= q_target, m
+        q, mb = best_m_for_power(p, m_cap, **kw)
+        return q >= q_target, mb
+    lo, hi = 1e-15, 1e-3
+    for _ in range(80):
+        mid = math.sqrt(lo * hi)
+        if ok(mid)[0]:
+            hi = mid
+        else:
+            lo = mid
+    return hi, ok(hi)[1]
+
+
+def die_power(i_e, view_deg, lateral_m, height_m, det, filter_T):
+    """On-state optical power on the bare die (W) for on-axis intensity i_e."""
+    return collected_power(irradiance(i_e, view_deg, lateral_m, height_m, filter_T), det, 1.0)
+
+
+# --------------------------------------------------------------------------
 # Reporting
 # --------------------------------------------------------------------------
 def summary(label, p, args, gain_used, pavg):
@@ -574,49 +699,68 @@ def sweep(args):
         print(f"{k:<8}{cur:>6g}{p['Q']:>9.3g}{p['Q_hi']:>9.3g}{db(nl):>13.1f}{db(nh):>13.1f}")
 
 
+def target_emitters(wpe_ref):
+    """Reference QBLP601 at 50 mA plus 140 deg targets costed from flux / WPE (review A1 fix).
+
+    Drive current for a target = (flux / WPE_ref) / Vf: what a QBLP601-efficiency LED would
+    need; it is NOT the 0.9 mW/sr/mA SFH 4715AS figure (a +/-45 deg part) used before.
+    """
+    out = [("NIR QBLP601 50 mA", EMITTERS["nir"], 50.0)]
+    for mw in (10, 30, 100):
+        flux, _ = emitter_cost(mw * 1e-3, 140.0, wpe_ref)
+        cur = flux / wpe_ref / QBLP_VF * 1e3
+        out.append((f"{mw} mW/sr 140deg", Emitter(f"Target emitter {mw} mW/sr", 850.0, mw * 1e-3,
+                                                  cur, cur, 140.0, QBLP_VF), cur))
+    return out
+
+
 def apd_sweep(args):
     """APD tables: Q vs M, minimum M, emitter power, ambient saturation (850 nm, 20k)."""
     h = args.height_cm / 100
     lat = args.lateral_cm / 100
     bw = args.bw_mhz * 1e6
     q9, q3 = q_for_ber(1e-9), q_for_ber(1e-3)
-    lo_n, hi_n = tia_noise_bounds(20e3, bw)
-    ms = (10, 20, 30, 50, 75, 100)
-    per_ma = 0.9e-3      # W/sr per mA for the generic target emitters
-    emitters = [("NIR QBLP601 50 mA", EMITTERS["nir"], 50.0)]
-    for mw in (30, 100):
-        cur = mw / (per_ma * 1e3)
-        emitters.append((f"{mw} mW/sr 140deg", Emitter(f"Target emitter {mw} mW/sr", 850.0, mw * 1e-3,
-                         cur, cur, 140.0, 1.5), cur))
+    ms = (10, 20, 30, 50, 75, 100, 150)
+    wref = wpe_reference()
+    emitters = target_emitters(wref)
     apds = [k for k, d in DETECTORS.items() if d.get("apd")]
     print(f"APD SWEEP: {lat*100:g} cm lateral, {args.height_cm:g} cm height, 850 nm, R_T=20k, T={args.filter_T}, "
           f"B={args.bw_mhz:g} MHz, gain 1x, ER=inf, ambient {args.ambient_nA:g} nA")
     print(f"Excess noise model: {'F = M^x (Hamamatsu, x per part)' if EXCESS_MODEL == 'power' else 'McIntyre F = kM + (2-1/M)(1-k)'}"
           f"{'; McIntyre k=0.02 for parts with no x (C30902EH)' if EXCESS_MODEL == 'power' else ''}")
-    print(f"TIA noise at 20k (OPA857 datasheet bounds at Cs = 1.5 pF): low {lo_n*1e9:.2f} nA, high {hi_n*1e9:.2f} nA; "
-          f"Q_lo = low-noise bound, Q_hi = high-noise bound")
+    print("TIA noise at 20k, i135 per APD (" + ("OPA857 datasheet value at Cs = 1.5 pF" if args.tia_cs == "datasheet"
+          else "OPA857 Fig. 9 read at the APD capacitance") + "): " + ", ".join(
+          f"{k} {tia_i135(20e3, DETECTORS[k]['c_pf'], args.tia_cs)*1e9:.1f} nA -> low "
+          f"{tia_noise_bounds(20e3, bw, tia_i135(20e3, DETECTORS[k]['c_pf'], args.tia_cs))[0]*1e9:.1f} nA"
+          for k in apds) + "; Q_lo = low-noise bound (i135 sqrt(B/135 MHz)), Q_hi = high-noise bound (i135)")
     print(f"Target Q: 6.00 (BER 1e-9), {q3:.2f} (BER 1e-3).  R at 850 nm for all emitters (NIR baseline is 765 nm; ~2% diff).")
     kw0 = dict(lateral_m=lat, height_m=h, rt=20e3, filter_T=args.filter_T, er=args.er, bw=bw,
                ambient=args.ambient_nA * 1e-9, target_vpp=args.target_vpp)
 
     def kwf(em, det):
-        return dict(i_e=None, view_deg=em.view_deg, wl_nm=850.0, det=det, **kw0)
+        return dict(view_deg=em.view_deg, wl_nm=850.0, det=det,
+                    i135=tia_i135(20e3, det["c_pf"], args.tia_cs), **kw0)
 
-    print("Emitters: " + "; ".join(f"{n}: Ie {em.intensity(c)*1e3:g} mW/sr, {c:.1f} mA, Pavg {em.avg_power_mW(c):.1f} mW"
-                                  for n, em, c in emitters) + "  (Vf 1.5 V, 50% duty; targets at 0.9 mW/sr/mA)")
+    print(f"Emitters (140 deg, flux = Ie x 2pi/(m+1) = Ie x {beam_flux_factor(140.0):.3f} sr; current at the "
+          f"QBLP601 WPE {wref:.1%}, Vf {QBLP_VF} V; Pavg = flux/WPE x 0.5):")
+    for n, em, c in emitters:
+        flux, pa = emitter_cost(em.intensity(c), em.view_deg, wref)
+        _, pa30 = emitter_cost(em.intensity(c), em.view_deg, WPE)
+        print(f"  {n:<19} Ie {em.intensity(c)*1e3:6.3g} mW/sr, flux {flux*1e3:6.1f} mW, I {c:7.1f} mA, "
+              f"Pavg {pa*1e3:6.1f} mW at WPE {wref:.1%} ({pa30*1e3:5.1f} mW at {WPE:.0%} ASSUMED)")
     print("TABLE A: Q (low-noise bound / high-noise bound) vs avalanche gain M")
     print(f"{'APD':<10}{'M':>4}" + "".join(f"{n:>22}" for n, _, _ in emitters))
     for dn in apds:
         d = DETECTORS[dn]
         for m in ms:
-            row = f"{dn:<10}{m:>4}"
+            row = f"{dn:<10}{m:>4}" + ("!" if m > d["m_max"] else " ")
             for n, em, c in emitters:
-                p = link_point(em.intensity(c), m_apd=float(m), **{k: v for k, v in kwf(em, d).items() if k != "i_e"})
+                p = link_point(em.intensity(c), m_apd=float(m), **kwf(em, d))
                 row += f"{p['Q']:>10.3g} /{p['Q_hi']:>9.3g}"
             print(row)
-    print(f"  M max (datasheet): " + ", ".join(f"{k} {DETECTORS[k]['m_max']:g}" for k in apds)
+    print(f"  '!' = above datasheet M. M max (datasheet): " + ", ".join(f"{k} {DETECTORS[k]['m_max']:g}" for k in apds)
           + "; excess noise per part: " + ", ".join(f"{k} {excess_label(DETECTORS[k])}" for k in apds) + "\n")
-    print("TABLE B: minimum M for Q = 6 and Q = 3.09 (lo / hi noise bound) and average emitter power")
+    print("TABLE B: minimum M for Q = 6 and Q = 3.09 (lo / hi noise bound) and average emitter power at the QBLP601 WPE")
     hdr = (f"{'APD':<10}{'emitter':<19}{'I(mA)':>7}{'Pavg(mW)':>9}{'Q6 lo':>8}{'Q6 hi':>8}{'3.09 lo':>9}{'3.09 hi':>9}"
            f"{'Qmax lo (M)':>14}{'Qmax hi (M)':>14}")
     print(hdr)
@@ -628,15 +772,17 @@ def apd_sweep(args):
     for dn in apds:
         d = DETECTORS[dn]
         for n, em, c in emitters:
-            kw = dict(i_e=em.intensity(c), **{k: v for k, v in kwf(em, d).items() if k != "i_e"})
+            kw = dict(i_e=em.intensity(c), **kwf(em, d))
             r6 = {b: apd_m_needed(q9, b, **kw) for b in ("lo", "hi")}
             r3 = {b: apd_m_needed(q3, b, **kw) for b in ("lo", "hi")}
             mm = d["m_max"]
+            pa = emitter_cost(em.intensity(c), em.view_deg, wref)[1] if n != "NIR QBLP601 50 mA" \
+                else em.avg_power_mW(c) * 1e-3
             qm = [f"{r6[b][1]:.2f} (M{r6[b][2]:.0f})" for b in ("lo", "hi")]
-            print(f"{dn:<10}{n:<19}{c:>7.1f}{em.avg_power_mW(c):>9.1f}{mfmt(r6['lo'][0], mm):>8}{mfmt(r6['hi'][0], mm):>8}"
+            print(f"{dn:<10}{n:<19}{c:>7.1f}{pa*1e3:>9.1f}{mfmt(r6['lo'][0], mm):>8}{mfmt(r6['hi'][0], mm):>8}"
                   f"{mfmt(r3['lo'][0], mm):>9}{mfmt(r3['hi'][0], mm):>9}{qm[0]:>14}{qm[1]:>14}")
     print("  '!' = above that part's datasheet maximum M; 'none' = never reached for M <= 1000; "
-          "Qmax = peak of Q(M), set by excess noise;\n  1 = target already met at M = 1.\n")
+          "Qmax = peak of Q(M) over M <= 1000, set by excess noise;\n  1 = target already met at M = 1.\n")
     lin = 60e-6
     print("Ambient saturation (OPA857 20k linear range 60 uA): in-band ambient power on the die "
           "P_sat = 60 uA / (M x R850)")
@@ -646,10 +792,178 @@ def apd_sweep(args):
             f"M={m}: {lin/(m*r)*1e6:.2f} uW" for m in (50, 100)))
 
 
+def apd_budget(args):
+    """Review A1/A2 tables R0-R5 for the built S12023-10 + OPA857 20k chain."""
+    det = DETECTORS["S12023-10"]
+    h = args.height_cm / 100
+    lat = args.lateral_cm / 100
+    q9, q3 = q_for_ber(1e-9), q_for_ber(1e-3)
+    wref = wpe_reference()
+    mcap = det["m_max"]
+    print(f"APD BUDGET (review A1/A2): S12023-10 (diam {det['diam_mm']} mm, {det['c_pf']:g} pF, R850 "
+          f"{det['resp'][850]} A/W, F = M^{det['x']}), OPA857 20k, {lat*100:g} cm lateral, {args.height_cm:g} cm "
+          f"height, T = {args.filter_T}, 850 nm, ER = inf, ambient {args.ambient_nA:g} nA, M cap {mcap:g} (datasheet)")
+    print(f"Q target {q9:.2f} (BER 1e-9), floor {q3:.2f} (BER 1e-3).  Optical dB = 10log(P ratio) = electrical "
+          "(20log I) dB / 2.\n")
+
+    # R0 chain noise bandwidth
+    print(f"TABLE R0: noise-equivalent bandwidth of the built chain: OPA857 2nd-order x one-pole "
+          f"{F_LPF/1e6:.1f} MHz low-pass (R56 49.9 / C54 47 pF)")
+    print(f"{'f_TIA(MHz)':>10}{'Q_TIA':>7}{'NEB(MHz)':>10}{'B_eq vs 135 MHz spec(MHz)':>27}")
+    for ft in F_TIA_RANGE:
+        for qt in (0.707, 0.8):
+            neb, beq = chain_neb(ft, qt)
+            print(f"{ft/1e6:>10.0f}{qt:>7.3f}{neb/1e6:>10.1f}{beq/1e6:>27.1f}")
+    print(f"  Default --bw-mhz = {BW_BUILT_MHZ:g} (NEB). B_eq applies if the datasheet 135 MHz brickwall figure "
+          "already includes the\n  OPA857 roll-off; then 70 MHz is optimistic by ~0.4 dB optical. One-pole "
+          "68 MHz alone has NEB 107 MHz.\n")
+
+    # R1 energy check of the old target emitters
+    print("TABLE R1: energy check of the old --apd-sweep targets (0.9 mW/sr/mA, Vf 1.5 V, 140 deg)")
+    print(f"{'emitter':<22}{'Ie(mW/sr)':>10}{'I(mA)':>8}{'P_el,on(mW)':>12}{'flux(mW)':>10}{'implied WPE':>13}")
+    for mw in (30, 100):
+        cur = mw / 0.9
+        flux = mw * beam_flux_factor(140.0)
+        pel = cur * 1.5
+        print(f"{str(mw)+' mW/sr 140deg (old)':<22}{mw:>10g}{cur:>8.1f}{pel:>12.1f}{flux:>10.1f}{flux/pel:>13.0%}")
+    flux = 1.0 * beam_flux_factor(140.0)
+    print(f"{'QBLP601 20 mA':<22}{1.0:>10g}{20.0:>8.1f}{20*QBLP_VF:>12.1f}{flux:>10.2f}{flux/(20*QBLP_VF):>13.1%}")
+    f45 = 900 * beam_flux_factor(90.0)
+    for vf in (1.5, 3.2):
+        print(f"{'SFH 4715AS 1 A, Vf '+str(vf):<22}{900:>10g}{1000:>8.0f}{1000*vf:>12.0f}{f45:>10.0f}"
+              f"{f45/(1000*vf):>13.0%}")
+    print(f"  flux = Ie x 2pi/(m+1): 140 deg (m {lambertian_order(140):.3f}) -> {beam_flux_factor(140):.3f} sr; "
+          f"+/-45 deg (m {lambertian_order(90):.2f}) -> {beam_flux_factor(90):.3f} sr.\n")
+
+    # R2 required intensity at the weak-end optimum
+    print(f"TABLE R2: on-axis Ie needed at {lat*100:g} cm lateral (140 deg beam) at the Q-optimal M (M <= {mcap:g}); "
+          f"Pavg at WPE {wref:.1%} (QBLP601-derived) and {WPE:.0%} (ASSUMED)")
+    hdr = (f"{'case':<22}{'bnd':>4}{'i_tia(nA)':>10}{'Q':>6}{'M_opt':>7}{'P_die(nW)':>10}{'Ie(mW/sr)':>10}"
+           f"{'flux(mW)':>9}{'Pavg@ref':>9}{'Pavg@30%':>9}{'M_opt free':>11}")
+    print(hdr)
+    print("-" * len(hdr))
+    g = die_power(1.0, 140.0, lat, h, det, args.filter_T)     # W on die per W/sr
+    cases = [("old: 35 MHz, 1.5 pF", 35e6, "datasheet"), ("70 MHz, 1.5 pF", 70e6, "datasheet"),
+             ("BUILT: 70 MHz, 6 pF", args.bw_mhz * 1e6, "fig")]
+    req = {}
+    for name, bw, mode in cases:
+        i135 = tia_i135(20e3, det["c_pf"], mode)
+        for bd in ("lo", "hi"):
+            kw = dict(det=det, wl_nm=850.0, rt=20e3, bw=bw, i135=i135, bound=bd, er=args.er,
+                      ambient=args.ambient_nA * 1e-9)
+            lo_n, hi_n = tia_noise_bounds(20e3, bw, i135)
+            for qt in (q9, q3):
+                p, mo = p_floor(qt, m_cap=mcap, **kw)
+                pf, mf = p_floor(qt, m_cap=1000.0, **kw)
+                ie = p / g
+                flux, pa = emitter_cost(ie, 140.0, wref)
+                pa30 = emitter_cost(ie, 140.0, WPE)[1]
+                req[(name, bd, round(qt, 2))] = (p, mo, ie)
+                print(f"{name:<22}{bd:>4}{(lo_n if bd == 'lo' else hi_n)*1e9:>10.1f}{qt:>6.2f}{mo:>7.0f}{p*1e9:>10.2f}"
+                      f"{ie*1e3:>10.2f}{flux*1e3:>9.1f}{pa*1e3:>9.0f}{pa30*1e3:>9.0f}{mf:>11.0f}")
+    print(f"  P_die = on-state power on the bare die: {g*1e6:.3f} nW per mW/sr of on-axis Ie at this geometry.\n"
+          f"  'M_opt free' = optimum without the M <= {mcap:g} cap. Pavg (mW) = flux/WPE x 0.5 "
+          "(emitter only; driver losses not included).\n")
+
+    # R3 Q vs M for the built case at the Q = 6 intensity
+    name = "BUILT: 70 MHz, 6 pF"
+    bw = args.bw_mhz * 1e6
+    i135 = tia_i135(20e3, det["c_pf"], "fig")
+    ie6 = req[(name, "lo", round(q9, 2))][2]
+    print(f"TABLE R3: Q (lo / hi bound) vs M, built case, for three emitters at {lat*100:g} cm lateral")
+    ems = [("QBLP601 50 mA", EMITTERS["nir"].intensity(50.0)), (f"Ie {ie6*1e3:.1f} (Q6 lo)", ie6),
+           ("Ie 30 mW/sr", 30e-3)]
+    print(f"{'M':>5}" + "".join(f"{n:>24}" for n, _ in ems))
+    for m in (10, 20, 30, 50, 75, 86, 100, 114, 150, 200):
+        row = f"{m:>5}"
+        for _, ie in ems:
+            p = die_power(ie, 140.0, lat, h, det, args.filter_T)
+            ql = q_apd_power(p, det, 850.0, m, 20e3, bw, i135, "lo", args.er, args.ambient_nA * 1e-9)
+            qh = q_apd_power(p, det, 850.0, m, 20e3, bw, i135, "hi", args.er, args.ambient_nA * 1e-9)
+            row += f"{ql:>12.2f} /{qh:>9.2f}" + ("!" if m > mcap else " ")
+        print(row)
+    for n, ie in ems:
+        p = die_power(ie, 140.0, lat, h, det, args.filter_T)
+        bl = best_m_for_power(p, 1000.0, det=det, wl_nm=850.0, rt=20e3, bw=bw, i135=i135, bound="lo")
+        bh = best_m_for_power(p, 1000.0, det=det, wl_nm=850.0, rt=20e3, bw=bw, i135=i135, bound="hi")
+        print(f"  {n}: Q-optimal M {bl[1]:.0f} (lo, Q {bl[0]:.2f}) / {bh[1]:.0f} (hi, Q {bh[0]:.2f})")
+    print("  '!' = above the datasheet M of 100. Q-optimum: M^(2+x) = 2 i_tia^2 / (x 2q I_avg B), so it rises as "
+          "the signal falls.\n")
+
+    # R4 range in optical dB
+    mmin = args.m_min
+    print(f"TABLE R4: dynamic range, built case, in on-die optical power (on-state) and both dB conventions; "
+          f"firmware M floor {mmin:g} (ASSUMED)")
+    hdr = f"{'level':<52}{'bnd':>4}{'I_pp(uA)':>10}{'P_die(nW)':>11}{'opt dB':>8}{'el dB':>7}"
+    print(hdr)
+    print("-" * len(hdr))
+    r850 = det["resp"][850]
+    for bd in ("lo", "hi"):
+        kw = dict(det=det, wl_nm=850.0, rt=20e3, bw=bw, i135=i135, bound=bd, er=args.er,
+                  ambient=args.ambient_nA * 1e-9)
+        p6, mw = p_floor(q9, m_cap=mcap, **kw)
+        p3, _ = p_floor(q3, m=mw, **kw)
+        mw_r = mw
+        rows = [(f"Q = 3.09 floor at M {mw_r:.0f}, 20k", p3 * r850 * mw_r, p3),
+                (f"Q = 6 floor (weak end) at M {mw_r:.0f}, 20k", p6 * r850 * mw_r, p6)]
+        for sw in POST_SWING_VPP:
+            ic = sw / (G_POST * RT_EFF[20e3])
+            rows.append((f"post-amp clip {sw:g} Vpp, M {mw_r:.0f}, 20k", ic, ic / (r850 * mw_r)))
+        rows.append((f"OPA857 saturation 60 uA, M {mw_r:.0f}, 20k", TIA_SAT[20e3], TIA_SAT[20e3] / (r850 * mw_r)))
+        for sw in POST_SWING_VPP:
+            ic = sw / (G_POST * RT_EFF[5e3])
+            rows.append((f"post-amp clip {sw:g} Vpp, M {mmin:g}, 5k (firmware)", ic, ic / (r850 * mmin)))
+        rows.append((f"OPA857 saturation 240 uA, M {mmin:g}, 5k (firmware)", TIA_SAT[5e3], TIA_SAT[5e3] / (r850 * mmin)))
+        for lab, ipp, p in rows:
+            od = db(p / p6)
+            print(f"{lab:<52}{bd:>4}{ipp*1e6:>10.3g}{p*1e9:>11.4g}{od:>8.1f}{2*od:>7.1f}")
+        clip_lo = POST_SWING_VPP[0] / (G_POST * RT_EFF[20e3]) / (r850 * mw_r)
+        clip_hi = POST_SWING_VPP[1] / (G_POST * RT_EFF[20e3]) / (r850 * mw_r)
+        print(f"  {bd}: single setting (M {mw_r:.0f}, 20k), Q = 6 to post-amp clip: {db(clip_lo/p6):.1f} to "
+              f"{db(clip_hi/p6):.1f} dB optical; to OPA857 saturation: {db(TIA_SAT[20e3]/(r850*mw_r)/p6):.1f} dB optical")
+        print(f"  {bd}: firmware extension (strong end only): M {mw_r:.0f} -> {mmin:g} = {db(mw_r/mmin):.1f} dB optical; "
+              f"20k -> 5k = {db(RT_EFF[20e3]/RT_EFF[5e3]):.1f} dB optical (post-amp clip), "
+              f"{db(TIA_SAT[5e3]/TIA_SAT[20e3]):.1f} dB (TIA saturation); weak-end extension 0 dB")
+    print("  Electrical (20log I) dB = 2 x optical dB. Firmware knobs (lower M, 5k) only LOWER gain: they move the\n"
+          "  strong end; the weak end is fixed by M <= 100 and 20k, so fade margin = emitter margin (row R5).\n")
+
+    # R5 weak-end margin
+    print(f"TABLE R5: weak-end margin, built case, optical dB above the Q = 6 and Q = 3.09 floors at the best "
+          f"M <= {mcap:g} (lo / hi bound)")
+    hdr = (f"{'emitter (140 deg)':<22}{'Ie(mW/sr)':>10}{'Pavg@ref':>9}{'Pavg@30%':>9}{'off(cm)':>8}{'P_die(nW)':>10}"
+           f"{'Q6 lo':>7}{'Q6 hi':>7}{'Q3.09 lo':>9}{'Q3.09 hi':>9}")
+    print(hdr)
+    print("-" * len(hdr))
+    floors = {}
+    for bd in ("lo", "hi"):
+        kw = dict(det=det, wl_nm=850.0, rt=20e3, bw=bw, i135=i135, bound=bd, er=args.er,
+                  ambient=args.ambient_nA * 1e-9)
+        floors[(bd, 6)] = p_floor(q9, m_cap=mcap, **kw)[0]
+        floors[(bd, 3)] = p_floor(q3, m_cap=mcap, **kw)[0]
+    for n, ie in (("QBLP601 20 mA", 1.0e-3), ("QBLP601 50 mA", 2.5e-3), ("target 10 mW/sr", 10e-3),
+                  ("target 30 mW/sr", 30e-3), ("target 100 mW/sr", 100e-3)):
+        pa = emitter_cost(ie, 140.0, wref)[1]
+        pa30 = emitter_cost(ie, 140.0, WPE)[1]
+        for off in (35, 0):
+            p = die_power(ie, 140.0, off / 100, h, det, args.filter_T)
+            print(f"{n:<22}{ie*1e3:>10.3g}{pa*1e3:>9.0f}{pa30*1e3:>9.0f}{off:>8}{p*1e9:>10.3g}"
+                  f"{db(p/floors[('lo', 6)]):>7.1f}{db(p/floors[('hi', 6)]):>7.1f}"
+                  f"{db(p/floors[('lo', 3)]):>9.1f}{db(p/floors[('hi', 3)]):>9.1f}")
+    print("  Negative = short of the floor. Pavg in mW (emitter only). Margin excludes ambient (0), comparator offset\n"
+          "  and noise, 1/f, ISI, tilt, shadowing and the unmeasured received power (review A4).")
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--sweep", action="store_true", help="print the sweep tables")
     ap.add_argument("--apd-sweep", action="store_true", help="print the APD tables (Q vs M, minimum M, ambient)")
+    ap.add_argument("--apd-budget", action="store_true",
+                    help="review A1/A2 tables R0-R5 (built chain: NEB, energy check, required Ie, M optimum, "
+                         "optical-dB range, weak-end margin)")
+    ap.add_argument("--tia-cs", choices=["fig", "datasheet"], default="fig",
+                    help="APD sweep TIA noise: fig = OPA857 Fig. 9 at the APD capacitance (default, built); "
+                         "datasheet = 15 nA at 1.5 pF (pre-2026-10-22 behaviour)")
+    ap.add_argument("--m-min", type=float, default=5.0, help="lowest usable APD gain for range tables (ASSUMED)")
     ap.add_argument("--excess-model", choices=["power", "mcintyre"], default="power",
                     help="APD excess noise: power = F = M^x (Hamamatsu, default); mcintyre = kM + (2-1/M)(1-k)")
     ap.add_argument("--emitter", choices=list(EMITTERS), help="default: all four emitters")
@@ -668,7 +982,8 @@ def main(argv=None):
     ap.add_argument("--gain", type=float, default=1.0, help="optical gain G_optics (etendue-checked)")
     ap.add_argument("--fov", type=float, default=90.0, help="optic FOV half-angle, deg (sets etendue cap)")
     ap.add_argument("--er", type=float, default=math.inf, help="extinction ratio (default inf)")
-    ap.add_argument("--bw-mhz", type=float, default=35.0, help="noise bandwidth, MHz")
+    ap.add_argument("--bw-mhz", type=float, default=BW_BUILT_MHZ,
+                    help="noise bandwidth, MHz (default: as-built ~70 MHz NEB; pre-2026-10-22 runs used 35)")
     ap.add_argument("--ambient-nA", type=float, default=0.0, help="ambient DC photocurrent, nA")
     ap.add_argument("--target-vpp", type=float, default=1.0, help="slicer target, Vpp")
     ap.add_argument("--tia-swing", type=float, default=1.2, help="OPA857 usable output swing, V (ASSUMED)")
@@ -677,7 +992,9 @@ def main(argv=None):
     args = ap.parse_args(argv)
     global EXCESS_MODEL
     EXCESS_MODEL = args.excess_model
-    if args.apd_sweep:
+    if args.apd_budget:
+        apd_budget(args)
+    elif args.apd_sweep:
         apd_sweep(args)
     elif args.sweep:
         sweep(args)

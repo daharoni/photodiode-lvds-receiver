@@ -145,9 +145,22 @@ the board but should be settled before the headstage emitter is frozen.
   S12023-10 M max is 100), not 35 to 60. The built noise bandwidth is about 70 MHz (OPA857 ~100 MHz, 68 MHz
   low-pass), about 1.5 dB optical worse than the budget. "Modestly brighter emitter" (decision 8) is overstated.
   Decision 8 itself (APD) still stands. [approach A1, A2; frontend m5]
+  **Status: ANALYSIS DONE 2026-10-22, awaiting Daniel's sign-off** (nothing in the decision log, requirements, guide or
+  architecture changed yet). Independent redo in docs/calculations/link-budget.md, section "Revision 2026-10-22", with
+  tools/link_budget.py fixed (noise bandwidth 70 MHz default, emitter costed from flux and wall-plug efficiency, 6 pF
+  noise curve, new --apd-budget mode). All four claims confirmed; two change in size: the bandwidth penalty at the
+  APD's best M is 2.2 to 2.5 dB optical (2.7 to 3.0 dB from the old assumptions), not 1.5; the single-setting window
+  is 10 to 12 dB optical unclipped (about 19 dB to TIA saturation, which is the old "39 dB" electrical). Headline:
+  Q = 6 at 35 cm needs 11 to 12 mW/sr, i.e. 72 to 77 mW average electrical at 30 % WPE or 180 to 194 mW at the
+  reference LED's 11.9 %, against a "~200 mW" headstage figure whose source is UNRESOLVED; M optimum 83 to 112,
+  capped at 100; the reference QBLP601 at 50 mA is 6.5 to 6.9 dB short of Q = 6 at the weak end. Decision 8 (APD)
+  stands: a PIN would need 15 to 23x more. Decisions 8 and 12, requirements row 2, architecture item 6,
+  post-amp-slicer.md section 3, gates G2 and the guide still carry the old figures; Daniel decides what to supersede.
 - **A2. Range figures are electrical dB.** "39 dB single-setting + 32 dB firmware" is about 16 to 25 dB and 16 dB in
   optical power, and every firmware knob lowers gain: the weak-light end has no remedy, so fade margin equals
   emitter margin. Restate in optical dB with an explicit weak-end margin row. [approach A3]
+  **Status: ANALYSIS DONE 2026-10-22, with A1 above** (optical-dB tables and the weak-end margin row are in the
+  link-budget revision; the authority docs wait for Daniel).
 - **A3. No headstage-to-receiver interface specification.** Two 100 us AC couplings require continuous idle with no
   dark gaps; LED rise times of 11 to 14 ns and the 4x blind-oversampling CDR (+-0.125 UI) are not budgeted; no
   jitter or eye budget exists. Write one interface page and reference it from requirements.md. [approach A5]
