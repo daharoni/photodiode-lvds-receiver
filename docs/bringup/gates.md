@@ -8,6 +8,7 @@ Simulation inputs (SIMULATED, ngspice 47 with TI models, `docs/simulation/README
 
 Acceptance: optical eye at the fixed post-amp gain is open at target rate across the bias range and both TIA gains; supplies meet the worst-case 3V3 load with the fan-out buffer; the TIA to post-amp coupling and the comparator overdrive are within limits.
 
+- [ ] Pre-board, no Rev A needed (review A4, decision 31): measure the optical power actually delivered to the APD in the real arena. Candidate emitter at the real geometry through the real bandpass filter onto a calibrated photodiode or the S12023-10 at M = 1; DC or lock-in photocurrent with the LED aimed at the receiver (direct plus diffuse) and aimed away (diffuse only); ambient with the LED off. Record arena dimensions and the wall material. This collapses the emitter working-point table in link-budget.md to one row and sets the LED current before the emitter is frozen.
 - [ ] Verify APD VBR and gain-vs-bias curve per unit at room temperature (S12023-10; record operating voltage for M = 50 and 100)
 - [ ] Confirm APD bias supply ripple/noise at the APD node with the TIA running (HV safety rules observed); compare SYNC/MODE float (pulse-skip) vs Burst
 - [ ] Cathode-capacitor discharge test into a sacrificial TIA (C50 10 nF vs 4.7 nF)
@@ -34,7 +35,7 @@ Acceptance: optical eye at the fixed post-amp gain is open at target rate across
 Goal: show that the ESP32's slow trim (APD bias via DAC_HV, TIA_CTRL 20k/5k) holds the link near the Q(M) optimum using RSSI and FPGA validity, and that no analog AGC is needed because intensity changes track animal motion.
 
 - [ ] RSSI vs photocurrent across M and 20k/5k; monotonic, repeatable, temperature drift bounded
-- [ ] PRBS BER vs photocurrent at fixed settings: confirm the ~39 dB single-setting window and the clip-region behaviour
+- [ ] PRBS BER vs photocurrent at fixed settings: confirm the single-setting window (10 to 12 dB optical unclipped from the Q = 6 floor to the post-amp clip, about 19 dB optical / 39 dB electrical to OPA857 saturation; decision 31) and the clip-region behaviour
 - [ ] Trim-loop step response: light step of 10 dB up and down; time to valid frames; no oscillation between 20k/5k
 - [ ] APD M vs bias and temperature per unit; DAC_HV EEPROM default and HV_DIS gating verified
 - [ ] First boot of every board (decision 20): with a blank MCP4728 HV stays off; the firmware provisions the EEPROM itself (C = 0xFFF, B = 0x800, VREF = VDD) and self-test step 3 passes; J1 is never fitted before that

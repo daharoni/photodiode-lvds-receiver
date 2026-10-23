@@ -5,7 +5,7 @@ HERE = os.path.dirname(os.path.abspath(__file__)); OUT = os.path.join(HERE, "out
 T0, UI, IPK = 300e-9, 20e-9, 5e-6
 M = {}; fig, ax = plt.subplots(1, 3, figsize=(15, 4.2))
 for m in ("20k", "5k"):
-    for c in ("6p", "1.5p"):
+    for c in ("6p", "1.5p", "10p"):
         k = f"{m}_{c}"; r = {}
         d = np.loadtxt(f"{OUT}/sim2_{k}_ac.txt"); f = d[:, 0]; o = d[:, 1] + 1j * d[:, 2]; g = 20 * np.log10(abs(o))
         i1 = int(np.argmin(abs(f - 1e6))); ref = g[i1]; ipk = int(np.argmax(g[i1:])) + i1

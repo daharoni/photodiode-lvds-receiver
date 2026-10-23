@@ -1,0 +1,161 @@
+Note: gnd in a subcircuit is not set to 0 automatically
+
+Note: Compatibility modes selected: ps a
+
+
+Circuit: * sim 2 transient: 50 mb/s nrz photocurrent, 5 ua peak, ti model as shipped
+
+Reducing trtol to 1 for xspice 'A' devices
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Note: v.xu10.xi0.xi5.v0: has no value, DC 0 assumed
+Note: v.xu10.xi0.xi5.v1: has no value, DC 0 assumed
+
+No. of Data Rows : 1
+v(in) = 1.900087e+00
+v(out) = 1.900087e+00
+v(outn) = 1.833327e+00
+Reducing trtol to 1 for xspice 'A' devices
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Note: v.xu10.xi0.xi5.v0: has no value, DC 0 assumed
+Note: v.xu10.xi0.xi5.v1: has no value, DC 0 assumed
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+hvk                                          0
+in                                     1.90009
+3v3                                        3.3
+ctrl                                       3.3
+xu10.xi0.xi5.net066                    1.90009
+xu10.xi0.xi5.net065                    1.90009
+xu10.xi0.xi5.xi19.x1.1                 0.00033
+xu10.xi0.xi5.vcc_int                       3.3
+xu10.xi0.xi5.xi19.x1.2                       0
+xu10.xi0.xi5.xi19.x1.101               0.00033
+xu10.xi0.xi5.xi19.x1.102               0.00033
+xu10.xi0.xi5.xi19.x1.gra_int1       1.7054e-26
+xu10.xi0.xi5.xi19.x1.1a            5.42101e-20
+xu10.xi0.xi5.xi19.x1.eb_int1           0.00033
+xu10.xi0.xi5.xi19.x1.3                       0
+xu10.xi0.xi5.vee_int                         0
+xu10.xi0.xi5.xi19.x1.4                       0
+xu10.xi0.xi5.xi19.x1.301                     0
+xu10.xi0.xi5.xi19.x1.302                     0
+xu10.xi0.xi5.xi19.x1.grc_int1                0
+xu10.xi0.xi5.xi19.x1.3a                      0
+xu10.xi0.xi5.xi19.x1.ed_int1                 0
+xu10.xi0.xi5.net8                      1.90009
+xu10.xi0.xi5.xi19.x1.e1_int1       5.42101e-20
+xu10.xi0.xi5.xi18.x1.7                0.833786
+xu10.xi0.xi5.xi18.x1.8                0.833786
+xu10.xi0.xi5.xi18.x1.3             -1.6368e-17
+xu10.xi0.xi5.xi18.x1.6             3.27361e-17
+xu10.xi0.xi5.xi18.x1.4             3.27361e-17
+xu10.xi0.xi5.xi18.x1.5                       0
+xu10.xi0.xi5.net058                    1.83418
+xu10.xi0.xi5.xi17.x1.7                0.833786
+xu10.xi0.xi5.xi17.x1.8                0.833786
+xu10.xi0.xi5.xi17.x1.3             1.97901e-20
+xu10.xi0.xi5.xi17.x1.6            -3.95802e-20
+xu10.xi0.xi5.xi17.x1.4            -3.95802e-20
+xu10.xi0.xi5.xi17.x1.5                       0
+xu10.xi0.xi5.net048                    1.83418
+xu10.xi0.xi5.xi10.g1_int1          1.43114e-12
+xu10.xi0.xi5.vimon                 1.43114e-12
+xu10.xi0.xi5.xi10.g2_int1                    0
+xu10.xi0.xi5.net041                    1.83418
+xu10.xi0.xi5.net51                     1.90009
+xu10.xi0.xi5.net089                    3.30006
+xu10.xi0.net7                          1.83418
+xu10.xi0.xi5.net66                           0
+xu10.xi0.xi5.net39                     3.30006
+xu10.xi0.xi5.net15                     1.90009
+xu10.xi0.xi5.net45                     1.90009
+xu10.xi0.xi5.net21                     1.90009
+xu10.xi0.xi5.net0137                   3.30006
+xu10.xi0.xi5.net0105                   1.90009
+xu10.xi0.xi5.net0116                       3.3
+xu10.xi0.xi5.net0135                         0
+xu10.xi0.xi5.net46                           1
+xu10.xi0.xi5.net25                         2.3
+xu10.xi0.xi5.net27                         2.3
+xu10.xi0.xi5.net48                           1
+xu10.xi0.xi5.net70                         0.6
+xu10.xi0.xi5.net33                         1.9
+xu10.xi0.xi5.net44                     1.90529
+xu10.xi0.xi5.net40                     1.92029
+xu10.xi0.xi5.net67                     3.30006
+xu10.xi0.xi5.net52                         0.6
+xu10.xi0.xi5.net59                     1.90009
+xu10.xi0.net036                        1.90009
+xu10.xi0.xi5.net68                         1.9
+xu10.xi0.xi5.gahdli6_int1               -0.001
+xu10.xi0.net024                              0
+xu10.xi0.net029                        1.90009
+xu10.xi0.net032                        1.90009
+xu10.xi0.xahdlinv0.e1_int1                   0
+xu10.xi0.net23                         1.83333
+xu10.xi0.net042                        1.83333
+outn                                   1.83333
+out                                    1.90009
+pa_in                                        0
+b.xu10.xi0.xahdlinv0.be1#branch               0
+b.xu10.xi0.xi5.bgahdli6#branch               0
+b.xu10.xi0.xi5.xi10.bg2#branch               0
+b.xu10.xi0.xi5.xi10.bg1#branch               0
+b.xu10.xi0.xi5.xi19.x1.be1#branch               0
+b.xu10.xi0.xi5.xi19.x1.bed#branch               0
+b.xu10.xi0.xi5.xi19.x1.bgrc#branch               0
+b.xu10.xi0.xi5.xi19.x1.beb#branch               0
+b.xu10.xi0.xi5.xi19.x1.bgra#branch               0
+h.xu10.xi0.xi5.h2#branch          -1.43114e-21
+v.xu10.xi0.xi5.vcursourcedetect#branch     1.43114e-12
+l.xu10.xi0.xi5.xi19.x1.l2#branch               0
+l.xu10.xi0.xi5.xi19.x1.l1#branch         0.00033
+e.xu10.xi0.xi4.e0#branch           5.66166e-07
+e.xu10.xi0.xahdlinv0.e1#branch               0
+e.xu10.xi0.xi5.xi2.e0#branch      -3.80162e-09
+e.xu10.xi0.xi5.xi11.e0#branch     -1.90007e-09
+e.xu10.xi0.xi5.xi12.e0#branch          1.39897
+e.xu10.xi0.xi5.xi13.e0#branch      6.37442e-12
+e.xu10.xi0.xi5.xi16.e0#branch         -1.39998
+e.xu10.xi0.xi5.xi17.x1.e3#branch       -5.68e-07
+e.xu10.xi0.xi5.xi17.x1.e2#branch    -9.89506e-29
+e.xu10.xi0.xi5.xi17.x1.e1#branch    -1.58321e-28
+e.xu10.xi0.xi5.xi18.x1.e2#branch     8.18401e-26
+e.xu10.xi0.xi5.xi18.x1.e1#branch     1.30944e-25
+e.xu10.xi0.xi5.xi19.x1.e1#branch    -1.50017e-12
+e.xu10.xi0.xi5.xi19.x1.ed#branch               0
+e.xu10.xi0.xi5.xi19.x1.ec#branch               0
+e.xu10.xi0.xi5.xi19.x1.eb#branch               0
+e.xu10.xi0.xi5.xi19.x1.ea#branch     -1.7054e-26
+v.xu10.xi0.xi5.v13#branch             -1.39998
+v.xu10.xi0.xi5.vcursinkdetect#branch    -1.43114e-12
+v.xu10.xi0.xi5.v4#branch           4.75821e-13
+v.xu10.xi0.xi5.v5#branch           4.09913e-13
+v.xu10.xi0.xi5.ve1#branch          1.31009e-12
+v.xu10.xi0.xi5.v0#branch           -0.00100622
+v.xu10.xi0.xi5.v6#branch           9.10087e-13
+v.xu10.xi0.xi5.v3#branch           8.44179e-13
+v.xu10.xi0.xi5.v10#branch            -1.52e-14
+v.xu10.xi0.xi5.v2#branch            0.00100622
+v.xu10.xi0.xi5.v9#branch             -3.02e-14
+v.xu10.xi0.xi5.v1#branch                -0.001
+v.xu10.xi0.xi5.v14#branch          3.31006e-12
+v.xu10.xi0.xi5.v12#branch           0.00100622
+v.xu10.xi0.xi5.v7#branch              5.68e-07
+v.xu10.xi0.xi5.xi21.v1#branch      1.50017e-12
+vctrl#branch                          -3.3e-12
+vs#branch                           -0.0234444
+a$poly$h.xu10.xi0.xi5.h1#branch_1_0     1.31009e-12
+a$poly$h.xu10.xi0.xi5.h0#branch_1_0        -1.39998
+
+
+No. of Data Rows : 22106
+Note: Simulation executed from .control section 

@@ -7,7 +7,10 @@ gain for an APD) -> TIA swing and noise -> Q / BER -> required VGA gain.
 
 Python 3 standard library only.  Modes: --sweep (tables 1-7), --apd-sweep (APD tables),
 --apd-budget (review A1/A2 tables R0-R5: chain noise bandwidth, energy check, required
-emitter, Q vs M, range in optical dB, weak-end margin).  Run `python3 tools/link_budget.py --help`.
+emitter, Q vs M, range in optical dB, weak-end margin), --credits (2026-10-23 tables C1-C4: optics
+on the direct path, arena diffuse term, tiling geometry, emitter working point with and without margin;
+flags --arena-rho, --arena-s, --arena-side-cm, --optics-gain, --led-vf, --led-wpe, --margin-db).
+Run `python3 tools/link_budget.py --help`.
 
 Revision 2026-10-22 (review A1, A2): default noise bandwidth is the as-built ~70 MHz
 (OPA857 ~100 MHz into the 68 MHz R56/C54 low-pass), not 0.7 x bit rate; APD tables use
@@ -953,6 +956,122 @@ def apd_budget(args):
           "  and noise, 1/f, ISI, tilt, shadowing and the unmeasured received power (review A4).")
 
 
+def credits(args):
+    """Collection credits (2026-10-23): optics on the direct path, arena diffuse term, tiling geometry, and
+    the emitter working point with and without margin.  All PROPOSED; inputs tagged ASSUMED/UNRESOLVED."""
+    det = DETECTORS["S12023-10"]
+    h = args.height_cm / 100
+    lat = args.lateral_cm / 100
+    q9 = q_for_ber(1e-9)
+    wref = wpe_reference()
+    mcap = det["m_max"]
+    bw = args.bw_mhz * 1e6
+    i135 = tia_i135(20e3, det["c_pf"], "fig")
+    area = detector_area_m2(det)
+    rhos = [float(x) for x in args.arena_rho.split(",")]
+    side = args.arena_side_cm / 100
+    s_arena = args.arena_s if args.arena_s else 5 * side * side
+    vol = side ** 3
+    vf, wpe, marg = args.led_vf, args.led_wpe, args.margin_db
+    print(f"COLLECTION CREDITS (2026-10-23): S12023-10 (diam {det['diam_mm']} mm, {area*1e6:.3f} mm^2), OPA857 20k, "
+          f"{args.bw_mhz:g} MHz NEB, Fig. 9 noise, {lat*100:g} cm lateral, {args.height_cm:g} cm height, 140 deg "
+          f"emitter, T = {args.filter_T}, 850 nm, M cap {mcap:g}")
+    print(f"Q target {q9:.2f} (BER 1e-9). All PROPOSED: beam, sphere and noise models, nothing measured (review A4).\n")
+
+    # floors (on-die on-state power for Q = 6 at the best M <= cap), both noise bounds
+    floors = {}
+    for bd in ("lo", "hi"):
+        kw = dict(det=det, wl_nm=850.0, rt=20e3, bw=bw, i135=i135, bound=bd, er=args.er,
+                  ambient=args.ambient_nA * 1e-9)
+        floors[bd] = p_floor(q9, m_cap=mcap, **kw)
+    g_dir = die_power(1.0, 140.0, lat, h, det, args.filter_T)        # W on die per W/sr
+    k_dir = g_dir / beam_flux_factor(140.0)                           # W on die per W of flux (direct)
+    print(f"Q = 6 floor on the die (best M <= {mcap:g}): {floors['lo'][0]*1e9:.2f} nW (lo, M {floors['lo'][1]:.0f}) / "
+          f"{floors['hi'][0]*1e9:.2f} nW (hi, M {floors['hi'][1]:.0f}).  Direct path: {g_dir*1e6:.3f} nW per mW/sr "
+          f"= {k_dir*1e6:.3f} nW per mW of flux (140 deg beam, {beam_flux_factor(140.0):.3f} sr).\n")
+
+    # C1 optics on the direct path
+    print("TABLE C1: etendue-limited optical gain on the DIRECT path, detector in air: G_max = 1/sin^2(half-angle)")
+    print(f"{'FOV half-angle':>15}{'G_max':>7}{'optical dB':>12}")
+    for th in (45.0, 30.0, 20.0):
+        gm = etendue_max_gain(th)
+        print(f"{th:>13.0f} deg{gm:>7.1f}{db(gm):>12.1f}")
+    print("  Real optics through the TO-18 window get part of G_max (losses, window geometry: UNRESOLVED).\n"
+          "  Optics cannot raise the DIFFUSE term: a lossless concentrator conserves etendue, so collected\n"
+          "  diffuse power is fixed by the die area (A_in sin^2 theta <= A_die).\n")
+
+    # C2 arena diffuse term
+    print(f"TABLE C2: arena diffuse term, integrating-sphere estimate E = flux x rho / (S x (1 - rho)); "
+          f"S = {s_arena:.2f} m^2 ({args.arena_side_cm:g} cm cube, open top, 5 faces; ASSUMED), x T on the die")
+    hdr = (f"{'rho (850 nm)':>13}{'E per mW flux':>16}{'nW/mW on die':>14}{'vs direct':>11}"
+           f"{'nW at Q6 flux':>15}{'mfp(m)':>8}{'tau(ns)':>9}")
+    print(hdr)
+    flux_q6 = floors["lo"][0] / k_dir                                 # direct-only flux for Q = 6 (lo bound)
+    kd = {}
+    for rho in rhos:
+        e_per = rho / (s_arena * (1 - rho))                           # (W/m^2) per W of flux
+        k_dif = e_per * area * args.filter_T                          # W on die per W of flux
+        kd[rho] = k_dif
+        mfp = 4 * vol / (6 * side * side)
+        tau = mfp / (2.998e8 * -math.log(rho))
+        print(f"{rho:>13.2f}{e_per:>12.2f}/m^2{k_dif*1e6:>14.3f}{k_dif/k_dir:>10.1f}x{flux_q6*k_dif*1e9:>15.1f}"
+              f"{mfp:>8.2f}{tau*1e9:>9.1f}")
+    print(f"  'nW at Q6 flux' is for the direct-only Q = 6 flux of {flux_q6*1e3:.1f} mW (lo bound), to compare with the\n"
+          f"  direct term {floors['lo'][0]*1e9:.2f} nW. rho at 850 nm is UNRESOLVED and dominates. mfp = 4V/S over all\n"
+          "  6 faces; tau = mfp / (c x -ln rho) is the multipath decay against the 20 ns UI. The open top is not\n"
+          "  a loss in the sphere formula: counting it as a 6th zero-reflectance face (S 1.5 m^2, rho x 5/6) gives")
+    for rho in rhos:
+        ra = rho * 5 / 6
+        e_alt = ra / (6 * side * side * (1 - ra)) * area * args.filter_T
+        print(f"    rho {rho:.2f}: {e_alt*1e6:.3f} nW/mW ({e_alt/kd[rho]:.2f}x of the row above)")
+    print("  Ambient light is diffuse too and is multiplied by M: the optical bandpass filter stays mandatory.\n")
+
+    # C3 tiling geometry
+    m = lambertian_order(140.0)
+    ref = irradiance(1.0, 140.0, lat, h, 1.0)
+    print(f"TABLE C3: tiling, direct-path geometry (h/d)^(m+1)/d^2, m = {m:.3f}, relative to {lat*100:g} cm lateral "
+          f"at {args.height_cm:g} cm height")
+    print(f"{'lateral(cm)':>12}{'height(cm)':>11}{'d(cm)':>7}{'rel':>7}{'dB':>7}")
+    for lc, hc in ((35.0, 50.0), (25.0, 50.0), (17.5, 50.0), (0.0, 50.0), (0.0, 25.0)):
+        e = irradiance(1.0, 140.0, lc / 100, hc / 100, 1.0)
+        print(f"{lc:>12.1f}{hc:>11.0f}{math.hypot(lc, hc):>7.1f}{e/ref:>7.2f}{db(e/ref):>+7.1f}")
+    print("  A 35 cm grid pitch at 50 cm height gains ~1.4 dB at the worst point: height dominates d. Tiling pays\n"
+          "  geometrically only if receivers get closer (lower, or on the walls). Its main value is removing the\n"
+          "  orientation / shadowing terms from the margin: the FPGA selects validated copies (requirements row 5),\n"
+          "  it does not sum lanes, so there is no SNR gain from combining. The diffuse term is near-uniform, so\n"
+          "  tiling adds only redundancy there.\n")
+
+    # C4 emitter working point
+    g_ach = args.optics_gain
+    cases = [("direct only, bare APD", 1.0, None),
+             ("+/-45 deg optics (2x)", etendue_max_gain(45.0), None),
+             (f"bare APD + arena rho {rhos[0]:g}", 1.0, rhos[0]),
+             (f"+/-30 optics ({g_ach:g}x) + arena {rhos[0]:g}", g_ach, rhos[0]),
+             (f"+/-30 optics ({g_ach:g}x) + arena {rhos[-1]:g}", g_ach, rhos[-1])]
+    for mdb in (0.0, marg):
+        mf = 10 ** (mdb / 10)
+        print(f"TABLE C4{'a' if mdb == 0 else 'b'}: emitter working point, Q = 6 at {lat*100:g} cm lateral, "
+              f"{'zero margin' if mdb == 0 else f'{mdb:g} dB optical margin ({mf:.2f}x flux)'}; 50 % duty; "
+              f"Vf {vf:g} V and WPE {wpe:.0%} ASSUMED, {wref:.1%} = QBLP601-derived")
+        hdr = (f"{'case':<34}{'flux lo-hi(mW)':>15}{'Pavg@'+format(wpe,'.0%'):>10}{'Pavg@'+format(wref,'.1%'):>11}"
+               f"{'I_on(mA)':>10}{'I_avg(mA)':>10}")
+        print(hdr)
+        print("-" * len(hdr))
+        for name, gopt, rho in cases:
+            k = gopt * k_dir + (kd[rho] if rho is not None else 0.0)
+            fl = floors["lo"][0] / k * mf
+            fh = floors["hi"][0] / k * mf
+            pav = fh / wpe * DUTY
+            pref = fh / wref * DUTY
+            ion = fh / wpe / vf
+            print(f"{name:<34}{fl*1e3:>8.1f}-{fh*1e3:<6.1f}{pav*1e3:>10.0f}{pref*1e3:>11.0f}{ion*1e3:>10.0f}"
+                  f"{ion*DUTY*1e3:>10.0f}")
+        print(f"  Electrical columns use the hi (conservative) noise bound. Pavg = flux/WPE x 0.5 (emitter only, no driver\n"
+              f"  loss); I_on = flux/(WPE x Vf). Optics gain applies to the direct term only.\n")
+    print("  Omitted (all optimistic): ambient, comparator offset/noise, 1/f, ISI, tilt, shadowing, LED droop, driver\n"
+          "  loss. The arena measurement (review A4) collapses these tables to one row.")
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--sweep", action="store_true", help="print the sweep tables")
@@ -960,6 +1079,16 @@ def main(argv=None):
     ap.add_argument("--apd-budget", action="store_true",
                     help="review A1/A2 tables R0-R5 (built chain: NEB, energy check, required Ie, M optimum, "
                          "optical-dB range, weak-end margin)")
+    ap.add_argument("--credits", action="store_true",
+                    help="collection credits (2026-10-23) tables C1-C4: optics on the direct path, arena diffuse "
+                         "term, tiling geometry, emitter working point with/without margin")
+    ap.add_argument("--arena-rho", default="0.5,0.7", help="arena wall reflectance(s) at 850 nm, comma list (UNRESOLVED)")
+    ap.add_argument("--arena-s", type=float, default=None, help="arena reflecting surface, m^2 (default 5 x side^2, open top)")
+    ap.add_argument("--arena-side-cm", type=float, default=50.0, help="arena cube side, cm (ASSUMED)")
+    ap.add_argument("--optics-gain", type=float, default=3.0, help="achieved optical gain for the +/-30 deg cases (ASSUMED)")
+    ap.add_argument("--led-vf", type=float, default=3.0, help="power-LED forward voltage, V (ASSUMED)")
+    ap.add_argument("--led-wpe", type=float, default=WPE, help="power-LED wall-plug efficiency (ASSUMED)")
+    ap.add_argument("--margin-db", type=float, default=6.0, help="optical margin for table C4b, dB")
     ap.add_argument("--tia-cs", choices=["fig", "datasheet"], default="fig",
                     help="APD sweep TIA noise: fig = OPA857 Fig. 9 at the APD capacitance (default, built); "
                          "datasheet = 15 nA at 1.5 pF (pre-2026-10-22 behaviour)")
@@ -992,7 +1121,9 @@ def main(argv=None):
     args = ap.parse_args(argv)
     global EXCESS_MODEL
     EXCESS_MODEL = args.excess_model
-    if args.apd_budget:
+    if args.credits:
+        credits(args)
+    elif args.apd_budget:
         apd_budget(args)
     elif args.apd_sweep:
         apd_sweep(args)

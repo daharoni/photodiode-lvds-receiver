@@ -619,3 +619,153 @@ Ambient saturation (OPA857 20k linear range 60 uA): in-band ambient power on the
   S3884      R850 0.48 A/W: M=50: 2.50 uW, M=100: 1.25 uW
   C30902EH   R850 0.51 A/W: M=50: 2.35 uW, M=100: 1.18 uW
 ```
+
+### Collection credits and the emitter working point (2026-10-23)
+
+Everything in this subsection is **PROPOSED**: beam, integrating-sphere and noise models with the inputs tagged
+ASSUMED or UNRESOLVED below. **Nothing is measured**; review A4 (received power in the real arena) is the
+measurement that settles it. Generated with `python3 tools/link_budget.py --credits` (defaults; flags `--arena-rho`,
+`--arena-s`, `--arena-side-cm`, `--optics-gain`, `--led-vf`, `--led-wpe`, `--margin-db`). Context: Daniel's three
+points of 2026-10-23: optics will sit in front of the APD, the APD's NIR quantum efficiency beats the old SiPM's (that
+one is already in the numbers: 0.48 A/W at 850 nm), and the headstage runs in an enclosure with light-reflecting
+walls, so the LED illuminates the arena rather than forming a point-to-point path. The revision above is the
+**direct-path-only, bare-APD** case; its 11 to 12 mW/sr is therefore an upper bound on the emitter, not the
+requirement. Three credits are added here, each as an explicit term.
+
+**1. Optics on the direct path (Table C1).** A lossless concentrator or lens in air is etendue-limited to
+G_max = 1/sin^2(half-angle): 2x at +/-45 deg (3.0 dB optical), 4x at +/-30 deg (6.0 dB), 8.5x at +/-20 deg (9.3 dB).
+Real optics through the TO-18 window get part of this (losses and window geometry UNRESOLVED). In a reflective
+arena a narrow field costs less than it would point-to-point because the diffuse light fills in. **Optics cannot
+raise the diffuse term**: for a uniform diffuse field the collected power is L x etendue, and a lossless
+concentrator conserves etendue (A_in sin^2 theta <= A_die), so the diffuse collection is fixed by the die area.
+Choose the optic for the direct geometry and count the diffuse term on the bare die.
+
+**2. Arena diffuse term (Table C2).** Integrating-sphere estimate E = flux x rho / (S x (1 - rho)) on the
+0.785 mm^2 die, through the T = 0.9 filter. Inputs: a 50 cm cube with an open top, S = 1.25 m^2 of reflecting
+surface (ASSUMED); wall reflectance rho at 850 nm 0.5 and 0.7 (**UNRESOLVED**, and it dominates the estimate).
+Result: 0.57 (rho 0.5) to 1.32 (rho 0.7) nW on the die per mW of on-state flux, against 0.36 nW per mW for the
+direct path at 35 cm lateral, i.e. **1.6x to 3.7x the direct term**. At the direct-only Q = 6 flux (43 mW) that is
+24 to 57 nW of diffuse power on the die next to 15 nW direct. The diffuse term scales with total flux, not with
+mW/sr or distance, favours the wide beam, and is immune to the animal's body shadowing the LED. Multipath tail:
+mean free path 4V/S = 0.33 m, decay tau = mfp / (c x -ln rho) = 1.6 to 3.1 ns, short against the 20 ns UI.
+Caution: the sphere formula treats the open top only through S; counting it as a sixth zero-reflectance face
+(S = 1.5 m^2, rho x 5/6) halves the estimate (0.34 / 0.66 nW per mW). Ambient light is diffuse too and is
+multiplied by M, so the optical bandpass filter stays mandatory and should be measured in the same arena.
+
+**3. Tiling (Table C3).** Several receivers on one LED, merged in the FPGA. On the direct path the geometric
+factor is (h/d)^(m+1)/d^2 with m = 0.646; height dominates d, so moving a receiver from 35 cm lateral to directly
+overhead at 50 cm is only +3.2 dB, and a 35 cm grid pitch at the same height gains +1.4 dB at the worst cell
+point (+2.2 dB at 17.5 cm). Tiling pays geometrically only if it lets receivers sit closer: directly overhead at
+25 cm is +9.2 dB. Its main value is in the margin column: orientation, body shadowing and tilt are the terms
+left out of the model, and a tiled set with FPGA selection removes most of them because some receiver sees the
+LED near its axis and unshadowed at any moment. The merge is selection of validated 8b/10b copies (requirements
+row 5), not combining, so there is no SNR gain from summing lanes. The diffuse term is near-uniform, so tiling
+adds only redundancy there.
+
+**4. Emitter working point (Tables C4a, C4b).** On-state flux for Q = 6 at 35 cm lateral with the credits
+applied one at a time (optics gain on the direct term only; "3x" is an ASSUMED achieved gain for a +/-30 deg
+optic), then the electrical cost at 50 % duty for a power LED with Vf 3.0 V and WPE 30 % (both ASSUMED: no
+power-LED datasheet is in the repo; 11.9 % is the QBLP601-derived figure and is the wrong LED class for this).
+Electrical columns use the hi (conservative) noise bound.
+
+| Case (zero margin) | On-state flux, lo-hi | Pavg at 30 % | Pavg at 11.9 % | I_on at 3.0 V, 30 % |
+|---|---|---|---|---|
+| Direct path only, bare APD | 43-46 mW | 77 mW | 194 mW | 51 mA |
+| +/-45 deg optics (2x) | 22-23 mW | 39 mW | 97 mW | 26 mA |
+| Bare APD plus arena rho 0.5 | 17-18 mW | 30 mW | 75 mW | 20 mA |
+| +/-30 optics (3x) plus arena 0.5 | 9-10 mW | 17 mW | 42 mW | 11 mA |
+| +/-30 optics (3x) plus arena 0.7 | 6-7 mW | 12 mW | 29 mW | 8 mA |
+
+Those are the floor. Tilt, shadowing, ambient shot noise through the filter, comparator offset, ISI and LED droop
+with temperature are all outside the model and all eat weak-end margin that firmware cannot give back (Table R4).
+With 6 dB optical margin (4x flux):
+
+| Case (6 dB margin) | On-state flux, lo-hi | Pavg at 30 % | Pavg at 11.9 % | I_on at 3.0 V, 30 % |
+|---|---|---|---|---|
+| Direct path only, bare APD | 171-184 mW | 307 mW | 772 mW | 205 mA |
+| +/-45 deg optics (2x) | 86-92 mW | 154 mW | 386 mW | 102 mA |
+| Bare APD plus arena rho 0.5 | 66-71 mW | 119 mW | 299 mW | 79 mA |
+| +/-30 optics (3x) plus arena 0.5 | 37-40 mW | 67 mW | 169 mW | 45 mA |
+| +/-30 optics (3x) plus arena 0.7 | 26-28 mW | 46 mW | 116 mW | 31 mA |
+
+**Working assumption for the headstage emitter (PROPOSED):** a 1 W class 850 nm LED run well below its rating,
+**30 to 100 mA on-state (45 to 150 mW average electrical)** if the optics and the arena deliver what the models
+say, **up to 200 mA (about 300 mW average)** if they do not; size the driver for 500 mA so the operating point is
+set after A4. With tiling the 6 dB margin comes from receiver selection rather than from more current. The
+on-state current is what the driver and LED see; the average is what the battery sees. The ~200 mW headstage
+figure remains UNRESOLVED (no source in requirements.md). The arena measurement (A4: photocurrent at M = 1 with
+the LED aimed at and away from the receiver, plus ambient, in the real enclosure) collapses these tables to one
+row.
+
+**Larger APD, evaluated and not adopted for Rev A (2026-10-23).** The S3884 (1.5 mm, 10 pF, same bias family)
+would add 3.5 dB of area, but the OPA857 20k mode rings at 10 pF (SIMULATED: 2.2 dB peaking, 22 % overshoot,
+2 % settling longer than one UI), so the net at 50 Mbps with this TIA is about zero; see docs/simulation/README.md
+(10 pF run) and docs/research/apd-selection.md. It stays a Rev B option with a discrete TIA and/or a lower rate.
+
+#### `--credits` output (verbatim)
+
+```
+COLLECTION CREDITS (2026-10-23): S12023-10 (diam 1.0 mm, 0.785 mm^2), OPA857 20k, 70 MHz NEB, Fig. 9 noise, 35 cm lateral, 50 cm height, 140 deg emitter, T = 0.9, 850 nm, M cap 100
+Q target 6.00 (BER 1e-9). All PROPOSED: beam, sphere and noise models, nothing measured (review A4).
+
+Q = 6 floor on the die (best M <= 100): 15.38 nW (lo, M 83) / 16.57 nW (hi, M 100).  Direct path: 1.367 nW per mW/sr = 0.358 nW per mW of flux (140 deg beam, 3.817 sr).
+
+TABLE C1: etendue-limited optical gain on the DIRECT path, detector in air: G_max = 1/sin^2(half-angle)
+ FOV half-angle  G_max  optical dB
+           45 deg    2.0         3.0
+           30 deg    4.0         6.0
+           20 deg    8.5         9.3
+  Real optics through the TO-18 window get part of G_max (losses, window geometry: UNRESOLVED).
+  Optics cannot raise the DIFFUSE term: a lossless concentrator conserves etendue, so collected
+  diffuse power is fixed by the die area (A_in sin^2 theta <= A_die).
+
+TABLE C2: arena diffuse term, integrating-sphere estimate E = flux x rho / (S x (1 - rho)); S = 1.25 m^2 (50 cm cube, open top, 5 faces; ASSUMED), x T on the die
+ rho (850 nm)   E per mW flux  nW/mW on die  vs direct  nW at Q6 flux  mfp(m)  tau(ns)
+         0.50        0.80/m^2         0.565       1.6x           24.3    0.33      1.6
+         0.70        1.87/m^2         1.319       3.7x           56.7    0.33      3.1
+  'nW at Q6 flux' is for the direct-only Q = 6 flux of 42.9 mW (lo bound), to compare with the
+  direct term 15.38 nW. rho at 850 nm is UNRESOLVED and dominates. mfp = 4V/S over all
+  6 faces; tau = mfp / (c x -ln rho) is the multipath decay against the 20 ns UI. The open top is not
+  a loss in the sphere formula: counting it as a 6th zero-reflectance face (S 1.5 m^2, rho x 5/6) gives
+    rho 0.50: 0.337 nW/mW (0.60x of the row above)
+    rho 0.70: 0.660 nW/mW (0.50x of the row above)
+  Ambient light is diffuse too and is multiplied by M: the optical bandpass filter stays mandatory.
+
+TABLE C3: tiling, direct-path geometry (h/d)^(m+1)/d^2, m = 0.646, relative to 35 cm lateral at 50 cm height
+ lateral(cm) height(cm)  d(cm)    rel     dB
+        35.0         50   61.0   1.00   +0.0
+        25.0         50   55.9   1.38   +1.4
+        17.5         50   53.0   1.68   +2.2
+         0.0         50   50.0   2.07   +3.2
+         0.0         25   25.0   8.28   +9.2
+  A 35 cm grid pitch at 50 cm height gains ~1.4 dB at the worst point: height dominates d. Tiling pays
+  geometrically only if receivers get closer (lower, or on the walls). Its main value is removing the
+  orientation / shadowing terms from the margin: the FPGA selects validated copies (requirements row 5),
+  it does not sum lanes, so there is no SNR gain from combining. The diffuse term is near-uniform, so
+  tiling adds only redundancy there.
+
+TABLE C4a: emitter working point, Q = 6 at 35 cm lateral, zero margin; 50 % duty; Vf 3 V and WPE 30% ASSUMED, 11.9% = QBLP601-derived
+case                               flux lo-hi(mW)  Pavg@30% Pavg@11.9%  I_on(mA) I_avg(mA)
+------------------------------------------------------------------------------------------
+direct only, bare APD                 42.9-46.3          77        194        51        26
++/-45 deg optics (2x)                 21.5-23.1          39         97        26        13
+bare APD + arena rho 0.5              16.7-17.9          30         75        20        10
++/-30 optics (3x) + arena 0.5          9.4-10.1          17         42        11         6
++/-30 optics (3x) + arena 0.7          6.4-6.9           12         29         8         4
+  Electrical columns use the hi (conservative) noise bound. Pavg = flux/WPE x 0.5 (emitter only, no driver
+  loss); I_on = flux/(WPE x Vf). Optics gain applies to the direct term only.
+
+TABLE C4b: emitter working point, Q = 6 at 35 cm lateral, 6 dB optical margin (3.98x flux); 50 % duty; Vf 3 V and WPE 30% ASSUMED, 11.9% = QBLP601-derived
+case                               flux lo-hi(mW)  Pavg@30% Pavg@11.9%  I_on(mA) I_avg(mA)
+------------------------------------------------------------------------------------------
+direct only, bare APD                171.0-184.2        307        772       205       102
++/-45 deg optics (2x)                 85.5-92.1         154        386       102        51
+bare APD + arena rho 0.5              66.3-71.4         119        299        79        40
++/-30 optics (3x) + arena 0.5         37.3-40.2          67        169        45        22
++/-30 optics (3x) + arena 0.7         25.6-27.6          46        116        31        15
+  Electrical columns use the hi (conservative) noise bound. Pavg = flux/WPE x 0.5 (emitter only, no driver
+  loss); I_on = flux/(WPE x Vf). Optics gain applies to the direct term only.
+
+  Omitted (all optimistic): ambient, comparator offset/noise, 1/f, ISI, tilt, shadowing, LED droop, driver
+  loss. The arena measurement (review A4) collapses these tables to one row.
+```

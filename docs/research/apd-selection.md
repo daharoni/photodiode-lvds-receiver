@@ -56,6 +56,8 @@ Availability/price class (all parts): NOT FOUND (Hamamatsu product page for S120
 1. **S12023-10**: same 1.0 mm area as FDS010 (4x the S12023-05 area), 6 pF is inside the 5-8 pF budget, 600 MHz intrinsic fc, peak at 800 nm, hermetic TO-18 with flat window (filter sits in front or bonded). Cost: OPA857 noise rises with Cs (project GRAPH-READ table: 20k, 135 MHz brickwall, about 17 nA at 2 pF to 28 nA at 6 pF, interpolated from FIG_NOISE_VS_CS; ~1.5x), but 4x collected power wins (DERIVED ~2.6x SNR vs -05 if the spot overfills the die).
 2. **S12023-05**: 2 pF, 900 MHz; lowest TIA noise and best phase margin; quarter the area. Fallback.
 3. **S3884** (1.5 mm, 10 pF, 400 MHz): 2.3x the area of -10, same VBR/bias; 10 pF is beyond the preferred budget, TIA noise ~33 nA (GRAPH-READ). Stretch option, verify OPA857 stability with 10 pF + layout.
+   2026-10-23 update: the OPA857 was simulated at 10 pF (SIMULATED, TI behavioural model characterised at 1.5 pF, so unverified at 10 pF; `docs/simulation/README.md` Sim 2). The 20 k mode rings past one 20 ns UI (21.5 ns settle, 2.2 dB peaking at 52 MHz), so the +3.5 dB optical area gain is cancelled by the TIA noise rise (about 1 dB) and the need to run 5 k mode, net about zero at 50 Mbps (PROPOSED reasoning, not measured). S3884 is therefore NOT adopted for Rev A; it is a Rev B option only with a discrete TIA (OPA855/OPA858 class with chosen feedback) and ideally a lower line rate (PROPOSED).
+   A dual TO-18/TO-5 footprint for D10 was considered and rejected 2026-10-23: the TO-5 lead circle (2.54 mm radius, lab footprint Thorlabs_FDS010_TO-5_P5.08mm_Vertical) lies under the TO-18 flange rim (2.35 to 2.7 mm radius), so the unused HV cathode pad would sit under the grounded can with only the 1.5 mm spacer (decision 26) as clearance, and the unused anode pad would add a plated-through stub to the TIA input (PROPOSED, geometry reasoning, not a CAD check).
 4. TE AD500-9 TO (1.2 pF, optimized for 905 nm; bias 200 V class; filtered version blocks 765 nm; datasheet access incomplete) and Excelitas C30902EH (1.6 pF, highest M, needs 180-250 V, 15 nA dark at M=150) are good small-area parts but need a higher bias rail and offer 0.2 mm2 only.
 5. S14645-05 (SMD, 1 pF, 175 V, 1.1 V/C is a harsh tempco) fits reflow assembly but resin package and 0.19 mm2 limit it; S8664/S5344/S5345/Broadcom rejected.
 
@@ -139,6 +141,7 @@ The tool's existing S12023-10 entry should change c_pf 3.0 -> 6.0 and resp 625 0
 - **Primary APD: Hamamatsu S12023-10 (TO-18, phi 1.0 mm)**. Same active area as FDS010, 6 pF / 600 MHz, 0.5 A/W at 800 nm, x=0.3, low dark current, hermetic flat window for the filter, 0.65 V/C tempco (gentlest of the candidates). Risks: 6 pF on OPA857 raises noise ~1.5x and needs a stability/bandwidth check; VBR spread 150-200 V.
 - **Fallback APD: S12023-05** (0.5 mm, 2 pF, 900 MHz): lowest TIA noise, near the OPA857 design Cs; 4x less area. Excelitas C30902EH is the alternative if more gain (M 150) is wanted at the cost of 180-250 V bias.
 - **Primary bias-supply IC: MAX1932** (SPI DAC, <1 mV ripple, 0.5 % accuracy, high-side current limit, avalanche flag, 2.7-5.5 V in) because it is the only IC option with digital trim for temperature compensation and VBR calibration. It stops at 90 V, so it directly serves only a low-VBR bin (~80-115 V). For standard S12023 parts add a doubling stage or use the Matsusada TP module; LT3482 (monitor + 90 V) is the second choice. Neither route is verified in this research.
+- 2026-10-23: S3884 (10 pF) is not adopted for Rev A. The OPA857 simulated at 10 pF rings past one UI in 20 k mode (SIMULATED, model unverified at 10 pF; `docs/simulation/README.md` Sim 2); the area gain is cancelled by the noise rise and 5 k mode. Rev B option only with a discrete TIA (OPA855/OPA858 class), ideally at a lower line rate. A dual TO-18/TO-5 D10 footprint was rejected the same day (see item 3 above). PROPOSED.
 - Run M=50 initially (0.5x the gain slope), closed-loop with a TMP sensor on the can plus downstream AGC.
 
 ## Gaps
@@ -146,7 +149,7 @@ The tool's existing S12023-10 entry should change c_pf 3.0 -> 6.0 and resp 625 0
 - Live DigiKey/Mouser/Edmund stock and prices for every part: NOT FOUND.
 - S12023-10 operating voltage for M=50/100 is GRAPH-READ only (~130-135 V at 20 C for M=100, roughly 5-10 V lower for M=50); per-device Vop is not printed.
 - QE/responsivity at 625/765/850 nm are GRAPH-READ+scaled; the plot (~84 % at 800) disagrees with the table (75 %).
-- OPA857 bandwidth and stability with 6-10 pF source capacitance (datasheet gives noise plot only).
+- OPA857 bandwidth and stability with 6-10 pF source capacitance (datasheet gives noise plot only; SIMULATED at 6 and 10 pF 2026-10-23, `docs/simulation/README.md` Sim 2, nothing measured).
 - AD500-9/AD1500-9, C30737: PDF hosts blocked; AD1500-9 capacitance/rise time and C30737 table NOT FOUND; AD500-9 800 nm responsivity NOT FOUND.
 - LT3905/LT3482/LT3571/ADL5317 datasheets (analog.com) could not be opened; figures come from search extracts and distributor pages.
 - Whether S12023-10 low-VBR suffix bins exist; Matsusada TP/TZ datasheets are behind login.

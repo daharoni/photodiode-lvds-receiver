@@ -153,8 +153,10 @@ the board but should be settled before the headstage emitter is frozen.
   S12023-10 M max is 100), not 35 to 60. The built noise bandwidth is about 70 MHz (OPA857 ~100 MHz, 68 MHz
   low-pass), about 1.5 dB optical worse than the budget. "Modestly brighter emitter" (decision 8) is overstated.
   Decision 8 itself (APD) still stands. [approach A1, A2; frontend m5]
-  **Status: ANALYSIS DONE 2026-10-22, awaiting Daniel's sign-off** (nothing in the decision log, requirements, guide or
-  architecture changed yet). Independent redo in docs/calculations/link-budget.md, section "Revision 2026-10-22", with
+  **Status: CLOSED 2026-10-23 (decision 31, Daniel accepted the redo).** Decisions 8 and 12 carry dated addenda,
+  requirements row 2, architecture item 6, gates G2 and the guide now state the optical-dB figures and the 11 to 12 mW/sr
+  direct-path emitter; optics, the reflective arena and tiling are recorded as PROPOSED credits (link-budget.md,
+  "Collection credits and the emitter working point"). Independent redo in docs/calculations/link-budget.md, section "Revision 2026-10-22", with
   tools/link_budget.py fixed (noise bandwidth 70 MHz default, emitter costed from flux and wall-plug efficiency, 6 pF
   noise curve, new --apd-budget mode). All four claims confirmed; two change in size: the bandwidth penalty at the
   APD's best M is 2.2 to 2.5 dB optical (2.7 to 3.0 dB from the old assumptions), not 1.5; the single-setting window
@@ -167,8 +169,8 @@ the board but should be settled before the headstage emitter is frozen.
 - **A2. Range figures are electrical dB.** "39 dB single-setting + 32 dB firmware" is about 16 to 25 dB and 16 dB in
   optical power, and every firmware knob lowers gain: the weak-light end has no remedy, so fade margin equals
   emitter margin. Restate in optical dB with an explicit weak-end margin row. [approach A3]
-  **Status: ANALYSIS DONE 2026-10-22, with A1 above** (optical-dB tables and the weak-end margin row are in the
-  link-budget revision; the authority docs wait for Daniel).
+  **Status: CLOSED 2026-10-23 with A1 (decision 31).** Optical-dB tables and the weak-end margin row are in the
+  link-budget revision; decision 12, architecture item 6 and gates G2 restated.
 - **A3. No headstage-to-receiver interface specification.** Two 100 us AC couplings require continuous idle with no
   dark gaps; LED rise times of 11 to 14 ns and the 4x blind-oversampling CDR (+-0.125 UI) are not budgeted; no
   jitter or eye budget exists. Write one interface page and reference it from requirements.md. [approach A5]
@@ -176,6 +178,11 @@ the board but should be settled before the headstage emitter is frozen.
   Candidate emitter at the real geometry through the real filter onto a calibrated photodiode or the APD at
   M = 1, DC or lock-in photocurrent, plus an ambient reading with the emitter off. Do it before freezing the
   emitter. [approach, "single biggest uncertainty"]
+  **Status: SCHEDULED 2026-10-23 as a G1 pre-board item (decision 31), measurement still to be done.** Rewritten for
+  the real arena: LED aimed at the receiver (direct plus diffuse) and aimed away (diffuse only), ambient with the LED
+  off, arena dimensions and wall material recorded; it picks the row of the emitter working-point table in
+  link-budget.md. Larger-area APD (S3884) and a dual TO-18/TO-5 footprint were evaluated the same day and not
+  adopted (decision 31; docs/simulation/README.md Sim 2 at 10 pF; docs/research/apd-selection.md).
 
 ## MINOR (condensed; details and page citations in the reports)
 

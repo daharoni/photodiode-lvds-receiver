@@ -81,7 +81,7 @@ Because the input edge itself takes 2 ns to return and OUT follows it, the recov
 
 ## Sim 2: OPA857 TIA with the APD capacitance (netlists `spice/sim2_ac.cir`, `sim2_tran.cir`, `sim2_core.inc`, `sim2_iph.inc` from `gen_pattern.py`)
 
-APD = ideal current source (photocurrent into the IN pin) in parallel with CD, anode at IN, cathode node through C50 10 n and R50 10 k to an AC-quiet bias. Load on OUT: C51 100 n into R51 1 k. CD = 6 pF (decision: same 6 pF for S12023-10 and FDS010) and 1.5 pF (the datasheet design point, SBOS630D p.1/p.6). Pattern: 50 Mb/s NRZ, UI 20 ns, 5 uA peak, 2 ns edges; first 5 ones then 5 zeros, then 1010101, then short runs (35 bits). AC uses the derived no-limit model copy; transient uses the TI file. Plot: [sim2_tia.png](plots/sim2_tia.png).
+APD = ideal current source (photocurrent into the IN pin) in parallel with CD, anode at IN, cathode node through C50 10 n and R50 10 k to an AC-quiet bias. Load on OUT: C51 100 n into R51 1 k. CD = 6 pF (decision: same 6 pF for S12023-10 and FDS010), 1.5 pF (the datasheet design point, SBOS630D p.1/p.6) and 10 pF (added 2026-10-23 for the S3884, see below). Pattern: 50 Mb/s NRZ, UI 20 ns, 5 uA peak, 2 ns edges; first 5 ones then 5 zeros, then 1010101, then short runs (35 bits). AC uses the derived no-limit model copy; transient uses the TI file. Plot: [sim2_tia.png](plots/sim2_tia.png).
 
 SIMULATED, ngspice 47, TI OPA857 v1.0 model:
 
@@ -91,6 +91,10 @@ SIMULATED, ngspice 47, TI OPA857 v1.0 model:
 | 20 k, 1.5 pF | 19.5 k | 106 MHz | none | 1.7 % | 3.5 ns | 6.1 ns | no |
 | 5 k, 6 pF | 4.88 k | 151 MHz | none | 1.7 % | 2.7 ns | 4.7 ns | no |
 | 5 k, 1.5 pF | 4.88 k | 127 MHz | none | 0 % | 3.2 ns | 6.1 ns | no |
+| 20 k, 10 pF | 19.5 k | 87.9 MHz | 2.19 dB at 51.9 MHz | 21.7 % (both edges) | 3.84 ns | 21.5 ns | 3 extrema above 2 % |
+| 5 k, 10 pF | 4.87 k | 150.3 MHz | 0.20 dB at 62.4 MHz | 7.1 % | 2.63 ns | 8.1 ns | 1 extremum above 2 % |
+
+2026-10-23, 10 pF case (SIMULATED, same TI OPA857 v1.0 model, ngspice): run to evaluate the Hamamatsu S3884 (1.5 mm, 10 pF) as a larger-area option (`docs/research/apd-selection.md`). In 20 k mode the 10 pF case settles to 2 % in 21.5 ns from edge start, more than one 20 ns UI, with 2.2 dB of peaking at 52 MHz and 3 ring extrema above 2 %. The peak lies below the 68 MHz low-pass, so the filter does not remove it. 5 k mode is fine (8.1 ns, 0.2 dB). Caveat: the model was characterised at 1.5 pF, so its accuracy at 10 pF is UNRESOLVED until measured. Metrics: `spice/out/sim2_metrics.json` (keys `20k_10p`, `5k_10p`).
 
 Check against the datasheet: with 1.5 pF the model gives 106 MHz (20 k) and 127 MHz (5 k); the datasheet table gives 105 MHz (CTRL = 1) and 125 MHz (CTRL = 0) at 1.5 pF (SBOS630D 6.5, PDF p.6; the text in 8.2.2, p.21, quotes 130 MHz for 5 k and 105 MHz for 20 k). So the model reproduces its own datasheet at the design point, which supports, but does not prove, its behaviour at 6 pF (UNRESOLVED until the 6 pF case is measured). Larger CD raised the 5 k bandwidth from 127 to 151 MHz in the model (input capacitance peaking), which is plausible but is also model-dependent. Not modelled: APD series resistance, bias-dependent capacitance, noise, and the TIA's DC bias path.
 

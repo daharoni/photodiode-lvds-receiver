@@ -29,6 +29,21 @@
   "ring_extrema_gt2pct": 0,
   "tr_10_90_ns": 3.53
  },
+ "20k_10p": {
+  "Rt_1MHz_ohm": 19496.0,
+  "peaking_dB": 2.19,
+  "f_peak_MHz": 51.9,
+  "f3dB_MHz": 87.9,
+  "settle_2pct_ns_from_edge_start": 21.5,
+  "idle_V": 1.8358,
+  "plateau_5UI_V": 1.7383,
+  "amp_mV": 97.5,
+  "Rt_tran_ohm": 19493.0,
+  "lead_overshoot_pct": 21.7,
+  "release_overshoot_pct": 21.7,
+  "ring_extrema_gt2pct": 3,
+  "tr_10_90_ns": 3.84
+ },
  "5k_6p": {
   "Rt_1MHz_ohm": 4875.0,
   "peaking_dB": 0.0,
@@ -58,5 +73,20 @@
   "release_overshoot_pct": -0.0,
   "ring_extrema_gt2pct": 0,
   "tr_10_90_ns": 3.19
+ },
+ "5k_10p": {
+  "Rt_1MHz_ohm": 4873.0,
+  "peaking_dB": 0.2,
+  "f_peak_MHz": 62.4,
+  "f3dB_MHz": 150.3,
+  "settle_2pct_ns_from_edge_start": 8.1,
+  "idle_V": 1.8358,
+  "plateau_5UI_V": 1.8114,
+  "amp_mV": 24.4,
+  "Rt_tran_ohm": 4874.0,
+  "lead_overshoot_pct": 7.1,
+  "release_overshoot_pct": 7.1,
+  "ring_extrema_gt2pct": 1,
+  "tr_10_90_ns": 2.63
  }
 }
