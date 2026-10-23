@@ -76,7 +76,7 @@ the board but should be settled before the headstage emitter is frozen.
   architecture.md ("slicing is analog; APD bias needs a provisioned ESP32 or J1 plus the pot leg") or implement
   S3's pot-leg option and fit J1 on first-article boards, and add a G1 item that proves the analog-only mode.
   Daniel's call. [controller M2, approach A4]
-- **S5. 4.99 M 0603 resistors see 110 V each (R17, R18, R20, R32), and the Q1 clamp is base-starved.** **Status: (a) rating FIXED 2026-10-22, decision 22** (0805, 150 V working, Yageo RC0805 spec V0 p.3 in docs/datasheets; Daniel re-places the four parts). **(b) base starvation OPEN**: MOSFET pass device (e.g. BSS127 source follower, same SOT-23 pin order) proposed, not decided; G1 sweep added to the calc doc test plan. Typical 0603
+- **S5. 4.99 M 0603 resistors see 110 V each (R17, R18, R20, R32), and the Q1 clamp is base-starved.** **Status: (a) rating FIXED 2026-10-22, decision 22** (0805, 150 V working, Yageo RC0805 spec V0 p.3 in docs/datasheets; board done by script 2026-10-22, DRC 52, parity clean). **(b) base starvation OPEN**: MOSFET pass device (e.g. BSS127 source follower, same SOT-23 pin order) proposed, not decided; G1 sweep added to the calc doc test plan. Typical 0603
   thick-film working voltage is 75 V (no MPN on the schematic; UNRESOLVED until an MPN is chosen). Q1's base is
   fed only through 10 M, so the APD bias drops by Ic x 10 M / hFE (about 1 V per 10 uA at hFE 100), which the
   calc doc's "about 1.2 V clamp" ignores; at 7 %/V of gain that is several percent of M per few uA of mean

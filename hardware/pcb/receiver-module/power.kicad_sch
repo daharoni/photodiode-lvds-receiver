@@ -12972,7 +12972,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4.99M 1%"
+		(property "Value" "4.99M 1% 0805 150V"
 			(at 188.722 138.18 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -12983,7 +12983,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
+		(property "Footprint" "AharoniLab_Resistor_SMD:R_0805_2012Metric_N"
 			(at 187.96 137.16 0)
 			(hide yes)
 			(show_name no)
@@ -14325,7 +14325,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4.99M 1%"
+		(property "Value" "4.99M 1% 0805 150V"
 			(at 188.722 143.26 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -14336,7 +14336,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
+		(property "Footprint" "AharoniLab_Resistor_SMD:R_0805_2012Metric_N"
 			(at 187.96 142.24 0)
 			(hide yes)
 			(show_name no)
@@ -15692,7 +15692,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4.99M 1%"
+		(property "Value" "4.99M 1% 0805 150V"
 			(at 236.982 115.32 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -15703,7 +15703,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
+		(property "Footprint" "AharoniLab_Resistor_SMD:R_0805_2012Metric_N"
 			(at 236.22 114.3 0)
 			(hide yes)
 			(show_name no)
@@ -17430,7 +17430,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4.99M 1%"
+		(property "Value" "4.99M 1% 0805 150V"
 			(at 236.982 110.24 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -17441,7 +17441,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "AharoniLab_Resistor_SMD:R_0603_1608Metric_N"
+		(property "Footprint" "AharoniLab_Resistor_SMD:R_0805_2012Metric_N"
 			(at 236.22 109.22 0)
 			(hide yes)
 			(show_name no)
