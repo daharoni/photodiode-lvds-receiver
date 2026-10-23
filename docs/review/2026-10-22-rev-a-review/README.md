@@ -133,8 +133,8 @@ the board but should be settled before the headstage emitter is frozen.
   when filled. Add to the G4 pre-order checklist. [pi-dfm M1]
 - **P7. J50 shell posts have no GND vias and thermal-relief connections (4 of the 5 starved_thermal items)**, against
   decision 16 ("several vias each"). Set the 8 S1 pads to solid connection and add 2-3 GND vias beside each large
-  post, outside the B-row antipad. [pi-dfm M2] **Status: FIXED 2026-10-22 except one post, decision 28** (8 S1 pads
-  solid, 10 vias at 5 posts; no legal spot at the (66.82, 20.73) post because of LVDS_OUT1 and U5/VBUS underneath).
+  post, outside the B-row antipad. [pi-dfm M2] **Status: FIXED 2026-10-22, decision 28** (8 S1 pads solid on every layer, the
+  real fix; the plated post barrels already tie all six layers, so the vias were dropped and decision 16 reworded).
 - **P8. Ground returns far from vias: U50 SN65LVDS104 GND pins 3.0 and 4.7 mm from the nearest GND via, its caps
   C184/C185 3.0 to 3.2 mm, U51 pin 5 2.3 mm, U4 output caps 4.5 to 5.2 mm.** Add one via at each. [pi-dfm M3]
   **Status: PARTLY FIXED 2026-10-22, decision 28** (U50 pin 8, C56, C57 done; the rest have no legal via spot within
