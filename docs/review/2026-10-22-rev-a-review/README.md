@@ -100,7 +100,14 @@ the board but should be settled before the headstage emitter is frozen.
   surface-leakage path into the TIA input. Fix (lab-library footprint PR): 1.0 mm round pads 1 and 2 (0.80 mm and
   1.54 mm gaps), keep the mask web, conformal-coat the HV end, record the waiver in the .kicad_dru. [fastpath M1]
 - **P2. C50 is 6.8 mm of trace from the cathode pin (rule says <= 3 mm), and 1.65 mm of the 220 V HV_K trace runs
-  under the grounded can flange with only solder mask between.** Move C50 next to the cathode pad and keep HV_K
+  under the grounded can flange with only solder mask between.** **Status: FIXED 2026-10-22, decision 26** (C50, R50 and
+  C8 re-placed in a column left of D10 by script: C50's HV_K pad 4.43 mm from the cathode pad, 4.59 mm of trace, two
+  GND vias in its ground pad; HV_K exits the pad radially, 0.93 mm under the flange plus the pad, which no routing can
+  avoid since the pad itself is 1.27 mm from the can axis; calc rule 6 amended from "<= 3 mm" to "as close as the
+  courtyard allows" because a 1210 cannot get nearer. The flange issue is closed by a 1.5 mm insulating TO-18 spacer
+  under D10 (KAPD1007E19 p.4 shows no standoff; part UNRESOLVED), which also lifts the header off the cathode annulus
+  from P1. The extra 100 pF at the pin was not added: 16 ohm at 100 MHz next to the 10 nF path, bench option for G1.
+  DRC 52, 0 unconnected, parity clean.) Move C50 next to the cathode pad and keep HV_K
   copper outside the 2.7 mm flange radius or specify an insulating spacer; this moves anyway with B1. [fastpath M2]
 - **P3. OPA855 has no plane window under IN-, FB and OUT (SBOS622D 9.4.1, Fig. 9-12), the feedback parts sit 2.5 to
   4.5 mm from the pins, and TP10 hangs a 2.5 mm stub plus a 1 mm pad on OUT ahead of R56.** Hand estimate: 0.3 to
