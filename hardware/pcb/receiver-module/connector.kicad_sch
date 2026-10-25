@@ -2314,6 +2314,227 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "AharoniLab_Passive:SMF5.0A"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "D"
+				(at 0 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "SMF5.0A"
+				(at 0 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "AharoniLab_Diode_SMD:D_SOD-123F"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" "https://www.panjit.com.tw/upload/datasheet/SMF5.0A_SERIES.pdf"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Unidirectional TVS diode, 200 W (10/1000 us), VRWM 5 V, VBR 6.4-7.0 V @ 10 mA, VC 9.2 V @ IPP 21.7 A, IR 200 uA @ 5 V, ESD 30 kV, SOD-123FL (pin 1 cathode band, pin 2 anode); industry-standard SMF5.0A (Littelfuse, Panjit, onsemi, Vishay)"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Manufacturer" "Littelfuse (second sources: Panjit, onsemi, Vishay SMF5V0A)"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "MPN" "SMF5.0A"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Contributor" "Daniel Aharoni"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Validated" "No"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Source" "Panjit SMF5.0A~SMF175A datasheet SMF5.0A_SERIES-REV.13 (March 6, 2024): electrical table p.1 (SMF5.0A row), SOD-123FL outline and Mounting Pad Layout p.4; Littelfuse SMF series is the primary vendor (LCSC C151296), its datasheet was not retrievable on 2026-10-25; symbol graphics follow D_Zener (pin 1 K, pin 2 A)"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "diode tvs transient voltage suppressor 5v 200w sod-123fl smf5.0a vbus"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "D*SOD?123F*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "SMF5.0A_0_1"
+				(polyline
+					(pts
+						(xy -1.27 -1.27) (xy -1.27 1.27) (xy -0.762 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy -1.27 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -1.27) (xy 1.27 1.27) (xy -1.27 0) (xy 1.27 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "SMF5.0A_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "K"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 	)
 	(text "J50 pin map (WE 632723300011 p.3, TC Table 3-4 p.76; A5/B5 are labelled CC/VCONN by Wuerth, wired as CC1/CC2: PROPOSED reading)\nA1 GND  A2 SSTXP1=LVDS_OUT2_N  A3 SSTXN1=LVDS_OUT2_P  A4 VBUS  A5 CC1  A6 DP1=USB_DP  A7 DN1=USB_DN  A8 SBU1=AUX_CAB  A9 VBUS  A10 SSRXN2=CAN_N  A11\n  SSRXP2=CAN_P  A12 GND\nB1 GND  B2 SSTXP2=LVDS_OUT1_N  B3 SSTXN2=LVDS_OUT1_P  B4 VBUS  B5 CC2  B6 DP2=USB_DP  B7 DN2=USB_DN  B8 SBU2=AUX_CAB  B9 VBUS  B10 SSRXN1=CAN_N  B11\n  SSRXP1=CAN_P  B12 GND\nJ51 DEBUG (2.54 mm 1x6): 1 GND, 2 LVDS_DBG_N (U50 3Z), 3 LVDS_DBG_P (U50 3Y) (pair flipped 2026-10-16 for layout), 4 CAN_P, 5 CAN_N, 6 AUX.\nTest points TP50-TP55: 3V3, 3V3_D, RSSI, HV_MON, GND, GND. DNP: R177, R182, R183, C180.\nCable rule: passive full-featured USB 3.2 Gen 1, 3 A, e-marked, <= 2 m certified; 3 m only after a bench check (TC Table 3-1 p.44, 3.4.1.1 p.83, 4.4.1\n  p.151). Labelling: USB-C: USB 2.0 and 5 V only on a host; SuperSpeed pairs carry proprietary LVDS/CAN, not USB 3; the module is not USB 3 compliant.\nHV rule: no bare APD_BIAS pad on this sheet; HV_MON (about Vout/101) is the only HV observation point.\nULX3S target pairs (PROPOSED; ULX3S schematics v3.1.7 p.2, Lattice FPGA-TN-02032 v1.4 p.14, p.26): first choice gp/gn[8..13] (bank 7), second\n  gp/gn[14..21]; not [0..7] or [22..27]. Constrain gp only; do not guess polarity."
 		(exclude_from_sim yes)
@@ -8892,6 +9113,215 @@
 			(project "receiver-module"
 				(path "/20237707-2fe5-41a5-bbd6-cb6c24e8ba32/0c318e1c-a27e-42fc-ba78-2292a9a0a0c3"
 					(reference "U52")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 219.71 121.92) (xy 222.25 121.92)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aece3d3b-122a-45b5-91ce-a5c2ce492a3c")
+	)
+	(wire
+		(pts
+			(xy 229.87 121.92) (xy 232.41 121.92)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cbd1c7ca-acbf-483c-83fc-8adfc35516c8")
+	)
+	(label "VBUS"
+		(at 219.71 121.92 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "9d810731-ff80-443f-a25b-a3d84bed3b59")
+	)
+	(global_label "GND"
+		(shape passive)
+		(at 232.41 121.92 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "619209b1-e382-4545-9cbf-6918b791a007")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 232.41 121.92 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "AharoniLab_Passive:SMF5.0A")
+		(at 226.06 121.92 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "a9f81da8-c375-46d6-8c83-741c2a0ea66c")
+		(property "Reference" "D50"
+			(at 226.06 119.38 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SMF5.0A"
+			(at 226.06 124.46000000000001 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "AharoniLab_Diode_SMD:D_SOD-123F"
+			(at 226.06 121.92 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.panjit.com.tw/upload/datasheet/SMF5.0A_SERIES.pdf"
+			(at 226.06 121.92 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Unidirectional TVS diode, 200 W (10/1000 us), VRWM 5 V, VBR 6.4-7.0 V @ 10 mA, VC 9.2 V @ IPP 21.7 A, IR 200 uA @ 5 V, ESD 30 kV, SOD-123FL (pin 1 cathode band, pin 2 anode); industry-standard SMF5.0A (Littelfuse, Panjit, onsemi, Vishay)"
+			(at 226.06 121.92 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer" "Littelfuse (second sources: Panjit, onsemi, Vishay SMF5V0A)"
+			(at 226.06 121.92 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "SMF5.0A"
+			(at 226.06 121.92 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Contributor" "Daniel Aharoni"
+			(at 226.06 121.92 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Validated" "No"
+			(at 226.06 121.92 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Source" "Panjit SMF5.0A~SMF175A datasheet SMF5.0A_SERIES-REV.13 (March 6, 2024): electrical table p.1 (SMF5.0A row), SOD-123FL outline and Mounting Pad Layout p.4; Littelfuse SMF series is the primary vendor (LCSC C151296), its datasheet was not retrievable on 2026-10-25; symbol graphics follow D_Zener (pin 1 K, pin 2 A)"
+			(at 226.06 121.92 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "diode tvs transient voltage suppressor 5v 200w sod-123fl smf5.0a vbus"
+			(at 226.06 121.92 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" "D*SOD?123F*"
+			(at 226.06 121.92 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "7a6c5761-8a63-47a1-b5cd-c308b862a58f")
+		)
+		(pin "2"
+			(uuid "f0f4c0fd-0cee-4fc1-b6f0-a8c701cf9678")
+		)
+		(instances
+			(project "receiver-module"
+				(path "/20237707-2fe5-41a5-bbd6-cb6c24e8ba32/0c318e1c-a27e-42fc-ba78-2292a9a0a0c3"
+					(reference "D50")
 					(unit 1)
 				)
 			)

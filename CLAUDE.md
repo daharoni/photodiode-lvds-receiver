@@ -64,7 +64,7 @@ Performance beats cost. No backward compatibility with the Miniscope Zero headst
 - CLI: `/Users/daharoni/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli` (KiCad 10.0.5; not on PATH) (ERC, DRC, exports).
 - Six sheets since decision 12: Power, Front End, Slicer, Monitor, Connector, Controller (the detector/AGC sheets are gone).
 - Fab outputs under `hardware/pcb/*/fab/` are ignored by git except under `release/`.
-- Layout status (2026-10-12): 6-layer JLC06161H-3313, 75 x 50 mm placeholder outline, 222 component footprints placed plus the four mounting holes H1-H4 (221 before R214 was added 2026-10-23, 223 before the J50 shield RC was removed 2026-10-22), routing complete since mid-October 2026 (0 unconnected pads, DRC 11 items (2026-10-25) all accepted in writing in `docs/review/2026-10-22-rev-a-review/README.md`; all vias epoxy filled and capped, decision 30); see `hardware/pcb/receiver-module/README.md`.
+- Layout status (2026-10-12): 6-layer JLC06161H-3313, 75 x 50 mm placeholder outline, 223 component footprints placed plus the four mounting holes H1-H4 (222 before D50 was added 2026-10-25, 221 before R214 was added 2026-10-23, 223 before the J50 shield RC was removed 2026-10-22), routing complete since mid-October 2026 (0 unconnected pads, DRC 11 items (2026-10-25) all accepted in writing in `docs/review/2026-10-22-rev-a-review/README.md`; all vias epoxy filled and capped, decision 30); see `hardware/pcb/receiver-module/README.md`.
 
 ## Key standing corrections (details in decision-log.md)
 

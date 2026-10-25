@@ -203,7 +203,7 @@ have no separate fields); TLV3605 LE/HYS floating (CHECKED, NO CHANGE: datasheet
 RHYST floating); C200 has both pins on GND (DONE: C200 DNP); TPS7A2033 300 mA vs the ESP32-C6 0.5 A supply
 requirement (DONE: firmware README states the radio is never started); R199 100k at the SN65HVD230 Rs maximum
 (DONE: 91k); RS has no GPIO so "RS high standby" in the docs is not available (DONE: wording fixed); VBUS has no
-TVS ahead of the eFuse (DEFERRED: needs a lab-library part); R33 pulls HV_DIS up to 3V3_D (KEPT: IO0 is Hi-Z at
+TVS ahead of the eFuse (DONE 2026-10-25, decision 34: D50 SMF5.0A, lab PR #66, parked on the board for Daniel to place and route); R33 pulls HV_DIS up to 3V3_D (KEPT: IO0 is Hi-Z at
 reset so the pull-up holds HV off, and a +5V pull-up would feed a non-5 V-tolerant pad); HV_MON loads the ADS1115
 by ~1.7 % (ACCEPTED, calibratable); D2 (DNP) is the SW-to-GND clamp of the p.30 reference (DONE: fitted); eFuse
 FLT not routed to the ESP32 (ACCEPTED, documented).
