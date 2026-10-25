@@ -231,15 +231,17 @@ requirements.md still calls the 3.3 V-bank LVDS input UNVERIFIED (decision 3 say
 "external HV module pads" are not in the netlist (addendum on decision 9, 2026-10-23); architecture.md "Q(M) peaks at M 35-60" (fixed 2026-10-23, decision 31); module-controller.md
 line 69 has the old HV_EN polarity (fixed 2026-10-23); firmware/esp32 README quotes the trimmer-fitted DAC span (fixed 2026-10-23).
 
-## DRC disposition (52 items)
+## DRC disposition (52 items at review; 11 on 2026-10-25, all accepted in writing)
 
-| Item class (count) | Disposition |
-|---|---|
-| hole_to_hole (32), H1-H4 via rings 0.35 mm | fix: ring radius 1.8 mm or the `_Pad` footprint |
-| starved_thermal (5): 4 J50 shell pads, U20 pad 9 | fix: solid connection + vias (P7); U20.9 solid + adjacent via |
-| diff_pair_gap (4) and diff_pair_uncoupled (1) on LVDS_P/N | accept with an exclusion, or relax the diff100 rule; not a routing fault |
-| via_dangling (2) VCM_REF, TIA_CTRL; track_dangling (1) EN; holes_co_located (1) | fix: delete the stubs and the duplicate via |
-| silk_edge_clearance (5), silk_overlap (1) | accept (J50 silk is on the overhang; U60/U51 outlines cosmetic) |
+| Item class (count) | Disposition | Status |
+|---|---|---|
+| hole_to_hole (32), H1-H4 via rings 0.35 mm | fix: ring radius 1.8 mm or the `_Pad` footprint | FIXED 2026-10-25: H1-H4 now `AharoniLab_Connector:MountingHole_2.2mm_M2_Pad` (no via ring), schematic footprint fields updated, parity clean |
+| starved_thermal (5): 4 J50 shell pads, U20 pad 9 | fix: solid connection + vias (P7); U20.9 solid + adjacent via | FIXED: J50 S1 pads solid (decision 16); U20 pad 9 solid zone connection 2026-10-25 |
+| diff_pair_gap (4) and diff_pair_uncoupled (1) on LVDS_P/N | accept with an exclusion, or relax the diff100 rule; not a routing fault | ACCEPTED in writing (Daniel, 2026-10-25): the four gap items are the pad jogs into R180 (100 ohm, 0.1 %) and the uncoupled length is the R87/C87 hysteresis stub; at 50 Mbps (20 ns UI, edges of about 1 ns, a 2.4 mm jog is under 1 % of the edge length) the impedance step is invisible. No exclusion added so the items stay visible to a future reader; this row is the disposition. |
+| via_dangling (2) VCM_REF, TIA_CTRL; track_dangling (1) EN; holes_co_located (1) | fix: delete the stubs and the duplicate via | FIXED 2026-10-23 (decision 32) |
+| silk_edge_clearance (5), silk_overlap (1) | accept (J50 silk is on the overhang; U60/U51 outlines cosmetic) | ACCEPTED (Daniel, 2026-10-25): J50 and U60 fab outlines reach the board edge by design; U51/U52 outline overlap is cosmetic; reference designators are on the RefDes layers, not silk, so nothing is obscured |
+
+This table is the written DRC disposition that gate G4 asks for; re-check it against the final DRC run before the order.
 
 ## Verified correct (coverage, so the reader knows what was checked)
 

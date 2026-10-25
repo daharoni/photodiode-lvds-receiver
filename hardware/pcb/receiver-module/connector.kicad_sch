@@ -5063,7 +5063,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:MountingHole_2.2mm_M2_Pad_Via"
+		(property "Footprint" "AharoniLab_Connector:MountingHole_2.2mm_M2_Pad"
 			(at 365.76 149.86 0)
 			(hide yes)
 			(show_name no)
@@ -5172,7 +5172,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:MountingHole_2.2mm_M2_Pad_Via"
+		(property "Footprint" "AharoniLab_Connector:MountingHole_2.2mm_M2_Pad"
 			(at 350.52 149.86 0)
 			(hide yes)
 			(show_name no)
@@ -5823,7 +5823,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:MountingHole_2.2mm_M2_Pad_Via"
+		(property "Footprint" "AharoniLab_Connector:MountingHole_2.2mm_M2_Pad"
 			(at 381 149.86 0)
 			(hide yes)
 			(show_name no)
@@ -7524,7 +7524,7 @@
 				)
 			)
 		)
-		(property "Footprint" "AharoniLab_Connector:MountingHole_2.2mm_M2_Pad_Via"
+		(property "Footprint" "AharoniLab_Connector:MountingHole_2.2mm_M2_Pad"
 			(at 396.24 149.86 0)
 			(hide yes)
 			(show_name no)
